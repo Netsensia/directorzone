@@ -8,7 +8,6 @@
     verbose="true">
     <testsuite name="Netsensia ZF2 Skeleton">
         <directory>../module/Application/tests/Application</directory>
-        <directory>../module/Netsensia/tests/Netsensia</directory>
     </testsuite>
     <filter>
         <whitelist addUncoveredFilesFromWhitelist="true">
