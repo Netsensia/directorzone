@@ -1,0 +1,279 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: ZendSkeletonApplication\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-08-09 13:01-0000\n"
+"PO-Revision-Date: 2013-08-09 13:01-0000\n"
+"Last-Translator: Chris Moreton <chris@netsensia.com>\n"
+"Language-Team: ZF Contibutors <zf-devteam@zend.com>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: translate\n"
+"X-Poedit-Basepath: C:\\Program Files (x86)\\Zend\\Apache2\\htdocs\\netsensia-"
+"zf2-skeleton\\module\\Application\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: view/application/help/index.phtml:13
+msgid "Track your stats"
+msgstr ""
+
+#: view/application/help/index.phtml:22
+msgid "Maintain your handicap"
+msgstr ""
+
+#: view/application/help/index.phtml:31
+msgid "Compare with friends"
+msgstr ""
+
+#: view/application/index/index.phtml:17
+msgid "Expand your mind"
+msgstr ""
+
+#: view/application/index/index.phtml:18
+msgid ""
+"We love \"word of the day\" sites, so we've taken it to the next level.  "
+"Each day we'll give you a new number drawn from our extensive library of "
+"numbers ranging from the lowly zero up to, and including, the big daddy of "
+"all numbers: one million."
+msgstr ""
+
+#: view/application/index/index.phtml:19 view/application/index/index.phtml:28
+#: view/application/index/index.phtml:37
+msgid "Get started"
+msgstr ""
+
+#: view/application/index/index.phtml:26
+msgid "Maths made easy"
+msgstr ""
+
+#: view/application/index/index.phtml:27
+msgid ""
+"Calculate sums up to five times faster with our patent-pending number-adding "
+"algorithm, just enter two numbers (lower than 10) and watch as our website "
+"adds them for you in a matter of seconds.  99% guaranteed accuracy rate."
+msgstr ""
+
+#: view/application/index/index.phtml:35
+msgid "Amaze your friends"
+msgstr ""
+
+#: view/application/index/index.phtml:36
+msgid ""
+"Never forget your birthday again.  Enter your date of birth in our notepad "
+"and simply visit every day, take a look at your notepad, copy the number "
+"into a form along with today's date, and we'll let you know if today is your "
+"big day.  Don't forget the cake!"
+msgstr ""
+
+#: view/application/index/index.phtml:47
+msgid "A system for the future"
+msgstr ""
+
+#: view/application/index/index.phtml:49
+msgid "Works in all known web browsers.<sup>1</sup>"
+msgstr ""
+
+#: view/application/index/index.phtml:50
+msgid ""
+"Coming soon as a Windows desktop app (versions 3.1 and below).<sup>2</sup>"
+msgstr ""
+
+#: view/application/index/index.phtml:51
+msgid "Award winning speed and responsiveness.<sup>3</sup>"
+msgstr ""
+
+#: view/application/index/index.phtml:52
+msgid "Award winning customer support.<sup>4</sup>"
+msgstr ""
+
+#: view/application/index/index.phtml:53
+msgid "5 star-rated user-friendliness.  <sup>5</sup>"
+msgstr ""
+
+#: view/application/index/index.phtml:58
+msgid "What our users say"
+msgstr ""
+
+#: view/application/index/index.phtml:61
+msgid ""
+"\"If there's one thing I'm sure of, it's that this is the finest website "
+"I've ever used.  I sometimes log on just to look at it in order to relax, as "
+"does my wife.\""
+msgstr ""
+
+#: view/application/index/index.phtml:63
+msgid ""
+"\"I've used lots of websites in the past, and now I use this one.  I'll "
+"telling all my friends about it.  Some of them aren't as receptive as I had "
+"hoped, but I'm working on it.\""
+msgstr ""
+
+#: view/application/index/index.phtml:65
+msgid ""
+"\"Est-ce que quelqu'un l&agrave;-bas parle fran&ccedil;ais?  J'en doute, "
+"mais je voulais juste vous dire que c'est le pire site que j'ai jamais "
+"utilis&eacute; dans toute ma vie.  Vous m'entendez? Je suis s&ucirc;r que "
+"vous ne serez pas mettre ceci sur votre page devis des clients.\""
+msgstr ""
+
+#: view/error/404.phtml:1
+msgid "A 404 error occurred"
+msgstr ""
+
+#: view/error/404.phtml:10
+msgid "The requested controller was unable to dispatch the request."
+msgstr ""
+
+#: view/error/404.phtml:13
+msgid ""
+"The requested controller could not be mapped to an existing controller class."
+msgstr ""
+
+#: view/error/404.phtml:16
+msgid "The requested controller was not dispatchable."
+msgstr ""
+
+#: view/error/404.phtml:19
+msgid "The requested URL could not be matched by routing."
+msgstr ""
+
+#: view/error/404.phtml:22
+msgid "We cannot determine at this time why a 404 was generated."
+msgstr ""
+
+#: view/error/404.phtml:34
+msgid "Controller"
+msgstr ""
+
+#: view/error/404.phtml:41
+#, php-format
+msgid "resolves to %s"
+msgstr ""
+
+#: view/error/404.phtml:53 view/error/index.phtml:8
+msgid "Additional information"
+msgstr ""
+
+#: view/error/404.phtml:56 view/error/404.phtml:80 view/error/index.phtml:11
+#: view/error/index.phtml:35
+msgid "File"
+msgstr ""
+
+#: view/error/404.phtml:60 view/error/404.phtml:84 view/error/index.phtml:15
+#: view/error/index.phtml:39
+msgid "Message"
+msgstr ""
+
+#: view/error/404.phtml:64 view/error/404.phtml:88 view/error/index.phtml:19
+#: view/error/index.phtml:43
+msgid "Stack trace"
+msgstr ""
+
+#: view/error/404.phtml:74 view/error/index.phtml:29
+msgid "Previous exceptions"
+msgstr ""
+
+#: view/error/404.phtml:103 view/error/index.phtml:58
+msgid "No Exception available"
+msgstr ""
+
+#: view/error/index.phtml:1
+msgid "An error occurred"
+msgstr ""
+
+#: view/layout/layout.phtml:6 view/layout/layout.phtml:35
+msgid "Netsensia Skeleton Application"
+msgstr ""
+
+#: view/layout/layout.phtml:41 view/layout/layout.phtml:48
+#: view/layout/layout.phtml:55 view/layout/layout.phtml:132
+msgid "Home"
+msgstr ""
+
+#: view/layout/layout.phtml:42 view/layout/layout.phtml:50
+#: view/layout/layout.phtml:56 view/layout/layout.phtml:136
+msgid "Help"
+msgstr ""
+
+#: view/layout/layout.phtml:43 view/layout/layout.phtml:51
+#: view/layout/layout.phtml:57
+msgid "Contact"
+msgstr ""
+
+#: view/layout/layout.phtml:49
+msgid "Register"
+msgstr ""
+
+#: view/layout/layout.phtml:66
+msgid "Logout"
+msgstr ""
+
+#: view/layout/layout.phtml:67
+msgid "Logged in as"
+msgstr ""
+
+#: view/layout/layout.phtml:73
+msgid "Sign In / Sign Up"
+msgstr ""
+
+#: view/layout/layout.phtml:79
+msgid "Remember Me"
+msgstr ""
+
+#: view/layout/layout.phtml:80
+msgid "Sign In"
+msgstr ""
+
+#: view/layout/layout.phtml:84
+msgid "Create a new account"
+msgstr ""
+
+#: view/layout/layout.phtml:86
+msgid "Reset your password"
+msgstr ""
+
+#: view/layout/layout.phtml:92 view/layout/layout.phtml:144
+msgid "English"
+msgstr ""
+
+#: view/layout/layout.phtml:93 view/layout/layout.phtml:146
+msgid "French"
+msgstr ""
+
+#: view/layout/layout.phtml:94 view/layout/layout.phtml:154
+msgid "US English"
+msgstr ""
+
+#: view/layout/layout.phtml:130
+msgid "All rights reserved."
+msgstr ""
+
+#: view/layout/layout.phtml:134
+msgid "Feedback"
+msgstr ""
+
+#: view/layout/layout.phtml:139
+msgid "Source code (GitHub)"
+msgstr ""
+
+#: view/layout/layout.phtml:141
+msgid "Continuous Integration (Travis CI)"
+msgstr ""
+
+#: view/layout/layout.phtml:148
+msgid "Italian"
+msgstr ""
+
+#: view/layout/layout.phtml:150
+msgid "German"
+msgstr ""
+
+#: view/layout/layout.phtml:152
+msgid "Spanish"
+msgstr ""
+
+#~ msgid "Hole"
+#~ msgstr "Hole"

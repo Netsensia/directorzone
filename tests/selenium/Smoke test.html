@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://netsensia.zf2.skeleton/" />
+<title>Smoke test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Smoke test</td></tr>
+</thead><tbody>
+<tr>
+	<td>storeEval</td>
+	<td>var d=new Date(); ('0' + d.getDate()).slice(-2) + '/' + ('0' + (d.getMonth()+1)).slice(-2) + '/' + d.getFullYear();</td>
+	<td>today</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>var d=new Date(); d.getTime();</td>
+	<td>timestamp</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>&quot;netsensia.com&quot;</td>
+	<td>domain</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>Math.floor((Math.random()*1000)+1);</td>
+	<td>random</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>&quot;email&quot; + ${timestamp} + &quot;-&quot; + ${random} + &quot;@&quot; + &quot;${domain}&quot;</td>
+	<td>email</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>&quot;user&quot; + ${timestamp}</td>
+	<td>username</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>&quot;asdasd&quot;</td>
+	<td>password</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>&quot;qweqwe&quot;</td>
+	<td>newpassword</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=drop3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Create a new account</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=email</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=send</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>×There were some errors on the form. Please review your entries and try again.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=email</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Username is required</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Email is required</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please choose a password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please confirm your password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>css=div.input-prepend &gt; input[name=&quot;username&quot;]</td>
+	<td>${username}</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=send</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>×There were some errors on the form. Please review your entries and try again.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>Username is required</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Email is required</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please choose a password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Please confirm your password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=email</td>
+	<td>${email}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password</td>
+	<td>asdasd</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=confirmpassword</td>
+	<td>asdasd</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=send</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Account activated</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=drop3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=login-email</td>
+	<td>asd${username}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=login-password</td>
+	<td>wrong${password}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=remember</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Login failed. Please try again. </td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=drop3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=login-email</td>
+	<td>${username}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=login-password</td>
+	<td>${password}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=remember</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.alert.alert-success</td>
+	<td>× You are now logged in</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>What our users say</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=drop3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=login-email</td>
+	<td>${username}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=login-password</td>
+	<td>${password}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=remember</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.alert.alert-success</td>
+	<td>× You are now logged in</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Contact</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=email</td>
+	<td>tester@netsensia.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=message</td>
+	<td>I have an important question.&nbsp;&nbsp;What is my name?</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=send</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>× Your message was sent successfully and will reach us shortly</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=drop3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>2000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Remember Me</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Login failed. Please try again. </td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login-email-standard</td>
+	<td>${email}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login-password-standard</td>
+	<td>wrong${password}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=remember</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=send</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Login failed. Please try again. </td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login-email-standard</td>
+	<td>${email}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login-password-standard</td>
+	<td>${password}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>document.contact.rememberme[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=send</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>× You are now logged in</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/update-password/ef1516fde6f184a0fa34d2210c8775c0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>× Your password reset request has expired. Please try again.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=drop3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Reset your password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=passwordreset-email</td>
+	<td>${email}</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=form-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>seeings as</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Here is the link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Update login details</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=password</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password</td>
+	<td>${newpassword}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=confirmpassword</td>
+	<td>${newpassword}</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=send</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>× Your password was successfully updated.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=drop3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=login-email</td>
+	<td>${username}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=login-password</td>
+	<td>${password}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=remember</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Login failed. Please try again. </td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=drop3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=login-email</td>
+	<td>${username}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=login-password</td>
+	<td>${newpassword}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=remember</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>× You are now logged in</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
