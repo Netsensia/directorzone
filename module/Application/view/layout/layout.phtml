@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <?php echo $this->headTitle($this->translate('Netsensia Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?php echo $this->headTitle($this->translate('Directorzone'))->setSeparator(' - ')->setAutoEscape(false) ?>
 
         <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
 
@@ -32,7 +32,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Netsensia Skeleton Application') ?></a>
+                    <a class="brand" href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Directorzone') ?></a>
                     <div class="nav-collapse collapse">
                         <ul class="nav">
                             <?php
@@ -125,20 +125,13 @@
   
             <footer id="footer">
                       <div class="container">
-                       <p>&copy; 1999 - <?php echo date('Y') ?> by Netsensia Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
+                       <p>&copy; 1999 - <?php echo date('Y') ?> by Directorzone Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
                         <ul class="footer-links">
                           <li><a href="<?= $this->url('home'); ?>"><?= $this->translate('Home'); ?></a></li>
                           <li class="muted">&middot;</li>
                           <li><a href="<?= $this->url('contact'); ?>"><?= $this->translate('Feedback'); ?></a></li>
                           <li class="muted">&middot;</li>
                           <li><a href="<?= $this->url('help'); ?>"><?= $this->translate('Help'); ?></a></li>
-                        </ul>
-                        <ul class="footer-links">
-                          <li><a href="https://github.com/Netsensia/netsensia-zf2-skeleton"><?= $this->translate('Source code (GitHub)'); ?></a></li>
-                          <li class="muted">&middot;</li>
-                          <li><a href="https://travis-ci.org/Netsensia/netsensia-zf2-skeleton"><?= $this->translate('Travis CI'); ?></a></li>
-                          <li class="muted">&middot;</li>
-                          <li><a href="http://ci.netsensia.com/job/NETSENSIA-ZF2-SKELETON/"><?= $this->translate('Jenkins'); ?></a></li>
                         </ul>
                         <ul class="footer-links">
                             <li><a href="<?php echo $this->url('locale', ["locale"=>"en_GB"]); ?>"><?php echo $this->translate('English'); ?></a>
