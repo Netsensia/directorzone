@@ -4,7 +4,8 @@ return array(
     'modules' => array(
         'Application',
         'Netsensia',
-        'ZendSentry','CompaniesHouse'
+        'ZendSentry',
+        'NetsensiaCompanies'
     ),
 
     // These are various options for the listeners attached to the ModuleManager
