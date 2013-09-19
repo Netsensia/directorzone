@@ -1,5 +1,5 @@
-create database zf2_skeleton;
-use zf2_skeleton;
+create database directorzone_zf2;
+use directorzone_zf2;
 
 CREATE TABLE `user` (
 `userid` int(10) unsigned NOT NULL AUTO_INCREMENT,
