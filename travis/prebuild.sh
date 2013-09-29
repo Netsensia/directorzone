@@ -7,7 +7,7 @@ sed -i 's/PASSWORD_SALT/abcde/g' config/autoload/netsensia.local.php
 sed -i 's/MAXMIND_USERID//g' config/autoload/netsensia.local.php
 sed -i 's/MAXMIND_LICENSEKEY//g' config/autoload/netsensia.local.php
 
-sed -i 's/DB_SOURCE/mysql:host=localhost;dbname=zf2_skeleton/g' config/autoload/netsensia.local.php
+sed -i 's/DB_SOURCE/mysql:host=localhost;dbname=directorzone_zf2/g' config/autoload/netsensia.local.php
 sed -i 's/DB_USERNAME/root/g' config/autoload/netsensia.local.php
 sed -i 's/DB_PASSWORD//g' config/autoload/netsensia.local.php
 
