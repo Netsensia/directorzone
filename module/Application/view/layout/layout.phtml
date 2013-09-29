@@ -9,9 +9,8 @@
 
         <!-- Le styles -->
         <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/brand/favicon.ico'))
-                        ->prependStylesheet($this->basePath() . '/css/bootstrap-responsive.min.css')
                         ->prependStylesheet($this->basePath() . '/css/style.css')
-                        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css') ?>
+                        ->prependStylesheet($this->basePath() . '/css/bootstrap.css') ?>
 
         <!-- Scripts -->
         <?php echo $this->headScript()->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
@@ -27,7 +26,9 @@
 			<nav class="navbar navbar-inverse navbar-fixed-top">
 				<div class="container">
 					<div class="navbar-header">
-						<a class="navbar-brand" href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Directorzone') ?></a>
+						<a class="navbar-brand" href="<?php echo $this->url('home') ?>">
+						  <span class="directorzone-brand-type"><?php echo $this->translate('DIRECTORZONE') ?></span>
+						</a>
 
 						<button type="button" class="navbar-toggle" data-toggle="collapse"
 							data-target=".navbar-collapse">
@@ -77,16 +78,13 @@
 							<li class="dropdown"><a href="#" id="drop3" role="button"
 								class="dropdown-toggle" data-toggle="dropdown"><?php echo $this->translate('Sign In / Sign Up'); ?><b
 									class="caret"></b></a>
-								<ul class="dropdown-menu" aria-labelledby="drop3">
+								<ul class="dropdown-menu" id="login-dropdown" aria-labelledby="drop3">
 									<li>
-										<form method="post"
-											action="<?php echo $this->url('login'); ?>">
-											<input type="text" style="margin: 10px;" name="login-email"
-												placeholder="Email" /> <input type="password"
-												style="margin: 10px;" name="login-password"
-												placeholder="Password" /> <input type="checkbox"
-												style="margin: 10px;" name="remember" value="remember" /> <?php echo $this->translate('Remember Me'); ?>
-                                	<input type="submit"
+										<form method="post" action="<?php echo $this->url('login'); ?>">
+											<input type="text" style="margin: 10px;" name="login-email" class="form-control" placeholder="Email" /> 
+											<input type="password" style="margin: 10px;" name="login-password" class="form-control" placeholder="Password" /> 
+											<input type="checkbox" style="margin: 10px;" name="remember" value="remember" /> <?php echo $this->translate('Remember Me'); ?>
+                                	       <input type="submit"
 												class="btn btn-primary" style="margin: 10px;" name="submit"
 												value="<?php echo $this->translate('Sign In'); ?>">
 										</form>

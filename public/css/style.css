@@ -106,3 +106,30 @@ html, body {height: 100%;}
 div.featurelist li {
 	margin-top:15px;
 }
+
+.input-group .form-control {
+	width:210px;
+}
+
+label.control-label {
+	font-weight:normal;
+}
+
+@font-face
+{
+    font-family:gentium-basic;
+    src: url('fonts/Gentium-Basic/GenBasR.ttf');
+}
+
+.directorzone-brand-type {
+	font-family:gentium-basic;
+	color:#fff;
+}
+
+#login-dropdown {
+  min-width: 240px;
+}
+
+#login-dropdown .form-control {
+  width: 220px;
+}
