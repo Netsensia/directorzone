@@ -24,18 +24,24 @@
     <body>
     <div id="page-wrap">
     <div id="main">
-        <div class="navbar navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container">
-                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
-                    <a class="brand" href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Directorzone') ?></a>
-                    <div class="nav-collapse collapse">
-                        <ul class="nav">
-                            <?php
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-header">
+    <a class="navbar-brand" href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Directorzone') ?></a>
+    
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+  </div>
+  <div class="navbar-header navbar-right">
+  	<p class="navbar-text">
+  	<a href="#" class="navbar-link">Username</a>
+  	</p>
+  </div>
+  <div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+      <?php
                                 if ($this->identity()) {
                                     $urls = array(
                                         'home' => $this->translate("Home"),
@@ -66,8 +72,8 @@
                             <li><a href="<?php echo $this->url('logout') ?>"><?php echo $this->translate('Logout') ?></a></li>
                             <li><a><strong><?php echo $this->translate('Logged in as'); ?> <?php echo $this->escapeHtml($user->getName()); ?></strong></a></li>
                             <?php } ?>
-                        </ul>
-                        <?php if ($this->config()['netsensia']['enable-users'] && !$this->identity()) { ?>
+    </ul>
+    <?php if ($this->config()['netsensia']['enable-users'] && !$this->identity()) { ?>
                         <ul class="nav pull-right">
                             <li class="dropdown">
                               <a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown"><?php echo $this->translate('Sign In / Sign Up'); ?><b class="caret"></b></a>
@@ -92,10 +98,10 @@
                             <a title="<?php echo $this->translate('English'); ?>" href="<?php echo $this->url('locale', ["locale"=>"en_GB"]); ?>"><img class="translate-flag" src="/img/flag/England.fw.png"></a>
                             <a title="<?php echo $this->translate('French'); ?>" href="<?php echo $this->url('locale', array("locale"=>"fr_FR")); ?>"><img class="translate-flag" src="/img/flag/France.fw.png"></a>
                         </div>
-                   </div><!--/.nav-collapse -->
-                </div>
-            </div>
-        </div>
+  </div>
+</nav>
+
+
 
         <div class="container">
             
