@@ -68,8 +68,8 @@
 								href="<?php echo $this->url($url); ?>"><?php echo $this->translate($name); ?></a></li>
                             <?php } ?>
                             <?php if ($user = $this->identity()) { ?>
-                            <li><a
-								href="<?php echo $this->url('logout') ?>"><?php echo $this->translate('Logout') ?></a></li>
+                            <li><a href="<?php echo $this->url('myaccount') ?>"><?php echo $this->translate('My Account') ?></a></li>
+                            <li><a href="<?php echo $this->url('logout') ?>"><?php echo $this->translate('Logout') ?></a></li>
 							<li><a><strong><?php echo $this->translate('Logged in as'); ?> <?php echo $this->escapeHtml($user->getName()); ?></strong></a></li>
                         <?php } ?>
                     </ul>

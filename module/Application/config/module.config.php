@@ -7,6 +7,8 @@ return array(
                 'Application\Controller\IndexController',
             'Application\Controller\Help' => 
                 'Application\Controller\HelpController',
+            'Application\Controller\Account' =>
+                'Application\Controller\AccountController',            
         ),
     ),
     'router' => array(
@@ -33,6 +35,17 @@ return array(
                     ),
                 ),
             ),
+            
+            'myaccount' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/help',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Account',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),            
             
             'contact' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
