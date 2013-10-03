@@ -1,6 +1,6 @@
 /*
-SQLyog Trial v11.25 (64 bit)
-MySQL - 5.1.50-community : Database - directorzone_zf2
+SQLyog Ultimate v11.25 (64 bit)
+MySQL - 5.5.23 : Database - directorzone_zf2
 *********************************************************************
 */
 
@@ -21,31 +21,31 @@ USE `directorzone_zf2`;
 DROP TABLE IF EXISTS `address`;
 
 CREATE TABLE `address` (
-  `id` int(11) NOT NULL,
+  `addressid` int(11) NOT NULL AUTO_INCREMENT,
   `address1` varchar(100) DEFAULT NULL,
   `address2` varchar(100) DEFAULT NULL,
   `town` varchar(100) DEFAULT NULL,
   `county` varchar(100) DEFAULT NULL,
   `country` int(11) DEFAULT NULL,
   `postcode` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`addressid`),
   KEY `country` (`country`),
   CONSTRAINT `address_ibfk_1` FOREIGN KEY (`country`) REFERENCES `country` (`country_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `address` */
 
-/*Table structure for table `area` */
+/*Table structure for table `availability` */
 
-DROP TABLE IF EXISTS `area`;
+DROP TABLE IF EXISTS `availability`;
 
-CREATE TABLE `area` (
-  `id` int(11) NOT NULL,
-  `desc` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE `availability` (
+  `availabilityid` int(11) NOT NULL,
+  `availability` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`availabilityid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*Data for the table `area` */
+/*Data for the table `availability` */
 
 /*Table structure for table `country` */
 
@@ -75,18 +75,32 @@ DROP TABLE IF EXISTS `experience`;
 CREATE TABLE `experience` (
   `userid` int(11) NOT NULL,
   `title` varchar(50) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  `area` int(11) DEFAULT NULL,
+  `statusid` int(11) DEFAULT NULL,
+  `experienceareaid` int(11) DEFAULT NULL,
   `committeerole` varchar(50) DEFAULT NULL,
   `fromdate` date DEFAULT NULL,
   `todate` date DEFAULT NULL,
-  KEY `status` (`status`),
-  KEY `area` (`area`),
-  CONSTRAINT `experience_ibfk_1` FOREIGN KEY (`status`) REFERENCES `status` (`id`),
-  CONSTRAINT `experience_ibfk_2` FOREIGN KEY (`area`) REFERENCES `area` (`id`)
+  KEY `status` (`statusid`),
+  KEY `area` (`experienceareaid`),
+  KEY `userid` (`userid`),
+  CONSTRAINT `experience_ibfk_5` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`),
+  CONSTRAINT `experience_ibfk_3` FOREIGN KEY (`statusid`) REFERENCES `status` (`statusid`),
+  CONSTRAINT `experience_ibfk_4` FOREIGN KEY (`experienceareaid`) REFERENCES `experiencearea` (`experiencearea`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `experience` */
+
+/*Table structure for table `experiencearea` */
+
+DROP TABLE IF EXISTS `experiencearea`;
+
+CREATE TABLE `experiencearea` (
+  `experiencearea` int(11) NOT NULL,
+  `experienceareaid` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`experiencearea`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `experiencearea` */
 
 /*Table structure for table `feedback` */
 
@@ -112,9 +126,9 @@ CREATE TABLE `feedback` (
 DROP TABLE IF EXISTS `keyevent`;
 
 CREATE TABLE `keyevent` (
-  `id` int(11) NOT NULL,
-  `desc` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `keyeventid` int(11) NOT NULL,
+  `keyevent` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`keyeventid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `keyevent` */
@@ -124,9 +138,10 @@ CREATE TABLE `keyevent` (
 DROP TABLE IF EXISTS `language`;
 
 CREATE TABLE `language` (
-  `id` int(11) NOT NULL,
+  `languageid` int(11) NOT NULL,
   `language` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`languageid`),
+  CONSTRAINT `language_ibfk_1` FOREIGN KEY (`languageid`) REFERENCES `userlanguage` (`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `language` */
@@ -136,9 +151,9 @@ CREATE TABLE `language` (
 DROP TABLE IF EXISTS `marketgroup`;
 
 CREATE TABLE `marketgroup` (
-  `id` int(11) NOT NULL,
-  `desc` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `marketgroupid` int(11) NOT NULL,
+  `marketgroup` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`marketgroupid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `marketgroup` */
@@ -148,33 +163,33 @@ CREATE TABLE `marketgroup` (
 DROP TABLE IF EXISTS `nationality`;
 
 CREATE TABLE `nationality` (
-  `id` int(11) NOT NULL,
+  `nationalityid` int(11) NOT NULL,
   `nationality` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`nationalityid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `nationality` */
 
-/*Table structure for table `pay` */
+/*Table structure for table `paylevel` */
 
-DROP TABLE IF EXISTS `pay`;
+DROP TABLE IF EXISTS `paylevel`;
 
-CREATE TABLE `pay` (
-  `id` int(11) NOT NULL,
-  `desc` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE `paylevel` (
+  `paylevelid` int(11) NOT NULL,
+  `paylevel` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`paylevelid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*Data for the table `pay` */
+/*Data for the table `paylevel` */
 
 /*Table structure for table `qualificationtype` */
 
 DROP TABLE IF EXISTS `qualificationtype`;
 
 CREATE TABLE `qualificationtype` (
-  `id` int(11) NOT NULL,
-  `type` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `qualificationtypeid` int(11) NOT NULL,
+  `qualificationtype` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`qualificationtypeid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `qualificationtype` */
@@ -184,9 +199,9 @@ CREATE TABLE `qualificationtype` (
 DROP TABLE IF EXISTS `role`;
 
 CREATE TABLE `role` (
-  `id` int(11) NOT NULL,
-  `desc` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `roleid` int(11) NOT NULL,
+  `role` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`roleid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `role` */
@@ -196,33 +211,21 @@ CREATE TABLE `role` (
 DROP TABLE IF EXISTS `sector`;
 
 CREATE TABLE `sector` (
-  `id` int(11) NOT NULL,
-  `desc` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `sectorid` int(11) NOT NULL,
+  `sector` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`sectorid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `sector` */
-
-/*Table structure for table `speakeravailability` */
-
-DROP TABLE IF EXISTS `speakeravailability`;
-
-CREATE TABLE `speakeravailability` (
-  `id` int(11) NOT NULL,
-  `desc` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-/*Data for the table `speakeravailability` */
 
 /*Table structure for table `status` */
 
 DROP TABLE IF EXISTS `status`;
 
 CREATE TABLE `status` (
-  `id` int(11) NOT NULL,
-  `desc` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `statusid` int(11) NOT NULL,
+  `status` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`statusid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `status` */
@@ -234,17 +237,20 @@ DROP TABLE IF EXISTS `targetrole`;
 CREATE TABLE `targetrole` (
   `userid` int(11) NOT NULL,
   `targetroleid` int(11) NOT NULL,
-  `role` int(11) DEFAULT NULL,
+  `roleid` int(11) DEFAULT NULL,
   `country` int(11) DEFAULT NULL,
-  `pay` int(11) DEFAULT NULL,
-  `primarysector` int(11) DEFAULT NULL,
+  `paylevelid` int(11) DEFAULT NULL,
+  `primarysectorid` int(11) DEFAULT NULL,
   `titlesummary` varchar(50) DEFAULT NULL,
   `commentrequirement` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`userid`,`targetroleid`),
-  KEY `primarysector` (`primarysector`),
-  KEY `role` (`role`),
-  CONSTRAINT `targetrole_ibfk_2` FOREIGN KEY (`role`) REFERENCES `role` (`id`),
-  CONSTRAINT `targetrole_ibfk_1` FOREIGN KEY (`primarysector`) REFERENCES `sector` (`id`)
+  KEY `primarysector` (`primarysectorid`),
+  KEY `role` (`roleid`),
+  KEY `paylevelid` (`paylevelid`),
+  CONSTRAINT `targetrole_ibfk_6` FOREIGN KEY (`primarysectorid`) REFERENCES `sector` (`sectorid`),
+  CONSTRAINT `targetrole_ibfk_3` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`),
+  CONSTRAINT `targetrole_ibfk_4` FOREIGN KEY (`paylevelid`) REFERENCES `paylevel` (`paylevelid`),
+  CONSTRAINT `targetrole_ibfk_5` FOREIGN KEY (`roleid`) REFERENCES `role` (`roleid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `targetrole` */
@@ -256,11 +262,12 @@ DROP TABLE IF EXISTS `targetrolekeyevent`;
 CREATE TABLE `targetrolekeyevent` (
   `userid` int(11) NOT NULL,
   `targetroleid` int(11) NOT NULL,
-  `keyevent` int(11) NOT NULL,
-  PRIMARY KEY (`userid`,`targetroleid`,`keyevent`),
-  KEY `keyevent` (`keyevent`),
-  CONSTRAINT `targetrolekeyevent_ibfk_2` FOREIGN KEY (`keyevent`) REFERENCES `keyevent` (`id`),
-  CONSTRAINT `targetrolekeyevent_ibfk_1` FOREIGN KEY (`userid`, `targetroleid`) REFERENCES `targetrole` (`userid`, `targetroleid`)
+  `keyeventid` int(11) NOT NULL,
+  PRIMARY KEY (`userid`,`targetroleid`,`keyeventid`),
+  KEY `keyevent` (`keyeventid`),
+  CONSTRAINT `targetrolekeyevent_ibfk_4` FOREIGN KEY (`keyeventid`) REFERENCES `keyevent` (`keyeventid`),
+  CONSTRAINT `targetrolekeyevent_ibfk_1` FOREIGN KEY (`userid`, `targetroleid`) REFERENCES `targetrole` (`userid`, `targetroleid`),
+  CONSTRAINT `targetrolekeyevent_ibfk_3` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `targetrolekeyevent` */
@@ -270,19 +277,21 @@ CREATE TABLE `targetrolekeyevent` (
 DROP TABLE IF EXISTS `title`;
 
 CREATE TABLE `title` (
-  `id` int(11) NOT NULL,
+  `titleid` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`titleid`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 /*Data for the table `title` */
+
+insert  into `title`(`titleid`,`title`) values (1,'Dr'),(2,'Mr'),(3,'Mrs'),(4,'Ms'),(5,'Prof'),(6,'Other');
 
 /*Table structure for table `user` */
 
 DROP TABLE IF EXISTS `user`;
 
 CREATE TABLE `user` (
-  `userid` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `userid` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(128) DEFAULT NULL,
   `name` varchar(128) DEFAULT NULL,
   `password` varchar(128) DEFAULT NULL,
@@ -294,41 +303,41 @@ CREATE TABLE `user` (
   `regipaddress` varchar(32) DEFAULT NULL,
   `locale` char(5) NOT NULL DEFAULT 'en_US',
   `activated` char(1) DEFAULT 'N',
-  `title` int(11) DEFAULT NULL,
+  `titleid` int(11) DEFAULT NULL,
   `forenames` varchar(100) DEFAULT NULL,
   `surname` varchar(100) DEFAULT NULL,
   `dob` date DEFAULT NULL,
   `suffix` varchar(20) DEFAULT NULL,
   `gender` char(1) DEFAULT NULL,
-  `nationality` int(11) DEFAULT NULL,
+  `nationalityid` int(11) DEFAULT NULL,
   `profileimage` varchar(100) DEFAULT NULL,
   `pseudonym` varchar(20) DEFAULT NULL,
   `alternativeemail` varchar(100) DEFAULT NULL,
   `telephone` varchar(20) DEFAULT NULL,
   `mobile` varchar(100) DEFAULT NULL,
   `fax` varchar(100) DEFAULT NULL,
-  `address` int(11) DEFAULT NULL,
+  `addressid` int(11) DEFAULT NULL,
   `talentpoolsummary` text,
   `skills` text,
   `personalinterests` text,
   `whoswhosummary` text,
-  `speakeravailability` int(11) DEFAULT NULL,
-  `marketgroup` int(11) DEFAULT NULL,
+  `availabilityid` int(11) DEFAULT NULL,
+  `marketgroupid` int(11) DEFAULT NULL,
   PRIMARY KEY (`userid`),
   UNIQUE KEY `emailidx` (`email`),
-  KEY `address` (`address`),
-  KEY `marketgroup` (`marketgroup`),
-  KEY `speakeravailability` (`speakeravailability`),
-  KEY `nationality` (`nationality`),
-  CONSTRAINT `user_ibfk_4` FOREIGN KEY (`nationality`) REFERENCES `nationality` (`id`),
-  CONSTRAINT `user_ibfk_1` FOREIGN KEY (`address`) REFERENCES `address` (`id`),
-  CONSTRAINT `user_ibfk_2` FOREIGN KEY (`marketgroup`) REFERENCES `marketgroup` (`id`),
-  CONSTRAINT `user_ibfk_3` FOREIGN KEY (`speakeravailability`) REFERENCES `speakeravailability` (`id`)
+  KEY `address` (`addressid`),
+  KEY `marketgroup` (`marketgroupid`),
+  KEY `speakeravailability` (`availabilityid`),
+  KEY `nationality` (`nationalityid`),
+  KEY `titleid` (`titleid`),
+  CONSTRAINT `user_ibfk_9` FOREIGN KEY (`marketgroupid`) REFERENCES `marketgroup` (`marketgroupid`),
+  CONSTRAINT `user_ibfk_5` FOREIGN KEY (`titleid`) REFERENCES `title` (`titleid`),
+  CONSTRAINT `user_ibfk_6` FOREIGN KEY (`availabilityid`) REFERENCES `availability` (`availabilityid`),
+  CONSTRAINT `user_ibfk_7` FOREIGN KEY (`addressid`) REFERENCES `address` (`addressid`),
+  CONSTRAINT `user_ibfk_8` FOREIGN KEY (`nationalityid`) REFERENCES `nationality` (`nationalityid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `user` */
-
-insert  into `user`(`userid`,`email`,`name`,`password`,`createddate`,`isocountry_fromregip`,`httpreferer`,`emailverifycode`,`passwordresetcode`,`regipaddress`,`locale`,`activated`,`title`,`forenames`,`surname`,`dob`,`suffix`,`gender`,`nationality`,`profileimage`,`pseudonym`,`alternativeemail`,`telephone`,`mobile`,`fax`,`address`,`talentpoolsummary`,`skills`,`personalinterests`,`whoswhosummary`,`speakeravailability`,`marketgroup`) values (1,'chris@netsensia.com','Chris','$2y$14$3cS1O1FNywjhCVXGX3L1UeLKEbJzTAicJbV4rFNLJNI7olBapbAvy','2013-10-02 20:13:05',NULL,NULL,'Z5YjijVG838KTQc5ir8bqTaDrguHJzgs',NULL,'127.0.0.1','en_US','Y',0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 
 /*Table structure for table `userlanguage` */
 
@@ -339,7 +348,7 @@ CREATE TABLE `userlanguage` (
   `languageid` int(11) NOT NULL,
   PRIMARY KEY (`userid`,`languageid`),
   KEY `languageid` (`languageid`),
-  CONSTRAINT `userlanguage_ibfk_1` FOREIGN KEY (`languageid`) REFERENCES `language` (`id`)
+  CONSTRAINT `userlanguage_ibfk_2` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `userlanguage` */
@@ -352,9 +361,11 @@ CREATE TABLE `userqualification` (
   `userid` int(11) NOT NULL,
   `qualification` varchar(100) DEFAULT NULL,
   `subject` varchar(100) DEFAULT NULL,
-  `type` int(1) DEFAULT NULL,
-  KEY `type` (`type`),
-  CONSTRAINT `userqualification_ibfk_1` FOREIGN KEY (`type`) REFERENCES `qualificationtype` (`id`)
+  `qualificationtypeid` int(1) DEFAULT NULL,
+  KEY `type` (`qualificationtypeid`),
+  KEY `userid` (`userid`),
+  CONSTRAINT `userqualification_ibfk_3` FOREIGN KEY (`qualificationtypeid`) REFERENCES `qualificationtype` (`qualificationtypeid`),
+  CONSTRAINT `userqualification_ibfk_2` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `userqualification` */

@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemadesigner version="6.5">
+<source>
+<database charset="latin1" collation="latin1_swedish_ci">directorzone_zf2</database>
+</source>
+<canvas zoom="100">
+<tables>
+<table name="user" view="colnames">
+<left>228</left>
+<top>16</top>
+<width>180</width>
+<height>608</height>
+<sql_create_table>CREATE TABLE `user` (
+  `userid` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(128) DEFAULT NULL,
+  `name` varchar(128) DEFAULT NULL,
+  `password` varchar(128) DEFAULT NULL,
+  `createddate` datetime DEFAULT NULL,
+  `isocountry_fromregip` varchar(5) DEFAULT NULL,
+  `httpreferer` varchar(250) DEFAULT NULL,
+  `emailverifycode` varchar(32) DEFAULT NULL,
+  `passwordresetcode` varchar(32) DEFAULT NULL,
+  `regipaddress` varchar(32) DEFAULT NULL,
+  `locale` char(5) NOT NULL DEFAULT 'en_US',
+  `activated` char(1) DEFAULT 'N',
+  `titleid` int(11) DEFAULT NULL,
+  `forenames` varchar(100) DEFAULT NULL,
+  `surname` varchar(100) DEFAULT NULL,
+  `dob` date DEFAULT NULL,
+  `suffix` varchar(20) DEFAULT NULL,
+  `gender` char(1) DEFAULT NULL,
+  `nationalityid` int(11) DEFAULT NULL,
+  `profileimage` varchar(100) DEFAULT NULL,
+  `pseudonym` varchar(20) DEFAULT NULL,
+  `alternativeemail` varchar(100) DEFAULT NULL,
+  `telephone` varchar(20) DEFAULT NULL,
+  `mobile` varchar(100) DEFAULT NULL,
+  `fax` varchar(100) DEFAULT NULL,
+  `addressid` int(11) DEFAULT NULL,
+  `talentpoolsummary` text,
+  `skills` text,
+  `personalinterests` text,
+  `whoswhosummary` text,
+  `availabilityid` int(11) DEFAULT NULL,
+  `marketgroupid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`userid`),
+  UNIQUE KEY `emailidx` (`email`),
+  KEY `address` (`addressid`),
+  KEY `marketgroup` (`marketgroupid`),
+  KEY `speakeravailability` (`availabilityid`),
+  KEY `nationality` (`nationalityid`),
+  KEY `titleid` (`titleid`),
+  CONSTRAINT `user_ibfk_9` FOREIGN KEY (`marketgroupid`) REFERENCES `marketgroup` (`marketgroupid`),
+  CONSTRAINT `user_ibfk_5` FOREIGN KEY (`titleid`) REFERENCES `title` (`titleid`),
+  CONSTRAINT `user_ibfk_6` FOREIGN KEY (`availabilityid`) REFERENCES `availability` (`availabilityid`),
+  CONSTRAINT `user_ibfk_7` FOREIGN KEY (`addressid`) REFERENCES `address` (`addressid`),
+  CONSTRAINT `user_ibfk_8` FOREIGN KEY (`nationalityid`) REFERENCES `nationality` (`nationalityid`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="userlanguage" view="colnames">
+<left>442</left>
+<top>613</top>
+<width>180</width>
+<height>92</height>
+<sql_create_table>CREATE TABLE `userlanguage` (
+  `userid` int(11) NOT NULL,
+  `languageid` int(11) NOT NULL,
+  PRIMARY KEY (`userid`,`languageid`),
+  KEY `languageid` (`languageid`),
+  CONSTRAINT `userlanguage_ibfk_2` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="userqualification" view="colnames">
+<left>461</left>
+<top>422</top>
+<width>160</width>
+<height>144</height>
+<sql_create_table>CREATE TABLE `userqualification` (
+  `userid` int(11) NOT NULL,
+  `qualification` varchar(100) DEFAULT NULL,
+  `subject` varchar(100) DEFAULT NULL,
+  `qualificationtypeid` int(1) DEFAULT NULL,
+  KEY `type` (`qualificationtypeid`),
+  KEY `userid` (`userid`),
+  CONSTRAINT `userqualification_ibfk_3` FOREIGN KEY (`qualificationtypeid`) REFERENCES `qualificationtype` (`qualificationtypeid`),
+  CONSTRAINT `userqualification_ibfk_2` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="title" view="colnames">
+<left>12</left>
+<top>20</top>
+<width>136</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `title` (
+  `titleid` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`titleid`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="qualificationtype" view="colnames">
+<left>701</left>
+<top>525</top>
+<width>160</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `qualificationtype` (
+  `qualificationtypeid` int(11) NOT NULL,
+  `qualificationtype` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`qualificationtypeid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="targetrolekeyevent" view="colnames">
+<left>789</left>
+<top>9</top>
+<width>192</width>
+<height>136</height>
+<sql_create_table>CREATE TABLE `targetrolekeyevent` (
+  `userid` int(11) NOT NULL,
+  `targetroleid` int(11) NOT NULL,
+  `keyeventid` int(11) NOT NULL,
+  PRIMARY KEY (`userid`,`targetroleid`,`keyeventid`),
+  KEY `keyevent` (`keyeventid`),
+  CONSTRAINT `targetrolekeyevent_ibfk_4` FOREIGN KEY (`keyeventid`) REFERENCES `keyevent` (`keyeventid`),
+  CONSTRAINT `targetrolekeyevent_ibfk_1` FOREIGN KEY (`userid`, `targetroleid`) REFERENCES `targetrole` (`userid`, `targetroleid`),
+  CONSTRAINT `targetrolekeyevent_ibfk_3` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="targetrole" view="colnames">
+<left>587</left>
+<top>86</top>
+<width>169</width>
+<height>214</height>
+<sql_create_table>CREATE TABLE `targetrole` (
+  `userid` int(11) NOT NULL,
+  `targetroleid` int(11) NOT NULL,
+  `roleid` int(11) DEFAULT NULL,
+  `country` int(11) DEFAULT NULL,
+  `paylevelid` int(11) DEFAULT NULL,
+  `primarysectorid` int(11) DEFAULT NULL,
+  `titlesummary` varchar(50) DEFAULT NULL,
+  `commentrequirement` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`userid`,`targetroleid`),
+  KEY `primarysector` (`primarysectorid`),
+  KEY `role` (`roleid`),
+  KEY `paylevelid` (`paylevelid`),
+  CONSTRAINT `targetrole_ibfk_6` FOREIGN KEY (`primarysectorid`) REFERENCES `sector` (`sectorid`),
+  CONSTRAINT `targetrole_ibfk_3` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`),
+  CONSTRAINT `targetrole_ibfk_4` FOREIGN KEY (`paylevelid`) REFERENCES `paylevel` (`paylevelid`),
+  CONSTRAINT `targetrole_ibfk_5` FOREIGN KEY (`roleid`) REFERENCES `role` (`roleid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="keyevent" view="colnames">
+<left>1051</left>
+<top>27</top>
+<width>168</width>
+<height>96</height>
+<sql_create_table>CREATE TABLE `keyevent` (
+  `keyeventid` int(11) NOT NULL,
+  `keyevent` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`keyeventid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="status" view="colnames">
+<left>990</left>
+<top>445</top>
+<width>112</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `status` (
+  `statusid` int(11) NOT NULL,
+  `status` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`statusid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="availability" view="colnames">
+<left>16</left>
+<top>476</top>
+<width>132</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `availability` (
+  `availabilityid` int(11) NOT NULL,
+  `availability` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`availabilityid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="sector" view="colnames">
+<left>960</left>
+<top>293</top>
+<width>124</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `sector` (
+  `sectorid` int(11) NOT NULL,
+  `sector` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`sectorid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="paylevel" view="colnames">
+<left>869</left>
+<top>159</top>
+<width>164</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `paylevel` (
+  `paylevelid` int(11) NOT NULL,
+  `paylevel` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`paylevelid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="nationality" view="colnames">
+<left>12</left>
+<top>140</top>
+<width>144</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `nationality` (
+  `nationalityid` int(11) NOT NULL,
+  `nationality` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`nationalityid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="marketgroup" view="colnames">
+<left>24</left>
+<top>624</top>
+<width>136</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `marketgroup` (
+  `marketgroupid` int(11) NOT NULL,
+  `marketgroup` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`marketgroupid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="language" view="colnames">
+<left>656</left>
+<top>656</top>
+<width>172</width>
+<height>92</height>
+<sql_create_table>CREATE TABLE `language` (
+  `languageid` int(11) NOT NULL,
+  `language` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`languageid`),
+  CONSTRAINT `language_ibfk_1` FOREIGN KEY (`languageid`) REFERENCES `userlanguage` (`userid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="experience" view="colnames">
+<left>643</left>
+<top>316</top>
+<width>156</width>
+<height>196</height>
+<sql_create_table>CREATE TABLE `experience` (
+  `userid` int(11) NOT NULL,
+  `title` varchar(50) DEFAULT NULL,
+  `statusid` int(11) DEFAULT NULL,
+  `experienceareaid` int(11) DEFAULT NULL,
+  `committeerole` varchar(50) DEFAULT NULL,
+  `fromdate` date DEFAULT NULL,
+  `todate` date DEFAULT NULL,
+  KEY `status` (`statusid`),
+  KEY `area` (`experienceareaid`),
+  KEY `userid` (`userid`),
+  CONSTRAINT `experience_ibfk_5` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`),
+  CONSTRAINT `experience_ibfk_3` FOREIGN KEY (`statusid`) REFERENCES `status` (`statusid`),
+  CONSTRAINT `experience_ibfk_4` FOREIGN KEY (`experienceareaid`) REFERENCES `experiencearea` (`experiencearea`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="experiencearea" view="colnames">
+<left>963</left>
+<top>599</top>
+<width>164</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `experiencearea` (
+  `experiencearea` int(11) NOT NULL,
+  `experienceareaid` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`experiencearea`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="address" view="colnames">
+<left>16</left>
+<top>260</top>
+<width>132</width>
+<height>200</height>
+<sql_create_table>CREATE TABLE `address` (
+  `addressid` int(11) NOT NULL AUTO_INCREMENT,
+  `address1` varchar(100) DEFAULT NULL,
+  `address2` varchar(100) DEFAULT NULL,
+  `town` varchar(100) DEFAULT NULL,
+  `county` varchar(100) DEFAULT NULL,
+  `country` int(11) DEFAULT NULL,
+  `postcode` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`addressid`),
+  KEY `country` (`country`),
+  CONSTRAINT `address_ibfk_1` FOREIGN KEY (`country`) REFERENCES `country` (`country_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+</tables>
+</canvas>
+</schemadesigner>
