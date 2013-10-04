@@ -25,66 +25,104 @@ return array(
                 ),
             ),
             
-            'help' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route'    => '/help',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Help',
-                        'action'     => 'index',
-                    ),
-                ),
-            ),
-            
             'myaccount' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route'    => '/help',
+                    'route'    => '/myaccount',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Account',
                         'action'     => 'index',
                     ),
                 ),
             ),            
-            
-            'contact' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
+
+            'account-profile' => array(
+                'type'    => 'Literal',
                 'options' => array(
-                    'route'    => '/contact',
+                    'route'    => '/myaccount/profile',
                     'defaults' => array(
-                        'controller' => 'Application\Controller\Help',
+                        'controller' => 'Application\Controller\Account',
+                        'action'     => 'profile',
+                    ),
+                ),
+            ),
+            'account-contact' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/myaccount/contact',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Account',
                         'action'     => 'contact',
                     ),
                 ),
             ),
-                        
-           // The following is a route to simplify getting started creating
-            // new controllers and actions without needing to create a new
-            // module. Simply drop new controllers in, and you can access them
-            // using the path /application/:controller/:action
-            'application' => array(
+            'account-membership' => array(
                 'type'    => 'Literal',
                 'options' => array(
-                    'route'    => '/application',
+                    'route'    => '/myaccount/membership',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Application\Controller',
-                        'controller'    => 'Index',
-                        'action'        => 'index',
+                        'controller' => 'Application\Controller\Account',
+                        'action'     => 'membership',
                     ),
                 ),
-                'may_terminate' => true,
-                'child_routes' => array(
-                    'default' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            'route'    => '/[:controller[/:action]]',
-                            'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults' => array(
-                            ),
-                        ),
+            ),
+            'account-account' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/myaccount/account',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Account',
+                        'action'     => 'account',
+                    ),
+                ),
+            ),
+            'account-publish' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/myaccount/publish',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Account',
+                        'action'     => 'publish',
+                    ),
+                ),
+            ),
+            'account-inbox' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/myaccount/inbox',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Account',
+                        'action'     => 'inbox',
+                    ),
+                ),
+            ),
+            'account-preferences' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/myaccount/preferences',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Account',
+                        'action'     => 'preferences',
+                    ),
+                ),
+            ),
+            'account-experience' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/myaccount/experience',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Account',
+                        'action'     => 'experience',
+                    ),
+                ),
+            ),
+            'account-company' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/myaccount/company',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Account',
+                        'action'     => 'company',
                     ),
                 ),
             ),
@@ -133,6 +171,7 @@ return array(
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
+            'partial' => __DIR__ . '/../view/application/partials',
         ),
         'strategies' => array(
             'ViewJsonStrategy',
