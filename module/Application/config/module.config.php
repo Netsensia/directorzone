@@ -5,10 +5,6 @@ return array(
         'invokables' => array(
             'Application\Controller\Index' => 
                 'Application\Controller\IndexController',
-            'Application\Controller\Help' => 
-                'Application\Controller\HelpController',
-            'Application\Controller\Account' =>
-                'Application\Controller\AccountController',            
         ),
     ),
     'router' => array(
@@ -25,107 +21,6 @@ return array(
                 ),
             ),
             
-            'myaccount' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route'    => '/myaccount',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Account',
-                        'action'     => 'index',
-                    ),
-                ),
-            ),            
-
-            'account-profile' => array(
-                'type'    => 'Literal',
-                'options' => array(
-                    'route'    => '/myaccount/profile',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Account',
-                        'action'     => 'profile',
-                    ),
-                ),
-            ),
-            'account-contact' => array(
-                'type'    => 'Literal',
-                'options' => array(
-                    'route'    => '/myaccount/contact',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Account',
-                        'action'     => 'contact',
-                    ),
-                ),
-            ),
-            'account-membership' => array(
-                'type'    => 'Literal',
-                'options' => array(
-                    'route'    => '/myaccount/membership',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Account',
-                        'action'     => 'membership',
-                    ),
-                ),
-            ),
-            'account-account' => array(
-                'type'    => 'Literal',
-                'options' => array(
-                    'route'    => '/myaccount/account',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Account',
-                        'action'     => 'account',
-                    ),
-                ),
-            ),
-            'account-publish' => array(
-                'type'    => 'Literal',
-                'options' => array(
-                    'route'    => '/myaccount/publish',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Account',
-                        'action'     => 'publish',
-                    ),
-                ),
-            ),
-            'account-inbox' => array(
-                'type'    => 'Literal',
-                'options' => array(
-                    'route'    => '/myaccount/inbox',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Account',
-                        'action'     => 'inbox',
-                    ),
-                ),
-            ),
-            'account-preferences' => array(
-                'type'    => 'Literal',
-                'options' => array(
-                    'route'    => '/myaccount/preferences',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Account',
-                        'action'     => 'preferences',
-                    ),
-                ),
-            ),
-            'account-experience' => array(
-                'type'    => 'Literal',
-                'options' => array(
-                    'route'    => '/myaccount/experience',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Account',
-                        'action'     => 'experience',
-                    ),
-                ),
-            ),
-            'account-company' => array(
-                'type'    => 'Literal',
-                'options' => array(
-                    'route'    => '/myaccount/company',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Account',
-                        'action'     => 'company',
-                    ),
-                ),
-            ),
         ),
     ),
     

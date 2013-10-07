@@ -5,7 +5,8 @@ return array(
         'Application',
         'Netsensia',
         'ZendSentry',
-        'NetsensiaCompanies'
+        'NetsensiaCompanies',
+        'Directorzone',
     ),
 
     // These are various options for the listeners attached to the ModuleManager
