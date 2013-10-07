@@ -8,6 +8,7 @@ use Directorzone\Model\User as UserModel;
 class AccountController extends NetsensiaActionController
 {
     private $userModel;
+    private $form;
     
     public function setEventManager(EventManagerInterface $events)
     {
@@ -35,42 +36,47 @@ class AccountController extends NetsensiaActionController
     {
         $this->userModel = $userModel;
     }
+    
+    private function prepareForm($formName)
+    {
+        $this->form = $this->getServiceLocator()->get('AccountProfileForm');
+        
+        $this->form->prepare();
+    }
         
     public function profileAction()
     {
-        $form = $this->getServiceLocator()->get('AccountProfileForm');
-        
-        $form->prepare();
+        $this->prepareForm('AccountProfileForm');
         
         $request = $this->getRequest();
         
         if ($request->isPost()) {
             $formData = $request->getPost()->toArray();
             
-            $form->setData($formData);
+            $this->form->setData($formData);
             
-            if ($form->isValid()) {
+            if ($this->form->isValid()) {
 
-                $prefix = $form->getFieldPrefix();
+                $prefix = $this->form->getFieldPrefix();
                 $data = array_merge(
                     $this->userModel->getData(),
                     [
-                        'titleid' => $formData[$prefix . 'title'],
+                        'titleid'   => $formData[$prefix . 'title'],
                         'forenames' => $formData[$prefix . 'forenames'],
-                        'surname' => $formData[$prefix . 'surname']
+                        'surname'   => $formData[$prefix . 'surname']
                     ]
                 );                
                 $this->userModel->setData($data);
                 
                 $this->userModel->save();
-            } else {
-                var_dump($form->getMessages()); die;
             }
+            
+        } else {
             
         }
         
         return array(
-            "form" => $form
+            "form" => $this->form
         );        
     }
 
