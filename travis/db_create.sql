@@ -2,7 +2,7 @@
 SQLyog Trial v11.25 (64 bit)
 MySQL - 5.1.50-community : Database - directorzone_zf2
 *********************************************************************
-*/
+*/
 
 /*!40101 SET NAMES utf8 */;
 

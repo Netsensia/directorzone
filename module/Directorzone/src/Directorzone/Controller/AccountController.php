@@ -14,6 +14,76 @@ class AccountController extends NetsensiaActionController
         $this->redirect()->toRoute('account-profile');
     }
     
+    public function accountAction()
+    {
+        return array(
+            "form" => $this->processForm(
+                'AccountAccountForm',
+                'User'
+            )
+        );
+    }
+        
+    public function companyAction()
+    {
+        return array(
+            "form" => $this->processForm(
+                'AccountCompanyForm',
+                'User'
+            )
+        );
+    }
+        
+    public function contactAction()
+    {
+        return array(
+            "form" => $this->processForm(
+                'AccountContactForm',
+                'User'
+            )
+        );
+    }
+        
+    public function experienceAction()
+    {
+        return array(
+            "form" => $this->processForm(
+                'AccountExperienceForm',
+                'User'
+            )
+        );
+    }
+    
+    public function inboxAction()
+    {
+        return array(
+            "form" => $this->processForm(
+                'AccountInboxForm',
+                'User'
+            )
+        );
+    }    
+    
+    public function membershipAction()
+    {
+        return array(
+            "form" => $this->processForm(
+                'AccountMembershipForm',
+                'User'
+            )
+        );
+    }
+        
+    public function preferencesAction()
+    {
+        return array(
+            "form" => $this->processForm(
+                'AccountPreferencesForm',
+                'User'
+            )
+        );
+    }
+        
     public function profileAction()
     {
         return array(
@@ -24,81 +94,11 @@ class AccountController extends NetsensiaActionController
         );        
     }
 
-    public function contactAction()
-    {
-        return array(
-            "form" => $this->processForm(
-                'AccountProfileForm',
-                'User'
-            )
-        );  
-    }
-    
-    public function membershipAction()
-    {
-        return array(
-            "form" => $this->processForm(
-                'AccountProfileForm',
-                'User'
-            )
-        );  
-    }
-    
-    public function accountAction()
-    {
-        return array(
-            "form" => $this->processForm(
-                'AccountProfileForm',
-                'User'
-            )
-        );  
-    }
-    
     public function publishAction()
     {
         return array(
             "form" => $this->processForm(
-                'AccountProfileForm',
-                'User'
-            )
-        );  
-    }
-    
-    public function inboxAction()
-    {
-        return array(
-            "form" => $this->processForm(
-                'AccountProfileForm',
-                'User'
-            )
-        );  
-    }
-    
-    public function preferencesAction()
-    {
-        return array(
-            "form" => $this->processForm(
-                'AccountProfileForm',
-                'User'
-            )
-        );  
-    }
-    
-    public function experienceAction()
-    {
-        return array(
-            "form" => $this->processForm(
-                'AccountProfileForm',
-                'User'
-            )
-        );  ;
-    }
-    
-    public function companyAction()
-    {
-        return array(
-            "form" => $this->processForm(
-                'AccountProfileForm',
+                'AccountPublishForm',
                 'User'
             )
         );  

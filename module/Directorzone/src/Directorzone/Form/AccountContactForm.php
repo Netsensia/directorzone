@@ -7,7 +7,7 @@ use Zend\InputFilter\Input;
 use Zend\InputFilter\InputFilter;
 use Netsensia\Form\NetsensiaForm;
 
-class AccountProfileForm extends NetsensiaForm
+class AccountContactForm extends NetsensiaForm
 {
     public function __construct($name = null, $options = array())
     {
@@ -16,19 +16,11 @@ class AccountProfileForm extends NetsensiaForm
     
     public function prepare()
     {
-        $this->setFieldPrefix('account-profile-');
+        $this->setFieldPrefix('account-contact-');
         $this->setDefaultIcon('user');
         
-        $this->addSelect('title');
-        
-        $this->addText('forenames');
-        $this->addText('surname');
-        $this->addText('suffix');
-        
-        $this->addSelect('gender');
-        $this->addSelect('nationality');
-        
-        $this->addText('pseudonym');
+        $this->addText('email');
+        $this->addText('alternativeemail');
         
         $this->addSubmit('Submit');
         

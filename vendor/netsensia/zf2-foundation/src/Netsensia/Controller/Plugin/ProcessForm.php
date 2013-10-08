@@ -1,6 +1,6 @@
 <?php
 
-namespace Directorzone\Controller\Plugin;
+namespace Netsensia\Controller\Plugin;
 
 use Zend\Mvc\Controller\Plugin\AbstractPlugin;
 
@@ -8,7 +8,7 @@ class ProcessForm extends AbstractPlugin
 {
     public function __invoke(
         $formName,
-        $model
+        $modelName
     ) 
     {
 
@@ -21,9 +21,9 @@ class ProcessForm extends AbstractPlugin
         $request = $controller->getRequest();
         
         $sl = $this->controller->getServiceLocator();
-        $userModel = $sl->get($model . 'Model');
+        $tableModel = $sl->get($modelName . 'Model');
         
-        $userModel->init($id);
+        $tableModel->init($id);
         
         if ($request->isPost()) {
             $formData = $request->getPost()->toArray();
@@ -42,19 +42,20 @@ class ProcessForm extends AbstractPlugin
                 }
                 
                 $data = array_merge(
-                    $userModel->getData(),
+                    $tableModel->getData(),
                     $modelData
                 );
-                $userModel->setData($data);
+                $tableModel->setData($data);
         
-                $userModel->save();
+                $tableModel->save();
             }
         
         } else {
-            $form->setDataFromModel($userModel);
+            $form->setDataFromModel($tableModel);
         }        
         
         return $form;
         
     }
 }
+

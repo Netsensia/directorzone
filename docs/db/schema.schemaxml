@@ -6,8 +6,8 @@
 <canvas zoom="100">
 <tables>
 <table name="user" view="colnames">
-<left>228</left>
-<top>16</top>
+<left>252</left>
+<top>14</top>
 <width>180</width>
 <height>608</height>
 <sql_create_table>CREATE TABLE `user` (
@@ -50,12 +50,14 @@
   KEY `speakeravailability` (`availabilityid`),
   KEY `nationality` (`nationalityid`),
   KEY `titleid` (`titleid`),
+  KEY `genderid` (`genderid`),
+  CONSTRAINT `user_ibfk_10` FOREIGN KEY (`genderid`) REFERENCES `gender` (`genderid`),
   CONSTRAINT `user_ibfk_5` FOREIGN KEY (`titleid`) REFERENCES `title` (`titleid`),
   CONSTRAINT `user_ibfk_6` FOREIGN KEY (`availabilityid`) REFERENCES `availability` (`availabilityid`),
   CONSTRAINT `user_ibfk_7` FOREIGN KEY (`addressid`) REFERENCES `address` (`addressid`),
   CONSTRAINT `user_ibfk_8` FOREIGN KEY (`nationalityid`) REFERENCES `nationality` (`nationalityid`),
   CONSTRAINT `user_ibfk_9` FOREIGN KEY (`marketgroupid`) REFERENCES `marketgroup` (`marketgroupid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1</sql_create_table>
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 <table name="userlanguage" view="colnames">
 <left>442</left>
@@ -209,10 +211,10 @@
 <width>144</width>
 <height>112</height>
 <sql_create_table>CREATE TABLE `nationality` (
-  `nationalityid` int(11) NOT NULL,
+  `nationalityid` int(11) NOT NULL AUTO_INCREMENT,
   `nationality` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`nationalityid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+) ENGINE=InnoDB AUTO_INCREMENT=194 DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 <table name="marketgroup" view="colnames">
 <left>24</left>
@@ -341,9 +343,9 @@
 <height>107</height>
 <sql_create_table>CREATE TABLE `gender` (
   `genderid` int(11) NOT NULL AUTO_INCREMENT,
-  `gender` varchar(6) DEFAULT NULL,
+  `gender` varchar(16) DEFAULT NULL,
   PRIMARY KEY (`genderid`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1</sql_create_table>
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 <table name="suffix" view="colnames">
 <left>1458</left>

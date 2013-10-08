@@ -7,11 +7,6 @@ return array(
                 'Directorzone\Controller\AccountController',            
         ),
     ),
-    'controller_plugins' => array(
-        'invokables' => array(
-            'processForm' => 'Directorzone\Controller\Plugin\ProcessForm',
-        )
-    ),   
     'router' => array(
         'routes' => array(
             
