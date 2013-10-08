@@ -17,7 +17,10 @@ class AccountController extends NetsensiaActionController
     public function profileAction()
     {
         return array(
-            "form" => $this->processForm('AccountProfileForm')
+            "form" => $this->processForm(
+                'AccountProfileForm',
+                'User'
+            )
         );        
     }
 
