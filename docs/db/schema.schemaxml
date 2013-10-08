@@ -28,7 +28,7 @@
   `surname` varchar(100) DEFAULT NULL,
   `dob` date DEFAULT NULL,
   `suffix` varchar(20) DEFAULT NULL,
-  `gender` char(1) DEFAULT NULL,
+  `genderid` int(11) DEFAULT NULL,
   `nationalityid` int(11) DEFAULT NULL,
   `profileimage` varchar(100) DEFAULT NULL,
   `pseudonym` varchar(20) DEFAULT NULL,
@@ -50,11 +50,11 @@
   KEY `speakeravailability` (`availabilityid`),
   KEY `nationality` (`nationalityid`),
   KEY `titleid` (`titleid`),
-  CONSTRAINT `user_ibfk_9` FOREIGN KEY (`marketgroupid`) REFERENCES `marketgroup` (`marketgroupid`),
   CONSTRAINT `user_ibfk_5` FOREIGN KEY (`titleid`) REFERENCES `title` (`titleid`),
   CONSTRAINT `user_ibfk_6` FOREIGN KEY (`availabilityid`) REFERENCES `availability` (`availabilityid`),
   CONSTRAINT `user_ibfk_7` FOREIGN KEY (`addressid`) REFERENCES `address` (`addressid`),
-  CONSTRAINT `user_ibfk_8` FOREIGN KEY (`nationalityid`) REFERENCES `nationality` (`nationalityid`)
+  CONSTRAINT `user_ibfk_8` FOREIGN KEY (`nationalityid`) REFERENCES `nationality` (`nationalityid`),
+  CONSTRAINT `user_ibfk_9` FOREIGN KEY (`marketgroupid`) REFERENCES `marketgroup` (`marketgroupid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 <table name="userlanguage" view="colnames">
@@ -125,8 +125,8 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 <table name="targetrole" view="colnames">
-<left>587</left>
-<top>86</top>
+<left>553</left>
+<top>68</top>
 <width>169</width>
 <height>214</height>
 <sql_create_table>CREATE TABLE `targetrole` (
@@ -285,6 +285,75 @@
   PRIMARY KEY (`addressid`),
   KEY `country` (`country`),
   CONSTRAINT `address_ibfk_1` FOREIGN KEY (`country`) REFERENCES `country` (`country_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="country" view="colnames">
+<left>1111</left>
+<top>170</top>
+<width>116</width>
+<height>226</height>
+<sql_create_table>CREATE TABLE `country` (
+  `country_id` int(5) NOT NULL AUTO_INCREMENT,
+  `iso2` char(2) DEFAULT NULL,
+  `short_name` varchar(80) NOT NULL DEFAULT '',
+  `long_name` varchar(80) NOT NULL DEFAULT '',
+  `iso3` char(3) DEFAULT NULL,
+  `numcode` varchar(6) DEFAULT NULL,
+  `un_member` varchar(12) DEFAULT NULL,
+  `calling_code` varchar(8) DEFAULT NULL,
+  `cctld` varchar(5) DEFAULT NULL,
+  PRIMARY KEY (`country_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=251 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="feedback" view="colnames">
+<left>1291</left>
+<top>138</top>
+<width>125</width>
+<height>226</height>
+<sql_create_table>CREATE TABLE `feedback` (
+  `feedbackid` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(50) DEFAULT NULL,
+  `message` text,
+  `name` varchar(50) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `replyto` int(11) DEFAULT NULL,
+  `status` char(1) NOT NULL DEFAULT '',
+  `feedbackcode` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`feedbackid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="role" view="colnames">
+<left>1274</left>
+<top>18</top>
+<width>78</width>
+<height>107</height>
+<sql_create_table>CREATE TABLE `role` (
+  `roleid` int(11) NOT NULL,
+  `role` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`roleid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="gender" view="colnames">
+<left>1220</left>
+<top>497</top>
+<width>96</width>
+<height>107</height>
+<sql_create_table>CREATE TABLE `gender` (
+  `genderid` int(11) NOT NULL AUTO_INCREMENT,
+  `gender` varchar(6) DEFAULT NULL,
+  PRIMARY KEY (`genderid`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="suffix" view="colnames">
+<left>1458</left>
+<top>18</top>
+<width>87</width>
+<height>107</height>
+<sql_create_table>CREATE TABLE `suffix` (
+  `suffixid` int(11) NOT NULL,
+  `suffix` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`suffixid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 </tables>

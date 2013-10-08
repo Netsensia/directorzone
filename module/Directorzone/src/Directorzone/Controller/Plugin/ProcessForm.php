@@ -51,7 +51,7 @@ class ProcessForm extends AbstractPlugin
             }
         
         } else {
-        
+            $form->setDataFromModel($userModel);
         }        
         
         return $form;

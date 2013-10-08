@@ -26,57 +26,81 @@ class AccountController extends NetsensiaActionController
 
     public function contactAction()
     {
-        return [
-        'flashMessages' => $this->getFlashMessages(),
-        ];
+        return array(
+            "form" => $this->processForm(
+                'AccountProfileForm',
+                'User'
+            )
+        );  
     }
     
     public function membershipAction()
     {
-        return [
-        'flashMessages' => $this->getFlashMessages(),
-        ];
+        return array(
+            "form" => $this->processForm(
+                'AccountProfileForm',
+                'User'
+            )
+        );  
     }
     
     public function accountAction()
     {
-        return [
-        'flashMessages' => $this->getFlashMessages(),
-        ];
+        return array(
+            "form" => $this->processForm(
+                'AccountProfileForm',
+                'User'
+            )
+        );  
     }
     
     public function publishAction()
     {
-        return [
-        'flashMessages' => $this->getFlashMessages(),
-        ];
+        return array(
+            "form" => $this->processForm(
+                'AccountProfileForm',
+                'User'
+            )
+        );  
     }
     
     public function inboxAction()
     {
-        return [
-        'flashMessages' => $this->getFlashMessages(),
-        ];
+        return array(
+            "form" => $this->processForm(
+                'AccountProfileForm',
+                'User'
+            )
+        );  
     }
     
     public function preferencesAction()
     {
-        return [
-        'flashMessages' => $this->getFlashMessages(),
-        ];
+        return array(
+            "form" => $this->processForm(
+                'AccountProfileForm',
+                'User'
+            )
+        );  
     }
     
     public function experienceAction()
     {
-        return [
-        'flashMessages' => $this->getFlashMessages(),
-        ];
+        return array(
+            "form" => $this->processForm(
+                'AccountProfileForm',
+                'User'
+            )
+        );  ;
     }
     
     public function companyAction()
     {
-        return [
-        'flashMessages' => $this->getFlashMessages(),
-        ];
+        return array(
+            "form" => $this->processForm(
+                'AccountProfileForm',
+                'User'
+            )
+        );  
     }
 }

@@ -1,6 +1,6 @@
 /*
-SQLyog Ultimate v11.25 (64 bit)
-MySQL - 5.5.23 : Database - directorzone_zf2
+SQLyog Trial v11.25 (64 bit)
+MySQL - 5.1.50-community : Database - directorzone_zf2
 *********************************************************************
 */
 
@@ -121,6 +121,20 @@ CREATE TABLE `feedback` (
 
 /*Data for the table `feedback` */
 
+/*Table structure for table `gender` */
+
+DROP TABLE IF EXISTS `gender`;
+
+CREATE TABLE `gender` (
+  `genderid` int(11) NOT NULL AUTO_INCREMENT,
+  `gender` varchar(16) DEFAULT NULL,
+  PRIMARY KEY (`genderid`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+/*Data for the table `gender` */
+
+insert  into `gender`(`genderid`,`gender`) values (-1,'Please select...'),(1,'Male'),(2,'Female');
+
 /*Table structure for table `keyevent` */
 
 DROP TABLE IF EXISTS `keyevent`;
@@ -230,6 +244,18 @@ CREATE TABLE `status` (
 
 /*Data for the table `status` */
 
+/*Table structure for table `suffix` */
+
+DROP TABLE IF EXISTS `suffix`;
+
+CREATE TABLE `suffix` (
+  `suffixid` int(11) NOT NULL,
+  `suffix` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`suffixid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `suffix` */
+
 /*Table structure for table `targetrole` */
 
 DROP TABLE IF EXISTS `targetrole`;
@@ -284,7 +310,7 @@ CREATE TABLE `title` (
 
 /*Data for the table `title` */
 
-insert  into `title`(`titleid`,`title`) values (1,'Dr'),(2,'Mr'),(3,'Mrs'),(4,'Ms'),(5,'Prof'),(6,'Other');
+insert  into `title`(`titleid`,`title`) values (-1,'Please select...'),(1,'Dr'),(2,'Mr'),(3,'Mrs'),(4,'Ms'),(5,'Prof'),(6,'Other');
 
 /*Table structure for table `user` */
 
@@ -308,7 +334,7 @@ CREATE TABLE `user` (
   `surname` varchar(100) DEFAULT NULL,
   `dob` date DEFAULT NULL,
   `suffix` varchar(20) DEFAULT NULL,
-  `gender` char(1) DEFAULT NULL,
+  `genderid` int(11) DEFAULT NULL,
   `nationalityid` int(11) DEFAULT NULL,
   `profileimage` varchar(100) DEFAULT NULL,
   `pseudonym` varchar(20) DEFAULT NULL,
@@ -330,14 +356,18 @@ CREATE TABLE `user` (
   KEY `speakeravailability` (`availabilityid`),
   KEY `nationality` (`nationalityid`),
   KEY `titleid` (`titleid`),
-  CONSTRAINT `user_ibfk_9` FOREIGN KEY (`marketgroupid`) REFERENCES `marketgroup` (`marketgroupid`),
+  KEY `genderid` (`genderid`),
+  CONSTRAINT `user_ibfk_10` FOREIGN KEY (`genderid`) REFERENCES `gender` (`genderid`),
   CONSTRAINT `user_ibfk_5` FOREIGN KEY (`titleid`) REFERENCES `title` (`titleid`),
   CONSTRAINT `user_ibfk_6` FOREIGN KEY (`availabilityid`) REFERENCES `availability` (`availabilityid`),
   CONSTRAINT `user_ibfk_7` FOREIGN KEY (`addressid`) REFERENCES `address` (`addressid`),
-  CONSTRAINT `user_ibfk_8` FOREIGN KEY (`nationalityid`) REFERENCES `nationality` (`nationalityid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  CONSTRAINT `user_ibfk_8` FOREIGN KEY (`nationalityid`) REFERENCES `nationality` (`nationalityid`),
+  CONSTRAINT `user_ibfk_9` FOREIGN KEY (`marketgroupid`) REFERENCES `marketgroup` (`marketgroupid`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `user` */
+
+insert  into `user`(`userid`,`email`,`name`,`password`,`createddate`,`isocountry_fromregip`,`httpreferer`,`emailverifycode`,`passwordresetcode`,`regipaddress`,`locale`,`activated`,`titleid`,`forenames`,`surname`,`dob`,`suffix`,`genderid`,`nationalityid`,`profileimage`,`pseudonym`,`alternativeemail`,`telephone`,`mobile`,`fax`,`addressid`,`talentpoolsummary`,`skills`,`personalinterests`,`whoswhosummary`,`availabilityid`,`marketgroupid`) values (3,'chris@netsensia.com','Chris','$2y$14$cakUUoMuXY7GMAWFb5C7u.f7kGr/SZyoI7YWjLoA.1OcztFDZEXfG','2013-10-08 16:43:41',NULL,NULL,'LRjeDE1Y65zAko2g8oymapWisZcCqROT',NULL,'127.0.0.1','en_US','Y',2,'Chris','Moreton',NULL,'Rocks',2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 
 /*Table structure for table `userlanguage` */
 

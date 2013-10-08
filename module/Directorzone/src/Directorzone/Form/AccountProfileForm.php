@@ -20,8 +20,12 @@ class AccountProfileForm extends NetsensiaForm
         $this->setDefaultIcon('user');
         
         $this->addSelect('title');
+        
         $this->addText('forenames');
         $this->addText('surname');
+        $this->addText('suffix');
+        
+        $this->addSelect('gender');
         
         $this->addSubmit('Submit');
         
