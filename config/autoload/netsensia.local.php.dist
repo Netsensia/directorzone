@@ -12,6 +12,10 @@
  */
 
 return array(
+    'db' => array(
+        'username' => 'DB_USERNAME',
+        'password' => 'DB_PASSWORD',
+    ),
     'zend-sentry' => array(
         'sentry-api-key' => 'SENTRY_URI',
     ),
