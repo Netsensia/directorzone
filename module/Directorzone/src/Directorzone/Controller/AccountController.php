@@ -39,7 +39,8 @@ class AccountController extends NetsensiaActionController
         return array(
             "form" => $this->processForm(
                 'AccountContactForm',
-                'User'
+                'User',
+                $this->getUserId()
             )
         );
     }
@@ -89,7 +90,8 @@ class AccountController extends NetsensiaActionController
         return array(
             "form" => $this->processForm(
                 'AccountProfileForm',
-                'User'
+                'User',
+                $this->getUserId()
             )
         );        
     }

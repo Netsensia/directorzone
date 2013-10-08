@@ -20,7 +20,7 @@ class AccountContactForm extends NetsensiaForm
         $this->setDefaultIcon('user');
         
         $this->addText('email');
-        $this->addText('alternativeemail');
+        $this->addText('alternative-email');
         
         $this->addSubmit('Submit');
         

@@ -1,10 +1,6 @@
 <?php
 namespace Directorzone\Form;
 
-use Zend\Form\Element;
-use Zend\Form\Fieldset;
-use Zend\InputFilter\Input;
-use Zend\InputFilter\InputFilter;
 use Netsensia\Form\NetsensiaForm;
 
 class AccountProfileForm extends NetsensiaForm
