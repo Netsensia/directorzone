@@ -177,12 +177,14 @@ CREATE TABLE `marketgroup` (
 DROP TABLE IF EXISTS `nationality`;
 
 CREATE TABLE `nationality` (
-  `nationalityid` int(11) NOT NULL,
+  `nationalityid` int(11) NOT NULL AUTO_INCREMENT,
   `nationality` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`nationalityid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=194 DEFAULT CHARSET=latin1;
 
 /*Data for the table `nationality` */
+
+insert  into `nationality`(`nationalityid`,`nationality`) values (1,'Afghan'),(2,'Albanian'),(3,'Algerian'),(4,'American'),(5,'Andorran'),(6,'Angolan'),(7,'Antiguans'),(8,'Argentinean'),(9,'Armenian'),(10,'Australian'),(11,'Austrian'),(12,'Azerbaijani'),(13,'Bahamian'),(14,'Bahraini'),(15,'Bangladeshi'),(16,'Barbadian'),(17,'Barbudans'),(18,'Batswana'),(19,'Belarusian'),(20,'Belgian'),(21,'Belizean'),(22,'Beninese'),(23,'Bhutanese'),(24,'Bolivian'),(25,'Bosnian'),(26,'Brazilian'),(27,'British'),(28,'Bruneian'),(29,'Bulgarian'),(30,'Burkinabe'),(31,'Burmese'),(32,'Burundian'),(33,'Cambodian'),(34,'Cameroonian'),(35,'Canadian'),(36,'Cape Verdean'),(37,'Central African'),(38,'Chadian'),(39,'Chilean'),(40,'Chinese'),(41,'Colombian'),(42,'Comoran'),(43,'Congolese'),(44,'Costa Rican'),(45,'Croatian'),(46,'Cuban'),(47,'Cypriot'),(48,'Czech'),(49,'Danish'),(50,'Djibouti'),(51,'Dominican'),(52,'Dutch'),(53,'East Timorese'),(54,'Ecuadorean'),(55,'Egyptian'),(56,'Emirian'),(57,'Equatorial Guinean'),(58,'Eritrean'),(59,'Estonian'),(60,'Ethiopian'),(61,'Fijian'),(62,'Filipino'),(63,'Finnish'),(64,'French'),(65,'Gabonese'),(66,'Gambian'),(67,'Georgian'),(68,'German'),(69,'Ghanaian'),(70,'Greek'),(71,'Grenadian'),(72,'Guatemalan'),(73,'Guinea-Bissauan'),(74,'Guinean'),(75,'Guyanese'),(76,'Haitian'),(77,'Herzegovinian'),(78,'Honduran'),(79,'Hungarian'),(80,'I-Kiribati'),(81,'Icelander'),(82,'Indian'),(83,'Indonesian'),(84,'Iranian'),(85,'Iraqi'),(86,'Irish'),(87,'Israeli'),(88,'Italian'),(89,'Ivorian'),(90,'Jamaican'),(91,'Japanese'),(92,'Jordanian'),(93,'Kazakhstani'),(94,'Kenyan'),(95,'Kittian and Nevisian'),(96,'Kuwaiti'),(97,'Kyrgyz'),(98,'Laotian'),(99,'Latvian'),(100,'Lebanese'),(101,'Liberian'),(102,'Libyan'),(103,'Liechtensteiner'),(104,'Lithuanian'),(105,'Luxembourger'),(106,'Macedonian'),(107,'Malagasy'),(108,'Malawian'),(109,'Malaysian'),(110,'Maldivan'),(111,'Malian'),(112,'Maltese'),(113,'Marshallese'),(114,'Mauritanian'),(115,'Mauritian'),(116,'Mexican'),(117,'Micronesian'),(118,'Moldovan'),(119,'Monacan'),(120,'Mongolian'),(121,'Moroccan'),(122,'Mosotho'),(123,'Motswana'),(124,'Mozambican'),(125,'Namibian'),(126,'Nauruan'),(127,'Nepalese'),(128,'New Zealander'),(129,'Nicaraguan'),(130,'Nigerian'),(131,'Nigerien'),(132,'North Korean'),(133,'Northern Irish'),(134,'Norwegian'),(135,'Omani'),(136,'Pakistani'),(137,'Palauan'),(138,'Panamanian'),(139,'Papua New Guinean'),(140,'Paraguayan'),(141,'Peruvian'),(142,'Polish'),(143,'Portuguese'),(144,'Qatari'),(145,'Romanian'),(146,'Russian'),(147,'Rwandan'),(148,'Saint Lucian'),(149,'Salvadoran'),(150,'Samoan'),(151,'San Marinese'),(152,'Sao Tomean'),(153,'Saudi'),(154,'Scottish'),(155,'Senegalese'),(156,'Serbian'),(157,'Seychellois'),(158,'Sierra Leonean'),(159,'Singaporean'),(160,'Slovakian'),(161,'Slovenian'),(162,'Solomon Islander'),(163,'Somali'),(164,'South African'),(165,'South Korean'),(166,'Spanish'),(167,'Sri Lankan'),(168,'Sudanese'),(169,'Surinamer'),(170,'Swazi'),(171,'Swedish'),(172,'Swiss'),(173,'Syrian'),(174,'Taiwanese'),(175,'Tajik'),(176,'Tanzanian'),(177,'Thai'),(178,'Togolese'),(179,'Tongan'),(180,'Trinidadian or Tobagonian'),(181,'Tunisian'),(182,'Turkish'),(183,'Tuvaluan'),(184,'Ugandan'),(185,'Ukrainian'),(186,'Uruguayan'),(187,'Uzbekistani'),(188,'Venezuelan'),(189,'Vietnamese'),(190,'Welsh'),(191,'Yemenite'),(192,'Zambian'),(193,'Zimbabwean');
 
 /*Table structure for table `paylevel` */
 
@@ -249,12 +251,15 @@ CREATE TABLE `status` (
 DROP TABLE IF EXISTS `suffix`;
 
 CREATE TABLE `suffix` (
-  `suffixid` int(11) NOT NULL,
+  `suffixid` int(11) NOT NULL AUTO_INCREMENT,
   `suffix` varchar(20) DEFAULT NULL,
+  `description` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`suffixid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 /*Data for the table `suffix` */
+
+insert  into `suffix`(`suffixid`,`suffix`,`description`) values (-1,'None',NULL),(1,'GBE ','Knight Grand Cross or Dame Grand Cross of the Most Excellent Order of the British Empire'),(2,'KBE ','Knight Commander of the Most Excellent Order of the British Empire'),(3,'DBE ','Dame Commander of the Most Excellent Order of the British Empire'),(4,'CBE ','Commander of the Most Excellent Order of the British Empire'),(5,'OBE ','Officer of the Most Excellent Order of the British Empire'),(6,'MBE ','Member of the Most Excellent Order of the British Empire'),(7,'Other',NULL);
 
 /*Table structure for table `targetrole` */
 
@@ -330,10 +335,12 @@ CREATE TABLE `user` (
   `locale` char(5) NOT NULL DEFAULT 'en_US',
   `activated` char(1) DEFAULT 'N',
   `titleid` int(11) DEFAULT NULL,
+  `titleother` varchar(20) DEFAULT NULL,
   `forenames` varchar(100) DEFAULT NULL,
   `surname` varchar(100) DEFAULT NULL,
   `dob` date DEFAULT NULL,
-  `suffix` varchar(20) DEFAULT NULL,
+  `suffixid` int(11) DEFAULT NULL,
+  `suffixother` varchar(20) DEFAULT NULL,
   `genderid` int(11) DEFAULT NULL,
   `nationalityid` int(11) DEFAULT NULL,
   `profileimage` varchar(100) DEFAULT NULL,
@@ -357,6 +364,8 @@ CREATE TABLE `user` (
   KEY `nationality` (`nationalityid`),
   KEY `titleid` (`titleid`),
   KEY `genderid` (`genderid`),
+  KEY `suffixid` (`suffixid`),
+  CONSTRAINT `user_ibfk_11` FOREIGN KEY (`suffixid`) REFERENCES `suffix` (`suffixid`),
   CONSTRAINT `user_ibfk_10` FOREIGN KEY (`genderid`) REFERENCES `gender` (`genderid`),
   CONSTRAINT `user_ibfk_5` FOREIGN KEY (`titleid`) REFERENCES `title` (`titleid`),
   CONSTRAINT `user_ibfk_6` FOREIGN KEY (`availabilityid`) REFERENCES `availability` (`availabilityid`),
@@ -367,7 +376,7 @@ CREATE TABLE `user` (
 
 /*Data for the table `user` */
 
-insert  into `user`(`userid`,`email`,`name`,`password`,`createddate`,`isocountry_fromregip`,`httpreferer`,`emailverifycode`,`passwordresetcode`,`regipaddress`,`locale`,`activated`,`titleid`,`forenames`,`surname`,`dob`,`suffix`,`genderid`,`nationalityid`,`profileimage`,`pseudonym`,`alternativeemail`,`telephone`,`mobile`,`fax`,`addressid`,`talentpoolsummary`,`skills`,`personalinterests`,`whoswhosummary`,`availabilityid`,`marketgroupid`) values (3,'chris@netsensia.com','Chris','$2y$14$cakUUoMuXY7GMAWFb5C7u.f7kGr/SZyoI7YWjLoA.1OcztFDZEXfG','2013-10-08 16:43:41',NULL,NULL,'LRjeDE1Y65zAko2g8oymapWisZcCqROT',NULL,'127.0.0.1','en_US','Y',2,'Chris','Moreton',NULL,'Rocks',2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+insert  into `user`(`userid`,`email`,`name`,`password`,`createddate`,`isocountry_fromregip`,`httpreferer`,`emailverifycode`,`passwordresetcode`,`regipaddress`,`locale`,`activated`,`titleid`,`titleother`,`forenames`,`surname`,`dob`,`suffixid`,`suffixother`,`genderid`,`nationalityid`,`profileimage`,`pseudonym`,`alternativeemail`,`telephone`,`mobile`,`fax`,`addressid`,`talentpoolsummary`,`skills`,`personalinterests`,`whoswhosummary`,`availabilityid`,`marketgroupid`) values (3,'chris@netsensia.com','Chris','$2y$14$cakUUoMuXY7GMAWFb5C7u.f7kGr/SZyoI7YWjLoA.1OcztFDZEXfG','2013-10-08 16:43:41',NULL,NULL,'LRjeDE1Y65zAko2g8oymapWisZcCqROT',NULL,'127.0.0.1','en_US','Y',5,NULL,'Chrismo','Moreton',NULL,-1,NULL,2,1,NULL,'','netadaptstorage@googlemail.com',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 
 /*Table structure for table `userlanguage` */
 

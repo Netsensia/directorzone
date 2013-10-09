@@ -6,10 +6,10 @@
 <canvas zoom="100">
 <tables>
 <table name="user" view="colnames">
-<left>252</left>
-<top>14</top>
-<width>180</width>
-<height>608</height>
+<left>230</left>
+<top>27</top>
+<width>185</width>
+<height>667</height>
 <sql_create_table>CREATE TABLE `user` (
   `userid` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(128) DEFAULT NULL,
@@ -24,10 +24,12 @@
   `locale` char(5) NOT NULL DEFAULT 'en_US',
   `activated` char(1) DEFAULT 'N',
   `titleid` int(11) DEFAULT NULL,
+  `titleother` varchar(20) DEFAULT NULL,
   `forenames` varchar(100) DEFAULT NULL,
   `surname` varchar(100) DEFAULT NULL,
   `dob` date DEFAULT NULL,
-  `suffix` varchar(20) DEFAULT NULL,
+  `suffixid` int(11) DEFAULT NULL,
+  `suffixother` varchar(20) DEFAULT NULL,
   `genderid` int(11) DEFAULT NULL,
   `nationalityid` int(11) DEFAULT NULL,
   `profileimage` varchar(100) DEFAULT NULL,
@@ -51,6 +53,8 @@
   KEY `nationality` (`nationalityid`),
   KEY `titleid` (`titleid`),
   KEY `genderid` (`genderid`),
+  KEY `suffixid` (`suffixid`),
+  CONSTRAINT `user_ibfk_11` FOREIGN KEY (`suffixid`) REFERENCES `suffix` (`suffixid`),
   CONSTRAINT `user_ibfk_10` FOREIGN KEY (`genderid`) REFERENCES `gender` (`genderid`),
   CONSTRAINT `user_ibfk_5` FOREIGN KEY (`titleid`) REFERENCES `title` (`titleid`),
   CONSTRAINT `user_ibfk_6` FOREIGN KEY (`availabilityid`) REFERENCES `availability` (`availabilityid`),
@@ -162,8 +166,8 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 <table name="status" view="colnames">
-<left>990</left>
-<top>445</top>
+<left>920</left>
+<top>418</top>
 <width>112</width>
 <height>112</height>
 <sql_create_table>CREATE TABLE `status` (
@@ -261,8 +265,8 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 <table name="experiencearea" view="colnames">
-<left>963</left>
-<top>599</top>
+<left>902</left>
+<top>637</top>
 <width>164</width>
 <height>112</height>
 <sql_create_table>CREATE TABLE `experiencearea` (
@@ -337,8 +341,8 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 <table name="gender" view="colnames">
-<left>1220</left>
-<top>497</top>
+<left>1060</left>
+<top>515</top>
 <width>96</width>
 <height>107</height>
 <sql_create_table>CREATE TABLE `gender` (
@@ -348,15 +352,16 @@
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 <table name="suffix" view="colnames">
-<left>1458</left>
-<top>18</top>
+<left>459</left>
+<top>215</top>
 <width>87</width>
 <height>107</height>
 <sql_create_table>CREATE TABLE `suffix` (
-  `suffixid` int(11) NOT NULL,
+  `suffixid` int(11) NOT NULL AUTO_INCREMENT,
   `suffix` varchar(20) DEFAULT NULL,
+  `description` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`suffixid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 </tables>
 </canvas>
