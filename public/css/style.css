@@ -133,3 +133,7 @@ label.control-label {
 #login-dropdown .form-control {
   width: 220px;
 }
+
+div.invisible-other {
+	display:none;
+}

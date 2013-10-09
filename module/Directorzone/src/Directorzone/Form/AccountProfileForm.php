@@ -15,11 +15,11 @@ class AccountProfileForm extends NetsensiaForm
         $this->setFieldPrefix('account-profile-');
         $this->setDefaultIcon('user');
         
-        $this->addSelect('title');
+        $this->addSelectWithInvisibleOther('title');
         
         $this->addText('forenames');
         $this->addText('surname');
-        $this->addText('suffix');
+        $this->addSelectWithInvisibleOther('suffix');
         
         $this->addSelect('gender');
         $this->addSelect('nationality');
