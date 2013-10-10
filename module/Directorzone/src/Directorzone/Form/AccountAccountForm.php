@@ -20,8 +20,8 @@ class AccountAccountForm extends NetsensiaForm
         $this->setDefaultIcon('user');
         
         $this->addText('email');
-        $this->addText(['name'=>'password', 'icon'=>'lock']);
-        $this->addText(['name'=>'password-confirm', 'icon'=>'lock']);
+        
+        $this->addPasswordPair();
         
         $this->addSubmit('Submit');
         
