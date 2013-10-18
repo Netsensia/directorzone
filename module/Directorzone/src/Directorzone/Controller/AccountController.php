@@ -19,7 +19,8 @@ class AccountController extends NetsensiaActionController
         return array(
             "form" => $this->processForm(
                 'AccountAccountForm',
-                'User'
+                'User',
+                $this->getUserId()
             )
         );
     }
@@ -29,7 +30,8 @@ class AccountController extends NetsensiaActionController
         return array(
             "form" => $this->processForm(
                 'AccountCompanyForm',
-                'User'
+                'User',
+                $this->getUserId()
             )
         );
     }
@@ -50,7 +52,8 @@ class AccountController extends NetsensiaActionController
         return array(
             "form" => $this->processForm(
                 'AccountExperienceForm',
-                'User'
+                'User',
+                $this->getUserId()
             )
         );
     }
@@ -60,7 +63,8 @@ class AccountController extends NetsensiaActionController
         return array(
             "form" => $this->processForm(
                 'AccountInboxForm',
-                'User'
+                'User',
+                $this->getUserId()
             )
         );
     }    
@@ -70,7 +74,8 @@ class AccountController extends NetsensiaActionController
         return array(
             "form" => $this->processForm(
                 'AccountMembershipForm',
-                'User'
+                'User',
+                $this->getUserId()
             )
         );
     }
@@ -80,7 +85,8 @@ class AccountController extends NetsensiaActionController
         return array(
             "form" => $this->processForm(
                 'AccountPreferencesForm',
-                'User'
+                'User',
+                $this->getUserId()
             )
         );
     }
@@ -101,7 +107,8 @@ class AccountController extends NetsensiaActionController
         return array(
             "form" => $this->processForm(
                 'AccountPublishForm',
-                'User'
+                'User',
+                $this->getUserId()
             )
         );  
     }

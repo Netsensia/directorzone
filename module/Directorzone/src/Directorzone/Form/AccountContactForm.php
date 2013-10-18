@@ -22,6 +22,8 @@ class AccountContactForm extends NetsensiaForm
         $this->addText('email');
         $this->addText('alternative-email');
         
+        $this->addAddress('address');
+        
         $this->addSubmit('Submit');
         
         parent::prepare();
