@@ -30,7 +30,8 @@ class AccountController extends NetsensiaActionController
                 'AccountAccountForm',
                 'User',
                 $this->getUserId()
-            )
+            ),
+        	'flashMessages' => $this->getFlashMessages(),
         );
     }
         
@@ -41,7 +42,8 @@ class AccountController extends NetsensiaActionController
                 'AccountCompanyForm',
                 'User',
                 $this->getUserId()
-            )
+            ),
+        	'flashMessages' => $this->getFlashMessages(),
         );
     }
         
@@ -53,6 +55,7 @@ class AccountController extends NetsensiaActionController
                 'User',
                 $this->getUserId()
             ),
+        	'flashMessages' => $this->getFlashMessages(),
         );
     }
         
@@ -63,7 +66,8 @@ class AccountController extends NetsensiaActionController
                 'AccountExperienceForm',
                 'User',
                 $this->getUserId()
-            )
+            ),
+        	'flashMessages' => $this->getFlashMessages(),
         );
     }
     
@@ -74,7 +78,8 @@ class AccountController extends NetsensiaActionController
                 'AccountInboxForm',
                 'User',
                 $this->getUserId()
-            )
+            ),
+        	'flashMessages' => $this->getFlashMessages(),
         );
     }    
     
@@ -85,7 +90,8 @@ class AccountController extends NetsensiaActionController
                 'AccountMembershipForm',
                 'User',
                 $this->getUserId()
-            )
+            ),
+        	'flashMessages' => $this->getFlashMessages(),
         );
     }
         
@@ -96,7 +102,8 @@ class AccountController extends NetsensiaActionController
                 'AccountPreferencesForm',
                 'User',
                 $this->getUserId()
-            )
+            ),
+        	'flashMessages' => $this->getFlashMessages(),
         );
     }
         
@@ -107,7 +114,8 @@ class AccountController extends NetsensiaActionController
                 'AccountProfileForm',
                 'User',
                 $this->getUserId()
-            )
+            ),
+        	'flashMessages' => $this->getFlashMessages(),
         );        
     }
 
@@ -118,7 +126,8 @@ class AccountController extends NetsensiaActionController
                 'AccountPublishForm',
                 'User',
                 $this->getUserId()
-            )
+            ),
+        	'flashMessages' => $this->getFlashMessages(),
         );  
     }
 }
