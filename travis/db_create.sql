@@ -24,16 +24,19 @@ CREATE TABLE `address` (
   `addressid` int(11) NOT NULL AUTO_INCREMENT,
   `address1` varchar(100) DEFAULT NULL,
   `address2` varchar(100) DEFAULT NULL,
+  `address3` varchar(100) DEFAULT NULL,
   `town` varchar(100) DEFAULT NULL,
   `county` varchar(100) DEFAULT NULL,
-  `country` int(11) DEFAULT NULL,
+  `countryid` int(11) DEFAULT NULL,
   `postcode` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`addressid`),
-  KEY `country` (`country`),
-  CONSTRAINT `address_ibfk_1` FOREIGN KEY (`country`) REFERENCES `country` (`countryid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  KEY `country` (`countryid`),
+  CONSTRAINT `address_ibfk_1` FOREIGN KEY (`countryid`) REFERENCES `country` (`countryid`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `address` */
+
+insert  into `address`(`addressid`,`address1`,`address2`,`address3`,`town`,`county`,`countryid`,`postcode`) values (1,'25 Raymond Road',NULL,'',NULL,'',NULL,''),(2,'25 Raymond Road',NULL,'','','',NULL,''),(3,'123123','',NULL,'','',1,''),(4,'25 Raymond Road','',NULL,'','',235,'SW194AD');
 
 /*Table structure for table `availability` */
 
@@ -376,7 +379,7 @@ CREATE TABLE `user` (
 
 /*Data for the table `user` */
 
-insert  into `user`(`userid`,`email`,`name`,`password`,`createddate`,`isocountry_fromregip`,`httpreferer`,`emailverifycode`,`passwordresetcode`,`regipaddress`,`locale`,`activated`,`titleid`,`titleother`,`forenames`,`surname`,`dob`,`suffixid`,`suffixother`,`genderid`,`nationalityid`,`profileimage`,`pseudonym`,`alternativeemail`,`telephone`,`mobile`,`fax`,`addressid`,`talentpoolsummary`,`skills`,`personalinterests`,`whoswhosummary`,`availabilityid`,`marketgroupid`) values (3,'chris@netsensia.com','Chris','$2y$14$cakUUoMuXY7GMAWFb5C7u.f7kGr/SZyoI7YWjLoA.1OcztFDZEXfG','2013-10-08 16:43:41',NULL,NULL,'LRjeDE1Y65zAko2g8oymapWisZcCqROT',NULL,'127.0.0.1','en_US','Y',5,NULL,'Chrismo','Moreton',NULL,-1,NULL,2,1,NULL,'','netadaptstorage@googlemail.com',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+insert  into `user`(`userid`,`email`,`name`,`password`,`createddate`,`isocountry_fromregip`,`httpreferer`,`emailverifycode`,`passwordresetcode`,`regipaddress`,`locale`,`activated`,`titleid`,`titleother`,`forenames`,`surname`,`dob`,`suffixid`,`suffixother`,`genderid`,`nationalityid`,`profileimage`,`pseudonym`,`alternativeemail`,`telephone`,`mobile`,`fax`,`addressid`,`talentpoolsummary`,`skills`,`personalinterests`,`whoswhosummary`,`availabilityid`,`marketgroupid`) values (3,'chris@netsensia.com','Chris','$2y$14$u6FnfWpEsRVDDXGNLACQ7e23qqUlGERF0vLAjZeRuYesJMgNT/CIG','2013-10-08 16:43:41',NULL,NULL,'LRjeDE1Y65zAko2g8oymapWisZcCqROT',NULL,'127.0.0.1','en_US','Y',5,'','Chrismo','Moreton',NULL,-1,'',2,1,NULL,'','netadaptstorage@googlemail.com',NULL,NULL,NULL,4,NULL,NULL,NULL,NULL,NULL,NULL);
 
 /*Table structure for table `userlanguage` */
 
