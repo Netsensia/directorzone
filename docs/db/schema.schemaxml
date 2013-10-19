@@ -284,14 +284,15 @@
   `addressid` int(11) NOT NULL AUTO_INCREMENT,
   `address1` varchar(100) DEFAULT NULL,
   `address2` varchar(100) DEFAULT NULL,
+  `address3` varchar(100) DEFAULT NULL,
   `town` varchar(100) DEFAULT NULL,
   `county` varchar(100) DEFAULT NULL,
-  `country` int(11) DEFAULT NULL,
+  `countryid` int(11) DEFAULT NULL,
   `postcode` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`addressid`),
-  KEY `country` (`country`),
-  CONSTRAINT `address_ibfk_1` FOREIGN KEY (`country`) REFERENCES `country` (`country_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+  KEY `country` (`countryid`),
+  CONSTRAINT `address_ibfk_1` FOREIGN KEY (`countryid`) REFERENCES `country` (`countryid`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 <table name="country" view="colnames">
 <left>1111</left>
@@ -299,16 +300,16 @@
 <width>116</width>
 <height>226</height>
 <sql_create_table>CREATE TABLE `country` (
-  `country_id` int(5) NOT NULL AUTO_INCREMENT,
+  `countryid` int(5) NOT NULL AUTO_INCREMENT,
   `iso2` char(2) DEFAULT NULL,
-  `short_name` varchar(80) NOT NULL DEFAULT '',
+  `country` varchar(80) NOT NULL DEFAULT '',
   `long_name` varchar(80) NOT NULL DEFAULT '',
   `iso3` char(3) DEFAULT NULL,
   `numcode` varchar(6) DEFAULT NULL,
   `un_member` varchar(12) DEFAULT NULL,
   `calling_code` varchar(8) DEFAULT NULL,
   `cctld` varchar(5) DEFAULT NULL,
-  PRIMARY KEY (`country_id`)
+  PRIMARY KEY (`countryid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=251 DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 <table name="feedback" view="colnames">

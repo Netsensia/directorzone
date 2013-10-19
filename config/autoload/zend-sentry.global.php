@@ -9,7 +9,7 @@ $settings = array(
     /**
      * Turn ZendSentry off or on as a whole package
      */
-    'use-module' => true,
+    'use-module' => false,
 
     /**
      * Attach a generic logger event listener so you can log custom messages from anywhere in your app

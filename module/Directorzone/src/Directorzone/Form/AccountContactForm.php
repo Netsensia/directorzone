@@ -22,7 +22,7 @@ class AccountContactForm extends NetsensiaForm
         $this->addText('email');
         $this->addText('alternative-email');
         
-        $this->addAddress('address');
+        $this->addAddress('addressid');
         
         $this->addSubmit('Submit');
         
