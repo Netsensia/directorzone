@@ -54,7 +54,7 @@ return array(
             ),
             'Netsensia\Service\UserService' => [
                 'parameters' => [
-                    'defaultColumnValues' => [ 'examplecolumn' => 'Example Value' ],
+                    'defaultColumnValues' => [ /*'examplecolumn' => 'Example Value'*/ ],
                  ],
             ],            
         ),
