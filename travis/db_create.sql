@@ -32,11 +32,11 @@ CREATE TABLE `address` (
   PRIMARY KEY (`addressid`),
   KEY `country` (`countryid`),
   CONSTRAINT `address_ibfk_1` FOREIGN KEY (`countryid`) REFERENCES `country` (`countryid`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 /*Data for the table `address` */
 
-insert  into `address`(`addressid`,`address1`,`address2`,`address3`,`town`,`county`,`countryid`,`postcode`) values (1,'25 Raymond Road',NULL,'',NULL,'',NULL,''),(2,'25 Raymond Road',NULL,'','','',NULL,''),(3,'123123','',NULL,'','',1,''),(4,'25 Raymond Road','',NULL,'','',235,'SW194AD');
+insert  into `address`(`addressid`,`address1`,`address2`,`address3`,`town`,`county`,`countryid`,`postcode`) values (1,'25 Raymond Road',NULL,'',NULL,'',NULL,''),(2,'25 Raymond Road',NULL,'','','',NULL,''),(3,'123123','',NULL,'','',1,''),(4,'25 Raymond Road','',NULL,'','',235,'SW194AD'),(5,'The Ninja Box','25 Raymond Road','Wimbledon','London','Surrey',235,'SW194AD'),(6,'The Ninja\'s Retreat','25 Raymond Road','Wimbledon','London','Surrey',235,'SW194AD'),(7,'The Ninja\'s Retreat','256 Raymond Road','Wimbledon','London','Surrey',235,'SW194AD');
 
 /*Table structure for table `availability` */
 
@@ -368,18 +368,18 @@ CREATE TABLE `user` (
   KEY `titleid` (`titleid`),
   KEY `genderid` (`genderid`),
   KEY `suffixid` (`suffixid`),
+  CONSTRAINT `user_ibfk_7` FOREIGN KEY (`addressid`) REFERENCES `address` (`addressid`) ON DELETE CASCADE,
   CONSTRAINT `user_ibfk_10` FOREIGN KEY (`genderid`) REFERENCES `gender` (`genderid`),
   CONSTRAINT `user_ibfk_11` FOREIGN KEY (`suffixid`) REFERENCES `suffix` (`suffixid`),
   CONSTRAINT `user_ibfk_5` FOREIGN KEY (`titleid`) REFERENCES `title` (`titleid`),
   CONSTRAINT `user_ibfk_6` FOREIGN KEY (`availabilityid`) REFERENCES `availability` (`availabilityid`),
-  CONSTRAINT `user_ibfk_7` FOREIGN KEY (`addressid`) REFERENCES `address` (`addressid`),
   CONSTRAINT `user_ibfk_8` FOREIGN KEY (`nationalityid`) REFERENCES `nationality` (`nationalityid`),
   CONSTRAINT `user_ibfk_9` FOREIGN KEY (`marketgroupid`) REFERENCES `marketgroup` (`marketgroupid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `user` */
 
-insert  into `user`(`userid`,`email`,`name`,`password`,`createddate`,`isocountryfromregip`,`httpreferer`,`emailverifycode`,`passwordresetcode`,`regipaddress`,`locale`,`activated`,`titleid`,`titleother`,`forenames`,`surname`,`dob`,`suffixid`,`suffixother`,`genderid`,`nationalityid`,`profileimage`,`pseudonym`,`alternativeemail`,`telephone`,`mobile`,`fax`,`addressid`,`talentpoolsummary`,`skills`,`personalinterests`,`whoswhosummary`,`availabilityid`,`marketgroupid`) values (3,'chris@netsensia.com','Chris','$2y$14$u6FnfWpEsRVDDXGNLACQ7e23qqUlGERF0vLAjZeRuYesJMgNT/CIG','2013-10-08 16:43:41',NULL,NULL,'LRjeDE1Y65zAko2g8oymapWisZcCqROT',NULL,'127.0.0.1','en_US','Y',5,'','Chrismo','Moreton',NULL,-1,'',2,1,NULL,'','netadaptstorage@googlemail.com',NULL,NULL,NULL,4,NULL,NULL,NULL,NULL,NULL,NULL);
+insert  into `user`(`userid`,`email`,`name`,`password`,`createddate`,`isocountryfromregip`,`httpreferer`,`emailverifycode`,`passwordresetcode`,`regipaddress`,`locale`,`activated`,`titleid`,`titleother`,`forenames`,`surname`,`dob`,`suffixid`,`suffixother`,`genderid`,`nationalityid`,`profileimage`,`pseudonym`,`alternativeemail`,`telephone`,`mobile`,`fax`,`addressid`,`talentpoolsummary`,`skills`,`personalinterests`,`whoswhosummary`,`availabilityid`,`marketgroupid`) values (3,'chris@netsensia.com','Chris','$2y$14$QhlLAgguw8ASo5CrMhiZMONKHbiwgWhf6g3T1JCMnJXkgwpoDkRau','2013-10-08 16:43:41',NULL,NULL,'LRjeDE1Y65zAko2g8oymapWisZcCqROT','0','127.0.0.1','en_US','Y',5,'','Chrismo','Moreton',NULL,-1,'',2,1,NULL,'','netadaptstorage@googlemail.com',NULL,NULL,NULL,7,NULL,NULL,NULL,NULL,NULL,NULL);
 
 /*Table structure for table `userlanguage` */
 
