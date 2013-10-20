@@ -43,6 +43,7 @@
   `skills` text,
   `personalinterests` text,
   `whoswhosummary` text,
+  `whoswhoexperience` text,
   `availabilityid` int(11) DEFAULT NULL,
   `marketgroupid` int(11) DEFAULT NULL,
   PRIMARY KEY (`userid`),
@@ -54,14 +55,14 @@
   KEY `titleid` (`titleid`),
   KEY `genderid` (`genderid`),
   KEY `suffixid` (`suffixid`),
-  CONSTRAINT `user_ibfk_7` FOREIGN KEY (`addressid`) REFERENCES `address` (`addressid`) ON DELETE CASCADE,
   CONSTRAINT `user_ibfk_10` FOREIGN KEY (`genderid`) REFERENCES `gender` (`genderid`),
   CONSTRAINT `user_ibfk_11` FOREIGN KEY (`suffixid`) REFERENCES `suffix` (`suffixid`),
   CONSTRAINT `user_ibfk_5` FOREIGN KEY (`titleid`) REFERENCES `title` (`titleid`),
   CONSTRAINT `user_ibfk_6` FOREIGN KEY (`availabilityid`) REFERENCES `availability` (`availabilityid`),
+  CONSTRAINT `user_ibfk_7` FOREIGN KEY (`addressid`) REFERENCES `address` (`addressid`) ON DELETE CASCADE,
   CONSTRAINT `user_ibfk_8` FOREIGN KEY (`nationalityid`) REFERENCES `nationality` (`nationalityid`),
   CONSTRAINT `user_ibfk_9` FOREIGN KEY (`marketgroupid`) REFERENCES `marketgroup` (`marketgroupid`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1</sql_create_table>
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 <table name="userlanguage" view="colnames">
 <left>442</left>
@@ -155,8 +156,8 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 <table name="keyevent" view="colnames">
-<left>1051</left>
-<top>27</top>
+<left>1019</left>
+<top>21</top>
 <width>168</width>
 <height>96</height>
 <sql_create_table>CREATE TABLE `keyevent` (
@@ -166,8 +167,8 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 <table name="status" view="colnames">
-<left>920</left>
-<top>418</top>
+<left>915</left>
+<top>455</top>
 <width>112</width>
 <height>112</height>
 <sql_create_table>CREATE TABLE `status` (
@@ -188,8 +189,8 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 <table name="sector" view="colnames">
-<left>960</left>
-<top>293</top>
+<left>856</left>
+<top>298</top>
 <width>124</width>
 <height>112</height>
 <sql_create_table>CREATE TABLE `sector` (
@@ -199,8 +200,8 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 <table name="paylevel" view="colnames">
-<left>869</left>
-<top>159</top>
+<left>809</left>
+<top>172</top>
 <width>164</width>
 <height>112</height>
 <sql_create_table>CREATE TABLE `paylevel` (
@@ -292,11 +293,11 @@
   PRIMARY KEY (`addressid`),
   KEY `country` (`countryid`),
   CONSTRAINT `address_ibfk_1` FOREIGN KEY (`countryid`) REFERENCES `country` (`countryid`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1</sql_create_table>
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 <table name="country" view="colnames">
-<left>1111</left>
-<top>170</top>
+<left>1090</left>
+<top>184</top>
 <width>116</width>
 <height>226</height>
 <sql_create_table>CREATE TABLE `country` (
@@ -313,8 +314,8 @@
 ) ENGINE=InnoDB AUTO_INCREMENT=251 DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 <table name="feedback" view="colnames">
-<left>1291</left>
-<top>138</top>
+<left>1179</left>
+<top>459</top>
 <width>125</width>
 <height>226</height>
 <sql_create_table>CREATE TABLE `feedback` (
@@ -331,8 +332,8 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 <table name="role" view="colnames">
-<left>1274</left>
-<top>18</top>
+<left>1230</left>
+<top>87</top>
 <width>78</width>
 <height>107</height>
 <sql_create_table>CREATE TABLE `role` (

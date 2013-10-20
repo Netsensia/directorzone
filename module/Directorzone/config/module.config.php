@@ -40,6 +40,16 @@ return array(
                     ),
                 ),
             ),
+            'account-directory' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/myaccount/directory',
+                    'defaults' => array(
+                        'controller' => 'Directorzone\Controller\Account',
+                        'action'     => 'directory',
+                    ),
+                ),
+            ),
             'account-contact' => array(
                 'type'    => 'Literal',
                 'options' => array(

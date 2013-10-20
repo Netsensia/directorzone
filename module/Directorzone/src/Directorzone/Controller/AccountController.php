@@ -131,6 +131,18 @@ class AccountController extends NetsensiaActionController
         );        
     }
 
+    public function directoryAction()
+    {
+        return array(
+            "form" => $this->processForm(
+                'AccountDirectoryForm',
+                'User',
+                $this->getUserId()
+            ),
+            'flashMessages' => $this->getFlashMessages(),
+        );
+    }
+    
     public function publishAction()
     {
         return array(

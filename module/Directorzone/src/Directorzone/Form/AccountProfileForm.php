@@ -16,6 +16,7 @@ class AccountProfileForm extends NetsensiaForm
         $this->setDefaultIcon('user');
 
         $this->addTextArea('talent-pool-summary');
+        $this->addTextArea('personal-summary');
         
         $this->addSubmit('Submit');
         

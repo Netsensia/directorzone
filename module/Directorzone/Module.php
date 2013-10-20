@@ -3,11 +3,8 @@
 
 namespace Directorzone;
 
-use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
-use Zend\Http\PhpEnvironment\Request;
 
-use Zend\Session\Container as SessionContainer;
 use Directorzone\Form\AccountAccountForm;
 use Directorzone\Form\AccountCompanyForm;
 use Directorzone\Form\AccountContactForm;
@@ -18,6 +15,7 @@ use Directorzone\Form\AccountPreferencesForm;
 use Directorzone\Form\AccountProfileForm;
 use Directorzone\Form\AccountPersonalForm;
 use Directorzone\Form\AccountPublishForm;
+use Directorzone\Form\AccountDirectoryForm;
 
 class Module
 {
@@ -93,7 +91,14 @@ class Module
                     $form->setTranslator($sm->get('translator'));
                     $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
                     return $form;
-                },                
+                },
+                'AccountDirectoryForm' =>  function($sm) {
+                    $form = new AccountDirectoryForm('accountDirectoryForm');
+                    $form->setTranslator($sm->get('translator'));
+                    $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                    return $form;
+                },
+                
             ),
         );
     }

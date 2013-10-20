@@ -8,8 +8,8 @@ namespace Application;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 use Zend\Http\PhpEnvironment\Request;
-
 use Zend\Session\Container as SessionContainer;
+use Netsensia\Model\Exception\KeyNotFoundException;
 
 class Module
 {
@@ -30,15 +30,19 @@ class Module
                                            ->get("AuthenticationService");
         
         if ($authService->hasIdentity()) {
-            
             $userModel = $e->getApplication()->getServiceManager()
                                              ->get('UserModel')
                                              ->init($authService->getIdentity()->getUserId());
-            
-            $translator->setLocale($userModel->get('locale'));
-            
-            
-            
+
+            try {
+                $translator->setLocale($userModel->get('locale'));
+            } catch (KeyNotFoundException $e) {
+                // Something's not right - possibly the user row is no longer in 
+                // the database.  Clear the identity, this will logged-out behaviour 
+                // in the handling controller, and stop this code being executed
+                // until a new login is performed.
+                $authService->clearIdentity();
+            }
         } else {
             
             $this->session = new SessionContainer('locale');
