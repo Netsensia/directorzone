@@ -16,7 +16,7 @@
   `name` varchar(128) DEFAULT NULL,
   `password` varchar(128) DEFAULT NULL,
   `createddate` datetime DEFAULT NULL,
-  `isocountry_fromregip` varchar(5) DEFAULT NULL,
+  `isocountryfromregip` varchar(5) DEFAULT NULL,
   `httpreferer` varchar(250) DEFAULT NULL,
   `emailverifycode` varchar(32) DEFAULT NULL,
   `passwordresetcode` varchar(32) DEFAULT NULL,
@@ -54,11 +54,11 @@
   KEY `titleid` (`titleid`),
   KEY `genderid` (`genderid`),
   KEY `suffixid` (`suffixid`),
-  CONSTRAINT `user_ibfk_11` FOREIGN KEY (`suffixid`) REFERENCES `suffix` (`suffixid`),
+  CONSTRAINT `user_ibfk_7` FOREIGN KEY (`addressid`) REFERENCES `address` (`addressid`) ON DELETE CASCADE,
   CONSTRAINT `user_ibfk_10` FOREIGN KEY (`genderid`) REFERENCES `gender` (`genderid`),
+  CONSTRAINT `user_ibfk_11` FOREIGN KEY (`suffixid`) REFERENCES `suffix` (`suffixid`),
   CONSTRAINT `user_ibfk_5` FOREIGN KEY (`titleid`) REFERENCES `title` (`titleid`),
   CONSTRAINT `user_ibfk_6` FOREIGN KEY (`availabilityid`) REFERENCES `availability` (`availabilityid`),
-  CONSTRAINT `user_ibfk_7` FOREIGN KEY (`addressid`) REFERENCES `address` (`addressid`),
   CONSTRAINT `user_ibfk_8` FOREIGN KEY (`nationalityid`) REFERENCES `nationality` (`nationalityid`),
   CONSTRAINT `user_ibfk_9` FOREIGN KEY (`marketgroupid`) REFERENCES `marketgroup` (`marketgroupid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1</sql_create_table>
@@ -292,7 +292,7 @@
   PRIMARY KEY (`addressid`),
   KEY `country` (`countryid`),
   CONSTRAINT `address_ibfk_1` FOREIGN KEY (`countryid`) REFERENCES `country` (`countryid`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1</sql_create_table>
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 <table name="country" view="colnames">
 <left>1111</left>

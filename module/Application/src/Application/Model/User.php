@@ -4,5 +4,4 @@ use Netsensia\Model\User as NetsensiaUser;
 
 class User extends NetsensiaUser
 {
-
 }

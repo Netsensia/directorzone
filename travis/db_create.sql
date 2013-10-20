@@ -330,7 +330,7 @@ CREATE TABLE `user` (
   `name` varchar(128) DEFAULT NULL,
   `password` varchar(128) DEFAULT NULL,
   `createddate` datetime DEFAULT NULL,
-  `isocountry_fromregip` varchar(5) DEFAULT NULL,
+  `isocountryfromregip` varchar(5) DEFAULT NULL,
   `httpreferer` varchar(250) DEFAULT NULL,
   `emailverifycode` varchar(32) DEFAULT NULL,
   `passwordresetcode` varchar(32) DEFAULT NULL,
@@ -368,8 +368,8 @@ CREATE TABLE `user` (
   KEY `titleid` (`titleid`),
   KEY `genderid` (`genderid`),
   KEY `suffixid` (`suffixid`),
-  CONSTRAINT `user_ibfk_11` FOREIGN KEY (`suffixid`) REFERENCES `suffix` (`suffixid`),
   CONSTRAINT `user_ibfk_10` FOREIGN KEY (`genderid`) REFERENCES `gender` (`genderid`),
+  CONSTRAINT `user_ibfk_11` FOREIGN KEY (`suffixid`) REFERENCES `suffix` (`suffixid`),
   CONSTRAINT `user_ibfk_5` FOREIGN KEY (`titleid`) REFERENCES `title` (`titleid`),
   CONSTRAINT `user_ibfk_6` FOREIGN KEY (`availabilityid`) REFERENCES `availability` (`availabilityid`),
   CONSTRAINT `user_ibfk_7` FOREIGN KEY (`addressid`) REFERENCES `address` (`addressid`),
@@ -379,7 +379,7 @@ CREATE TABLE `user` (
 
 /*Data for the table `user` */
 
-insert  into `user`(`userid`,`email`,`name`,`password`,`createddate`,`isocountry_fromregip`,`httpreferer`,`emailverifycode`,`passwordresetcode`,`regipaddress`,`locale`,`activated`,`titleid`,`titleother`,`forenames`,`surname`,`dob`,`suffixid`,`suffixother`,`genderid`,`nationalityid`,`profileimage`,`pseudonym`,`alternativeemail`,`telephone`,`mobile`,`fax`,`addressid`,`talentpoolsummary`,`skills`,`personalinterests`,`whoswhosummary`,`availabilityid`,`marketgroupid`) values (3,'chris@netsensia.com','Chris','$2y$14$u6FnfWpEsRVDDXGNLACQ7e23qqUlGERF0vLAjZeRuYesJMgNT/CIG','2013-10-08 16:43:41',NULL,NULL,'LRjeDE1Y65zAko2g8oymapWisZcCqROT',NULL,'127.0.0.1','en_US','Y',5,'','Chrismo','Moreton',NULL,-1,'',2,1,NULL,'','netadaptstorage@googlemail.com',NULL,NULL,NULL,4,NULL,NULL,NULL,NULL,NULL,NULL);
+insert  into `user`(`userid`,`email`,`name`,`password`,`createddate`,`isocountryfromregip`,`httpreferer`,`emailverifycode`,`passwordresetcode`,`regipaddress`,`locale`,`activated`,`titleid`,`titleother`,`forenames`,`surname`,`dob`,`suffixid`,`suffixother`,`genderid`,`nationalityid`,`profileimage`,`pseudonym`,`alternativeemail`,`telephone`,`mobile`,`fax`,`addressid`,`talentpoolsummary`,`skills`,`personalinterests`,`whoswhosummary`,`availabilityid`,`marketgroupid`) values (3,'chris@netsensia.com','Chris','$2y$14$u6FnfWpEsRVDDXGNLACQ7e23qqUlGERF0vLAjZeRuYesJMgNT/CIG','2013-10-08 16:43:41',NULL,NULL,'LRjeDE1Y65zAko2g8oymapWisZcCqROT',NULL,'127.0.0.1','en_US','Y',5,'','Chrismo','Moreton',NULL,-1,'',2,1,NULL,'','netadaptstorage@googlemail.com',NULL,NULL,NULL,4,NULL,NULL,NULL,NULL,NULL,NULL);
 
 /*Table structure for table `userlanguage` */
 
