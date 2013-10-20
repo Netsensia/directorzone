@@ -14,17 +14,8 @@ class AccountProfileForm extends NetsensiaForm
     {
         $this->setFieldPrefix('account-profile-');
         $this->setDefaultIcon('user');
-        
-        $this->addSelectWithInvisibleOther('title');
-        
-        $this->addText('forenames');
-        $this->addText('surname');
-        $this->addSelectWithInvisibleOther('suffix');
-        
-        $this->addSelect('gender');
-        $this->addSelect('nationality');
-        
-        $this->addText('pseudonym');
+
+        $this->addTextArea('talent-pool-summary');
         
         $this->addSubmit('Submit');
         

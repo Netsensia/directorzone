@@ -20,7 +20,16 @@ return array(
                     ),
                 ),
             ),            
-
+            'account-personal' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/myaccount/personal',
+                    'defaults' => array(
+                        'controller' => 'Directorzone\Controller\Account',
+                        'action'     => 'personal',
+                    ),
+                ),
+            ),
             'account-profile' => array(
                 'type'    => 'Literal',
                 'options' => array(

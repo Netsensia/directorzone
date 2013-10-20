@@ -16,6 +16,7 @@ use Directorzone\Form\AccountInboxForm;
 use Directorzone\Form\AccountMembershipForm;
 use Directorzone\Form\AccountPreferencesForm;
 use Directorzone\Form\AccountProfileForm;
+use Directorzone\Form\AccountPersonalForm;
 use Directorzone\Form\AccountPublishForm;
 
 class Module
@@ -65,6 +66,12 @@ class Module
                 },
                 'AccountMembershipForm' => function($sm) {
                     $form = new AccountMembershipForm('accountMembershipForm');
+                    $form->setTranslator($sm->get('translator'));
+                    $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                    return $form;
+                },
+                'AccountPersonalForm' => function($sm) {
+                    $form = new AccountPersonalForm('accountPersonalForm');
                     $form->setTranslator($sm->get('translator'));
                     $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
                     return $form;

@@ -106,7 +106,19 @@ class AccountController extends NetsensiaActionController
         	'flashMessages' => $this->getFlashMessages(),
         );
     }
-        
+
+    public function personalAction()
+    {
+        return array(
+            "form" => $this->processForm(
+                'AccountPersonalForm',
+                'User',
+                $this->getUserId()
+            ),
+            'flashMessages' => $this->getFlashMessages(),
+        );
+    }
+    
     public function profileAction()
     {
         return array(

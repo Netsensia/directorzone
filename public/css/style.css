@@ -111,6 +111,11 @@ div.featurelist li {
 	width:275px;
 }
 
+.input-group textarea.form-control  {
+    width:100%;
+	height:80px;
+}
+
 label.control-label {
 	font-weight:normal;
 }
