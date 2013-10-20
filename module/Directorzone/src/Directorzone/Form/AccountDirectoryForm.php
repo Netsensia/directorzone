@@ -36,6 +36,13 @@ class AccountDirectoryForm extends NetsensiaForm
             ]
         );
         
+        $this->addSelect(
+            [
+                'name' => 'availability',
+                'label' => 'Media / speaker availability',
+            ]
+        );
+        
         $this->addSubmit('Submit');
         
         parent::prepare();

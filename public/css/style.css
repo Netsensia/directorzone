@@ -116,6 +116,10 @@ div.featurelist li {
 	height:80px;
 }
 
+select#account-whoswho-availability {
+	width:100%;
+}
+
 label.control-label {
 	font-weight:normal;
 }
