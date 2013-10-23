@@ -78,19 +78,21 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 <table name="userqualification" view="colnames">
-<left>461</left>
-<top>422</top>
+<left>454</left>
+<top>447</top>
 <width>160</width>
 <height>144</height>
 <sql_create_table>CREATE TABLE `userqualification` (
+  `userqualificationid` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
   `qualification` varchar(100) DEFAULT NULL,
   `subject` varchar(100) DEFAULT NULL,
   `qualificationtypeid` int(1) DEFAULT NULL,
+  PRIMARY KEY (`userqualificationid`),
   KEY `type` (`qualificationtypeid`),
   KEY `userid` (`userid`),
-  CONSTRAINT `userqualification_ibfk_3` FOREIGN KEY (`qualificationtypeid`) REFERENCES `qualificationtype` (`qualificationtypeid`),
-  CONSTRAINT `userqualification_ibfk_2` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`)
+  CONSTRAINT `userqualification_ibfk_2` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`),
+  CONSTRAINT `userqualification_ibfk_3` FOREIGN KEY (`qualificationtypeid`) REFERENCES `qualificationtype` (`qualificationtypeid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 <table name="title" view="colnames">
@@ -115,44 +117,43 @@
   PRIMARY KEY (`qualificationtypeid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
 </table>
-<table name="targetrolekeyevent" view="colnames">
+<table name="usertargetrolekeyevent" view="colnames">
 <left>789</left>
 <top>9</top>
 <width>192</width>
 <height>136</height>
-<sql_create_table>CREATE TABLE `targetrolekeyevent` (
-  `userid` int(11) NOT NULL,
-  `targetroleid` int(11) NOT NULL,
+<sql_create_table>CREATE TABLE `usertargetrolekeyevent` (
+  `usertargetroleid` int(11) NOT NULL,
   `keyeventid` int(11) NOT NULL,
-  PRIMARY KEY (`userid`,`targetroleid`,`keyeventid`),
+  PRIMARY KEY (`usertargetroleid`,`keyeventid`),
   KEY `keyevent` (`keyeventid`),
-  CONSTRAINT `targetrolekeyevent_ibfk_4` FOREIGN KEY (`keyeventid`) REFERENCES `keyevent` (`keyeventid`),
-  CONSTRAINT `targetrolekeyevent_ibfk_1` FOREIGN KEY (`userid`, `targetroleid`) REFERENCES `targetrole` (`userid`, `targetroleid`),
-  CONSTRAINT `targetrolekeyevent_ibfk_3` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`)
+  CONSTRAINT `usertargetrolekeyevent_ibfk_5` FOREIGN KEY (`usertargetroleid`) REFERENCES `usertargetrole` (`usertargetroleid`),
+  CONSTRAINT `usertargetrolekeyevent_ibfk_4` FOREIGN KEY (`keyeventid`) REFERENCES `keyevent` (`keyeventid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
 </table>
-<table name="targetrole" view="colnames">
-<left>553</left>
-<top>68</top>
+<table name="usertargetrole" view="colnames">
+<left>560</left>
+<top>45</top>
 <width>169</width>
 <height>214</height>
-<sql_create_table>CREATE TABLE `targetrole` (
+<sql_create_table>CREATE TABLE `usertargetrole` (
+  `usertargetroleid` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
-  `targetroleid` int(11) NOT NULL,
   `roleid` int(11) DEFAULT NULL,
   `country` int(11) DEFAULT NULL,
   `paylevelid` int(11) DEFAULT NULL,
   `primarysectorid` int(11) DEFAULT NULL,
   `titlesummary` varchar(50) DEFAULT NULL,
   `commentrequirement` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`userid`,`targetroleid`),
+  PRIMARY KEY (`usertargetroleid`),
   KEY `primarysector` (`primarysectorid`),
   KEY `role` (`roleid`),
   KEY `paylevelid` (`paylevelid`),
-  CONSTRAINT `targetrole_ibfk_6` FOREIGN KEY (`primarysectorid`) REFERENCES `sector` (`sectorid`),
-  CONSTRAINT `targetrole_ibfk_3` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`),
-  CONSTRAINT `targetrole_ibfk_4` FOREIGN KEY (`paylevelid`) REFERENCES `paylevel` (`paylevelid`),
-  CONSTRAINT `targetrole_ibfk_5` FOREIGN KEY (`roleid`) REFERENCES `role` (`roleid`)
+  KEY `userid` (`userid`),
+  CONSTRAINT `usertargetrole_ibfk_4` FOREIGN KEY (`paylevelid`) REFERENCES `paylevel` (`paylevelid`),
+  CONSTRAINT `usertargetrole_ibfk_5` FOREIGN KEY (`roleid`) REFERENCES `role` (`roleid`),
+  CONSTRAINT `usertargetrole_ibfk_6` FOREIGN KEY (`primarysectorid`) REFERENCES `sector` (`sectorid`),
+  CONSTRAINT `usertargetrole_ibfk_7` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 <table name="keyevent" view="colnames">
@@ -244,12 +245,13 @@
   CONSTRAINT `language_ibfk_1` FOREIGN KEY (`languageid`) REFERENCES `userlanguage` (`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
 </table>
-<table name="experience" view="colnames">
+<table name="userexperience" view="colnames">
 <left>643</left>
 <top>316</top>
 <width>156</width>
 <height>196</height>
-<sql_create_table>CREATE TABLE `experience` (
+<sql_create_table>CREATE TABLE `userexperience` (
+  `userexperienceid` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
   `title` varchar(50) DEFAULT NULL,
   `statusid` int(11) DEFAULT NULL,
@@ -257,12 +259,13 @@
   `committeerole` varchar(50) DEFAULT NULL,
   `fromdate` date DEFAULT NULL,
   `todate` date DEFAULT NULL,
+  PRIMARY KEY (`userexperienceid`),
   KEY `status` (`statusid`),
   KEY `area` (`experienceareaid`),
   KEY `userid` (`userid`),
-  CONSTRAINT `experience_ibfk_5` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`),
-  CONSTRAINT `experience_ibfk_3` FOREIGN KEY (`statusid`) REFERENCES `status` (`statusid`),
-  CONSTRAINT `experience_ibfk_4` FOREIGN KEY (`experienceareaid`) REFERENCES `experiencearea` (`experiencearea`)
+  CONSTRAINT `userexperience_ibfk_3` FOREIGN KEY (`statusid`) REFERENCES `status` (`statusid`),
+  CONSTRAINT `userexperience_ibfk_5` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`),
+  CONSTRAINT `userexperience_ibfk_6` FOREIGN KEY (`experienceareaid`) REFERENCES `experiencearea` (`experienceareaid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 <table name="experiencearea" view="colnames">
@@ -271,9 +274,9 @@
 <width>164</width>
 <height>112</height>
 <sql_create_table>CREATE TABLE `experiencearea` (
-  `experiencearea` int(11) NOT NULL,
-  `experienceareaid` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`experiencearea`)
+  `experienceareaid` int(11) NOT NULL,
+  `experiencearea` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`experienceareaid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 <table name="address" view="colnames">
@@ -304,10 +307,10 @@
   `countryid` int(5) NOT NULL AUTO_INCREMENT,
   `iso2` char(2) DEFAULT NULL,
   `country` varchar(80) NOT NULL DEFAULT '',
-  `long_name` varchar(80) NOT NULL DEFAULT '',
+  `longname` varchar(80) NOT NULL DEFAULT '',
   `iso3` char(3) DEFAULT NULL,
   `numcode` varchar(6) DEFAULT NULL,
-  `un_member` varchar(12) DEFAULT NULL,
+  `unmember` varchar(12) DEFAULT NULL,
   `calling_code` varchar(8) DEFAULT NULL,
   `cctld` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`countryid`)
@@ -332,8 +335,8 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 <table name="role" view="colnames">
-<left>1230</left>
-<top>87</top>
+<left>456</left>
+<top>136</top>
 <width>78</width>
 <height>107</height>
 <sql_create_table>CREATE TABLE `role` (
@@ -354,8 +357,8 @@
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 <table name="suffix" view="colnames">
-<left>459</left>
-<top>215</top>
+<left>460</left>
+<top>269</top>
 <width>87</width>
 <height>107</height>
 <sql_create_table>CREATE TABLE `suffix` (
