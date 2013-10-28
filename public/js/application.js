@@ -7,7 +7,7 @@ $(function(){
 		toggleSelectOther($(this).attr('id'));
 	});
 	
-	$('.date-entry').datepicker( { changeYear: true, yearRange: "1920:2013" } );
+	$('.date-entry').datepicker( { changeYear: true, yearRange: "1920:2013", dateFormat: "yy-mm-dd" } );
 });
 
 function toggleSelectOther(id)
