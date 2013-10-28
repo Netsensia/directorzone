@@ -4,12 +4,36 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Directorzone\Controller\Account' =>
-                'Directorzone\Controller\AccountController',            
+                'Directorzone\Controller\AccountController',
+			'Directorzone\Controller\Content' =>
+                'Directorzone\Controller\ContentController',
+			'Directorzone\Controller\Directory' =>
+                'Directorzone\Controller\DirectoryController',        		        		            
         ),
     ),
     'router' => array(
         'routes' => array(
             
+        	'content' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/content',
+                    'defaults' => array(
+                        'controller' => 'Directorzone\Controller\Content',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),  
+        	'directories' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/myaccount',
+                    'defaults' => array(
+                        'controller' => 'Directorzone\Controller\Directory',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),  
             'myaccount' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(

@@ -39,28 +39,33 @@
 					<div class="navbar-collapse collapse">
 						<ul class="nav navbar-nav">
                         <?php
+                        	$someurls = [
+								'home' => $this->translate("Home"),
+								'directories' => $this->translate("Directories"),
+								'content' => $this->translate("Content"),
+                        	];
                             if ($this->identity()) {
-                                $urls = array(
-                                    'home' => $this->translate("Home"),
+                                $moreurls = array(
                                     'help' => $this->translate("Help"),
                                     'contact' => $this->translate("Contact")
                                 );
                             } else {
                                 if ($this->config()['netsensia']['enable-users']) {
-                                    $urls = array(
+                                    $moreurls = array(
                                         'home' => $this->translate("Home"),
                                         'register' => $this->translate("Register"),
                                         'help' => $this->translate("Help"),
                                         'contact' => $this->translate("Contact"),
                                     );
                                 } else {
-                                    $urls = array(
+                                    $moreurls = array(
                                         'home' => $this->translate("Home"),
                                         'help' => $this->translate("Help"),
                                         'contact' => $this->translate("Contact"),
                                     );
                                 }
-                            } 
+                            }
+                            $urls = array_merge($someurls, $moreurls); 
                         ?>
                         <?php foreach ($urls as $url => $name) { ?>
                             <li
@@ -69,11 +74,13 @@
                             <?php } ?>
                             <?php if ($user = $this->identity()) { ?>
                             <li><a href="<?php echo $this->url('myaccount') ?>"><?php echo $this->translate('My Account') ?></a></li>
+                            
                             <li><a href="<?php echo $this->url('logout') ?>"><?php echo $this->translate('Logout') ?></a></li>
-							<li><a><strong><?php echo $this->translate('Logged in as'); ?> <?php echo $this->escapeHtml($user->getName()); ?></strong></a></li>
+							
                         <?php } ?>
                     </ul>
-                    <?php if ($this->config()['netsensia']['enable-users'] && !$this->identity()) { ?>
+                    <?php if ($this->config()['netsensia']['enable-users']) { ?>
+                    <?php if (!$this->identity()) { ?>
                         <ul class="nav navbar-nav pull-right">
 							<li class="dropdown"><a href="#" id="drop3" role="button"
 								class="dropdown-toggle" data-toggle="dropdown"><?php echo $this->translate('Sign In / Sign Up'); ?><b
@@ -95,19 +102,16 @@
 									<li class="divider"></li>
 									<li><a tabindex="-1"
 										href="<?php echo $this->url('password-reset'); ?>"><?php echo $this->translate("Reset your password"); ?></a></li>
-								</ul></li>
+								</ul>
+							</li>
+							
 						</ul>
-                        <?php } ?>
-
-						<div id="flag-container" class="pull-right">
-							<a title="<?php echo $this->translate('English'); ?>"
-								href="<?php echo $this->url('locale', ["locale"=>"en_GB"]); ?>"><img
-								class="translate-flag" src="/img/flag/England.fw.png"></a> <a
-								title="<?php echo $this->translate('French'); ?>"
-								href="<?php echo $this->url('locale', array("locale"=>"fr_FR")); ?>"><img
-								class="translate-flag" src="/img/flag/France.fw.png"></a>
-						</div>
-						
+                        <?php } else { ?>
+                        <ul class="nav navbar-nav pull-right">
+						<li><a><strong><?php echo $this->escapeHtml($user->getName()); ?></strong></a></li>
+						</ul>
+						<?php } ?>
+						<?php } ?>
                         <form class="navbar-form navbar-right" role="search">
 							<div class="form-group">
 								<input type="text" class="form-control" placeholder="Search">
