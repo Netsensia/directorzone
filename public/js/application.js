@@ -6,6 +6,8 @@ $(function(){
 	$('select').change( function() {
 		toggleSelectOther($(this).attr('id'));
 	});
+	
+	$('.date-entry').datepicker( { changeYear: true, yearRange: "1920:2013" } );
 });
 
 function toggleSelectOther(id)
