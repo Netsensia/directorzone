@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.5.34, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.5.23, for Win32 (x86)
 --
 -- Host: localhost    Database: directorzone_zf2
 -- ------------------------------------------------------
--- Server version	5.5.34-0ubuntu0.13.10.1
+-- Server version	5.5.23
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -559,7 +559,7 @@ CREATE TABLE `user` (
   CONSTRAINT `user_ibfk_7` FOREIGN KEY (`addressid`) REFERENCES `address` (`addressid`) ON DELETE CASCADE,
   CONSTRAINT `user_ibfk_8` FOREIGN KEY (`nationalityid`) REFERENCES `nationality` (`nationalityid`),
   CONSTRAINT `user_ibfk_9` FOREIGN KEY (`marketgroupid`) REFERENCES `marketgroup` (`marketgroupid`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -568,7 +568,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (3,'chris@netsensia.com','Chris','$2y$14$MpKnfjE/QY7AYHTopwqSoe4eO6Q.U8IIj1DXN98YJUYFH8AZoYKOu','2013-10-08 16:43:41',NULL,NULL,'LRjeDE1Y65zAko2g8oymapWisZcCqROT','0','127.0.0.1','en_US','Y',5,'','Chrismo','Moreton',NULL,-1,'',2,1,NULL,'','netadaptstorage@googlemail.com',NULL,NULL,NULL,11,'I am awesome.\r\n\r\nHear me roar.',NULL,NULL,NULL,NULL,NULL,NULL),(4,'test@netsensia.com',NULL,'$2y$14$cBKJD3NnF6L4FuuEN7P1fOOepHEX5iN1XCA9U3.4SAIYGAUq5a6Iy',NULL,NULL,NULL,NULL,NULL,NULL,'en_US','N',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(5,'chris2@netsensia.com','asdasd','$2y$14$Natpv4i64TYp8GyDfcQ/POSsBYqx18g3i3q5ZFvzfLcnFMuNsoaz2','2013-10-20 14:27:35',NULL,NULL,'wY3CoBSHQHfQ3jARfsDqbVOCwmevvRAx',NULL,'127.0.0.1','en_US','Y',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(6,'chris22@netsensia.com','asdasd2','$2y$14$vkHjAIDJ8dmdr/15APtulOvaafXZzO/efq1nX25M9.159TnpMrJIu','2013-10-20 14:27:50',NULL,NULL,'SzTfzsZ88ZAGmB1bzBBbF65pewkaxT7H',NULL,'127.0.0.1','en_US','Y',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `user` VALUES (9,'chris@netsensia.com','Chris','$2y$14$NjkBrLTGaPJXIxb37qxCaem6/vzlLaTbc9CYLnt6WSsEO2ocaIcsm','2013-10-28 18:59:34',NULL,NULL,'3tLR7FiIYxZP5rSkBzSJDujAfDcUcy9s',NULL,'127.0.0.1','en_US','Y',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -734,4 +734,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-10-28 14:31:34
+-- Dump completed on 2013-10-28 19:00:14
