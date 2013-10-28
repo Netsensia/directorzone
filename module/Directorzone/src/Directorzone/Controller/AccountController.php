@@ -3,8 +3,6 @@
 namespace Directorzone\Controller;
 
 use Netsensia\Controller\NetsensiaActionController;
-use Zend\EventManager\EventManagerInterface;
-use Directorzone\Model\User as UserModel;
 use Zend\Mvc\MvcEvent;
 
 class AccountController extends NetsensiaActionController
@@ -20,7 +18,7 @@ class AccountController extends NetsensiaActionController
 
     public function indexAction()
     {
-        $this->redirect()->toRoute('account-profile');
+        $this->redirect()->toRoute('account-personal');
     }
     
     public function accountAction()
