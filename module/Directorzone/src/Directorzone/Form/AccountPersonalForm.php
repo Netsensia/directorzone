@@ -21,6 +21,8 @@ class AccountPersonalForm extends NetsensiaForm
         $this->addText('surname');
         $this->addSelectWithInvisibleOther('suffix');
         
+        $this->addDate(['name'=>'dob', 'label'=>'Date of birth']);
+        
         $this->addSelect('gender');
         $this->addSelect('nationality');
         

@@ -116,6 +116,10 @@ div.featurelist li {
 	height:80px;
 }
 
+.input-group .date-entry {
+    width:10em;
+}
+
 select#account-whoswho-availability {
 	width:100%;
 }
