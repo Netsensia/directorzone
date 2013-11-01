@@ -2,7 +2,6 @@
 namespace Application\Controller;
 
 use Netsensia\Controller\NetsensiaActionController;
-use NetsensiaCompanies\Search\Companies;
 
 class IndexController extends NetsensiaActionController
 {
@@ -18,12 +17,12 @@ class IndexController extends NetsensiaActionController
     {
         $companyNumber = $this->params('companyNumber');
         
-        $c = $this->getServiceLocator()->get('NetsensiaCompanies\Search\CompanyDetails');
+        $c = $this->getServiceLocator()->get('NetsensiaCompanies\Loader\CompanyDetailsLoader');
         
-        $xml = $c->getCompanyDetails($companyNumber);
+        $companyModel = $c->loadCompanyDetails($companyNumber);
         
         return [
-            'xml' => $xml
+            'company' => $companyModel
         ];
                 
     }
