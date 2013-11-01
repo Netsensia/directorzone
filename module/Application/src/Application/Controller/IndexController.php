@@ -8,12 +8,23 @@ class IndexController extends NetsensiaActionController
 {
     public function indexAction()
     {
-        $c = $this->getServiceLocator()->get('NetsensiaCompanies\Search\Companies');
-        
-        echo ($c->getCompanyDetails('06236637'));
-        
+
         return [ 
             'flashMessages' => $this->getFlashMessages(),
         ];
+    }
+    
+    public function companyAction()
+    {
+        $companyNumber = $this->params('companyNumber');
+        
+        $c = $this->getServiceLocator()->get('NetsensiaCompanies\Search\CompanyDetails');
+        
+        $xml = $c->getCompanyDetails($companyNumber);
+        
+        return [
+            'xml' => $xml
+        ];
+                
     }
 }

@@ -20,6 +20,16 @@ return array(
                     ),
                 ),
             ),
+            'company' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route'    => '/company/[:companyNumber]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action'     => 'company',
+                    ),
+                ),
+            ),
             
         ),
     ),
