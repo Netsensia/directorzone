@@ -10,11 +10,10 @@ class IndexController extends NetsensiaActionController
     {
         $c = $this->getServiceLocator()->get('NetsensiaCompanies\Search\Companies');
         
-        echo($c->test());
-        die;
+        echo ($c->getCompanyDetails('06236637'));
         
-       return [
+        return [ 
             'flashMessages' => $this->getFlashMessages(),
-       ];
+        ];
     }
 }
