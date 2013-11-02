@@ -17,12 +17,18 @@ class IndexController extends NetsensiaActionController
     {
         $companyNumber = $this->params('companyNumber');
         
-        $c = $this->getServiceLocator()->get('NetsensiaCompanies\Loader\CompanyDetailsLoader');
-        
-        $companyModel = $c->loadCompanyDetails($companyNumber);
+        $request = $this->getServiceLocator()->get('NetsensiaCompanies\Request\CompanyDetailsRequest');
+        $companyModel = $request->loadCompanyDetails($companyNumber);
+
+        $request = $this->getServiceLocator()->get('NetsensiaCompanies\Request\CompanyAppointmentsRequest');
+        $companyAppointmentsModel = $request->loadCompanyAppointments(
+            $companyNumber,
+            $companyModel->getCompanyName()
+        );
         
         return [
-            'company' => $companyModel
+            'company' => $companyModel,
+            'appointments' => $companyAppointmentsModel,
         ];
                 
     }

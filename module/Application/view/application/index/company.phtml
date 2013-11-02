@@ -1,10 +1,26 @@
-<pre>
-<?php echo $this->company->getCompanyNumber() . ' is ' . $this->company->getCompanyName(); ?>
-<br>
-<?php 
-    foreach ($this->company->getAddressLines() as $line) {
-        echo $line . '<br>';
-}?>
+<table border="1" style="width:100%">
+<tr><td>Number</td><td><?php echo $this->company->getCompanyNumber(); ?></td></tr>
+<tr><td>Name</td><td><?php echo $this->company->getCompanyName(); ?></td></tr>
 
-Postcode: <?php echo $this->company->getPostcode(); ?>
-</pre>
+<tr><td>Address</td>
+<td>
+    <?php 
+        foreach ($this->company->getAddressLines() as $line) {
+            echo $line . '<br>';
+    }?>
+    
+    Postcode: <?php echo $this->company->getPostcode(); ?>
+</td></tr>
+
+<tr><td>Number of Current Appointments</td><td><?php echo $this->appointments->getNumberOfCurrentAppointments(); ?></td></tr>
+<tr><td>Number of Resigned Appointments</td><td><?php echo $this->appointments->getNumberOfResignedAppointments(); ?></td></tr>
+
+<tr><td>Appointments</td>
+<td>
+    <?php 
+        foreach ($this->appointments->getAppointments() as $person) {
+            echo $person->getSurname() . '<br>';
+    }?>
+</td></tr>
+
+</table>
