@@ -14,9 +14,9 @@
 return array(
     'netsensia' => [
         'companies_house' => [
-    	    'SenderID' => '',
-            'password' => '',
-            'email'    => '',
+    	    'SenderID' => 'CH_SENDER_ID',
+            'password' => 'CH_PASSWORD',
+            'email'    => 'CH_EMAIL',
         ]
     ]
 );
