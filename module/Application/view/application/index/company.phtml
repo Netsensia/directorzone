@@ -1,3 +1,10 @@
 <pre>
 <?php echo $this->company->getCompanyNumber() . ' is ' . $this->company->getCompanyName(); ?>
+<br>
+<?php 
+    foreach ($this->company->getAddressLines() as $line) {
+        echo $line . '<br>';
+}?>
+
+Postcode: <?php echo $this->company->getPostcode(); ?>
 </pre>
