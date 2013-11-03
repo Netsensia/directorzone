@@ -15,7 +15,7 @@
 	"homepage" : "http://zf2.skeleton.com",
 	"require" : {
 		"netsensia/zf2-foundation" : "dev-master",
-		"netsensia/companies-house" : "dev-master"
+		"netsensia/companies-house" : "*"
 	},
 	"require-dev" : {
 		"phpunit/phpunit" : "3.7.*",

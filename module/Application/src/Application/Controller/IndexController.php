@@ -23,7 +23,9 @@ class IndexController extends NetsensiaActionController
         $request = $this->getServiceLocator()->get('NetsensiaCompanies\Request\CompanyAppointmentsRequest');
         $companyAppointmentsModel = $request->loadCompanyAppointments(
             $companyNumber,
-            $companyModel->getCompanyName()
+            $companyModel->getCompanyName(),
+            true,
+            true
         );
         
         return [
