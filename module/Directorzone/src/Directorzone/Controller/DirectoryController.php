@@ -3,8 +3,6 @@
 namespace Directorzone\Controller;
 
 use Netsensia\Controller\NetsensiaActionController;
-use Zend\EventManager\EventManagerInterface;
-use Directorzone\Model\User as UserModel;
 use Zend\Mvc\MvcEvent;
 
 class DirectoryController extends NetsensiaActionController

@@ -1,4 +1,5 @@
-<?php
+<?php 
+
 namespace TestSuite;
 
 define('DEVELOPMENT_ENVIRONMENT', true);
