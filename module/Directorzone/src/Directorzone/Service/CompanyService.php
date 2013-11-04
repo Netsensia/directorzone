@@ -46,8 +46,10 @@ class CompanyService extends NetsensiaService
             "SELECT name " .
             "FROM company " .
             "WHERE name NOT LIKE 'THE %' " .
-            "AND name NOT LIKE 'THE-%' " .            
+            "AND name NOT LIKE 'THE-%' " .
             "AND name NOT LIKE '\\\\\\\\%' " .
+            "AND name NOT LIKE '%[%' " .
+            "AND name NOT LIKE '%\_%' " .
             "ORDER BY name DESC " .
             "LIMIT 1";
 
