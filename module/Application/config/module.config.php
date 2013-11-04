@@ -49,6 +49,19 @@ return array(
                         'action'     => 'add-to-database',
                     ),
                 ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'kick' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/[:partialName]',
+                            'defaults' => array(
+                                'controller' => 'Application\Controller\Index',
+                                'action'     => 'add-to-database',
+                            ),
+                        )
+                    ),
+                )                
             ),
             
         ),

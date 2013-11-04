@@ -37,14 +37,18 @@ class IndexController extends NetsensiaActionController
     
     public function addToDatabaseAction()
     {
+        $partialName = $this->params('partialName');
+        
         $companyService = $this->getServiceLocator()->get('CompanyService');
     
-        $partialName = $companyService->getMaxAlphabeticalCompanyName();
+        if ($partialName == '') {
+            $partialName = $companyService->getMaxAlphabeticalCompanyName();
+        }
     
         $request = $this->getServiceLocator()->get('NetsensiaCompanies\Request\NameSearchRequest');
         $nameSearchResults = $request->loadResults(
             $partialName,
-            1000,
+            500,
             10
         );
     
@@ -61,7 +65,7 @@ class IndexController extends NetsensiaActionController
             'results' => $nameSearchResults->getMatches(),
         ];
     }
-        
+    
     public function companySearchAction()
     {
         $partialName = $this->params('partialName');
