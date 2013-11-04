@@ -61,7 +61,18 @@ return array(
                             ),
                         )
                     ),
-                )                
+                    'count' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/count',
+                            'defaults' => array(
+                                'controller' => 'Application\Controller\Index',
+                                'action'     => 'count',
+                            ),
+                        )
+                    ),
+                )
+                
             ),
             
         ),

@@ -35,6 +35,17 @@ class IndexController extends NetsensiaActionController
                 
     }
     
+    public function countAction()
+    {
+        $companyService = $this->getServiceLocator()->get('CompanyService');
+        
+        $count = $companyService->count();
+    
+        return [
+            'count' => $count,
+        ];
+    }
+    
     public function addToDatabaseAction()
     {
         $partialName = $this->params('partialName');

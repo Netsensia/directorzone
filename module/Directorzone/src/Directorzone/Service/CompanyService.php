@@ -23,6 +23,23 @@ class CompanyService extends NetsensiaService
         return ($query->rowCount() == 1);
     }
     
+    public function count()
+    {
+        $sql =
+            "SELECT count(*) as c " .
+            "FROM company";
+    
+        $query = $this->getConnection()->prepare($sql);
+    
+        $query->execute();
+    
+        if ($row = $query->fetch()) {
+            return $row['c'];
+        } else {
+            return null;
+        }   
+    }    
+    
     public function getMaxAlphabeticalCompanyName()
     {
         $sql =
