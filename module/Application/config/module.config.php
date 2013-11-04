@@ -39,7 +39,17 @@ return array(
                         'action'     => 'company-search',
                     ),
                 ),
-            ),            
+            ),
+            'add-to-database' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/add-to-database',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action'     => 'add-to-database',
+                    ),
+                ),
+            ),
             
         ),
     ),

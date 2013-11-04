@@ -380,8 +380,9 @@
   `dataset` varchar(20) DEFAULT NULL,
   `status` varchar(100) DEFAULT NULL,
   `companydate` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`companyid`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1</sql_create_table>
+  PRIMARY KEY (`companyid`),
+  UNIQUE KEY `number` (`number`)
+) ENGINE=InnoDB AUTO_INCREMENT=19722 DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 </tables>
 </canvas>

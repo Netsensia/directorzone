@@ -8,9 +8,9 @@ class CompanyService extends NetsensiaService
     public function isCompanyNumberTaken($companyNumber)
     {
         $sql =
-        "SELECT companyid " .
-        "FROM company " .
-        "WHERE number = :number";
+            "SELECT companyid " .
+            "FROM company " .
+            "WHERE number = :number";
     
         $query = $this->getConnection()->prepare($sql);
     
@@ -21,5 +21,28 @@ class CompanyService extends NetsensiaService
         );
     
         return ($query->rowCount() == 1);
+    }
+    
+    public function getMaxAlphabeticalCompanyName()
+    {
+        $sql =
+            "SELECT name " .
+            "FROM company " .
+            "WHERE name NOT LIKE 'THE %' " .
+            "AND name NOT LIKE 'THE-%' " .            
+            "ORDER BY name DESC " .
+            "LIMIT 1";
+
+        $query = $this->getConnection()->prepare($sql);
+        
+        $query->execute();
+        
+        if ($row = $query->fetch()) {
+            $name = preg_replace('/^THE[ -]/', '', $row['name']);
+            return $name;
+        } else {
+            return null;
+        }        
+        
     }
 }
