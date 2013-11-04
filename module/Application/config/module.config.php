@@ -30,6 +30,16 @@ return array(
                     ),
                 ),
             ),
+            'company-search' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route'    => '/company-search/[:partialName]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action'     => 'company-search',
+                    ),
+                ),
+            ),            
             
         ),
     ),

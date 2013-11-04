@@ -62,7 +62,7 @@
   CONSTRAINT `user_ibfk_7` FOREIGN KEY (`addressid`) REFERENCES `address` (`addressid`) ON DELETE CASCADE,
   CONSTRAINT `user_ibfk_8` FOREIGN KEY (`nationalityid`) REFERENCES `nationality` (`nationalityid`),
   CONSTRAINT `user_ibfk_9` FOREIGN KEY (`marketgroupid`) REFERENCES `marketgroup` (`marketgroupid`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1</sql_create_table>
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 <table name="userlanguage" view="colnames">
 <left>442</left>
@@ -299,8 +299,8 @@
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 <table name="country" view="colnames">
-<left>1090</left>
-<top>184</top>
+<left>1144</left>
+<top>197</top>
 <width>116</width>
 <height>226</height>
 <sql_create_table>CREATE TABLE `country` (
@@ -367,6 +367,21 @@
   `description` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`suffixid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="company" view="colnames">
+<left>1007</left>
+<top>131</top>
+<width>123</width>
+<height>163</height>
+<sql_create_table>CREATE TABLE `company` (
+  `companyid` int(11) NOT NULL AUTO_INCREMENT,
+  `number` varchar(20) DEFAULT NULL,
+  `name` varchar(250) DEFAULT NULL,
+  `dataset` varchar(20) DEFAULT NULL,
+  `status` varchar(100) DEFAULT NULL,
+  `companydate` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`companyid`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1</sql_create_table>
 </table>
 </tables>
 </canvas>

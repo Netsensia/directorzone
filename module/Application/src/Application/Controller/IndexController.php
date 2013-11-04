@@ -34,4 +34,30 @@ class IndexController extends NetsensiaActionController
         ];
                 
     }
+    
+    public function companySearchAction()
+    {
+        $partialName = $this->params('partialName');
+    
+        $request = $this->getServiceLocator()->get('NetsensiaCompanies\Request\NameSearchRequest');
+        $nameSearchResults = $request->loadResults(
+            $partialName,
+            10
+        );
+        
+        $companyService = $this->getServiceLocator()->get('CompanyService');
+        
+        foreach ($nameSearchResults->getMatches() as $match) {
+            if (!$companyService->isCompanyNumberTaken($match['number'])) {
+                $companyModel = $this->newModel('Company');
+                var_dump($match);
+                $companyModel->setData($match);
+                $companyModel->create();
+            }
+        }
+    
+        return [
+            'results' => $nameSearchResults->getMatches(),
+        ];
+    }
 }

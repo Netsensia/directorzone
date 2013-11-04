@@ -1,0 +1,8 @@
+<table border="1" style="width:100%">
+<?php
+    $count = 0;
+    foreach ($this->results as $result) {
+        echo '<tr><td>' . (++$count) . '</td><td>' . $result['number'] . '</td><td>' . $result['name'] . '</td></tr>';
+    } 
+?>
+</table>

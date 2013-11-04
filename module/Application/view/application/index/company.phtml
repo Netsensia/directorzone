@@ -20,6 +20,32 @@
 <tr><td>Number of Current Appointments</td><td><?php echo $this->appointments->getNumberOfCurrentAppointments(); ?></td></tr>
 <tr><td>Number of Resigned Appointments</td><td><?php echo $this->appointments->getNumberOfResignedAppointments(); ?></td></tr>
 
+<tr>
+    <td>Accounts</td>
+    <td>
+        <table>
+            <tr><td>Category</td><td><?php echo $this->company->getAccountsDetails()->getCategory(); ?></td></tr>
+            <tr><td>Ref Date</td><td><?php echo $this->company->getAccountsDetails()->getRefDate(); ?></td></tr>
+            <tr><td>Next Due</td><td><?php echo $this->company->getAccountsDetails()->getNextDueDate(); ?></td></tr>
+            <tr><td>Overdue?</td><td><?php echo ($this->company->getAccountsDetails()->isOverdue() ? 'Yes' : 'No'); ?></td></tr>
+            <tr><td>Last Made Up</td><td><?php echo $this->company->getAccountsDetails()->getLastMadeUpDate(); ?></td></tr>
+            <tr><td>Document available?</td><td><?php echo ($this->company->getAccountsDetails()->isDocumentAvailable() ? 'Yes' : 'No'); ?></td></tr>
+        </table>
+    </td>
+</tr>
+
+<tr>
+    <td>Returns</td>
+    <td>
+        <table>
+            <tr><td>Next Due</td><td><?php echo $this->company->getReturnDetails()->getNextDueDate(); ?></td></tr>
+            <tr><td>Overdue?</td><td><?php echo ($this->company->getReturnDetails()->isOverdue() ? 'Yes' : 'No'); ?></td></tr>
+            <tr><td>Last Made Up</td><td><?php echo $this->company->getReturnDetails()->getLastMadeUpDate(); ?></td></tr>
+            <tr><td>Document available?</td><td><?php echo ($this->company->getReturnDetails()->isDocumentAvailable() ? 'Yes' : 'No'); ?></td></tr>
+        </table>
+    </td>
+</tr>
+
 <tr><td>Appointments</td>
 <td>
     <?php 

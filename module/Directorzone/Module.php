@@ -32,6 +32,11 @@ class Module
     {
         return array(
             'factories' => array(
+                'CompanyModel' => function (\Zend\ServiceManager\ServiceLocatorInterface $sl) {
+                    $instance = new \Directorzone\Model\Company();
+                    $instance->setServiceLocator($sl);
+                    return $instance;
+                },
                 'AccountAccountForm' => function($sm) {
                     $form = new AccountAccountForm('accountAccountForm');
                     $form->setTranslator($sm->get('translator'));
