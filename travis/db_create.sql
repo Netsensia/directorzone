@@ -2,7 +2,7 @@
 SQLyog Ultimate v11.27 (64 bit)
 MySQL - 5.5.23 : Database - directorzone_zf2
 *********************************************************************
-*/
+*/
 
 /*!40101 SET NAMES utf8 */;
 

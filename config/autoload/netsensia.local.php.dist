@@ -27,6 +27,7 @@ return array(
         'instance' => array(
         	'alias' => array(
                 'LocationService' => 'Netsensia\Service\MaxmindLocationService',
+                'CompanyService' => 'Directorzone\Service\CompanyService',
             ),
             'Netsensia\Service\MaxmindLocationService' => array(
                 'parameters' => array(
