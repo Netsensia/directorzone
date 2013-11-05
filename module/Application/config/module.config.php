@@ -126,4 +126,20 @@ return array(
             'ViewJsonStrategy',
         ),
     ),
+    
+    'console' => array(
+        'router' => array(
+            'routes' => array(
+                'ingest' => array(
+                    'options' => array(
+                        'route'    => 'ingest',
+                        'defaults' => array(
+                            'controller' => 'Application\Controller\Index',
+                            'action'     => 'ingest',
+                        ),
+                    ),
+                ),
+            ),
+        ),
+    ),    
 );

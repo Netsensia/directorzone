@@ -46,6 +46,45 @@ class IndexController extends NetsensiaActionController
         ];
     }
     
+    public function ingestAction()
+    {
+        while (true) {
+            try {
+                $partialName = file_get_contents('lastname.txt');
+                
+                $companyService = $this->getServiceLocator()->get('CompanyService');
+                
+                $done = false;
+                
+                while (!$done) {
+                    $request = $this->getServiceLocator()->get('NetsensiaCompanies\Request\NameSearchRequest');
+                    
+                    echo $partialName . PHP_EOL;
+                    
+                    $nameSearchResults = $request->loadResults(
+                        $partialName,
+                        500,
+                        1
+                    );
+                
+                    foreach ($nameSearchResults->getMatches() as $match) {
+                        if (!$companyService->isCompanyNumberTaken($match['number'])) {
+                            $companyModel = $this->newModel('Company');
+                            $companyModel->setData($match);
+                            $companyModel->create();
+                        }
+                        $partialName = $match['name'];
+                        file_put_contents('lastname.txt', $partialName);            
+                    }
+                }
+            } catch (\Exception $e) {
+                echo PHP_EOL . "Exception: " . $e->getMessage() . PHP_EOL . PHP_EOL;
+            }
+        }
+        
+        echo 'Done.' . PHP_EOL;
+    }
+    
     public function addToDatabaseAction()
     {
         $partialName = $this->params('partialName');
@@ -59,8 +98,8 @@ class IndexController extends NetsensiaActionController
         $request = $this->getServiceLocator()->get('NetsensiaCompanies\Request\NameSearchRequest');
         $nameSearchResults = $request->loadResults(
             $partialName,
-            500,
-            10
+            50,
+            1
         );
     
         foreach ($nameSearchResults->getMatches() as $match) {
