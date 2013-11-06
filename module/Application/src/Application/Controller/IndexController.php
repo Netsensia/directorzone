@@ -63,8 +63,8 @@ class IndexController extends NetsensiaActionController
                     
                     $nameSearchResults = $request->loadResults(
                         $partialName,
-                        500,
-                        10
+                        50,
+                        1
                     );
                 
                     foreach ($nameSearchResults->getMatches() as $match) {
@@ -75,7 +75,8 @@ class IndexController extends NetsensiaActionController
                         }
                         $partialName = $match['name'];
                     }
-                    file_put_contents('lastname.txt', $partialName);            
+                    file_put_contents('lastname.txt', $partialName);
+                    sleep(10);        
                 }
             } catch (\Exception $e) {
                 echo PHP_EOL . "Exception: " . $e->getMessage() . PHP_EOL . PHP_EOL;
