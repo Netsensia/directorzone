@@ -8,7 +8,7 @@ class IndexController extends NetsensiaActionController
     public function indexAction()
     {
 
-        return [ 
+        return [
             'flashMessages' => $this->getFlashMessages(),
         ];
     }
@@ -64,7 +64,7 @@ class IndexController extends NetsensiaActionController
                     $nameSearchResults = $request->loadResults(
                         $partialName,
                         500,
-                        1
+                        10
                     );
                 
                     foreach ($nameSearchResults->getMatches() as $match) {
