@@ -12,7 +12,7 @@
 	"keywords" : [
 		"zend framework 2"
 	],
-	"homepage" : "http://zf2.skeleton.com",
+	"homepage" : "http://zf2.netsensia.com",
 	"require" : {
 		"netsensia/zf2-foundation" : "dev-master",
 		"netsensia/companies-house" : "*"

@@ -48,6 +48,8 @@ class IndexController extends NetsensiaActionController
     
     public function ingestAction()
     {
+        $previousNames = [];
+        
         while (true) {
             try {
                 $partialName = file_get_contents('lastname.txt');
@@ -63,10 +65,13 @@ class IndexController extends NetsensiaActionController
                     
                     $nameSearchResults = $request->loadResults(
                         $partialName,
-                        50
+                        rand(10, 500),
+                        rand(0, 10)
                     );
-                
+
+                    $previousNames = [];
                     foreach ($nameSearchResults->getMatches() as $match) {
+                        $previousNames[] = $match['name'];
                         if (!$companyService->isCompanyNumberTaken($match['number'])) {
                             $companyModel = $this->newModel('Company');
                             $companyModel->setData($match);
@@ -75,10 +80,21 @@ class IndexController extends NetsensiaActionController
                         $partialName = $match['name'];
                     }
                     file_put_contents('lastname.txt', $partialName);
-                    sleep(10);        
+                    
+                    sleep(5);
                 }
             } catch (\Exception $e) {
                 echo PHP_EOL . "Exception: " . $e->getMessage() . PHP_EOL . PHP_EOL;
+                
+                unset($previousNames[count($previousNames)-1]);
+                $partialName = array_pop($previousNames);
+                
+                if ($partialName == null) {
+                    echo "I give up." . PHP_EOL;
+                    die;
+                }
+                
+                sleep(5);
             }
         }
         
@@ -98,8 +114,7 @@ class IndexController extends NetsensiaActionController
         $request = $this->getServiceLocator()->get('NetsensiaCompanies\Request\NameSearchRequest');
         $nameSearchResults = $request->loadResults(
             $partialName,
-            50,
-            1
+            100
         );
     
         foreach ($nameSearchResults->getMatches() as $match) {
