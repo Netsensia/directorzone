@@ -63,8 +63,7 @@ class IndexController extends NetsensiaActionController
                     
                     $nameSearchResults = $request->loadResults(
                         $partialName,
-                        50,
-                        1
+                        50
                     );
                 
                     foreach ($nameSearchResults->getMatches() as $match) {
