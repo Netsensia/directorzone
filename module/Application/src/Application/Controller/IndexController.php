@@ -61,17 +61,17 @@ class IndexController extends NetsensiaActionController
                 while (!$done) {
                     $request = $this->getServiceLocator()->get('NetsensiaCompanies\Request\NameSearchRequest');
                     
-                    echo $partialName . PHP_EOL;
-                    
+                    $pagesize = rand(10, 500);
+                    $pagecount = rand(0, 10);
+                    echo $partialName . ' ' . $pagesize . ' ' . $pagecount . PHP_EOL;
+
                     $nameSearchResults = $request->loadResults(
                         $partialName,
-                        rand(10, 500),
-                        rand(0, 10)
+                        $pagesize,
+                        $pagecount
                     );
 
-                    $previousNames = [];
                     foreach ($nameSearchResults->getMatches() as $match) {
-                        $previousNames[] = $match['name'];
                         if (!$companyService->isCompanyNumberTaken($match['number'])) {
                             $companyModel = $this->newModel('Company');
                             $companyModel->setData($match);
@@ -85,10 +85,7 @@ class IndexController extends NetsensiaActionController
                 }
             } catch (\Exception $e) {
                 echo PHP_EOL . "Exception: " . $e->getMessage() . PHP_EOL . PHP_EOL;
-                
-                unset($previousNames[count($previousNames)-1]);
-                $partialName = array_pop($previousNames);
-                
+
                 if ($partialName == null) {
                     echo "I give up." . PHP_EOL;
                     die;
