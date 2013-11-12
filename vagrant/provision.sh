@@ -48,7 +48,8 @@ dpkg -i elasticsearch-0.90.5.deb
 #############################################################
 # Import database
 #############################################################
-cd /var/www/directorzone/travis
+cd /home/vagrant
+wget https://dl.dropboxusercontent.com/u/63777076/VM/db_create.zip
 unzip db_create.zip
 mysql -uroot < db_create.sql
 rm db_create.sql
@@ -58,13 +59,4 @@ rm db_create.sql
 #############################################################
 rm /var/www/index.html
 service apache2 restart
-
-
-
-
-
-
-
-
-
 
