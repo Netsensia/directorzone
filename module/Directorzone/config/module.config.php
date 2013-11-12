@@ -56,6 +56,78 @@ return array(
                     ),
                 ),
             ),
+            'admin-people' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/admin/people',
+                    'defaults' => array(
+                        'controller' => 'Directorzone\Controller\Admin',
+                        'action'     => 'people',
+                    ),
+                ),
+            ),
+            'admin-users' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/admin/users',
+                    'defaults' => array(
+                        'controller' => 'Directorzone\Controller\Admin',
+                        'action'     => 'users',
+                    ),
+                ),
+            ),
+            'admin-publishing' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/admin/publishing',
+                    'defaults' => array(
+                        'controller' => 'Directorzone\Controller\Admin',
+                        'action'     => 'publishing',
+                    ),
+                ),
+            ),
+            'admin-data' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/admin/data',
+                    'defaults' => array(
+                        'controller' => 'Directorzone\Controller\Admin',
+                        'action'     => 'data',
+                    ),
+                ),
+            ),
+            'admin-membership' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/admin/membership',
+                    'defaults' => array(
+                        'controller' => 'Directorzone\Controller\Admin',
+                        'action'     => 'membership',
+                    ),
+                ),
+            ),
+            'admin-advertising' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/admin/advertising',
+                    'defaults' => array(
+                        'controller' => 'Directorzone\Controller\Admin',
+                        'action'     => 'advertising',
+                    ),
+                ),
+            ),
+            'admin-pages' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/admin/pages',
+                    'defaults' => array(
+                        'controller' => 'Directorzone\Controller\Admin',
+                        'action'     => 'pages',
+                    ),
+                ),
+            ),
+
+            
             'myaccount' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
