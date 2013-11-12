@@ -35,17 +35,6 @@ class IndexController extends NetsensiaActionController
                 
     }
     
-    public function countAction()
-    {
-        $companyService = $this->getServiceLocator()->get('CompanyService');
-        
-        $count = $companyService->count();
-    
-        return [
-            'count' => $count,
-        ];
-    }
-    
     public function ingestAction()
     {
         $previousNames = [];
@@ -53,6 +42,8 @@ class IndexController extends NetsensiaActionController
         while (true) {
             try {
                 $partialName = file_get_contents('lastname.txt');
+                
+                $partialName = preg_replace("/[^A-Za-z0-9 ]/", '', $partialName);
                 
                 $companyService = $this->getServiceLocator()->get('CompanyService');
                 
@@ -81,7 +72,7 @@ class IndexController extends NetsensiaActionController
                     }
                     file_put_contents('lastname.txt', $partialName);
                     
-                    sleep(5);
+                    //sleep(5);
                 }
             } catch (\Exception $e) {
                 echo PHP_EOL . "Exception: " . $e->getMessage() . PHP_EOL . PHP_EOL;
@@ -98,49 +89,8 @@ class IndexController extends NetsensiaActionController
         echo 'Done.' . PHP_EOL;
     }
     
-    public function addToDatabaseAction()
+    public function searchIndexAction()
     {
-        $partialName = $this->params('partialName');
-        
-        $companyService = $this->getServiceLocator()->get('CompanyService');
-    
-        if ($partialName == '') {
-            $partialName = $companyService->getMaxAlphabeticalCompanyName();
-        }
-    
-        $request = $this->getServiceLocator()->get('NetsensiaCompanies\Request\NameSearchRequest');
-        $nameSearchResults = $request->loadResults(
-            $partialName,
-            100
-        );
-    
-        foreach ($nameSearchResults->getMatches() as $match) {
-            if (!$companyService->isCompanyNumberTaken($match['number'])) {
-                $companyModel = $this->newModel('Company');
-                $companyModel->setData($match);
-                $companyModel->create();
-            }
-        }
-    
-        return [
-            'partialName' => $partialName,
-            'results' => $nameSearchResults->getMatches(),
-        ];
-    }
-    
-    public function companySearchAction()
-    {
-        $partialName = $this->params('partialName');
-
-        $request = $this->getServiceLocator()->get('NetsensiaCompanies\Request\NameSearchRequest');
-        $nameSearchResults = $request->loadResults(
-            $partialName,
-            100
-        );
-        
-        return [
-            'partialName' => $partialName,
-            'results' => $nameSearchResults->getMatches(),
-        ];
+        echo "done";
     }
 }

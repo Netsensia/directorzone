@@ -8,7 +8,9 @@ return array(
 			'Directorzone\Controller\Content' =>
                 'Directorzone\Controller\ContentController',
 			'Directorzone\Controller\Directory' =>
-                'Directorzone\Controller\DirectoryController',        		        		            
+                'Directorzone\Controller\DirectoryController',
+            'Directorzone\Controller\Admin' =>
+                'Directorzone\Controller\AdminController',        		        		            
         ),
     ),
     'router' => array(
@@ -34,6 +36,26 @@ return array(
                     ),
                 ),
             ),  
+            'admin' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/admin',
+                    'defaults' => array(
+                        'controller' => 'Directorzone\Controller\Admin',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
+            'admin-companies' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/admin/companies',
+                    'defaults' => array(
+                        'controller' => 'Directorzone\Controller\Admin',
+                        'action'     => 'companies',
+                    ),
+                ),
+            ),
             'myaccount' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(

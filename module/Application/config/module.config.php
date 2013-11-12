@@ -139,6 +139,15 @@ return array(
                         ),
                     ),
                 ),
+                'search-index' => array(
+                    'options' => array(
+                        'route'    => 'search-index',
+                        'defaults' => array(
+                            'controller' => 'Application\Controller\Index',
+                            'action'     => 'search-index',
+                        ),
+                    ),
+                ),
             ),
         ),
     ),    
