@@ -19,6 +19,7 @@ use Directorzone\Form\AccountDirectoryForm;
 use Elasticsearch\Client as ElasticClient;
 use Zend\Db\TableGateway\TableGateway;
 use \Zend\Mvc\Controller\ControllerManager;
+use Directorzone\Service\CompanyService;
 
 class Module
 {
@@ -38,7 +39,7 @@ class Module
                 'Directorzone\Controller\Admin' =>
                     function(ControllerManager $cm) {
                         return new \Directorzone\Controller\AdminController(
-                            $cm->getServiceLocator()->get('CompanyTableGateway')
+                            $cm->getServiceLocator()->get('CompanyService')
                         );
                     },
             ),
@@ -61,9 +62,8 @@ class Module
                     
                     return $instance;
                 },   
-                'CompanyTableGateway' => function ($sm) {
-                    $instance = new TableGateway(
-                        'company', 
+                'CompanyService' => function ($sm) {
+                    $instance = new CompanyService(
                         $sm->get('Zend\Db\Adapter\Adapter')
                     );
                     return $instance;

@@ -4,19 +4,16 @@ namespace Directorzone\Controller;
 
 use Netsensia\Controller\NetsensiaActionController;
 use Zend\Mvc\MvcEvent;
-use Zend\Db\TableGateway\TableGateway;
-use Zend\Db\Sql\Select;
-use Zend\Db\Sql\Expression;
+use Directorzone\Service\CompanyService;
 
 class AdminController extends NetsensiaActionController
 {
-    
-    private $companyTableGateway;
+    private $companyService;
     
     public function __construct(
-        TableGateway $companyTableGateway
+        CompanyService $companyService
     ) {
-        $this->companyTableGateway = $companyTableGateway;
+        $this->companyService = $companyService;
     }
    
 	public function onDispatch(MvcEvent $e) 
@@ -34,23 +31,29 @@ class AdminController extends NetsensiaActionController
     }
     
     public function companiesAction()
-    {
-        $rowset = $this->companyTableGateway->select(
-            function (Select $select) {
-                $select->columns(array('count' => new Expression('COUNT(*)')));
-            }
-        );
-        
-        foreach ($rowset as $row) {
-            $companiesHouseCount = number_format($row['count']);
-        }
-        
+    {        
         return [
             'filters' =>  [
-                'live' => ['name' => 'Live', 'count' => 3],
-                'pending' => ['name' => 'Pending', 'count' => 4],
-                'unmatched' => ['name' => 'Unmatched', 'count' => 6],
-                'companies-house' => ['name' => 'Companies House', 'count' => $companiesHouseCount],
+                'live' => 
+                    [
+                    'name' => 'Live', 
+                    'count' => $this->companyService->getLiveCount()
+                ],
+                'pending' => 
+                    [
+                    'name' => 'Pending', 
+                    'count' => $this->companyService->getPendingCount()
+                    ],
+                'unmatched' => 
+                    [
+                    'name' => 'Unmatched', 
+                    'count' => $this->companyService->getUnmatchedCount()
+                    ],
+                'companies-house' => 
+                    [
+                    'name' => 'Companies House', 
+                    'count' => $this->companyService->getCompaniesHouseCount()
+                    ],
             ]
        ];
     }
