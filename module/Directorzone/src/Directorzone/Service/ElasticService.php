@@ -28,6 +28,7 @@ class ElasticService extends NetsensiaService
         $limit = 1000;
         
         do {
+            
             $rowset = $this->companyTableGateway->select(
                 function (Select $select) use ($offset, $limit) {
                     $select->order('name ASC')->offset($offset)->limit($limit);
