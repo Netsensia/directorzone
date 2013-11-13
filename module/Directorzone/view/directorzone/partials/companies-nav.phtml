@@ -5,7 +5,7 @@
 
 foreach ($this->filters as $slug => $details) {
 ?>
-    <li class="<?php echo ($slug == 'live' ? 'active' : '') ?>">
+    <li id="<?php echo $slug; ?>" class="filter <?php echo ($slug == 'live' ? 'active' : '') ?>">
         <a href="#">
             <?php echo $details['name'] . ' <span class="badge pull-right">' . $details['count'] . '</span>'; ?>
         </a>
@@ -17,9 +17,39 @@ foreach ($this->filters as $slug => $details) {
 </ul>
 </div>
 <div class="col-md-8">
-<table class="table">
+
+<table id="companies" class="table">
 <tr><th>Number</th><th>Name</th><th>CEO</th><th>Sector</th></tr>
-<tr><td>Number</td><td>Name</td><td>CEO</td><td>Sector</td></tr>
 </table>
 
+<ul class="pager">
+  <li><a href="#">Previous</a></li>
+  <li><a href="#">Next</a></li>
+</ul>
+
 </div>
+
+<script>
+$(document).ready(function() {
+	
+	$(".filter").click(function() {
+		$(".filter").removeClass('active');
+		$(this).addClass('active');
+	});
+	
+	$.ajax({
+		url: "/ajax/company/search?page=1&size=5"
+	}).done(function(data) {
+		$.each(data.results, function(key, value) {
+    		$('table#companies tr:last').after(
+    			'<tr>' +
+    			'<td>' + value.number + '</td>' +
+    			'<td>' + value.name + '</td>' +
+    			'<td>' + value.ceo + '</td>' +
+    			'<td>' + value.sector + '</td>' +
+    			'</tr>'
+    	    );
+    	});
+	});
+});
+</script>
