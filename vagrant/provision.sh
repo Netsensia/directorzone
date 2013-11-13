@@ -53,6 +53,7 @@ wget https://dl.dropboxusercontent.com/u/63777076/VM/db_create.zip
 unzip db_create.zip
 mysql -uroot < db_create.sql
 rm db_create.sql
+rm db_create.zip
 
 #############################################################
 # Some clean up

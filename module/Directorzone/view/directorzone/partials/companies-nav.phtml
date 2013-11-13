@@ -1,11 +1,13 @@
-<ul class="nav nav-pills nav-stacked" style="max-width:200px">
+<div class="row">
+<div class="col-md-4">
+<ul class="nav nav-pills nav-stacked" style="max-width:250px;">
 <?php 
 
 foreach ($this->filters as $slug => $details) {
 ?>
     <li class="<?php echo ($slug == 'live' ? 'active' : '') ?>">
         <a href="#">
-            <?php echo $details['name'] . ' (' . $details['count'] . ')'; ?>
+            <?php echo $details['name'] . ' <span class="badge pull-right">' . $details['count'] . '</span>'; ?>
         </a>
     </li>
 <?php
@@ -13,3 +15,11 @@ foreach ($this->filters as $slug => $details) {
 
 ?>
 </ul>
+</div>
+<div class="col-md-8">
+<table class="table">
+<tr><th>Number</th><th>Name</th><th>CEO</th><th>Sector</th></tr>
+<tr><td>Number</td><td>Name</td><td>CEO</td><td>Sector</td></tr>
+</table>
+
+</div>
