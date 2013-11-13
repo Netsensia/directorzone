@@ -20,11 +20,11 @@ class AjaxController extends NetsensiaActionController
         $size = $this->params()->fromQuery('size', null);
         
         $start = ($page - 1) * $size + 1;
-        $end = $start + $size;
+        $end = $start + $size - 1;
         
         $companies = [
             'results' => [],
-            'total' => 100,	
+            'total' => 11,	
         ];
         
         for ($i=$start; $i<=$end; $i++) {

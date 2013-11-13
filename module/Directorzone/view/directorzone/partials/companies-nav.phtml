@@ -23,23 +23,54 @@ foreach ($this->filters as $slug => $details) {
 </table>
 
 <ul class="pager">
-  <li><a href="#">Previous</a></li>
-  <li><a href="#">Next</a></li>
+  <li id="previous" class="disabled"><a href="#">&larr; Previous</a></li>
+  <li id="next"><a href="#">Next &rarr;</a></li>
 </ul>
 
 </div>
 
 <script>
 $(document).ready(function() {
+	var page = 1;
+	var size = 5;
 	
 	$(".filter").click(function() {
 		$(".filter").removeClass('active');
 		$(this).addClass('active');
 	});
-	
+
+	$("li#next").click(function() {
+		page ++;
+		loadTable(page, size);
+	});
+
+	$("li#previous").click(function() {
+		page --;
+		loadTable(page, size);
+	});
+
+	loadTable(page, size);
+});
+
+function loadTable(page, size)
+{
 	$.ajax({
-		url: "/ajax/company/search?page=1&size=5"
+		url: "/ajax/company/search?page=" + page + "&size=" + size
 	}).done(function(data) {
+
+		$('table#companies').find("tr:gt(0)").remove();
+		
+		$('li#next').removeClass('disabled');
+		$('li#previous').removeClass('disabled');
+		
+		if (data.total <= page * size) {
+			$('li#next').addClass('disabled');
+		}
+
+		if (page == 1) {
+			$('li#previous').addClass('disabled');
+		}
+		
 		$.each(data.results, function(key, value) {
     		$('table#companies tr:last').after(
     			'<tr>' +
@@ -51,5 +82,5 @@ $(document).ready(function() {
     	    );
     	});
 	});
-});
+}
 </script>
