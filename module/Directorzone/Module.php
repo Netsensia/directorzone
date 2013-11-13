@@ -16,6 +16,9 @@ use Directorzone\Form\AccountProfileForm;
 use Directorzone\Form\AccountPersonalForm;
 use Directorzone\Form\AccountPublishForm;
 use Directorzone\Form\AccountDirectoryForm;
+use Elasticsearch\Client as ElasticClient;
+use Zend\Db\TableGateway\TableGateway;
+use \Zend\Mvc\Controller\ControllerManager;
 
 class Module
 {
@@ -28,13 +31,46 @@ class Module
         return include __DIR__ . '/config/module.config.php';
     }
     
+    public function getControllerConfig()
+    {
+        return array(
+            'factories' => array(
+                'Directorzone\Controller\Admin' =>
+                    function(ControllerManager $cm) {
+                        return new \Directorzone\Controller\AdminController(
+                            $cm->getServiceLocator()->get('CompanyTableGateway')
+                        );
+                    },
+            ),
+        );
+    }
+    
     public function getServiceConfig()
     {
         return array(
             'factories' => array(
-                'CompanyModel' => function (\Zend\ServiceManager\ServiceLocatorInterface $sl) {
+                'ElasticService' => function ($sm) {
+                    $elasticClient = new ElasticClient();
+
+                    $companyTableGateway = $sm->get('CompanyTableGateway');
+                    
+                    $instance = new \Directorzone\Service\ElasticService(
+            	        $elasticClient,
+                        $companyTableGateway
+                    );
+                    
+                    return $instance;
+                },   
+                'CompanyTableGateway' => function ($sm) {
+                    $instance = new TableGateway(
+                        'company', 
+                        $sm->get('Zend\Db\Adapter\Adapter')
+                    );
+                    return $instance;
+                },
+                'CompanyModel' => function ($sm) {
                     $instance = new \Directorzone\Model\Company();
-                    $instance->setServiceLocator($sl);
+                    $instance->setServiceLocator($sm);
                     return $instance;
                 },
                 'AccountAccountForm' => function($sm) {

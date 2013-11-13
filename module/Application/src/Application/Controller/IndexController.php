@@ -91,6 +91,7 @@ class IndexController extends NetsensiaActionController
     
     public function searchIndexAction()
     {
-        echo "done";
+        $elasticService = $this->getServiceLocator()->get('ElasticService');
+        $elasticService->indexCompanies();
     }
 }

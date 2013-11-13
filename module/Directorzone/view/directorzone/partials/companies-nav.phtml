@@ -1,0 +1,15 @@
+<ul class="nav nav-pills nav-stacked" style="max-width:200px">
+<?php 
+
+foreach ($this->filters as $slug => $details) {
+?>
+    <li class="<?php echo ($slug == 'live' ? 'active' : '') ?>">
+        <a href="#">
+            <?php echo $details['name'] . ' (' . $details['count'] . ')'; ?>
+        </a>
+    </li>
+<?php
+}
+
+?>
+</ul>

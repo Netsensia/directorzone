@@ -9,13 +9,43 @@ return array(
                 'Directorzone\Controller\ContentController',
 			'Directorzone\Controller\Directory' =>
                 'Directorzone\Controller\DirectoryController',
-            'Directorzone\Controller\Admin' =>
-                'Directorzone\Controller\AdminController',        		        		            
+            'Directorzone\Controller\Ajax' =>
+                'Directorzone\Controller\AjaxController',
         ),
     ),
     'router' => array(
         'routes' => array(
-            
+            'ajax' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/ajax',
+                    'defaults' => array(
+                        'controller' => 'Directorzone\Controller\Ajax',
+                    ),
+                ),
+                'may_terminate' => false,
+                'child_routes' => array(
+                    'company' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/company',
+                        ),
+                        'may_terminate' => false,
+                        'child_routes' => array(
+                            'search' => array(
+                                'type' => 'literal',
+                                'options' => array(
+                                    'route' => '/search',
+                                    'defaults' => array(
+                                        'action' => 'company-search',
+                                    ),
+                                )
+                            )
+                        )
+                    )
+                )
+
+            ),
         	'content' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
@@ -126,8 +156,6 @@ return array(
                     ),
                 ),
             ),
-
-            
             'myaccount' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(

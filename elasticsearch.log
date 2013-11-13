@@ -1,0 +1,1 @@
+[2013-11-13 10:35:10] log.ERROR: Curl error: [curl] 7: Failed connect to localhost:9200; Connection refused [url] http://localhost:9200 [] {"file":"/Users/chris/git/directorzone/vendor/elasticsearch/elasticsearch/src/Elasticsearch/Connections/GuzzleConnection.php","line":253,"class":"Elasticsearch\\Connections\\GuzzleConnection","function":"processCurlError"}
