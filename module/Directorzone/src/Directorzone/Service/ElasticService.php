@@ -24,34 +24,53 @@ class ElasticService extends NetsensiaService
     {
         $this->client->indices()->delete(array(array('index' => 'companies')));
         
-        $offset = 0;
-        $limit = 1000;
+        $limit = 5000;
+        $lastCompanyId = -1;
         
+        $count = 0;
         do {
             
             $rowset = $this->companyTableGateway->select(
-                function (Select $select) use ($offset, $limit) {
-                    $select->order('name ASC')->offset($offset)->limit($limit);
+                function (Select $select) use ($limit, $lastCompanyId) {
+                    $select->order('companyid ASC')->limit($limit)->where->greaterThan('companyid', $lastCompanyId);
                 }
             );
             
             $found = false;
                 
+            $body = '';
+            //$body = [];
+            
             foreach ($rowset as $row) {
+                $count ++;
+                
                 $found = true;
                 
-                $document = array(
-                    'index' => 'companies',
-                    'type'  => 'company',
-                    'id'    => $row['companyid'],
-                    'body'  => (array)$row
-                );
+                $row['_id'] = $row['companyid'];
                 
-                $this->client->index($document);
+                $body .= 
+                    '{ "index" : { "_index" : "companies", "_type" : "company", "_id" : "' . $row['companyid'] . '" } }' . PHP_EOL .
+                    json_encode($row) . PHP_EOL;
+                //$body[] = (array)$row;
+                
+                $lastCompanyId = $row['companyid'];
+
             }
-            echo $row['name'] . PHP_EOL;
             
-            $offset += $limit;
+            $document = array(
+                'index' => 'companies',
+                'type'  => 'company',
+                'body'  => $body
+            );
+            
+            $result = $this->client->bulk($document);
+            
+            if (isset($result['error'])) {
+                var_dump($result); die;
+            }
+            
+            echo $count . ' | ' . $row['name'] . PHP_EOL;
+            
         } while ($found);
 
     }
