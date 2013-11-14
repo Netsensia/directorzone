@@ -61,7 +61,15 @@ class Module
                     );
                     
                     return $instance;
-                },   
+                },
+                'CompanyTableGateway' => function ($sm) {
+                    
+                    $instance = new TableGateway(
+                        'company',
+                        $sm->get('Zend\Db\Adapter\Adapter')
+                    );
+                    return $instance;
+                },
                 'CompanyService' => function ($sm) {
                     $instance = new CompanyService(
                         $sm->get('Zend\Db\Adapter\Adapter')
