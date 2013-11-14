@@ -50,7 +50,12 @@ class CompanyService extends NetsensiaService
         
         $rowset = $tableGateway->select(
             function (Select $select) use ($status) {
-                $select->where(['status' => $status])->columns(array('count' => new Expression('COUNT(*)')));
+                $select->where(
+                            ['recordstatus' => $status]
+                         )
+                       ->columns(
+                            ['count' => new Expression('COUNT(*)')]
+                         );
             }
         );
         
@@ -69,6 +74,21 @@ class CompanyService extends NetsensiaService
     public function getUnmatchedCount()
     {
         return $this->getStatusCount('companyupload', 'U');
+    }
+    
+    public function getUnprocessedCount()
+    {
+        return $this->getStatusCount('companyupload', 'W');
+    }
+    
+    public function getConflictsCount()
+    {
+        return $this->getStatusCount('companyupload', 'C');
+    }
+    
+    public function getRemovedCount()
+    {
+        return $this->getStatusCount('company', 'R');
     }
     
     public function isCompanyNumberTaken($companyNumber)

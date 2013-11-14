@@ -70,10 +70,12 @@ textarea {
   border-top: 1px solid #e5e5e5;
   background-color: #f5f5f5;
 }
+
 #footer p {
   margin-bottom: 0;
   color: #777;
 }
+
 .footer-links {
   margin: 10px 0;
 }
@@ -109,6 +111,10 @@ div.featurelist li {
 
 .input-group .form-control {
 	width:275px;
+}
+
+div.fileinput .input-group .form-control {
+	width:100%;
 }
 
 .input-group textarea.form-control  {

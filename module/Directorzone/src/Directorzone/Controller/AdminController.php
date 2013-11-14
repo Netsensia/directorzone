@@ -49,6 +49,21 @@ class AdminController extends NetsensiaActionController
                     'name' => 'Unmatched', 
                     'count' => $this->companyService->getUnmatchedCount()
                     ],
+                'conflicts' =>
+                    [
+                    'name' => 'Conflicts',
+                    'count' => $this->companyService->getConflictsCount()
+                    ],
+                'removed' =>
+                    [
+                    'name' => 'Removed',
+                    'count' => $this->companyService->getRemovedCount()
+                    ],
+                'unprocessed' =>
+                    [
+                    'name' => 'Unprocessed',
+                    'count' => $this->companyService->getUnprocessedCount()
+                    ],
                 'companies-house' => 
                     [
                     'name' => 'Companies House', 
