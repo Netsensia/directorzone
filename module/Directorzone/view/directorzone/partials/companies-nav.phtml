@@ -24,9 +24,15 @@ foreach ($this->filters as $slug => $details) {
 <div class="fileinput fileinput-new" data-provides="fileinput"><input type="hidden">
         <div class="input-group">
           <div class="form-control uneditable-input span3" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
-          <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span><input type="file"></span>
-          <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
-        </div>
+          <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists" style="color:#aaa">Uploading...</span>
+          <input id="fileupload" type="file" name="files[]" data-url="/admin/upload/companies" multiple>
+          </span>
+         </div>
+</div>
+<div id="progress">
+    <div class="bar" style="background-color:#888888">
+        &nbsp;
+    </div>
 </div>
         
 <table id="companies" class="table">
@@ -40,8 +46,33 @@ foreach ($this->filters as $slug => $details) {
 
 </div>
 
+<script src="/js/jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="/js/jquery-file-upload/js/jquery.iframe-transport.js"></script>
+<script src="/js/jquery-file-upload/js/jquery.fileupload.js"></script>
+                                  
 <script>
+
+
 $(document).ready(function() {
+
+	$('#fileupload').fileupload({
+		url: '/admin/upload/companies',
+		autoUpload: true,
+        dataType: 'json',
+        done: function (e, data) {
+            $.each(data.result.files, function (index, file) {
+                $('<p/>').text(file.name).appendTo(document.body);
+            });
+        },
+        progressall: function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('#progress .bar').css(
+                'width',
+                progress + '%'
+            );
+        },
+    });
+
 	var page = 1;
 	var size = 10;
 	

@@ -5,6 +5,7 @@ namespace Directorzone\Controller;
 use Netsensia\Controller\NetsensiaActionController;
 use Zend\Mvc\MvcEvent;
 use Directorzone\Service\CompanyService;
+use Zend\View\Model\JsonModel;
 
 class AdminController extends NetsensiaActionController
 {
@@ -28,6 +29,22 @@ class AdminController extends NetsensiaActionController
     public function indexAction()
     {
         $this->redirect()->toRoute('admin-companies');
+    }
+    
+    public function uploadCompaniesAction()
+    {
+        return new JsonModel(
+            [
+                'result' => 
+                [
+                    'files' => 
+                    [
+	                    1 => ['name' => 'Bungo'],
+                        2 => ['name' => 'Bongo'],
+                    ]
+                ]
+            ]
+        );
     }
     
     public function companiesAction()

@@ -15,6 +15,37 @@ return array(
     ),
     'router' => array(
         'routes' => array(
+            'admin' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/admin',
+                    'defaults' => array(
+                        'controller' => 'Directorzone\Controller\Admin',
+                        'action'     => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'admin-upload' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'options' => array(
+                            'route' => '/upload',
+                        ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'asdasdasdas' => array(
+                                'type' => 'Zend\Mvc\Router\Http\Literal',
+                                'options' => array(
+                                    'route' => '/companies',
+                                    'defaults' => array(
+                                        'action' => 'upload-companies',
+                                    ),
+                                ),
+                            )
+                        )
+                    )
+                )
+            ),
             'ajax' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
@@ -66,16 +97,7 @@ return array(
                     ),
                 ),
             ),  
-            'admin' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route'    => '/admin',
-                    'defaults' => array(
-                        'controller' => 'Directorzone\Controller\Admin',
-                        'action'     => 'index',
-                    ),
-                ),
-            ),
+            
             'admin-companies' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
