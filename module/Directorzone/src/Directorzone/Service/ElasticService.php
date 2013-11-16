@@ -39,7 +39,6 @@ class ElasticService extends NetsensiaService
             $found = false;
                 
             $body = '';
-            //$body = [];
             
             foreach ($rowset as $row) {
                 $count ++;
@@ -51,25 +50,25 @@ class ElasticService extends NetsensiaService
                 $body .= 
                     '{ "index" : { "_index" : "companies", "_type" : "company", "_id" : "' . $row['companyid'] . '" } }' . PHP_EOL .
                     json_encode($row) . PHP_EOL;
-                //$body[] = (array)$row;
                 
                 $lastCompanyId = $row['companyid'];
-
             }
             
-            $document = array(
-                'index' => 'companies',
-                'type'  => 'company',
-                'body'  => $body
-            );
-            
-            $result = $this->client->bulk($document);
-            
-            if (isset($result['error'])) {
-                var_dump($result); die;
+            if ($body != '') {
+                $document = array(
+                    'index' => 'companies',
+                    'type'  => 'company',
+                    'body'  => $body
+                );
+                
+                $result = $this->client->bulk($document);
+                
+                if (isset($result['error'])) {
+                    var_dump($result); die;
+                }
+                
+                echo $count . ' | ' . $row['name'] . PHP_EOL;
             }
-            
-            echo $count . ' | ' . $row['name'] . PHP_EOL;
             
         } while ($found);
 

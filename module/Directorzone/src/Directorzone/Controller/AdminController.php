@@ -33,18 +33,27 @@ class AdminController extends NetsensiaActionController
     
     public function uploadCompaniesAction()
     {
-        return new JsonModel(
-            [
-                'result' => 
-                [
-                    'files' => 
-                    [
-	                    1 => ['name' => 'Bungo'],
-                        2 => ['name' => 'Bongo'],
-                    ]
-                ]
+        $files = [
+	       'files' => [
+	             [ 
+	                "name" => "picture1.jpg",
+                    "size" => 902604,
+                    "url" => "http:\/\/example.org\/files\/picture1.jpg",
+                    "thumbnailUrl" => "http:\/\/example.org\/files\/thumbnail\/picture1.jpg",
+                    "deleteUrl" => "http:\/\/example.org\/files\/picture1.jpg",
+                    "deleteType" => "DELETE"
+                 ],
+                 [
+                    "name" => "picture1.jpg",
+                    "size" => 902604,
+                    "url" => "http:\/\/example.org\/files\/picture1.jpg",
+                    "thumbnailUrl" => "http:\/\/example.org\/files\/thumbnail\/picture1.jpg",
+                    "deleteUrl" => "http:\/\/example.org\/files\/picture1.jpg",
+                    "deleteType" => "DELETE"
+                 ],
             ]
-        );
+        ];
+        return new JsonModel($files);
     }
     
     public function companiesAction()

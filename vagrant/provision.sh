@@ -55,6 +55,8 @@ mysql -uroot < db_create.sql
 rm db_create.sql
 rm db_create.zip
 
+php /var/www/directorzone/public/index.php search-index
+
 #############################################################
 # Some clean up
 #############################################################
