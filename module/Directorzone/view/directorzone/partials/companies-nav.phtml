@@ -65,7 +65,11 @@ $(document).ready(function() {
                     'none'
             );
             $.each(data.result.files, function (index, file) {
-            	alert(file.name);
+                if (file.error) {
+             	   alert('ERROR: ' + file.error);
+                } else {
+                   alert('SUCCESS: ' + file.name);
+                }
             });
         },
         progressall: function (e, data) {

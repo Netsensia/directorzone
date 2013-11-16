@@ -6,6 +6,7 @@ use Netsensia\Controller\NetsensiaActionController;
 use Zend\Mvc\MvcEvent;
 use Directorzone\Service\CompanyService;
 use Zend\View\Model\JsonModel;
+use Zend\Validator\File\Size;
 
 class AdminController extends NetsensiaActionController
 {
@@ -33,26 +34,29 @@ class AdminController extends NetsensiaActionController
     
     public function uploadCompaniesAction()
     {
-        $files = [
-	       'files' => [
-	             [ 
-	                "name" => "picture1.jpg",
-                    "size" => 902604,
-                    "url" => "http:\/\/example.org\/files\/picture1.jpg",
-                    "thumbnailUrl" => "http:\/\/example.org\/files\/thumbnail\/picture1.jpg",
-                    "deleteUrl" => "http:\/\/example.org\/files\/picture1.jpg",
-                    "deleteType" => "DELETE"
-                 ],
-                 [
-                    "name" => "picture1.jpg",
-                    "size" => 902604,
-                    "url" => "http:\/\/example.org\/files\/picture1.jpg",
-                    "thumbnailUrl" => "http:\/\/example.org\/files\/thumbnail\/picture1.jpg",
-                    "deleteUrl" => "http:\/\/example.org\/files\/picture1.jpg",
-                    "deleteType" => "DELETE"
-                 ],
-            ]
-        ];
+        $files = ['files' => []];
+        
+        $file = $this->params()->fromFiles('fileupload');
+        
+        $size = new Size(array('min'=>2000000)); //minimum bytes filesize
+         
+        $adapter = new \Zend\File\Transfer\Adapter\Http();
+        $adapter->setValidators(array($size), $file['name']);
+        
+        if (!$adapter->isValid()){
+            $dataError = $adapter->getMessages();
+            $error = array();
+            foreach($dataError as $key=>$row)
+            {
+                $files['files'][] = ['name' => $row, 'error' => $row];
+            }
+        } else {
+            $adapter->setDestination(dirname(__DIR__) . '/assets/admin/upload/companies');
+            if ($adapter->receive($file['name'])) {
+                $files['files'][] = ['name' => $file['name']];
+            }
+        }
+        
         return new JsonModel($files);
     }
     
