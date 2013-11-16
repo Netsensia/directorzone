@@ -1,1 +1,8 @@
-hello
+Array
+(
+    [name] => build.xml
+    [type] => text/xml
+    [tmp_name] => /tmp/phpNmQZW9
+    [error] => 0
+    [size] => 3893
+)

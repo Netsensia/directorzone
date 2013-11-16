@@ -7,6 +7,7 @@ use Zend\Mvc\MvcEvent;
 use Directorzone\Service\CompanyService;
 use Zend\View\Model\JsonModel;
 use Zend\Validator\File\Size;
+use Zend\Form\Form;
 
 class AdminController extends NetsensiaActionController
 {
@@ -34,30 +35,16 @@ class AdminController extends NetsensiaActionController
     
     public function uploadCompaniesAction()
     {
-        $files = ['files' => []];
+        $returnArray = [];
         
-        $file = $this->params()->fromFiles('fileupload');
-        
-        $size = new Size(array('min'=>2000000)); //minimum bytes filesize
-         
-        $adapter = new \Zend\File\Transfer\Adapter\Http();
-        $adapter->setValidators(array($size), $file['name']);
-        
-        if (!$adapter->isValid()){
-            $dataError = $adapter->getMessages();
-            $error = array();
-            foreach($dataError as $key=>$row)
-            {
-                $files['files'][] = ['name' => $row, 'error' => $row];
-            }
-        } else {
-            $adapter->setDestination(dirname(__DIR__) . '/assets/admin/upload/companies');
-            if ($adapter->receive($file['name'])) {
-                $files['files'][] = ['name' => $file['name']];
-            }
+        $files = $this->getRequest()->getFiles()->toArray();
+                
+        foreach ($files as $file) {
+            $filename = $file[0]['tmp_name'];
+            $returnArray['files'][] = ['name' => $filename];
         }
         
-        return new JsonModel($files);
+        return new JsonModel($returnArray);
     }
     
     public function companiesAction()
