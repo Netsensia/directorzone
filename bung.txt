@@ -1,8 +1,20 @@
-Array
+Zend\Stdlib\Parameters Object
 (
-    [name] => build.xml
-    [type] => text/xml
-    [tmp_name] => /tmp/phpNmQZW9
-    [error] => 0
-    [size] => 3893
+    [storage:ArrayObject:private] => Array
+        (
+            [files] => Array
+                (
+                    [0] => Array
+                        (
+                            [name] => q2.lop
+                            [type] => application/octet-stream
+                            [tmp_name] => /tmp/phpziCBd1
+                            [error] => 0
+                            [size] => 64089
+                        )
+
+                )
+
+        )
+
 )

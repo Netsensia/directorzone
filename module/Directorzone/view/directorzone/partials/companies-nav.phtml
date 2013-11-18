@@ -67,8 +67,6 @@ $(document).ready(function() {
             $.each(data.result.files, function (index, file) {
                 if (file.error) {
              	   alert('ERROR: ' + file.error);
-                } else {
-                   alert('SUCCESS: ' + file.name);
                 }
             });
         },

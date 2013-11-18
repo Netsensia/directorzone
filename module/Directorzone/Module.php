@@ -20,6 +20,7 @@ use Elasticsearch\Client as ElasticClient;
 use Zend\Db\TableGateway\TableGateway;
 use \Zend\Mvc\Controller\ControllerManager;
 use Directorzone\Service\CompanyService;
+use Directorzone\Service\Admin\CompanyUploadService;
 
 class Module
 {
@@ -72,6 +73,12 @@ class Module
                 },
                 'CompanyService' => function ($sm) {
                     $instance = new CompanyService(
+                        $sm->get('Zend\Db\Adapter\Adapter')
+                    );
+                    return $instance;
+                },
+                'CompanyUploadService' => function ($sm) {
+                    $instance = new CompanyUploadService(
                         $sm->get('Zend\Db\Adapter\Adapter')
                     );
                     return $instance;

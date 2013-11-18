@@ -35,13 +35,22 @@ class AdminController extends NetsensiaActionController
     
     public function uploadCompaniesAction()
     {
+        $companyUploadService = $this->getServiceLocator()->get('CompanyUploadService');
         $returnArray = [];
         
-        $files = $this->getRequest()->getFiles()->toArray();
-                
+        $filter = new \Zend\Filter\File\RenameUpload('./assets/admin/upload/companies/');
+        $filter->setUseUploadName(true);
+        
+        $files = $this->getRequest()->getFiles();
+        file_put_contents('bung.txt', print_r($files, true));
+                        
         foreach ($files as $file) {
-            $filename = $file[0]['tmp_name'];
-            $returnArray['files'][] = ['name' => $filename];
+            try {
+                $fileDetails = $filter->filter($file[0], true);
+                $companyUploadService->ingest($fileDetails['tmp_name']);
+            } catch (\Exception $e) {
+                $returnArray['files'][] = ['error' => $e->getMessage()];
+            }
         }
         
         return new JsonModel($returnArray);
