@@ -71,6 +71,14 @@ class Module
                     );
                     return $instance;
                 },
+                'CompanyUploadTableGateway' => function ($sm) {
+                
+                    $instance = new TableGateway(
+                        'companyupload',
+                        $sm->get('Zend\Db\Adapter\Adapter')
+                    );
+                    return $instance;
+                },
                 'CompanyService' => function ($sm) {
                     $instance = new CompanyService(
                         $sm->get('Zend\Db\Adapter\Adapter')
@@ -79,7 +87,7 @@ class Module
                 },
                 'CompanyUploadService' => function ($sm) {
                     $instance = new CompanyUploadService(
-                        $sm->get('Zend\Db\Adapter\Adapter')
+                        $sm->get('CompanyUploadTableGateway')
                     );
                     return $instance;
                 },

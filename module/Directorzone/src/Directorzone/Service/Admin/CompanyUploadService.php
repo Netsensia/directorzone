@@ -8,19 +8,13 @@ use Zend\Db\Sql\Select;
 
 class CompanyUploadService extends NetsensiaService
 {
-    private $dbAdapter;
-    
+
     private $companyUploadTableGateway;
     
     public function __construct(
-        Adapter $adapter
+        TableGateway $companyUploadTableGateway
     ) {
-        $this->dbAdapter = $adapter;
-        
-        $this->companyUploadTableGateway = new TableGateway(
-            'companyupload',
-            $this->dbAdapter
-        );
+        $this->companyUploadTableGateway = $companyUploadTableGateway;
     }
 
     public function ingest($filename)
@@ -34,6 +28,8 @@ class CompanyUploadService extends NetsensiaService
         }
         
         $this->addCompaniesToUploadTable($companies);
+        
+        return $companies;
     }
     
     private function parseCompaniesUploadCsv(
@@ -66,8 +62,8 @@ class CompanyUploadService extends NetsensiaService
                     );
                 }
         
-                $array = str_getcsv($array);
-        
+                $array = str_getcsv($line);
+                
                 if (count($array) < 2) {
                     throw new \InvalidArgumentException(
                         'CSV file expects at least two ' .
@@ -79,7 +75,7 @@ class CompanyUploadService extends NetsensiaService
                 $companyName = $array[1];
         
                 $resultSet = $this->companyUploadTableGateway->select(
-                    function (Select $select) {
+                    function (Select $select) use ($companyName, $companyNumber) {
                         $select->where->equalTo('companynumber', $companyNumber);
                         $select->where->OR->equalTo('name', $companyName);
                     }
