@@ -1,5 +1,5 @@
 <?php
-namespace Tests\Application\Controller;
+namespace ApplicationTest\Controller;
 
 use PHPUnit_Framework_TestCase;
 use Application\Controller\IndexController;

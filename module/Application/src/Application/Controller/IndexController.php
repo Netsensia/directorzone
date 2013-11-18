@@ -71,8 +71,7 @@ class IndexController extends NetsensiaActionController
                         $partialName = $match['name'];
                     }
                     file_put_contents('lastname.txt', $partialName);
-                    
-                    //sleep(5);
+
                 }
             } catch (\Exception $e) {
                 echo PHP_EOL . "Exception: " . $e->getMessage() . PHP_EOL . PHP_EOL;

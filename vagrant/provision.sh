@@ -36,6 +36,7 @@ sh -c 'echo "ServerName 127.0.0.1" >> /etc/apache2/apache2.conf'
 sed -i 's/display_errors = Off/display_errors = On/g' /etc/php5/apache2/php.ini
 sed -i 's/;date.timezone =/date.timezone = Europe\/London/g' /etc/php5/apache2/php.ini
 sed -i 's/;date.timezone =/date.timezone = Europe\/London/g' /etc/php5/cli/php.ini
+sed -i 's/disable_functions/;disable_functions/g' /etc/php5/cli/php.ini
 
 #############################################################
 # Install Elastic Search
@@ -62,4 +63,22 @@ php /var/www/directorzone/public/index.php search-index
 #############################################################
 rm /var/www/index.html
 service apache2 restart
+
+#############################################################
+# Install developer tools
+#############################################################
+apt-get -y install ant php-pear phpunit php5-xsl php5-dev openjdk-7-jdk
+pear channel-discover pear.phpqatools.org
+pear config-set auto_discover 1
+pear install pear.phpunit.de/phploc
+pear channel-discover pear.pdepend.org
+pear channel-discover pear.phpmd.org
+#pear install --alldeps phpmd/PHP_PMD
+pear install pear.phpunit.de/PHP_Timer
+pear install pear.phpunit.de/phpcpd
+pear install --alldeps phpqatools/PHP_CodeBrowser
+pear install --force --alldeps pear.phpunit.de/PHP_CodeCoverage
+pear install --force --alldeps pear.phpunit.de/PHPUnit_MockObject
+pear install pear.phpunit.de/phpdcd-0.9.3
+pear upgrade-all
 

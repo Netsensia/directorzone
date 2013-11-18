@@ -20,6 +20,8 @@
 		"blueimp/jquery-file-upload": "9.2.1"
 	},
 	"require-dev" : {
+		"mockery/mockery" : "0.8.0",
+		"phpdocumentor/phpdocumentor" : "2.*",
 		"phpunit/phpunit" : "3.7.*",
 		"behat/mink-selenium2-driver" : "*",
 		"behat/behat" : "2.4.*@stable",
