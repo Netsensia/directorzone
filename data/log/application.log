@@ -96,3 +96,14 @@
     ),
   ),
 )
+2013-11-19T18:02:34+00:00 INFO (6): FirePHP logging enabled
+2013-11-19T18:02:34+00:00 INFO (6): array (
+  'files' => 
+  array (
+    0 => 
+    array (
+      'name' => 'Telegraph 1000_Sept 2011.csv',
+      'error' => 'No new companies found to upload',
+    ),
+  ),
+)

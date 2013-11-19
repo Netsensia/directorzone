@@ -9,8 +9,6 @@ return array(
                 'Directorzone\Controller\ContentController',
 			'Directorzone\Controller\Directory' =>
                 'Directorzone\Controller\DirectoryController',
-            'Directorzone\Controller\Ajax' =>
-                'Directorzone\Controller\AjaxController',
         ),
     ),
     'router' => array(
@@ -51,7 +49,7 @@ return array(
                 'options' => array(
                     'route'    => '/ajax',
                     'defaults' => array(
-                        'controller' => 'Directorzone\Controller\Ajax',
+                        'controller' => 'Directorzone\Controller\CompanyAjax',
                     ),
                 ),
                 'may_terminate' => false,

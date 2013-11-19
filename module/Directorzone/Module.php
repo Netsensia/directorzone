@@ -43,6 +43,12 @@ class Module
                             $cm->getServiceLocator()->get('CompanyService')
                         );
                     },
+                'Directorzone\Controller\CompanyAjax' =>
+                    function(ControllerManager $cm) {
+                        return new \Directorzone\Controller\CompanyAjaxController(
+                            $cm->getServiceLocator()->get('CompanyService')
+                        );
+                    },                    
             ),
         );
     }

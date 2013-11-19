@@ -56,7 +56,7 @@ class CompanyService extends NetsensiaService
         return $rowset->current()['count'];    
     }
     
-    public function getUploadStatusCount($status)
+    private function getUploadStatusCount($status)
     {        
         $rowset = $this->companyUploadTable->select(
             function (Select $select) use ($status) {
@@ -72,7 +72,7 @@ class CompanyService extends NetsensiaService
         return number_format($rowset->current()['count']);    
     }
     
-    public function getDirectoryStatusCount($status)
+    private function getDirectoryStatusCount($status)
     {
         $rowset = $this->companyDirectoryTable->select(
             function (Select $select) use ($status) {
@@ -86,6 +86,30 @@ class CompanyService extends NetsensiaService
         );
     
         return number_format($rowset->current()['count']);
+    }
+    
+    private function getUploadedCompaniesFromStatus($status, $start, $end)
+    {
+        $rowset = $this->companyUploadTable->select(
+            function (Select $select) use ($status, $start, $end) {
+                $select->where(
+                    ['recordstatus' => $status]
+                )
+                ->columns(
+                    ['companynumber', 'name']
+                )
+                ->offset($start - 1)
+                ->limit( 1 + ($end - $start) )
+                ->order('name ASC');
+            }
+        );
+
+        return $rowset->toArray();
+    }
+    
+    public function getPendingCompanies($start, $end)
+    {
+        return $this->getUploadedCompaniesFromStatus('P', $start, $end);
     }
     
     public function getPendingCount()
