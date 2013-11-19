@@ -9,46 +9,56 @@ use Zend\Db\Sql\Expression;
 
 class CompanyService extends NetsensiaService
 {
-    private $dbAdapter;
+    /**
+     * @var TableGateway
+     */
+    private $companyUploadTable;
+    
+    /**
+     * @var TableGateway
+     */
+    private $companiesHouseTable;
+    
+    /**
+     * @var TableGateway
+     */
+    private $companyDirectoryTable;
     
     public function __construct(
-        Adapter $adapter
+        TableGateway $companyUpload,
+        TableGateway $companiesHouse,
+        TableGateway $companyDirectory
     ) {
-        $this->dbAdapter = $adapter;    
+        $this->companyUploadTable = $companyUpload;
+        $this->companiesHouseTable = $companiesHouse;
+        $this->companyDirectoryTable = $companyDirectory; 
     }
     
-    private function count($table)
+    public function getCompaniesHouseCount()
     {
-        $tableGateway = new TableGateway($table, $this->dbAdapter);
-        
-        $rowset = $tableGateway->select(
+        $rowset = $this->companiesHouseTable->select(
             function (Select $select) {
                 $select->columns(array('count' => new Expression('COUNT(*)')));
             }
         );
         
-        foreach ($rowset as $row) {
-            $count = number_format($row['count']);
-        }
-        
-        return $count;
-    }
-    
-    public function getCompaniesHouseCount()
-    {
-        return $this->count('company');    
+        return number_format($rowset->current()['count']);
     }
     
     public function getLiveCount()
     {
-        return $this->count('companydirectory');
+        $rowset = $this->companyDirectoryTable->select(
+            function (Select $select) {
+                $select->columns(array('count' => new Expression('COUNT(*)')));
+            }
+        );
+        
+        return $rowset->current()['count'];    
     }
     
-    public function getStatusCount($table, $status)
-    {
-        $tableGateway = new TableGateway($table, $this->dbAdapter);
-        
-        $rowset = $tableGateway->select(
+    public function getUploadStatusCount($status)
+    {        
+        $rowset = $this->companyUploadTable->select(
             function (Select $select) use ($status) {
                 $select->where(
                             ['recordstatus' => $status]
@@ -59,53 +69,63 @@ class CompanyService extends NetsensiaService
             }
         );
         
-        foreach ($rowset as $row) {
-            $count = number_format($row['count']);
-        }
-        
-        return $count;    
+        return number_format($rowset->current()['count']);    
+    }
+    
+    public function getDirectoryStatusCount($status)
+    {
+        $rowset = $this->companyDirectoryTable->select(
+            function (Select $select) use ($status) {
+                $select->where(
+                    ['recordstatus' => $status]
+                )
+                ->columns(
+                    ['count' => new Expression('COUNT(*)')]
+                );
+            }
+        );
+    
+        return number_format($rowset->current()['count']);
     }
     
     public function getPendingCount()
     {
-        return $this->getStatusCount('companyupload', 'P');
+        return $this->getUploadStatusCount('P');
     }
     
     public function getUnmatchedCount()
     {
-        return $this->getStatusCount('companyupload', 'U');
+        return $this->getUploadStatusCount('U');
     }
     
     public function getUnprocessedCount()
     {
-        return $this->getStatusCount('companyupload', 'W');
+        return $this->getUploadStatusCount('W');
     }
     
     public function getConflictsCount()
     {
-        return $this->getStatusCount('companyupload', 'C');
+        return $this->getUploadStatusCount('C');
     }
     
     public function getRemovedCount()
     {
-        return $this->getStatusCount('company', 'R');
+        return $this->getDirectoryStatusCount('R');
     }
     
     public function isCompanyNumberTaken($companyNumber)
     {
-        $sql =
-            "SELECT companyid " .
-            "FROM company " .
-            "WHERE number = :number";
-    
-        $query = $this->getConnection()->prepare($sql);
-    
-        $query->execute(
-            array(
-                ':number' => $companyNumber,
-            )
+        $rowset = $this->companyDirectoryTable->select(
+            function (Select $select) {
+                $select->where(
+                    ['number' => $companyNumber]
+                )
+                ->columns(
+                    ['count' => new Expression('COUNT(*)')]
+                );
+            }
         );
     
-        return ($query->rowCount() == 1);
+        return $rowset->current()['count'] == 1;
     }
 }

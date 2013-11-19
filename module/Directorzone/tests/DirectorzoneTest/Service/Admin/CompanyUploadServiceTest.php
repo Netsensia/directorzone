@@ -47,7 +47,7 @@ class CompanyUploadServiceTest extends NetsensiaTest
     
     public function testAcceptsOneLineFile()
     {
-        $contents = 'number,name';
+        $contents = 'name,number';
     
         file_put_contents('tests/workspace/test.csv', $contents);
     
@@ -61,7 +61,7 @@ class CompanyUploadServiceTest extends NetsensiaTest
     
     public function testAcceptsOneLineFileWithOneCarriageReturn()
     {
-        $contents = 'number,name' . PHP_EOL;
+        $contents = 'name,number' . PHP_EOL;
     
         file_put_contents('tests/workspace/test.csv', $contents);
     
@@ -75,7 +75,7 @@ class CompanyUploadServiceTest extends NetsensiaTest
     
     public function testAcceptsOneLineFileWithTwoCarriageReturns()
     {
-        $contents = 'number,name' . PHP_EOL . PHP_EOL;
+        $contents = 'name,number' . PHP_EOL . PHP_EOL;
     
         file_put_contents('tests/workspace/test.csv', $contents);
     
@@ -89,9 +89,9 @@ class CompanyUploadServiceTest extends NetsensiaTest
     
     public function testAcceptsMultipleLineFile()
     {
-        $contents = 'number1,name1' . PHP_EOL;
-        $contents .= 'number2,name2' . PHP_EOL;
-        $contents .= 'number3,name3' . PHP_EOL;
+        $contents = 'name1,number1,' . PHP_EOL;
+        $contents .= 'name2,number2' . PHP_EOL;
+        $contents .= 'name3,number3,' . PHP_EOL;
         $contents .= PHP_EOL . PHP_EOL;
     
         file_put_contents('tests/workspace/test.csv', $contents);

@@ -63,10 +63,18 @@ class Module
                     
                     return $instance;
                 },
-                'CompanyTableGateway' => function ($sm) {
+                'CompanyDirectoryTableGateway' => function ($sm) {
+                
+                    $instance = new TableGateway(
+                        'companydirectory',
+                        $sm->get('Zend\Db\Adapter\Adapter')
+                    );
+                    return $instance;
+                },
+                'CompaniesHouseTableGateway' => function ($sm) {
                     
                     $instance = new TableGateway(
-                        'company',
+                        'companieshouse',
                         $sm->get('Zend\Db\Adapter\Adapter')
                     );
                     return $instance;
@@ -81,7 +89,9 @@ class Module
                 },
                 'CompanyService' => function ($sm) {
                     $instance = new CompanyService(
-                        $sm->get('Zend\Db\Adapter\Adapter')
+                        $sm->get('CompanyUploadTableGateway'),
+                        $sm->get('CompaniesHouseTableGateway'),
+                        $sm->get('CompanyDirectoryTableGateway')
                     );
                     return $instance;
                 },

@@ -58,17 +58,25 @@ foreach ($this->filters as $slug => $details) {
 $(document).ready(function() {
 
 	$('#fileupload').fileupload({
-        dataType: 'json',
+		type: 'json',
         done: function (e, data) {
-            $('#progress').css(
-                    'display',
-                    'none'
-            );
-            $.each(data.result.files, function (index, file) {
-                if (file.error) {
-             	   alert('ERROR: ' + file.error);
-                }
-            });
+
+            if (data.result.files[0].error) {
+                alert(data.result.files[0].error);
+            }
+
+            window.location = '/admin/companies';
+            
+        },
+        fail: function (e, data) {
+
+            alert('There was an unexpected error.  ' +
+            	  'The data may have uploaded successful anyway.  ' +
+            	  'Please check the figures on the left after ' +
+            	  'closing this box.');
+
+            window.location = '/admin/companies';
+            
         },
         progressall: function (e, data) {
             var progress = parseInt(data.loaded / data.total * 100, 10);

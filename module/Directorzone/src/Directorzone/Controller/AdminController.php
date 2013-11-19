@@ -8,6 +8,8 @@ use Directorzone\Service\CompanyService;
 use Zend\View\Model\JsonModel;
 use Zend\Validator\File\Size;
 use Zend\Form\Form;
+use Zend\Stdlib\ParametersInterface;
+use Zend\Log\Formatter\FirePhp;
 
 class AdminController extends NetsensiaActionController
 {
@@ -35,24 +37,28 @@ class AdminController extends NetsensiaActionController
     
     public function uploadCompaniesAction()
     {
+        
         $companyUploadService = $this->getServiceLocator()->get('CompanyUploadService');
-        $returnArray = [];
         
         $filter = new \Zend\Filter\File\RenameUpload('./assets/admin/upload/companies/');
         $filter->setUseUploadName(true);
         $filter->setOverwrite(true);
         
-        $files = $this->getRequest()->getFiles();
-                        
-        foreach ($files as $file) {
-            try {
-                $fileDetails = $filter->filter($file[0], true);
-                $companyUploadService->ingest($fileDetails['tmp_name']);
-            } catch (\Exception $e) {
-                file_put_contents('bung.txt', $e->getTraceAsString());
-                $returnArray['files'][] = ['error' => $e->getMessage()];
-            }
+        $files = $this->getRequest()->getFiles()->toArray();
+
+        $file = $files['files'][0];
+        
+        $fileDetails = $filter->filter($file);
+        $returnArray['files'][0]['name'] = $fileDetails['name'];
+        
+        try {
+            $companyUploadService->ingest($fileDetails['tmp_name']);
+            $returnArray['files'][0]['error'] = 'Complete';
+        } catch (\Exception $e) {
+            $returnArray['files'][0]['error'] = $e->getMessage();
         }
+        
+        $this->getServiceLocator()->get('Zend\Log')->info($returnArray);
         
         return new JsonModel($returnArray);
     }

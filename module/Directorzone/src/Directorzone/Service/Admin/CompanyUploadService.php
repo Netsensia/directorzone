@@ -35,6 +35,8 @@ class CompanyUploadService extends NetsensiaService
     private function parseCompaniesUploadCsv(
         $filename
     ) {
+        ini_set("auto_detect_line_endings", true);
+        
         $file = new \SplFileInfo($filename);
         
         if ($file->getExtension() != 'csv') {
@@ -43,8 +45,6 @@ class CompanyUploadService extends NetsensiaService
             );
         }
         
-        ini_set("auto_detect_line_endings", true);
-        
         $fileHandle = $file->openFile();
         
         $lineNumber = 0;
@@ -52,38 +52,36 @@ class CompanyUploadService extends NetsensiaService
         $companies = [];
 
         while (!$fileHandle->eof()) {
+
             $lineNumber ++;
         
             $array = $fileHandle->fgetcsv();
             
-            if (count($array) < 2) {
-                throw new \InvalidArgumentException(
-                    'CSV file expects at least two ' .
-                    'elements on line ' . $lineNumber
-                );
-            }
-    
-            $companyName = iconv("UTF-8", "UTF-8//IGNORE", $array[0]);
-            $companyNumber = iconv("UTF-8", "UTF-8//IGNORE", $array[1]);
-            
-            if (trim($companyName) != '') {
+            if (count($array) >= 2) {
+                $companyName = $this->sanitize($array[0]);
+                $companyNumber = $this->sanitize($array[1]);
                 
-                $resultSet = $this->companyUploadTableGateway->select(
-                    function (Select $select) use ($companyName, $companyNumber) {
-                        $select->where->equalTo('companynumber', $companyNumber);
-                        $select->where->OR->equalTo('name', $companyName);
+                if (trim($companyName) != '') {
+                    
+                    $resultSet = $this->companyUploadTableGateway->select(
+                        function (Select $select) use ($companyName, $companyNumber) {
+                            $select->where->equalTo('companynumber', $companyNumber);
+                            $select->where->OR->equalTo('name', $companyName);
+                        }
+                    );
+                    
+                    if ($resultSet->count() == 0) {
+                        $companies[] = [
+                            'name' => $companyName,
+                            'number' => $companyNumber
+                        ];
                     }
-                );
-               
-                if ($resultSet->count() == 0) {
-                    $companies[] = [
-                        'name' => $companyName,
-                        'number' => $companyNumber
-                    ];
                 }
             }
         }
         
+        //fclose($fileHandle);
+
         return $companies;    
     }
     
@@ -92,12 +90,23 @@ class CompanyUploadService extends NetsensiaService
     ) {
 
         foreach ($companies as $company) {
+            
             $this->companyUploadTableGateway->insert(
                 [
                     'companynumber' => $company['number'],
-                    'name' => $company['name']
+                    'name' => $company['name'],
+                    'recordstatus' => 'P'
                 ]
             );
         }
+    }
+    
+    private function sanitize($str)
+    {
+        $str = filter_var($str, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
+        $str = filter_var($str, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
+        $str = iconv("UTF-8", "UTF-8//IGNORE",$str);
+        
+        return $str;
     }
 }
