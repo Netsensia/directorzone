@@ -90,8 +90,10 @@ class CompanyService extends NetsensiaService
     
     private function getUploadedCompaniesFromStatus($status, $start, $end)
     {
+        
         $rowset = $this->companyUploadTable->select(
             function (Select $select) use ($status, $start, $end) {
+                
                 $select->where(
                     ['recordstatus' => $status]
                 )
@@ -107,9 +109,72 @@ class CompanyService extends NetsensiaService
         return $rowset->toArray();
     }
     
+    private function getDirectoryCompaniesFromStatus($status, $start, $end)
+    {
+        $rowset = $this->companyDirectoryTable->select(
+            function (Select $select) use ($status, $start, $end) {
+                $select->where(
+                    ['recordstatus' => $status]
+                )
+                ->columns(
+                    ['reference', 'name']
+                )
+                ->offset($start - 1)
+                ->limit( 1 + ($end - $start) )
+                ->order('name ASC');
+            }
+        );
+    
+        return $rowset->toArray();
+    }
+    
+    private function getCompaniesHouseCompaniesFromStatus($status, $start, $end)
+    {
+        $rowset = $this->companiesHouseTable->select(
+            function (Select $select) use ($status, $start, $end) {
+                $select->where(
+                    ['recordstatus' => $status]
+                )
+                ->columns(
+                    ['number', 'name']
+                )
+                ->offset($start - 1)
+                ->limit( 1 + ($end - $start) )
+                ->order('name ASC');
+            }
+        );
+    
+        return $rowset->toArray();
+    }
+    
     public function getPendingCompanies($start, $end)
     {
         return $this->getUploadedCompaniesFromStatus('P', $start, $end);
+    }
+    
+    public function getUnmatchedCompanies($start, $end)
+    {
+        return $this->getUploadedCompaniesFromStatus('U', $start, $end);
+    }
+    
+    public function getConflictsCompanies($start, $end)
+    {
+        return $this->getUploadedCompaniesFromStatus('C', $start, $end);
+    }
+    
+    public function getRemovedCompanies($start, $end)
+    {
+        return $this->getDirectoryCompaniesFromStatus('R', $start, $end);
+    }
+    
+    public function getLiveCompanies($start, $end)
+    {
+        return $this->getDirectoryCompaniesFromStatus('L', $start, $end);
+    }
+    
+    public function getCompaniesHouseCompanies($start, $end)
+    {
+        return $this->getCompaniesHouseCompaniesFromStatus('N', $start, $end);
     }
     
     public function getPendingCount()
@@ -122,11 +187,6 @@ class CompanyService extends NetsensiaService
         return $this->getUploadStatusCount('U');
     }
     
-    public function getUnprocessedCount()
-    {
-        return $this->getUploadStatusCount('W');
-    }
-    
     public function getConflictsCount()
     {
         return $this->getUploadStatusCount('C');
@@ -135,6 +195,19 @@ class CompanyService extends NetsensiaService
     public function getRemovedCount()
     {
         return $this->getDirectoryStatusCount('R');
+    }
+    
+    public function getCompanies($type, $start, $end)
+    {
+        switch ($type) {
+        	case 'P' : return $this->getPendingCompanies($start, $end);
+        	case 'C' : return $this->getConflictsCompanies($start, $end);
+        	case 'L' : return $this->getLiveCompanies($start, $end);
+        	case 'U' : return $this->getUnmatchedCompanies($start, $end);
+        	case 'R' : return $this->getRemovedCompanies($start, $end);
+        	case 'H' : return $this->getCompaniesHouseCompanies($start, $end);
+        	default : return $this->getLiveCompanies($start, $end);
+        }
     }
     
     public function isCompanyNumberTaken($companyNumber)

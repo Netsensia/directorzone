@@ -26,14 +26,17 @@ class CompanyAjaxController extends NetsensiaActionController
 	}
 
     public function companySearchAction()
-    {        
+    {      
+        $type = $this->params()->fromQuery('type', null);
         $page = $this->params()->fromQuery('page', null);
         $size = $this->params()->fromQuery('size', null);
         
         $start = ($page - 1) * $size + 1;
         $end = $start + $size - 1;
                 
-        $results = $this->companyService->getPendingCompanies(
+        $this->getServiceLocator()->get('Zend\Log')->info($type);
+        $results = $this->companyService->getCompanies(
+            $type,
             $start,
             $end
         );
@@ -43,8 +46,18 @@ class CompanyAjaxController extends NetsensiaActionController
         ];
         
         foreach ($results as $result) {
+            if (isset($result['companynumber'])) {
+                $companyNumber = $result['companynumber'];
+            } else
+            if (isset($result['reference'])) {
+                $companyNumber = $result['reference'];
+            } else
+            if (isset($result['number'])) {
+                $companyNumber = $result['number'];
+            }
+            
             $companies['results'][] = [
-                'number' => $result['companynumber'],
+                'number' => $companyNumber,
                 'name' => $result['name'],
                 'ceo' => '',
                 'sector' => ''

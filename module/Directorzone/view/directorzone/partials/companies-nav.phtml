@@ -93,31 +93,46 @@ $(document).ready(function() {
 
 	var page = 1;
 	var size = 10;
-	
+	var type = "L";
+
 	$(".filter").click(function() {
 		$(".filter").removeClass('active');
 		$(this).addClass('active');
+		page = 1;
+		size = 10;
+		switch ($(this).attr('id')) {
+		  case 'live' : type = 'L'; break;
+		  case 'pending' : type = 'P'; break;
+		  case 'conflicts' : type = 'C'; break;
+		  case 'companies-house' : type = 'H'; break;
+		  case 'removed' : type = 'R'; break;
+		  case 'unmatched' : type = 'U'; break;
+		}
+
+		loadTable(type, page, size);
 	});
 
 	$("li#next").click(function() {
 		page ++;
-		loadTable(page, size);
+		loadTable(type, page, size);
 	});
 
 	$("li#previous").click(function() {
 		if (!$(this).hasClass('disabled')) {
     		page --;
-    		loadTable(page, size);
+    		loadTable(type, page, size);
 		}
 	});
 
-	loadTable(page, size);
+	loadTable(type, page, size);
 });
 
-function loadTable(page, size)
+function loadTable(type, page, size)
 {
+	var url = "/ajax/company/search?type=" + type + "&page=" + page + "&size=" + size;
+
 	$.ajax({
-		url: "/ajax/company/search?page=" + page + "&size=" + size
+		url: url
 	}).done(function(data) {
 
 		$('table#companies').find("tr:gt(0)").remove();

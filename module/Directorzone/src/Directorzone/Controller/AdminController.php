@@ -92,11 +92,6 @@ class AdminController extends NetsensiaActionController
                     'name' => 'Removed',
                     'count' => $this->companyService->getRemovedCount()
                     ],
-                'unprocessed' =>
-                    [
-                    'name' => 'Unprocessed',
-                    'count' => $this->companyService->getUnprocessedCount()
-                    ],
                 'companies-house' => 
                     [
                     'name' => 'Companies House', 
