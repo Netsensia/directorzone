@@ -40,15 +40,16 @@ class AdminController extends NetsensiaActionController
         
         $filter = new \Zend\Filter\File\RenameUpload('./assets/admin/upload/companies/');
         $filter->setUseUploadName(true);
+        $filter->setOverwrite(true);
         
         $files = $this->getRequest()->getFiles();
-        file_put_contents('bung.txt', print_r($files, true));
                         
         foreach ($files as $file) {
             try {
                 $fileDetails = $filter->filter($file[0], true);
                 $companyUploadService->ingest($fileDetails['tmp_name']);
             } catch (\Exception $e) {
+                file_put_contents('bung.txt', $e->getTraceAsString());
                 $returnArray['files'][] = ['error' => $e->getMessage()];
             }
         }
