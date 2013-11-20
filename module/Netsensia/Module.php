@@ -9,29 +9,13 @@
 
 namespace Netsensia;
 
-use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\Mvc\ModuleRouteListener;
-use Zend\Log\Writer\FirePhp;
-use Zend\Log\Writer\FirePhp\FirePhpBridge;
 use Zend\Log\Writer\Stream;
 use Zend\Log\Logger;
     
 
-class Module implements AutoloaderProviderInterface
+class Module
 {
-    public function getAutoloaderConfig()
-    {
-        return array(
-            'Zend\Loader\ClassMapAutoloader' => array(
-                __DIR__ . '/autoload_classmap.php',
-            ),
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
-                    __NAMESPACE__ => __DIR__ . '/src/' . str_replace('\\', '/' , __NAMESPACE__),
-                ),
-            ),
-        );
-    }
 
     public function getConfig()
     {
