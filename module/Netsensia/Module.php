@@ -13,7 +13,6 @@ use Zend\Mvc\ModuleRouteListener;
 use Zend\Log\Writer\Stream;
 use Zend\Log\Logger;
     
-
 class Module
 {
 
