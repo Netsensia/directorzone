@@ -60,7 +60,7 @@ class Module
                 'ElasticService' => function ($sm) {
                     $elasticClient = new ElasticClient();
 
-                    $companyTableGateway = $sm->get('CompanyTableGateway');
+                    $companyTableGateway = $sm->get('CompaniesHouseTableGateway');
                     
                     $instance = new \Directorzone\Service\ElasticService(
             	        $elasticClient,

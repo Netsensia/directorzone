@@ -56,6 +56,10 @@ mysql -uroot < db_create.sql
 rm db_create.sql
 rm db_create.zip
 
+cd /var/www/directorzone
+php composer.phar install
+php composer.phar update
+
 php /var/www/directorzone/public/index.php search-index
 
 #############################################################
@@ -82,3 +86,5 @@ pear install --force --alldeps pear.phpunit.de/PHPUnit_MockObject
 pear install pear.phpunit.de/phpdcd-0.9.3
 pear upgrade-all
 
+git config --global user.name "Chris Moreton"
+git config --global user.email "chris@netsensia.com"

@@ -9,11 +9,13 @@
     <testsuite name="Netsensia ZF2 Skeleton">
         <directory>../module/Application/tests/ApplicationTest</directory>
         <directory>../module/Directorzone/tests/DirectorzoneTest</directory>
+        <directory>../module/Netsensia/tests/Netsensia</directory>
     </testsuite>
     <filter>
         <whitelist addUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./../module/Application/src</directory>
             <directory suffix=".php">./../module/Directorzone/src</directory>
+            <directory suffix=".php">./../module/Netsensia/src</directory>
         </whitelist>
     </filter>    
 </phpunit>
