@@ -26,10 +26,9 @@ class AuthAdaptorMySQL implements AdapterInterface, ServiceLocatorAwareInterface
      * @return void
      */
     public function setCredentials(
-        $username, 
+        $username,
         $password
-    )
-    {
+    ) {
         $this->username = $username;
         $this->password = $password;
     }
@@ -40,7 +39,7 @@ class AuthAdaptorMySQL implements AdapterInterface, ServiceLocatorAwareInterface
     public function authenticate()
     {
         $userId = $this->getUserIdFromEmailAndPassword();
-        if (!$userId ) { 
+        if (!$userId) {
             $userId = $this->getUserIdFromUsernameAndPassword();
         }
         

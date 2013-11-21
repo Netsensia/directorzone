@@ -6,7 +6,7 @@ use Zend\View\Helper\AbstractHelper;
 use Zend\Form\View\Helper\FormElement;
 use Zend\Form\Element\Submit;
 
-class BootstrapForm extends AbstractHelper 
+class BootstrapForm extends AbstractHelper
 {
     protected $form;
     protected $view;
@@ -103,7 +103,8 @@ class BootstrapForm extends AbstractHelper
         }
     }
     
-    protected function renderAdditionalElements() {
+    protected function renderAdditionalElements()
+    {
         $numVisibleElements = 0;
         foreach ($this->form->getElements() as $element) {
             if ($element instanceof Submit) {
@@ -116,7 +117,8 @@ class BootstrapForm extends AbstractHelper
         }
     }
     
-    protected function renderButton() {
+    protected function renderButton()
+    {
         if ($this->form->getElements()) {
             $this->renderSubmit($this->form->getElements());
         }
@@ -128,15 +130,15 @@ class BootstrapForm extends AbstractHelper
             echo('<div class="alert alert-danger">');
             echo('<button type="button" class="close" data-dismiss="alert">&times;</button>');
             echo($this->getView()->translate(
-            		'There were some errors on the form.  ' .
-            		'Please review your entries and try again.'
-    			)
-    		);
+                'There were some errors on the form.  ' .
+                'Please review your entries and try again.'
+            ));
             echo('</div>');
-        }       
+        }
     }
     
-    protected function openForm($title, $action) {
+    protected function openForm($title, $action)
+    {
         
         echo('<div class="container">');
         echo('<legend>' . $title . '</legend>');
@@ -152,7 +154,8 @@ class BootstrapForm extends AbstractHelper
         );
     }
     
-    protected function closeForm() {
+    protected function closeForm()
+    {
         echo('</form>');
         
         echo('</div>');

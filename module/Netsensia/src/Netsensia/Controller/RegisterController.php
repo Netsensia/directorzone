@@ -39,7 +39,7 @@ class RegisterController extends NetsensiaActionController
         }
         
         $form = new RegisterForm(
-            'register', 
+            'register',
             [
                 'showCaptcha' => $this->isCaptchaForm('register'),
                 'captchaConfig' => $this->getCaptchaConfig(),
@@ -72,7 +72,7 @@ class RegisterController extends NetsensiaActionController
                 
                 $password = $this->getUserService()->encryptPassword($data['password']);
                 
-                $activationCode = $this->getUserService()->generateActivationCode(); 
+                $activationCode = $this->getUserService()->generateActivationCode();
 
                 $user->setData(
                     array(
@@ -239,7 +239,7 @@ class RegisterController extends NetsensiaActionController
          
         return array(
             "form" => $form,
-        );        
+        );
     }
     
     private function getEmailFilter()

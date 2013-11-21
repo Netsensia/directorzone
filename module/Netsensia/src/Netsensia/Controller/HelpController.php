@@ -14,7 +14,7 @@ use Netsensia\Form\ContactForm;
 class HelpController extends NetsensiaActionController
 {
     public function __construct()
-    {       
+    {
     }
     
     public function indexAction()
@@ -25,7 +25,7 @@ class HelpController extends NetsensiaActionController
     public function contactAction()
     {
         $form = new ContactForm(
-            'contact', 
+            'contact',
             [
                 'showCaptcha' => $this->isCaptchaForm('contact'),
                 'captchaConfig' => $this->getCaptchaConfig(),
@@ -36,7 +36,7 @@ class HelpController extends NetsensiaActionController
         
         $form->setAttribute('action', $this->getEvent()->getRouteMatch()->getParam('contact'));
         
-        $form->setAttribute('method', 'post');        
+        $form->setAttribute('method', 'post');
         
         $request = $this->getRequest();
         
@@ -69,8 +69,8 @@ class HelpController extends NetsensiaActionController
                 $feedbackCode = md5($data['email'] . $data['message']);
                     
                 $this->sendMail(
-                    $this->translate('Thanks for your feedback'), 
-                    $data['email'], 
+                    $this->translate('Thanks for your feedback'),
+                    $data['email'],
                     'netsensia/email/template/feedback-thanks',
                     ['feedback_id' => $feedbackId, 'feedback_code' => $feedbackCode]
                 );

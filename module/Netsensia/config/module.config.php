@@ -13,7 +13,7 @@ return array(
         'invokables' => array(
             'processForm' => 'Netsensia\Controller\Plugin\ProcessForm',
         )
-    ),    
+    ),
     'service_manager' => array(
         'invokables' => array(
             'AuthAdaptorMySQL' => 'Netsensia\Adaptor\Auth\AuthAdaptorMySQL',
@@ -134,7 +134,7 @@ return array(
                         'action'     => 'set',
                     ),
                 ),
-            ),            
+            ),
         ),
     ),
     'view_manager' => array(

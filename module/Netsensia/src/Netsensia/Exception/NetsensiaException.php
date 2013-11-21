@@ -5,5 +5,4 @@ use \Exception;
 
 class NetsensiaException extends Exception
 {
-    
 }

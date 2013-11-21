@@ -21,14 +21,14 @@ class Module
         return include __DIR__ . '/config/module.config.php';
     }
     
-    public function getViewHelperConfig()   
-    { 
+    public function getViewHelperConfig()
+    {
         return array(
             'invokables' => array(
                 'BootstrapForm' => 'Netsensia\Form\View\Helper\BootstrapForm',
             ),
             'factories' => array(
-                'config' => function($serviceManager) {
+                'config' => function ($serviceManager) {
                     $helper = new \Netsensia\View\Helper\Config($serviceManager);
                     return $helper;
                 },
@@ -40,14 +40,14 @@ class Module
     {
         return [
             'factories' => array(
-                'Zend\Log' => function($sm) {
+                'Zend\Log' => function ($sm) {
                     $log = new Logger();
- 
+                    
                     $stream_writer = new Stream('./data/log/application.log');
                     $log->addWriter($stream_writer);
      
                     $log->info('Logging started...');
-     
+                    
                     return $log;
                 },
                 'UserModel' => function (\Zend\ServiceManager\ServiceLocatorInterface $sl) {
@@ -64,12 +64,12 @@ class Module
                     return $instance;
                 },
                 'AddressModel' => function (\Zend\ServiceManager\ServiceLocatorInterface $sl) {
-                	$instance = new \Netsensia\Model\Address();
-                	$instance->setServiceLocator($sl);
-                	return $instance;
+                    $instance = new \Netsensia\Model\Address();
+                    $instance->setServiceLocator($sl);
+                    return $instance;
                 },
             ),
-        ];        
+        ];
     }
 
     public function onBootstrap($e)

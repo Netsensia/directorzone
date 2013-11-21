@@ -12,18 +12,18 @@ use Netsensia\Provider\ProvidesEmail;
 
 class NetsensiaActionController extends AbstractActionController
 {
-    use ProvidesConnection, 
-        ProvidesUserInfo, 
-        ProvidesModels, 
-        ProvidesConfig, 
+    use ProvidesConnection,
+        ProvidesUserInfo,
+        ProvidesModels,
+        ProvidesConfig,
         ProvidesTranslator,
-        ProvidesEmail, 
+        ProvidesEmail,
         ProvidesHttpUtils;
     
     protected function getUserService()
     {
         $userService = $this->getServiceLocator()->get('Netsensia\Service\UserService');
-        return $userService;    
+        return $userService;
     }
     
     public function getFlashMessages()

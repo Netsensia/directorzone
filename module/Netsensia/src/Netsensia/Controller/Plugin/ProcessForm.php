@@ -10,8 +10,7 @@ class ProcessForm extends AbstractPlugin
         $formName,
         $modelName,
         $modelId
-    ) 
-    {
+    ) {
         $form = $this->controller->getServiceLocator()->get($formName);
         
         $form->prepare();
@@ -53,7 +52,7 @@ class ProcessForm extends AbstractPlugin
                 if (isset($data['password']) && isset($data['confirmpassword'])) {
                     
                     if ($data['password'] == $data['confirmpassword']) {
-                        $userService = 
+                        $userService =
                             $this->controller->getServiceLocator()->get('Netsensia\Service\UserService');
                         
                         $data['password'] = $userService->encryptPassword($data['password']);
@@ -80,11 +79,9 @@ class ProcessForm extends AbstractPlugin
         
         } else {
             $form->setDataFromModel($tableModel);
-        }        
+        }
         
         return $form;
         
     }
-    
 }
-

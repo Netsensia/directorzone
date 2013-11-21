@@ -53,7 +53,7 @@ class AuthController extends NetsensiaActionController
                     $this->translate('You are now logged in')
                 );
                 $this->redirect()->toRoute('home');
-            }        
+            }
         }
         
         $form = new LoginForm();

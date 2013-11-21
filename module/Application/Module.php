@@ -37,8 +37,9 @@ class Module
             try {
                 $translator->setLocale($userModel->get('locale'));
             } catch (KeyNotFoundException $e) {
-                // Something's not right - possibly the user row is no longer in 
-                // the database.  Clear the identity, this will logged-out behaviour 
+                // Something's not right - possibly the user row is no longer in
+                // the database.  Clear the identity, this will trigger
+                // logged-out behaviour
                 // in the handling controller, and stop this code being executed
                 // until a new login is performed.
                 $authService->clearIdentity();
@@ -59,12 +60,11 @@ class Module
                 $translator->setLocale($locale);
             }
             $translator->setFallbackLocale('en_GB');
-        }        
+        }
     }
 
     public function getConfig()
     {
         return include __DIR__ . '/config/module.config.php';
     }
-    
 }

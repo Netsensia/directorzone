@@ -1,7 +1,7 @@
 <?php
 namespace Netsensia\Adaptor\Auth;
 
-class UserSessionModel 
+class UserSessionModel
 {
     private $userId;
     private $name;
@@ -37,5 +37,4 @@ class UserSessionModel
     {
         $this->userId = $userId;
     }
-
 }
