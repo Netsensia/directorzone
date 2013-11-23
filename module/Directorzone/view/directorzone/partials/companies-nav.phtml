@@ -38,7 +38,7 @@ foreach ($this->filters as $slug => $details) {
 </div>
         
 <table id="companies" class="table">
-<tr><th>Number</th><th>Name</th><th>CEO</th><th>Sector</th></tr>
+<tr><th>Number</th><th>Name</th><th>CEO</th></tr>
 </table>
 
 <ul class="pager">
@@ -162,8 +162,7 @@ function loadTable(type, page, size)
     			'<tr>' +
     			'<td>' + value.number + '</td>' +
     			'<td>' + value.name + '</td>' +
-    			'<td>' + value.ceo + '</td>' +
-    			'<td>' + value.sector + '</td>' +
+    			'<td>' + JSON.stringify(value.searchResults) + '</td>' +
     			'</tr>'
     	    );
     	});

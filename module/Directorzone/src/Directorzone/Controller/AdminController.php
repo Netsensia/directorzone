@@ -21,14 +21,14 @@ class AdminController extends NetsensiaActionController
         $this->companyService = $companyService;
     }
    
-	public function onDispatch(MvcEvent $e) 
-	{
-		if (!$this->isLoggedOn()) {
-			return $this->redirect()->toRoute('login');
-		}
-		
-		parent::onDispatch($e);
-	}
+    public function onDispatch(MvcEvent $e)
+    {
+        if (!$this->isLoggedOn()) {
+            return $this->redirect()->toRoute('login');
+        }
+
+        parent::onDispatch($e);
+    }
 
     public function indexAction()
     {
@@ -64,41 +64,30 @@ class AdminController extends NetsensiaActionController
     }
     
     public function companiesAction()
-    {        
+    {
         return [
             'filters' =>  [
-                'live' => 
+                'live' =>
                     [
-                    'name' => 'Live', 
+                    'name' => 'Live',
                     'count' => $this->companyService->getLiveCount()
-                ],
-                'pending' => 
+                    ],
+                'pending' =>
                     [
-                    'name' => 'Pending', 
+                    'name' => 'Pending',
                     'count' => $this->companyService->getPendingCount()
                     ],
-                'unmatched' => 
+                'unmatched' =>
                     [
-                    'name' => 'Unmatched', 
+                    'name' => 'Unmatched',
                     'count' => $this->companyService->getUnmatchedCount()
                     ],
-                'conflicts' =>
+                'companies-house' =>
                     [
-                    'name' => 'Conflicts',
-                    'count' => $this->companyService->getConflictsCount()
-                    ],
-                'removed' =>
-                    [
-                    'name' => 'Removed',
-                    'count' => $this->companyService->getRemovedCount()
-                    ],
-                'companies-house' => 
-                    [
-                    'name' => 'Companies House', 
+                    'name' => 'Companies House',
                     'count' => $this->companyService->getCompaniesHouseCount()
                     ],
             ]
-       ];
+        ];
     }
-    
 }

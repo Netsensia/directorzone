@@ -13,11 +13,25 @@ class ElasticService extends NetsensiaService
     private $companyTableGateway;
     
     public function __construct(
-	    ElasticClient $client,
+        ElasticClient $client,
         TableGateway $companyTableGateway
     ) {
         $this->client = $client;
         $this->companyTableGateway = $companyTableGateway;
+    }
+    
+    public function search($name)
+    {
+        $params = [
+            'index' => 'companies',
+            'type'  => 'company'
+        ];
+        
+        $params['body']['query']['match']['name'] = $name;
+        
+        $result = $this->client->search($params);
+        
+        return $result;
     }
     
     public function indexCompanies()
@@ -47,7 +61,7 @@ class ElasticService extends NetsensiaService
                 
                 $row['_id'] = $row['companyid'];
                 
-                $body .= 
+                $body .=
                     '{ "index" : { "_index" : "companies", "_type" : "company", "_id" : "' . $row['companyid'] . '" } }' . PHP_EOL .
                     json_encode($row) . PHP_EOL;
                 
@@ -64,7 +78,8 @@ class ElasticService extends NetsensiaService
                 $result = $this->client->bulk($document);
                 
                 if (isset($result['error'])) {
-                    var_dump($result); die;
+                    var_dump($result);
+                    die;
                 }
                 
                 echo $count . ' | ' . $row['name'] . PHP_EOL;

@@ -6,6 +6,7 @@ use Netsensia\Controller\NetsensiaActionController;
 use Zend\Mvc\MvcEvent;
 use Zend\View\Model\JsonModel;
 use Directorzone\Service\CompanyService;
+use Directorzone\Service\ElasticService;
 
 class CompanyAjaxController extends NetsensiaActionController
 {
@@ -14,19 +15,26 @@ class CompanyAjaxController extends NetsensiaActionController
      */
     private $companyService;
     
+    /**
+     * @var ElasticService $elasticService
+     */
+    private $elasticService;
+    
     public function __construct(
-	    CompanyService $companyService
+        CompanyService $companyService,
+        ElasticService $elasticService
     ) {
         $this->companyService = $companyService;
+        $this->elasticService = $elasticService;
     }
     
-	public function onDispatch(MvcEvent $e) 
-	{
-		parent::onDispatch($e);
-	}
+    public function onDispatch(MvcEvent $e)
+    {
+        parent::onDispatch($e);
+    }
 
     public function companySearchAction()
-    {      
+    {
         $type = $this->params()->fromQuery('type', null);
         $page = $this->params()->fromQuery('page', null);
         $size = $this->params()->fromQuery('size', null);
@@ -34,39 +42,42 @@ class CompanyAjaxController extends NetsensiaActionController
         $start = ($page - 1) * $size + 1;
         $end = $start + $size - 1;
                 
-        $this->getServiceLocator()->get('Zend\Log')->info($type);
         $results = $this->companyService->getCompanies(
             $type,
             $start,
             $end
         );
         
+        
         $companies = [
             'results' => [],
         ];
         
         foreach ($results as $result) {
+            
+            $name = $result['name'];
+            
+            $searchResults = $this->elasticService->search($name);
+            
             if (isset($result['companynumber'])) {
                 $companyNumber = $result['companynumber'];
-            } else
-            if (isset($result['reference'])) {
+            } elseif (isset($result['reference'])) {
                 $companyNumber = $result['reference'];
-            } else
-            if (isset($result['number'])) {
+            } elseif (isset($result['number'])) {
                 $companyNumber = $result['number'];
             }
             
             $companies['results'][] = [
+                'searchResults' => $searchResults,
                 'number' => $companyNumber,
-                'name' => $result['name'],
+                'name' => $name,
                 'ceo' => '',
                 'sector' => ''
-           ];
+            ];
         }
 
         return new JsonModel(
-	        $companies
+            $companies
         );
     }
-
 }
