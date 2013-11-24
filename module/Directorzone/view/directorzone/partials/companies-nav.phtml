@@ -57,6 +57,10 @@ foreach ($this->filters as $slug => $details) {
       </div>
       <div class="modal-body">
       Searching for: <span id="searchCompanyName"></span>
+      <div id="searchresultscontainer">
+      <select id="searchresults">
+      </select>
+      </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -75,10 +79,23 @@ foreach ($this->filters as $slug => $details) {
 $(document).ready(function() {
 	
 	$(document).delegate('.linkSearchForCompanyNumber', 'click', function() {
+		var name = $(this).attr('company-name');
+		
 		$('#lightboxSearchForCompany span#searchCompanyName').html(
-			$(this).attr('company-name')
-		);
+				name
+			);
+
+		$('select#searchresults').empty();
+		
 		$('#lightboxSearchForCompany').modal();
+
+		var url = "/ajax/company/search?name=" + name;
+		
+		$.ajax({
+			url: url
+		}).done(function(data) {
+			$('#searchresultscontainer').html(JSON.stringify(data));
+		});
 	});
 	
 	$('#fileupload').fileupload({
@@ -95,7 +112,7 @@ $(document).ready(function() {
         fail: function (e, data) {
 
             alert('There was an unexpected error.  ' +
-            	  'The data may have uploaded successful anyway.  ' +
+            	  'The data may have uploaded successfully anyway.  ' +
             	  'Please check the figures on the left after ' +
             	  'closing this box.');
 
@@ -161,7 +178,7 @@ function loadTable(type, page, size)
 		'</tr>'
     );
 	
-	var url = "/ajax/company/search?type=" + type + "&page=" + page + "&size=" + size;
+	var url = "/ajax/company/list?type=" + type + "&page=" + page + "&size=" + size;
 
 	$.ajax({
 		url: url

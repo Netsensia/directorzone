@@ -61,6 +61,15 @@ return array(
                         ),
                         'may_terminate' => false,
                         'child_routes' => array(
+                            'list' => array(
+                                'type' => 'literal',
+                                'options' => array(
+                                    'route' => '/list',
+                                    'defaults' => array(
+                                        'action' => 'company-list',
+                                    ),
+                                )
+                            ),
                             'search' => array(
                                 'type' => 'literal',
                                 'options' => array(
@@ -70,7 +79,7 @@ return array(
                                     ),
                                 )
                             )
-                        )
+                        ),
                     )
                 )
 

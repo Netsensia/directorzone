@@ -32,8 +32,20 @@ class CompanyController extends NetsensiaActionController
     {
         parent::onDispatch($e);
     }
-
+    
     public function companySearchAction()
+    {
+        $name = $this->params()->fromQuery('name', null);
+        
+        $result = $this->elasticService->search($name);
+        
+        return new JsonModel(
+            $result
+        );
+        
+    }
+
+    public function companyListAction()
     {
         $type = $this->params()->fromQuery('type', null);
         $page = $this->params()->fromQuery('page', null);
