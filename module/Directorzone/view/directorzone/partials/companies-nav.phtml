@@ -48,15 +48,36 @@ foreach ($this->filters as $slug => $details) {
 
 </div>
 
+<div class="modal fade" id="lightboxSearchForCompany" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 <script src="/js/jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>
 <script src="/js/jquery-file-upload/js/jquery.iframe-transport.js"></script>
 <script src="/js/jquery-file-upload/js/jquery.fileupload.js"></script>
                                   
 <script>
 
-
 $(document).ready(function() {
-
+	
+	$(document).delegate('.linkSearchForCompanyNumber', 'click', function() {
+		$('#lightboxSearchForCompany').modal();
+	});
+	
 	$('#fileupload').fileupload({
 		type: 'json',
         done: function (e, data) {
@@ -131,7 +152,6 @@ function loadTable(type, page, size)
 {
 	$('table#companies').find("tr:gt(0)").remove();
 
-
 	$('table#companies tr:last').after(
 		'<tr>' +
 		'<td style="text-align:center" colspan="4"><img src="/img/ajax/ajax-loader.gif"></td>' +
@@ -159,7 +179,7 @@ function loadTable(type, page, size)
 		
 		$.each(data.results, function(key, value) {
 			if (type == 'U') {
-				value.number = '<a href="#searchForNumber">Search</a>'
+				value.number = '<a class="linkSearchForCompanyNumber" href="#">Search</a>'
 			}
     		$('table#companies tr:last').after(
     			'<tr>' +
