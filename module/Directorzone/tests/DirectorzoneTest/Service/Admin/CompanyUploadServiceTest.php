@@ -1,11 +1,10 @@
 <?php
 namespace DirectorzoneTest\Service\Admin;
 
-use Netsensia\Test\NetsensiaTest;
 use Directorzone\Service\Admin\CompanyUploadService;
 use Zend\Db\ResultSet\ResultSet;
 
-class CompanyUploadServiceTest extends NetsensiaTest
+class CompanyUploadServiceTest extends \PHPUnit_Framework_TestCase
 {
     private $service;
     
