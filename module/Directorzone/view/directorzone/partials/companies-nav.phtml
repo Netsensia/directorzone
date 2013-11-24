@@ -81,9 +81,7 @@ $(document).ready(function() {
 	$(document).delegate('.linkSearchForCompanyNumber', 'click', function() {
 		var name = $(this).attr('company-name');
 		
-		$('#lightboxSearchForCompany span#searchCompanyName').html(
-				name
-			);
+		$('#lightboxSearchForCompany span#searchCompanyName').html(name);
 
 		$('select#searchresults').empty();
 		
@@ -94,7 +92,14 @@ $(document).ready(function() {
 		$.ajax({
 			url: url
 		}).done(function(data) {
-			$('#searchresultscontainer').html(JSON.stringify(data));
+			$.each(data.hits.hits, function (key, value) {
+				var companyNumber = value['_source']['number'];
+				var companyName = value['_source']['name'];
+				$('select#searchresults')
+				    .append($("<option></option>")
+				    .attr("value", companyNumber)
+				    .text(companyNumber + " " + companyName)); 
+			});
 		});
 	});
 	
