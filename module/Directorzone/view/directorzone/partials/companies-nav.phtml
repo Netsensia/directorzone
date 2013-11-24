@@ -53,14 +53,14 @@ foreach ($this->filters as $slug => $details) {
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        <h4 class="modal-title" id="myModalLabel">Assign company number to uploaded company</h4>
       </div>
       <div class="modal-body">
-        ...
+      Searching for: <span id="searchCompanyName"></span>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary">Move to Pending</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -75,6 +75,9 @@ foreach ($this->filters as $slug => $details) {
 $(document).ready(function() {
 	
 	$(document).delegate('.linkSearchForCompanyNumber', 'click', function() {
+		$('#lightboxSearchForCompany span#searchCompanyName').html(
+			$(this).attr('company-name')
+		);
 		$('#lightboxSearchForCompany').modal();
 	});
 	
@@ -179,7 +182,7 @@ function loadTable(type, page, size)
 		
 		$.each(data.results, function(key, value) {
 			if (type == 'U') {
-				value.number = '<a class="linkSearchForCompanyNumber" href="#">Search</a>'
+				value.number = '<a class="linkSearchForCompanyNumber" company-name="' + value.name + '" href="#">Search</a>'
 			}
     		$('table#companies tr:last').after(
     			'<tr>' +
