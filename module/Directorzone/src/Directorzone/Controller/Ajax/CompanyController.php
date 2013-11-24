@@ -1,6 +1,6 @@
 <?php
 
-namespace Directorzone\Controller;
+namespace Directorzone\Controller\Ajax;
 
 use Netsensia\Controller\NetsensiaActionController;
 use Zend\Mvc\MvcEvent;
@@ -8,7 +8,7 @@ use Zend\View\Model\JsonModel;
 use Directorzone\Service\CompanyService;
 use Directorzone\Service\ElasticService;
 
-class CompanyAjaxController extends NetsensiaActionController
+class CompanyController extends NetsensiaActionController
 {
     /**
      * @var CompanyService $companyService
@@ -56,9 +56,7 @@ class CompanyAjaxController extends NetsensiaActionController
         foreach ($results as $result) {
             
             $name = $result['name'];
-            
-            $searchResults = $this->elasticService->search($name);
-            
+                        
             if (isset($result['companynumber'])) {
                 $companyNumber = $result['companynumber'];
             } elseif (isset($result['reference'])) {
@@ -68,7 +66,6 @@ class CompanyAjaxController extends NetsensiaActionController
             }
             
             $companies['results'][] = [
-                'searchResults' => $searchResults,
                 'number' => $companyNumber,
                 'name' => $name,
                 'ceo' => '',

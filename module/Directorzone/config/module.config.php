@@ -48,9 +48,6 @@ return array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
                     'route'    => '/ajax',
-                    'defaults' => array(
-                        'controller' => 'Directorzone\Controller\CompanyAjax',
-                    ),
                 ),
                 'may_terminate' => false,
                 'child_routes' => array(
@@ -58,6 +55,9 @@ return array(
                         'type' => 'literal',
                         'options' => array(
                             'route' => '/company',
+                            'defaults' => array(
+                                'controller' => 'Directorzone\Controller\Ajax\Company',
+                            ),
                         ),
                         'may_terminate' => false,
                         'child_routes' => array(
@@ -75,7 +75,7 @@ return array(
                 )
 
             ),
-        	'content' => array(
+            'content' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
                     'route'    => '/content',

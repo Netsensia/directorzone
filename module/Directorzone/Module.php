@@ -43,9 +43,9 @@ class Module
                             $cm->getServiceLocator()->get('CompanyService')
                         );
                     },
-                'Directorzone\Controller\CompanyAjax' =>
+                'Directorzone\Controller\Ajax\Company' =>
                     function (ControllerManager $cm) {
-                        return new \Directorzone\Controller\CompanyAjaxController(
+                        return new \Directorzone\Controller\Ajax\CompanyController(
                             $cm->getServiceLocator()->get('CompanyService'),
                             $cm->getServiceLocator()->get('ElasticService')
                         );

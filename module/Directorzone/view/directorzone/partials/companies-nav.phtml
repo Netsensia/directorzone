@@ -36,9 +36,9 @@ foreach ($this->filters as $slug => $details) {
     <div class="bar" style="height:18px;background-color:#428bca">
     </div>
 </div>
-        
-<table id="companies" class="table">
-<tr><th>Number</th><th>Name</th><th>CEO</th></tr>
+
+<table id="companies" class="table table-striped table-bordered table-hover">
+<tr><th>Number</th><th>Name</th></tr>
 </table>
 
 <ul class="pager">
@@ -158,11 +158,13 @@ function loadTable(type, page, size)
 		}
 		
 		$.each(data.results, function(key, value) {
+			if (type == 'U') {
+				value.number = '<a href="#searchForNumber">Search</a>'
+			}
     		$('table#companies tr:last').after(
     			'<tr>' +
     			'<td>' + value.number + '</td>' +
     			'<td>' + value.name + '</td>' +
-    			'<td>' + JSON.stringify(value.searchResults) + '</td>' +
     			'</tr>'
     	    );
     	});
