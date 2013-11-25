@@ -55,6 +55,4 @@ class CompanyServiceTest extends \PHPUnit_Framework_TestCase
     
         $this->assertFalse($service->isCompanyNumberTaken(1));
     }
-    
- 
 }

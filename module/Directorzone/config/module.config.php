@@ -5,9 +5,9 @@ return array(
         'invokables' => array(
             'Directorzone\Controller\Account' =>
                 'Directorzone\Controller\AccountController',
-			'Directorzone\Controller\Content' =>
+            'Directorzone\Controller\Content' =>
                 'Directorzone\Controller\ContentController',
-			'Directorzone\Controller\Directory' =>
+            'Directorzone\Controller\Directory' =>
                 'Directorzone\Controller\DirectoryController',
         ),
     ),
@@ -93,8 +93,8 @@ return array(
                         'action'     => 'index',
                     ),
                 ),
-            ),  
-        	'directories' => array(
+            ),
+            'directories' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
                     'route'    => '/myaccount',
@@ -103,7 +103,7 @@ return array(
                         'action'     => 'index',
                     ),
                 ),
-            ),  
+            ),
             
             'admin-companies' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
@@ -194,7 +194,7 @@ return array(
                         'action'     => 'index',
                     ),
                 ),
-            ),            
+            ),
             'account-personal' => array(
                 'type'    => 'Literal',
                 'options' => array(
@@ -336,13 +336,13 @@ return array(
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
         'template_map' => array(
-            'layout/layout' => 
+            'layout/layout' =>
                 __DIR__ . '/../view/layout/layout.phtml',
-            'directorzone/index/index' => 
+            'directorzone/index/index' =>
                 __DIR__ . '/../view/directorzone/index/index.phtml',
-            'error/404' => 
+            'error/404' =>
                 __DIR__ . '/../view/error/404.phtml',
-            'error/index'=> 
+            'error/index'=>
                 __DIR__ . '/../view/error/index.phtml',
         ),
         'template_path_stack' => array(
