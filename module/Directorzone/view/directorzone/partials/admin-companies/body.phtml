@@ -1,0 +1,29 @@
+
+<div class="fileinput fileinput-new" data-provides="fileinput">
+<div class="input-group">
+<div class="form-control uneditable-input span3" data-trigger="fileinput">
+<i class="glyphicon glyphicon-file fileinput-exists"></i>
+<span class="fileinput-filename"></span>
+</div>
+<span class="input-group-addon btn btn-default btn-file">
+<span class="fileinput-new">Select file</span>
+<span class="fileinput-exists">Change</span>
+<input id="fileupload" type="file" name="files[]" data-url="/admin/upload/companies" multiple>
+</span>
+<a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+</div>
+</div>
+
+<div id="progress" style="display:none">
+<div class="bar" style="height:18px;background-color:#428bca">
+</div>
+</div>
+
+<table id="companies" class="table table-striped table-bordered table-hover">
+<tr><th>Number</th><th>Name</th></tr>
+</table>
+
+<ul class="pager">
+<li class="previous" id="previous" class="disabled"><a href="#">&larr; Previous</a></li>
+<li class="next" id="next"><a href="#">Next &rarr;</a></li>
+</ul>

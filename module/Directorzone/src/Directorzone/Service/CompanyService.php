@@ -139,7 +139,7 @@ class CompanyService extends NetsensiaService
                     ['number', 'name']
                 )
                 ->offset($start - 1)
-                ->limit( 1 + ($end - $start) )
+                ->limit(1 + ($end - $start))
                 ->order('name ASC');
             }
         );
@@ -157,9 +157,9 @@ class CompanyService extends NetsensiaService
         return $this->getUploadedCompaniesFromStatus('U', $start, $end);
     }
     
-    public function getConflictsCompanies($start, $end)
+    public function getProblemCompanies($start, $end)
     {
-        return $this->getUploadedCompaniesFromStatus('C', $start, $end);
+        return $this->getUploadedCompaniesFromStatus('O', $start, $end);
     }
     
     public function getRemovedCompanies($start, $end)
@@ -187,9 +187,9 @@ class CompanyService extends NetsensiaService
         return $this->getUploadStatusCount('U');
     }
     
-    public function getConflictsCount()
+    public function getProblemCount()
     {
-        return $this->getUploadStatusCount('C');
+        return $this->getUploadStatusCount('O');
     }
     
     public function getRemovedCount()
@@ -200,13 +200,20 @@ class CompanyService extends NetsensiaService
     public function getCompanies($type, $start, $end)
     {
         switch ($type) {
-        	case 'P' : return $this->getPendingCompanies($start, $end);
-        	case 'C' : return $this->getConflictsCompanies($start, $end);
-        	case 'L' : return $this->getLiveCompanies($start, $end);
-        	case 'U' : return $this->getUnmatchedCompanies($start, $end);
-        	case 'R' : return $this->getRemovedCompanies($start, $end);
-        	case 'H' : return $this->getCompaniesHouseCompanies($start, $end);
-        	default : return $this->getLiveCompanies($start, $end);
+            case 'P':
+                return $this->getPendingCompanies($start, $end);
+            case 'R':
+                return $this->getProblemsCompanies($start, $end);
+            case 'L':
+                return $this->getLiveCompanies($start, $end);
+            case 'U':
+                return $this->getUnmatchedCompanies($start, $end);
+            case 'R':
+                return $this->getRemovedCompanies($start, $end);
+            case 'H':
+                return $this->getCompaniesHouseCompanies($start, $end);
+            default:
+                return $this->getLiveCompanies($start, $end);
         }
     }
     

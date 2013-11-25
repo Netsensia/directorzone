@@ -1,0 +1,26 @@
+
+
+
+<div class="col-md-4">
+    <ul class="nav nav-pills nav-stacked" style="max-width:250px;">
+    <?php 
+    
+    foreach ($this->filters as $slug => $details) {
+        ?>
+        <li id="<?php echo $slug; ?>" class="filter <?php echo ($slug == 'unmatched' ? 'active' : '') ?>">
+            <a href="#">
+                <?php echo $details['name'] . ' <span class="badge pull-right">' . $details['count'] . '</span>'; ?>
+            </a>
+        </li>
+        <?php
+    }
+    
+    ?>
+    </ul>
+</div>
+
+
+
+
+
+                           

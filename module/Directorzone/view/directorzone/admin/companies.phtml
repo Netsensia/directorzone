@@ -1,3 +1,17 @@
 <?php echo $this->partial('admin-nav.phtml'); ?>
+
 <hr>
-<?php echo $this->partial('companies-nav.phtml'); ?>
+
+<div class="row">
+    <?php echo $this->partial('admin-companies/side-nav.phtml'); ?>
+
+    <div class="col-md-8">
+
+        <?php echo $this->partial('admin-companies/body.phtml'); ?>
+
+    </div>
+</div>
+
+<?php 
+    echo $this->partial('admin-companies/dialog/search-for-number.phtml');
+    echo $this->partial('admin-companies/js/companies-javascript.phtml');
