@@ -95,7 +95,7 @@ class CompanyUploadService extends NetsensiaService
                 [
                     'companynumber' => $company['number'],
                     'name' => $company['name'],
-                    'recordstatus' => 'P'
+                    'recordstatus' => 'U'
                 ]
             );
         }

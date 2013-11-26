@@ -391,3 +391,25 @@
 2013-11-23T21:14:22+00:00 INFO (6): P
 2013-11-23T21:14:23+00:00 INFO (6): Logging started...
 2013-11-23T21:14:23+00:00 INFO (6): U
+2013-11-26T11:25:04+00:00 INFO (6): Logging started...
+2013-11-26T11:25:04+00:00 INFO (6): array (
+  'files' => 
+  array (
+    0 => 
+    array (
+      'name' => 'Telegraph 1000_Sept 2011.csv',
+      'error' => 'Complete',
+    ),
+  ),
+)
+2013-11-26T11:26:04+00:00 INFO (6): Logging started...
+2013-11-26T11:26:04+00:00 INFO (6): array (
+  'files' => 
+  array (
+    0 => 
+    array (
+      'name' => 'Telegraph 1000_Sept 2011.csv',
+      'error' => 'Complete',
+    ),
+  ),
+)
