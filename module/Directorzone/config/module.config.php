@@ -31,7 +31,7 @@ return array(
                         ),
                         'may_terminate' => true,
                         'child_routes' => array(
-                            'asdasdasdas' => array(
+                            'upload-companies' => array(
                                 'type' => 'Zend\Mvc\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/companies',
@@ -76,6 +76,15 @@ return array(
                                     'route' => '/search',
                                     'defaults' => array(
                                         'action' => 'company-search',
+                                    ),
+                                )
+                            ),
+                            'update-status' => array(
+                                'type' => 'literal',
+                                'options' => array(
+                                    'route' => '/updateuploadstatus',
+                                    'defaults' => array(
+                                        'action' => 'update-upload-status',
                                     ),
                                 )
                             )

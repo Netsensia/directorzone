@@ -42,7 +42,23 @@ class CompanyController extends NetsensiaActionController
         return new JsonModel(
             $result
         );
+    }
+    
+    public function updateUploadStatusAction()
+    {
+        $uploadId = $this->params()->fromQuery('uploadid', null);
+        $number = $this->params()->fromQuery('number', null);
+        $status = $this->params()->fromQuery('recordstatus', null);
+                
+        $result = $this->companyService->updateUploadStatus(
+            $uploadId,
+            $number,
+            $status
+        );
         
+        return new JsonModel(
+            [$result]
+        );
     }
 
     public function companyListAction()
@@ -59,8 +75,7 @@ class CompanyController extends NetsensiaActionController
             $start,
             $end
         );
-        
-        
+                
         $companies = [
             'results' => [],
         ];
@@ -77,7 +92,14 @@ class CompanyController extends NetsensiaActionController
                 $companyNumber = $result['number'];
             }
             
+            if (isset($result['companyuploadid'])) {
+                $internalId = $result['companyuploadid'];
+            } else {
+                $internalId = '';
+            }
+            
             $companies['results'][] = [
+                'internalId' => $internalId,
                 'number' => $companyNumber,
                 'name' => $name,
                 'ceo' => '',

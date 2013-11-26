@@ -31,7 +31,7 @@ class CompanyService extends NetsensiaService
     ) {
         $this->companyUploadTable = $companyUpload;
         $this->companiesHouseTable = $companiesHouse;
-        $this->companyDirectoryTable = $companyDirectory; 
+        $this->companyDirectoryTable = $companyDirectory;
     }
     
     public function getCompaniesHouseCount()
@@ -53,23 +53,41 @@ class CompanyService extends NetsensiaService
             }
         );
         
-        return $rowset->current()['count'];    
+        return $rowset->current()['count'];
     }
     
     private function getUploadStatusCount($status)
-    {        
+    {
         $rowset = $this->companyUploadTable->select(
             function (Select $select) use ($status) {
                 $select->where(
-                            ['recordstatus' => $status]
-                         )
-                       ->columns(
-                            ['count' => new Expression('COUNT(*)')]
-                         );
+                    ['recordstatus' => $status]
+                )
+                ->columns(
+                    ['count' => new Expression('COUNT(*)')]
+                );
             }
         );
         
-        return number_format($rowset->current()['count']);    
+        return number_format($rowset->current()['count']);
+    }
+    
+    public function updateUploadStatus(
+        $uploadId,
+        $companyNumber,
+        $status
+    ) {
+        $result = $this->companyUploadTable->update(
+            [
+                'companynumber' => $companyNumber,
+                'recordstatus' => $status,
+            ],
+            [
+                'companyuploadid' => $uploadId,
+            ]
+        );
+        
+        return $result;
     }
     
     private function getDirectoryStatusCount($status)
@@ -98,10 +116,10 @@ class CompanyService extends NetsensiaService
                     ['recordstatus' => $status]
                 )
                 ->columns(
-                    ['companynumber', 'name']
+                    ['companyuploadid', 'companynumber', 'name']
                 )
                 ->offset($start - 1)
-                ->limit( 1 + ($end - $start) )
+                ->limit(1 + ($end - $start))
                 ->order('name ASC');
             }
         );
@@ -120,7 +138,7 @@ class CompanyService extends NetsensiaService
                     ['reference', 'name']
                 )
                 ->offset($start - 1)
-                ->limit( 1 + ($end - $start) )
+                ->limit(1 + ($end - $start))
                 ->order('name ASC');
             }
         );
@@ -202,7 +220,7 @@ class CompanyService extends NetsensiaService
         switch ($type) {
             case 'P':
                 return $this->getPendingCompanies($start, $end);
-            case 'R':
+            case 'O':
                 return $this->getProblemsCompanies($start, $end);
             case 'L':
                 return $this->getLiveCompanies($start, $end);

@@ -5,11 +5,36 @@
 <script>
 
 $(document).ready(function() {
+
+	function updateUploadedRecordStatus(newStatus) {
+		
+		var number = $('#searchresults').val();
+		var id = $('#searchCompanyUploadId').val();
+		
+		var url = '/ajax/company/updateuploadstatus?uploadid=' + id + '&number=' + number + '&recordstatus=' + newStatus;
+
+		$.ajax({
+			url: url
+		}).done(function(data) {
+			$('#action-cancel').click();
+			location.reload();
+		});
+	}
+	
+	$(document).delegate('#action-move-to-pending', 'click', function() {
+		updateUploadedRecordStatus('P');
+	});
+
+	$(document).delegate('#action-move-to-problems', 'click', function() {
+		updateUploadedRecordStatus('O');
+	});
 	
 	$(document).delegate('.linkSearchForCompanyNumber', 'click', function() {
 		var name = $(this).attr('company-name');
+		var uploadId = $(this).attr('company-upload-id');
 		
 		$('#lightboxSearchForCompany input#searchCompanyName').val(name);
+		$('#lightboxSearchForCompany input#searchCompanyUploadId').val(uploadId);
 
 		$('select#searchresults').empty();
 		
@@ -24,9 +49,11 @@ $(document).ready(function() {
 				var companyNumber = value['_source']['number'];
 				var companyName = value['_source']['name'];
 				$('select#searchresults')
-				    .append($("<option></option>")
-				    .attr("value", companyNumber)
-				    .text(companyNumber + " " + companyName)); 
+				    .append(
+				   	    $("<option></option>")
+				        .attr("value", companyNumber)
+				        .text(companyNumber + " " + companyName)
+				    ); 
 			});
 		});
 	});
@@ -129,10 +156,14 @@ function loadTable(type, page, size)
 		if (page == 1) {
 			$('li#previous').addClass('disabled');
 		}
-		
+
 		$.each(data.results, function(key, value) {
 			if (type == 'U') {
-				value.number = '<a class="linkSearchForCompanyNumber" company-name="' + value.name + '" href="#">Search</a>'
+				value.number = 
+					'<a class="linkSearchForCompanyNumber" ' +
+					'company-name="' + value.name + '" ' +
+					'company-upload-id="' + value.internalId + '" ' +
+					'href="#">Search</a>'
 			}
     		$('table#companies tr:last').after(
     			'<tr>' +
