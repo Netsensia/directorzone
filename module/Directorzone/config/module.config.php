@@ -9,6 +9,8 @@ return array(
                 'Directorzone\Controller\ContentController',
             'Directorzone\Controller\Directory' =>
                 'Directorzone\Controller\DirectoryController',
+            'Directorzone\Controller\Console\Company' =>
+                'Directorzone\Controller\Console\CompanyController',
         ),
     ),
     'router' => array(
@@ -360,6 +362,40 @@ return array(
         ),
         'strategies' => array(
             'ViewJsonStrategy',
+        ),
+    ),
+    
+    'console' => array(
+        'router' => array(
+            'routes' => array(
+                'ingest' => array(
+                    'options' => array(
+                        'route'    => 'ingest',
+                        'defaults' => array(
+                            'controller' => 'Directorzone\Controller\Console\Company',
+                            'action'     => 'ingest',
+                        ),
+                    ),
+                ),
+                'ingest-officers' => array(
+                    'options' => array(
+                        'route'    => 'officers',
+                        'defaults' => array(
+                            'controller' => 'Directorzone\Controller\Console\Company',
+                            'action'     => 'ingest-offices',
+                        ),
+                    ),
+                ),
+                'search-index' => array(
+                    'options' => array(
+                        'route'    => 'search-index',
+                        'defaults' => array(
+                            'controller' => 'Directorzone\Controller\Console\Company',
+                            'action'     => 'search-index',
+                        ),
+                    ),
+                ),
+            ),
         ),
     ),
 );

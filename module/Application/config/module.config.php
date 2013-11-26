@@ -3,7 +3,7 @@
 return array(
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => 
+            'Application\Controller\Index' =>
                 'Application\Controller\IndexController',
         ),
     ),
@@ -20,61 +20,7 @@ return array(
                     ),
                 ),
             ),
-            'company' => array(
-                'type' => 'Zend\Mvc\Router\Http\Segment',
-                'options' => array(
-                    'route'    => '/company/[:companyNumber]',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Index',
-                        'action'     => 'company',
-                    ),
-                ),
-            ),
-            'company-search' => array(
-                'type' => 'Zend\Mvc\Router\Http\Segment',
-                'options' => array(
-                    'route'    => '/company-search/[:partialName]',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Index',
-                        'action'     => 'company-search',
-                    ),
-                ),
-            ),
-            'add-to-database' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route'    => '/add-to-database',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Index',
-                        'action'     => 'add-to-database',
-                    ),
-                ),
-                'may_terminate' => true,
-                'child_routes' => array(
-                    'kick' => array(
-                        'type' => 'Zend\Mvc\Router\Http\Segment',
-                        'options' => array(
-                            'route' => '/[:partialName]',
-                            'defaults' => array(
-                                'controller' => 'Application\Controller\Index',
-                                'action'     => 'add-to-database',
-                            ),
-                        )
-                    ),
-                    'count' => array(
-                        'type' => 'Zend\Mvc\Router\Http\Segment',
-                        'options' => array(
-                            'route' => '/count',
-                            'defaults' => array(
-                                'controller' => 'Application\Controller\Index',
-                                'action'     => 'count',
-                            ),
-                        )
-                    ),
-                )
-                
-            ),
-            
+ 
         ),
     ),
     
@@ -126,29 +72,4 @@ return array(
             'ViewJsonStrategy',
         ),
     ),
-    
-    'console' => array(
-        'router' => array(
-            'routes' => array(
-                'ingest' => array(
-                    'options' => array(
-                        'route'    => 'ingest',
-                        'defaults' => array(
-                            'controller' => 'Application\Controller\Index',
-                            'action'     => 'ingest',
-                        ),
-                    ),
-                ),
-                'search-index' => array(
-                    'options' => array(
-                        'route'    => 'search-index',
-                        'defaults' => array(
-                            'controller' => 'Application\Controller\Index',
-                            'action'     => 'search-index',
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),    
 );

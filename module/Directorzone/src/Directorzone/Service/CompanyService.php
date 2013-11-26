@@ -2,7 +2,6 @@
 namespace Directorzone\Service;
 
 use Netsensia\Service\NetsensiaService;
-use Zend\Db\Adapter\Adapter;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Expression;
@@ -32,6 +31,12 @@ class CompanyService extends NetsensiaService
         $this->companyUploadTable = $companyUpload;
         $this->companiesHouseTable = $companiesHouse;
         $this->companyDirectoryTable = $companyDirectory;
+    }
+    
+    public function addToCompaniesHouseDirectory(
+        $data
+    ) {
+        $this->companiesHouseTable->insert($data);
     }
     
     public function getCompaniesHouseCount()
@@ -221,7 +226,7 @@ class CompanyService extends NetsensiaService
             case 'P':
                 return $this->getPendingCompanies($start, $end);
             case 'O':
-                return $this->getProblemsCompanies($start, $end);
+                return $this->getProblemCompanies($start, $end);
             case 'L':
                 return $this->getLiveCompanies($start, $end);
             case 'U':
@@ -237,8 +242,8 @@ class CompanyService extends NetsensiaService
     
     public function isCompanyNumberTaken($companyNumber)
     {
-        $rowset = $this->companyDirectoryTable->select(
-            function (Select $select) {
+        $rowset = $this->companiesHouseTable->select(
+            function (Select $select) use ($companyNumber) {
                 $select->where(
                     ['number' => $companyNumber]
                 )
