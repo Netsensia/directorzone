@@ -48,11 +48,13 @@ class CompanyController extends NetsensiaActionController
     {
         $uploadId = $this->params()->fromQuery('uploadid', null);
         $number = $this->params()->fromQuery('number', null);
+        $name = $this->params()->fromQuery('name', null);
         $status = $this->params()->fromQuery('recordstatus', null);
                 
         $result = $this->companyService->updateUploadStatus(
             $uploadId,
             $number,
+            $name,
             $status
         );
         

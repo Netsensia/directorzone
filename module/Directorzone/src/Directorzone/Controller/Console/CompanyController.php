@@ -40,7 +40,7 @@ class CompanyController extends NetsensiaActionController
             try {
                 $partialName = file_get_contents('lastname.txt');
                 
-                $partialName = preg_replace("/[^&A-Za-z0-9 ]/", '', $partialName);
+                $partialName = preg_replace("/[^\.\-&\/A-Za-z0-9 ]/", '', $partialName);
                                 
                 $companyService = $this->getServiceLocator()->get('CompanyService');
                 
@@ -49,8 +49,8 @@ class CompanyController extends NetsensiaActionController
                 while (!$done) {
                     $request = $this->getServiceLocator()->get('NetsensiaCompanies\Request\NameSearchRequest');
                     
-                    $pagesize = rand(10, 500);
-                    $pagecount = rand(0, 10);
+                    $pagesize = 500; // rand(10, 500);
+                    $pagecount = 25; // rand(0, 10);
                     echo $partialName . ' ' . $pagesize . ' ' . $pagecount . PHP_EOL;
 
                     $nameSearchResults = $request->loadResults(
@@ -65,13 +65,16 @@ class CompanyController extends NetsensiaActionController
                             $companyService->addToCompaniesHouseDirectory($match);
                         }
                         $partialName = $match['name'];
+                        
                     }
+                    exec('cp lastname.txt lastgoodname.txt');
                     file_put_contents('lastname.txt', $partialName);
-
                 }
             } catch (\Exception $e) {
                 echo PHP_EOL . "Exception: " . $e->getMessage() . PHP_EOL . PHP_EOL;
 
+                exec('cp lastgoodname.txt lastname.txt');
+                
                 if ($partialName == null) {
                     echo "I give up." . PHP_EOL;
                     die;

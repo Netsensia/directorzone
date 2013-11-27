@@ -80,11 +80,13 @@ class CompanyService extends NetsensiaService
     public function updateUploadStatus(
         $uploadId,
         $companyNumber,
+        $companyName,
         $status
     ) {
         $result = $this->companyUploadTable->update(
             [
                 'companynumber' => $companyNumber,
+                'name' => $companyName,
                 'recordstatus' => $status,
             ],
             [

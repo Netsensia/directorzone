@@ -424,3 +424,14 @@
     ),
   ),
 )
+2013-11-27T14:38:53+00:00 INFO (6): Logging started...
+2013-11-27T14:38:53+00:00 INFO (6): array (
+  'files' => 
+  array (
+    0 => 
+    array (
+      'name' => 'Telegraph 1000_Sept 2011.csv',
+      'error' => 'Complete',
+    ),
+  ),
+)

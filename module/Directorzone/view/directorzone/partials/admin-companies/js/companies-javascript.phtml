@@ -10,8 +10,9 @@ $(document).ready(function() {
 		
 		var number = $('#searchresults').val();
 		var id = $('#searchCompanyUploadId').val();
+		var name = $('input#searchCompanyName').val();
 		
-		var url = '/ajax/company/updateuploadstatus?uploadid=' + id + '&number=' + number + '&recordstatus=' + newStatus;
+		var url = '/ajax/company/updateuploadstatus?uploadid=' + id + '&number=' + number + '&name=' + name + '&recordstatus=' + newStatus;
 
 		$.ajax({
 			url: url
@@ -20,31 +21,17 @@ $(document).ready(function() {
 			location.reload();
 		});
 	}
-	
-	$(document).delegate('#action-move-to-pending', 'click', function() {
-		updateUploadedRecordStatus('P');
-	});
 
-	$(document).delegate('#action-move-to-problems', 'click', function() {
-		updateUploadedRecordStatus('O');
-	});
-	
-	$(document).delegate('.linkSearchForCompanyNumber', 'click', function() {
-		var name = $(this).attr('company-name');
-		var uploadId = $(this).attr('company-upload-id');
-		
-		$('#lightboxSearchForCompany input#searchCompanyName').val(name);
-		$('#lightboxSearchForCompany input#searchCompanyUploadId').val(uploadId);
-
+	function populateDropdownFromNameSearch(name)
+	{
 		$('select#searchresults').empty();
 		
-		$('#lightboxSearchForCompany').modal();
-
 		var url = "/ajax/company/search?name=" + name;
 		
 		$.ajax({
 			url: url
 		}).done(function(data) {
+			$('#action-search-again').removeClass('active');
 			$.each(data.hits.hits, function (key, value) {
 				var companyNumber = value['_source']['number'];
 				var companyName = value['_source']['name'];
@@ -56,6 +43,32 @@ $(document).ready(function() {
 				    ); 
 			});
 		});
+	}
+	
+	$(document).delegate('#action-move-to-pending', 'click', function() {
+		updateUploadedRecordStatus('P');
+	});
+
+	$(document).delegate('#action-move-to-problems', 'click', function() {
+		updateUploadedRecordStatus('O');
+	});
+
+	$(document).delegate('#action-search-again', 'click', function() {
+		var name = $('#searchCompanyName').val();
+		$(this).addClass('active');
+		populateDropdownFromNameSearch(name);
+	});
+	
+	$(document).delegate('.linkSearchForCompanyNumber', 'click', function() {
+		var name = $(this).attr('company-name');
+		var uploadId = $(this).attr('company-upload-id');
+		
+		$('#lightboxSearchForCompany input#searchCompanyName').val(name);
+		$('#lightboxSearchForCompany input#searchCompanyUploadId').val(uploadId);
+
+		$('#lightboxSearchForCompany').modal();
+
+		populateDropdownFromNameSearch(name);
 	});
 	
 	$('#fileupload').fileupload({

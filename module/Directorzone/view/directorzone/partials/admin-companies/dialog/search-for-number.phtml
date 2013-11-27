@@ -8,13 +8,19 @@
       <div class="modal-body">
       Searching for: <input class="form-control" id="searchCompanyName">
       <input type="hidden" id="searchCompanyUploadId">
-      <div id="searchresultscontainer">
+      <div id="searchresultscontainer" style="margin-top:5px">
       <select class="form-control" id="searchresults">
       </select>
       </div>
       </div>
       <div class="modal-footer">
         <button id="action-cancel" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        
+        <button id="action-search-again" type="button" class="btn btn-info has-spinner">
+            <span class="spinner"><i class="glyphicon spin glyphicon-refresh"></i></span>
+            Search Again
+        </button>
+        
         <button id="action-move-to-pending" type="button" class="btn btn-success">Move to Pending</button>
         <button id="action-move-to-problems" type="button" class="btn btn-warning">Move to Problems</button>
       </div>
