@@ -24,7 +24,7 @@ $(document).ready(function() {
 
 	function populateDropdownFromNameSearch(name)
 	{
-		$('select#searchresults').empty();
+		$('ul#searchresults').empty();
 		
 		var url = "/ajax/company/search?name=" + name;
 		
@@ -35,12 +35,17 @@ $(document).ready(function() {
 			$.each(data.hits.hits, function (key, value) {
 				var companyNumber = value['_source']['number'];
 				var companyName = value['_source']['name'];
-				$('select#searchresults')
-				    .append(
-				   	    $("<option></option>")
-				        .attr("value", companyNumber)
-				        .text(companyNumber + " " + companyName)
-				    ); 
+				var text = '<div class="infodropdown">';
+				text = text + companyNumber + " " + companyName;
+				text = text + '</div>';
+				$('ul#searchresults').append(
+					    '<li role="presentation">' +
+					    '<a role="menuitem" company-number="' +
+					    companyNumber +
+					    '" tabindex="-1" href="#">' +
+					    text + 
+					    '</a></li>'
+					);
 			});
 		});
 	}
