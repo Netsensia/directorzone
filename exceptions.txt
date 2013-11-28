@@ -416,3 +416,145 @@ Data returned is that of the Branch Company.  Company name and number reflect th
 1385665202 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
 1385665213 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
 1385665221 No data available for this company number
+1385665289 No data available for this company number
+1385665432 No data available for this company number
+1385665460 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385665471 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385665484 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385665495 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385665505 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385665515 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385665527 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385665534 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385665555 No data available for this company number
+1385665573 No data available for this company number
+1385665574 No data available for this company number
+1385665579 No data available for this company number
+1385665641 No data available for this company number
+1385665681 No data available for this company number
+1385665692 No data available for this company number
+1385665740 No data available for this company number
+1385665749 No data available for this company number
+1385665776 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385665781 No data available for this company number
+1385665793 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385665795 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385665809 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385665850 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385665903 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385665915 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385665932 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385665943 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385665957 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385665982 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385665992 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385666002 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385666208 18700 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385666214 18704 No data available for this company number
+1385666249 18742 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385666359 18756 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385666370 18764 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385666381 18765 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385666392 18768 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385666403 18772 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385666413 18774 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385666423 18775 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385666437 18777 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671204 18782 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671234 18783 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671244 18791 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671255 18792 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671266 18795 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671276 18798 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671287 18799 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671298 18802 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671309 18804 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671323 18808 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671335 18817 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671345 18820 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671356 18822 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671366 18823 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671376 18825 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671389 18826 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671408 18842 No data available for this company number
+1385671423 18848 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671434 18857 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671445 18859 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671455 18862 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671455 18863 No data available for this company number
+1385671467 18864 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671477 18869 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671478 18870 No data available for this company number
+1385671478 18871 No data available for this company number
+1385671488 18872 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671498 18873 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671508 18874 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671519 18875 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671531 18878 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671542 18882 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671552 18885 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671562 18886 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671575 18887 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671585 18893 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671596 18894 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671606 18896 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671616 18897 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671626 18899 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671636 18900 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671663 18921 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671673 18924 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671683 18925 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671697 18927 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671709 18936 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671719 18941 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671729 18942 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671740 18943 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671750 18944 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671760 18945 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671774 18947 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671784 18956 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671795 18957 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671806 18960 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671839 18981 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671849 18986 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671860 18987 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671870 18990 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385671884 19012 No data available for this company number
+1385671916 19067 No data available for this company number
+1385671980 19177 No data available for this company number
+1385671980 19185 No data available for this company number
+1385671998 19216 No data available for this company number
+1385672021 19259 No data available for this company number
+1385672039 19292 No data available for this company number
+1385672039 19297 No data available for this company number
+1385672090 19388 No data available for this company number
+1385672090 19395 No data available for this company number
+1385672091 19396 No data available for this company number
+1385672105 19418 No data available for this company number
+1385672111 19426 No data available for this company number
+1385672121 19441 No data available for this company number
+1385672124 19451 No data available for this company number
+1385672151 19496 No data available for this company number
+1385672159 19512 No data available for this company number
+1385672210 19596 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385672243 19653 No data available for this company number
+1385672303 19763 No data available for this company number
+1385672305 19765 No data available for this company number
+1385672495 20100 No data available for this company number
+1385672546 20195 No data available for this company number
+1385672571 20243 No data available for this company number
+1385672592 20283 No data available for this company number
+1385672608 20323 No data available for this company number
+1385672631 20367 No data available for this company number
+1385672673 20428 No data available for this company number
+1385672677 20437 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385672716 20506 No data available for this company number
+1385672734 20541 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385672825 20695 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385672840 20723 No data available for this company number
+1385672859 20757 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385672860 20760 No data available for this company number
+1385672880 20792 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385672944 20886 No data available for this company number
+1385672956 20904 No data available for this company number
+1385672957 20914 No data available for this company number

@@ -2,6 +2,7 @@
 namespace Directorzone\Controller\Console;
 
 use Netsensia\Controller\NetsensiaActionController;
+use Netsensia\Library\Csv\Csv;
 
 class CompanyController extends NetsensiaActionController
 {
@@ -25,6 +26,80 @@ class CompanyController extends NetsensiaActionController
             'appointments' => $companyAppointmentsModel,
         ];
                 
+    }
+    
+    public function ingestFromCsvAction()
+    {
+        $companyService = $this->getServiceLocator()->get('CompanyService');
+        
+        $dir = new \DirectoryIterator('/var/www/chdata');
+        
+        $count = 0;
+        
+        $request =
+            $this->getServiceLocator()
+                ->get('NetsensiaCompanies\Request\CompanyDetailsRequest');
+        
+        foreach ($dir as $file) {
+            if ($file->isFile()) {
+                
+                $file = new \SplFileInfo($file->getPathname());
+                 
+                $fileHandle = $file->openFile();
+                
+                $headers = $fileHandle->fgetcsv();
+                
+                $rows = [];
+                
+                $rowCount = 0;
+                
+                while (!$fileHandle->eof()) {
+                    
+                    $fields = [];
+                    $fieldNumber = 0;
+                
+                    $array = $fileHandle->fgetcsv();
+                
+                    if (count($array) > 5) {
+                        foreach ($array as $dataItem) {
+                            $fieldName = trim($headers[$fieldNumber++]);
+                            $fields[$fieldName] = $dataItem;
+                        }
+    
+                        $data = [];
+                        
+                        $data['addressline1'] = $fields['RegAddress.AddressLine1'];
+                        $data['addressline2'] = $fields['RegAddress.AddressLine2'];
+                        $data['town'] = $fields['RegAddress.PostTown'];
+                        $data['county'] = $fields['RegAddress.County'];
+                        $data['country'] = $fields['RegAddress.Country'];
+                        $data['postcode'] = $fields['RegAddress.PostCode'];
+                        
+                        $originalDate = $fields['IncorporationDate'];
+                        $newDate = date("Y-m-d", strtotime($originalDate));
+                        
+                        $data['incorporationdate'] = $newDate;
+                        $data['category'] = $fields['CompanyCategory'];
+                        $data['detailstatus'] = $fields['CompanyStatus'];
+                                                
+                        for ($i=1; $i<=4; $i++) {
+                            $sicCode = $fields['SICCode.SicText_' . $i];
+                            if (trim($sicCode) != '') {
+                                $data['siccodes'][] = $sicCode;
+                            }
+                            $data['siccode' . $i] = $fields['SICCode.SicText_' . $i];
+                        }
+                        $data['number'] = $fields['CompanyNumber'];
+                        
+                        $companyService->updateCompaniesHouseDirectory($data);
+                        
+                        if ($rowCount++ % 10000 == 0) {
+                            echo '.';
+                        }
+                    }
+                }
+            }
+        }
     }
     
     public function ingestCompanyDetailsAction()
@@ -68,7 +143,7 @@ class CompanyController extends NetsensiaActionController
             } catch (\Exception $e) {
                 file_put_contents(
                     'exceptions.txt',
-                    time() . ' ' . $e->getMessage() . PHP_EOL,
+                    time() . ' ' . $lastCompanyId . ' ' . $e->getMessage() . PHP_EOL,
                     FILE_APPEND
                 );
                 echo 'x';
@@ -100,8 +175,8 @@ class CompanyController extends NetsensiaActionController
                 while (!$done) {
                     $request = $this->getServiceLocator()->get('NetsensiaCompanies\Request\NameSearchRequest');
                     
-                    $pagesize = 500; // rand(10, 500);
-                    $pagecount = 25; // rand(0, 10);
+                    $pagesize = 500;
+                    $pagecount = 25;
                     echo $partialName . ' ' . $pagesize . ' ' . $pagecount . PHP_EOL;
 
                     $nameSearchResults = $request->loadResults(

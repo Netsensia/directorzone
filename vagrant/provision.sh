@@ -37,6 +37,7 @@ sed -i 's/display_errors = Off/display_errors = On/g' /etc/php5/apache2/php.ini
 sed -i 's/;date.timezone =/date.timezone = Europe\/London/g' /etc/php5/apache2/php.ini
 sed -i 's/;date.timezone =/date.timezone = Europe\/London/g' /etc/php5/cli/php.ini
 sed -i 's/disable_functions/;disable_functions/g' /etc/php5/cli/php.ini
+sed -i 's/memory_limit = 128M/memory_limit = 2048M/g' /etc/php5/cli/php.ini
 
 #############################################################
 # Install Elastic Search

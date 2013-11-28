@@ -35,12 +35,23 @@ $(document).ready(function() {
 			$.each(data.hits.hits, function (key, value) {
 				var companyNumber = value['_source']['number'];
 				var companyName = value['_source']['name'];
-				var companyAddress = '25 Raymond Road, SW19 4AD';
+				var companyAddress = value['_source']['addressline1'];
+				var town = value['_source']['town'];
+				var county = value['_source']['county'];
+				var postcode = value['_source']['postcode'];
+
+				//var businessAreas = value['_source']['businessAreas'];
+				var incorporationDate = value['_source']['incorporationdate'];
+				
+				if (town != 'null' && town != null && town != '') companyAddress += ', ' + town;
+				if (county != 'null' && county != null && county != '') companyAddress += ', ' + county;
+				if (postcode != 'null' && postcode != null && postcode != '') companyAddress += ', ' + postcode;
 
 				var text = '<div class="infodropdown">';
 				text += '<span class="id">' + companyNumber + '</span>';
 				text += '<span class="name">' + companyName + '</span>';
 				text += '<div class="supplement">' + companyAddress + '</div>';
+				text += '<div class="supplement">Incorporated on ' + incorporationDate + '</div>';
 				text += '</div>';
 				
 				$('ul#searchresults').append(

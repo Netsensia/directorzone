@@ -21,7 +21,7 @@ class ElasticService extends NetsensiaService
     }
     
     public function search($name)
-    {        
+    {
         $params = [
             'index' => 'companies',
             'type'  => 'company',
@@ -86,12 +86,9 @@ class ElasticService extends NetsensiaService
             foreach ($rowset as $row) {
                 
                 if (isset($row['incorporationdate'])) {
-                    if (empty($row['incorporationdate']) || 
+                    if (empty($row['incorporationdate']) ||
                         $row['incorporationdate'] == 'Unknown') {
                         unset($row['incorporationdate']);
-                        //echo 'Unset' . PHP_EOL;
-                    } else {
-                        //echo 'DATE: ' . $row['incorporationdate'] . PHP_EOL;
                     }
                 }
                 

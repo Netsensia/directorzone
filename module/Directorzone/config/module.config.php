@@ -395,6 +395,15 @@ return array(
                         ),
                     ),
                 ),
+                'ingest-company-details-from-csv' => array(
+                    'options' => array(
+                        'route'    => 'csv',
+                        'defaults' => array(
+                            'controller' => 'Directorzone\Controller\Console\Company',
+                            'action'     => 'ingest-from-csv',
+                        ),
+                    ),
+                ),
                 'search-index' => array(
                     'options' => array(
                         'route'    => 'search-index',
