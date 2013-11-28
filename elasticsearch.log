@@ -19,3 +19,5 @@
 [reason phrase] Internal Server Error
 [url] http://localhost:9200/companies/company/_bulk
 {"error":"ActionRequestValidationException[Validation Failed: 1: no requests added;]","status":500} [] {"file":"/var/www/directorzone/vendor/elasticsearch/elasticsearch/src/Elasticsearch/Connections/GuzzleConnection.php","line":189,"class":"Elasticsearch\\Connections\\GuzzleConnection","function":"process5xxError"}
+[2013-11-28 18:45:58] log.ERROR: Curl error: [curl] 7: couldn't connect to host [url] http://localhost:9200 [] {"file":"/var/www/directorzone/vendor/elasticsearch/elasticsearch/src/Elasticsearch/Connections/GuzzleConnection.php","line":253,"class":"Elasticsearch\\Connections\\GuzzleConnection","function":"processCurlError"}
+[2013-11-28 18:46:09] log.ERROR: Curl error: [curl] 7: couldn't connect to host [url] http://localhost:9200 [] {"file":"/var/www/directorzone/vendor/elasticsearch/elasticsearch/src/Elasticsearch/Connections/GuzzleConnection.php","line":253,"class":"Elasticsearch\\Connections\\GuzzleConnection","function":"processCurlError"}

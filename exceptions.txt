@@ -1,2 +1,398 @@
 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
 1385649238 No data available for this company number
+1385649603 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385649725 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385649824 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385649972 Read timed out after 10 seconds
+1385650122 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385650127 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385650187 No data received from ngsrv
+
+1385650288 No data received from ngsrv
+
+1385650308 No data available for this company number
+1385650340 No data available for this company number
+1385650508 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385651007 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385651413 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385651505 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385651788 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385651873 No data available for this company number
+1385651955 No data available for this company number
+1385652002 No data available for this company number
+1385652003 No data available for this company number
+1385652192 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385652456 No data available for this company number
+1385652513 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385652522 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385652798 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385652937 No data available for this company number
+1385652966 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385653204 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385653382 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385653447 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385653448 Documentation for Assurance Companies is no longer filed at Companies House. Documents are now forwarded by the company to the Financial Services Authority
+1385653543 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385653596 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385654127 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385654226 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385654438 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385654471 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385654955 No data available for this company number
+1385654981 No data available for this company number
+1385655273 No data available for this company number
+1385655274 No data available for this company number
+1385655333 No data available for this company number
+1385655347 No data available for this company number
+1385655374 No data available for this company number
+1385655428 No data available for this company number
+1385655455 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385655844 No data available for this company number
+1385655898 No data available for this company number
+1385655938 No data available for this company number
+1385655968 No data available for this company number
+1385655995 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385656197 No data available for this company number
+1385656251 No data available for this company number
+1385656309 No data available for this company number
+1385656319 No data available for this company number
+1385656357 No data available for this company number
+1385656357 No data available for this company number
+1385656358 No data available for this company number
+1385656360 No data available for this company number
+1385656370 No data available for this company number
+1385656386 No data available for this company number
+1385656398 No data available for this company number
+1385656417 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385656492 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385656554 No data available for this company number
+1385656608 No data available for this company number
+1385656857 No data available for this company number
+1385656882 No data available for this company number
+1385656882 No data available for this company number
+1385656884 No data available for this company number
+1385656905 No data available for this company number
+1385656985 No data available for this company number
+1385656993 No data available for this company number
+1385657034 No data available for this company number
+1385657034 No data available for this company number
+1385657106 No data available for this company number
+1385657109 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385657124 No data available for this company number
+1385657138 No data available for this company number
+1385657140 No data available for this company number
+1385657143 No data available for this company number
+1385657146 No data available for this company number
+1385657181 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385657236 No data available for this company number
+1385657236 No data available for this company number
+1385657295 No data available for this company number
+1385657339 No data available for this company number
+1385657371 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385657394 No data available for this company number
+1385657431 No data available for this company number
+1385657511 No data available for this company number
+1385657541 No data available for this company number
+1385657555 No data available for this company number
+1385657563 No data available for this company number
+1385657610 No data available for this company number
+1385657639 No data available for this company number
+1385657685 No data available for this company number
+1385657686 No data available for this company number
+1385657819 No data available for this company number
+1385657949 No data available for this company number
+1385657979 No data available for this company number
+1385657984 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385657996 No data available for this company number
+1385658012 No data available for this company number
+1385658012 No data available for this company number
+1385658016 No data available for this company number
+1385658060 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385658074 No data available for this company number
+1385658103 No data available for this company number
+1385658147 Documentation for Assurance Companies is no longer filed at Companies House. Documents are now forwarded by the company to the Financial Services Authority
+1385658173 No data available for this company number
+1385658178 No data available for this company number
+1385658179 No data available for this company number
+1385658179 No data available for this company number
+1385658233 No data available for this company number
+1385658248 No data available for this company number
+1385658261 No data available for this company number
+1385658262 No data available for this company number
+1385658266 No data available for this company number
+1385658276 Documentation for Assurance Companies is no longer filed at Companies House. Documents are now forwarded by the company to the Financial Services Authority
+1385658337 No data available for this company number
+1385658338 No data available for this company number
+1385658458 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385658560 No data available for this company number
+1385658668 No data available for this company number
+1385658745 No data available for this company number
+1385658745 No data available for this company number
+1385658745 No data available for this company number
+1385658745 No data available for this company number
+1385658745 No data available for this company number
+1385658753 No data available for this company number
+1385658755 No data available for this company number
+1385658756 No data available for this company number
+1385658784 No data available for this company number
+1385658790 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385658848 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385658872 No data available for this company number
+1385658998 No data available for this company number
+1385659029 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385659037 No data available for this company number
+1385659039 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385659114 No data available for this company number
+1385659176 No data available for this company number
+1385659179 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385659180 No data available for this company number
+1385659201 No data available for this company number
+1385659202 No data available for this company number
+1385659272 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385659374 No data available for this company number
+1385659386 No data available for this company number
+1385659445 No data available for this company number
+1385659475 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385659497 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385659534 No data available for this company number
+1385659644 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385659656 No data available for this company number
+1385659727 No data available for this company number
+1385659729 No data available for this company number
+1385661344 No data available for this company number
+1385661406 No data available for this company number
+1385661418 No data available for this company number
+1385661530 No data available for this company number
+1385661546 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385661619 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385661651 No data available for this company number
+1385661698 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385661698 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385661703 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385661705 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385661706 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385661710 No data available for this company number
+1385661756 No data available for this company number
+1385661852 No data available for this company number
+1385661856 No data available for this company number
+1385661857 No data available for this company number
+1385661970 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385661977 No data available for this company number
+1385661977 No data available for this company number
+1385661997 No data available for this company number
+1385662034 No data available for this company number
+1385662040 No data available for this company number
+1385662098 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385662108 No data available for this company number
+1385662168 No data available for this company number
+1385662168 No data available for this company number
+1385662205 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385662216 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385662232 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385662302 No data available for this company number
+1385662318 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385662327 No data available for this company number
+1385662404 No data available for this company number
+1385662418 No data available for this company number
+1385662424 No data available for this company number
+1385662435 No data available for this company number
+1385662436 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385662450 No data available for this company number
+1385662461 Documentation for Assurance Companies is no longer filed at Companies House. Documents are now forwarded by the company to the Financial Services Authority
+1385662461 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385662471 No data available for this company number
+1385662473 No data available for this company number
+1385662476 No data available for this company number
+1385662476 No data available for this company number
+1385662480 No data available for this company number
+1385662496 No data available for this company number
+1385662515 No data available for this company number
+1385662550 No data available for this company number
+1385662552 No data available for this company number
+1385662567 No data available for this company number
+1385662576 No data available for this company number
+1385662611 No data available for this company number
+1385662612 No data available for this company number
+1385662631 No data available for this company number
+1385662669 No data available for this company number
+1385662672 No data available for this company number
+1385662687 No data available for this company number
+1385662687 No data available for this company number
+1385662729 No data available for this company number
+1385662812 No data available for this company number
+1385662817 No data available for this company number
+1385662880 No data available for this company number
+1385663091 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385663092 Documentation for Assurance Companies is no longer filed at Companies House. Documents are now forwarded by the company to the Financial Services Authority
+1385663116 No data available for this company number
+1385663123 No data available for this company number
+1385663124 No data available for this company number
+1385663124 No data available for this company number
+1385663254 No data available for this company number
+1385663342 No data available for this company number
+1385663344 No data available for this company number
+1385663354 No data available for this company number
+1385663535 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385663566 No data available for this company number
+1385663566 No data available for this company number
+1385663595 No data available for this company number
+1385663621 No data available for this company number
+1385663622 No data available for this company number
+1385663645 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663645 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663645 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663645 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663645 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663645 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663646 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663646 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663646 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663646 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663646 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663646 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663646 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663646 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663647 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663647 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663647 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663647 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663647 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663647 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663647 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663648 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663648 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663648 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663648 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663648 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663648 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663649 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663650 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663650 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663650 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663650 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663650 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663650 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663650 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663651 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663651 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663651 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663651 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663651 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663651 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663652 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663652 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663652 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663652 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663652 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663652 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663653 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663653 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663653 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663653 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663653 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663653 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663653 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663654 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663654 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663655 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663655 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663655 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663655 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663655 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663656 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663656 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663656 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663656 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663656 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663656 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663656 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663656 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663657 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663657 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663657 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663657 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663657 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663657 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663657 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663657 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663658 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663658 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663658 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663658 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663658 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663658 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663666 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663666 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663667 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663667 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663667 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663667 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663667 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663667 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663667 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663667 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663668 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663668 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663668 Repeat/non-incremental Transaction ID sent with request - Rejecting
+1385663737 No data available for this company number
+1385663737 No data available for this company number
+1385663810 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385663966 No data available for this company number
+1385664012 No data available for this company number
+1385664014 No data available for this company number
+1385664109 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664123 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664176 No data available for this company number
+1385664245 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664255 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664265 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664388 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664401 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664411 No data available for this company number
+1385664442 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664452 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664465 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664475 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664485 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664495 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664506 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664516 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664527 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664538 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664548 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664558 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385664579 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664590 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664603 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664613 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664625 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664646 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664657 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664667 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664679 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664689 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664699 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664733 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664744 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664755 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664756 Data returned is that of the Branch Company.  Company name and number reflect that of the parent company.
+1385664782 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664795 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664805 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664818 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664828 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664838 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664848 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664858 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664868 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664879 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664889 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664899 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664909 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664919 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664947 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664957 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664967 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664977 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664987 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)
+1385664998 Unable to connect to xmlgw.companieshouse.gov.uk:80 . Error #0: stream_socket_client(): unable to connect to xmlgw.companieshouse.gov.uk:80 (Connection timed out)

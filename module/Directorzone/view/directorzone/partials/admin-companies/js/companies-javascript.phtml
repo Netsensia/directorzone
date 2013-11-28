@@ -26,7 +26,7 @@ $(document).ready(function() {
 	{
 		$('ul#searchresults').empty();
 		
-		var url = "/ajax/company/search?name=" + name;
+		var url = "/ajax/company/search?name=" + encodeURIComponent(name);
 		
 		$.ajax({
 			url: url
