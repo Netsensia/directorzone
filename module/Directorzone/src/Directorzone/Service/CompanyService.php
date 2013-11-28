@@ -300,7 +300,7 @@ class CompanyService extends NetsensiaService
                 $companyNumberHigherThan,
                 $numberOfResults
             ) {
-                $select->order('number ASC')
+                $select->order('companyid ASC')
                        ->limit($numberOfResults)
                        ->where->greaterThan(
                            'companyid',

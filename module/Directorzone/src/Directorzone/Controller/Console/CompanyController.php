@@ -35,37 +35,46 @@ class CompanyController extends NetsensiaActionController
         
         while (true) {
             
-            $lastCompanyId = file_get_contents('lastcompanyid.txt');
-            
-            $rowset = $companyService->getCompaniesHouseList($lastCompanyId, 10);
-            
-            foreach ($rowset as $row) {
-                $request =
-                    $this->getServiceLocator()
-                         ->get('NetsensiaCompanies\Request\CompanyDetailsRequest');
+            try {
+                $lastCompanyId = file_get_contents('lastcompanyid.txt');
                 
-                $companyModel = $request->loadCompanyDetails($row['number']);
-                            
-                $addressLines = $companyModel->getAddressLines();
+                $rowset = $companyService->getCompaniesHouseList($lastCompanyId, 10);
                 
-                for ($i=0; $i<count($addressLines) && $i<5; $i++) {
-                    $data['addressline' . ($i+1)] = $addressLines[$i];
+                foreach ($rowset as $row) {
+                    $request =
+                        $this->getServiceLocator()
+                             ->get('NetsensiaCompanies\Request\CompanyDetailsRequest');
+                    
+                    $companyModel = $request->loadCompanyDetails($row['number']);
+                                
+                    $addressLines = $companyModel->getAddressLines();
+                    
+                    for ($i=0; $i<count($addressLines) && $i<5; $i++) {
+                        $data['addressline' . ($i+1)] = $addressLines[$i];
+                    }
+                    
+                    $data['incorporationdate'] = $companyModel->getIncorporationDate();
+                    $data['category'] = $companyModel->getCategory();
+                    $data['country'] = $companyModel->getCountry();
+                    $data['detailstatus'] = $companyModel->getStatus();
+                    
+                    $data['siccodes'] = $companyModel->getSicCodes();
+                    $data['number'] = $row['number'];
+                    
+                    $companyService->updateCompaniesHouseDirectory($data);
+                    
+                    echo '.';
                 }
-                
-                $data['incorporationdate'] = $companyModel->getIncorporationDate();
-                $data['category'] = $companyModel->getCategory();
-                $data['country'] = $companyModel->getCountry();
-                $data['detailstatus'] = $companyModel->getStatus();
-                
-                $data['siccodes'] = $companyModel->getSicCodes();
-                $data['number'] = $row['number'];
-                
-                $companyService->updateCompaniesHouseDirectory($data);
-                
-                file_put_contents('lastcompanyid.txt', $row['companyid']);
-                
-                echo '.';
+            } catch (\Exception $e) {
+                file_put_contents(
+                    'exceptions.txt',
+                    time() . ' ' . $e->getMessage() . PHP_EOL,
+                    FILE_APPEND
+                );
+                echo 'x';
             }
+                
+            file_put_contents('lastcompanyid.txt', $row['companyid']);
         }
     }
     
