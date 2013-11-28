@@ -29,7 +29,8 @@ class CompanyServiceTest extends \PHPUnit_Framework_TestCase
         $service = new CompanyService(
             $this->tableMock,
             $this->tableMock,
-            $directoryMock
+            $directoryMock,
+            $this->tableMock
         );
         
         $this->assertTrue($service->isCompanyNumberTaken(1));
@@ -50,7 +51,8 @@ class CompanyServiceTest extends \PHPUnit_Framework_TestCase
         $service = new CompanyService(
             $this->tableMock,
             $this->tableMock,
-            $directoryMock
+            $directoryMock,
+            $this->tableMock
         );
     
         $this->assertFalse($service->isCompanyNumberTaken(1));
