@@ -34,6 +34,9 @@ class CompanyController extends NetsensiaActionController
         $lastCompanyId = '0';
         
         while (true) {
+            
+            $lastCompanyId = file_get_contents('lastcompanyid.txt');
+            
             $rowset = $companyService->getCompaniesHouseList($lastCompanyId, 10);
             
             foreach ($rowset as $row) {
@@ -45,7 +48,7 @@ class CompanyController extends NetsensiaActionController
                             
                 $addressLines = $companyModel->getAddressLines();
                 
-                for ($i=0; $i<count($addressLines); $i++) {
+                for ($i=0; $i<count($addressLines) && $i<5; $i++) {
                     $data['addressline' . ($i+1)] = $addressLines[$i];
                 }
                 
@@ -59,7 +62,7 @@ class CompanyController extends NetsensiaActionController
                 
                 $companyService->updateCompaniesHouseDirectory($data);
                 
-                $lastCompanyId = $row['companyid'];
+                file_put_contents('lastcompanyid.txt', $row['companyid']);
                 
                 echo '.';
             }
