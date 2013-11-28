@@ -8,7 +8,7 @@ $(document).ready(function() {
 
 	function updateUploadedRecordStatus(newStatus) {
 		
-		var number = $('#searchresults').val();
+		var number = $('#searchCompanyNumber').val();
 		var id = $('#searchCompanyUploadId').val();
 		var name = $('input#searchCompanyName').val();
 		
@@ -40,15 +40,21 @@ $(document).ready(function() {
 				text = text + '</div>';
 				$('ul#searchresults').append(
 					    '<li role="presentation">' +
-					    '<a role="menuitem" company-number="' +
-					    companyNumber +
-					    '" tabindex="-1" href="#">' +
+					    '<a class="companysearchresult" role="menuitem" ' +
+					    'company-number="' + companyNumber + '" ' +
+					    'company-name="' + companyName + '" ' +
+					    'tabindex="-1" href="#">' +
 					    text + 
 					    '</a></li>'
 					);
 			});
 		});
 	}
+
+	$(document).delegate('.companysearchresult', 'click', function() {
+		$('#lightboxSearchForCompany input#searchCompanyName').val($(this).attr('company-name'));
+		$('#lightboxSearchForCompany input#searchCompanyNumber').val($(this).attr('company-number'));
+	});
 	
 	$(document).delegate('#action-move-to-pending', 'click', function() {
 		updateUploadedRecordStatus('P');
@@ -66,9 +72,11 @@ $(document).ready(function() {
 	
 	$(document).delegate('.linkSearchForCompanyNumber', 'click', function() {
 		var name = $(this).attr('company-name');
+		var number = $(this).attr('company-number');
 		var uploadId = $(this).attr('company-upload-id');
 		
 		$('#lightboxSearchForCompany input#searchCompanyName').val(name);
+		$('#lightboxSearchForCompany input#searchCompanyNumber').val(number);
 		$('#lightboxSearchForCompany input#searchCompanyUploadId').val(uploadId);
 
 		$('#lightboxSearchForCompany').modal();
@@ -180,6 +188,7 @@ function loadTable(type, page, size)
 				value.number = 
 					'<a class="linkSearchForCompanyNumber" ' +
 					'company-name="' + value.name + '" ' +
+					'company-number="' + value.number + '" ' +
 					'company-upload-id="' + value.internalId + '" ' +
 					'href="#">Search</a>'
 			}
