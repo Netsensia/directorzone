@@ -7,7 +7,7 @@
     
     foreach ($this->filters as $slug => $details) {
         ?>
-        <li id="<?php echo $slug; ?>" class="filter <?php echo ($slug == 'unmatched' ? 'active' : '') ?>">
+        <li id="<?php echo $slug; ?>" class="filter <?php echo ($slug == 'uploaded' ? 'active' : '') ?>">
             <a href="#">
                 <?php echo $details['name'] . ' <span class="badge pull-right">' . $details['count'] . '</span>'; ?>
             </a>

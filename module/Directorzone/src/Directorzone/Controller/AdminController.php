@@ -77,10 +77,10 @@ class AdminController extends NetsensiaActionController
                     'name' => 'Pending',
                     'count' => $this->companyService->getPendingCount()
                     ],
-                'unmatched' =>
+                'uploaded' =>
                     [
-                    'name' => 'Unmatched',
-                    'count' => $this->companyService->getUnmatchedCount()
+                    'name' => 'Uploaded',
+                    'count' => $this->companyService->getUploadedCount()
                     ],
                 'problems' =>
                     [

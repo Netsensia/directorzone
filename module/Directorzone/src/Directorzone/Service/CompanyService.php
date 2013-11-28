@@ -177,7 +177,7 @@ class CompanyService extends NetsensiaService
         return $this->getUploadedCompaniesFromStatus('P', $start, $end);
     }
     
-    public function getUnmatchedCompanies($start, $end)
+    public function getUploadedCompanies($start, $end)
     {
         return $this->getUploadedCompaniesFromStatus('U', $start, $end);
     }
@@ -207,7 +207,7 @@ class CompanyService extends NetsensiaService
         return $this->getUploadStatusCount('P');
     }
     
-    public function getUnmatchedCount()
+    public function getUploadedCount()
     {
         return $this->getUploadStatusCount('U');
     }
@@ -232,7 +232,7 @@ class CompanyService extends NetsensiaService
             case 'L':
                 return $this->getLiveCompanies($start, $end);
             case 'U':
-                return $this->getUnmatchedCompanies($start, $end);
+                return $this->getUploadedCompanies($start, $end);
             case 'R':
                 return $this->getRemovedCompanies($start, $end);
             case 'H':
