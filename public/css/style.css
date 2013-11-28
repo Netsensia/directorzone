@@ -156,3 +156,20 @@ label.control-label {
 div.invisible-other {
 	display:none;
 }
+
+div.infodropdown {
+	font-size:0.8em;
+}
+
+div.infodropdown .id {
+	font-weight:bold;
+	margin-right:1em;
+}
+
+div.infodropdown .name {
+	font-weight:normal;
+}
+
+div.infodropdown .supplement {
+    color:#BBBBBB	
+}

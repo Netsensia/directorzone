@@ -35,17 +35,23 @@ $(document).ready(function() {
 			$.each(data.hits.hits, function (key, value) {
 				var companyNumber = value['_source']['number'];
 				var companyName = value['_source']['name'];
+				var companyAddress = '25 Raymond Road, SW19 4AD';
+
 				var text = '<div class="infodropdown">';
-				text = text + companyNumber + " " + companyName;
-				text = text + '</div>';
+				text += '<span class="id">' + companyNumber + '</span>';
+				text += '<span class="name">' + companyName + '</span>';
+				text += '<div class="supplement">' + companyAddress + '</div>';
+				text += '</div>';
+				
 				$('ul#searchresults').append(
 					    '<li role="presentation">' +
 					    '<a class="companysearchresult" role="menuitem" ' +
-					    'company-number="' + companyNumber + '" ' +
-					    'company-name="' + companyName + '" ' +
-					    'tabindex="-1" href="#">' +
-					    text + 
-					    '</a></li>'
+    					    'company-number="' + companyNumber + '" ' +
+    					    'company-name="' + companyName + '" ' +
+    					    'tabindex="-1" href="#">' +
+    					    text + 
+					    '</a>' +
+					    '</li>'
 					);
 			});
 		});
