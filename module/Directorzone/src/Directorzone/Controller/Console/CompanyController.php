@@ -27,6 +27,45 @@ class CompanyController extends NetsensiaActionController
                 
     }
     
+    public function ingestCompanyDetailsAction()
+    {
+        $companyService = $this->getServiceLocator()->get('CompanyService');
+        
+        $lastCompanyId = '0';
+        
+        while (true) {
+            $rowset = $companyService->getCompaniesHouseList($lastCompanyId, 10);
+            
+            foreach ($rowset as $row) {
+                $request =
+                    $this->getServiceLocator()
+                         ->get('NetsensiaCompanies\Request\CompanyDetailsRequest');
+                
+                $companyModel = $request->loadCompanyDetails($row['number']);
+                            
+                $addressLines = $companyModel->getAddressLines();
+                
+                for ($i=0; $i<count($addressLines); $i++) {
+                    $data['addressline' . ($i+1)] = $addressLines[$i];
+                }
+                
+                $data['incorporationdate'] = $companyModel->getIncorporationDate();
+                $data['category'] = $companyModel->getCategory();
+                $data['country'] = $companyModel->getCountry();
+                $data['detailstatus'] = $companyModel->getStatus();
+                
+                $data['siccodes'] = $companyModel->getSicCodes();
+                $data['number'] = $row['number'];
+                
+                $companyService->updateCompaniesHouseDirectory($data);
+                
+                $lastCompanyId = $row['companyid'];
+                
+                echo '.';
+            }
+        }
+    }
+    
     public function ingestOfficersAction()
     {
         

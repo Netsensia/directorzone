@@ -23,20 +23,52 @@ class CompanyService extends NetsensiaService
      */
     private $companyDirectoryTable;
     
+    /**
+     * @var TableGateway
+     */
+    private $companySicCodesTable;
+    
     public function __construct(
         TableGateway $companyUpload,
         TableGateway $companiesHouse,
-        TableGateway $companyDirectory
+        TableGateway $companyDirectory,
+        TableGateway $companySicCode
     ) {
         $this->companyUploadTable = $companyUpload;
         $this->companiesHouseTable = $companiesHouse;
         $this->companyDirectoryTable = $companyDirectory;
+        $this->companySicCodeTable = $companySicCode;
     }
     
     public function addToCompaniesHouseDirectory(
         $data
     ) {
         $this->companiesHouseTable->insert($data);
+    }
+    
+    public function updateCompaniesHouseDirectory(
+        $data
+    ) {
+        $sicCodes = $data['siccodes'];
+        unset($data['siccodes']);
+        
+        $companyNumber = $data['number'];
+        unset($data['number']);
+        
+        $this->companiesHouseTable->update(
+            $data,
+            ['number' => $companyNumber]
+        );
+        
+        foreach ($sicCodes as $sicCode) {
+            $data = [
+                'siccode' => $sicCode,
+                'companynumber' => $companyNumber
+            ];
+            $this->companySicCodeTable->insert(
+                $data
+            );
+        }
     }
     
     public function getCompaniesHouseCount()
@@ -256,5 +288,27 @@ class CompanyService extends NetsensiaService
         );
     
         return $rowset->current()['count'] == 1;
+    }
+    
+    public function getCompaniesHouseList(
+        $companyNumberHigherThan,
+        $numberOfResults
+    )
+    {
+        $rowset = $this->companiesHouseTable->select(
+            function (Select $select) use (
+                $companyNumberHigherThan,
+                $numberOfResults
+            ) {
+                $select->order('number ASC')
+                       ->limit($numberOfResults)
+                       ->where->greaterThan(
+                           'companyid',
+                           $companyNumberHigherThan
+                       );
+            }
+        );
+    
+        return $rowset;
     }
 }

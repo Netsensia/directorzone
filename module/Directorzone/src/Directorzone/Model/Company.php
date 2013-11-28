@@ -26,7 +26,5 @@ class Company extends DatabaseTableModel
     {
         $primaryKey = $this->getPrimaryKey();
         return $primaryKey['addressid'];
-        
-        
     }
 }

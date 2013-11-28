@@ -94,11 +94,20 @@ class Module
                     );
                     return $instance;
                 },
+                'CompanySicCodeTableGateway' => function ($sm) {
+                
+                    $instance = new TableGateway(
+                        'companysiccode',
+                        $sm->get('Zend\Db\Adapter\Adapter')
+                    );
+                    return $instance;
+                },
                 'CompanyService' => function ($sm) {
                     $instance = new CompanyService(
                         $sm->get('CompanyUploadTableGateway'),
                         $sm->get('CompaniesHouseTableGateway'),
-                        $sm->get('CompanyDirectoryTableGateway')
+                        $sm->get('CompanyDirectoryTableGateway'),
+                        $sm->get('CompanySicCodeTableGateway')
                     );
                     return $instance;
                 },

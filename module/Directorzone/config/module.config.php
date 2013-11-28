@@ -382,7 +382,16 @@ return array(
                         'route'    => 'officers',
                         'defaults' => array(
                             'controller' => 'Directorzone\Controller\Console\Company',
-                            'action'     => 'ingest-offices',
+                            'action'     => 'ingest-officers',
+                        ),
+                    ),
+                ),
+                'ingest-company-details' => array(
+                    'options' => array(
+                        'route'    => 'details',
+                        'defaults' => array(
+                            'controller' => 'Directorzone\Controller\Console\Company',
+                            'action'     => 'ingest-company-details',
                         ),
                     ),
                 ),
