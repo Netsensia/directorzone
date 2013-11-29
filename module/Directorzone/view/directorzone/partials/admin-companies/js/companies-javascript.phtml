@@ -31,6 +31,15 @@ $(document).ready(function() {
 		return empty;
 	}
 
+	function prettySic(sic)
+	{
+		var parts = sic.split(" - ");
+
+		if (parts.length > 1) {
+		    return parts[1];
+		}
+	}
+
 	function populateDropdownFromNameSearch(name)
 	{
 		$('ul#searchresults').empty();
@@ -74,10 +83,10 @@ $(document).ready(function() {
 	            
 	            if (!empty(siccode[0])) {
     				text += '<div class="supplement">';
-				    text += siccode[0];
+				    text += prettySic(siccode[0]);
 				    for (i=1; i<4; i++) {
 					    if (!empty(siccode[i])) {
-						    text += ', ' + siccode[i];
+						    text += ', ' + prettySic(siccode[i]);
 					    }
 				    }
                     text += '</div>';
