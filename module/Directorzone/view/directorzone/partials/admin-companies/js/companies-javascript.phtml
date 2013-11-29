@@ -154,7 +154,9 @@ $(document).ready(function() {
 	$(document).delegate('.linkSearchForOfficers', 'click', function() {
 
 		var number = $(this).attr('company-number');
-		$('#lightboxSearchForCompany input#searchCompanyNumber').val(number);
+		var name = $(this).attr('company-name');
+		$('#lightboxSearchForOfficers .modal-title').html('Officer search<br>' + name);
+		$('#lightboxSearchForOfficers input#searchCompanyNumber').val(number);
 
 		$('#lightboxSearchForOfficers').modal();
 
@@ -272,6 +274,7 @@ function loadTable(type, page, size)
 			if (type == 'P') {
 				value.officers = 
 					'<a class="linkSearchForOfficers" ' +
+					'company-name="' + value.name + '" ' +
 					'company-number="' + value.number + '" ' +
 					'href="#">Search</a>'
 			}
