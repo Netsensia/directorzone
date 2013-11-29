@@ -24,7 +24,11 @@ $(document).ready(function() {
 
 	function empty(str)
 	{
-		return (!str || /^\s*$/.test(str));
+		var empty = (!str || /^\s*$/.test(str));
+
+		empty = empty || str.toLowerCase() == 'none supplied';
+
+		return empty;
 	}
 
 	function populateDropdownFromNameSearch(name)
