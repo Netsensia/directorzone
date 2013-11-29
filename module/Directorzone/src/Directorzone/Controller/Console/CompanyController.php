@@ -3,6 +3,7 @@ namespace Directorzone\Controller\Console;
 
 use Netsensia\Controller\NetsensiaActionController;
 use Netsensia\Library\Csv\Csv;
+use Netsensia\Library\Datetime\Datetime;
 
 class CompanyController extends NetsensiaActionController
 {
@@ -75,10 +76,15 @@ class CompanyController extends NetsensiaActionController
                         $data['country'] = $fields['RegAddress.Country'];
                         $data['postcode'] = $fields['RegAddress.PostCode'];
                         
-                        $originalDate = $fields['IncorporationDate'];
-                        $newDate = date("Y-m-d", strtotime($originalDate));
+                        try {
+                            $incorporationDate =
+                                Datetime::ukDateToGenericDate($fields['IncorporationDate']);
+                        } catch (\InvalidArgumentException $e) {
+                            $incorporateDate = null;
+                        }
                         
-                        $data['incorporationdate'] = $newDate;
+                        $data['incorporationdate'] = $incorporationDate;
+                        
                         $data['category'] = $fields['CompanyCategory'];
                         $data['detailstatus'] = $fields['CompanyStatus'];
                                                 

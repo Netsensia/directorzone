@@ -22,6 +22,11 @@ $(document).ready(function() {
 		});
 	}
 
+	function empty(str)
+	{
+		return (!str || /^\s*$/.test(str));
+	}
+
 	function populateDropdownFromNameSearch(name)
 	{
 		$('ul#searchresults').empty();
@@ -40,18 +45,39 @@ $(document).ready(function() {
 				var county = value['_source']['county'];
 				var postcode = value['_source']['postcode'];
 
-				//var businessAreas = value['_source']['businessAreas'];
-				var incorporationDate = value['_source']['incorporationdate'];
+				var siccode = new Array();
+				siccode[0] = value['_source']['siccode1'];
+				siccode[1] = value['_source']['siccode2'];
+				siccode[2] = value['_source']['siccode3'];
+				siccode[3] = value['_source']['siccode4'];
 				
-				if (town != 'null' && town != null && town != '') companyAddress += ', ' + town;
-				if (county != 'null' && county != null && county != '') companyAddress += ', ' + county;
-				if (postcode != 'null' && postcode != null && postcode != '') companyAddress += ', ' + postcode;
+				if (!empty(town)) companyAddress += ', ' + town;
+				if (!empty(county)) companyAddress += ', ' + county;
+				if (!empty(postcode)) companyAddress += ', ' + postcode;
 
 				var text = '<div class="infodropdown">';
 				text += '<span class="id">' + companyNumber + '</span>';
 				text += '<span class="name">' + companyName + '</span>';
 				text += '<div class="supplement">' + companyAddress + '</div>';
-				text += '<div class="supplement">Incorporated on ' + incorporationDate + '</div>';
+
+				var incorporationDate = value['_source']['incorporationdate'];
+				
+				if (!empty(incorporationDate)) {
+    				text += '<div class="supplement">' + 
+    			                 'Incorporated on ' + incorporationDate +
+    			            '</div>';
+				}
+	            
+	            if (!empty(siccode[0])) {
+    				text += '<div class="supplement">';
+				    text += siccode[0];
+				    for (i=1; i<4; i++) {
+					    if (!empty(siccode[i])) {
+						    text += ', ' + siccode[i];
+					    }
+				    }
+                    text += '</div>';
+			    }
 				text += '</div>';
 				
 				$('ul#searchresults').append(
