@@ -42,6 +42,9 @@ $(document).ready(function() {
 
 	function populateDropdownFromNameSearch(name)
 	{
+		$('#action-search-again').addClass('active');
+		$('#searchagaintext').html('Searching...');
+		
 		$('ul#searchresults').empty();
 		
 		var url = "/ajax/company/search?name=" + encodeURIComponent(name);
@@ -49,7 +52,7 @@ $(document).ready(function() {
 		$.ajax({
 			url: url
 		}).done(function(data) {
-			$('#action-search-again').removeClass('active');
+			
 			$.each(data.hits.hits, function (key, value) {
 				var companyNumber = value['_source']['number'];
 				var companyName = value['_source']['name'];
@@ -104,6 +107,9 @@ $(document).ready(function() {
 					    '</li>'
 					);
 			});
+
+			$('#action-search-again').removeClass('active');
+			$('#searchagaintext').html('Search Again');
 		});
 	}
 
@@ -122,7 +128,7 @@ $(document).ready(function() {
 
 	$(document).delegate('#action-search-again', 'click', function() {
 		var name = $('#searchCompanyName').val();
-		$(this).addClass('active');
+		
 		populateDropdownFromNameSearch(name);
 	});
 	

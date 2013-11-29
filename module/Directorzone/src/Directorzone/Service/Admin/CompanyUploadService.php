@@ -82,11 +82,11 @@ class CompanyUploadService extends NetsensiaService
         
         //fclose($fileHandle);
 
-        return $companies;    
+        return $companies;
     }
     
     private function addCompaniesToUploadTable(
-	   array $companies
+        array $companies
     ) {
 
         foreach ($companies as $company) {
@@ -105,7 +105,7 @@ class CompanyUploadService extends NetsensiaService
     {
         $str = filter_var($str, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
         $str = filter_var($str, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
-        $str = iconv("UTF-8", "UTF-8//IGNORE",$str);
+        $str = iconv("UTF-8", "UTF-8//IGNORE", $str);
         
         return $str;
     }
