@@ -44,6 +44,8 @@ $(document).ready(function() {
 	{
 		$('#action-search-again').addClass('active');
 		$('#searchagaintext').html('Searching...');
+		$('#companySearchDropDown').attr('disabled', 'disabled');
+		$('#companySearchDropDownText').html('Searching...');
 		
 		$('ul#searchresults').empty();
 		
@@ -110,6 +112,9 @@ $(document).ready(function() {
 
 			$('#action-search-again').removeClass('active');
 			$('#searchagaintext').html('Search Again');
+			$('#companySearchDropDown').removeAttr('disabled');
+			$('#companySearchDropDownText').html('Select company...');
+			$('#companySearchDropDown').trigger('click');
 		});
 	}
 
