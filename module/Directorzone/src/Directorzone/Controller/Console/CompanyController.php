@@ -160,8 +160,7 @@ class CompanyController extends NetsensiaActionController
     }
     
     public function ingestOfficersAction()
-    {
-        
+    { 
     }
     
     public function ingestAction()

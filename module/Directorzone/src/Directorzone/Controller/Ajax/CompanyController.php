@@ -104,8 +104,8 @@ class CompanyController extends NetsensiaActionController
                 'internalId' => $internalId,
                 'number' => $companyNumber,
                 'name' => $name,
-                'ceo' => '',
-                'sector' => ''
+                'officers' => [],
+                'sectors' => []
             ];
         }
 

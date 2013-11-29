@@ -136,7 +136,7 @@ $(document).ready(function() {
 		
 		populateDropdownFromNameSearch(name);
 	});
-	
+
 	$(document).delegate('.linkSearchForCompanyNumber', 'click', function() {
 		var name = $(this).attr('company-name');
 		var number = $(this).attr('company-number');
@@ -149,6 +149,16 @@ $(document).ready(function() {
 		$('#lightboxSearchForCompany').modal();
 
 		populateDropdownFromNameSearch(name);
+	});
+	
+	$(document).delegate('.linkSearchForOfficers', 'click', function() {
+
+		var number = $(this).attr('company-number');
+		$('#lightboxSearchForCompany input#searchCompanyNumber').val(number);
+
+		$('#lightboxSearchForOfficers').modal();
+
+		populateDropdownFromOfficerSearch(name);
 	});
 	
 	$('#fileupload').fileupload({
@@ -199,7 +209,6 @@ $(document).ready(function() {
 		  case 'pending' : type = 'P'; break;
 		  case 'problems' : type = 'O'; break;
 		  case 'companies-house' : type = 'H'; break;
-		  case 'removed' : type = 'R'; break;
 		  case 'uploaded' : type = 'U'; break;
 		}
 
@@ -238,7 +247,7 @@ function loadTable(type, page, size)
 	}).done(function(data) {
 
 		$('table#companies').find("tr:gt(0)").remove();
-		
+				
 		$('li#next').removeClass('disabled');
 		$('li#previous').removeClass('disabled');
 		
@@ -259,12 +268,22 @@ function loadTable(type, page, size)
 					'company-upload-id="' + value.internalId + '" ' +
 					'href="#">Search</a>'
 			}
-    		$('table#companies tr:last').after(
-    			'<tr>' +
-    			'<td>' + value.number + '</td>' +
-    			'<td>' + value.name + '</td>' +
-    			'</tr>'
-    	    );
+
+			if (type == 'P') {
+				value.officers = 
+					'<a class="linkSearchForOfficers" ' +
+					'company-number="' + value.number + '" ' +
+					'href="#">Search</a>'
+			}
+			
+			var newRow = '<tr>';
+			newRow += '<td>' + value.number + '</td>';
+			newRow += '<td>' + value.name + '</td>';
+			newRow += '<td>' + value.officers + '</td>';
+			newRow += '<td>' + value.sectors + '</td>';
+			newRow += '</tr>';
+			
+    		$('table#companies tr:last').after(newRow);
     	});
 	});
 }
