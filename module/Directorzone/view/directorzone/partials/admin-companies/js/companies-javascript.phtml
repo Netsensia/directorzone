@@ -155,10 +155,10 @@ $(document).ready(function() {
 
 		var number = $(this).attr('company-number');
 		var name = $(this).attr('company-name');
-		$('#lightboxSearchForOfficers .modal-title').html('Officer search<br>' + name);
-		$('#lightboxSearchForOfficers input#searchCompanyNumber').val(number);
+		$('#lightboxCompanyDetails .modal-title').html('Company details<br>' + name);
+		$('#lightboxCompanyDetails input#searchCompanyNumber').val(number);
 
-		$('#lightboxSearchForOfficers').modal();
+		$('#lightboxCompanyDetails').modal();
 
 		populateDropdownFromOfficerSearch(name);
 	});
@@ -272,7 +272,7 @@ function loadTable(type, page, size)
 			}
 
 			if (type == 'P') {
-				value.officers = 
+				value.details = 
 					'<a class="linkSearchForOfficers" ' +
 					'company-name="' + value.name + '" ' +
 					'company-number="' + value.number + '" ' +
@@ -282,8 +282,7 @@ function loadTable(type, page, size)
 			var newRow = '<tr>';
 			newRow += '<td>' + value.number + '</td>';
 			newRow += '<td>' + value.name + '</td>';
-			newRow += '<td>' + value.officers + '</td>';
-			newRow += '<td>' + value.sectors + '</td>';
+			newRow += '<td>' + value.details + '</td>';
 			newRow += '</tr>';
 			
     		$('table#companies tr:last').after(newRow);
