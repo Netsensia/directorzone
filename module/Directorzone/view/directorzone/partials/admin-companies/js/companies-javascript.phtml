@@ -12,12 +12,42 @@ $(document).ready(function() {
 		var id = $('#searchCompanyUploadId').val();
 		var name = $('input#searchCompanyName').val();
 		
-		var url = '/ajax/company/updateuploadstatus?uploadid=' + id + '&number=' + number + '&name=' + name + '&recordstatus=' + newStatus;
+		var url = '/ajax/company/updateuploadstatus?uploadid=' + id + 
+		   '&number=' + number + '&name=' + name + '&recordstatus=' + newStatus;
 
 		$.ajax({
 			url: url
 		}).done(function(data) {
-			$('#action-cancel').click();
+			$('#lightboxSearchForCompany #action-cancel').click();
+			location.reload();
+		});
+	}
+
+	function deleteUploadedRecord(id, fromType) {
+				
+		var url = '/ajax/company/deleteuploaded?uploadid=' + id;
+
+		$.ajax({
+			url: url
+		}).done(function(data) {
+			$('#lightboxSearchForCompany #action-cancel').click();
+			 window.location = '/admin/companies?type=' + fromType;
+		});
+	}
+
+	function makeCompanyLive(id) {
+		
+		var url = '/ajax/company/makelive?uploadid=' + id;
+
+		$.ajax({
+			url: url
+		}).done(function(data) {
+
+			if (data[0].error) {
+                alert(data[0].error);
+            }
+            
+			$('#lightboxCompanyDetails #action-cancel').click();
 			location.reload();
 		});
 	}
@@ -127,14 +157,24 @@ $(document).ready(function() {
 		updateUploadedRecordStatus('P');
 	});
 
-	$(document).delegate('#action-move-to-problems', 'click', function() {
-		updateUploadedRecordStatus('O');
+	$(document).delegate('#action-delete-from-upload', 'click', function() {
+		var id = $('#searchCompanyUploadId').val();
+		deleteUploadedRecord(id, 'uploaded');
+	});
+
+	$(document).delegate('#action-company-details-delete', 'click', function() {
+		var id = $('#companyDetailsUploadId').val();
+		deleteUploadedRecord(id, 'pending');
 	});
 
 	$(document).delegate('#action-search-again', 'click', function() {
 		var name = $('#searchCompanyName').val();
-		
 		populateDropdownFromNameSearch(name);
+	});
+
+	$(document).delegate('#action-make-company-live', 'click', function() {
+		var id = $('#companyDetailsUploadId').val();
+		makeCompanyLive(id);
 	});
 
 	$(document).delegate('.linkSearchForCompanyNumber', 'click', function() {
@@ -151,12 +191,14 @@ $(document).ready(function() {
 		populateDropdownFromNameSearch(name);
 	});
 	
-	$(document).delegate('.linkSearchForOfficers', 'click', function() {
+	$(document).delegate('.linkUpdateDetails', 'click', function() {
 
 		var number = $(this).attr('company-number');
 		var name = $(this).attr('company-name');
+		var uploadId = $(this).attr('company-upload-id');
+		
 		$('#lightboxCompanyDetails .modal-title').html('Company details<br>' + name);
-		$('#lightboxCompanyDetails input#searchCompanyNumber').val(number);
+		$('#lightboxCompanyDetails input#companyDetailsUploadId').val(uploadId);
 
 		$('#lightboxCompanyDetails').modal();
 
@@ -199,20 +241,14 @@ $(document).ready(function() {
 
 	var page = 1;
 	var size = 10;
-	var type = "U";
+	var type = getTypeFromSlug("<?php echo $this->selectedCompanyType; ?>");
 
 	$(".filter").click(function() {
 		$(".filter").removeClass('active');
 		$(this).addClass('active');
 		page = 1;
 		size = 10;
-		switch ($(this).attr('id')) {
-		  case 'live' : type = 'L'; break;
-		  case 'pending' : type = 'P'; break;
-		  case 'problems' : type = 'O'; break;
-		  case 'companies-house' : type = 'H'; break;
-		  case 'uploaded' : type = 'U'; break;
-		}
+		type = getTypeFromSlug($(this).attr('id'));
 
 		loadTable(type, page, size);
 	});
@@ -231,6 +267,21 @@ $(document).ready(function() {
 
 	loadTable(type, page, size);
 });
+
+function getTypeFromSlug(slug)
+{
+	var type;
+	
+	switch (slug) {
+	  case 'live' : type = 'L'; break;
+	  case 'pending' : type = 'P'; break;
+	  case 'problems' : type = 'O'; break;
+	  case 'companies-house' : type = 'H'; break;
+	  case 'uploaded' : type = 'U'; break;
+	}
+
+	return type;
+}
 
 function loadTable(type, page, size)
 {
@@ -273,10 +324,11 @@ function loadTable(type, page, size)
 
 			if (type == 'P') {
 				value.details = 
-					'<a class="linkSearchForOfficers" ' +
+					'<a class="linkUpdateDetails" ' +
 					'company-name="' + value.name + '" ' +
 					'company-number="' + value.number + '" ' +
-					'href="#">Search</a>'
+					'company-upload-id="' + value.internalId + '" ' +
+					'href="#">Update</a>'
 			}
 			
 			var newRow = '<tr>';

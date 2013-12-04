@@ -129,6 +129,56 @@ class CompanyService extends NetsensiaService
         return $result;
     }
     
+    public function deleteUploaded(
+        $uploadId
+    ) {
+        $result = $this->companyUploadTable->delete(
+            [
+                'companyuploadid' => $uploadId,
+            ]
+        );
+    
+        return $result;
+    }
+    
+    public function makeLive(
+        $uploadId
+    ) {
+        $rowset = $this->companyUploadTable->select(
+            function (Select $select) use ($uploadId) {
+                $select->where(
+                    ['companyuploadid' => $uploadId]
+                );
+            }
+        );
+        
+        $array = $rowset->toArray();
+        
+        if (count($array) != 1) {
+            throw new \Exception(
+                'Could not find company to make live'
+            );
+        }
+        
+        $companyRow = $array[0];
+        
+        $result = $this->companyDirectoryTable->insert(
+            [
+                'reference' => $companyRow['companynumber'],
+                'name' => $companyRow['name'],
+                'recordstatus' => 'L',
+            ]
+        );
+        
+        $result = $this->companyUploadTable->delete(
+            [
+                'companyuploadid' => $uploadId,
+            ]
+        );
+    
+        return $result;
+    }
+    
     private function getDirectoryStatusCount($status)
     {
         $rowset = $this->companyDirectoryTable->select(

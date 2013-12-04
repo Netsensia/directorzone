@@ -89,6 +89,24 @@ return array(
                                         'action' => 'update-upload-status',
                                     ),
                                 )
+                            ),
+                            'delete-uploaded' => array(
+                                'type' => 'literal',
+                                'options' => array(
+                                    'route' => '/deleteuploaded',
+                                    'defaults' => array(
+                                        'action' => 'delete-uploaded',
+                                    ),
+                                )
+                            ),
+                            'make-live' => array(
+                                'type' => 'literal',
+                                'options' => array(
+                                    'route' => '/makelive',
+                                    'defaults' => array(
+                                        'action' => 'make-live',
+                                    ),
+                                )
                             )
                         ),
                     )

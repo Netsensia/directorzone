@@ -5,13 +5,17 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title" id="companyDetailsDialogTitle"></h4>
       </div>
+      
+      <input type="hidden" id="companyDetailsUploadId">
+      
       <div class="modal-body">
       Company details
       </div>
       <div class="modal-footer">
         <button id="action-cancel" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
         
-        <button id="action-confirm-officers" type="button" class="btn btn-success">Confirm</button>
+        <button id="action-make-company-live" type="button" class="btn btn-success">Add to Directory</button>
+        <button id="action-company-details-delete" type="button" class="btn btn-danger">Delete</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

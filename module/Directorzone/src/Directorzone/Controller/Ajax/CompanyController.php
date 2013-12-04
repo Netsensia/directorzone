@@ -62,6 +62,36 @@ class CompanyController extends NetsensiaActionController
             [$result]
         );
     }
+    
+    public function deleteUploadedAction()
+    {
+        $uploadId = $this->params()->fromQuery('uploadid', null);
+    
+        $result = $this->companyService->deleteUploaded(
+            $uploadId
+        );
+    
+        return new JsonModel(
+            [$result]
+        );
+    }
+    
+    public function makeLiveAction()
+    {
+        $uploadId = $this->params()->fromQuery('uploadid', null);
+    
+        try {
+            $result = $this->companyService->makeLive(
+                $uploadId
+            );
+        } catch (\Exception $e) {
+            $result['error'] = $e->getMessage();
+        }
+            
+        return new JsonModel(
+            [$result]
+        );
+    }
 
     public function companyListAction()
     {

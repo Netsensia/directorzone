@@ -468,3 +468,58 @@
     ),
   ),
 )
+2013-12-04T20:39:17+00:00 INFO (6): Logging started...
+2013-12-04T20:39:17+00:00 INFO (6): array (
+  'files' => 
+  array (
+    0 => 
+    array (
+      'name' => 'Telegraph 1000_Sept 2011.csv',
+      'error' => 'No new companies found to upload',
+    ),
+  ),
+)
+2013-12-04T20:40:06+00:00 INFO (6): Logging started...
+2013-12-04T20:40:06+00:00 INFO (6): array (
+  'files' => 
+  array (
+    0 => 
+    array (
+      'name' => 'Telegraph 1000_Sept 2011.csv',
+      'error' => 'No new companies found to upload',
+    ),
+  ),
+)
+2013-12-04T20:45:43+00:00 INFO (6): Logging started...
+2013-12-04T20:45:43+00:00 INFO (6): array (
+  'files' => 
+  array (
+    0 => 
+    array (
+      'name' => 'Telegraph 1000_Sept 2011.csv',
+      'error' => 'Complete',
+    ),
+  ),
+)
+2013-12-04T20:52:39+00:00 INFO (6): Logging started...
+2013-12-04T20:52:39+00:00 INFO (6): array (
+  'files' => 
+  array (
+    0 => 
+    array (
+      'name' => 'Telegraph 1000_Sept 2011.csv',
+      'error' => '7 new companies uploaded',
+    ),
+  ),
+)
+2013-12-04T20:53:56+00:00 INFO (6): Logging started...
+2013-12-04T20:53:56+00:00 INFO (6): array (
+  'files' => 
+  array (
+    0 => 
+    array (
+      'name' => 'Telegraph 1000_Sept 2011.csv',
+      'error' => '2 new companies uploaded',
+    ),
+  ),
+)

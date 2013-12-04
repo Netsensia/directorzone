@@ -52,8 +52,8 @@ class AdminController extends NetsensiaActionController
         $returnArray['files'][0]['name'] = $fileDetails['name'];
         
         try {
-            $companyUploadService->ingest($fileDetails['tmp_name']);
-            $returnArray['files'][0]['error'] = 'Complete';
+            $companies = $companyUploadService->ingest($fileDetails['tmp_name']);
+            $returnArray['files'][0]['error'] = count($companies) . ' new companies uploaded';
         } catch (\Exception $e) {
             $returnArray['files'][0]['error'] = $e->getMessage();
         }
@@ -65,7 +65,13 @@ class AdminController extends NetsensiaActionController
     
     public function companiesAction()
     {
+        $selectedCompanyType = $this->params()->fromQuery('type', null);
+        if (empty($selectedCompanyType)) {
+            $selectedCompanyType = 'uploaded';
+        }
+        
         return [
+            'selectedCompanyType' => $selectedCompanyType,
             'filters' =>  [
                 'live' =>
                     [
@@ -81,11 +87,6 @@ class AdminController extends NetsensiaActionController
                     [
                     'name' => 'Uploaded',
                     'count' => $this->companyService->getUploadedCount()
-                    ],
-                'problems' =>
-                    [
-                    'name' => 'Problems',
-                    'count' => $this->companyService->getProblemCount()
                     ],
                 'companies-house' =>
                     [
