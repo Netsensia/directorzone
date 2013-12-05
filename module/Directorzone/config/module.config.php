@@ -126,10 +126,31 @@ return array(
             'directories' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route'    => '/myaccount',
+                    'route'    => '/directories',
                     'defaults' => array(
                         'controller' => 'Directorzone\Controller\Directory',
                         'action'     => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'company-directory' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/company',
+                            'defaults' => array(
+                                'action' => 'company',
+                            ),
+                        )
+                    ),
+                    'people-directory' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/people',
+                            'defaults' => array(
+                                'action' => 'people',
+                            ),
+                        )
                     ),
                 ),
             ),
