@@ -8,9 +8,12 @@ class CompanyServiceTest extends \PHPUnit_Framework_TestCase
 {
     private $tableMock;
     
+    private $appointmentsMock;
+    
     public function setup()
     {
         $this->tableMock = \Mockery::mock('Zend\Db\TableGateway\TableGateway');
+        $this->appointmentsMock = \Mockery::mock('NetsensiaCompanies\Request\CompanyAppointmentsRequest');
         
         parent::setup();
     }
@@ -30,7 +33,9 @@ class CompanyServiceTest extends \PHPUnit_Framework_TestCase
             $this->tableMock,
             $this->tableMock,
             $directoryMock,
-            $this->tableMock
+            $this->tableMock,
+            $this->tableMock,
+            $this->appointmentsMock
         );
         
         $this->assertTrue($service->isCompanyNumberTaken(1));
@@ -52,7 +57,9 @@ class CompanyServiceTest extends \PHPUnit_Framework_TestCase
             $this->tableMock,
             $this->tableMock,
             $directoryMock,
-            $this->tableMock
+            $this->tableMock,
+            $this->tableMock,
+            $this->appointmentsMock
         );
     
         $this->assertFalse($service->isCompanyNumberTaken(1));

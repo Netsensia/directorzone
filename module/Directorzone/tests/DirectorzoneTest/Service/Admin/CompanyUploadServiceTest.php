@@ -46,7 +46,7 @@ class CompanyUploadServiceTest extends \PHPUnit_Framework_TestCase
     
     public function testAcceptsOneLineFile()
     {
-        $contents = 'name,number';
+        $contents = 'name';
     
         file_put_contents('tests/workspace/test.csv', $contents);
     
@@ -55,12 +55,11 @@ class CompanyUploadServiceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($companies));
         
         $this->assertEquals('name', $companies[0]['name']);
-        $this->assertEquals('number', $companies[0]['number']);
     }
     
     public function testAcceptsOneLineFileWithOneCarriageReturn()
     {
-        $contents = 'name,number' . PHP_EOL;
+        $contents = 'name' . PHP_EOL;
     
         file_put_contents('tests/workspace/test.csv', $contents);
     
@@ -69,12 +68,11 @@ class CompanyUploadServiceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($companies));
         
         $this->assertEquals('name', $companies[0]['name']);
-        $this->assertEquals('number', $companies[0]['number']);
     }
     
     public function testAcceptsOneLineFileWithTwoCarriageReturns()
     {
-        $contents = 'name,number' . PHP_EOL . PHP_EOL;
+        $contents = 'name' . PHP_EOL . PHP_EOL;
     
         file_put_contents('tests/workspace/test.csv', $contents);
     
@@ -83,14 +81,13 @@ class CompanyUploadServiceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($companies));
         
         $this->assertEquals('name', $companies[0]['name']);
-        $this->assertEquals('number', $companies[0]['number']);
     }
     
     public function testAcceptsMultipleLineFile()
     {
-        $contents = 'name1,number1,' . PHP_EOL;
-        $contents .= 'name2,number2' . PHP_EOL;
-        $contents .= 'name3,number3,' . PHP_EOL;
+        $contents = 'name1,' . PHP_EOL;
+        $contents .= 'name2' . PHP_EOL;
+        $contents .= 'name3,' . PHP_EOL;
         $contents .= PHP_EOL . PHP_EOL;
     
         file_put_contents('tests/workspace/test.csv', $contents);
@@ -100,10 +97,7 @@ class CompanyUploadServiceTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(3, count($companies));
     
         $this->assertEquals('name1', $companies[0]['name']);
-        $this->assertEquals('number1', $companies[0]['number']);
         $this->assertEquals('name2', $companies[1]['name']);
-        $this->assertEquals('number2', $companies[1]['number']);
         $this->assertEquals('name3', $companies[2]['name']);
-        $this->assertEquals('number3', $companies[2]['number']);
     }
 }
