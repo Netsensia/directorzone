@@ -102,12 +102,22 @@ class Module
                     );
                     return $instance;
                 },
+                'CompanyOfficersTableGateway' => function ($sm) {
+                
+                    $instance = new TableGateway(
+                        'companyofficer',
+                        $sm->get('Zend\Db\Adapter\Adapter')
+                    );
+                    return $instance;
+                },
                 'CompanyService' => function ($sm) {
                     $instance = new CompanyService(
                         $sm->get('CompanyUploadTableGateway'),
                         $sm->get('CompaniesHouseTableGateway'),
                         $sm->get('CompanyDirectoryTableGateway'),
-                        $sm->get('CompanySicCodeTableGateway')
+                        $sm->get('CompanySicCodeTableGateway'),
+                        $sm->get('CompanyOfficersTableGateway'),
+                        $sm->get('NetsensiaCompanies\Request\CompanyAppointmentsRequest')
                     );
                     return $instance;
                 },

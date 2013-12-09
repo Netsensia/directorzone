@@ -5,6 +5,8 @@ use Netsensia\Service\NetsensiaService;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Expression;
+use NetsensiaCompanies\Request\CompanyAppointmentsRequest;
+use NetsensiaCompanies\Model\Person;
 
 class CompanyService extends NetsensiaService
 {
@@ -26,18 +28,32 @@ class CompanyService extends NetsensiaService
     /**
      * @var TableGateway
      */
+    private $companyOfficersTable;
+    
+    /**
+     * @var TableGateway
+     */
     private $companySicCodesTable;
+    
+    /**
+     * @var CompanyAppointmentsRequest
+     */
+    private $companyAppointmentsRequest;
     
     public function __construct(
         TableGateway $companyUpload,
         TableGateway $companiesHouse,
         TableGateway $companyDirectory,
-        TableGateway $companySicCode
+        TableGateway $companySicCode,
+        TableGateway $companyOfficers,
+        CompanyAppointmentsRequest $companyAppointmentsRequest
     ) {
         $this->companyUploadTable = $companyUpload;
         $this->companiesHouseTable = $companiesHouse;
         $this->companyDirectoryTable = $companyDirectory;
         $this->companySicCodeTable = $companySicCode;
+        $this->companyOfficersTable = $companyOfficers;
+        $this->companyAppointmentsRequest = $companyAppointmentsRequest;
     }
     
     public function addToCompaniesHouseDirectory(
@@ -175,6 +191,45 @@ class CompanyService extends NetsensiaService
                 'companyuploadid' => $uploadId,
             ]
         );
+                
+        $companyAppointmentsModel =
+            $this->companyAppointmentsRequest->loadCompanyAppointments(
+                $companyRow['companynumber'],
+                $companyRow['name'],
+                true,
+                true
+            );
+                
+        $appointments = $companyAppointmentsModel->getAppointments();
+                
+        $result = $this->companyOfficersTable->delete(
+            [
+                'companyreference' => $companyRow['companynumber'],
+            ]
+        );
+        
+        foreach ($appointments as $appointment) {
+            
+            file_put_contents('bung.txt', print_r($appointment));
+            
+            $appointment instanceof Person;
+            $address = $appointment->getAddress();
+            $result = $this->companyOfficersTable->insert(
+                [
+                    'companyreference' => $companyRow['companynumber'],
+                    'officernumber' => $appointment->getId(),
+                    'forename' => $appointment->getForename(),
+                    'surname' => $appointment->getSurname(),
+                    'dob' => $appointment->getDob(),
+                    'nationality' => $appointment->getNationality(),
+                    'numappointments' => $appointment->getNumAppointments(),
+                    'appointmenttype' => $appointment->getAppointmentType(),
+                    'appointmentstatus' => $appointment->getAppointmentStatus(),
+                    'appointmentdate' => $appointment->getAppointmentDate(),
+                    'honours' => $appointment->getHonours(),
+                ]
+            );
+        }
     
         return $result;
     }
@@ -343,8 +398,7 @@ class CompanyService extends NetsensiaService
     public function getCompaniesHouseList(
         $companyNumberHigherThan,
         $numberOfResults
-    )
-    {
+    ) {
         $rowset = $this->companiesHouseTable->select(
             function (Select $select) use (
                 $companyNumberHigherThan,

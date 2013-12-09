@@ -7,6 +7,7 @@ use Zend\Mvc\MvcEvent;
 use Zend\View\Model\JsonModel;
 use Directorzone\Service\CompanyService;
 use Directorzone\Service\ElasticService;
+use NetsensiaCompanies\Request\CompanyAppointmentsRequest;
 
 class CompanyController extends NetsensiaActionController
 {
@@ -39,6 +40,17 @@ class CompanyController extends NetsensiaActionController
         
         $result = $this->elasticService->search($name);
         
+        return new JsonModel(
+            $result
+        );
+    }
+    
+    public function officerSearchAction()
+    {
+        $name = $this->params()->fromQuery('name', null);
+    
+        $result = $this->elasticService->search($name);
+    
         return new JsonModel(
             $result
         );
