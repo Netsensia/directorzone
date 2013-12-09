@@ -38,21 +38,8 @@ class PeopleController extends NetsensiaActionController
             $end
         );
                 
-        $people = [
-            'results' => [],
-        ];
-        
-        foreach ($results as $result) {
-            
-            $people['results'][] = [
-                'internalId' => $result['officernumber'],
-                'number' => $result['companyreference'],
-                'name' => $result['forename'] . ' ' . $result['surname']
-            ];
-        }
-
         return new JsonModel(
-            $people
+            $results
         );
     }
 }

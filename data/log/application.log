@@ -534,3 +534,36 @@
     ),
   ),
 )
+2013-12-09T17:31:02+00:00 INFO (6): Logging started...
+2013-12-09T17:31:02+00:00 INFO (6): array (
+  'files' => 
+  array (
+    0 => 
+    array (
+      'name' => 'Telegraph 1000_Sept 2011.csv',
+      'error' => '1000 new companies uploaded',
+    ),
+  ),
+)
+2013-12-09T19:49:42+00:00 INFO (6): Logging started...
+2013-12-09T19:49:42+00:00 INFO (6): array (
+  'files' => 
+  array (
+    0 => 
+    array (
+      'name' => 'Telegraph 1000_Sept 2011.csv',
+      'error' => '1000 new companies uploaded',
+    ),
+  ),
+)
+2013-12-09T20:01:05+00:00 INFO (6): Logging started...
+2013-12-09T20:01:05+00:00 INFO (6): array (
+  'files' => 
+  array (
+    0 => 
+    array (
+      'name' => 'Telegraph 1000_Sept 2011.csv',
+      'error' => '11 new companies uploaded',
+    ),
+  ),
+)

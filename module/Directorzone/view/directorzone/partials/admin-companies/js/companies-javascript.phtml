@@ -13,7 +13,7 @@ $(document).ready(function() {
 		var name = $('input#searchCompanyName').val();
 		
 		var url = '/ajax/company/updateuploadstatus?uploadid=' + id + 
-		   '&number=' + number + '&name=' + name + '&recordstatus=' + newStatus;
+		   '&number=' + number + '&name=' + encodeURIComponent(name) + '&recordstatus=' + newStatus;
 
 		$.ajax({
 			url: url
@@ -48,7 +48,7 @@ $(document).ready(function() {
             }
             
 			$('#lightboxCompanyDetails #action-cancel').click();
-			location.reload();
+			window.location = '/admin/companies?type=pending';
 		});
 	}
 

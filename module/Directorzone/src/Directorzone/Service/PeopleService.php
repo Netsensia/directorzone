@@ -26,7 +26,13 @@ class PeopleService extends NetsensiaService
                     ['appointmentstatus' => 'CURRENT']
                 )
                 ->columns(
-                    ['officernumber', 'companyreference', 'forename', 'surname']
+                    ['officernumber', 'dob', 'appointmenttype', 'companyreference', 'forename', 'surname']
+                )
+                ->join(
+                    'companydirectory',
+                    'companydirectory.reference = companyofficer.companyreference',
+                    ['name'],
+                    'left'
                 )
                 ->offset($start - 1)
                 ->limit(1 + ($end - $start))
@@ -34,6 +40,33 @@ class PeopleService extends NetsensiaService
             }
         );
     
-        return $rowset->toArray();
+        $people = [
+            'results' => [],
+        ];
+        
+        $results = $rowset->toArray();
+        
+        foreach ($results as $result) {
+        
+            switch ($result['appointmenttype']) {
+                case 'DIR': $type = 'Director';
+                    break;
+                case 'SEC': $type = 'Secretary';
+                    break;
+                default: $type = $result['appointmenttype'];
+                    break;
+            }
+            
+            $people['results'][] = [
+                'officernumber' => $result['officernumber'],
+                'number' => $result['companyreference'],
+                'appointmenttype' => $type,
+                'companyname' => $result['name'],
+                'dob' => $result['dob'],
+                'name' => $result['forename'] . ' ' . $result['surname']
+            ];
+        }
+        
+        return $people;
     }
 }

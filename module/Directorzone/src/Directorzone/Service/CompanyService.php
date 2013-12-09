@@ -209,9 +209,7 @@ class CompanyService extends NetsensiaService
         );
         
         foreach ($appointments as $appointment) {
-            
-            file_put_contents('bung.txt', print_r($appointment));
-            
+                        
             $appointment instanceof Person;
             $address = $appointment->getAddress();
             $result = $this->companyOfficersTable->insert(
