@@ -44,7 +44,7 @@ class PeopleController extends NetsensiaActionController
         
         foreach ($results as $result) {
             
-            $companies['results'][] = [
+            $people['results'][] = [
                 'internalId' => $result['officernumber'],
                 'number' => $result['companyreference'],
                 'name' => $result['forename'] . ' ' . $result['surname']
@@ -52,7 +52,7 @@ class PeopleController extends NetsensiaActionController
         }
 
         return new JsonModel(
-            $companies
+            $people
         );
     }
 }
