@@ -53,6 +53,27 @@ return array(
                 ),
                 'may_terminate' => false,
                 'child_routes' => array(
+                    'people' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/people',
+                            'defaults' => array(
+                                'controller' => 'Directorzone\Controller\Ajax\People',
+                            ),
+                        ),
+                        'may_terminate' => false,
+                        'child_routes' => array(
+                            'list' => array(
+                                'type' => 'literal',
+                                'options' => array(
+                                    'route' => '/list',
+                                    'defaults' => array(
+                                        'action' => 'people-list',
+                                    ),
+                                )
+                            ),
+                        ),
+                    ),
                     'company' => array(
                         'type' => 'literal',
                         'options' => array(

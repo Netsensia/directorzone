@@ -21,6 +21,7 @@ use Zend\Db\TableGateway\TableGateway;
 use \Zend\Mvc\Controller\ControllerManager;
 use Directorzone\Service\CompanyService;
 use Directorzone\Service\Admin\CompanyUploadService;
+use Directorzone\Service\PeopleService;
 
 class Module
 {
@@ -48,6 +49,12 @@ class Module
                         return new \Directorzone\Controller\Ajax\CompanyController(
                             $cm->getServiceLocator()->get('CompanyService'),
                             $cm->getServiceLocator()->get('ElasticService')
+                        );
+                    },
+                'Directorzone\Controller\Ajax\People' =>
+                    function (ControllerManager $cm) {
+                        return new \Directorzone\Controller\Ajax\PeopleController(
+                            $cm->getServiceLocator()->get('PeopleService')
                         );
                     },
             ),
@@ -103,7 +110,6 @@ class Module
                     return $instance;
                 },
                 'CompanyOfficersTableGateway' => function ($sm) {
-                
                     $instance = new TableGateway(
                         'companyofficer',
                         $sm->get('Zend\Db\Adapter\Adapter')
@@ -118,6 +124,12 @@ class Module
                         $sm->get('CompanySicCodeTableGateway'),
                         $sm->get('CompanyOfficersTableGateway'),
                         $sm->get('NetsensiaCompanies\Request\CompanyAppointmentsRequest')
+                    );
+                    return $instance;
+                },
+                'PeopleService' => function ($sm) {
+                    $instance = new PeopleService(
+                        $sm->get('CompanyOfficersTableGateway')
                     );
                     return $instance;
                 },
