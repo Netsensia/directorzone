@@ -1,7 +1,7 @@
 <?php echo $this->partial('directory-nav.phtml'); ?>
 <h3>Company directory</h3>
 
-<table id="companies" class="table table-striped table-bordered table-hover">
+<table id="companies" data-link="row" class="rowlink table table-striped table-bordered table-hover">
 <tr><th>Number</th><th>Name</th><th>CEO</th><th>Sectors</th><th>Turnover</th></tr>
 </table>
 
@@ -72,9 +72,6 @@ function loadTable(page, size)
 			
     		$('table#companies tr:last').after(newRow);
     	});
-
-    	$('table#companies tbody').attr('data-link', 'row');
-    	$('table#companies tbody').attr('class', 'rowlink');
     	
 	});
 }

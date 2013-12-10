@@ -330,7 +330,17 @@ function loadTable(type, page, size)
 					'company-upload-id="' + value.internalId + '" ' +
 					'href="#">Update</a>'
 			}
-			
+
+			if (type == 'L') {
+				var url = '/directories/company/' + value.internalId;
+				value.number = '<a href="' + url + '">' + value.number + '</a>';
+				$('table#companies').attr('data-link', 'row');
+				$('table#companies').addClass('rowlink');
+			} else {
+				$('table#companies').removeAttr('data-link');
+				$('table#companies').removeClass('rowlink');
+			}
+
 			var newRow = '<tr>';
 			newRow += '<td>' + value.number + '</td>';
 			newRow += '<td>' + value.name + '</td>';
