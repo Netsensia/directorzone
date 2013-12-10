@@ -138,11 +138,7 @@ class CompanyController extends NetsensiaActionController
             
             if (isset($result['companyuploadid'])) {
                 $internalId = $result['companyuploadid'];
-            } else {
-                $internalId = '';
-            }
-            
-            if (isset($result['companydirectoryid'])) {
+            } elseif (isset($result['companydirectoryid'])) {
                 $internalId = $result['companydirectoryid'];
             } else {
                 $internalId = '';
