@@ -7,8 +7,6 @@ return array(
                 'Directorzone\Controller\AccountController',
             'Directorzone\Controller\Content' =>
                 'Directorzone\Controller\ContentController',
-            'Directorzone\Controller\Directory' =>
-                'Directorzone\Controller\DirectoryController',
             'Directorzone\Controller\Console\Company' =>
                 'Directorzone\Controller\Console\CompanyController',
         ),
@@ -155,12 +153,21 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
+                    'company-details' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route' => '/company/[:id]',
+                            'defaults' => array(
+                                'action' => 'company-details',
+                            ),
+                        )
+                    ),
                     'company-directory' => array(
                         'type' => 'literal',
                         'options' => array(
                             'route' => '/company',
                             'defaults' => array(
-                                'action' => 'company',
+                                'action' => 'company-list',
                             ),
                         )
                     ),
@@ -169,7 +176,7 @@ return array(
                         'options' => array(
                             'route' => '/people',
                             'defaults' => array(
-                                'action' => 'people',
+                                'action' => 'people-list',
                             ),
                         )
                     ),

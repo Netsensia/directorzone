@@ -61,8 +61,9 @@ function loadTable(page, size)
 		}
 
 		$.each(data.results, function(key, value) {
+			var url = '/directories/company/' + value.internalId;
 			var newRow = '<tr>';
-			newRow += '<td>' + value.number + '</td>';
+			newRow += '<td><a href="' + url + '">' + value.number + '</a></td>';
 			newRow += '<td>' + value.name + '</td>';
 			newRow += '<td>&nbsp;</td>';
 			newRow += '<td>&nbsp;</td>';
@@ -71,6 +72,10 @@ function loadTable(page, size)
 			
     		$('table#companies tr:last').after(newRow);
     	});
+
+    	$('table#companies tbody').attr('data-link', 'row');
+    	$('table#companies tbody').attr('class', 'rowlink');
+    	
 	});
 }
 

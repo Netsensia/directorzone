@@ -1,0 +1,33 @@
+<h3><?php echo $this->name; ?></h3>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">Address</h3>
+            </div>
+            <div class="panel-body">
+            <?php 
+                echo $this->addressline1 . '<br>' . $this->postcode;
+            ?>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">Sectors</h3>
+            </div>
+            <div class="panel-body">
+            <?php 
+                echo $this->siccode1 . '<br>';
+                echo $this->siccode2 . '<br>';
+                echo $this->siccode3 . '<br>';
+                echo $this->siccode4 . '<br>';
+            ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+

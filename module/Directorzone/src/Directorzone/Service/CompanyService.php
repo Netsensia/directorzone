@@ -7,6 +7,7 @@ use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Expression;
 use NetsensiaCompanies\Request\CompanyAppointmentsRequest;
 use NetsensiaCompanies\Model\Person;
+use Symfony\Component\Translation\Exception\NotFoundResourceException;
 
 class CompanyService extends NetsensiaService
 {
@@ -85,6 +86,27 @@ class CompanyService extends NetsensiaService
                 $data
             );
         }
+    }
+    
+    public function getCompanyDetails($companyDirectoryId)
+    {
+        $rowset = $this->companyDirectoryTable->select(
+            function (Select $select) use ($companyDirectoryId) {
+                $select->where(
+                    ['companydirectoryid' => $companyDirectoryId]
+                )
+                ->join(
+                    'companieshouse',
+                    'companydirectory.reference = companieshouse.number'
+                );
+            }
+        );
+        
+        if ($rowset->count() == 0) {
+            throw new NotFoundResourceException('Company not found in directory');
+        }
+    
+        return $rowset->current()->getArrayCopy();
     }
     
     public function getCompaniesHouseCount()
@@ -277,7 +299,7 @@ class CompanyService extends NetsensiaService
                     ['recordstatus' => $status]
                 )
                 ->columns(
-                    ['reference', 'name']
+                    ['reference', 'name', 'companydirectoryid']
                 )
                 ->offset($start - 1)
                 ->limit(1 + ($end - $start))
