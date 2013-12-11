@@ -88,6 +88,7 @@ service apache2 restart
 cd /var/www
 git clone git@github.com:Netsensia/directorzone.git
 cd /var/www/directorzone
+rm composer.lock
 php composer.phar self-update
 php composer.phar install
 cd config/autoload
