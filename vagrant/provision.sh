@@ -4,6 +4,15 @@
 export DEBIAN_FRONTEND=noninteractive
 
 #############################################################
+# Set up deployment key
+#############################################################
+apt-get -y install git
+eval `ssh-agent -s`
+ssh-agent bash
+ssh-add /home/vagrant/keys/id_rsa
+ssh -o "StrictHostKeyChecking no" git@github.com
+
+#############################################################
 # Necessary system updates to get PHP 5.5 rather than default 5.3
 #############################################################
 apt-get -y update
@@ -15,20 +24,12 @@ apt-get -y install php5
 #############################################################
 # Install other dependencies
 #############################################################
-apt-get -y install mysql-server mysql-client git apache2 libapache2-mod-php5 curl php5-curl php5-mcrypt php5-xsl php5-ldap php5-mysql php5-gd php5-intl php5-json zip build-essential libssl-dev dos2unix
+apt-get -y install openjdk-7-jre-headless mysql-server mysql-client git apache2 libapache2-mod-php5 curl php5-curl php5-mcrypt php5-xsl php5-ldap php5-mysql php5-gd php5-intl php5-json zip build-essential libssl-dev dos2unix
 
 #############################################################
 # Enable required Apache modules
 #############################################################
 a2enmod rewrite php5
-
-#############################################################
-# Setup Apache virtual hosts
-#############################################################
-cp /vagrant/VirtualHost/*.conf /etc/apache2/sites-available
-a2ensite directorzone.conf
-sh -c 'echo "127.0.0.1 directorzone.local" >> /etc/hosts'
-sh -c 'echo "ServerName 127.0.0.1" >> /etc/apache2/apache2.conf'
 
 #############################################################
 # Make some modifications to php.ini file
@@ -42,32 +43,17 @@ sed -i 's/memory_limit = 128M/memory_limit = 2048M/g' /etc/php5/cli/php.ini
 #############################################################
 # Install Elastic Search
 #############################################################
-cd /home/vagrant
 wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.5.deb
-apt-get install -y openjdk-7-jre-headless
 dpkg -i elasticsearch-0.90.5.deb
 
 #############################################################
 # Import database
 #############################################################
-cd /home/vagrant
 wget https://dl.dropboxusercontent.com/u/63777076/VM/db_create.zip
 unzip db_create.zip
 mysql -uroot < db_create.sql
 rm db_create.sql
 rm db_create.zip
-
-cd /var/www/directorzone
-php composer.phar install
-php composer.phar update
-
-php /var/www/directorzone/public/index.php search-index
-
-#############################################################
-# Some clean up
-#############################################################
-rm /var/www/index.html
-service apache2 restart
 
 #############################################################
 # Install developer tools
@@ -89,3 +75,36 @@ pear upgrade-all
 
 git config --global user.name "Chris Moreton"
 git config --global user.email "chris@netsensia.com"
+
+#############################################################
+# Some clean up
+#############################################################
+rm /var/www/index.html
+service apache2 restart
+
+#############################################################
+# Install source code
+#############################################################
+cd /var/www
+git clone git@github.com:Netsensia/directorzone.git
+cd /var/www/directorzone
+php composer.phar self-update
+php composer.phar install
+cd config/autoload
+cp local.php.dist local.php
+cp netsensia.local.php.dist netsensia.local.php
+
+#############################################################
+# Setup Apache virtual hosts
+#############################################################
+cp /var/www/directorzone/vagrant/VirtualHost/*.conf /etc/apache2/sites-available
+a2ensite directorzone.conf
+service apache2 reload
+sh -c 'echo "127.0.0.1 directorzone.local" >> /etc/hosts'
+sh -c 'echo "ServerName 127.0.0.1" >> /etc/apache2/apache2.conf'
+
+#############################################################
+# Set up search index
+#############################################################
+php /var/www/directorzone/public/index.php search-index
+

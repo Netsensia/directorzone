@@ -181,9 +181,7 @@ class CompanyService extends NetsensiaService
     
     public function makeLive(
         $uploadId
-    ) {
-        file_put_contents('bung.txt', "Make live " . print_r($uploadId, true), true);
-        
+    ) {        
         $rowset = $this->companyUploadTable->select(
             function (Select $select) use ($uploadId) {
                 $select->where(
@@ -215,8 +213,6 @@ class CompanyService extends NetsensiaService
                 'companyuploadid' => $uploadId,
             ]
         );
-
-        file_put_contents('bung.txt', "Deleted " . print_r($companyRow, true), true);
         
         $companyAppointmentsModel =
             $this->companyAppointmentsRequest->loadCompanyAppointments(
@@ -227,13 +223,13 @@ class CompanyService extends NetsensiaService
             );
                 
         $appointments = $companyAppointmentsModel->getAppointments();
-                
+                        
         $result = $this->companyOfficersTable->delete(
             [
                 'companyreference' => $companyRow['companynumber'],
             ]
         );
-        
+                
         foreach ($appointments as $appointment) {
                         
             $appointment instanceof Person;
@@ -251,9 +247,7 @@ class CompanyService extends NetsensiaService
                     'appointmentdate' => $appointment->getAppointmentDate(),
                     'honours' => $appointment->getHonours(),
             ];
-            
-            file_put_contents('bung.txt', print_r($data, true), true);
-            
+                        
             $result = $this->companyOfficersTable->insert(
                 $data
             );

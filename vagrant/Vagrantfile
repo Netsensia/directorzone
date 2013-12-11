@@ -43,6 +43,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
     config.vm.synced_folder "../../", "/var/www/", :mount_options => ["gid=www-data", "uid=www-data", "dmode=777", "fmode=777"]
+   config.vm.synced_folder "~/.ssh", "/home/vagrant/keys", :mount_options => []
 
     config.vm.provision "shell", path: "provision.sh"
 
