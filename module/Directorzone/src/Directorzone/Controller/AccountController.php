@@ -7,14 +7,14 @@ use Zend\Mvc\MvcEvent;
 
 class AccountController extends NetsensiaActionController
 {
-	public function onDispatch(MvcEvent $e) 
-	{
-		if (!$this->isLoggedOn()) {
-			return $this->redirect()->toRoute('login');
-		}
-		
-		parent::onDispatch($e);
-	}
+    public function onDispatch(MvcEvent $e)
+    {
+        if (!$this->isLoggedOn()) {
+            return $this->redirect()->toRoute('login');
+        }
+        
+        parent::onDispatch($e);
+    }
 
     public function indexAction()
     {
@@ -29,7 +29,7 @@ class AccountController extends NetsensiaActionController
                 'User',
                 $this->getUserId()
             ),
-        	'flashMessages' => $this->getFlashMessages(),
+            'flashMessages' => $this->getFlashMessages(),
         );
     }
         
@@ -41,7 +41,7 @@ class AccountController extends NetsensiaActionController
                 'User',
                 $this->getUserId()
             ),
-        	'flashMessages' => $this->getFlashMessages(),
+            'flashMessages' => $this->getFlashMessages(),
         );
     }
         
@@ -53,7 +53,7 @@ class AccountController extends NetsensiaActionController
                 'User',
                 $this->getUserId()
             ),
-        	'flashMessages' => $this->getFlashMessages(),
+            'flashMessages' => $this->getFlashMessages(),
         );
     }
         
@@ -65,7 +65,7 @@ class AccountController extends NetsensiaActionController
                 'User',
                 $this->getUserId()
             ),
-        	'flashMessages' => $this->getFlashMessages(),
+            'flashMessages' => $this->getFlashMessages(),
         );
     }
     
@@ -77,9 +77,9 @@ class AccountController extends NetsensiaActionController
                 'User',
                 $this->getUserId()
             ),
-        	'flashMessages' => $this->getFlashMessages(),
+            'flashMessages' => $this->getFlashMessages(),
         );
-    }    
+    }
     
     public function membershipAction()
     {
@@ -89,7 +89,7 @@ class AccountController extends NetsensiaActionController
                 'User',
                 $this->getUserId()
             ),
-        	'flashMessages' => $this->getFlashMessages(),
+            'flashMessages' => $this->getFlashMessages(),
         );
     }
         
@@ -101,7 +101,7 @@ class AccountController extends NetsensiaActionController
                 'User',
                 $this->getUserId()
             ),
-        	'flashMessages' => $this->getFlashMessages(),
+            'flashMessages' => $this->getFlashMessages(),
         );
     }
 
@@ -125,8 +125,8 @@ class AccountController extends NetsensiaActionController
                 'User',
                 $this->getUserId()
             ),
-        	'flashMessages' => $this->getFlashMessages(),
-        );        
+            'flashMessages' => $this->getFlashMessages(),
+        );
     }
 
     public function directoryAction()
@@ -149,7 +149,7 @@ class AccountController extends NetsensiaActionController
                 'User',
                 $this->getUserId()
             ),
-        	'flashMessages' => $this->getFlashMessages(),
-        );  
+            'flashMessages' => $this->getFlashMessages(),
+        );
     }
 }

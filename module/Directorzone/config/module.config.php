@@ -147,7 +147,7 @@ return array(
                 'options' => array(
                     'route'    => '/directories',
                     'defaults' => array(
-                        'controller' => 'Directorzone\Controller\Directory',
+                        'controller' => 'Directorzone\Controller\Directory\CompanyDirectoryController',
                         'action'     => 'index',
                     ),
                 ),
@@ -176,6 +176,7 @@ return array(
                         'options' => array(
                             'route' => '/people',
                             'defaults' => array(
+                                'controller' => 'Directorzone\Controller\Directory\PeopleDirectoryController',
                                 'action' => 'people-list',
                             ),
                         )

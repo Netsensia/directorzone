@@ -83,19 +83,6 @@ rm /var/www/index.html
 service apache2 restart
 
 #############################################################
-# Install source code
-#############################################################
-cd /var/www
-git clone git@github.com:Netsensia/directorzone.git
-cd /var/www/directorzone
-rm composer.lock
-php composer.phar self-update
-php composer.phar install
-cd config/autoload
-cp local.php.dist local.php
-cp netsensia.local.php.dist netsensia.local.php
-
-#############################################################
 # Setup Apache virtual hosts
 #############################################################
 cp /var/www/directorzone/vagrant/VirtualHost/*.conf /etc/apache2/sites-available

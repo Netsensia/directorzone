@@ -1,30 +1,23 @@
 <?php
 
-namespace Directorzone\Controller;
+namespace Directorzone\Controller\Directory;
 
 use Netsensia\Controller\NetsensiaActionController;
 use Directorzone\Service\CompanyService;
 use Directorzone\Service\PeopleService;
 use Symfony\Component\Translation\Exception\NotFoundResourceException;
 
-class DirectoryController extends NetsensiaActionController
+class CompanyDirectoryController extends NetsensiaActionController
 {
     /**
      * @var CompanyService
      */
     private $companyService;
     
-    /**
-     * @var PeopleService
-     */
-    private $peopleService;
-    
     public function __construct(
-        CompanyService $companyService,
-        PeopleService $peopleService
+        CompanyService $companyService
     ) {
         $this->companyService = $companyService;
-        $this->peopleService = $peopleService;
     }
       
     public function indexAction()
@@ -55,9 +48,5 @@ class DirectoryController extends NetsensiaActionController
     {
         
     }
-    
-    public function peopleListAction()
-    {
-        
-    }
+
 }

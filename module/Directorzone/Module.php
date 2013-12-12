@@ -57,10 +57,15 @@ class Module
                             $cm->getServiceLocator()->get('PeopleService')
                         );
                     },
-                'Directorzone\Controller\Directory' =>
+                'Directorzone\Controller\Directory\CompanyDirectoryController' =>
                     function (ControllerManager $cm) {
-                        return new \Directorzone\Controller\DirectoryController(
-                            $cm->getServiceLocator()->get('CompanyService'),
+                        return new \Directorzone\Controller\Directory\CompanyDirectoryController(
+                            $cm->getServiceLocator()->get('CompanyService')
+                        );
+                    },
+                'Directorzone\Controller\Directory\PeopleDirectoryController' =>
+                    function (ControllerManager $cm) {
+                        return new \Directorzone\Controller\Directory\PeopleDirectoryController(
                             $cm->getServiceLocator()->get('PeopleService')
                         );
                     },
