@@ -332,7 +332,7 @@ function loadTable(type, page, size)
 			}
 
 			if (type == 'L') {
-				var url = '/directories/company/' + value.internalId;
+				var url = '/directories/company/' + value.internalId + '/edit';
 				value.number = '<a href="' + url + '">' + value.number + '</a>';
 				$('table#companies').attr('data-link', 'row');
 				$('table#companies').addClass('rowlink');

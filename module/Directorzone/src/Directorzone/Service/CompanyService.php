@@ -93,7 +93,9 @@ class CompanyService extends NetsensiaService
         $rowset = $this->companyDirectoryTable->select(
             function (Select $select) use ($companyDirectoryId) {
                 $select->where(
-                    ['companydirectoryid' => $companyDirectoryId]
+                    [
+                    'companydirectoryid' => $companyDirectoryId
+                    ]
                 )
                 ->join(
                     'companieshouse',
@@ -109,19 +111,21 @@ class CompanyService extends NetsensiaService
         $companyDetails = $rowset->current()->getArrayCopy();
         
         $rowset = $this->companyOfficersTable->select(
-        		function (Select $select) use ($companyDetails) {
-        			$select->where(
-        					[
-        					'companyreference' => $companyDetails['reference'],
-							'appointmentstatus' => 'CURRENT',
-							]
-        			);
-        		}
+            function (Select $select) use ($companyDetails) {
+                $select->where(
+                    [
+                    'companyreference' => $companyDetails['reference'],
+                    'appointmentstatus' => 'CURRENT',
+                    ]
+                );
+            }
         );
         
         foreach ($rowset as $row) {
         	$companyDetails['officers'][] = $row->getArrayCopy();
         }
+        
+        $companyDetails['relatedCompanies'] = [];
         
         return $companyDetails;
         

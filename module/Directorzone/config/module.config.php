@@ -131,7 +131,7 @@ return array(
 
             ),
             'directories' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'type' => 'literal',
                 'options' => array(
                     'route'    => '/directories',
                     'defaults' => array(
@@ -141,15 +141,6 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
-                    'company-details' => array(
-                        'type' => 'Zend\Mvc\Router\Http\Segment',
-                        'options' => array(
-                            'route' => '/company/[:id]',
-                            'defaults' => array(
-                                'action' => 'company-details',
-                            ),
-                        )
-                    ),
                     'company-directory' => array(
                         'type' => 'literal',
                         'options' => array(
@@ -157,7 +148,33 @@ return array(
                             'defaults' => array(
                                 'action' => 'company-list',
                             ),
-                        )
+                        ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'company-details' => array(
+                                'type' => 'segment',
+                                'options' => array(
+                                    'route' => '/:id',
+                                    'constraints' => ['id' => '[0-9]*'],
+                                    'defaults' => array(
+                                        'action' => 'company-details',
+                                        'id' => 0,
+                                    ),
+                                ),
+                                'may_terminate' => true,
+                                'child_routes' => array(
+                                    'company-edit' => array(
+                                        'type' => 'literal',
+                                        'options' => array(
+                                            'route' => '/edit',
+                                            'defaults' => array(
+                                                'action' => 'company-edit',
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                             ),
+                          ),
                     ),
                     'people-directory' => array(
                         'type' => 'literal',

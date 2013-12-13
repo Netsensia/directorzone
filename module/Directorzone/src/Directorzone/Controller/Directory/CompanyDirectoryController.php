@@ -44,6 +44,25 @@ class CompanyDirectoryController extends NetsensiaActionController
         }
     }
     
+    public function companyEditAction()
+    {
+        $companyDirectoryId = $this->params()->fromRoute('id');
+    
+        try {
+    
+            $companyDetails = $this->companyService->getCompanyDetails(
+                $companyDirectoryId
+            );
+    
+            return $companyDetails;
+    
+        } catch (NotFoundResourceException $e) {
+    
+            $this->getResponse()->setStatusCode(404);
+    
+        }
+    }
+    
     public function companyListAction()
     {
         
