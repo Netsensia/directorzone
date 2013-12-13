@@ -106,7 +106,25 @@ class CompanyService extends NetsensiaService
             throw new NotFoundResourceException('Company not found in directory');
         }
     
-        return $rowset->current()->getArrayCopy();
+        $companyDetails = $rowset->current()->getArrayCopy();
+        
+        $rowset = $this->companyOfficersTable->select(
+        		function (Select $select) use ($companyDetails) {
+        			$select->where(
+        					[
+        					'companyreference' => $companyDetails['reference'],
+							'appointmentstatus' => 'CURRENT',
+							]
+        			);
+        		}
+        );
+        
+        foreach ($rowset as $row) {
+        	$companyDetails['officers'][] = $row->getArrayCopy();
+        }
+        
+        return $companyDetails;
+        
     }
     
     public function getCompaniesHouseCount()

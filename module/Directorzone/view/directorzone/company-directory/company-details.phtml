@@ -26,7 +26,11 @@
               <h3 class="panel-title">Officers</h3>
             </div>
             <div class="panel-body">
-            <table class="table"></table>
+            <table class="table">
+              <?php foreach ($this->officers as $officer) : ?>
+              <tr><td><?php echo $officer['forename'] . ' ' . $officer['surname']; ?></td></tr>
+              <?php endforeach; ?>
+            </table>
             </div>
         </div>
         

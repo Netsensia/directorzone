@@ -53,6 +53,10 @@ class PeopleService extends NetsensiaService
                     break;
                 case 'SEC': $type = 'Secretary';
                     break;
+                case 'NOMDIR': $type = 'Nominee Director';
+                    break;
+                case 'NOMSEC': $type = 'Nominee Secretary';
+                    break;
                 default: $type = $result['appointmenttype'];
                     break;
             }
