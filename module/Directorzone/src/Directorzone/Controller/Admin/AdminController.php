@@ -1,15 +1,11 @@
 <?php
 
-namespace Directorzone\Controller;
+namespace Directorzone\Controller\Admin;
 
 use Netsensia\Controller\NetsensiaActionController;
 use Zend\Mvc\MvcEvent;
 use Directorzone\Service\CompanyService;
 use Zend\View\Model\JsonModel;
-use Zend\Validator\File\Size;
-use Zend\Form\Form;
-use Zend\Stdlib\ParametersInterface;
-use Zend\Log\Formatter\FirePhp;
 
 class AdminController extends NetsensiaActionController
 {

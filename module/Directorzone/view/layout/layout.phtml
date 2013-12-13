@@ -18,6 +18,7 @@
         <!-- Scripts -->
         <?php echo $this->headScript()->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
                       ->prependFile($this->basePath() . '/js/validate.min.js')
+                      ->prependFile($this->basePath() . '/js/netsensia/pager.js')
                       ->prependFile($this->basePath() . '/js/application.js')
                       ->prependFile($this->basePath() . '/js/jquery-ui-1.10.3/ui/minified/jquery-ui.min.js')
                       ->prependFile('//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.0.1-p7/js/bootstrap.min.js')
@@ -48,7 +49,6 @@
                             $someurls = [
                                 'home' => $this->translate("Home"),
                                 'directories' => $this->translate("Directories"),
-                                'content' => $this->translate("Content"),
                                 'admin' => $this->translate("Admin"),
                             ];
                             if ($this->identity()) {

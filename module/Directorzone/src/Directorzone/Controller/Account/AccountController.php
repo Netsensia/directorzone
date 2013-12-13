@@ -1,6 +1,6 @@
 <?php
 
-namespace Directorzone\Controller;
+namespace Directorzone\Controller\Account;
 
 use Netsensia\Controller\NetsensiaActionController;
 use Zend\Mvc\MvcEvent;

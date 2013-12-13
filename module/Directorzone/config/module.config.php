@@ -3,10 +3,8 @@
 return array(
     'controllers' => array(
         'invokables' => array(
-            'Directorzone\Controller\Account' =>
-                'Directorzone\Controller\AccountController',
-            'Directorzone\Controller\Content' =>
-                'Directorzone\Controller\ContentController',
+            'Directorzone\Controller\Account\Account' =>
+                'Directorzone\Controller\Account\AccountController',
             'Directorzone\Controller\Console\Company' =>
                 'Directorzone\Controller\Console\CompanyController',
         ),
@@ -18,7 +16,7 @@ return array(
                 'options' => array(
                     'route'    => '/admin',
                     'defaults' => array(
-                        'controller' => 'Directorzone\Controller\Admin',
+                        'controller' => 'Directorzone\Controller\Admin\Admin',
                         'action'     => 'index',
                     ),
                 ),
@@ -132,16 +130,6 @@ return array(
                 )
 
             ),
-            'content' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route'    => '/content',
-                    'defaults' => array(
-                        'controller' => 'Directorzone\Controller\Content',
-                        'action'     => 'index',
-                    ),
-                ),
-            ),
             'directories' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
@@ -189,7 +177,7 @@ return array(
                 'options' => array(
                     'route'    => '/admin/companies',
                     'defaults' => array(
-                        'controller' => 'Directorzone\Controller\Admin',
+                        'controller' => 'Directorzone\Controller\Admin\Admin',
                         'action'     => 'companies',
                     ),
                 ),
@@ -199,7 +187,7 @@ return array(
                 'options' => array(
                     'route'    => '/admin/people',
                     'defaults' => array(
-                        'controller' => 'Directorzone\Controller\Admin',
+                        'controller' => 'Directorzone\Controller\Admin\Admin',
                         'action'     => 'people',
                     ),
                 ),
@@ -209,7 +197,7 @@ return array(
                 'options' => array(
                     'route'    => '/admin/users',
                     'defaults' => array(
-                        'controller' => 'Directorzone\Controller\Admin',
+                        'controller' => 'Directorzone\Controller\Admin\Admin',
                         'action'     => 'users',
                     ),
                 ),
@@ -219,7 +207,7 @@ return array(
                 'options' => array(
                     'route'    => '/admin/publishing',
                     'defaults' => array(
-                        'controller' => 'Directorzone\Controller\Admin',
+                        'controller' => 'Directorzone\Controller\Admin\Admin',
                         'action'     => 'publishing',
                     ),
                 ),
@@ -229,7 +217,7 @@ return array(
                 'options' => array(
                     'route'    => '/admin/data',
                     'defaults' => array(
-                        'controller' => 'Directorzone\Controller\Admin',
+                        'controller' => 'Directorzone\Controller\Admin\Admin',
                         'action'     => 'data',
                     ),
                 ),
@@ -239,7 +227,7 @@ return array(
                 'options' => array(
                     'route'    => '/admin/membership',
                     'defaults' => array(
-                        'controller' => 'Directorzone\Controller\Admin',
+                        'controller' => 'Directorzone\Controller\Admin\Admin',
                         'action'     => 'membership',
                     ),
                 ),
@@ -249,7 +237,7 @@ return array(
                 'options' => array(
                     'route'    => '/admin/advertising',
                     'defaults' => array(
-                        'controller' => 'Directorzone\Controller\Admin',
+                        'controller' => 'Directorzone\Controller\Admin\Admin',
                         'action'     => 'advertising',
                     ),
                 ),
@@ -259,7 +247,7 @@ return array(
                 'options' => array(
                     'route'    => '/admin/pages',
                     'defaults' => array(
-                        'controller' => 'Directorzone\Controller\Admin',
+                        'controller' => 'Directorzone\Controller\Admin\Admin',
                         'action'     => 'pages',
                     ),
                 ),
@@ -269,7 +257,7 @@ return array(
                 'options' => array(
                     'route'    => '/myaccount',
                     'defaults' => array(
-                        'controller' => 'Directorzone\Controller\Account',
+                        'controller' => 'Directorzone\Controller\Account\Account',
                         'action'     => 'index',
                     ),
                 ),
@@ -279,7 +267,7 @@ return array(
                 'options' => array(
                     'route'    => '/myaccount/personal',
                     'defaults' => array(
-                        'controller' => 'Directorzone\Controller\Account',
+                        'controller' => 'Directorzone\Controller\Account\Account',
                         'action'     => 'personal',
                     ),
                 ),
@@ -289,7 +277,7 @@ return array(
                 'options' => array(
                     'route'    => '/myaccount/profile',
                     'defaults' => array(
-                        'controller' => 'Directorzone\Controller\Account',
+                        'controller' => 'Directorzone\Controller\Account\Account',
                         'action'     => 'profile',
                     ),
                 ),
@@ -299,7 +287,7 @@ return array(
                 'options' => array(
                     'route'    => '/myaccount/directory',
                     'defaults' => array(
-                        'controller' => 'Directorzone\Controller\Account',
+                        'controller' => 'Directorzone\Controller\Account\Account',
                         'action'     => 'directory',
                     ),
                 ),
@@ -309,7 +297,7 @@ return array(
                 'options' => array(
                     'route'    => '/myaccount/contact',
                     'defaults' => array(
-                        'controller' => 'Directorzone\Controller\Account',
+                        'controller' => 'Directorzone\Controller\Account\Account',
                         'action'     => 'contact',
                     ),
                 ),
@@ -319,7 +307,7 @@ return array(
                 'options' => array(
                     'route'    => '/myaccount/membership',
                     'defaults' => array(
-                        'controller' => 'Directorzone\Controller\Account',
+                        'controller' => 'Directorzone\Controller\Account\Account',
                         'action'     => 'membership',
                     ),
                 ),
@@ -329,7 +317,7 @@ return array(
                 'options' => array(
                     'route'    => '/myaccount/account',
                     'defaults' => array(
-                        'controller' => 'Directorzone\Controller\Account',
+                        'controller' => 'Directorzone\Controller\Account\Account',
                         'action'     => 'account',
                     ),
                 ),
@@ -339,7 +327,7 @@ return array(
                 'options' => array(
                     'route'    => '/myaccount/publish',
                     'defaults' => array(
-                        'controller' => 'Directorzone\Controller\Account',
+                        'controller' => 'Directorzone\Controller\Account\Account',
                         'action'     => 'publish',
                     ),
                 ),
@@ -349,7 +337,7 @@ return array(
                 'options' => array(
                     'route'    => '/myaccount/inbox',
                     'defaults' => array(
-                        'controller' => 'Directorzone\Controller\Account',
+                        'controller' => 'Directorzone\Controller\Account\Account',
                         'action'     => 'inbox',
                     ),
                 ),
@@ -359,7 +347,7 @@ return array(
                 'options' => array(
                     'route'    => '/myaccount/preferences',
                     'defaults' => array(
-                        'controller' => 'Directorzone\Controller\Account',
+                        'controller' => 'Directorzone\Controller\Account\Account',
                         'action'     => 'preferences',
                     ),
                 ),
@@ -369,7 +357,7 @@ return array(
                 'options' => array(
                     'route'    => '/myaccount/experience',
                     'defaults' => array(
-                        'controller' => 'Directorzone\Controller\Account',
+                        'controller' => 'Directorzone\Controller\Account\Account',
                         'action'     => 'experience',
                     ),
                 ),
@@ -379,7 +367,7 @@ return array(
                 'options' => array(
                     'route'    => '/myaccount/company',
                     'defaults' => array(
-                        'controller' => 'Directorzone\Controller\Account',
+                        'controller' => 'Directorzone\Controller\Account\Account',
                         'action'     => 'company',
                     ),
                 ),

@@ -38,9 +38,9 @@ class Module
     {
         return array(
             'factories' => array(
-                'Directorzone\Controller\Admin' =>
+                'Directorzone\Controller\Admin\Admin' =>
                     function (ControllerManager $cm) {
-                        return new \Directorzone\Controller\AdminController(
+                        return new \Directorzone\Controller\Admin\AdminController(
                             $cm->getServiceLocator()->get('CompanyService')
                         );
                     },
