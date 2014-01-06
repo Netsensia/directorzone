@@ -1,13 +1,9 @@
 <?php
-namespace Directorzone\Form;
+namespace Directorzone\Form\Account;
 
-use Zend\Form\Element;
-use Zend\Form\Fieldset;
-use Zend\InputFilter\Input;
-use Zend\InputFilter\InputFilter;
 use Netsensia\Form\NetsensiaForm;
 
-class AccountPreferencesForm extends NetsensiaForm
+class AccountMembershipForm extends NetsensiaForm
 {
     public function __construct($name = null, $options = array())
     {

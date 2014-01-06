@@ -5,23 +5,24 @@ namespace Directorzone;
 
 use Zend\Mvc\MvcEvent;
 
-use Directorzone\Form\AccountAccountForm;
-use Directorzone\Form\AccountCompanyForm;
-use Directorzone\Form\AccountContactForm;
-use Directorzone\Form\AccountExperienceForm;
-use Directorzone\Form\AccountInboxForm;
-use Directorzone\Form\AccountMembershipForm;
-use Directorzone\Form\AccountPreferencesForm;
-use Directorzone\Form\AccountProfileForm;
-use Directorzone\Form\AccountPersonalForm;
-use Directorzone\Form\AccountPublishForm;
-use Directorzone\Form\AccountDirectoryForm;
+use Directorzone\Form\Account\AccountAccountForm;
+use Directorzone\Form\Account\AccountCompanyForm;
+use Directorzone\Form\Account\AccountContactForm;
+use Directorzone\Form\Account\AccountExperienceForm;
+use Directorzone\Form\Account\AccountInboxForm;
+use Directorzone\Form\Account\AccountMembershipForm;
+use Directorzone\Form\Account\AccountPreferencesForm;
+use Directorzone\Form\Account\AccountProfileForm;
+use Directorzone\Form\Account\AccountPersonalForm;
+use Directorzone\Form\Account\AccountPublishForm;
+use Directorzone\Form\Account\AccountDirectoryForm;
 use Elasticsearch\Client as ElasticClient;
 use Zend\Db\TableGateway\TableGateway;
 use \Zend\Mvc\Controller\ControllerManager;
 use Directorzone\Service\CompanyService;
 use Directorzone\Service\Admin\CompanyUploadService;
 use Directorzone\Service\PeopleService;
+use Directorzone\Form\Company\CompanyContactForm;
 
 class Module
 {
@@ -155,6 +156,12 @@ class Module
                     $instance = new \Directorzone\Model\Company();
                     $instance->setServiceLocator($sm);
                     return $instance;
+                },
+                'CompanyContactForm' => function ($sm) {
+                    $form = new CompanyContactForm('companyContactForm');
+                    $form->setTranslator($sm->get('translator'));
+                    $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                    return $form;
                 },
                 'AccountAccountForm' => function ($sm) {
                     $form = new AccountAccountForm('accountAccountForm');

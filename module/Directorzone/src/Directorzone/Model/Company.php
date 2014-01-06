@@ -7,7 +7,7 @@ class Company extends DatabaseTableModel
 {
     public function __construct()
     {
-        $this->setTableName('company');
+        $this->setTableName('companydirectory');
     
         parent::__construct();
     

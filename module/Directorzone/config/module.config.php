@@ -128,7 +128,6 @@ return array(
                         ),
                     )
                 )
-
             ),
             'directories' => array(
                 'type' => 'literal',
@@ -163,12 +162,75 @@ return array(
                                 ),
                                 'may_terminate' => true,
                                 'child_routes' => array(
-                                    'company-edit' => array(
+                                    'company-contact' => array(
                                         'type' => 'literal',
                                         'options' => array(
-                                            'route' => '/edit',
+                                            'route' => '/contact',
                                             'defaults' => array(
-                                                'action' => 'company-edit',
+                                                'action' => 'contact',
+                                            ),
+                                        ),
+                                    ),
+                                    'company-overview' => array(
+                                        'type' => 'literal',
+                                        'options' => array(
+                                            'route' => '/overview',
+                                            'defaults' => array(
+                                                'action' => 'overview',
+                                            ),
+                                        ),
+                                    ),
+                                    'company-feeds' => array(
+                                        'type' => 'literal',
+                                        'options' => array(
+                                            'route' => '/feeds',
+                                            'defaults' => array(
+                                                'action' => 'feeds',
+                                            ),
+                                        ),
+                                    ),
+                                    'company-financials' => array(
+                                        'type' => 'literal',
+                                        'options' => array(
+                                            'route' => '/financials',
+                                            'defaults' => array(
+                                                'action' => 'financials',
+                                            ),
+                                        ),
+                                    ),
+                                    'company-officers' => array(
+                                        'type' => 'literal',
+                                        'options' => array(
+                                            'route' => '/officers',
+                                            'defaults' => array(
+                                                'action' => 'officers',
+                                            ),
+                                        ),
+                                    ),
+                                    'company-owners' => array(
+                                        'type' => 'literal',
+                                        'options' => array(
+                                            'route' => '/owners',
+                                            'defaults' => array(
+                                                'action' => 'owners',
+                                            ),
+                                        ),
+                                    ),
+                                    'company-relationships' => array(
+                                        'type' => 'literal',
+                                        'options' => array(
+                                            'route' => '/relationships',
+                                            'defaults' => array(
+                                                'action' => 'relationships',
+                                            ),
+                                        ),
+                                    ),
+                                    'company-sectors' => array(
+                                        'type' => 'literal',
+                                        'options' => array(
+                                            'route' => '/sectors',
+                                            'defaults' => array(
+                                                'action' => 'sectors',
                                             ),
                                         ),
                                     ),

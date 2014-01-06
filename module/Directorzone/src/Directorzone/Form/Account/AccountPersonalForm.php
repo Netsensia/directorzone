@@ -1,5 +1,5 @@
 <?php
-namespace Directorzone\Form;
+namespace Directorzone\Form\Account;
 
 use Netsensia\Form\NetsensiaForm;
 

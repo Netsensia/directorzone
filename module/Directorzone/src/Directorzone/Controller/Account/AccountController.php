@@ -1,11 +1,11 @@
 <?php
 
-namespace Directorzone\Controller\Account;
+namespace Directorzone\Controller\Company;
 
 use Netsensia\Controller\NetsensiaActionController;
 use Zend\Mvc\MvcEvent;
 
-class AccountController extends NetsensiaActionController
+class CompanyController extends NetsensiaActionController
 {
     public function onDispatch(MvcEvent $e)
     {

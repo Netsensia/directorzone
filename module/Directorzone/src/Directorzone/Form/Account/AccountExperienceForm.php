@@ -1,9 +1,9 @@
 <?php
-namespace Directorzone\Form;
+namespace Directorzone\Form\Account;
 
 use Netsensia\Form\NetsensiaForm;
 
-class AccountMembershipForm extends NetsensiaForm
+class AccountExperienceForm extends NetsensiaForm
 {
     public function __construct($name = null, $options = array())
     {
@@ -12,7 +12,7 @@ class AccountMembershipForm extends NetsensiaForm
     
     public function prepare()
     {
-        $this->setFieldPrefix('account-account-');
+        $this->setFieldPrefix('account-experience-');
         $this->setDefaultIcon('user');
         
         $this->addSubmit('Submit');

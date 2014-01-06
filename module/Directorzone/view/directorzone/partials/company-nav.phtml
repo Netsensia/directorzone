@@ -1,0 +1,25 @@
+<ul class="nav nav-pills">
+<?php 
+
+$routes = [
+   'directories/company-directory/company-details/company-overview' => 'Overview',
+   'directories/company-directory/company-details/company-contact' => 'Contact',
+   'directories/company-directory/company-details/company-financials' => 'Financials',
+   'directories/company-directory/company-details/company-officers' => 'Officers',
+   'directories/company-directory/company-details/company-relationships' => 'Relationships',
+   'directories/company-directory/company-details/company-sectors' => 'Sectors',
+   'directories/company-directory/company-details/company-owners' => 'Admin Owners',
+];
+
+foreach ($routes as $route => $text) {
+?>
+    <li class="<?php echo ($this->url() == $this->url($route) ? 'active' : ''); ?>">
+        <a href="<?php echo $this->url($route, ['id'=>$this->companyId]); ?>">
+            <?php echo $text; ?>
+        </a>
+    </li>
+<?php
+}
+
+?>
+</ul>
