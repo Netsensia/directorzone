@@ -3,7 +3,7 @@ namespace Directorzone\Model;
 
 use Netsensia\Model\DatabaseTableModel;
 
-class Company extends DatabaseTableModel
+class CompanyDirectory extends DatabaseTableModel
 {
     public function __construct()
     {
@@ -15,7 +15,7 @@ class Company extends DatabaseTableModel
     
     public function init($companyId = null)
     {
-        $this->setPrimaryKey(array("companyid" => $companyId));
+        $this->setPrimaryKey(array("companydirectoryid" => $companyId));
         if ($companyId != null) {
             $this->load();
         }
@@ -25,6 +25,6 @@ class Company extends DatabaseTableModel
     public function getCompanyId()
     {
         $primaryKey = $this->getPrimaryKey();
-        return $primaryKey['addressid'];
+        return $primaryKey['companydirectoryid'];
     }
 }

@@ -13,15 +13,11 @@ class CompanyDirectoryController extends NetsensiaActionController
      */
     private $companyService;
     
-    /**
-     * @var string
-     */
-    private $companyId;
-    
     public function __construct(
         CompanyService $companyService
     ) {
         $this->companyService = $companyService;
+        
     }
       
     public function indexAction()
@@ -70,11 +66,11 @@ class CompanyDirectoryController extends NetsensiaActionController
     public function contactAction()
     {
         return array(
-            "companyId" => $this->companyId,
+            "companyDirectoryId" => $this->params('id'),
             "form" => $this->processForm(
                 'CompanyContactForm',
-                'Company',
-                $this->companyId
+                'CompanyDirectory',
+                $this->params('id')
             ),
             'flashMessages' => $this->getFlashMessages(),
         );
@@ -83,11 +79,11 @@ class CompanyDirectoryController extends NetsensiaActionController
     public function overviewAction()
     {
         return array(
-            "companyId" => $this->companyId,
+            "companyDirectoryId" => $this->params('id'),
             "form" => $this->processForm(
                 'CompanyOverviewForm',
-                'Company',
-                $this->companyId
+                'CompanyDirectory',
+                $this->params('id')
             ),
             'flashMessages' => $this->getFlashMessages(),
         );
@@ -96,11 +92,11 @@ class CompanyDirectoryController extends NetsensiaActionController
     public function feedsAction()
     {
         return array(
-            "companyId" => $this->companyId,
+            "companyDirectoryId" => $this->params('id'),
             "form" => $this->processForm(
                 'CompanyFeedsForm',
-                'Company',
-                $this->companyId
+                'CompanyDirectory',
+                $this->params('id')
             ),
             'flashMessages' => $this->getFlashMessages(),
         );
@@ -109,11 +105,11 @@ class CompanyDirectoryController extends NetsensiaActionController
     public function financialsAction()
     {
         return array(
-            "companyId" => $this->companyId,
+            "companyDirectoryId" => $this->params('id'),
             "form" => $this->processForm(
                 'CompanyFinancialsForm',
-                'Company',
-                $this->companyId
+                'CompanyDirectory',
+                $this->params('id')
             ),
             'flashMessages' => $this->getFlashMessages(),
         );
@@ -122,11 +118,11 @@ class CompanyDirectoryController extends NetsensiaActionController
     public function officersAction()
     {
         return array(
-            "companyId" => $this->companyId,
+            "companyDirectoryId" => $this->params('id'),
             "form" => $this->processForm(
                 'CompanyOfficersForm',
-                'Company',
-                $this->companyId
+                'CompanyDirectory',
+                $this->params('id')
             ),
             'flashMessages' => $this->getFlashMessages(),
         );
@@ -135,11 +131,11 @@ class CompanyDirectoryController extends NetsensiaActionController
     public function ownersAction()
     {
         return array(
-            "companyId" => $this->companyId,
+            "companyDirectoryId" => $this->params('id'),
             "form" => $this->processForm(
                 'CompanyOwnersForm',
-                'Company',
-                $this->companyId
+                'CompanyDirectory',
+                $this->params('id')
             ),
             'flashMessages' => $this->getFlashMessages(),
         );
@@ -148,11 +144,11 @@ class CompanyDirectoryController extends NetsensiaActionController
     public function relationshipsAction()
     {
         return array(
-            "companyId" => $this->companyId,
+            "companyDirectoryId" => $this->params('id'),
             "form" => $this->processForm(
                 'CompanyRelationshipsForm',
-                'Company',
-                $this->companyId
+                'CompanyDirectory',
+                $this->params('id')
             ),
             'flashMessages' => $this->getFlashMessages(),
         );
@@ -161,11 +157,11 @@ class CompanyDirectoryController extends NetsensiaActionController
     public function sectorsAction()
     {
         return array(
-            "companyId" => $this->companyId,
+            "companyDirectoryId" => $this->params('id'),
             "form" => $this->processForm(
                 'CompanySectorsForm',
-                'Company',
-                $this->companyId
+                'CompanyDirectory',
+                $this->params('id')
             ),
             'flashMessages' => $this->getFlashMessages(),
         );

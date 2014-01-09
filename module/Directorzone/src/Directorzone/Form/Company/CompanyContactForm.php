@@ -12,13 +12,10 @@ class CompanyContactForm extends NetsensiaForm
     
     public function prepare()
     {
-        $this->setFieldPrefix('account-contact-');
+        $this->setFieldPrefix('company-contact-');
         $this->setDefaultIcon('user');
         
-        $this->addText('email');
-        $this->addText('alternative-email');
-        
-        $this->addAddress('addressid');
+        $this->addText('telephone');
         
         $this->addSubmit('Submit');
         

@@ -23,6 +23,13 @@ use Directorzone\Service\CompanyService;
 use Directorzone\Service\Admin\CompanyUploadService;
 use Directorzone\Service\PeopleService;
 use Directorzone\Form\Company\CompanyContactForm;
+use Directorzone\Form\Company\CompanyOverviewForm;
+use Directorzone\Form\Company\CompanySectorsForm;
+use Directorzone\Form\Company\CompanyRelationshipsForm;
+use Directorzone\Form\Company\CompanyOwnersForm;
+use Directorzone\Form\Company\CompanyOfficersForm;
+use Directorzone\Form\Company\CompanyFinancialsForm;
+use Directorzone\Form\Company\CompanyFeedsForm;
 
 class Module
 {
@@ -152,13 +159,55 @@ class Module
                     );
                     return $instance;
                 },
-                'CompanyModel' => function ($sm) {
-                    $instance = new \Directorzone\Model\Company();
+                'CompanyDirectoryModel' => function ($sm) {
+                    $instance = new \Directorzone\Model\CompanyDirectory();
                     $instance->setServiceLocator($sm);
                     return $instance;
                 },
                 'CompanyContactForm' => function ($sm) {
                     $form = new CompanyContactForm('companyContactForm');
+                    $form->setTranslator($sm->get('translator'));
+                    $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                    return $form;
+                },
+                'CompanyFeedsForm' => function ($sm) {
+                    $form = new CompanyFeedsForm('companyFeedsForm');
+                    $form->setTranslator($sm->get('translator'));
+                    $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                    return $form;
+                },
+                'CompanyFinancialsForm' => function ($sm) {
+                    $form = new CompanyFinancialsForm('companyFinancialsForm');
+                    $form->setTranslator($sm->get('translator'));
+                    $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                    return $form;
+                },
+                'CompanyOfficersForm' => function ($sm) {
+                    $form = new CompanyOfficersForm('companyOfficersForm');
+                    $form->setTranslator($sm->get('translator'));
+                    $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                    return $form;
+                },
+                'CompanyOverviewForm' => function ($sm) {
+                    $form = new CompanyOverviewForm('companyOverviewForm');
+                    $form->setTranslator($sm->get('translator'));
+                    $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                    return $form;
+                },
+                'CompanyOwnersForm' => function ($sm) {
+                    $form = new CompanyOwnersForm('companyOwnersForm');
+                    $form->setTranslator($sm->get('translator'));
+                    $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                    return $form;
+                },
+                'CompanyRelationshipsForm' => function ($sm) {
+                    $form = new CompanyRelationshipsForm('companyRelationshipsForm');
+                    $form->setTranslator($sm->get('translator'));
+                    $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                    return $form;
+                },
+                'CompanySectorsForm' => function ($sm) {
+                    $form = new CompanySectorsForm('companySectorsForm');
                     $form->setTranslator($sm->get('translator'));
                     $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
                     return $form;

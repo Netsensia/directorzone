@@ -12,16 +12,16 @@ class CompanyFeedsForm extends NetsensiaForm
     
     public function prepare()
     {
-        $this->setFieldPrefix('account-contact-');
+        $this->setFieldPrefix('company-feeds-');
         $this->setDefaultIcon('user');
         
-        $this->addText('email');
-        $this->addText('alternative-email');
-        
-        $this->addAddress('addressid');
-        
+        $this->addText('twitter-user-name');
+        $this->addTextArea('twitter-search-terms');
+        $this->addTextArea('rss-feeds');
+        $this->addTextArea('rss-search-terms');
+                
         $this->addSubmit('Submit');
-        
+
         parent::prepare();
     }
 }
