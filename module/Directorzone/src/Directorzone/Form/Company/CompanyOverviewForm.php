@@ -15,7 +15,7 @@ class CompanyOverviewForm extends NetsensiaForm
         $this->setFieldPrefix('company-overview-');
         $this->setDefaultIcon('user');
         
-        $this->addTextArea('business-decription');
+        $this->addTextArea('business-description');
         
         $this->addSubmit('Submit');
         

@@ -78,8 +78,12 @@ class CompanyDirectoryController extends NetsensiaActionController
     
     public function overviewAction()
     {
+        $companyDetails = $this->companyService->getCompanyDetails(
+            $this->params('id')
+        );
+        
         return array(
-            "companyDirectoryId" => $this->params('id'),
+            "companyDetails" => $companyDetails,
             "form" => $this->processForm(
                 'CompanyOverviewForm',
                 'CompanyDirectory',

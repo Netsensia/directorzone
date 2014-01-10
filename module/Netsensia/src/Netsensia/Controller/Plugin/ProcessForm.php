@@ -3,6 +3,7 @@
 namespace Netsensia\Controller\Plugin;
 
 use Zend\Mvc\Controller\Plugin\AbstractPlugin;
+use Zend\Mvc\Router\RouteMatch;
 
 class ProcessForm extends AbstractPlugin
 {
@@ -73,7 +74,12 @@ class ProcessForm extends AbstractPlugin
                     $request = $sl->get('request');
                     
                     $routeMatch = $router->match($request);
-                    $this->controller->redirect()->toRoute($routeMatch->getMatchedRouteName());
+                    $router instanceof \Zend\Mvc\Router\Http\TreeRouteStack;
+                    
+                    $this->controller->redirect()->toRoute(
+                        $routeMatch->getMatchedRouteName(),
+                        $routeMatch->getParams()
+                    );
                 }
             }
         

@@ -139,7 +139,6 @@ class BootstrapForm extends AbstractHelper
     
     protected function openForm($title, $action)
     {
-        
         echo('<div class="container">');
         echo('<legend>' . $title . '</legend>');
         

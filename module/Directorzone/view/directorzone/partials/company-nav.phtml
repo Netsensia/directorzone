@@ -15,7 +15,7 @@ $routes = [
 foreach ($routes as $route => $text) {
 ?>
     <li class="<?php echo ($this->url() == $this->url($route) ? 'active' : ''); ?>">
-        <a href="<?php echo $this->url($route, ['id'=>$this->companyDirectoryId]); ?>">
+        <a href="<?php echo $this->url($route, ['id'=>$this->companyDetails['companydirectoryid']]); ?>">
             <?php echo $text; ?>
         </a>
     </li>
@@ -24,3 +24,6 @@ foreach ($routes as $route => $text) {
 
 ?>
 </ul>
+
+<h3><?php echo $this->companyDetails['name']; ?></h3>
+<h5><a href="/directories/company/<?php echo $this->companyDetails['companydirectoryid']; ?>">View company profile page</a></h5>
