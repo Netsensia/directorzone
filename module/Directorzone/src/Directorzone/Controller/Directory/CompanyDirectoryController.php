@@ -62,23 +62,6 @@ class CompanyDirectoryController extends NetsensiaActionController
         }
     }
     
-    public function genericForm($formName, $modelName)
-    {
-        $companyDetails = $this->companyService->getCompanyDetails(
-            $this->params('id')
-        );
-        
-        return array(
-            "companyDetails" => $companyDetails,
-            "form" => $this->processForm(
-                $formName,
-                $modelName,
-                $this->params('id')
-            ),
-            'flashMessages' => $this->getFlashMessages(),
-        );        
-    }
-    
     public function contactAction()
     {
         return $this->genericForm('CompanyContactForm', 'CompanyDirectory');
@@ -122,6 +105,23 @@ class CompanyDirectoryController extends NetsensiaActionController
     public function companyListAction()
     {
         
+    }
+    
+    private function genericForm($formName, $modelName)
+    {
+        $companyDetails = $this->companyService->getCompanyDetails(
+            $this->params('id')
+        );
+    
+        return array(
+            "companyDetails" => $companyDetails,
+            "form" => $this->processForm(
+                $formName,
+                $modelName,
+                $this->params('id')
+            ),
+            'flashMessages' => $this->getFlashMessages(),
+        );
     }
 
 }

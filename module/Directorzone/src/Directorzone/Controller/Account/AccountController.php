@@ -23,130 +23,66 @@ class AccountController extends NetsensiaActionController
     
     public function accountAction()
     {
-        return array(
-            "form" => $this->processForm(
-                'AccountAccountForm',
-                'User',
-                $this->getUserId()
-            ),
-            'flashMessages' => $this->getFlashMessages(),
-        );
+        return $this->genericForm('AccountAccountForm', 'User');
     }
         
     public function companyAction()
     {
-        return array(
-            "form" => $this->processForm(
-                'AccountCompanyForm',
-                'User',
-                $this->getUserId()
-            ),
-            'flashMessages' => $this->getFlashMessages(),
-        );
+        return $this->genericForm('AccountCompanyForm', 'User');
     }
         
     public function contactAction()
     {
-        return array(
-            "form" => $this->processForm(
-                'AccountContactForm',
-                'User',
-                $this->getUserId()
-            ),
-            'flashMessages' => $this->getFlashMessages(),
-        );
+        return $this->genericForm('AccountContactForm', 'User');
     }
         
     public function experienceAction()
     {
-        return array(
-            "form" => $this->processForm(
-                'AccountExperienceForm',
-                'User',
-                $this->getUserId()
-            ),
-            'flashMessages' => $this->getFlashMessages(),
-        );
+        return $this->genericForm('AccountExperienceForm', 'User');
     }
     
     public function inboxAction()
     {
-        return array(
-            "form" => $this->processForm(
-                'AccountInboxForm',
-                'User',
-                $this->getUserId()
-            ),
-            'flashMessages' => $this->getFlashMessages(),
-        );
+        return $this->genericForm('AccountInboxForm', 'User');
     }
     
     public function membershipAction()
     {
-        return array(
-            "form" => $this->processForm(
-                'AccountMembershipForm',
-                'User',
-                $this->getUserId()
-            ),
-            'flashMessages' => $this->getFlashMessages(),
-        );
+        return $this->genericForm('AccountMembershipForm', 'User');
     }
         
     public function preferencesAction()
     {
-        return array(
-            "form" => $this->processForm(
-                'AccountPreferencesForm',
-                'User',
-                $this->getUserId()
-            ),
-            'flashMessages' => $this->getFlashMessages(),
-        );
+        return $this->genericForm('AccountPreferencesForm', 'User');
     }
 
     public function personalAction()
     {
-        return array(
-            "form" => $this->processForm(
-                'AccountPersonalForm',
-                'User',
-                $this->getUserId()
-            ),
-            'flashMessages' => $this->getFlashMessages(),
-        );
+        return $this->genericForm('AccountPersonalForm', 'User');
     }
     
     public function profileAction()
     {
-        return array(
-            "form" => $this->processForm(
-                'AccountProfileForm',
-                'User',
-                $this->getUserId()
-            ),
-            'flashMessages' => $this->getFlashMessages(),
-        );
+        return $this->genericForm('AccountProfileForm', 'User');
     }
 
     public function directoryAction()
     {
-        return array(
-            "form" => $this->processForm(
-                'AccountDirectoryForm',
-                'User',
-                $this->getUserId()
-            ),
-            'flashMessages' => $this->getFlashMessages(),
-        );
+        return $this->genericForm('AccountDirectoryForm', 'User');
+        
     }
     
     public function publishAction()
     {
+        return $this->genericForm('AccountPublishForm', 'User');
+    }
+    
+    private function genericForm($formName, $modelName)
+    {
         return array(
             "form" => $this->processForm(
-                'AccountPublishForm',
-                'User',
+                $formName,
+                $modelName,
                 $this->getUserId()
             ),
             'flashMessages' => $this->getFlashMessages(),
