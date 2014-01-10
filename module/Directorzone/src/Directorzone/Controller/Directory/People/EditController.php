@@ -1,13 +1,13 @@
 <?php
 
-namespace Directorzone\Controller\Directory;
+namespace Directorzone\Controller\Directory\People;
 
 use Netsensia\Controller\NetsensiaActionController;
 use Directorzone\Service\CompanyService;
 use Directorzone\Service\PeopleService;
 use Symfony\Component\Translation\Exception\NotFoundResourceException;
 
-class PeopleDirectoryController extends NetsensiaActionController
+class EditController extends NetsensiaActionController
 {
     /**
      * @var PeopleService
@@ -19,14 +19,5 @@ class PeopleDirectoryController extends NetsensiaActionController
     ) {
         $this->peopleService = $peopleService;
     }
-      
-    public function indexAction()
-    {
-        $this->redirect()->toRoute('directories/people-directory');
-    }
-    
-    public function peopleListAction()
-    {
-        
-    }
+
 }

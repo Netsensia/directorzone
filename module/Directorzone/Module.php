@@ -65,15 +65,33 @@ class Module
                             $cm->getServiceLocator()->get('PeopleService')
                         );
                     },
-                'Directorzone\Controller\Directory\CompanyDirectoryController' =>
+                'Directory' =>
                     function (ControllerManager $cm) {
-                        return new \Directorzone\Controller\Directory\CompanyDirectoryController(
+                        return new \Directorzone\Controller\Directory\DirectoryController(
                             $cm->getServiceLocator()->get('CompanyService')
                         );
                     },
-                'Directorzone\Controller\Directory\PeopleDirectoryController' =>
+                'CompanyView' =>
                     function (ControllerManager $cm) {
-                        return new \Directorzone\Controller\Directory\PeopleDirectoryController(
+                        return new \Directorzone\Controller\Directory\Company\ViewController(
+                            $cm->getServiceLocator()->get('CompanyService')
+                        );
+                    },
+                'CompanyEdit' =>
+                    function (ControllerManager $cm) {
+                        return new \Directorzone\Controller\Directory\Company\EditController(
+                            $cm->getServiceLocator()->get('CompanyService')
+                        );
+                    },
+                'PeopleView' =>
+                    function (ControllerManager $cm) {
+                        return new \Directorzone\Controller\Directory\People\ViewController(
+                            $cm->getServiceLocator()->get('PeopleService')
+                        );
+                    },
+                'PeopleEdit' =>
+                    function (ControllerManager $cm) {
+                        return new \Directorzone\Controller\Directory\People\EditController(
                             $cm->getServiceLocator()->get('PeopleService')
                         );
                     },

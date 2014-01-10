@@ -1,12 +1,11 @@
 <?php
 
-namespace Directorzone\Controller\Directory;
+namespace Directorzone\Controller\Directory\Company;
 
 use Netsensia\Controller\NetsensiaActionController;
 use Directorzone\Service\CompanyService;
-use Symfony\Component\Translation\Exception\NotFoundResourceException;
 
-class CompanyDirectoryController extends NetsensiaActionController
+class EditController extends NetsensiaActionController
 {
     /**
      * @var CompanyService
@@ -19,49 +18,6 @@ class CompanyDirectoryController extends NetsensiaActionController
         $this->companyService = $companyService;
     }
       
-    public function indexAction()
-    {
-        $this->redirect()->toRoute('directories/company-directory');
-    }
-    
-    public function companyDetailsAction()
-    {
-        $companyDirectoryId = $this->params('id');
-                
-        try {
-            
-            $companyDetails = $this->companyService->getCompanyDetails(
-                $companyDirectoryId
-            );
-            
-            return $companyDetails;
-            
-        } catch (NotFoundResourceException $e) {
-            
-            $this->getResponse()->setStatusCode(404);
-            
-        }
-    }
-    
-    public function companyEditAction()
-    {
-        $companyDirectoryId = $this->params()->fromRoute('id');
-    
-        try {
-    
-            $companyDetails = $this->companyService->getCompanyDetails(
-                $companyDirectoryId
-            );
-    
-            return $companyDetails;
-    
-        } catch (NotFoundResourceException $e) {
-    
-            $this->getResponse()->setStatusCode(404);
-    
-        }
-    }
-    
     public function contactAction()
     {
         return $this->genericForm('CompanyContactForm', 'CompanyDirectory');
@@ -102,11 +58,6 @@ class CompanyDirectoryController extends NetsensiaActionController
         return $this->genericForm('CompanySectorsForm', 'CompanyDirectory');
     }
     
-    public function companyListAction()
-    {
-        
-    }
-    
     private function genericForm($formName, $modelName)
     {
         $companyDetails = $this->companyService->getCompanyDetails(
@@ -123,5 +74,4 @@ class CompanyDirectoryController extends NetsensiaActionController
             'flashMessages' => $this->getFlashMessages(),
         );
     }
-
 }

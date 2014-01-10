@@ -134,7 +134,7 @@ return array(
                 'options' => array(
                     'route'    => '/directories',
                     'defaults' => array(
-                        'controller' => 'Directorzone\Controller\Directory\CompanyDirectoryController',
+                        'controller' => 'Directory',
                         'action'     => 'index',
                     ),
                 ),
@@ -146,6 +146,7 @@ return array(
                             'route' => '/company',
                             'defaults' => array(
                                 'action' => 'company-list',
+                                'controller' => 'Directory',
                             ),
                         ),
                         'may_terminate' => true,
@@ -157,6 +158,7 @@ return array(
                                     'constraints' => ['id' => '[0-9]*'],
                                     'defaults' => array(
                                         'action' => 'company-details',
+                                        'controller' => 'CompanyView',
                                         'id' => 0,
                                     ),
                                 ),
@@ -168,6 +170,7 @@ return array(
                                             'route' => '/contact',
                                             'defaults' => array(
                                                 'action' => 'contact',
+                                                'controller' => 'CompanyEdit',
                                             ),
                                         ),
                                     ),
@@ -177,6 +180,7 @@ return array(
                                             'route' => '/overview',
                                             'defaults' => array(
                                                 'action' => 'overview',
+                                                'controller' => 'CompanyEdit',
                                             ),
                                         ),
                                     ),
@@ -186,6 +190,7 @@ return array(
                                             'route' => '/feeds',
                                             'defaults' => array(
                                                 'action' => 'feeds',
+                                                'controller' => 'CompanyEdit',
                                             ),
                                         ),
                                     ),
@@ -195,6 +200,7 @@ return array(
                                             'route' => '/financials',
                                             'defaults' => array(
                                                 'action' => 'financials',
+                                                'controller' => 'CompanyEdit',
                                             ),
                                         ),
                                     ),
@@ -204,6 +210,7 @@ return array(
                                             'route' => '/officers',
                                             'defaults' => array(
                                                 'action' => 'officers',
+                                                'controller' => 'CompanyEdit',
                                             ),
                                         ),
                                     ),
@@ -213,6 +220,7 @@ return array(
                                             'route' => '/owners',
                                             'defaults' => array(
                                                 'action' => 'owners',
+                                                'controller' => 'CompanyEdit',
                                             ),
                                         ),
                                     ),
@@ -222,6 +230,7 @@ return array(
                                             'route' => '/relationships',
                                             'defaults' => array(
                                                 'action' => 'relationships',
+                                                'controller' => 'CompanyEdit',
                                             ),
                                         ),
                                     ),
@@ -231,6 +240,7 @@ return array(
                                             'route' => '/sectors',
                                             'defaults' => array(
                                                 'action' => 'sectors',
+                                                'controller' => 'CompanyEdit',
                                             ),
                                         ),
                                     ),
@@ -243,7 +253,7 @@ return array(
                         'options' => array(
                             'route' => '/people',
                             'defaults' => array(
-                                'controller' => 'Directorzone\Controller\Directory\PeopleDirectoryController',
+                                'controller' => 'Directory',
                                 'action' => 'people-list',
                             ),
                         )
