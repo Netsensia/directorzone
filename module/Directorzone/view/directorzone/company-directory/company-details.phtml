@@ -66,20 +66,7 @@
             ?>
             </div>
         </div>
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-              <h3 class="panel-title">Sectors</h3>
-            </div>
-            <div class="panel-body">
-            <?php 
-                echo trim($this->siccode1) == '' ? '' : ($this->siccode1 . '<br>');
-                echo trim($this->siccode2) == '' ? '' : ($this->siccode2 . '<br>');
-                echo trim($this->siccode3) == '' ? '' : ($this->siccode3 . '<br>');
-                echo trim($this->siccode4) == '' ? '' : ($this->siccode4 . '<br>');
-            ?>
-            </div>
-        </div>
-   
+ 
         <div class="row">
             <div class="col-md-6">
                 <div class="panel panel-info">
@@ -88,6 +75,12 @@
                     </div>
                     <div class="panel-body">
                     <table class="table">
+                    <tr><td>Sectors</td><td><?php 
+                echo trim($this->siccode1) == '' ? '' : ($this->siccode1 . '<br>');
+                echo trim($this->siccode2) == '' ? '' : ($this->siccode2 . '<br>');
+                echo trim($this->siccode3) == '' ? '' : ($this->siccode3 . '<br>');
+                echo trim($this->siccode4) == '' ? '' : ($this->siccode4 . '<br>');
+            ?></td></tr>
                     <tr><td>Category</td><td><?php echo $this->category; ?></td></tr>
                     <tr><td>Incorporated</td><td><?php echo $this->incorporationdate; ?></td></tr>
                     <tr><td>Status</td><td><?php echo $this->detailstatus; ?></td></tr>

@@ -17,7 +17,6 @@ class CompanyDirectoryController extends NetsensiaActionController
         CompanyService $companyService
     ) {
         $this->companyService = $companyService;
-        
     }
       
     public function indexAction()
@@ -63,20 +62,7 @@ class CompanyDirectoryController extends NetsensiaActionController
         }
     }
     
-    public function contactAction()
-    {
-        return array(
-            "companyDirectoryId" => $this->params('id'),
-            "form" => $this->processForm(
-                'CompanyContactForm',
-                'CompanyDirectory',
-                $this->params('id')
-            ),
-            'flashMessages' => $this->getFlashMessages(),
-        );
-    }
-    
-    public function overviewAction()
+    public function genericForm($formName, $modelName)
     {
         $companyDetails = $this->companyService->getCompanyDetails(
             $this->params('id')
@@ -85,90 +71,52 @@ class CompanyDirectoryController extends NetsensiaActionController
         return array(
             "companyDetails" => $companyDetails,
             "form" => $this->processForm(
-                'CompanyOverviewForm',
-                'CompanyDirectory',
+                $formName,
+                $modelName,
                 $this->params('id')
             ),
             'flashMessages' => $this->getFlashMessages(),
-        );
+        );        
+    }
+    
+    public function contactAction()
+    {
+        return $this->genericForm('CompanyContactForm', 'CompanyDirectory');
+    }
+    
+    public function overviewAction()
+    {
+        return $this->genericForm('CompanyOverviewForm', 'CompanyDirectory');
     }
     
     public function feedsAction()
     {
-        return array(
-            "companyDirectoryId" => $this->params('id'),
-            "form" => $this->processForm(
-                'CompanyFeedsForm',
-                'CompanyDirectory',
-                $this->params('id')
-            ),
-            'flashMessages' => $this->getFlashMessages(),
-        );
+        return $this->genericForm('CompanyFeedsForm', 'CompanyDirectory');
     }
     
     public function financialsAction()
     {
-        return array(
-            "companyDirectoryId" => $this->params('id'),
-            "form" => $this->processForm(
-                'CompanyFinancialsForm',
-                'CompanyDirectory',
-                $this->params('id')
-            ),
-            'flashMessages' => $this->getFlashMessages(),
-        );
+        return $this->genericForm('CompanyFinancialsForm', 'CompanyDirectory');
     }
     
     public function officersAction()
     {
-        return array(
-            "companyDirectoryId" => $this->params('id'),
-            "form" => $this->processForm(
-                'CompanyOfficersForm',
-                'CompanyDirectory',
-                $this->params('id')
-            ),
-            'flashMessages' => $this->getFlashMessages(),
-        );
+        return $this->genericForm('CompanyOfficersForm', 'CompanyDirectory');
     }
     
     public function ownersAction()
     {
-        return array(
-            "companyDirectoryId" => $this->params('id'),
-            "form" => $this->processForm(
-                'CompanyOwnersForm',
-                'CompanyDirectory',
-                $this->params('id')
-            ),
-            'flashMessages' => $this->getFlashMessages(),
-        );
+        return $this->genericForm('CompanyOwnersForm', 'CompanyDirectory');
     }
     
     public function relationshipsAction()
     {
-        return array(
-            "companyDirectoryId" => $this->params('id'),
-            "form" => $this->processForm(
-                'CompanyRelationshipsForm',
-                'CompanyDirectory',
-                $this->params('id')
-            ),
-            'flashMessages' => $this->getFlashMessages(),
-        );
+        return $this->genericForm('CompanyRelationshipsForm', 'CompanyDirectory');
     }
     
     public function sectorsAction()
     {
-        return array(
-            "companyDirectoryId" => $this->params('id'),
-            "form" => $this->processForm(
-                'CompanySectorsForm',
-                'CompanyDirectory',
-                $this->params('id')
-            ),
-            'flashMessages' => $this->getFlashMessages(),
-        );
+        return $this->genericForm('CompanySectorsForm', 'CompanyDirectory');
     }
     
     public function companyListAction()
