@@ -30,6 +30,7 @@ use Directorzone\Form\Company\CompanyOwnersForm;
 use Directorzone\Form\Company\CompanyOfficersForm;
 use Directorzone\Form\Company\CompanyFinancialsForm;
 use Directorzone\Form\Company\CompanyFeedsForm;
+use Directorzone\Service\TwitterService;
 
 class Module
 {
@@ -73,25 +74,26 @@ class Module
                     },
                 'CompanyView' =>
                     function (ControllerManager $cm) {
-                        return new \Directorzone\Controller\Directory\Company\ViewController(
-                            $cm->getServiceLocator()->get('CompanyService')
+                        return new \Directorzone\Controller\Directory\Company\CompanyViewController(
+                            $cm->getServiceLocator()->get('CompanyService'),
+                            $cm->getServiceLocator()->get('TwitterService')
                         );
                     },
                 'CompanyEdit' =>
                     function (ControllerManager $cm) {
-                        return new \Directorzone\Controller\Directory\Company\EditController(
+                        return new \Directorzone\Controller\Directory\Company\CompanyEditController(
                             $cm->getServiceLocator()->get('CompanyService')
                         );
                     },
                 'PeopleView' =>
                     function (ControllerManager $cm) {
-                        return new \Directorzone\Controller\Directory\People\ViewController(
+                        return new \Directorzone\Controller\Directory\People\PeopleViewController(
                             $cm->getServiceLocator()->get('PeopleService')
                         );
                     },
                 'PeopleEdit' =>
                     function (ControllerManager $cm) {
-                        return new \Directorzone\Controller\Directory\People\EditController(
+                        return new \Directorzone\Controller\Directory\People\PeopleEditController(
                             $cm->getServiceLocator()->get('PeopleService')
                         );
                     },
@@ -103,6 +105,11 @@ class Module
     {
         return array(
             'factories' => array(
+                'TwitterService' => function($sm) {
+                    $settings = $sm->get('config')['twitter'];
+                    $twitterApiExchange = new \TwitterAPIExchange($settings);
+                    return new TwitterService($twitterApiExchange);
+                },
                 'ElasticService' => function ($sm) {
                     $elasticClient = new ElasticClient();
 

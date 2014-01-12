@@ -5,7 +5,7 @@ namespace Directorzone\Controller\Directory\Company;
 use Netsensia\Controller\NetsensiaActionController;
 use Directorzone\Service\CompanyService;
 
-class EditController extends NetsensiaActionController
+class CompanyEditController extends NetsensiaActionController
 {
     /**
      * @var CompanyService

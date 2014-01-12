@@ -7,7 +7,7 @@ use Directorzone\Service\CompanyService;
 use Directorzone\Service\PeopleService;
 use Symfony\Component\Translation\Exception\NotFoundResourceException;
 
-class ViewController extends NetsensiaActionController
+class PeopleViewController extends NetsensiaActionController
 {
     /**
      * @var PeopleService
