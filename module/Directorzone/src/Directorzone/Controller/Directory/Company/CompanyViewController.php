@@ -24,7 +24,7 @@ class CompanyViewController extends NetsensiaActionController
         TwitterService $twitterService
     ) {
         $this->companyService = $companyService;
-        $this->twitterServuce = $twitterService;
+        $this->twitterService = $twitterService;
     }
     
     public function companyDetailsAction()
@@ -33,18 +33,28 @@ class CompanyViewController extends NetsensiaActionController
                 
         try {
             
-            $twitterResults = $this->twitterService->search('Microsoft');
-            
-            var_dump($twitterResults);
             $companyDetails = $this->companyService->getCompanyDetails(
                 $companyDirectoryId
             );
             
-            $returnArray = array_merge(
-	            $twitterResults,
-                $companyDetails
+            $twitterSearchTerm = str_replace('limited', '', strtolower($companyDetails['name']));
+            $twitterSearchTerm = str_replace('ltd', '', $twitterSearchTerm);
+            $twitterSearchTerm = str_replace('holdings', '', $twitterSearchTerm);
+            $twitterSearchTerm = str_replace('plc', '', $twitterSearchTerm);
+            $twitterSearchTerm = str_replace('&', 'and', $twitterSearchTerm);
+            
+            $twitterSearchTerm = trim($twitterSearchTerm);
+            
+            $twitterResults = $this->twitterService->search(
+                $twitterSearchTerm,
+                5
             );
             
+            $returnArray = array_merge(
+                $companyDetails,
+                $twitterResults
+            );
+                        
             return $returnArray;
             
         } catch (NotFoundResourceException $e) {

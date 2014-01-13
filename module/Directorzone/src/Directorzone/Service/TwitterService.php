@@ -17,18 +17,33 @@ class TwitterService extends NetsensiaService
         $this->twitterApiExchange = $twitterApiExchange;
     }
     
-    public function search($searchTerm)
+    public function search($searchTerm, $count)
     {
         
-        $results = $this->twitterApiExchange->buildOauth(
-            'https://api.twitter.com/1.1/search/tweets.json',
-            'POST'
-        )->setPostfields([
-            'q' => $searchTerm,
-            'count' => 10
-        ])
-         ->performRequest();
+        $a = $this->twitterApiExchange->setGetfield('?q=' . $searchTerm . '&count=' . $count);
 
+        $b = $a->buildOauth(
+            'https://api.twitter.com/1.1/search/tweets.json',
+            'GET'
+        );
+        
+        $c = $b->performRequest();
+        
+        $results['tweets'] = [];
+        
+        if ($c) {
+            $json = json_decode($c);
+            
+            foreach ($json->statuses as $tweet) {
+                $results['tweets'][] = [
+                    'text' => $tweet->text,
+                    'created' => $tweet->created_at,
+                    'username' => $tweet->user->name,
+                    'userimage' => $tweet->user->profile_image_url,	
+                ];   
+            }
+        }
+                
         return $results;
     }
 

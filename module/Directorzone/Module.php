@@ -74,9 +74,12 @@ class Module
                     },
                 'CompanyView' =>
                     function (ControllerManager $cm) {
+                        $companyService = $cm->getServiceLocator()->get('CompanyService');
+                        $twitterService = $cm->getServiceLocator()->get('TwitterService');
+                        
                         return new \Directorzone\Controller\Directory\Company\CompanyViewController(
-                            $cm->getServiceLocator()->get('CompanyService'),
-                            $cm->getServiceLocator()->get('TwitterService')
+                            $companyService,
+                            $twitterService
                         );
                     },
                 'CompanyEdit' =>
