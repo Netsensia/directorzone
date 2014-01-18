@@ -192,6 +192,11 @@ class Module
                     $instance->setServiceLocator($sm);
                     return $instance;
                 },
+                'ArticleModel' => function ($sm) {
+                    $instance = new \Directorzone\Model\Article();
+                    $instance->setServiceLocator($sm);
+                    return $instance;
+                },
                 'CompanyContactForm' => function ($sm) {
                     $form = new CompanyContactForm('companyContactForm');
                     $form->setTranslator($sm->get('translator'));

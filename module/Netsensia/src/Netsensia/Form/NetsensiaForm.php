@@ -151,9 +151,9 @@ class NetsensiaForm extends Form
             throw new \Exception('DB Adapter is not set');
         }
 
-        $table = new TableGateway($table, $this->dbAdapter);
+        $tableGateway = new TableGateway($table, $this->dbAdapter);
         
-        $rowset = $table->select();
+        $rowset = $tableGateway->select();
         
         $optionsArray = [];
 

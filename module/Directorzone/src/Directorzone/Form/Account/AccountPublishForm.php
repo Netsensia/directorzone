@@ -12,10 +12,16 @@ class AccountPublishForm extends NetsensiaForm
     
     public function prepare()
     {
-        $this->setFieldPrefix('account-account-');
-        $this->setDefaultIcon('user');
+        $this->setFieldPrefix('account-publish-');
+        $this->setDefaultIcon('envelope');
         
-        $this->addSubmit('Submit');
+        $this->addSelect(['name' => 'articlecategory', 'label' => 'Category']);
+        
+        
+        $this->addText('title');
+        $this->addTextArea('content');
+        
+        $this->addSubmit('Publish');
         
         parent::prepare();
     }
