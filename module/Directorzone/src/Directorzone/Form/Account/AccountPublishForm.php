@@ -17,9 +17,13 @@ class AccountPublishForm extends NetsensiaForm
         
         $this->addSelect(['name' => 'articlecategory', 'label' => 'Category']);
         
-        
         $this->addText('title');
         $this->addTextArea('content');
+        
+        $this->addDate('startdate');
+        $this->addDate('enddate');
+        
+       // $this->addImage('image');
         
         $this->addSubmit('Publish');
         

@@ -286,6 +286,40 @@ class NetsensiaForm extends Form
         $this->add($text);
     }
     
+    public function addImage($options)
+    {
+        if (!is_array($options)) {
+            $options = [ 'name' => $options ];
+        }
+
+        $name = $this->fieldPrefix . str_replace('-', '', $options['name']);
+        
+        if (!isset($options['label'])) {
+            $parts = explode('_', $options['name']);
+            $label = $parts[count($parts)-1];
+            $label = ucwords(str_replace('-', ' ', $label));
+        
+            $options['label'] = $label;
+        }
+        
+        $options['icon'] = 'camera';
+        $options['class'] = $this->defaultClass . ' image-upload';
+        
+        $file = new Element\File($name);
+        $file->setLabel($label);
+        
+        $file->setAttributes(
+            [
+                'id'    => $name,
+                'type'  => 'file',
+                'icon'  => $options['icon'],
+                'class' => $options['class'],
+            ]
+        );
+        
+        $this->add($file);
+    }
+    
     public function addTextArea($options)
     {
         if (is_array($options)) {

@@ -24,12 +24,12 @@ class ProcessForm extends AbstractPlugin
         $tableModel = $sl->get($modelName . 'Model');
         
         $tableModel->init($modelId);
-        
+
         if ($request->isPost()) {
             $formData = $request->getPost()->toArray();
         
             $form->setData($formData);
-        
+                    
             if ($form->isValid()) {
                 $prefix = $form->getFieldPrefix();
                                 
@@ -66,8 +66,12 @@ class ProcessForm extends AbstractPlugin
                                 
                 if ($isValid) {
                     $tableModel->setData($data);
-            
-                    $tableModel->save();
+                    
+                    if (empty($modelId)) {
+                        $tableModel->create();
+                    } else {
+                        $tableModel->save();
+                    }
                     
                     $this->controller->flashMessenger()->addSuccessMessage('Your details have been saved');
                     $router = $sl->get('router');
