@@ -41,6 +41,12 @@ sed -i 's/disable_functions/;disable_functions/g' /etc/php5/cli/php.ini
 sed -i 's/memory_limit = 128M/memory_limit = 2048M/g' /etc/php5/cli/php.ini
 
 #############################################################
+# Make some modifications to my.cnf file
+#############################################################
+sed -i 's/^bind-address/#bind-address/g' /etc/mysql/my.cnf
+
+
+#############################################################
 # Install Elastic Search
 #############################################################
 wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.5.deb
@@ -54,6 +60,8 @@ unzip db_create.zip
 mysql -uroot < db_create.sql
 rm db_create.sql
 rm db_create.zip
+mysql -uroot -e "grant all on *.* to root@'%'"
+sudo service mysql restart
 
 #############################################################
 # Install developer tools
