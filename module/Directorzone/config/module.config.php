@@ -421,6 +421,16 @@ return array(
                     ),
                 ),
             ),
+            'account-myarticles' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/myaccount/myarticles',
+                    'defaults' => array(
+                        'controller' => 'Directorzone\Controller\Account\Account',
+                        'action'     => 'my-articles',
+                    ),
+                ),
+            ),
             'account-inbox' => array(
                 'type'    => 'Literal',
                 'options' => array(

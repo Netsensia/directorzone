@@ -69,12 +69,16 @@ class AccountController extends NetsensiaActionController
     public function directoryAction()
     {
         return $this->genericForm('AccountDirectoryForm', 'User');
-        
     }
     
     public function publishAction()
     {
-        return $this->genericForm('AccountPublishForm', 'User');
+        return $this->genericForm('AccountPublishForm', 'Article');
+    }
+    
+    public function myArticlesAction()
+    {
+       
     }
     
     private function genericForm($formName, $modelName)
@@ -83,7 +87,7 @@ class AccountController extends NetsensiaActionController
             "form" => $this->processForm(
                 $formName,
                 $modelName,
-                $this->getUserId()
+                null
             ),
             'flashMessages' => $this->getFlashMessages(),
         );

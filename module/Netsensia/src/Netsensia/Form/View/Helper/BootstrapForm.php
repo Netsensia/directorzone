@@ -145,7 +145,7 @@ class BootstrapForm extends AbstractHelper
         $this->renderMessages();
         
         echo(
-            '<form class="form-horizontal" ' .
+            '<form enctype="multipart/form-data" class="form-horizontal" ' .
                   'name="' . $this->form->getName() . '" ' .
                   'id="' . $this->form->getName() . '" ' .
                   'action="' . $action . '" ' .

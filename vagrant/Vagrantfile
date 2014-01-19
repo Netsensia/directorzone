@@ -10,8 +10,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
  
     config.vm.network :forwarded_port, guest: 80, host: 8081
+<<<<<<< HEAD
     config.vm.network :forwarded_port, guest: 9200, host: 9091
       config.vm.network :forwarded_port, guest: 3306, host: 33060
+=======
+    config.vm.network :forwarded_port, guest: 9200, host: 9200
+    config.vm.network :forwarded_port, guest: 3306, host: 33060
+>>>>>>> 1f3952c8064e93956714951159f841a82db897fa
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.

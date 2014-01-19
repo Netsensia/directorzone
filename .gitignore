@@ -15,5 +15,4 @@ test
 behat.local.yml
 temp.sh
 ch_xml_gateway.last.transaction.id
-
-
+elasticsearch.log
