@@ -312,6 +312,14 @@ function loadTable(type, page, size)
 			$('li#previous').addClass('disabled');
 		}
 
+    	if (type == 'L') {
+    		$('table#companies').attr('data-link', 'row');
+    		$('table#companies').addClass('rowlink');
+    	} else {
+    		$('table#companies').removeAttr('data-link');
+    		$('table#companies').removeClass('rowlink');
+    	}
+
 		$.each(data.results, function(key, value) {
 			if (type == 'U') {
 				value.number = 
@@ -334,11 +342,6 @@ function loadTable(type, page, size)
 			if (type == 'L') {
 				var url = '/directories/company/' + value.internalId;
 				value.number = '<a href="' + url + '">' + value.number + '</a>';
-				$('table#companies').attr('data-link', 'row');
-				$('table#companies').addClass('rowlink');
-			} else {
-				$('table#companies').removeAttr('data-link');
-				$('table#companies').removeClass('rowlink');
 			}
 
 			var newRow = '<tr>';
