@@ -64,17 +64,22 @@
 
 							<tr>
 								<th>
-									Company
+									Number
+								</th>
+								<th>
+									Name
 								</th>
 								<th>
 									Exchange
 								</th>
-								<th>
-									Turnover
-								</th>
 							</tr>
 
 					</table>
+					
+					<ul class="pager">
+                    <li class="previous" id="previous" class="disabled"><a href="#">&larr; Previous</a></li>
+                    <li class="next" id="next"><a href="#">Next &rarr;</a></li>
+                    </ul>
 				</div>
 				<div class="col-md-4 column">
 					<div class="panel panel-default">
@@ -135,42 +140,75 @@
 <script>
 
 $(document).ready(function() {
-	loadTable('L');
+
+	loadCompanies();
+	
+	$(document).delegate('#tab-companies', 'click', function() {
+		$('#tab-companies').parent().addClass('active');
+		$('#tab-people').parent().removeClass('active');
+		$('#tab-services').parent().removeClass('active');
+		loadCompanies();
+	});
+	
+	$(document).delegate('#tab-people', 'click', function() {
+		$('#tab-companies').parent().removeClass('active');
+		$('#tab-people').parent().addClass('active');
+		$('#tab-services').parent().removeClass('active');
+		loadPeople();
+	});
+
+	$(document).delegate('#tab-services', 'click', function() {
+		$('#tab-people').parent().removeClass('active');
+		$('#tab-companies').parent().removeClass('active');
+		$('#tab-services').parent().addClass('active');
+		loadServices();
+	});
+
 });
 
-function loadTable(type)
+function loadCompanies()
 {
-	$('table#directories').find("tr:gt(0)").remove();
-
-	$('table#directories tr:last').after(
-		'<tr>' +
-		'<td style="text-align:center" colspan="4"><img src="/img/ajax/ajax-loader.gif"></td>' +
-		'</tr>'
-    );
-	
-	var url = "/ajax/company/list?type=" + type + "&page=1&size=5";
-
-	$.ajax({
-		url: url
-	}).done(function(data) {
-
-		$('table#directories').find("tr:gt(0)").remove();
-				
-		$.each(data.results, function(key, value) {
-			if (type == 'L') {
+	netsensia_Pager(
+			1,
+			5,
+			'directories',
+			'/ajax/company/list',
+			function(key, value) {
 				var url = '/directories/company/' + value.internalId;
-				value.name = '<a href="' + url + '">' + value.name + '</a>';
+				var newRow = '<tr>';
+				newRow += '<td><a href="' + url + '">' + value.number + '</a></td>';
+				newRow += '<td>' + value.name + '</td>';
+				newRow += '<td>FTSE AIM 100</td>';
+				newRow += '</tr>';
+		
+				return newRow;
 			}
-			
-			var newRow = '<tr>';
-			newRow += '<td>' + value.name + '</td>';
-			newRow += '<td>FTSE AIM 100</td>';
-			newRow += '<td>1M GBP</td>';
-			newRow += '</tr>';
-			
-    		$('table#directories tr:last').after(newRow);
-    	});
-	});
+		);
 }
+
+function loadPeople()
+{
+	netsensia_Pager(
+			1,
+			5,
+			'directories',
+			'/ajax/people/list',
+			function(key, value) {
+				var newRow = '<tr>';
+				newRow += '<td>' + value.name + '</td>';
+				newRow += '<td>' + value.companyname + '</td>';
+				newRow += '<td>' + value.appointmenttype + '</td>';
+				newRow += '</tr>';
+		
+				return newRow;
+			}
+		);	
+}
+
+function loadServices()
+{
+	loadCompanies();
+}
+
 
 </script>
