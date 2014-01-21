@@ -1,2 +1,27 @@
+<link rel="stylesheet" href="/js/sceditor/minified/themes/default.min.css" type="text/css" media="all" />
+<script type="text/javascript" src="/js/sceditor/minified/jquery.sceditor.bbcode.min.js"></script>
+
+<style>
+.sceditor-button {
+	width:24px;
+	height:24px;
+}
+
+textarea {
+	min-height:125px;
+}
+</style>
+
 <?php echo $this->partial('account-nav.phtml'); ?>
 <?php echo $this->BootstrapForm($this->form, 'Publishing Dashboard', $this->url('account-publish')); ?>
+
+<script>
+$(function() {
+    // Replace all textarea's
+    // with SCEditor
+    $("textarea").sceditor({
+        plugins: "bbcode",
+        style: "/js/sceditor/minified/jquery.sceditor.default.min.css"
+    });
+});
+</script>
