@@ -32,6 +32,7 @@ use Directorzone\Form\Company\CompanyFinancialsForm;
 use Directorzone\Form\Company\CompanyFeedsForm;
 use Directorzone\Service\TwitterService;
 use Directorzone\Service\BingService;
+use Zend\Server\Cache;
 
 class Module
 {
@@ -111,6 +112,23 @@ class Module
     {
         return array(
             'factories' => array(
+                'ZendCache' => function () {
+                    return \Zend\Cache\StorageFactory::factory(
+                        array(
+                            'adapter' => array(
+                                'name' => 'filesystem',
+                                'options' => array(
+                                    'dirLevel' => 2,
+                                    'cacheDir' => '/tmp',
+                                    'dirPermission' => 0755,
+                                    'filePermission' => 0666,
+                                    'namespaceSeparator' => '-db-'
+                                ),
+                            ),
+                            'plugins' => array('serializer'),
+                        )
+                    );
+                },
                 'TwitterService' => function($sm) {
                     $settings = $sm->get('config')['twitter'];
                     $twitterApiExchange = new \TwitterAPIExchange($settings);

@@ -41,6 +41,17 @@ class CompanyViewController extends NetsensiaActionController
                 
         try {
             
+            $zendCache = $this->getServiceLocator()->get('ZendCache');
+            
+            $cacheKey = 'companyDetailsAction_' . $companyDirectoryId;
+            
+            $success = false;
+            $result = $zendCache->getItem($cacheKey, $success);
+            
+            if ($success) {
+                return $result;
+            }
+            
             $companyDetails = $this->companyService->getCompanyDetails(
                 $companyDirectoryId
             );
@@ -66,7 +77,7 @@ class CompanyViewController extends NetsensiaActionController
 	           $bingSearchTerm,
                4
             );
-            
+                        
             $returnArray = array_merge(
                 $companyDetails,
                 $twitterResults
@@ -81,9 +92,10 @@ class CompanyViewController extends NetsensiaActionController
             $returnArray = array_merge(
                 $returnArray,
                 $bingResults
-            
             );
-
+            
+            $zendCache->setItem($cacheKey, $returnArray);
+            
             return $returnArray;
             
         } catch (NotFoundResourceException $e) {
