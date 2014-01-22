@@ -31,6 +31,7 @@ use Directorzone\Form\Company\CompanyOfficersForm;
 use Directorzone\Form\Company\CompanyFinancialsForm;
 use Directorzone\Form\Company\CompanyFeedsForm;
 use Directorzone\Service\TwitterService;
+use Directorzone\Service\BingService;
 
 class Module
 {
@@ -76,10 +77,12 @@ class Module
                     function (ControllerManager $cm) {
                         $companyService = $cm->getServiceLocator()->get('CompanyService');
                         $twitterService = $cm->getServiceLocator()->get('TwitterService');
+                        $bingService = $cm->getServiceLocator()->get('BingService');
                         
                         return new \Directorzone\Controller\Directory\Company\CompanyViewController(
                             $companyService,
-                            $twitterService
+                            $twitterService,
+                            $bingService
                         );
                     },
                 'CompanyEdit' =>
@@ -112,6 +115,11 @@ class Module
                     $settings = $sm->get('config')['twitter'];
                     $twitterApiExchange = new \TwitterAPIExchange($settings);
                     return new TwitterService($twitterApiExchange);
+                },
+                'BingService' => function($sm) {
+                    $settings = $sm->get('config')['bing'];
+                    $bingClient = new \Bing\Client($settings['key'], 'json');
+                    return new BingService($bingClient);
                 },
                 'ElasticService' => function ($sm) {
                     $elasticClient = new ElasticClient();

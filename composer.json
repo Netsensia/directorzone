@@ -24,7 +24,8 @@
 		"mockery/mockery" : "0.8.0",
 		"netsensia/companies-house" : ">=0.2.0",
 		"zendframework/zendframework" : ">=2.2.0rc3",
-		"j7mbo/twitter-api-php": "dev-master"
+		"j7mbo/twitter-api-php": "dev-master",
+		"scragg0x/bing-api-php": "dev-master"
 	},
 	"require-dev" : {
 		"phpunit/phpunit" : "3.7.*",

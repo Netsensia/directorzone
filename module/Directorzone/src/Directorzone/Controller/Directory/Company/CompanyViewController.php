@@ -6,6 +6,7 @@ use Netsensia\Controller\NetsensiaActionController;
 use Directorzone\Service\CompanyService;
 use Symfony\Component\Translation\Exception\NotFoundResourceException;
 use Directorzone\Service\TwitterService;
+use Directorzone\Service\BingService;
 
 class CompanyViewController extends NetsensiaActionController
 {
@@ -19,12 +20,19 @@ class CompanyViewController extends NetsensiaActionController
      */
     private $twitterService;
     
+    /**
+     * @var BingService
+     */
+    private $bingService;
+    
     public function __construct(
         CompanyService $companyService,
-        TwitterService $twitterService
+        TwitterService $twitterService,
+        BingService $bingService
     ) {
         $this->companyService = $companyService;
         $this->twitterService = $twitterService;
+        $this->bingService = $bingService;
     }
     
     public function companyDetailsAction()
@@ -50,11 +58,32 @@ class CompanyViewController extends NetsensiaActionController
                 5
             );
             
+            $bingSearchTerm = $twitterSearchTerm;
+            
+            $searchResults = [];
+            
+            $searchResults = $this->bingService->search(
+	           $bingSearchTerm,
+               4
+            );
+            
             $returnArray = array_merge(
                 $companyDetails,
                 $twitterResults
             );
-                        
+            
+            if (isset($searchResults['d']['results'])) {
+                $bingResults = ['bing' => $searchResults['d']['results']];
+            } else {
+                $bingResults = ['bing' => []];
+            }
+            
+            $returnArray = array_merge(
+                $returnArray,
+                $bingResults
+            
+            );
+
             return $returnArray;
             
         } catch (NotFoundResourceException $e) {
