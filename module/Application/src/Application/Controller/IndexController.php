@@ -2,33 +2,31 @@
 namespace Application\Controller;
 
 use Netsensia\Controller\NetsensiaActionController;
+use Directorzone\Service\ArticleService;
 
 class IndexController extends NetsensiaActionController
 {
+    /**
+     * @var ArticleService
+     */
+    private $articleService;
+    
+    public function __construct(
+        ArticleService $articleService
+    ) {
+        $this->articleService = $articleService;
+    }
+    
     public function indexAction()
     {
-        $items = [
-    	        [
-    	           'image' => '/img/brand/globe.fw.png',
-    	           'title' => 'Example title',
-    	           'content' => 'This is some example content.  It is a little bit longer than the title.'
-                ],
-                [
-                'image' => '/img/brand/globe.fw.png',
-                    'title' => 'Another example title',
-                    'content' => 'This is some more example content.  It is a little bit longer than the title.'
-                ],
-            ];
+        $mediaItems = [];
+        $types = ['news', 'movers', 'talentpool', 'wantedoffered', 'events', 'blogposts'];
+        $limit = 2;
         
-        $mediaItems = [
-            'news' => $items,
-            'movers' => $items,
-            'talentpool' => $items,
-            'wantedoffered' => $items,
-            'events' => $items,
-            'blogposts' => $items,
-           
-        ];
+        foreach ($types as $type) {
+            $mediaItems[$type] = $this->articleService->getArticlesByType($type, $limit);
+        }
+        
         return [
             'flashMessages' => $this->getFlashMessages(),
             'mediaItems' => $mediaItems,

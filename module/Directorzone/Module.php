@@ -33,6 +33,7 @@ use Directorzone\Form\Company\CompanyFeedsForm;
 use Directorzone\Service\TwitterService;
 use Directorzone\Service\BingService;
 use Zend\Server\Cache;
+use Directorzone\Service\ArticleService;
 
 class Module
 {
@@ -204,6 +205,19 @@ class Module
                 'PeopleService' => function ($sm) {
                     $instance = new PeopleService(
                         $sm->get('CompanyOfficersTableGateway')
+                    );
+                    return $instance;
+                },
+                'ArticleTableGateway' => function ($sm) {
+                    $instance = new TableGateway(
+                        'article',
+                        $sm->get('Zend\Db\Adapter\Adapter')
+                    );
+                    return $instance;
+                },
+                'ArticleService' => function ($sm) {
+                    $instance = new ArticleService(
+                        $sm->get('ArticleTableGateway')
                     );
                     return $instance;
                 },

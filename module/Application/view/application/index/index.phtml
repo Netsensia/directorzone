@@ -24,8 +24,8 @@
 			</div>
 			<div class="row clearfix">
 				<div class="col-md-3 column">
-					<?php $this->NewsPanel($this->mediaItems['movers']); ?>
-					<?php $this->NewsPanel($this->mediaItems['talentpool']); ?>
+					<?php $this->NewsPanel('Movers', $this->mediaItems['movers']); ?>
+					<?php $this->NewsPanel('Talent Pool', $this->mediaItems['talentpool']); ?>
 				</div>
 				<div class="col-md-6 column">
 					<ul class="nav nav-tabs">
@@ -62,17 +62,17 @@
                     </ul>
 				</div>
 				<div class="col-md-3 column">
-					<?php $this->NewsPanel($this->mediaItems['news']); ?>
-					<?php $this->NewsPanel($this->mediaItems['wantedoffered']); ?>
+					<?php $this->NewsPanel('News', $this->mediaItems['news']); ?>
+					<?php $this->NewsPanel('Deal Flow', $this->mediaItems['wantedoffered']); ?>
 
 				</div>
 			</div>
 			<div class="row clearfix">
 				<div class="col-md-6 column">
-					<?php $this->NewsPanel($this->mediaItems['blogposts']); ?>
+					<?php $this->NewsPanel('Member Articles', $this->mediaItems['blogposts']); ?>
 				</div>
 				<div class="col-md-6 column">
-					<?php $this->NewsPanel($this->mediaItems['events']); ?>
+					<?php $this->NewsPanel('Events', $this->mediaItems['events']); ?>
 				</div>
 			</div>
 		</div>

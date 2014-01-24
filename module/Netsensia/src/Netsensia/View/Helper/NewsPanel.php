@@ -6,13 +6,13 @@ use Zend\View\HelperPluginManager as ServiceManager;
 
 class NewsPanel extends AbstractHelper 
 {
-    public function __invoke(array $items)
+    public function __invoke($panelTitle, array $items)
     {
         ?>
             <div class="panel panel-default">
             <div class="panel-heading">
             <h3 class="panel-title">
-            News
+            <?php echo $panelTitle; ?>
             </h3>
             </div>
         <?php

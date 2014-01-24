@@ -10,6 +10,7 @@ use Zend\Mvc\MvcEvent;
 use Zend\Http\PhpEnvironment\Request;
 use Zend\Session\Container as SessionContainer;
 use Netsensia\Model\Exception\KeyNotFoundException;
+use Zend\Mvc\Controller\ControllerManager;
 
 class Module
 {
@@ -63,6 +64,20 @@ class Module
         }
     }
 
+    public function getControllerConfig()
+    {
+        return array(
+            'factories' => array(
+                'Index' =>
+                    function (ControllerManager $cm) {
+                        return new \Application\Controller\IndexController(
+                            $cm->getServiceLocator()->get('ArticleService')
+                        );
+                    },
+            )
+        );
+    }
+    
     public function getConfig()
     {
         return include __DIR__ . '/config/module.config.php';

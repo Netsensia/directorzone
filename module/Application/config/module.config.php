@@ -1,12 +1,6 @@
 <?php
 
 return array(
-    'controllers' => array(
-        'invokables' => array(
-            'Application\Controller\Index' =>
-                'Application\Controller\IndexController',
-        ),
-    ),
     'router' => array(
         'routes' => array(
             
@@ -15,7 +9,7 @@ return array(
                 'options' => array(
                     'route'    => '/',
                     'defaults' => array(
-                        'controller' => 'Application\Controller\Index',
+                        'controller' => 'Index',
                         'action'     => 'index',
                     ),
                 ),
