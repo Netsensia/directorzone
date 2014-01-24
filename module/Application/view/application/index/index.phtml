@@ -23,29 +23,9 @@
 				</p>
 			</div>
 			<div class="row clearfix">
-				<div class="col-md-2 column">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								Movers
-							</h3>
-						</div>
-						<div class="panel-body">
-						
-						</div>
-
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								Talent pool
-							</h3>
-						</div>
-						<div class="panel-body">
-						
-						</div>
-
-					</div>
+				<div class="col-md-3 column">
+					<?php $this->NewsPanel($this->mediaItems['movers']); ?>
+					<?php $this->NewsPanel($this->mediaItems['talentpool']); ?>
 				</div>
 				<div class="col-md-6 column">
 					<ul class="nav nav-tabs">
@@ -81,56 +61,18 @@
                     <li class="next" id="next"><a href="#">Next &rarr;</a></li>
                     </ul>
 				</div>
-				<div class="col-md-4 column">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								News
-							</h3>
-						</div>
-						<div class="panel-body">
-							
-						</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								Wanted / Offered
-							</h3>
-						</div>
-						<div class="panel-body">
-			
-						</div>
-						
-					</div>
+				<div class="col-md-3 column">
+					<?php $this->NewsPanel($this->mediaItems['news']); ?>
+					<?php $this->NewsPanel($this->mediaItems['wantedoffered']); ?>
+
 				</div>
 			</div>
 			<div class="row clearfix">
 				<div class="col-md-6 column">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								Blog posts
-							</h3>
-						</div>
-						<div class="panel-body">
-				
-						</div>
-
-					</div>
+					<?php $this->NewsPanel($this->mediaItems['blogposts']); ?>
 				</div>
 				<div class="col-md-6 column">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								Meeting requests
-							</h3>
-						</div>
-						<div class="panel-body">
-			
-						</div>
-
-					</div>
+					<?php $this->NewsPanel($this->mediaItems['events']); ?>
 				</div>
 			</div>
 		</div>
@@ -170,7 +112,7 @@ function loadCompanies()
 {
 	netsensia_Pager(
 			1,
-			5,
+			12,
 			'directories',
 			'/ajax/company/list',
 			function(key, value) {
@@ -190,7 +132,7 @@ function loadPeople()
 {
 	netsensia_Pager(
 			1,
-			5,
+			12,
 			'directories',
 			'/ajax/people/list',
 			function(key, value) {

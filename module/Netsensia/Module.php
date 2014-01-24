@@ -26,6 +26,7 @@ class Module
         return array(
             'invokables' => array(
                 'BootstrapForm' => 'Netsensia\Form\View\Helper\BootstrapForm',
+                'NewsPanel' => 'Netsensia\View\Helper\NewsPanel',
             ),
             'factories' => array(
                 'config' => function ($serviceManager) {
