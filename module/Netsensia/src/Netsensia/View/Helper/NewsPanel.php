@@ -3,6 +3,8 @@ namespace Netsensia\View\Helper;
 
 use Zend\View\Helper\AbstractHelper;
 use Zend\View\HelperPluginManager as ServiceManager;
+use JBBCode\Parser;
+use JBBCode\DefaultCodeDefinitionSet;
 
 class NewsPanel extends AbstractHelper 
 {
@@ -17,6 +19,8 @@ class NewsPanel extends AbstractHelper
             </div>
         <?php
         foreach ($items as $item) {
+            $bbCodeParser = new Parser();
+            $bbCodeParser->addCodeDefinitionSet(new DefaultCodeDefinitionSet());
         ?>
 
             <div class="panel-body">
@@ -26,7 +30,7 @@ class NewsPanel extends AbstractHelper
                 </a>
                     <div class="media-body">
                     <h4 class="media-heading"><?php echo $item['title']; ?></h4>
-                    <?php echo $item['content']; ?>
+                    <div style="max-height:6em"><?php $bbCodeParser->parse($item['content']); echo $bbCodeParser->getAsHtml(); ?></div>
                     </div>
                 </div>
             </div>
