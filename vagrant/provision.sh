@@ -100,6 +100,13 @@ sh -c 'echo "127.0.0.1 directorzone.local" >> /etc/hosts'
 sh -c 'echo "ServerName 127.0.0.1" >> /etc/apache2/apache2.conf'
 
 #############################################################
+# Set up phpmyadmin
+#############################################################
+apt-get -q -y install phpmyadmin
+a2ensite phpmyadmin.conf
+cp /var/www/directorzone/vagrant/VirtualHost/.htpasswd /var/www
+
+#############################################################
 # Set up search index
 #############################################################
 php /var/www/directorzone/public/index.php search-index

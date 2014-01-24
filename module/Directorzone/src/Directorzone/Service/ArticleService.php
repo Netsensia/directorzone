@@ -18,20 +18,50 @@ class ArticleService extends NetsensiaService
         $this->articleTable = $articleTable;
     }
 
-    public function getArticlesByType($type, $limit)
+    public function getArticlesByType($type, $start, $end = 0)
     {
-        $articles = [
-            [
-                'image' => '/img/brand/globe.fw.png',
-                'title' => 'Example title',
-                'content' => 'This is some example content.  It is a little bit longer than the title.'
-            ],
-            [
-                'image' => '/img/brand/globe.fw.png',
-                'title' => 'Another example title',
-                'content' => 'This is some more example content.  It is a little bit longer than the title.'
-            ],
-        ];
+        if ($end == 0) {
+            $end = $start;
+            $start = 1;
+        }
+        
+        switch ($type) {
+        	case 'news' : $categoryId = 2; break;
+        	case 'movers' : $categoryId = 8; break;
+        	case 'blogposts' : $categoryId = 1; break;
+        	case 'wanted' : $categoryId = 3; break;
+        	case 'offered' : $categoryId = 4; break;
+        	case 'events' : $categoryId = 5; break;
+        	case 'jobs' : $categoryId = 7; break;
+        	default: throw new \Exception('Category ' . $type . ' not found');
+        }
+        
+        $rowset = $this->articleTable->select(
+            function (Select $select) use ($categoryId, $start, $end) {
+        
+                $select->where(
+                    ['articlecategoryid' => $categoryId]
+                )
+                ->columns(
+                    ['image', 'title', 'content']
+                )
+                ->offset($start - 1)
+                ->limit(1 + ($end - $start))
+                ->order('publishdate DESC');
+            }
+        );
+        
+        $rows = $rowset->toArray();
+        $articles = [];
+        
+        foreach ($rows as $row) {
+            $image = '/img/brand/globe.fw.png';
+            $articles[] = [
+	            'image' => $image,
+	            'title' => $row['title'],
+	            'content' => $row['content'],   
+            ];
+        }
         
         return $articles;
     }

@@ -20,7 +20,7 @@ class IndexController extends NetsensiaActionController
     public function indexAction()
     {
         $mediaItems = [];
-        $types = ['news', 'movers', 'talentpool', 'wantedoffered', 'events', 'blogposts'];
+        $types = ['news', 'movers', 'wanted', 'offered', 'events', 'movers', 'blogposts'];
         $limit = 2;
         
         foreach ($types as $type) {
