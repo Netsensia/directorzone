@@ -8,6 +8,13 @@ use JBBCode\DefaultCodeDefinitionSet;
 
 class NewsPanel extends AbstractHelper 
 {
+    private function stripBBCode($text_to_search)
+    {
+        $pattern = '|[[\/\!]*?[^\[\]]*?]|si';
+        $replace = '';
+        return preg_replace($pattern, $replace, $text_to_search);
+    }
+    
     public function __invoke($panelTitle, array $items)
     {
         ?>
@@ -21,6 +28,11 @@ class NewsPanel extends AbstractHelper
         foreach ($items as $item) {
             $bbCodeParser = new Parser();
             $bbCodeParser->addCodeDefinitionSet(new DefaultCodeDefinitionSet());
+            $content = $item['content'];
+            $bbCodeParser->parse($content);
+            $content = $bbCodeParser->getAsHtml();
+            $content = $this->stripBBCode($content);
+
         ?>
 
             <div class="panel-body">
@@ -30,7 +42,7 @@ class NewsPanel extends AbstractHelper
                 </a>
                     <div class="media-body">
                     <h4 class="media-heading"><?php echo $item['title']; ?></h4>
-                    <div style="max-height:6em"><?php $bbCodeParser->parse($item['content']); echo $bbCodeParser->getAsHtml(); ?></div>
+                    <div style="max-height:6em"><?php echo $content; ?></div>
                     </div>
                 </div>
             </div>
