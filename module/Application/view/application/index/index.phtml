@@ -32,10 +32,6 @@
 						<li>
 							<a href="#" id="tab-people">People</a>
 						</li>
-						<li>
-							<a href="#" id="tab-services">Services</a>
-						</li>
-
 					</ul>
 					<table class="table table-striped table-bordered table-hover rowlink" data-link="row" id="directories">
 
@@ -95,13 +91,7 @@ $(document).ready(function() {
 		$('#tab-services').parent().removeClass('active');
 		loadPeople();
 	});
-
-	$(document).delegate('#tab-services', 'click', function() {
-		$('#tab-people').parent().removeClass('active');
-		$('#tab-companies').parent().removeClass('active');
-		$('#tab-services').parent().addClass('active');
-		loadServices();
-	});
+;
 
 });
 
@@ -142,11 +132,6 @@ function loadPeople()
 				return newRow;
 			}
 		);	
-}
-
-function loadServices()
-{
-	loadCompanies();
 }
 
 
