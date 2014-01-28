@@ -129,6 +129,16 @@ return array(
                     )
                 )
             ),
+            'articles' => array(
+                'type' => 'literal',
+                'options' => array(
+                    'route'    => '/articles',
+                    'defaults' => array(
+                        'controller' => 'Article',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
             'directories' => array(
                 'type' => 'literal',
                 'options' => array(

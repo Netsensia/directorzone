@@ -75,6 +75,12 @@ class Module
                             $cm->getServiceLocator()->get('CompanyService')
                         );
                     },
+                'Article' =>
+                    function (ControllerManager $cm) {
+                        return new \Directorzone\Controller\Article\ArticleController(
+                            $cm->getServiceLocator()->get('ArticleService')
+                        );
+                    },
                 'CompanyView' =>
                     function (ControllerManager $cm) {
                         $companyService = $cm->getServiceLocator()->get('CompanyService');
