@@ -153,11 +153,34 @@ return array(
             'articles' => array(
                 'type' => 'literal',
                 'options' => array(
-                    'route'    => '/articles',
+                    'route'    => '/article',
                     'defaults' => array(
                         'controller' => 'Article',
                         'action'     => 'index',
                     ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'article-details' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/:id',
+                            'constraints' => ['id' => '[0-9]*'],
+                            'defaults' => array(
+                                'action' => 'index',
+                                'id' => 0,
+                            ),
+                        ),
+                    ),
+                    'article-list' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/list',
+                            'defaults' => array(
+                                'action' => 'list',
+                            ),
+                        ),
+                   ),
                 ),
             ),
             'directories' => array(

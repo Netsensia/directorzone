@@ -21,4 +21,8 @@ class ArticleController extends NetsensiaActionController
     public function indexAction()
     {
     }
+    
+    public function listAction()
+    {
+    }
 }
