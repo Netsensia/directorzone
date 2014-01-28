@@ -70,6 +70,27 @@ return array(
                             ),
                         ),
                     ),
+                    'article' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/article',
+                            'defaults' => array(
+                                'controller' => 'Directorzone\Controller\Ajax\Article',
+                            ),
+                        ),
+                        'may_terminate' => false,
+                        'child_routes' => array(
+                            'list' => array(
+                                'type' => 'literal',
+                                'options' => array(
+                                    'route' => '/list',
+                                    'defaults' => array(
+                                        'action' => 'article-list',
+                                    ),
+                                )
+                            ),
+                        ),
+                    ),
                     'company' => array(
                         'type' => 'literal',
                         'options' => array(

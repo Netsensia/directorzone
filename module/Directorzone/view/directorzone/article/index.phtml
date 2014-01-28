@@ -1,1 +1,37 @@
-Hello
+<?php echo $this->partial('article-nav.phtml'); ?>
+<h3>Member Articles</h3>
+
+
+<table id="articles" data-link="row" class="rowlink table table-striped table-bordered table-hover">
+<tr><th>Title</th><th>Author</th><th>Published</th><th>Sectors</th></tr>
+</table>
+
+<ul class="pager">
+<li class="previous" id="previous" class="disabled"><a href="#">&larr; Previous</a></li>
+<li class="next" id="next"><a href="#">Next &rarr;</a></li>
+</ul>
+
+<script>
+
+$(document).ready(function() {
+	netsensia_Pager(
+		1,
+		20,
+		'articles',
+		'/ajax/article/list',
+		function(key, value) {
+			var url = '/article/' + value.internalId;
+			
+			var newRow = '<tr>';
+			newRow += '<td><a href="' + url + '">' + value.title + '</a></td>';
+			newRow += '<td>' + value.author + '</td>';
+			newRow += '<td>' + value.publishdate + '</td>';
+			newRow += '<td>&nbsp;</td>';
+			newRow += '</tr>';
+	
+			return newRow;
+		}
+	);	
+});
+
+</script>

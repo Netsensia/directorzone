@@ -18,6 +18,42 @@ class ArticleService extends NetsensiaService
         $this->articleTable = $articleTable;
     }
 
+    public function getArticles($start, $end)
+    {
+        if ($end == 0) {
+            $end = $start;
+            $start = 1;
+        }
+        
+        $rowset = $this->articleTable->select(
+            function (Select $select) use ($start, $end) {
+        
+                $select->columns(
+                    ['title', 'publishdate', 'articleid', 'content']
+                )
+                ->offset($start - 1)
+                ->limit(1 + ($end - $start))
+                ->order('publishdate DESC');
+            }
+        );
+        
+        $rows = $rowset->toArray();
+        $articles = [];
+        
+        foreach ($rows as $row) {
+            $image = '/img/brand/globe.fw.png';
+            $articles[] = [
+                'image' => $image,
+                'title' => $row['title'],
+                'articleid' => $row['articleid'],
+                'publishdate' => $row['publishdate'],
+                'content' => $row['content'],
+            ];
+        }
+
+        return $articles;
+    }
+    
     public function getArticlesByType($type, $start, $end = 0)
     {
         if ($end == 0) {

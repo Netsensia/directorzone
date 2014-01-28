@@ -69,6 +69,13 @@ class Module
                             $cm->getServiceLocator()->get('PeopleService')
                         );
                     },
+                'Directorzone\Controller\Ajax\Article' =>
+                    function (ControllerManager $cm) {
+                        return new \Directorzone\Controller\Ajax\ArticleController(
+                            $cm->getServiceLocator()->get('ArticleService'),
+                            $cm->getServiceLocator()->get('ElasticService')
+                        );
+                    },
                 'Directory' =>
                     function (ControllerManager $cm) {
                         return new \Directorzone\Controller\Directory\DirectoryController(
