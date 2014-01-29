@@ -5,7 +5,7 @@
         <a href="/">Home</a>
       </li>
       <li>
-        <a href="/articles">Articles</a>
+        <a href="/article/list">Articles</a>
       </li>
       <li class="active">
         <?php echo $this->title; ?>
@@ -21,7 +21,11 @@
         <?php echo $this->title; ?>
       </h3>
       <p>
-        <img style="float:left;margin-right:10px" src="https://s3.amazonaws.com/jetstrap-site/images/website/index/what_icon.png">
+      <div class="col-xs-6 col-md-2" style="padding:0.5em">
+                <img class="img-thumbnail" src="<?php echo $this->image; ?>">
+      </div>
+  
+        
         <?php echo $this->BbCode($this->content); ?>
       </p>
     </div>

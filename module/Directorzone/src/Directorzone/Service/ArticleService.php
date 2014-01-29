@@ -35,7 +35,9 @@ class ArticleService extends NetsensiaService
         $rows = $rowset->toArray();
         
         if (count($rows) == 1) {
-            return $rows[0];
+            $article = $rows[0];
+            $article['image'] = 'https://dl.dropboxusercontent.com/u/63777076/_72603635_stottie_petermiddleton.jpg';
+            return $article;
         } else {
             throw new NotFoundResourceException('Article not found');
         }
