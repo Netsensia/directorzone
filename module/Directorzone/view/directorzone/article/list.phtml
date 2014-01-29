@@ -1,6 +1,16 @@
 <?php echo $this->partial('article-nav.phtml'); ?>
 <h3>Member Articles</h3>
 
+<div class="well">
+<span article-type="1" style="cursor:pointer" class="label label-primary">Blog Posts</span>
+<span article-type="2" style="cursor:pointer" class="label label-primary">News Articles</span>
+<span article-type="3" style="cursor:pointer" class="label label-primary">Wanted</span>
+<span article-type="4" style="cursor:pointer" class="label label-primary">Offered</span>
+<span article-type="5" style="cursor:pointer" class="label label-primary">Events</span>
+<span article-type="6" style="cursor:pointer" class="label label-primary">Meeting Requests</span>
+<span article-type="7" style="cursor:pointer" class="label label-primary">Opportunities</span>
+<span article-type="8" style="cursor:pointer" class="label label-primary">Movers</span>
+</div>
 
 <table id="articles" data-link="row" class="rowlink table table-striped table-bordered table-hover">
 <tr><th>Title</th><th>Author</th><th>Published</th><th>Sectors</th></tr>
@@ -14,24 +24,54 @@
 <script>
 
 $(document).ready(function() {
-	netsensia_Pager(
-		1,
-		20,
-		'articles',
-		'/ajax/article/list',
-		function(key, value) {
-			var url = '/article/' + value.internalId;
-			
-			var newRow = '<tr>';
-			newRow += '<td><a href="' + url + '">' + value.title + '</a></td>';
-			newRow += '<td>' + value.author + '</td>';
-			newRow += '<td>' + value.publishdate + '</td>';
-			newRow += '<td>&nbsp;</td>';
-			newRow += '</tr>';
-	
-			return newRow;
-		}
-	);	
+	var typeArray = ["1","2","3","4","5","6","7","8"];
+
+    loadArticles(typeArray);
+
+    $('.label').click(function() {
+        var articleType = $(this).attr('article-type');
+        var index = typeArray.indexOf(articleType);
+        if (index == -1) {
+            typeArray.push(articleType);
+            $('span[article-type=' + articleType + ']').addClass('label-primary');
+            $('span[article-type=' + articleType + ']').removeClass('label-default');
+        } else {
+            typeArray.splice(index, 1);
+            $('span[article-type=' + articleType + ']').removeClass('label-primary');
+            $('span[article-type=' + articleType + ']').addClass('label-default');
+        }
+
+        loadArticles(typeArray);
+    });
 });
 
+function loadArticles(typeArray) {
+
+	var typeParam = '';
+	for (var i = 0; i < typeArray.length; i++) {
+	    typeParam += 'type[]=' + typeArray[i];
+	    if (i+1 < typeArray.length) {
+		    typeParam += '&';
+	    }
+	}
+
+	netsensia_Pager(
+			1,
+			20,
+			'articles',
+			'/ajax/article/list?' + typeParam,
+			function(key, value) {
+				var url = '/article/' + value.internalId;
+				
+				var newRow = '<tr>';
+				newRow += '<td><a href="' + url + '">' + value.title + '</a></td>';
+				newRow += '<td>' + value.author + '</td>';
+				newRow += '<td>' + value.publishdate + '</td>';
+				newRow += '<td>&nbsp;</td>';
+				newRow += '</tr>';
+		
+				return newRow;
+			}
+		);
+}
 </script>

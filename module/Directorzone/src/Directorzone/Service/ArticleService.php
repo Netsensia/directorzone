@@ -26,7 +26,7 @@ class ArticleService extends NetsensiaService
             function (Select $select) use ($articleId) {
         
                 $select->columns(
-                    ['title', 'publishdate', 'articleid', 'content']
+                    ['title', 'publishdate', 'articleid', 'content', 'image']
                 )
                 ->where(['articleid' => $articleId]);
             }
@@ -42,69 +42,22 @@ class ArticleService extends NetsensiaService
             throw new NotFoundResourceException('Article not found');
         }
     }
-
-    public function getArticles($start, $end)
-    {
-        if ($end == 0) {
-            $end = $start;
-            $start = 1;
-        }
-        
-        $rowset = $this->articleTable->select(
-            function (Select $select) use ($start, $end) {
-        
-                $select->columns(
-                    ['title', 'publishdate', 'articleid', 'content']
-                )
-                ->offset($start - 1)
-                ->limit(1 + ($end - $start))
-                ->order('publishdate DESC');
-            }
-        );
-        
-        $rows = $rowset->toArray();
-        $articles = [];
-        
-        foreach ($rows as $row) {
-            $image = '/img/brand/globe.fw.png';
-            $articles[] = [
-                'image' => $image,
-                'title' => $row['title'],
-                'articleid' => $row['articleid'],
-                'publishdate' => $row['publishdate'],
-                'content' => $row['content'],
-            ];
-        }
-
-        return $articles;
-    }
     
-    public function getArticlesByType($type, $start, $end = 0)
+    public function getArticlesByType($typeArray, $start, $end = 0)
     {
         if ($end == 0) {
             $end = $start;
             $start = 1;
         }
         
-        switch ($type) {
-        	case 'news' : $categoryId = 2; break;
-        	case 'movers' : $categoryId = 8; break;
-        	case 'blogposts' : $categoryId = 1; break;
-        	case 'wanted' : $categoryId = 3; break;
-        	case 'offered' : $categoryId = 4; break;
-        	case 'events' : $categoryId = 5; break;
-        	case 'jobs' : $categoryId = 7; break;
-        	default: throw new \Exception('Category ' . $type . ' not found');
-        }
-        
         $rowset = $this->articleTable->select(
-            function (Select $select) use ($categoryId, $start, $end) {
+            function (Select $select) use ($typeArray, $start, $end) {
         
                 $select->where(
-                    ['articlecategoryid' => $categoryId]
+                    ['articlecategoryid' => $typeArray]
                 )
                 ->columns(
-                    ['image', 'title', 'content']
+                    ['image', 'title', 'content', 'publishdate', 'articleid']
                 )
                 ->offset($start - 1)
                 ->limit(1 + ($end - $start))
@@ -120,7 +73,9 @@ class ArticleService extends NetsensiaService
             $articles[] = [
 	            'image' => $image,
 	            'title' => $row['title'],
-	            'content' => $row['content'],   
+	            'content' => $row['content'],
+	            'articleid' => $row['articleid'],
+	            'publishdate' => $row['publishdate'],
             ];
         }
         

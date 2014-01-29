@@ -27,7 +27,14 @@ function loadTable(page, size, id, route, rowFunc)
 		'</tr>'
     );
 	
-	var url = route + '?page=' + page + '&size=' + size;
+	var url;
+	var joinChar = '?';
+	
+	if (route.indexOf('?') != -1) {
+		joinChar = '&';
+	}
+	
+	url = route + joinChar + 'page=' + page + '&size=' + size;
 	
 	$.ajax({
 		url: url
