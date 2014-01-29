@@ -4,6 +4,7 @@ namespace Directorzone\Service;
 use Netsensia\Service\NetsensiaService;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Select;
+use Symfony\Component\Translation\Exception\NotFoundResourceException;
 
 class ArticleService extends NetsensiaService
 {
@@ -14,8 +15,30 @@ class ArticleService extends NetsensiaService
     
     public function __construct(
         TableGateway $articleTable
-    ) {
+    )
+    {
         $this->articleTable = $articleTable;
+    }
+    
+    public function getArticle($articleId)
+    {
+        $rowset = $this->articleTable->select(
+            function (Select $select) use ($articleId) {
+        
+                $select->columns(
+                    ['title', 'publishdate', 'articleid', 'content']
+                )
+                ->where(['articleid' => $articleId]);
+            }
+        );
+        
+        $rows = $rowset->toArray();
+        
+        if (count($rows) == 1) {
+            return $rows[0];
+        } else {
+            throw new NotFoundResourceException('Article not found');
+        }
     }
 
     public function getArticles($start, $end)

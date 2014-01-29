@@ -2,7 +2,6 @@
 namespace Netsensia\View\Helper;
 
 use Zend\View\Helper\AbstractHelper;
-use Zend\View\HelperPluginManager as ServiceManager;
 use JBBCode\Parser;
 use JBBCode\DefaultCodeDefinitionSet;
 

@@ -27,6 +27,7 @@ class Module
             'invokables' => array(
                 'BootstrapForm' => 'Netsensia\Form\View\Helper\BootstrapForm',
                 'NewsPanel' => 'Netsensia\View\Helper\NewsPanel',
+                'BbCode' => 'Netsensia\View\Helper\BbCode',
             ),
             'factories' => array(
                 'config' => function ($serviceManager) {
