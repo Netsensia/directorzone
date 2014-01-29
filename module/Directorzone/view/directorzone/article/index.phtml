@@ -1,4 +1,35 @@
-<?php echo $this->partial('article-nav.phtml'); ?>
-<h3><?php echo $this->title; ?></h3>
 
-<?php echo $this->BbCode($this->content); ?>
+<body>
+    <ul class="breadcrumb">
+      <li>
+        <a href="/">Home</a>
+      </li>
+      <li>
+        <a href="/articles">Articles</a>
+      </li>
+      <li class="active">
+        <?php echo $this->title; ?>
+      </li>
+    </ul>
+
+    <div class="well" style="min-height:20em">
+      <span class="badge">Information Technology</span>
+      <span class="badge">Farming</span>
+      <span class="badge">Investing</span>
+      
+      <h3>
+        <?php echo $this->title; ?>
+      </h3>
+      <p>
+        <img style="float:left;margin-right:10px" src="https://s3.amazonaws.com/jetstrap-site/images/website/index/what_icon.png">
+        <?php echo $this->BbCode($this->content); ?>
+      </p>
+    </div>
+  
+
+</body>
+
+<h3></h3>
+
+
+
