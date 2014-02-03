@@ -155,14 +155,23 @@ class Module
                 },
                 'ElasticService' => function ($sm) {
                     $elasticClient = new ElasticClient();
-
-                    $companyTableGateway = $sm->get('CompaniesHouseTableGateway');
                     
                     $instance = new \Directorzone\Service\ElasticService(
                         $elasticClient,
-                        $companyTableGateway
+                        $sm->get('CompaniesHouseTableGateway'),
+                        $sm->get('CompanyOfficersTableGateway'),
+                        $sm->get('CompanyDirectoryTableGateway'),
+                        $sm->get('ArticlesTableGateway')
                     );
                     
+                    return $instance;
+                },
+                'ArticlesTableGateway' => function ($sm) {
+                
+                    $instance = new TableGateway(
+                        'article',
+                        $sm->get('Zend\Db\Adapter\Adapter')
+                    );
                     return $instance;
                 },
                 'CompanyDirectoryTableGateway' => function ($sm) {

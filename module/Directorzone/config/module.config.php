@@ -613,12 +613,21 @@ return array(
                         ),
                     ),
                 ),
-                'search-index' => array(
+                'index-companies' => array(
                     'options' => array(
-                        'route'    => 'search-index',
+                        'route'    => 'index-companies',
                         'defaults' => array(
                             'controller' => 'Directorzone\Controller\Console\Company',
-                            'action'     => 'search-index',
+                            'action'     => 'index-companies',
+                        ),
+                    ),
+                ),
+                'index-articles' => array(
+                    'options' => array(
+                        'route'    => 'index-articles',
+                        'defaults' => array(
+                            'controller' => 'Directorzone\Controller\Console\Company',
+                            'action'     => 'index-articles',
                         ),
                     ),
                 ),
