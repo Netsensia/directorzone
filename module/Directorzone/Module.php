@@ -118,6 +118,12 @@ class Module
                             $cm->getServiceLocator()->get('PeopleService')
                         );
                     },
+                'Search' =>
+                    function (ControllerManager $cm) {
+                        return new \Directorzone\Controller\Search\SearchController(
+                            $cm->getServiceLocator()->get('ElasticSearch')
+                        );
+                    },
             ),
         );
     }

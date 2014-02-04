@@ -37,7 +37,7 @@ class ArticleController extends NetsensiaActionController
     {
         $name = $this->params()->fromQuery('name', null);
         
-        $result = $this->elasticService->search($name);
+        $result = $this->elasticService->searchArticles($name);
         
         return new JsonModel(
             $result

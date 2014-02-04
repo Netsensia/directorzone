@@ -38,7 +38,7 @@ class CompanyController extends NetsensiaActionController
     {
         $name = $this->params()->fromQuery('name', null);
         
-        $result = $this->elasticService->search($name);
+        $result = $this->elasticService->searchCompanies($name);
         
         return new JsonModel(
             $result
@@ -49,7 +49,7 @@ class CompanyController extends NetsensiaActionController
     {
         $name = $this->params()->fromQuery('name', null);
     
-        $result = $this->elasticService->search($name);
+        $result = $this->elasticService->searchOfficers($name);
     
         return new JsonModel(
             $result

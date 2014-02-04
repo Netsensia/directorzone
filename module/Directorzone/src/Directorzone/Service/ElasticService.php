@@ -30,12 +30,41 @@ class ElasticService extends NetsensiaService
         $this->articleTableGateway = $articleTableGateway;
     }
     
-    public function search($name)
+    public function searchCompanies($name)
     {
-        $params = [
-            'index' => 'companies',
-            'type'  => 'company',
-        ];
+        return $this->search(
+	       $name,
+            [
+                'index' => 'companies',
+                'type'  => 'company',
+            ]
+        );  
+    }
+    
+    public function searchArticles($name)
+    {
+        return $this->search(
+            $name,
+            [
+                'index' => 'articles',
+                'type'  => 'article',
+            ]
+        );
+    }
+    
+    public function searchOfficers($name)
+    {
+        return $this->search(
+            $name,
+            [
+                'index' => 'officers',
+                'type'  => 'officer',
+            ]
+        );
+    }
+    
+    public function search($name, $params = [])
+    {
         
         $params['body']['query']['query_string']['query'] = $name;
         $params['body']['query']['query_string']['default_field'] = 'name';
@@ -73,7 +102,7 @@ class ElasticService extends NetsensiaService
     {
         $this->createIndex('companies');
         
-        $this->client->indices()->delete(array(array('index' => 'companies')));
+        $this->client->indices()->delete(array('index' => 'companies'));
         
         $limit = 10000;
         $lastCompanyId = -1;
@@ -141,9 +170,9 @@ class ElasticService extends NetsensiaService
     public function indexArticles()
     {
         $this->createIndex('articles');
-    
-        $this->client->indices()->delete(array(array('index' => 'articles')));
-    
+        
+        $this->client->indices()->delete(array('index' => 'articles'));
+        
         $limit = 10000;
         $lastArticleId = -1;
     

@@ -91,6 +91,16 @@ return array(
                             ),
                         ),
                     ),
+                    'search' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/search',
+                            'defaults' => array(
+                                'controller' => 'Search',
+                                'action' => 'search',
+                            ),
+                        ),
+                    ),
                     'company' => array(
                         'type' => 'literal',
                         'options' => array(
