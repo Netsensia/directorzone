@@ -29,10 +29,11 @@ class SearchController extends NetsensiaActionController
     
     public function searchAction()
     {
-        $name = $this->params()->fromQuery('keywords', null);
+        $keywords = $this->params()->fromQuery('keywords', null);
         
-        //$result = $this->elasticService->searchCompanies($name);
+        $result = $this->elasticService->search($keywords);
         
+        var_dump($result['hits']); die;
         $result = ['results' => []];
         for ($i=0; $i<20; $i++) {
             $result['results'][] = [
