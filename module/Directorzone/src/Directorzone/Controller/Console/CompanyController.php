@@ -217,6 +217,18 @@ class CompanyController extends NetsensiaActionController
         echo 'Done.' . PHP_EOL;
     }
     
+    public function indexCompanyOfficersAction()
+    {
+        $elasticService = $this->getServiceLocator()->get('ElasticService');
+        $elasticService->indexCompanyOfficers();
+    }
+    
+    public function indexCompanyDirectoryAction()
+    {
+        $elasticService = $this->getServiceLocator()->get('ElasticService');
+        $elasticService->indexCompanyDirectory();
+    }
+    
     public function indexCompaniesAction()
     {
         $elasticService = $this->getServiceLocator()->get('ElasticService');

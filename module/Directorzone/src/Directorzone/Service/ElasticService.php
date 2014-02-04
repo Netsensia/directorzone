@@ -8,6 +8,8 @@ use Zend\Db\Sql\Select;
 
 class ElasticService extends NetsensiaService
 {
+    private $dateKeys;
+    
     private $client;
     
     private $companiesHouseTableGateway;
@@ -46,9 +48,9 @@ class ElasticService extends NetsensiaService
         return $this->search(
             $name,
             [
-            'index' => 'articles',
+                'index' => 'articles',
                 'type'  => 'article',
-                ]
+            ]
         );
     }
     
@@ -59,6 +61,17 @@ class ElasticService extends NetsensiaService
             [
                 'index' => 'officers',
                 'type'  => 'officer',
+            ]
+        );
+    }
+    
+    public function searchSite($name)
+    {
+        return $this->search(
+            $name,
+            [
+                'index' => 'articles,companydirectory,officers',
+                'type'  => 'article,company,officer',
             ]
         );
     }
@@ -99,90 +112,74 @@ class ElasticService extends NetsensiaService
     
     public function indexCompanies()
     {
-        $this->createIndex('companies');
-        
-        $this->client->indices()->delete(array('index' => 'companies'));
-        
-        $limit = 10000;
-        $lastCompanyId = -1;
-        
-        $count = 0;
-        do {
-            
-            $rowset = $this->companiesHouseTableGateway->select(
-                function (Select $select) use ($limit, $lastCompanyId) {
-                    $select->order('companyid ASC')
-                           ->limit($limit)
-                           ->where->greaterThan('companyid', $lastCompanyId);
-                }
-            );
-            
-            $found = false;
-                
-            $body = '';
-            
-            foreach ($rowset as $row) {
-                
-                if (isset($row['incorporationdate'])) {
-                    if (empty($row['incorporationdate']) ||
-                        $row['incorporationdate'] == 'Unknown') {
-                        unset($row['incorporationdate']);
-                    }
-                }
-                
-                $count ++;
-                
-                $found = true;
-                
-                $row['_id'] = $row['companyid'];
-                
-                $body .=
-                    '{ "index" : { "_index" : "companies", "_type" : "company", "_id" : "' . $row['companyid'] . '" } }' . PHP_EOL .
-                    json_encode($row) . PHP_EOL;
-                
-                $lastCompanyId = $row['companyid'];
-            }
-            
-            if ($body != '') {
-                $document = array(
-                    'index' => 'companies',
-                    'type'  => 'company',
-                    'body'  => $body
-                );
-                
-                $result = $this->client->bulk($document);
-                
-                for ($i=0; $i<5000; $i++) {
-                    if (isset($result['items'][$i]['index']['error'])) {
-                        var_dump($result['items'][$i]['index']);
-                        die;
-                    }
-                }
-                
-                echo $count . ' | ' . $row['name'] . PHP_EOL;
-            }
-            
-        } while ($found);
-
+        $this->indexGeneric(
+            'companies',
+            'company',
+            $this->companiesHouseTableGateway,
+            'companyid',
+            'name'
+        );
+    }
+    
+    public function indexCompanyDirectory()
+    {
+        $this->indexGeneric(
+            'companydirectory',
+            'company',
+            $this->companyDirectoryTableGateway,
+            'companydirectoryid',
+            'name'
+        );
+    }
+    
+    public function indexCompanyOfficers()
+    {
+        $this->indexGeneric(
+            'officers',
+            'officer',
+            $this->companyOfficersTableGateway,
+            'officernumber',
+            'surname'
+        );
     }
     
     public function indexArticles()
     {
-        $this->createIndex('articles');
-        
-        $this->client->indices()->delete(array('index' => 'articles'));
-        
-        $limit = 10000;
-        $lastArticleId = -1;
+        $this->indexGeneric(
+            'articles', 
+            'article', 
+            $this->articleTableGateway, 
+            'articleid', 
+            'title'
+        );
+    }
+    
+    public function indexGeneric(
+        $index,
+        $type,
+        $gateway,
+        $primaryKey,
+        $nameKey
+    )
+    {
+        $this->createIndex($index);
+    
+        $this->client->indices()->delete(array('index' => $index));
+    
+        $limit = 5000;
+        $lastId = -1;
     
         $count = 0;
+        
+        $this->dateKeys = [];
+                
         do {
     
-            $rowset = $this->articleTableGateway->select(
-                function (Select $select) use ($limit, $lastArticleId) {
-                    $select->order('companyid ASC')
+            $rowset = $gateway->select(
+                function (Select $select) use ($limit, $lastId, $primaryKey) {
+                    $select->order($primaryKey . ' ASC')
                     ->limit($limit)
-                    ->where->greaterThan('articleid', $lastArticleId);
+                    ->where->greaterThan($primaryKey, $lastId);
                 }
             );
     
@@ -191,26 +188,38 @@ class ElasticService extends NetsensiaService
             $body = '';
     
             foreach ($rowset as $row) {
-
+    
                 $count ++;
     
                 $found = true;
     
-                $row['_id'] = $row['companyid'];
+                $row['_id'] = $row[$primaryKey];
+    
+                if ($count == 1) {
+                    $dateKeys = $this->setDateKeys($row);
+                }
                 
-                $row = $this->unsetDateFieldsIfEmpty($row, ['startdate', 'enddate', 'publishdate']);
+                foreach ($this->dateKeys as $key) {
+                    if (isset($row[$key])) {
+                        if (!$this->validateDate($row[$key])) {
+                            unset($row[$key]);
+                        }
+                    }        
+                }
                 
                 $body .=
-                '{ "index" : { "_index" : "articles", "_type" : "article", "_id" : "' . $row['articleid'] . '" } }' . PHP_EOL .
-                json_encode($row) . PHP_EOL;
+                    '{ "index" : { "_index" : "' . $index .
+                    '", "_type" : "' . $type . '", "_id" : "' .
+                    $row[$primaryKey] . '" } }' . PHP_EOL .
+                    json_encode($row) . PHP_EOL;
     
-                $lastArticleId = $row['articleid'];
+                $lastId = $row[$primaryKey];
             }
     
             if ($body != '') {
                 $document = array(
-                    'index' => 'articles',
-                    'type'  => 'article',
+                    'index' => $index,
+                    'type'  => $type,
                     'body'  => $body
                 );
     
@@ -223,21 +232,33 @@ class ElasticService extends NetsensiaService
                     }
                 }
     
-                echo $count . ' | ' . $row['title'] . PHP_EOL;
+                echo $count . ' | ' . $row[$nameKey] . PHP_EOL;
             }
     
         } while ($found);
-    
     }
     
-    private function unsetDateFieldsIfEmpty($row, $fields)
+    private function validateDate($date, $format = 'Y-m-d H:i:s')
     {
-        foreach ($fields as $field) {
-            if (empty($row[$field]) || $row[$field] == '0000-00-00') {
-                unset($row[$field]);
+        $d = \DateTime::createFromFormat($format, $date);
+        return $d && $d->format($format) == $date;
+    }
+    
+    private function setDateKeys($row)
+    {
+        $dateKeys = [];
+        
+        foreach ($row as $key => $value) {
+            $keys[] = $key;
+        }
+        
+        foreach ($keys as $key) {
+            if (preg_match('/date$/', $key) || $key == 'dob') {
+                $dateKeys[] = $key;
             }
         }
         
-        return $row;
+        $this->dateKeys = $dateKeys;
     }
+
 }

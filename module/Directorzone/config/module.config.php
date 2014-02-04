@@ -641,6 +641,24 @@ return array(
                         ),
                     ),
                 ),
+                'index-company-directory' => array(
+                    'options' => array(
+                        'route'    => 'index-company-directory',
+                        'defaults' => array(
+                            'controller' => 'Directorzone\Controller\Console\Company',
+                            'action'     => 'index-company-directory',
+                        ),
+                    ),
+                ),
+                'index-company-officers' => array(
+                    'options' => array(
+                        'route'    => 'index-company-officers',
+                        'defaults' => array(
+                            'controller' => 'Directorzone\Controller\Console\Company',
+                            'action'     => 'index-company-officers',
+                        ),
+                    ),
+                ),
                 'index-articles' => array(
                     'options' => array(
                         'route'    => 'index-articles',

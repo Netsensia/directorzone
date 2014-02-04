@@ -31,7 +31,7 @@ class SearchController extends NetsensiaActionController
     {
         $keywords = $this->params()->fromQuery('keywords', null);
         
-        $result = $this->elasticService->search($keywords);
+        $result = $this->elasticService->searchSite($keywords);
         
         $hits = $result['hits'];
         $return = ['results' => []];
@@ -42,6 +42,8 @@ class SearchController extends NetsensiaActionController
                 $title = $source['title'];
             } elseif (isset($source['name'])) {
                 $title = $source['name'];
+            } elseif (isset($source['surname'])) {
+                $title = trim($source['forename'] . ' ' . $source['surname']);
             } else {
                 $title = '';
             }
