@@ -46,9 +46,9 @@ class ElasticService extends NetsensiaService
         return $this->search(
             $name,
             [
-                'index' => 'articles',
+            'index' => 'articles',
                 'type'  => 'article',
-            ]
+                ]
         );
     }
     
@@ -65,13 +65,8 @@ class ElasticService extends NetsensiaService
     
     public function search($name, $params = [])
     {
-        
-        $params = [
-                'index' => 'companies',
-                'type'  => 'company',
-            ];
         $params['body']['query']['query_string']['query'] = $name;
-        $params['body']['query']['query_string']['default_field'] = 'name';
+        //$params['body']['query']['query_string']['default_field'] = 'title';
         $params['body']['query']['query_string']['default_operator'] = 'OR';
         $params['body']['query']['query_string']['analyzer'] = 'standard';
         

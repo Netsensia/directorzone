@@ -33,19 +33,28 @@ class SearchController extends NetsensiaActionController
         
         $result = $this->elasticService->search($keywords);
         
-        var_dump($result['hits']); die;
-        $result = ['results' => []];
-        for ($i=0; $i<20; $i++) {
-            $result['results'][] = [
-               'url' => 'http://www.google.com',
-	           'title' => 'Hello',
-	           'description' => 'Goodbye',
-	           'type' => 'Company',
+        $hits = $result['hits'];
+        $return = ['results' => []];
+        foreach ($hits['hits'] as $hit) {
+            
+            $source = $hit['_source'];
+            if (isset($source['title'])) {
+                $title = $source['title'];
+            } elseif (isset($source['name'])) {
+                $title = $source['name'];
+            } else {
+                $title = '';
+            }
+            $return['results'][] = [
+                'url' => 'http://www.google.com',
+                'title' => $title,
+                'description' => 'Goodbye',
+                'type' => 'Company',
             ];
         }
         
         return new JsonModel(
-            $result
+            $return
         );
     }
 }
