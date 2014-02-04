@@ -1,0 +1,35 @@
+<h3>Search</h3>
+
+<table id="search" data-link="row" class="rowlink table table-striped table-bordered table-hover">
+<tr><th>Title</th><th>Description</th><th>Type</th></tr>
+</table>
+
+<ul class="pager">
+<li class="previous" id="previous" class="disabled"><a href="#">&larr; Previous</a></li>
+<li class="next" id="next"><a href="#">Next &rarr;</a></li>
+</ul>
+
+<script>
+
+$(document).ready(function() {
+
+	var url = '/ajax/search?keywords=<?php echo $this->keywords ?>';
+
+	netsensia_Pager(
+		1,
+		10,
+		'search',
+		url,
+		function(key, value) {
+			var newRow = '<tr>';
+			newRow += '<td><a href="' + value.url + '">' + value.title + '</a></td>';
+			newRow += '<td>' + value.description + '</td>';
+			newRow += '<td>' + value.type + '</td>';
+			newRow += '</tr>';
+	
+			return newRow;
+		}
+	);	
+});
+
+</script>

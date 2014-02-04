@@ -9,16 +9,10 @@ use Directorzone\Service\ElasticService;
 
 class SearchController extends NetsensiaActionController
 {
-
-    /**
-     * @var ElasticService $elasticService
-     */
-    private $elasticService;
     
-    public function __construct(
-        ElasticService $elasticService
-    ) {
-        $this->elasticService = $elasticService;
+    public function __construct() 
+    {
+    	
     }
     
     public function onDispatch(MvcEvent $e)
@@ -28,12 +22,8 @@ class SearchController extends NetsensiaActionController
     
     public function searchAction()
     {
-        $name = $this->params()->fromQuery('name', null);
+        $keywords = $this->params()->fromQuery('keywords', null);
         
-        $result = $this->elasticService->searchCompanies($name);
-        
-        return new JsonModel(
-            $result
-        );
+        return [ 'keywords' => $keywords ];
     }
 }

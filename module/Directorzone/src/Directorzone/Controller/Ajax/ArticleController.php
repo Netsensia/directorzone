@@ -23,7 +23,8 @@ class ArticleController extends NetsensiaActionController
     public function __construct(
         ArticleService $articleService,
         ElasticService $elasticService
-    ) {
+    )
+    {
         $this->articleService = $articleService;
         $this->elasticService = $elasticService;
     }

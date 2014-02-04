@@ -96,7 +96,7 @@ return array(
                         'options' => array(
                             'route' => '/search',
                             'defaults' => array(
-                                'controller' => 'Search',
+                                'controller' => 'AjaxSearch',
                                 'action' => 'search',
                             ),
                         ),
@@ -324,7 +324,16 @@ return array(
                     ),
                 ),
             ),
-            
+            'search' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/search',
+                    'defaults' => array(
+                        'controller' => 'Search',
+                        'action'     => 'search',
+                    ),
+                ),
+            ),
             'admin-companies' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(

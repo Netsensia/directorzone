@@ -118,11 +118,15 @@ class Module
                             $cm->getServiceLocator()->get('PeopleService')
                         );
                     },
+                'AjaxSearch' =>
+                    function (ControllerManager $cm) {
+                        return new \Directorzone\Controller\Ajax\SearchController(
+                            $cm->getServiceLocator()->get('ElasticService')
+                        );
+                    },
                 'Search' =>
                     function (ControllerManager $cm) {
-                        return new \Directorzone\Controller\Search\SearchController(
-                            $cm->getServiceLocator()->get('ElasticSearch')
-                        );
+                        return new \Directorzone\Controller\Search\SearchController();
                     },
             ),
         );
