@@ -4,15 +4,6 @@
 export DEBIAN_FRONTEND=noninteractive
 
 #############################################################
-# Set up deployment key
-#############################################################
-apt-get -y install git
-eval `ssh-agent -s`
-ssh-agent bash
-ssh-add /home/vagrant/keys/id_rsa
-ssh -o "StrictHostKeyChecking no" git@github.com
-
-#############################################################
 # Necessary system updates to get PHP 5.5 rather than default 5.3
 #############################################################
 apt-get -y update
@@ -24,7 +15,8 @@ apt-get -y install php5
 #############################################################
 # Install other dependencies
 #############################################################
-apt-get -y install openjdk-7-jre-headless mysql-server mysql-client apache2 libapache2-mod-php5 curl php5-curl php5-mcrypt php5-xsl php5-ldap php5-mysql php5-gd php5-intl php5-json zip build-essential libssl-dev dos2unix
+apt-get -y install openjdk-7-jre-headless mysql-server mysql-client apache2 libapache2-mod-php5 curl php5-curl
+apt-get -y install php5-mcrypt php5-xsl php5-ldap php5-mysql php5-gd php5-intl php5-json zip build-essential libssl-dev
 
 #############################################################
 # Enable required Apache modules
@@ -38,7 +30,7 @@ sed -i 's/display_errors = Off/display_errors = On/g' /etc/php5/apache2/php.ini
 sed -i 's/;date.timezone =/date.timezone = Europe\/London/g' /etc/php5/apache2/php.ini
 sed -i 's/;date.timezone =/date.timezone = Europe\/London/g' /etc/php5/cli/php.ini
 sed -i 's/disable_functions/;disable_functions/g' /etc/php5/cli/php.ini
-sed -i 's/memory_limit = 128M/memory_limit = 1024M/g' /etc/php5/cli/php.ini
+sed -i 's/memory_limit = 128M/memory_limit = 512M/g' /etc/php5/cli/php.ini
 
 #############################################################
 # Make some modifications to my.cnf file
@@ -54,12 +46,16 @@ dpkg -i elasticsearch-0.90.11.deb
 #############################################################
 # Import database
 #############################################################
+echo "Downloading database..."
 wget https://dl.dropboxusercontent.com/u/63777076/VM/db_create.zip
+echo "Unzipping..."
 unzip db_create.zip
+echo "Importing..."
 mysql -uroot < db_create.sql
 rm db_create.sql
 rm db_create.zip
 mysql -uroot -e "grant all on *.* to root@'%'"
+echo "Restarting MySQL"
 sudo service mysql restart
 
 #############################################################
@@ -89,4 +85,3 @@ cp /var/www/directorzone/vagrant/VirtualHost/.htpasswd /var/www
 #############################################################
 cd /var/www/directorzone
 sh index.sh
-

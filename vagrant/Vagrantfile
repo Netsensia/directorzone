@@ -5,27 +5,25 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "precise64"
+  config.vm.box = "Ubuntu Server 13.10 amd64 (Chef 11.8.0, VMware tools)"
 
-  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+  config.vm.box_url = "http://shopify-vagrant.s3.amazonaws.com/ubuntu-13.10_vmware.box"
  
     config.vm.network :forwarded_port, guest: 80, host: 8081
     config.vm.network :forwarded_port, guest: 9200, host: 9201
     config.vm.network :forwarded_port, guest: 3306, host: 33060
 
-   config.vm.provider "vmware_fusion" do |v|
-         v.vmx["memsize"] = "2048"
-         v.vmx["numvcpus"] = "8"
-   end
+   #config.vm.provider "vmware_fusion" do |v|
+   #      v.vmx["memsize"] = "2048"
+   #      v.vmx["numvcpus"] = "1"
+   #end
 
     config.vm.synced_folder "../../", "/var/www/", :mount_options => ["gid=www-data", "uid=www-data", "dmode=777", "fmode=777"]
-    config.vm.synced_folder "~/.ssh", "/home/vagrant/keys", :mount_options => []
 
     config.vm.provision "shell", path: "provision.sh"
 
-
-   config.vm.provider :virtualbox do |vb|
-  	vb.customize ["modifyvm", :id, "--memory", "2048", "--cpus", 8, "--cpuexecutioncap", 95, "--hwvirtex", "on"]
-   end
+   #config.vm.provider :virtualbox do |vb|
+  	#vb.customize ["modifyvm", :id, "--memory", "2048", "--cpus", 8, "--cpuexecutioncap", 95, "--hwvirtex", "on"]
+   #end
 
 end

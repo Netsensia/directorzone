@@ -236,3 +236,4 @@ function ajaxFileUpload()
         echo('</div>');
     }
 }
+?>
