@@ -23,7 +23,7 @@ class AccountPublishForm extends NetsensiaForm
         $this->addDate('startdate');
         $this->addDate('enddate');
         
-       // $this->addImage('image');
+        $this->addImage('image');
         
         $this->addSubmit('Publish');
         

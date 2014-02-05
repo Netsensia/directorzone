@@ -50,6 +50,10 @@ class Module
     {
         return array(
             'factories' => array(
+                'AjaxImageUpload' =>
+                    function (ControllerManager $cm) {
+                        return new \Directorzone\Controller\Ajax\ImageUploadController();
+                    },
                 'Directorzone\Controller\Admin\Admin' =>
                     function (ControllerManager $cm) {
                         return new \Directorzone\Controller\Admin\AdminController(

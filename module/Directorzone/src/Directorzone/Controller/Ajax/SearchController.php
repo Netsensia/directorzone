@@ -50,8 +50,8 @@ class SearchController extends NetsensiaActionController
             $return['results'][] = [
                 'url' => 'http://www.google.com',
                 'title' => $title,
-                'description' => 'Goodbye',
-                'type' => 'Company',
+                'description' => '',
+                'type' => '',
             ];
         }
         

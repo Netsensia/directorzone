@@ -101,6 +101,16 @@ return array(
                             ),
                         ),
                     ),
+                    'image-upload' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/image-upload',
+                            'defaults' => array(
+                                'controller' => 'AjaxImageUpload',
+                                'action' => 'image-upload',
+                            ),
+                        ),
+                    ),
                     'company' => array(
                         'type' => 'literal',
                         'options' => array(
