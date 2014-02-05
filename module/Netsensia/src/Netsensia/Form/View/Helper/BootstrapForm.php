@@ -184,7 +184,7 @@ function ajaxFileUpload()
 	$(document).ajaxStart( function() {
         $('#image-upload-thumbnail').attr('src', '/img/ajax/ajax-loader.gif');
     }).ajaxComplete(function(){
-        removeImage();
+        //removeImage();
     });
     
     $.ajaxFileUpload
@@ -206,7 +206,6 @@ function ajaxFileUpload()
     )
     
     return false;
-
 } 
 </script>
             <?php
@@ -232,7 +231,6 @@ function ajaxFileUpload()
     protected function closeForm()
     {
         echo('</form>');
-        
         echo('</div>');
     }
 }
