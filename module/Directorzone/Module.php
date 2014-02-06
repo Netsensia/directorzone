@@ -34,6 +34,7 @@ use Directorzone\Service\TwitterService;
 use Directorzone\Service\BingService;
 use Zend\Server\Cache;
 use Directorzone\Service\ArticleService;
+use Netsensia\Service\ImageService;
 
 class Module
 {
@@ -52,7 +53,9 @@ class Module
             'factories' => array(
                 'AjaxImageUpload' =>
                     function (ControllerManager $cm) {
-                        return new \Directorzone\Controller\Ajax\ImageUploadController();
+                        return new \Directorzone\Controller\Ajax\ImageUploadController(
+            	            $cm->getServiceLocator()->get('ImageService')
+                        );
                     },
                 'Directorzone\Controller\Admin\Admin' =>
                     function (ControllerManager $cm) {

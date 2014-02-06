@@ -12,6 +12,7 @@ namespace Netsensia;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Log\Writer\Stream;
 use Zend\Log\Logger;
+use Netsensia\Service\ImageService;
     
 class Module
 {
@@ -51,6 +52,9 @@ class Module
                     $log->info('Logging started...');
                     
                     return $log;
+                },
+                'ImageService' => function (\Zend\ServiceManager\ServiceLocatorInterface $sl) {
+                    return new ImageService();
                 },
                 'UserModel' => function (\Zend\ServiceManager\ServiceLocatorInterface $sl) {
                     $instance = new \Application\Model\User();

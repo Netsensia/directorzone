@@ -7,12 +7,17 @@ use Zend\Mvc\MvcEvent;
 use Zend\View\Model\JsonModel;
 use Directorzone\Service\ArticleService;
 use Directorzone\Service\ElasticService;
+use Netsensia\Service\ImageService;
 
 class ImageUploadController extends NetsensiaActionController
 {
+    private $imageService;
+    
     public function __construct(
+        ImageService $imageService
     )
     {
+        $this->imageService = $imageService;
     }
     
     public function onDispatch(MvcEvent $e)
@@ -26,19 +31,10 @@ class ImageUploadController extends NetsensiaActionController
             $fieldIds = array_keys($_FILES);
             
             $file = $_FILES[$fieldIds[0]];
-            $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
-            $filename = time() . '_' . uniqid() . '_' . md5($file['name']) . '.' . $extension;
-            $finalPath = 'img/upload/' . $filename;
-            move_uploaded_file($file['tmp_name'], 'public/' . $finalPath);
-            file_put_contents('test2.txt', $finalPath);
-            
-            //{"account-publish-image":{"name":"enhanced-buzz-30227-1367984436-3.jpg","type":"image/jpeg","tmp_name":"/tmp/phpVs5F8l","error":0,"size":126392}}
+            $result = $this->imageService->saveUploadedFile($file);
+
             return new JsonModel(
-                [
-                    'teaser'=>'/img/flag/England.fw.png',
-                    'thumb' => '/' . $finalPath,
-                    'main' => '/img/flag/Italy.fw.png',
-                ]
+                $result
             );
         }
         $this->getResponse()->setStatusCode(500);
