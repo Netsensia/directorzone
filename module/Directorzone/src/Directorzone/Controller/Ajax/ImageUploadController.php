@@ -22,12 +22,10 @@ class ImageUploadController extends NetsensiaActionController
     
     public function imageUploadAction()
     {
-        return JsonModel($_FILES);
-        
-        if ($_FILES && isset($_FILES[0])) {
-            file_put_contents('test.txt', print_r($_FILES, true));
+        if ($_FILES && is_array($_FILES) && count($_FILES) > 0) {
+            $fieldIds = array_keys($_FILES);
             
-            $file = $_FILES[0];
+            $file = $_FILES[$fieldIds[0]];
             $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
             $filename = time() . '_' . uniqid() . '_' . md5($file['name']) . '.' . $extension;
             $finalPath = 'img/upload/' . $filename;
@@ -42,9 +40,8 @@ class ImageUploadController extends NetsensiaActionController
                     'main' => '/img/flag/Italy.fw.png',
                 ]
             );
-        } else {
-            $this->getResponse()->setStatusCode(500);
         }
+        $this->getResponse()->setStatusCode(500);
     }
 }
 ?>
