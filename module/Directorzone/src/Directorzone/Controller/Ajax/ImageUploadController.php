@@ -27,17 +27,22 @@ class ImageUploadController extends NetsensiaActionController
     
     public function imageUploadAction()
     {
-        if ($_FILES && is_array($_FILES) && count($_FILES) > 0) {
-            $fieldIds = array_keys($_FILES);
-            
-            $file = $_FILES[$fieldIds[0]];
-            $result = $this->imageService->saveUploadedFile($file);
-
-            return new JsonModel(
-                $result
-            );
+        try {
+            if ($_FILES && is_array($_FILES) && count($_FILES) > 0) {
+                $fieldIds = array_keys($_FILES);
+    
+                $file = $_FILES[$fieldIds[0]];
+    
+                $result = $this->imageService->saveUploadedFile($file);
+                
+                return new JsonModel(
+                    $result
+                );
+            }
+        } catch (\Exception $e) {
+            return [12312=>123123];
         }
+        
         $this->getResponse()->setStatusCode(500);
     }
 }
-?>
