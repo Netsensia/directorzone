@@ -17,6 +17,7 @@ apt-get -y install php5
 #############################################################
 apt-get -y install openjdk-7-jre-headless mysql-server mysql-client apache2 libapache2-mod-php5 curl php5-curl
 apt-get -y install php5-mcrypt php5-xsl php5-ldap php5-mysql php5-gd php5-intl php5-json zip build-essential libssl-dev
+apt-get -y install imagemagick php5-imagick
 
 #############################################################
 # Enable required Apache modules

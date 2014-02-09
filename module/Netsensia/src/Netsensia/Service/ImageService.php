@@ -1,8 +1,6 @@
 <?php
 namespace Netsensia\Service;
 
-use Netsensia\Service\NetsensiaService;
-
 class ImageService extends NetsensiaService
 {
     public function saveUploadedFile($file)
@@ -17,11 +15,25 @@ class ImageService extends NetsensiaService
         $thumbPath = $basePath . 'thumb/' . $filename;
         $teaserPath = $basePath . 'teaser/' . $filename;
         
-        move_uploaded_file($file['tmp_name'], 'public' . $mainPath);
+        $mainZf2Path = 'public' . $mainPath;
+        $thumbZf2Path = 'public' . $thumbPath;
+        $teaserZf2Path = 'public' . $teaserPath;
         
+        move_uploaded_file($file['tmp_name'], $mainZf2Path);
+        
+        $iMagick = new \IMagick($mainZf2Path);
+        $iMagick->setImageFormat('jpg');
+        $iMagick->cropthumbnailimage(200, 200);
+        $iMagick->writeimage($thumbZf2Path);
+        
+        $iMagick = new \IMagick($mainZf2Path);
+        $iMagick->setImageFormat('jpg');
+        $iMagick->cropthumbnailimage(50, 50);
+        $iMagick->writeimage($teaserZf2Path);
+                    
         $result = [
-            'teaser' => $mainPath,
-            'thumb' => $mainPath,
+            'teaser' => $teaserPath,
+            'thumb' => $thumbPath,
             'main' =>  $mainPath,
         ];
         
