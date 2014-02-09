@@ -19,6 +19,7 @@ class NetsensiaForm extends Form
     private $fieldPrefix = '';
     private $defaultIcon = 'align-justify';
     private $defaultClass = 'form-control';
+    private $autoDateOnCreateArray = [];
     
     public function __construct($name = null, $options = array())
     {
@@ -39,6 +40,16 @@ class NetsensiaForm extends Form
         );
         
         $this->add($submitButton);
+    }
+    
+    public function addAutoDateOnCreate($name)
+    {
+        $this->autoDateOnCreateArray[] = $name;
+    }
+    
+    public function getAutoDateOnCreateArray()
+    {
+        return $this->autoDateOnCreateArray;
     }
     
     public function addRelation($options)

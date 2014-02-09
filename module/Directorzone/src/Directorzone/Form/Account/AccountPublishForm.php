@@ -20,10 +20,12 @@ class AccountPublishForm extends NetsensiaForm
         $this->addText('title');
         $this->addTextArea('content');
         
-        $this->addDate('startdate');
-        $this->addDate('enddate');
+        $this->addDate('start-date');
+        $this->addDate('end-date');
         
         $this->addImage('image');
+        
+        $this->addAutoDateOnCreate('publishdate');
         
         $this->addSubmit('Publish');
         

@@ -14,6 +14,9 @@ class BootstrapForm extends AbstractHelper
     
     private $hasImage;
     private $imageUploadId;
+    private $imageLocationElementId;
+    
+    const IMAGE_LOCATION_PREFIX = 'image-upload-location-';
  
     /**
      * __invoke
@@ -54,8 +57,10 @@ class BootstrapForm extends AbstractHelper
             if (strpos($element->getAttribute('class'), 'image-upload') !== false) {
                 $this->hasImage = true;
                 $this->imageUploadId = $element->getAttribute('id');
+                $this->imageLocationElementId = self::IMAGE_LOCATION_PREFIX . $element->getAttribute('id');
                 ?>
                 <img id="image-upload-thumbnail" style="margin-top:1em; width: 200px; height: 200px;" src="">
+                <input type="hidden" name="<?php echo $this->imageLocationElementId; ?>" id="<?php echo $this->imageLocationElementId; ?>" value="">
                 <div>
                 <a id="remove-image" href="#">Remove Image</a>
                 </div>
@@ -196,7 +201,8 @@ function ajaxFileUpload()
             dataType: 'json',
             success: function (data, status)
             {
-            	$('#image-upload-thumbnail').attr("src", data.thumb);
+            	$('#image-upload-thumbnail').attr('src', data.thumb);
+            	$('#<?php echo $this->imageLocationElementId; ?>').val(data.main);
             },
             error: function (data, status, e)
             {

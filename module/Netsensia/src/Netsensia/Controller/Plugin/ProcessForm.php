@@ -4,6 +4,7 @@ namespace Netsensia\Controller\Plugin;
 
 use Zend\Mvc\Controller\Plugin\AbstractPlugin;
 use Zend\Mvc\Router\RouteMatch;
+use Netsensia\Form\View\Helper\BootstrapForm;
 
 class ProcessForm extends AbstractPlugin
 {
@@ -11,7 +12,8 @@ class ProcessForm extends AbstractPlugin
         $formName,
         $modelName,
         $modelId
-    ) {
+    )
+    {
         $form = $this->controller->getServiceLocator()->get($formName);
         
         $form->prepare();
@@ -35,17 +37,24 @@ class ProcessForm extends AbstractPlugin
                                 
                 $modelData = [];
                 
-                $addressColumns = [];
-                
                 foreach ($formData as $key => $value) {
+                    if (preg_match('/^' . BootstrapForm::IMAGE_LOCATION_PREFIX . '/', $key)) {
+                        $key = str_replace(BootstrapForm::IMAGE_LOCATION_PREFIX, '', $key);
+                    }
                     if ($key != 'form-submit') {
                         $modelField = preg_replace('/^' . $prefix . '/', '', $key);
                         $modelData[$modelField] = $value;
                     }
                 }
+
+                foreach ($form->getAutoDateOnCreateArray() as $autoDateOnCreate) {
+                    $modelData[$autoDateOnCreate] = date('Y-m-d H:i:s', time());    
+                }
+
+                $currentData = $tableModel->getData();
                 
                 $data = array_merge(
-                    $tableModel->getData(),
+                    $currentData,
                     $modelData
                 );
                 
@@ -73,12 +82,14 @@ class ProcessForm extends AbstractPlugin
                         $tableModel->save();
                     }
                     
-                    $this->controller->flashMessenger()->addSuccessMessage('Your details have been saved');
+                    $this->controller->flashMessenger()->addSuccessMessage(
+                        'Your details have been saved'
+                    );
+                    
                     $router = $sl->get('router');
                     $request = $sl->get('request');
                     
                     $routeMatch = $router->match($request);
-                    $router instanceof \Zend\Mvc\Router\Http\TreeRouteStack;
                     
                     $this->controller->redirect()->toRoute(
                         $routeMatch->getMatchedRouteName(),
@@ -90,7 +101,7 @@ class ProcessForm extends AbstractPlugin
         } else {
             $form->setDataFromModel($tableModel);
         }
-        
+      
         return $form;
         
     }
