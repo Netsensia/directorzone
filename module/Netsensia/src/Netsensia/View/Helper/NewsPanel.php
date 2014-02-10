@@ -40,7 +40,7 @@ class NewsPanel extends AbstractHelper
                 <img class="media-object" style="height:45px; width:45px" src="<?php echo $item['image']; ?>" alt="<?php echo $item['title']; ?>">
                 </a>
                     <div class="media-body">
-                    <h4 class="media-heading"><?php echo $item['title']; ?></h4>
+                    <h4 class="media-heading"><a href="/article/<?php echo $item['articleid']; ?>"><?php echo $item['title']; ?></a></h4>
                     <div style="max-height:6em"><?php echo $content; ?></div>
                     </div>
                 </div>
