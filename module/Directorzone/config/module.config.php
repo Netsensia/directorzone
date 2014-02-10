@@ -191,6 +191,19 @@ return array(
                                 'id' => 0,
                             ),
                         ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'article-edit' => array(
+                                'type' => 'literal',
+                                'options' => array(
+                                    'route' => '/edit',
+                                    'defaults' => array(
+                                        'action' => 'publish',
+                                        'controller' => 'Directorzone\Controller\Account\Account',
+                                    ),
+                                ),
+                            ),
+                        ),
                     ),
                     'article-list' => array(
                         'type' => 'literal',

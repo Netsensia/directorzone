@@ -14,7 +14,8 @@ class CompanyEditController extends NetsensiaActionController
     
     public function __construct(
         CompanyService $companyService
-    ) {
+    )
+    {
         $this->companyService = $companyService;
     }
       

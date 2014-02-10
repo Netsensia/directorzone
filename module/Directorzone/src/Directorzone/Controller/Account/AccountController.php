@@ -73,12 +73,18 @@ class AccountController extends NetsensiaActionController
     
     public function publishAction()
     {
-        return $this->genericForm('AccountPublishForm', 'Article');
+        return array(
+            "form" => $this->processForm(
+                'AccountPublishForm',
+                'Article',
+                $this->params('id')
+            ),
+            'flashMessages' => $this->getFlashMessages(),
+        );
     }
     
     public function myArticlesAction()
     {
-       
     }
     
     private function genericForm($formName, $modelName)
