@@ -13,7 +13,14 @@ textarea {
 </style>
 
 <?php echo $this->partial('account-nav.phtml'); ?>
-<?php echo $this->BootstrapForm($this->form, 'Publishing Dashboard', $this->url('account-publish')); ?>
+
+<?php 
+    echo $this->BootstrapForm(
+        $this->form,
+        'Publishing Dashboard',
+        $this->url(null, ['id'=>$this->editId])
+    );
+?>
 
 <script>
 $(function() {

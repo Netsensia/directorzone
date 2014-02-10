@@ -73,11 +73,14 @@ class AccountController extends NetsensiaActionController
     
     public function publishAction()
     {
+        $articleId = $this->params('id');
+        
         return array(
+            "editId" => $articleId,
             "form" => $this->processForm(
                 'AccountPublishForm',
                 'Article',
-                $this->params('id')
+                $articleId
             ),
             'flashMessages' => $this->getFlashMessages(),
         );
