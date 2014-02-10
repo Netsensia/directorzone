@@ -3,8 +3,6 @@
 namespace Netsensia\Controller\Plugin;
 
 use Zend\Mvc\Controller\Plugin\AbstractPlugin;
-use Zend\Mvc\Router\RouteMatch;
-use Netsensia\Form\View\Helper\BootstrapForm;
 
 class ProcessForm extends AbstractPlugin
 {
@@ -38,9 +36,6 @@ class ProcessForm extends AbstractPlugin
                 $modelData = [];
                 
                 foreach ($formData as $key => $value) {
-                    if (preg_match('/^' . BootstrapForm::IMAGE_LOCATION_PREFIX . '/', $key)) {
-                        $key = str_replace(BootstrapForm::IMAGE_LOCATION_PREFIX, '', $key);
-                    }
                     if ($key != 'form-submit') {
                         $modelField = preg_replace('/^' . $prefix . '/', '', $key);
                         $modelData[$modelField] = $value;

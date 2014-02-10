@@ -303,7 +303,8 @@ class NetsensiaForm extends Form
             $options = [ 'name' => $options ];
         }
 
-        $name = $this->fieldPrefix . str_replace('-', '', $options['name']);
+        $originalName = $this->fieldPrefix . str_replace('-', '', $options['name']);
+        $name = 'image-upload-' . $originalName;
         
         if (!isset($options['label'])) {
             $parts = explode('_', $options['name']);
@@ -314,7 +315,7 @@ class NetsensiaForm extends Form
         }
         
         $options['icon'] = 'camera';
-        $options['class'] = $this->defaultClass . ' image-upload';
+        $options['class'] = $this->defaultClass;
         
         $file = new Element\File($name);
         $file->setLabel($label);
@@ -325,10 +326,12 @@ class NetsensiaForm extends Form
                 'type'  => 'file',
                 'icon'  => $options['icon'],
                 'class' => $options['class'],
+                'data-netsensia' => 'image-upload',
             ]
         );
         
         $this->add($file);
+        $this->addHidden($originalName, '', 'image-upload-location');
     }
     
     public function addTextArea($options)
@@ -417,10 +420,12 @@ class NetsensiaForm extends Form
         $this->setInputFilter($inputFilter);
     }
     
-    public function addHidden($name, $value)
+    public function addHidden($name, $value, $class='')
     {
         $hidden = new Hidden($name);
         $hidden->setValue($value);
+        $hidden->setAttribute('id', $name);
+        $hidden->setAttribute('data-netsensia', $class);
         $this->add($hidden);
     }
     

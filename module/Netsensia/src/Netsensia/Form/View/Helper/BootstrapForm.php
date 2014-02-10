@@ -2,8 +2,6 @@
 namespace Netsensia\Form\View\Helper;
 
 use Zend\View\Helper\AbstractHelper;
-
-use Zend\Form\View\Helper\FormElement;
 use Zend\Form\Element\Submit;
 
 class BootstrapForm extends AbstractHelper
@@ -16,8 +14,6 @@ class BootstrapForm extends AbstractHelper
     private $imageUploadId;
     private $imageLocationElementId;
     
-    const IMAGE_LOCATION_PREFIX = 'image-upload-location-';
- 
     /**
      * __invoke
      *
@@ -54,19 +50,21 @@ class BootstrapForm extends AbstractHelper
                 continue;
             }
             
-            if (strpos($element->getAttribute('class'), 'image-upload') !== false) {
+            if ($element->getAttribute('data-netsensia') == 'image-upload') {
                 $this->hasImage = true;
                 $this->imageUploadId = $element->getAttribute('id');
-                $this->imageLocationElementId = self::IMAGE_LOCATION_PREFIX . $element->getAttribute('id');
                 ?>
                 <img id="image-upload-thumbnail" style="margin-top:1em; width: 200px; height: 200px;" src="">
-                <input type="hidden" name="<?php echo $this->imageLocationElementId; ?>" id="<?php echo $this->imageLocationElementId; ?>" value="">
                 <div>
                 <a id="remove-image" href="#">Remove Image</a>
                 </div>
                 <?php
-
             }
+            
+            if (strpos($element->getAttribute('data-netsensia'), 'image-upload-location') !== false) {
+                $this->imageLocationElementId = $element->getAttribute('id');
+            }
+            
             $isInvisibleOther = (strpos($element->getAttribute('class'), 'invisible-other') !== false);
             
             if ($isInvisibleOther) {
@@ -173,8 +171,13 @@ $(document).ready(function() {
 	$('#remove-image').click(function() {
 		removeImage();
 	});
+
+	var currentImageLocation = $('#<?php echo $this->imageLocationElementId; ?>').val();
+	if (currentImageLocation != '') {
+		$('#image-upload-thumbnail').attr("src", currentImageLocation);
+	}
 	
-    $('.image-upload').change(function() {
+    $("[data-netsensia='image-upload']").change(function() {
         ajaxFileUpload();
     });
 });
