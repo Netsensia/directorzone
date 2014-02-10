@@ -69,7 +69,7 @@ class ArticleService extends NetsensiaService
         $articles = [];
         
         foreach ($rows as $row) {
-            $image = '/img/brand/globe.fw.png';
+            $image = ($row['image'] == '' ? '/img/brand/globe.fw.png' : $row['image']);
             $articles[] = [
 	            'image' => $image,
 	            'title' => $row['title'],

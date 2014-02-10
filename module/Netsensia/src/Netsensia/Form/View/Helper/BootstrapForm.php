@@ -54,7 +54,7 @@ class BootstrapForm extends AbstractHelper
                 $this->hasImage = true;
                 $this->imageUploadId = $element->getAttribute('id');
                 ?>
-                <img id="image-upload-thumbnail" style="margin-top:1em; width: 200px; height: 200px;" src="">
+                <img id="image-upload-thumbnail" style="margin-top:1em; width: 100px; height: 100px;" src="">
                 <div>
                 <a id="remove-image" href="#">Remove Image</a>
                 </div>
