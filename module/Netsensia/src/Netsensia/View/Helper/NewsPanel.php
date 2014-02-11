@@ -14,10 +14,10 @@ class NewsPanel extends AbstractHelper
         return preg_replace($pattern, $replace, $text_to_search);
     }
     
-    public function __invoke($panelTitle, array $items)
+    public function __invoke($panelTitle, array $items, $panelClass = 'panel-default')
     {
         ?>
-            <div class="panel panel-default">
+            <div class="panel <?php echo $panelClass; ?>">
             <div class="panel-heading">
             <h3 class="panel-title">
             <?php echo $panelTitle; ?>
