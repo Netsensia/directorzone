@@ -61,7 +61,7 @@ class ArticleService extends NetsensiaService
                 )
                 ->offset($start - 1)
                 ->limit(1 + ($end - $start))
-                ->order('publishdate DESC');
+                ->order('articleid DESC');
             }
         );
         

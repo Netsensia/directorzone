@@ -327,7 +327,7 @@ class CompanyService extends NetsensiaService
                 )
                 ->offset($start - 1)
                 ->limit(1 + ($end - $start))
-                ->order('name ASC');
+                ->order('companydirectoryid DESC');
             }
         );
     
