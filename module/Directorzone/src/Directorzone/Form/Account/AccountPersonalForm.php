@@ -21,13 +21,19 @@ class AccountPersonalForm extends NetsensiaForm
         $this->addText('surname');
         $this->addSelectWithInvisibleOther('suffix');
         
+        $this->addText(
+            [
+                0 => 1,
+                'name' => 'pseudonym',
+                'label' => 'Pseudonym (will appear as the author on your published articles)'
+            ]
+        );
+        
         $this->addDate(['name'=>'dob', 'label'=>'Date of birth']);
         
         $this->addSelect('gender');
         $this->addSelect('nationality');
-        
-        $this->addText('pseudonym');
-        
+                
         $this->addSubmit('Submit');
         
         parent::prepare();

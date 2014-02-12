@@ -26,8 +26,9 @@ class ArticleService extends NetsensiaService
             function (Select $select) use ($articleId) {
         
                 $select->columns(
-                    ['title', 'publishdate', 'articleid', 'content', 'image']
+                    ['title', 'publishdate', 'articleid', 'content', 'image', 'userid']
                 )
+                ->join('user', 'article.userid = user.userid', ['pseudonym'])
                 ->where(['articleid' => $articleId]);
             }
         );
@@ -36,7 +37,11 @@ class ArticleService extends NetsensiaService
         
         if (count($rows) == 1) {
             $article = $rows[0];
-            $article['image'] = ($article['image'] == '' ? '/img/brand/globe.fw.png' : $article['image']);
+            $autoPseudonym = 'AnonymousUser' . $article['userid'];
+            $article['pseudonym'] =
+                ($article['pseudonym'] == '' ? $autoPseudonym : $article['pseudonym']);
+            $article['image'] =
+                ($article['image'] == '' ? '/img/brand/globe.fw.png' : $article['image']);
             return $article;
         } else {
             throw new NotFoundResourceException('Article not found');

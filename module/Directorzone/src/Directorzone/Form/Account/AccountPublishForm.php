@@ -5,9 +5,16 @@ use Netsensia\Form\NetsensiaForm;
 
 class AccountPublishForm extends NetsensiaForm
 {
+    private $userId;
+    
     public function __construct($name = null, $options = array())
     {
         parent::__construct($name, $options);
+    }
+    
+    public function setUserId($userId)
+    {
+        $this->userId = $userId;    
     }
     
     public function prepare()
@@ -22,6 +29,8 @@ class AccountPublishForm extends NetsensiaForm
         
         $this->addDate('start-date');
         $this->addDate('end-date');
+        
+        $this->addHidden('userid', $this->userId);
         
         $this->addImage('image');
         

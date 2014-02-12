@@ -32,9 +32,7 @@ use Directorzone\Form\Company\CompanyFinancialsForm;
 use Directorzone\Form\Company\CompanyFeedsForm;
 use Directorzone\Service\TwitterService;
 use Directorzone\Service\BingService;
-use Zend\Server\Cache;
 use Directorzone\Service\ArticleService;
-use Netsensia\Service\ImageService;
 
 class Module
 {
@@ -380,6 +378,9 @@ class Module
                 },
                 'AccountPublishForm' =>  function ($sm) {
                     $form = new AccountPublishForm('accountPublishForm');
+                    $authService = $sm->get('Zend\Authentication\AuthenticationService');
+                    $identity = $authService->getIdentity();
+                    $form->setUserId($identity->getUserId());
                     $form->setTranslator($sm->get('translator'));
                     $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
                     return $form;

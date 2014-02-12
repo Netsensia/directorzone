@@ -23,52 +23,52 @@ class AccountController extends NetsensiaActionController
     
     public function accountAction()
     {
-        return $this->genericForm('AccountAccountForm', 'User');
+        return $this->userAccountForm('AccountAccountForm', 'User');
     }
         
     public function companyAction()
     {
-        return $this->genericForm('AccountCompanyForm', 'User');
+        return $this->userAccountForm('AccountCompanyForm', 'User');
     }
         
     public function contactAction()
     {
-        return $this->genericForm('AccountContactForm', 'User');
+        return $this->userAccountForm('AccountContactForm', 'User');
     }
         
     public function experienceAction()
     {
-        return $this->genericForm('AccountExperienceForm', 'User');
+        return $this->userAccountForm('AccountExperienceForm', 'User');
     }
     
     public function inboxAction()
     {
-        return $this->genericForm('AccountInboxForm', 'User');
+        return $this->userAccountForm('AccountInboxForm', 'User');
     }
     
     public function membershipAction()
     {
-        return $this->genericForm('AccountMembershipForm', 'User');
+        return $this->userAccountForm('AccountMembershipForm', 'User');
     }
         
     public function preferencesAction()
     {
-        return $this->genericForm('AccountPreferencesForm', 'User');
+        return $this->userAccountForm('AccountPreferencesForm', 'User');
     }
 
     public function personalAction()
     {
-        return $this->genericForm('AccountPersonalForm', 'User');
+        return $this->userAccountForm('AccountPersonalForm', 'User');
     }
     
     public function profileAction()
     {
-        return $this->genericForm('AccountProfileForm', 'User');
+        return $this->userAccountForm('AccountProfileForm', 'User');
     }
 
     public function directoryAction()
     {
-        return $this->genericForm('AccountDirectoryForm', 'User');
+        return $this->userAccountForm('AccountDirectoryForm', 'User');
     }
     
     public function publishAction()
@@ -90,13 +90,13 @@ class AccountController extends NetsensiaActionController
     {
     }
     
-    private function genericForm($formName, $modelName)
+    private function userAccountForm($formName, $modelName)
     {
         return array(
             "form" => $this->processForm(
                 $formName,
                 $modelName,
-                null
+                $this->getUserId()
             ),
             'flashMessages' => $this->getFlashMessages(),
         );

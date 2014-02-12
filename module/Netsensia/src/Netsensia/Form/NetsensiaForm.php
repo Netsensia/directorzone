@@ -249,7 +249,7 @@ class NetsensiaForm extends Form
     }
     
     public function addText($options)
-    {
+    {   
         if (!is_array($options)) {
             $options = [ 'name' => $options ];
         }
@@ -284,7 +284,7 @@ class NetsensiaForm extends Form
     
         $text = new Element($name);
         $text->setLabel($label);
-    
+        
         $text->setAttributes(
             [
                 'id'    => $name,
@@ -295,6 +295,7 @@ class NetsensiaForm extends Form
         );
     
         $this->add($text);
+        
     }
     
     public function addImage($options)
