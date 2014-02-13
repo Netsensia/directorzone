@@ -1,7 +1,7 @@
 <?php echo $this->partial('directory-nav.phtml'); ?>
 <h3>People directory</h3>
 
-<table id="people" class="table table-striped table-bordered table-hover">
+<table id="people" data-link="row" class="table table-striped table-bordered table-hover">
 <tr><th>Name</th><th>Company</th><th>Appointment Type</th><th>Date of Birth</th></tr>
 </table>
 
@@ -20,8 +20,9 @@ $(document).ready(function() {
 		'people',
 		'/ajax/people/list',
 		function(key, value) {
+			var url = '/directories/people/' + value.internalId;
 			var newRow = '<tr>';
-			newRow += '<td>' + value.name + '</td>';
+			newRow += '<td><a href="' + url + '">' + value.name + '</a></td>';
 			newRow += '<td>' + value.companyname + '</td>';
 			newRow += '<td>' + value.appointmenttype + '</td>';
 			newRow += '<td>' + value.dob + '</td>';

@@ -29,7 +29,8 @@ class CompanyViewController extends NetsensiaActionController
         CompanyService $companyService,
         TwitterService $twitterService,
         BingService $bingService
-    ) {
+    )
+    {
         $this->companyService = $companyService;
         $this->twitterService = $twitterService;
         $this->bingService = $bingService;

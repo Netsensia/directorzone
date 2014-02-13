@@ -113,8 +113,14 @@ class Module
                     },
                 'PeopleView' =>
                     function (ControllerManager $cm) {
+                        $peopleService = $cm->getServiceLocator()->get('PeopleService');
+                        $twitterService = $cm->getServiceLocator()->get('TwitterService');
+                        $bingService = $cm->getServiceLocator()->get('BingService');
+                        
                         return new \Directorzone\Controller\Directory\People\PeopleViewController(
-                            $cm->getServiceLocator()->get('PeopleService')
+                            $peopleService,
+                            $twitterService,
+                            $bingService
                         );
                     },
                 'PeopleEdit' =>

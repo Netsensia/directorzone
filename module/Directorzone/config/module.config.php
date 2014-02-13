@@ -343,8 +343,24 @@ return array(
                                 'controller' => 'Directory',
                                 'action' => 'people-list',
                             ),
-                        )
+                        ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'people-details' => array(
+                                'type' => 'segment',
+                                'options' => array(
+                                    'route' => '/:id',
+                                    'constraints' => ['id' => '[0-9]*'],
+                                    'defaults' => array(
+                                        'action' => 'people-details',
+                                        'controller' => 'PeopleView',
+                                        'id' => 0,
+                                    ),
+                                ),
+                            ),
+                        ),
                     ),
+                    
                 ),
             ),
             'search' => array(

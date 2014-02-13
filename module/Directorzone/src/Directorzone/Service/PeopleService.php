@@ -4,6 +4,7 @@ namespace Directorzone\Service;
 use Netsensia\Service\NetsensiaService;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Select;
+use Symfony\Component\Translation\Exception\NotFoundResourceException;
 
 class PeopleService extends NetsensiaService
 {
@@ -26,7 +27,7 @@ class PeopleService extends NetsensiaService
                     ['appointmentstatus' => 'CURRENT']
                 )
                 ->columns(
-                    ['officernumber', 'dob', 'appointmenttype', 'companyreference', 'forename', 'surname']
+                    ['officerid', 'officernumber', 'dob', 'appointmenttype', 'companyreference', 'forename', 'surname']
                 )
                 ->join(
                     'companydirectory',
@@ -62,6 +63,7 @@ class PeopleService extends NetsensiaService
             }
             
             $people['results'][] = [
+                'internalId' => $result['officerid'],
                 'officernumber' => $result['officernumber'],
                 'number' => $result['companyreference'],
                 'appointmenttype' => $type,
@@ -72,5 +74,27 @@ class PeopleService extends NetsensiaService
         }
         
         return $people;
+    }
+    
+    public function getPeopleDetails($peopleDirectoryId)
+    {
+        $rowset = $this->peopleDirectoryTable->select(
+            function (Select $select) use ($peopleDirectoryId) {
+                $select->where(
+                    [
+                        'officerid' => $peopleDirectoryId
+                    ]
+                );
+            }
+        );
+    
+        if ($rowset->count() == 0) {
+            throw new NotFoundResourceException('Person not found in directory');
+        }
+    
+        $peopleDetails = $rowset->current()->getArrayCopy();
+    
+        return $peopleDetails;
+    
     }
 }
