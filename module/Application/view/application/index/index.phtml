@@ -123,8 +123,9 @@ function loadPeople()
 			'directories',
 			'/ajax/people/list',
 			function(key, value) {
+				var url = '/directories/people/' + value.internalId;
 				var newRow = '<tr>';
-				newRow += '<td>' + value.name + '</td>';
+				newRow += '<td><a href="' + url + '">' + value.name + '</a></td>';
 				newRow += '<td>' + value.companyname + '</td>';
 				newRow += '<td>' + value.appointmenttype + '</td>';
 				newRow += '</tr>';
