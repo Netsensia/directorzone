@@ -51,6 +51,7 @@
                                 'home' => $this->translate("Home"),
                                 'directories' => $this->translate("Directories"),
                                 'articles/article-list' => $this->translate("Articles"),
+                                'events-calendar' => $this->translate("Calendar"),
                                 'admin' => $this->translate("Admin"),
                             ];
                             if ($this->identity()) {
@@ -61,7 +62,6 @@
                                 if ($this->config()['netsensia']['enable-users']) {
                                     $moreurls = array(
                                         'home' => $this->translate("Home"),
-                                        'register' => $this->translate("Register"),
                                         'contact' => $this->translate("Contact"),
                                     );
                                 } else {
