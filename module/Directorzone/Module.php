@@ -139,6 +139,10 @@ class Module
                     function (ControllerManager $cm) {
                         return new \Directorzone\Controller\Search\SearchController();
                     },
+                'Event' =>
+                    function (ControllerManager $cm) {
+                        return new \Directorzone\Controller\Event\EventController();
+                    },
             ),
         );
     }

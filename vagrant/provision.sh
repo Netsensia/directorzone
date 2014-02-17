@@ -17,7 +17,7 @@ apt-get -y install php5
 #############################################################
 apt-get -y install openjdk-7-jre-headless mysql-server mysql-client apache2 libapache2-mod-php5 curl php5-curl
 apt-get -y install php5-mcrypt php5-xsl php5-ldap php5-mysql php5-gd php5-intl php5-json zip build-essential libssl-dev
-apt-get -y install imagemagick php5-imagick
+apt-get -y install imagemagick php5-imagick npm
 
 #############################################################
 # Enable required Apache modules
@@ -64,6 +64,28 @@ sudo service mysql restart
 #############################################################
 rm /var/www/index.html
 service apache2 restart
+
+#############################################################
+# Compile Node.js from source - package version is too old
+#############################################################
+cd /usr/local/src
+mkdir node
+cd node
+wget http://nodejs.org/dist/v0.10.21/node-v0.10.21.tar.gz
+tar -xzvf node-v0.10.21.tar.gz
+cd node-v0.10.21
+./configure
+make
+make install
+ln -s /usr/bin/nodejs /usr/bin/node
+
+#############################################################
+# Install bootstrap calendar
+#############################################################
+cd /var/www/directorzone/public
+apt-get -y install git
+npm install -g bower
+bower install bootstrap-calendar
 
 #############################################################
 # Setup Apache virtual hosts

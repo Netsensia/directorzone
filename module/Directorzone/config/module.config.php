@@ -101,6 +101,16 @@ return array(
                             ),
                         ),
                     ),
+                    'events' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/events',
+                            'defaults' => array(
+                                'controller' => 'Event',
+                                'action' => 'list',
+                            ),
+                        ),
+                    ),
                     'image-upload' => array(
                         'type' => 'literal',
                         'options' => array(
@@ -361,6 +371,16 @@ return array(
                         ),
                     ),
                     
+                ),
+            ),
+            'events-calendar' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/events-calendar',
+                    'defaults' => array(
+                        'controller' => 'Event',
+                        'action'     => 'calendar',
+                    ),
                 ),
             ),
             'search' => array(

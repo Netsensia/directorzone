@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="app/bower_components/bootstrap-calendar/css/calendar.css">
+</head>
+<body>
+
+    <div id="calendar"></div>
+
+    <script type="text/javascript" src="app/bower_components/underscore/underscore-min.js"></script>
+    <script type="text/javascript" src="app/bower_components/bootstrap-calendar/js/calendar.js"></script>
+    
+</body>
+<script type="text/javascript">
+    $(document).ready(function() {
+    	var calendar = $('#calendar').calendar({events_url:'/ajax/events'});
+    });
+</script>
+</html>
+
