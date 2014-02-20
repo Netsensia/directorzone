@@ -89,6 +89,16 @@ return array(
                                     ),
                                 )
                             ),
+                            'events' => array(
+                                'type' => 'literal',
+                                'options' => array(
+                                    'route' => '/events',
+                                    'defaults' => array(
+                                        'controller' => 'Directorzone\Controller\Ajax\Article',
+                                        'action' => 'events',
+                                    ),
+                                ),
+                            ),
                         ),
                     ),
                     'search' => array(
@@ -98,16 +108,6 @@ return array(
                             'defaults' => array(
                                 'controller' => 'AjaxSearch',
                                 'action' => 'search',
-                            ),
-                        ),
-                    ),
-                    'events' => array(
-                        'type' => 'literal',
-                        'options' => array(
-                            'route' => '/events',
-                            'defaults' => array(
-                                'controller' => 'Event',
-                                'action' => 'list',
                             ),
                         ),
                     ),

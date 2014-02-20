@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="/app/bower_components/bootstrap-calendar/css/calendar.css">
 <script type="text/javascript" src="/app/bower_components/underscore/underscore-min.js"></script>
 <script type="text/javascript" src="/app/bower_components/bootstrap-calendar/js/calendar.js"></script>
+<script type="text/javascript" src="/app/bower_components/bootstrap-calendar/js/language/en-GB.js"></script>
 
 <div class="page-header">
 		      <h3>asd</h3>
@@ -27,7 +28,8 @@
     $(document).ready(function() {
         var calendar = $('#calendar').calendar(
     	    {
-        	    events_source:function () { return []; },
+    	    	language: 'en-GB',
+        	    events_source: '/ajax/article/events',
         	    tmpl_path: 'app/bower_components/bootstrap-calendar/tmpls/',
         	    'view' : 'month',
         	    'day' : 'now',

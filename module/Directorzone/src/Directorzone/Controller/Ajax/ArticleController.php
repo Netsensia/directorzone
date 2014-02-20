@@ -45,6 +45,34 @@ class ArticleController extends NetsensiaActionController
         );
     }
     
+    public function eventsAction()
+    {
+        $events = [];
+    
+        $events[] = [
+            'id' => 293,
+            'title' => 'Important Event about Business',
+            'start' => 1392932906000,
+            'end' => 1393027200000,
+            'class' => 'event-important',
+        ];
+        
+        $events[] = [
+            'id' => 293,
+            'title' => 'Event about Directors',
+            'start' => 1391644800000,
+            'end' => 1391990400000,
+            'class' => 'event-info',
+        ];
+    
+        return new JsonModel(
+            [
+                'success' => 1,
+                'result' => $events,
+            ]
+        );
+    }
+    
     public function articleListAction()
     {
         $page = $this->params()->fromQuery('page', null);
