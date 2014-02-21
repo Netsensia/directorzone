@@ -52,8 +52,7 @@
                                 'home' => $this->translate("Home"),
                                 'directories' => $this->translate("Directories"),
                                 'articles/article-list' => $this->translate("Articles"),
-                                'events-calendar' => $this->translate("Calendar"),
-                                'admin' => $this->translate("Admin"),
+                                'events-calendar' => $this->translate("Events"),
                             ];
                             if ($this->identity()) {
                                 $moreurls = array(
@@ -75,12 +74,12 @@
                             $urls = array_merge($someurls, $moreurls); 
                         ?>
                         <?php foreach ($urls as $url => $name) { ?>
-                            <li
+                             <li
                                 class="<?php echo ($this->url() == $this->url($url) ? "active" : ""); ?>"><a
                                 href="<?php echo $this->url($url); ?>"><?php echo $this->translate($name); ?></a></li>
-                            <?php } ?>
+                        <?php } ?>
                             <?php if ($user = $this->identity()) { ?>
-                            <li><a href="<?php echo $this->url('myaccount') ?>"><?php echo $this->translate('My Account') ?></a></li>
+                            <li><a href="<?php echo $this->url('myaccount') ?>"><?php echo $this->translate('Account') ?></a></li>
                             
                             <li><a href="<?php echo $this->url('logout') ?>"><?php echo $this->translate('Logout') ?></a></li>
                             
@@ -174,6 +173,8 @@
                 <li><a href="<?= $this->url('contact'); ?>"><?= $this->translate('Feedback'); ?></a></li>
                 <li class="muted">&middot;</li>
                 <li><a href="<?= $this->url('help'); ?>"><?= $this->translate('Help'); ?></a></li>
+                <li class="muted">&middot;</li>
+                <li><a href="<?= $this->url('admin'); ?>"><?= $this->translate('Admin'); ?></a></li>
             </ul>
             <ul class="footer-links">
                 <li><a

@@ -66,12 +66,12 @@ class BootstrapForm extends AbstractHelper
             }
             
             $isInvisibleOther = (strpos($element->getAttribute('class'), 'invisible-other') !== false);
+            $id = $element->getAttribute('id');
             
             if ($isInvisibleOther) {
-                $id = $element->getAttribute('id');
                 echo('<div id="' . $id . '" class="control-group invisible-other">');
             } else {
-                echo('<div class="control-group">');
+                echo('<div class="control-group" data-netsensia-group="' . $id . '">');
             }
             
             echo('<label class="control-label">' . $element->getLabel() . '</label>');

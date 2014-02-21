@@ -30,5 +30,26 @@ $(function() {
        plugins: "bbcode",
         style: "/js/sceditor/minified/jquery.sceditor.default.min.css"
     });
+
+    dateVisibility('none');
+
+    var display;
+
+    $("#account-publish-articlecategory").change(function() {
+        var val = $(this).val();
+
+        if (val == 5 || val == 6) {
+            display = 'block';
+        } else {
+            display = 'none';
+        }
+        dateVisibility(display);
+    });
 });
+
+function dateVisibility(display)
+{
+    $("[data-netsensia-group='account-publish-startdate']").css('display', display);
+    $("[data-netsensia-group='account-publish-enddate']").css('display', display);
+}
 </script>
