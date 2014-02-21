@@ -60,7 +60,7 @@ class CompanyController extends NetsensiaActionController
                     $fieldNumber = 0;
                 
                     $array = $fileHandle->fgetcsv();
-                
+                                    
                     if (count($array) > 5) {
                         foreach ($array as $dataItem) {
                             $fieldName = trim($headers[$fieldNumber++]);
@@ -97,7 +97,7 @@ class CompanyController extends NetsensiaActionController
                         }
                         $data['number'] = $fields['CompanyNumber'];
                         
-                        $companyService->updateCompaniesHouseDirectory($data);
+                        $companyService->addToCompaniesHouseDirectory($data);
                         
                         if ($rowCount++ % 10000 == 0) {
                             echo '.';

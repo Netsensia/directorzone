@@ -59,22 +59,48 @@ class CompanyService extends NetsensiaService
     
     public function addToCompaniesHouseDirectory(
         $data
-    ) {
-        $this->companiesHouseTable->insert($data);
-    }
-    
-    public function updateCompaniesHouseDirectory(
-        $data
-    ) {
+    )
+    {
         $sicCodes = $data['siccodes'];
         unset($data['siccodes']);
         
         $companyNumber = $data['number'];
         unset($data['number']);
         
+        $this->companiesHouseTable->insert(
+            $data
+        );
+        
+        foreach ($sicCodes as $sicCode) {
+            $data = [
+                'siccode' => $sicCode,
+                'companynumber' => $companyNumber
+            ];
+            $this->companySicCodeTable->insert(
+                $data
+            );
+        }
+    }
+    
+    public function updateCompaniesHouseDirectory(
+        $data
+    )
+    {
+        $companyNumber = $data['number'];
+        unset($data['number']);
+
+        $sicCodes = $data['siccodes'];
+        unset($data['siccodes']);
+        
         $this->companiesHouseTable->update(
             $data,
             ['number' => $companyNumber]
+        );
+        
+        $result = $this->companySicCodeTable->delete(
+            [
+                'companynumber' => $companyNumber,
+            ]
         );
         
         foreach ($sicCodes as $sicCode) {
