@@ -62,7 +62,7 @@ class ArticleService extends NetsensiaService
                     ['articlecategoryid' => $typeArray]
                 )
                 ->columns(
-                    ['image', 'title', 'content', 'publishdate', 'articleid']
+                    ['image', 'title', 'content', 'publishdate', 'articleid', 'startdate', 'enddate']
                 )
                 ->offset($start - 1)
                 ->limit(1 + ($end - $start))
@@ -79,6 +79,8 @@ class ArticleService extends NetsensiaService
 	            'image' => $image,
 	            'title' => $row['title'],
 	            'content' => $row['content'],
+	            'startdate' => $row['startdate'],
+	            'enddate' => $row['enddate'],
 	            'articleid' => $row['articleid'],
 	            'publishdate' => $row['publishdate'],
             ];

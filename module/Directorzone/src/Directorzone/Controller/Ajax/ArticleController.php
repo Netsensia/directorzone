@@ -48,22 +48,24 @@ class ArticleController extends NetsensiaActionController
     public function eventsAction()
     {
         $events = [];
-    
-        $events[] = [
-            'id' => 293,
-            'title' => 'Important Event about Business',
-            'start' => 1392932906000,
-            'end' => 1393027200000,
-            'class' => 'event-important',
-        ];
         
-        $events[] = [
-            'id' => 293,
-            'title' => 'Event about Directors',
-            'start' => 1391644800000,
-            'end' => 1391990400000,
-            'class' => 'event-info',
-        ];
+        $results = $this->articleService->getArticlesByType(
+            [5],
+            1,
+            100
+        );
+        
+        foreach ($results as $result) {
+            $events[] = [
+                'id' => $result['articleid'],
+                'author' => '',
+                'url' => '/article/' . $result['articleid'],
+                'title' => $result['title'],
+                'start' => strtotime($result['startdate']) * 1000,
+                'end' => strtotime($result['enddate']) * 1000,
+                'class' => 'event-info',
+            ];
+        }
     
         return new JsonModel(
             [
