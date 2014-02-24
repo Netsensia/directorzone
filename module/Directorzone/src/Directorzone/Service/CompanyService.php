@@ -64,12 +64,11 @@ class CompanyService extends NetsensiaService
         $sicCodes = $data['siccodes'];
         unset($data['siccodes']);
         
-        $companyNumber = $data['number'];
-        unset($data['number']);
-        
         $this->companiesHouseTable->insert(
             $data
         );
+
+        $companyNumber = $data['number'];
         
         foreach ($sicCodes as $sicCode) {
             $data = [

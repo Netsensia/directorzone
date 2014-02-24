@@ -212,7 +212,7 @@ class ElasticService extends NetsensiaService
                     '", "_type" : "' . $type . '", "_id" : "' .
                     $row[$primaryKey] . '" } }' . PHP_EOL .
                     json_encode($row) . PHP_EOL;
-    
+                
                 $lastId = $row[$primaryKey];
             }
     

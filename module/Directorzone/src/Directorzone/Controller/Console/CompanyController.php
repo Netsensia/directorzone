@@ -69,12 +69,14 @@ class CompanyController extends NetsensiaActionController
     
                         $data = [];
                         
+                        $data['name'] = $fields['CompanyName'];
                         $data['addressline1'] = $fields['RegAddress.AddressLine1'];
                         $data['addressline2'] = $fields['RegAddress.AddressLine2'];
                         $data['town'] = $fields['RegAddress.PostTown'];
                         $data['county'] = $fields['RegAddress.County'];
                         $data['country'] = $fields['RegAddress.Country'];
                         $data['postcode'] = $fields['RegAddress.PostCode'];
+                        $data['number'] = $fields['CompanyNumber'];
                         
                         try {
                             $incorporationDate =
@@ -95,7 +97,6 @@ class CompanyController extends NetsensiaActionController
                             }
                             $data['siccode' . $i] = $fields['SICCode.SicText_' . $i];
                         }
-                        $data['number'] = $fields['CompanyNumber'];
                         
                         $companyService->addToCompaniesHouseDirectory($data);
                         
