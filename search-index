@@ -1,0 +1,5 @@
+php /var/www/directorzone/public/index.php index-companies
+php /var/www/directorzone/public/index.php index-articles
+php /var/www/directorzone/public/index.php index-company-officers
+php /var/www/directorzone/public/index.php index-company-directory
+
