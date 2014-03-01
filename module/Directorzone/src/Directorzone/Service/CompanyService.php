@@ -139,12 +139,30 @@ class CompanyService extends NetsensiaService
             function (Select $select) use ($companyDetails) {
                 $select->where(
                     [
-                    'companyreference' => $companyDetails['reference'],
-                    'appointmentstatus' => 'CURRENT',
+                        'companyreference' => $companyDetails['reference'],
+                        'appointmentstatus' => 'CURRENT',
                     ]
                 );
             }
         );
+        
+        if (count($rowset) == 0) {
+            $this->addOfficers(
+                $companyDetails['reference'],
+                $companyDetails['name']
+            );
+            
+            $rowset = $this->companyOfficersTable->select(
+                function (Select $select) use ($companyDetails) {
+                    $select->where(
+                        [
+                        'companyreference' => $companyDetails['reference'],
+                        'appointmentstatus' => 'CURRENT',
+                        ]
+                    );
+                }
+            );
+        }
         
         foreach ($rowset as $row) {
         	$companyDetails['officers'][] = $row->getArrayCopy();
@@ -228,7 +246,8 @@ class CompanyService extends NetsensiaService
     
     public function makeLive(
         $uploadId
-    ) {        
+    )
+    {        
         $rowset = $this->companyUploadTable->select(
             function (Select $select) use ($uploadId) {
                 $select->where(
@@ -261,45 +280,58 @@ class CompanyService extends NetsensiaService
             ]
         );
         
+        $result = $this->addOfficers(
+            $companyRow['companynumber'],
+            $companyRow['name']
+        );
+        
+        return $result;
+    }
+    
+    public function addOfficers(
+        $companyNumber,
+        $companyName
+    )
+    {
         $companyAppointmentsModel =
             $this->companyAppointmentsRequest->loadCompanyAppointments(
-                $companyRow['companynumber'],
-                $companyRow['name'],
+                $companyNumber,
+                $companyName,
                 true,
                 true
             );
-                
+        
         $appointments = $companyAppointmentsModel->getAppointments();
-                        
+        
         $result = $this->companyOfficersTable->delete(
             [
-                'companyreference' => $companyRow['companynumber'],
+                'companyreference' => $companyNumber,
             ]
         );
-                
+        
         foreach ($appointments as $appointment) {
-                        
+        
             $appointment instanceof Person;
             $address = $appointment->getAddress();
             $data = [
-                    'companyreference' => $companyRow['companynumber'],
-                    'officernumber' => $appointment->getId(),
-                    'forename' => $appointment->getForename(),
-                    'surname' => $appointment->getSurname(),
-                    'dob' => $appointment->getDob(),
-                    'nationality' => $appointment->getNationality(),
-                    'numappointments' => $appointment->getNumAppointments(),
-                    'appointmenttype' => $appointment->getAppointmentType(),
-                    'appointmentstatus' => $appointment->getAppointmentStatus(),
-                    'appointmentdate' => $appointment->getAppointmentDate(),
-                    'honours' => $appointment->getHonours(),
+                'companyreference' => $companyNumber,
+                'officernumber' => $appointment->getId(),
+                'forename' => $appointment->getForename(),
+                'surname' => $appointment->getSurname(),
+                'dob' => $appointment->getDob(),
+                'nationality' => $appointment->getNationality(),
+                'numappointments' => $appointment->getNumAppointments(),
+                'appointmenttype' => $appointment->getAppointmentType(),
+                'appointmentstatus' => $appointment->getAppointmentStatus(),
+                'appointmentdate' => $appointment->getAppointmentDate(),
+                'honours' => $appointment->getHonours(),
             ];
-                        
+        
             $result = $this->companyOfficersTable->insert(
                 $data
             );
         }
-    
+
         return $result;
     }
     

@@ -47,12 +47,14 @@
             </div>
             <div class="panel-body">
             <table class="table">
+              <?php if (isset($this->officers)) : ?>
               <?php foreach ($this->officers as $officer) : ?>
               <tr>
               	<td><?php echo $officer['forename'] . ' ' . $officer['surname']; ?></td>
               	<td><?php echo $officer['appointmenttype']; ?></td>
               </tr>
               <?php endforeach; ?>
+              <?php endif; ?>
             </table>
             </div>
         </div>
