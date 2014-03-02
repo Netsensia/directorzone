@@ -22,6 +22,8 @@ class BbCode extends AbstractHelper
         $content = $bbCodeParser->getAsHtml();
         $content = $this->stripBBCode($content);
         
+        $content = str_replace(PHP_EOL, '<br>', $content);
+        
         return $content;
     }
 }
