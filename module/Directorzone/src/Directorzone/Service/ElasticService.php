@@ -79,7 +79,6 @@ class ElasticService extends NetsensiaService
     public function search($name, $params = [])
     {
         $params['body']['query']['query_string']['query'] = $name;
-        //$params['body']['query']['query_string']['default_field'] = 'title';
         $params['body']['query']['query_string']['default_operator'] = 'OR';
         $params['body']['query']['query_string']['analyzer'] = 'standard';
         
@@ -88,22 +87,26 @@ class ElasticService extends NetsensiaService
         return $result;
     }
     
-    private function createIndex($name)
+    private function createIndex($name, $defaultField = null)
     {
         $indexParams['index']  = $name;
     
         // Index Settings
         $indexParams['body']['settings']['number_of_shards']   = 3;
         $indexParams['body']['settings']['number_of_replicas'] = 2;
-    
+        
+        if ($defaultField) {
+            $indexParams['body']['settings']['query']['default_field'] = $defaultField;
+        }
+        
         $indexParams['body']['settings']['analysis']['char_filter']['nopunc_mapping'] = [
-        "type" => "mapping",
-        "mappings" => [".=>"]
+            "type" => "mapping",
+            "mappings" => [".=>"]
         ];
     
         $indexParams['body']['settings']['analysis']['analyzer']['custom_with_char_filter'] = [
-        "tokenizer" => "standard",
-        "char_filter" => ["nopunc_mapping"]
+            "tokenizer" => "standard",
+            "char_filter" => ["nopunc_mapping"]
         ];
          
         // Create the index
@@ -112,6 +115,8 @@ class ElasticService extends NetsensiaService
     
     public function indexCompanies()
     {
+        $this->createIndex('companies', 'name');
+        
         $this->indexGeneric(
             'companies',
             'company',
@@ -123,6 +128,8 @@ class ElasticService extends NetsensiaService
     
     public function indexCompanyDirectory()
     {
+        $this->createIndex('companydirectory');
+        
         $this->indexGeneric(
             'companydirectory',
             'company',
@@ -134,6 +141,8 @@ class ElasticService extends NetsensiaService
     
     public function indexCompanyOfficers()
     {
+        $this->createIndex('officers');
+        
         $this->indexGeneric(
             'officers',
             'officer',
@@ -145,6 +154,8 @@ class ElasticService extends NetsensiaService
     
     public function indexArticles()
     {
+        $this->createIndex('articles');
+        
         $this->indexGeneric(
             'articles', 
             'article', 
@@ -162,8 +173,6 @@ class ElasticService extends NetsensiaService
         $nameKey
     )
     {
-        $this->createIndex($index);
-    
         $this->client->indices()->delete(array('index' => $index));
     
         $limit = 5000;
