@@ -395,10 +395,7 @@ class CompanyService extends NetsensiaService
     {
         $rowset = $this->companiesHouseTable->select(
             function (Select $select) use ($status, $start, $end) {
-                $select->where(
-                    ['recordstatus' => $status]
-                )
-                ->columns(
+                $select->columns(
                     ['number', 'name']
                 )
                 ->offset($start - 1)
