@@ -240,14 +240,14 @@ $(document).ready(function() {
     });
 
 	var page = 1;
-	var size = 10;
+	var size = 500;
 	var type = getTypeFromSlug("<?php echo $this->selectedCompanyType; ?>");
 
 	$(".filter").click(function() {
 		$(".filter").removeClass('active');
 		$(this).addClass('active');
 		page = 1;
-		size = 10;
+		size = 500;
 		type = getTypeFromSlug($(this).attr('id'));
 
 		loadTable(type, page, size);

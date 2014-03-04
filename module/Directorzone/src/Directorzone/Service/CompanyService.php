@@ -353,7 +353,7 @@ class CompanyService extends NetsensiaService
     
     private function getUploadedCompaniesFromStatus($status, $start, $end)
     {
-        
+
         $rowset = $this->companyUploadTable->select(
             function (Select $select) use ($status, $start, $end) {
                 
@@ -461,7 +461,7 @@ class CompanyService extends NetsensiaService
     }
     
     public function getCompanies($type, $start, $end)
-    {
+    {               
         switch ($type) {
             case 'P':
                 return $this->getPendingCompanies($start, $end);

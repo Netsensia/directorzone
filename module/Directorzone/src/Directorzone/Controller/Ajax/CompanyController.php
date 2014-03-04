@@ -114,7 +114,7 @@ class CompanyController extends NetsensiaActionController
         
         $start = ($page - 1) * $size + 1;
         $end = $start + $size - 1;
-                
+        
         $results = $this->companyService->getCompanies(
             $type,
             $start,
