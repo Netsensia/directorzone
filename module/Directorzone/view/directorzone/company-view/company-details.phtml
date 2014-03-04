@@ -103,7 +103,14 @@
                     ?>
                         <tr>
                             <td>
-                                <h5><a href="<?php echo $bingResult['Title']; ?>"><?php echo $bingResult['Title']; ?></a></h5>
+                                <h5><a href="<?php echo $bingResult['Url']; ?>"><?php echo $bingResult['Title']; ?></a></h5>
+                                <div style="font-size:0.8em;margin-bottom:5px;">
+                                    <?php 
+                                        $timestamp = strtotime($bingResult['Date']);
+                                        $bingResult['Date'] = date('g:ia \o\n l jS F Y', $timestamp);
+                                        echo $bingResult['Date'];
+                                    ?>
+                                </div>
                                 <?php echo $bingResult['Description']; ?>
                             </td>
                         </tr>

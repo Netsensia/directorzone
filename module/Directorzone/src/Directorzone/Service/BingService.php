@@ -13,7 +13,8 @@ class BingService extends NetsensiaService
     
     public function __construct(
         \Bing\Client $client
-    ) {
+    )
+    {
         $this->client = $client;
     }
     
@@ -22,8 +23,7 @@ class BingService extends NetsensiaService
         $res = $this->client->get('News', ['Query' => $searchTerm, '$top' => '3']);
         
         $res = json_decode($res, true);
-        
+
         return $res;
     }
-
 }
