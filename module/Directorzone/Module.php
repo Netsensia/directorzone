@@ -33,6 +33,7 @@ use Directorzone\Form\Company\CompanyFeedsForm;
 use Directorzone\Service\TwitterService;
 use Directorzone\Service\BingService;
 use Directorzone\Service\ArticleService;
+use Bing\Client;
 
 class Module
 {
@@ -159,8 +160,10 @@ class Module
                                 'options' => array(
                                     'dirLevel' => 2,
                                     'cacheDir' => '/tmp',
+                                    'ttl' => 7200,
                                     'dirPermission' => 0755,
                                     'filePermission' => 0666,
+                                    'namespace' => 'directorzone',
                                     'namespaceSeparator' => '-db-'
                                 ),
                             ),

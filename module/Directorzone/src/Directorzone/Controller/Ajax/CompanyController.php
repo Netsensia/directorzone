@@ -24,7 +24,8 @@ class CompanyController extends NetsensiaActionController
     public function __construct(
         CompanyService $companyService,
         ElasticService $elasticService
-    ) {
+    )
+    {
         $this->companyService = $companyService;
         $this->elasticService = $elasticService;
     }
