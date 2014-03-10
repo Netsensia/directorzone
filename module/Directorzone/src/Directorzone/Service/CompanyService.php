@@ -147,10 +147,14 @@ class CompanyService extends NetsensiaService
         );
         
         if (count($rowset) == 0) {
-            $this->addOfficers(
-                $companyDetails['reference'],
-                $companyDetails['name']
-            );
+            try {
+                $this->addOfficers(
+                    $companyDetails['reference'],
+                    $companyDetails['name']
+                );
+            } catch (\Exception $e) {
+                //
+            }
             
             $rowset = $this->companyOfficersTable->select(
                 function (Select $select) use ($companyDetails) {
