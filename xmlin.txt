@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<GovTalkMessage xsi:schemaLocation="http://www.govtalk.gov.uk/schemas/govtalk/govtalkheader http://xmlgw.companieshouse.gov.uk/v1-0/schema/Egov_ch.xsd" xmlns="http://www.govtalk.gov.uk/schemas/govtalk/govtalkheader" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:gt="http://www.govtalk.gov.uk/schemas/govtalk/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+  <EnvelopeVersion>1.0</EnvelopeVersion>
+  <Header>
+    <MessageDetails>
+      <Class>CompanyAppointments</Class>
+      <Qualifier>response</Qualifier>
+      <TransactionID>1000000000000000013945434638352</TransactionID>
+      <GatewayTimestamp>2014-03-11T13:13:48-00:00</GatewayTimestamp>
+    </MessageDetails>
+    <SenderDetails>
+      <IDAuthentication>
+        <SenderID>55929018299358273807663349255503</SenderID>
+        <Authentication>
+          <Method>CHMD5</Method>
+          <Value></Value>
+        </Authentication>
+      </IDAuthentication>
+      <EmailAddress>rbryan@city-zone.com</EmailAddress>
+    </SenderDetails>
+  </Header>
+  <GovTalkDetails>
+    <Keys/>
+  </GovTalkDetails>
+  <Body>
+    <CompanyAppointments xmlns="http://xmlgw.companieshouse.gov.uk/v1-0/schema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlgw.companieshouse.gov.uk/v1-0/schema http://xmlgw.companieshouse.gov.uk/v1-0/schema/CompanyAppointments-v2-1.xsd">
+  <CompanyName>JUST-EAT GROUP HOLDINGS LIMITED</CompanyName>
+  <CompanyNumber>06947854</CompanyNumber>
+  <NumCurrentAppt>8</NumCurrentAppt>
+  <NumResignedAppt>1</NumResignedAppt>
+  <SearchRows>9</SearchRows>
+  <CoAppt>
+    <Person>
+      <Forename>MICHAEL JOHN</Forename>
+      <Surname>WROE</Surname>
+      <Title>MR</Title>
+      <DOB></DOB>
+      <Nationality>NATIONALITY UNKNOWN</Nationality>
+      <CountryOfResidence></CountryOfResidence>
+      <PersonAddress>
+        <AddressLine>90 FETTER LANE</AddressLine>
+        <PostTown>LONDON</PostTown>
+        <County></County>
+        <Country></Country>
+        <Postcode>EC4A 1EQ</Postcode>
+      </PersonAddress>
+      <PersonID>CSeJxNj1sLgkAQhd/7FeJ77dqFCqaN6EJGJYTRo5iOtZSr7Wrkv29dsHwZznxnhjMD80/6tN4oFc/EzHZ61LZQRFnMxW1mn/1Nd2Jbc9aBB1a6hnmuirAoFaNA/k3NiypH5hhqJMRcJplEEabIDu5yu1jvrZ23PQJpO/WYKqXRl5O3Nm4DtKlerojrtEbCI8CgCngQMy9JeITSXQH5Q8hRijK9sj6lzng6GkyGQBoGCkMZ3X1zIGk3qr02pM60r9d+UAfo/7/AgGdL</PersonID>
+    </Person>
+    <NumAppointments>1</NumAppointments>
+    <AppointmentType>SEC</AppointmentType>
+    <AppointmentStatus>CURRENT</AppointmentStatus>
+    <AppointmentDate>2009-06-30</AppointmentDate>
+  </CoAppt>
+  <CoAppt>
+    <Person>
+      <Forename>LAUREL CHARMAINE</Forename>
+      <Surname>BOWDEN</Surname>
+      <Title>MS</Title>
+      <DOB>1965-05-18</DOB>
+      <Nationality>UK/SOUTH AFRICAN</Nationality>
+      <CountryOfResidence>UNITED KINGDOM</CountryOfResidence>
+      <PersonAddress>
+        <AddressLine>90 FETTER LANE</AddressLine>
+        <PostTown>LONDON</PostTown>
+        <County></County>
+        <Country></Country>
+        <Postcode>EC4A 1EQ</Postcode>
+      </PersonAddress>
+      <PersonID>CSeJxNkN0KgkAQhe97CvG+diuTgmnDykjoB6ToUkzHWsrVdjXy7dMFy5vhzHfOMMPA4pM+jTdKxTMxN4cDahoooizm4jY3z6dNf2oaC9aDB1Z1DfNcFWFRKkaB/JuGF1WObKSplhBzmWQSRZgi2zln390Zq63j7x3v4ALpuk1UlVLr5fGydg/ab1Ftq5cn4mZnK+ERYFAFPIjZMUl4hNJbA/lDyFGKMr0ySul0Yk1sOgPSMlAYyuh+0meSbqO6Y3RsWbZdB35zpPnCF+0yaP8=</PersonID>
+    </Person>
+    <NumAppointments>11</NumAppointments>
+    <AppointmentType>DIR</AppointmentType>
+    <AppointmentStatus>CURRENT</AppointmentStatus>
+    <AppointmentDate>2011-03-18</AppointmentDate>
+    <Occupation>DIRECTOR</Occupation>
+  </CoAppt>
+  <CoAppt>
+    <Person>
+      <Forename>DAVID TALFRYN</Forename>
+      <Surname>BUTTRESS</Surname>
+      <Title>MR</Title>
+      <DOB>1976-03-09</DOB>
+      <Nationality>BRITISH</Nationality>
+      <CountryOfResidence>UNITED KINGDOM</CountryOfResidence>
+      <PersonAddress>
+        <AddressLine>90 FETTER LANE</AddressLine>
+        <PostTown>LONDON</PostTown>
+        <County></County>
+        <Country></Country>
+        <Postcode>EC4A 1EQ</Postcode>
+      </PersonAddress>
+      <PersonID>CSeJxNkEGPgjAQhe/+CsJ9bQGjHMYaN0hCstFEq8meCAvDboMUtgUj/97SBPUyefPNS97MwOZeX50bKi0auXa9OXUdlHlTCPm7ds88/ghdZ8NmUOFgata2usu6XjMK5NWMvBtaZL6lVkIhVNkolFmNLNpeksjh26/4+L0H8j4afbpXVn+eOT/uTifrmKAx6P9EFmPkJKFKMR1SkRbsUJYiR5VEQF4QWlSyr39YQGngh6vQD4BMDDRmKv/jdkvy3ujJQqm3Cr3lgpqDntAEmCc8AL93aPQ=</PersonID>
+    </Person>
+    <NumAppointments>7</NumAppointments>
+    <AppointmentType>DIR</AppointmentType>
+    <AppointmentStatus>CURRENT</AppointmentStatus>
+    <AppointmentDate>2013-07-09</AppointmentDate>
+    <Occupation>DIRECTOR</Occupation>
+  </CoAppt>
+  <CoAppt>
+    <Person>
+      <Forename>FREDERIC</Forename>
+      <Surname>COOREVITS</Surname>
+      <Title>MR</Title>
+      <DOB>1970-03-02</DOB>
+      <Nationality>BELGIAN</Nationality>
+      <CountryOfResidence>BELGIUM</CountryOfResidence>
+      <PersonAddress>
+        <AddressLine>FRANS HAISLAAN 5 9051</AddressLine>
+        <PostTown>SINT DENIJS WESTREM</PostTown>
+        <County></County>
+        <Country>BELGIUM</Country>
+        <Postcode></Postcode>
+      </PersonAddress>
+      <PersonID>CSeJxNkEELgkAQhe/9CvFeu2aBwrgeSsGTYNZVTMdaytV2NfLfpwuWl+G9j/eYYcD/1E/jjVLxRnimtaGmgaJoSi5unnlOw7VjGj5bwQOHceZtq7q86xWjQP5m4t3QIttqqiWUXFaNRJHXyMIkOAZJdACypFNE9VLrQxwnwSVKTzoy0zGhXpEop3WzhEeG2ZDxrGRxVfECZXQE8ofQohR9fWU2pdZ27ziODWRmoDCXxT3VF5KlUYsadV1q7dwx8OuR6QFfU45n2g==</PersonID>
+    </Person>
+    <NumAppointments>28</NumAppointments>
+    <AppointmentType>DIR</AppointmentType>
+    <AppointmentStatus>CURRENT</AppointmentStatus>
+    <AppointmentDate>2009-07-10</AppointmentDate>
+    <Occupation>DIRECTOR</Occupation>
+  </CoAppt>
+  <CoAppt>
+    <Person>
+      <Forename>BENJAMIN JOHN BIEDER</Forename>
+      <Surname>HOLMES</Surname>
+      <Title></Title>
+      <DOB>1973-10-12</DOB>
+      <Nationality>BRITISH</Nationality>
+      <CountryOfResidence>UK</CountryOfResidence>
+      <PersonAddress>
+        <AddressLine>FLAT 1</AddressLine>
+        <AddressLine>34 IFIELD ROAD</AddressLine>
+        <PostTown>LONDON</PostTown>
+        <County></County>
+        <Country></Country>
+        <Postcode>SW10 9AA</Postcode>
+      </PersonAddress>
+      <PersonID>CSeJxNkEGPgjAQhe/+ioa726ooHMYajRgxCsmueyYsDNq4FGzByL8XmqBcJm++9yYzGVg983/yQKVFIZfW5ItZBGVSpEJeltbveTd2LbLiI7hh09a4LHUVV7XmDOin6XjVlMinhhoJqVBZoVDGOfKNFxzWJz8gh3AfkI3vbb1voMNEF9e1MnofHk/ej/F71Nr67su029tLuEUYNZGIUh5mmUhQ+VugHwglKlnnf5wx5kxtezKfAe0ZaIxVcj2bU+mw0YOxxWLuuDO7DbznaPeJF0DzafY=</PersonID>
+    </Person>
+    <NumAppointments>10</NumAppointments>
+    <AppointmentType>DIR</AppointmentType>
+    <AppointmentStatus>CURRENT</AppointmentStatus>
+    <AppointmentDate>2009-07-10</AppointmentDate>
+    <Occupation>INVESTMENT MANAGER</Occupation>
+  </CoAppt>
+  <CoAppt>
+    <Person>
+      <Forename>JOHN LLEWELLYN MOSTYN</Forename>
+      <Surname>HUGHES</Surname>
+      <Title>MR</Title>
+      <DOB>1951-07-20</DOB>
+      <Nationality>BRITISH</Nationality>
+      <CountryOfResidence>UNITED KINGDOM</CountryOfResidence>
+      <PersonAddress>
+        <AddressLine>90 FETTER LANE</AddressLine>
+        <PostTown>LONDON</PostTown>
+        <County></County>
+        <Country></Country>
+        <Postcode>EC4A 1EQ</Postcode>
+      </PersonAddress>
+      <PersonID>CSeJxNkE+PgjAQxe/7KRru2voPd5OxXkRxw8JBjPFEEAZtlMK2YOTbLzRh5TJ583tvMpOB9St/kCcqLQq5siZjZhGUSZEKeV1Zx3A7+rTImn/AHZu2xmWpq7iqNWdA303Hq6ZEPjXUSEiFygqFMs6RfweuTzzPOTmed/bJT3AIzz7QYaTL61oZ7R53rnMwfo9aW//uZdot7iXcI4yaSEQpD7JMJKj2G6BvCCUqWecXzhhbzudsMV0A7RlojFVyC82tdNjowZhts9mXvWwD/3O0e8Uf7cxqpA==</PersonID>
+    </Person>
+    <NumAppointments>67</NumAppointments>
+    <AppointmentType>DIR</AppointmentType>
+    <AppointmentStatus>CURRENT</AppointmentStatus>
+    <AppointmentDate>2011-12-15</AppointmentDate>
+    <Occupation>COMPANY DIRECTOR</Occupation>
+  </CoAppt>
+  <CoAppt>
+    <Person>
+      <CorporateIndicator>1</CorporateIndicator>
+      <Surname>VITRUVIAN DIRECTORS 1 LIMITED</Surname>
+      <Title></Title>
+      <DOB></DOB>
+      <Nationality>BRITISH</Nationality>
+      <CountryOfResidence></CountryOfResidence>
+      <PersonAddress>
+        <AddressLine>105 WIGMORE STREET</AddressLine>
+        <PostTown>LONDON</PostTown>
+        <County></County>
+        <Country></Country>
+        <Postcode>W1U 1QY</Postcode>
+      </PersonAddress>
+      <PersonID>CSeJxVkF0LgjAUhu/7FcP7cqlEwVpEHzDoA2x2K6bHGuW0TSP/fWtgHzeH9304D2eMzJ7FDT1AaVHKqTMcYAeBTMtMyPPUifi6P3bQjPbIFVozk6rSdVI3mmLifsub120F1LPURpIJlZcKZFKY4v41U3SjbD4yHkZHNt+hJQtXC74PD2iINmzL+GpptW7TWPrOZPY+3UVyjSFuYxFndJ/nIgXFjPSFpAIlm+JEfYx9HASjsU/cjhENiUov3L7W/S36R/MCf+Jho32gOWA+4wWvfmrY</PersonID>
+    </Person>
+    <NumAppointments>1</NumAppointments>
+    <AppointmentType>DIR</AppointmentType>
+    <AppointmentStatus>CURRENT</AppointmentStatus>
+    <AppointmentDate>2012-04-27</AppointmentDate>
+  </CoAppt>
+  <CoAppt>
+    <Person>
+      <Forename>MICHAEL JOHN</Forename>
+      <Surname>WROE</Surname>
+      <Title>MR</Title>
+      <DOB>1968-08-08</DOB>
+      <Nationality>BRITISH</Nationality>
+      <CountryOfResidence>UNITED KINGDOM</CountryOfResidence>
+      <PersonAddress>
+        <AddressLine>90 FETTER LANE</AddressLine>
+        <PostTown>LONDON</PostTown>
+        <County></County>
+        <Country></Country>
+        <Postcode>EC4A 1EQ</Postcode>
+      </PersonAddress>
+      <PersonID>CSeJxNj0ELgkAQhe/9CvFeu1lYwbQRZWRUQhQdxXSsxVxtVyP/fbpgeRnefG+GeQOLT/o03igVz8TcHA6oaaAIs4iL+9y8nDf9qWksWA8SrOoa5LkqgqJUjAL5Nw0vqhyZpamWEHEZZxJFkCI7uKvt0tkbO297BNJ1mjFVSq2vJ8/RbgtqU71cETXXWgmJj37lcz9iXhzzEKW7BvKHkKMUZXpjlA5tezShszpUy0BhIMPHWQck3UZ11sYTa2ZZdj3w2yPN/1/AxGdR</PersonID>
+    </Person>
+    <NumAppointments>13</NumAppointments>
+    <AppointmentType>DIR</AppointmentType>
+    <AppointmentStatus>CURRENT</AppointmentStatus>
+    <AppointmentDate>2013-10-17</AppointmentDate>
+    <Occupation>ACCOUNTANT</Occupation>
+  </CoAppt>
+  <CoAppt>
+    <Person>
+      <Forename>KLAUS RANDEL</Forename>
+      <Surname>NYENGAARD</Surname>
+      <Title>MR</Title>
+      <DOB>1970-09-03</DOB>
+      <Nationality>DANISH</Nationality>
+      <CountryOfResidence>DENMARK</CountryOfResidence>
+      <PersonAddress>
+        <AddressLine>8 LINDEBJERGVEJ</AddressLine>
+        <PostTown>SKÆVINGE</PostTown>
+        <County></County>
+        <Country>DENMARK</Country>
+        <Postcode>3320</Postcode>
+      </PersonAddress>
+      <PersonID>CSeJxNkE8LgkAQxe99CvFeu2pRwbQhWBGFQX8OncR0rMVcbVcjv326UXkZ3vvNezAMzF/Z3XiiVDwXM9MaUNNAEeUxF9eZeTou+xPTmLMepFg3MywKVYZlpZgF5G9aXtYFMltTLSHmMsklijBDttm6p4Oxd31vsQXS3bQxVUmt/fPCX7nu3tORL20S6rEWMaMt/khIAwzqgAcx2yUJj1Cum9IfQoFSVNmFOZQO7enEdsZAvgwUhjK6HfWVpGtUp+YMR9aUjprAr0faJ7wBol5oww==</PersonID>
+    </Person>
+    <NumAppointments>4</NumAppointments>
+    <AppointmentType>DIR</AppointmentType>
+    <AppointmentStatus>RESIGNED</AppointmentStatus>
+    <AppointmentDate>2009-06-30</AppointmentDate>
+    <ResignationDate>2013-02-05</ResignationDate>
+    <Occupation>CEO</Occupation>
+  </CoAppt>
+</CompanyAppointments>
+  </Body>
+</GovTalkMessage>

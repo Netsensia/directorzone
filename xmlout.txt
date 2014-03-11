@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GovTalkMessage xmlns="http://www.govtalk.gov.uk/schemas/govtalk/govtalkheader" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:gt="http://www.govtalk.gov.uk/schemas/govtalk/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.govtalk.gov.uk/schemas/govtalk/govtalkheader http://xmlgw.companieshouse.gov.uk/v1-0/schema/Egov_ch.xsd">
+    <EnvelopeVersion>1.0</EnvelopeVersion>
+    <Header>
+        <MessageDetails>
+            <Class>CompanyAppointments</Class>
+            <Qualifier>request</Qualifier>
+            <TransactionID>1000000000000000013945434638352</TransactionID>
+        </MessageDetails>
+        <SenderDetails>
+            <IDAuthentication>
+                <SenderID>55929018299358273807663349255503</SenderID>
+                <Authentication>
+                    <Method>CHMD5</Method>
+                    <Value>341f08ff341858c624a346e91ace184a</Value>
+                </Authentication>
+            </IDAuthentication>
+            <EmailAddress>rbryan@city-zone.com</EmailAddress>
+        </SenderDetails>
+    </Header>
+    <GovTalkDetails>
+        <Keys/>
+    </GovTalkDetails>
+<Body><Body>
+<CompanyApptRequest xmlns="http://xmlgw.companieshouse.gov.uk/v1-0/schema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlgw.companieshouse.gov.uk/v1-0/schema http://xmlgw.companieshouse.gov.uk/v1-0/schema/CompanyAppointments-v2-2.xsd">
+<CompanyNumber></CompanyNumber>
+<CompanyName></CompanyName>
+<IncludeResignedInd></IncludeResignedInd>
+<UserReference></UserReference>
+</CompanyApptRequest>
+</Body>
+<CompanyApptRequest><CompanyNumber>06947854</CompanyNumber><CompanyName>JUST-EAT GROUP HOLDINGS LIMITED</CompanyName><IncludeResignedInd>1</IncludeResignedInd><UserReference>userref</UserReference></CompanyApptRequest></Body></GovTalkMessage>
