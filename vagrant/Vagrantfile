@@ -17,6 +17,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   	override.vm.box_url = "https://s3.amazonaws.com/life360-vagrant/raring64.box"
    end
 
+   config.vm.provider "vmware_workstation" do |v, override|
+         v.vmx["memsize"] = "2048"
+         v.vmx["numvcpus"] = "1"
+  	override.vm.box_url = "https://s3.amazonaws.com/life360-vagrant/raring64.box"
+   end
+
     config.vm.synced_folder "../../", "/var/www/", :mount_options => ["gid=www-data", "uid=www-data", "dmode=777", "fmode=777"], type: "nfs"
 
     config.vm.provision "shell", path: "provision.sh"

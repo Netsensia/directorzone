@@ -1,0 +1,1 @@
+alter table article add column location varchar(250);

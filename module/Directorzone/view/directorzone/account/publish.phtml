@@ -32,6 +32,7 @@ $(function() {
     });
 
     dateVisibility('none');
+    locationVisibility('none');
 
     var display;
 
@@ -44,6 +45,7 @@ $(function() {
             display = 'none';
         }
         dateVisibility(display);
+        locationVisibility(display);
     });
 });
 
@@ -51,5 +53,10 @@ function dateVisibility(display)
 {
     $("[data-netsensia-group='account-publish-startdate']").css('display', display);
     $("[data-netsensia-group='account-publish-enddate']").css('display', display);
+}
+
+function locationVisibility(display)
+{
+    $("[data-netsensia-group='account-publish-location']").css('display', display);
 }
 </script>

@@ -26,6 +26,8 @@ class AccountPublishForm extends NetsensiaForm
         
         $this->addText('title');
         $this->addTextArea('content');
+
+        $this->addText('location');
         
         $this->addDate('start-date');
         $this->addDate('end-date');
