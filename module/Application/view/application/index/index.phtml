@@ -85,7 +85,7 @@ $(document).ready(function() {
 		$('#tab-companies').parent().addClass('active');
 		$('#tab-people').parent().removeClass('active');
 		$('#tab-services').parent().removeClass('active');
-		loadCompanies(false);
+		loadCompanies('L');
 	});
 	
 	$(document).delegate('#tab-people', 'click', function() {
@@ -99,18 +99,18 @@ $(document).ready(function() {
 		$('#tab-companies').parent().removeClass('active');
 		$('#tab-people').parent().removeClass('active');
 		$('#tab-services').parent().addClass('active');
-		loadCompanies(true);
+		loadCompanies('S');
 	});
 
 });
 
-function loadCompanies(isServices)
+function loadCompanies(type)
 {
 	netsensia_Pager(
 			1,
 			12,
 			'directories',
-			'/ajax/company/list?isServices=' + isServices,
+			'/ajax/company/list?type=' + type,
 			function(key, value) {
 				var url = '/directories/company/' + value.internalId;
 				var newRow = '<tr>';
@@ -143,26 +143,5 @@ function loadPeople()
 			}
 		);	
 }
-
-function loadPeople()
-{
-	netsensia_Pager(
-			1,
-			12,
-			'directories',
-			'/ajax/people/list',
-			function(key, value) {
-				var url = '/directories/people/' + value.internalId;
-				var newRow = '<tr>';
-				newRow += '<td><a href="' + url + '">' + value.name + '</a></td>';
-				newRow += '<td>' + value.companyname + '</td>';
-				newRow += '<td>' + value.appointmenttype + '</td>';
-				newRow += '</tr>';
-		
-				return newRow;
-			}
-		);	
-}
-
 
 </script>

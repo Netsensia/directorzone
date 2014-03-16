@@ -393,12 +393,15 @@ class CompanyService extends NetsensiaService
         return $rowset->toArray();
     }
     
-    private function getDirectoryCompaniesFromStatus($status, $start, $end)
+    private function getDirectoryCompaniesFromStatus($status, $start, $end, $dzType = 3)
     {
         $rowset = $this->companyDirectoryTable->select(
-            function (Select $select) use ($status, $start, $end) {
+            function (Select $select) use ($status, $start, $end, $dzType) {
                 $select->where(
-                    ['recordstatus' => $status]
+                    [
+                    'recordstatus' => $status,
+                    'companytypeid' => ($dzType == 3 ? [1,2] : $dzType)
+                    ]
                 )
                 ->columns(
                     ['reference', 'name', 'companydirectoryid']
@@ -448,9 +451,9 @@ class CompanyService extends NetsensiaService
         return $this->getDirectoryCompaniesFromStatus('R', $start, $end);
     }
     
-    public function getLiveCompanies($start, $end)
+    public function getLiveCompanies($start, $end, $dzType = 3)
     {
-        return $this->getDirectoryCompaniesFromStatus('L', $start, $end);
+        return $this->getDirectoryCompaniesFromStatus('L', $start, $end, $dzType);
     }
     
     public function getCompaniesHouseCompanies($start, $end)
@@ -485,16 +488,19 @@ class CompanyService extends NetsensiaService
                 return $this->getPendingCompanies($start, $end);
             case 'O':
                 return $this->getProblemCompanies($start, $end);
-            case 'L':
-                return $this->getLiveCompanies($start, $end);
             case 'U':
                 return $this->getUploadedCompanies($start, $end);
             case 'R':
                 return $this->getRemovedCompanies($start, $end);
             case 'H':
                 return $this->getCompaniesHouseCompanies($start, $end);
+            case 'L':
+                return $this->getLiveCompanies($start, $end, 1);
+            case 'S':
+                return $this->getLiveCompanies($start, $end, 2);
+            case 'B':
             default:
-                return $this->getLiveCompanies($start, $end);
+                return $this->getLiveCompanies($start, $end, 3);
         }
     }
     

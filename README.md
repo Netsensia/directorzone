@@ -1,4 +1,4 @@
-ALTER TABLE `directorzone_zf2`.`companydirectory` ADD COLUMN `canusefeedcache` CHAR(1) DEFAULT 'N' NULL AFTER `telephone`; 
+
 
 # Netsensia Zend Framework 2 Skeleton
 
