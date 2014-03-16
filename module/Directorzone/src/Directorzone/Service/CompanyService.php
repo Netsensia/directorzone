@@ -400,7 +400,7 @@ class CompanyService extends NetsensiaService
                 $select->where(
                     [
                     'recordstatus' => $status,
-                    'companytypeid' => ($dzType == 3 ? [1,2] : $dzType)
+                    'companytypeid' => ($dzType == 3 ? [1,2,3] : [$dzType, 3])
                     ]
                 )
                 ->columns(
