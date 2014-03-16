@@ -236,6 +236,23 @@ class CompanyService extends NetsensiaService
         return $result;
     }
     
+    public function updateCanUseFeedCache(
+        $companyDirectoryId,
+        $canUseFeedCache
+    )
+    {
+        $result = $this->companyDirectoryTable->update(
+            [
+                'canusefeedcache' => ($canUseFeedCache ? 'Y' : 'N'),
+            ],
+            [
+                'companydirectoryid' => $companyDirectoryId,
+            ]
+        );
+
+        return $result;
+    }
+    
     public function deleteUploaded(
         $uploadId
     ) {

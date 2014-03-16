@@ -17,7 +17,15 @@ class CompanyFeedsForm extends NetsensiaForm
         
         $this->addText('twitter-user-name');
         $this->addTextArea('twitter-search-terms');
-        $this->addTextArea(['name' => 'rsssearchterms', 'label' => 'Web search terms']);
+        $this->addTextArea([
+            'name' => 'rsssearchterms',
+            'label' => 'Web search terms'
+        ]);
+        
+        $this->addHidden(
+            'canusefeedcache',
+            'N'
+        );
                 
         $this->addSubmit('Submit');
 

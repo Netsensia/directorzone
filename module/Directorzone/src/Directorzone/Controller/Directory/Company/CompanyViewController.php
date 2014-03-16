@@ -46,21 +46,27 @@ class CompanyViewController extends NetsensiaActionController
                 $companyDirectoryId
             );
             
+            $cacheSuccess = false;
             $zendCache = $this->getServiceLocator()->get('ZendCache');
-
             $cacheKey = 'companyDetailsActionFeedResults' . $companyDirectoryId;
             
-            $success = false;
-            $result = $zendCache->getItem($cacheKey, $success);
+            if ($companyDetails['canusefeedcache'] == 'Y') {
+                $result = $zendCache->getItem($cacheKey, $cacheSuccess);
+            }
             
-            if ($success) {
+            if ($cacheSuccess) {
                 $feedResults = $result;
             } else {
-                $twitterSearchTerm = str_replace('limited', '', strtolower($companyDetails['name']));
-                $twitterSearchTerm = str_replace('ltd', '', $twitterSearchTerm);
-                $twitterSearchTerm = str_replace('holdings', '', $twitterSearchTerm);
-                $twitterSearchTerm = str_replace('plc', '', $twitterSearchTerm);
-                $twitterSearchTerm = str_replace('&', 'and', $twitterSearchTerm);
+                
+                if (isset($companyDetails['twittersearchterms'])) {
+                    $twitterSearchTerm = $companyDetails['twittersearchterms'];
+                } else {
+                    $twitterSearchTerm = str_replace('limited', '', strtolower($companyDetails['name']));
+                    $twitterSearchTerm = str_replace('ltd', '', $twitterSearchTerm);
+                    $twitterSearchTerm = str_replace('holdings', '', $twitterSearchTerm);
+                    $twitterSearchTerm = str_replace('plc', '', $twitterSearchTerm);
+                    $twitterSearchTerm = str_replace('&', 'and', $twitterSearchTerm);
+                }
                 
                 $twitterSearchTerm = trim($twitterSearchTerm);
                 
@@ -69,7 +75,11 @@ class CompanyViewController extends NetsensiaActionController
                     5
                 );
                 
-                $bingSearchTerm = $twitterSearchTerm;
+                if (isset($companyDetails['rsssearchterms'])) {
+                    $bingSearchTerm = $companyDetails['rsssearchterms'];
+                } else {
+                    $bingSearchTerm  = $twitterSearchTerm;
+                }
                 
                 $searchResults = [];
                 
@@ -95,6 +105,11 @@ class CompanyViewController extends NetsensiaActionController
                 );
                 
                 $zendCache->setItem($cacheKey, $feedResults);
+                
+                $this->companyService->updateCanUseFeedCache(
+                    $companyDirectoryId,
+                    true
+                );
             }
                
             $returnArray = array_merge(

@@ -107,4 +107,14 @@ cp /var/www/directorzone/vagrant/VirtualHost/.htpasswd /var/www
 # Set up search index
 #############################################################
 cd /var/www/directorzone
-sh index.sh
+php public/index.php index-company-directory
+php public/index.php index-articles
+php public/index.php index-companies
+php public/index.php index-company-officers
+
+sh -c 'echo "echo 1 > /proc/sys/vm/drop_caches" >> /home/vagrant/drop_caches'
+sudo chmod +x /home/vagrant/drop_caches
+
+echo 100 > /proc/sys/vm/dirty_expire_centisecs
+echo 100 > /proc/sys/vm/dirty_writeback_centisecs
+
