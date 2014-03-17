@@ -11,6 +11,7 @@ use Zend\Db\TableGateway\TableGateway;
 use Netsensia\Model\DatabaseTableModel;
 use Zend\Validator\NotEmpty;
 use Zend\Validator\Identical;
+use Zend\Form\Element\Checkbox;
 
 class NetsensiaForm extends Form
 {
@@ -125,17 +126,9 @@ class NetsensiaForm extends Form
             $label = ucwords(str_replace('-', ' ', $ultimateName));
         }
         
-        if (isset($options['icon'])) {
-            $icon = $options['icon'];
-        } else {
-            $icon = $this->defaultIcon;
-        }
+        $icon = $this->getIconFromOptions($options, $this->defaultIcon);
         
-        if (isset($options['class'])) {
-            $class = $options['class'];
-        } else {
-            $class = $this->defaultClass;
-        }
+        $class = $this->getClassFromOptions($options, $this->defaultClass);
         
         if (isset($options['table'])) {
             $table = $options['table'];
@@ -248,6 +241,38 @@ class NetsensiaForm extends Form
         $this->addText($options);
     }
     
+    public function addCheckbox($options)
+    {
+        if (!is_array($options)) {
+            $options = [ 'name' => $options ];
+        }
+    
+        $name = $this->fieldPrefix . str_replace('-', '', $options['name']);
+        $label = $this->getLabelFromOptions($options);
+        $icon = $this->getIconFromOptions($options, 'check');
+    
+        if (isset($options['class'])) {
+            $class = $options['class'];
+        } else {
+            $class = $this->defaultClass;
+        }
+    
+        $checkbox = new Checkbox($name);
+        $checkbox->setLabel($label);
+    
+        $checkbox->setAttributes(
+            [
+                'id'    => $name,
+                'type'  => $this->getTypeFromOptions($options, 'checkbox'),
+                'icon'  => $icon,
+                'class' => $class,
+            ]
+        );
+    
+        $this->add($checkbox);
+    
+    }
+    
     public function addText($options)
     {   
         if (!is_array($options)) {
@@ -256,31 +281,9 @@ class NetsensiaForm extends Form
         
         $name = $this->fieldPrefix . str_replace('-', '', $options['name']);
         
-        if (isset($options['label'])) {
-            $label = $options['label'];
-        } else {
-        	$parts = explode('_', $options['name']);
-        	$label = $parts[count($parts)-1];
-            $label = ucwords(str_replace('-', ' ', $label));
-        }
-        
-        if (isset($options['type'])) {
-            $type = $options['type'];
-        } else {
-            $type = 'text';
-        }
-        
-        if (isset($options['icon'])) {
-            $icon = $options['icon'];
-        } else {
-            $icon = $this->defaultIcon;
-        }
-        
-        if (isset($options['class'])) {
-            $class = $options['class'];
-        } else {
-            $class = $this->defaultClass;
-        }
+        $label = $this->getLabelFromOptions($options);
+        $icon = $this->getIconFromOptions($options, $this->defaultIcon);
+        $class = $this->getClassFromOptions($options, $this->defaultClass);
     
         $text = new Element($name);
         $text->setLabel($label);
@@ -288,7 +291,7 @@ class NetsensiaForm extends Form
         $text->setAttributes(
             [
                 'id'    => $name,
-                'type'  => $type,
+                'type'  => $this->getTypeFromOptions($options, 'text'),
                 'icon'  => $icon,
                 'class' => $class,
             ]
@@ -471,6 +474,52 @@ class NetsensiaForm extends Form
         $this->setData($formData);
     }
     
+    private function getTypeFromOptions($options, $default)
+    {
+        if (isset($options['type'])) {
+            $type = $options['type'];
+        } else {
+            $type = $default;
+        }
+    
+        return $type;
+    }
+    
+    private function getLabelFromOptions($options)
+    {
+        if (isset($options['label'])) {
+            $label = $options['label'];
+        } else {
+            $parts = explode('_', $options['name']);
+            $label = $parts[count($parts)-1];
+            $label = ucwords(str_replace('-', ' ', $label));
+        }
+    
+        return $label;
+    }
+    
+    private function getIconFromOptions($options, $default)
+    {
+        if (isset($options['icon'])) {
+            $icon = $options['icon'];
+        } else {
+            $icon = $default;
+        }
+        
+        return $icon;
+    }
+    
+    private function getClassFromOptions($options, $default)
+    {
+        if (isset($options['class'])) {
+            $class = $options['class'];
+        } else {
+            $class = $default;
+        }
+        
+        return $class;
+    }
+    
     public function setTranslator($translator)
     {
         $this->translator = $translator;
@@ -484,6 +533,4 @@ class NetsensiaForm extends Form
             return $text;
         }
     }
-    
-    
 }

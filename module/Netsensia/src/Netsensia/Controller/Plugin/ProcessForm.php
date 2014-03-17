@@ -3,6 +3,7 @@
 namespace Netsensia\Controller\Plugin;
 
 use Zend\Mvc\Controller\Plugin\AbstractPlugin;
+use Zend\Form\Element\Checkbox;
 
 class ProcessForm extends AbstractPlugin
 {
@@ -44,6 +45,14 @@ class ProcessForm extends AbstractPlugin
 
                 foreach ($form->getAutoDateOnCreateArray() as $autoDateOnCreate) {
                     $modelData[$autoDateOnCreate] = date('Y-m-d H:i:s', time());    
+                }
+                
+                foreach ($form->getElements() as $element) {
+                    if ($element instanceof Checkbox) {
+                        $name = $element->getName();
+                        $modelField = preg_replace('/^' . $prefix . '/', '', $name);
+                        $modelData[$modelField] = ($element->getValue() == 1 ? 'Y' : 'N');
+                    }
                 }
 
                 $currentData = $tableModel->getData();
