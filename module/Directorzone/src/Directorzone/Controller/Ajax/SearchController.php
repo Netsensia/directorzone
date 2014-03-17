@@ -33,11 +33,14 @@ class SearchController extends NetsensiaActionController
         
         $result = $this->elasticService->searchSite($keywords);
         
+        file_put_contents('search.txt', print_r($result, true));
+        
         $hits = $result['hits'];
         $return = ['results' => []];
         foreach ($hits['hits'] as $hit) {
             
             $source = $hit['_source'];
+            $type = $hit['_type'];
             if (isset($source['title'])) {
                 $title = $source['title'];
             } elseif (isset($source['name'])) {
@@ -47,8 +50,25 @@ class SearchController extends NetsensiaActionController
             } else {
                 $title = '';
             }
+            
+            switch ($type) {
+            	case 'company' :
+            	    $internalId = $source['companydirectoryid'];
+            	    $url = '/directories/company/' . $internalId;
+            	    break;
+            	case 'article' :
+            	    $internalId = $source['articleid'];
+            	    $url = '/article/' . $internalId;
+            	    break;
+        	    case 'officer' :
+        	        $internalId = $source['officerid'];
+        	        $url = '/directories/people/' . $internalId;
+        	        break;            
+            }
+            
             $return['results'][] = [
-                'url' => 'http://www.google.com',
+                'url' => $url,
+                'type' => $type,
                 'title' => $title,
                 'description' => '',
                 'type' => '',

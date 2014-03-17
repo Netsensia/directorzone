@@ -118,3 +118,10 @@ sudo chmod +x /home/vagrant/drop_caches
 echo 100 > /proc/sys/vm/dirty_expire_centisecs
 echo 100 > /proc/sys/vm/dirty_writeback_centisecs
 
+sh -c 'echo "
+*/5 * * * * root php /var/www/directorzone/public/index.php index-company-directory
+*/5 * * * * root php /var/www/directorzone/public/index.php index-articles
+*/5 * * * * root php /var/www/directorzone/public/index.php index-company-officers
+" >> /etc/crontab'
+
+service cron restart
