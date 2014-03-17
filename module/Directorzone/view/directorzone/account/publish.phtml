@@ -33,6 +33,7 @@ $(function() {
 
     dateVisibility('none');
     locationVisibility('none');
+    isAnonymousVisibility('none');
 
     var display;
 
@@ -46,8 +47,14 @@ $(function() {
         }
         dateVisibility(display);
         locationVisibility(display);
+        isAnonymousVisibility(val == 7 ? 'block' : 'none');
     });
 });
+
+function isAnonymousVisibility(display)
+{
+    $("[data-netsensia-group='account-publish-isanonymous']").css('display', display);
+}
 
 function dateVisibility(display)
 {
