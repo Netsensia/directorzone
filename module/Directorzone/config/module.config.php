@@ -248,6 +248,16 @@ return array(
                         ),
                         'may_terminate' => true,
                         'child_routes' => array(
+                            'add-new-company' => array(
+                                'type' => 'literal',
+                                'options' => array(
+                                    'route' => '/new',
+                                    'defaults' => array(
+                                        'action' => 'new-company',
+                                        'controller' => 'CompanyEdit',
+                                    ),
+                                ),
+                            ),
                             'company-details' => array(
                                 'type' => 'segment',
                                 'options' => array(

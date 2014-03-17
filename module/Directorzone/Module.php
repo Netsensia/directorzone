@@ -34,6 +34,7 @@ use Directorzone\Service\TwitterService;
 use Directorzone\Service\BingService;
 use Directorzone\Service\ArticleService;
 use Bing\Client;
+use Directorzone\Form\Company\NewCompanyForm;
 
 class Module
 {
@@ -313,6 +314,12 @@ class Module
                 },
                 'CompanyOverviewForm' => function ($sm) {
                     $form = new CompanyOverviewForm('companyOverviewForm');
+                    $form->setTranslator($sm->get('translator'));
+                    $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                    return $form;
+                },
+                'NewCompanyForm' => function ($sm) {
+                    $form = new NewCompanyForm('newCompanyForm');
                     $form->setTranslator($sm->get('translator'));
                     $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
                     return $form;
