@@ -5,8 +5,8 @@
     <MessageDetails>
       <Class>CompanyAppointments</Class>
       <Qualifier>response</Qualifier>
-      <TransactionID>1000000000000000013945434638352</TransactionID>
-      <GatewayTimestamp>2014-03-11T13:13:48-00:00</GatewayTimestamp>
+      <TransactionID>1000000000000000013951569490611</TransactionID>
+      <GatewayTimestamp>2014-03-18T15:35:53-00:00</GatewayTimestamp>
     </MessageDetails>
     <SenderDetails>
       <IDAuthentication>
@@ -57,7 +57,7 @@
       <Surname>BOWDEN</Surname>
       <Title>MS</Title>
       <DOB>1965-05-18</DOB>
-      <Nationality>UK/SOUTH AFRICAN</Nationality>
+      <Nationality>BRITISH</Nationality>
       <CountryOfResidence>UNITED KINGDOM</CountryOfResidence>
       <PersonAddress>
         <AddressLine>90 FETTER LANE</AddressLine>
@@ -68,7 +68,7 @@
       </PersonAddress>
       <PersonID>CSeJxNkN0KgkAQhe97CvG+diuTgmnDykjoB6ToUkzHWsrVdjXy7dMFy5vhzHfOMMPA4pM+jTdKxTMxN4cDahoooizm4jY3z6dNf2oaC9aDB1Z1DfNcFWFRKkaB/JuGF1WObKSplhBzmWQSRZgi2zln390Zq63j7x3v4ALpuk1UlVLr5fGydg/ab1Ftq5cn4mZnK+ERYFAFPIjZMUl4hNJbA/lDyFGKMr0ySul0Yk1sOgPSMlAYyuh+0meSbqO6Y3RsWbZdB35zpPnCF+0yaP8=</PersonID>
     </Person>
-    <NumAppointments>11</NumAppointments>
+    <NumAppointments>12</NumAppointments>
     <AppointmentType>DIR</AppointmentType>
     <AppointmentStatus>CURRENT</AppointmentStatus>
     <AppointmentDate>2011-03-18</AppointmentDate>
