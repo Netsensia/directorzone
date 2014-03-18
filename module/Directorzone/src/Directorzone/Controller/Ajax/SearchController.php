@@ -33,8 +33,6 @@ class SearchController extends NetsensiaActionController
         
         $result = $this->elasticService->searchSite($keywords);
         
-        file_put_contents('search.txt', print_r($result, true));
-        
         $hits = $result['hits'];
         $return = ['results' => []];
         foreach ($hits['hits'] as $hit) {

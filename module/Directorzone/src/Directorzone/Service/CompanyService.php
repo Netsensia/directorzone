@@ -124,11 +124,13 @@ class CompanyService extends NetsensiaService
                 )
                 ->join(
                     'companieshouse',
-                    'companydirectory.reference = companieshouse.number'
+                    'companydirectory.reference = companieshouse.number',
+                    Select::SQL_STAR,
+                    Select::JOIN_LEFT
                 );
             }
         );
-        
+                
         if ($rowset->count() == 0) {
             throw new NotFoundResourceException('Company not found in directory');
         }
