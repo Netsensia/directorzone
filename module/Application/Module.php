@@ -40,9 +40,8 @@ class Module
             } catch (KeyNotFoundException $e) {
                 // Something's not right - possibly the user row is no longer in
                 // the database.  Clear the identity, this will trigger
-                // logged-out behaviour
-                // in the handling controller, and stop this code being executed
-                // until a new login is performed.
+                // logged-out behaviour in the handling controller, and stop
+                // this code being executed until a new login is performed.
                 $authService->clearIdentity();
             }
         } else {
