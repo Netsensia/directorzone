@@ -24,6 +24,11 @@ class Module
         
         $moduleRouteListener->attach($eventManager);
         
+        $e->getApplication()->getServiceManager()->setService(
+            'Zend\I18n\Translator\TranslatorInterface',
+            new \Zend\I18n\Translator\Translator()
+        );
+        
         $translator  = $e->getApplication()->getServiceManager()
                                            ->get('translator');
         
