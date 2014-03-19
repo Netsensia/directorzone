@@ -22,7 +22,7 @@
 		"cloud-solutions/zend-sentry" : "0.3.1",
 		"php" : ">=5.4",
 		"mockery/mockery" : "0.8.0",
-		"netsensia/companies-house" : "0.2.3",
+		"netsensia/companies-house" : "v0.2.3",
 		"zendframework/zendframework" : "2.2.6",
 		"j7mbo/twitter-api-php": "dev-master",
 		"scragg0x/bing-api-php": "dev-master",
