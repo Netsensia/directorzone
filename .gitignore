@@ -10,6 +10,7 @@ nbproject
 composer.lock
 vendor/
 vagrant/.vagrant/
+vagrant/salt/.vagrant/
 cache.properties
 test
 behat.local.yml
