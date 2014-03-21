@@ -8,7 +8,19 @@ apache2:
     - running
     - require:
       - pkg: apache2
-      
+
+apache2-reload:
+  module:
+    - wait
+    - name: service.reload
+    - m_name: apache2
+
+apache2-restart:
+  module:
+    - wait
+    - name: service.restart
+    - m_name: apache2
+          
 a2enmod rewrite:
   cmd.run:
     - unless: ls /etc/apache2/mods-enabled/rewrite.load
@@ -16,4 +28,5 @@ a2enmod rewrite:
     - require:
       - pkg: apache2
     - watch_in:
-      - service: apache2
+      - module: apache2-restart
+

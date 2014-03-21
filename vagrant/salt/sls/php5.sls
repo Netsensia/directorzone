@@ -28,3 +28,21 @@ a2enmod php5:
       - pkg: apache2
     - watch_in:
       - service: apache2
+      
+/etc/php5/apache2/php.ini:
+  file:
+    - managed
+    - source: salt://files/php.ini.apache2
+    - template: jinja
+    - require:
+      - pkg: php5
+      - pkg: apache2
+
+/etc/php5/cli/php.ini:
+  file:
+    - managed
+    - source: salt://files/php.ini.cli
+    - template: jinja
+    - require:
+      - pkg: php5
+      - pkg: apache2
