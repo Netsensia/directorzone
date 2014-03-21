@@ -13,15 +13,15 @@
 
 return array(
     'db' => array(
-        'username' => 'DB_USERNAME',
-        'password' => 'DB_PASSWORD',
+        'username' => '{{ pillar['directorzone']['DB_USERNAME'] }}',
+        'password' => '{{ pillar['directorzone']['DB_PASSWORD'] }}',
     ),
     'zend-sentry' => array(
-        'sentry-api-key' => 'SENTRY_URI',
+        'sentry-api-key' => '{{ pillar['directorzone']['SENTRY_URI'] }}',
     ),
     'captcha' => [
-    	'private-key' => 'CAPTCHA_PRIVATE_KEY',
-    	'public-key' => 'CAPTCHA_PUBLIC_KEY',
+    	'private-key' => '{{ pillar['netsensia']['CAPTCHA_PRIVATE_KEY'] }}',
+    	'public-key' => '{{ pillar['netsensia']['CAPTCHA_PUBLIC_KEY'] }}',
     ],
     'di' => array(
         'instance' => array(
@@ -31,26 +31,26 @@ return array(
             ),
             'Netsensia\Service\MaxmindLocationService' => array(
                 'parameters' => array(
-                    'userId' => 'MAXMIND_USERID',
-                    'licenseKey' => 'MAXMIND_LICENSEKEY',
+                    'userId' => '{{ pillar['netsensia']['MAXMIND_USERID'] }}',
+                    'licenseKey' => '{{ pillar['netsensia']['MAXMIND_LICENSEKEY'] }}',
                 ),
             ),    
             'Netsensia\Service\PdoConnectionService' => array(
                 'parameters' => array(
-                    'dataSourceName'     => 'DB_SOURCE',
-                    'dataSourceUsername' => 'DB_USERNAME',
-                    'dataSourcePassword' => 'DB_PASSWORD',
+                    'dataSourceName'     => '{{ pillar['directorzone']['DB_SOURCE'] }}',
+                    'dataSourceUsername' => '{{ pillar['directorzone']['DB_USERNAME'] }}',
+                    'dataSourcePassword' => '{{ pillar['directorzone']['DB_PASSWORD'] }}',
                 ),
             ),
             'Netsensia\Service\EmailService' => array(
                 'parameters' => array(
-                    'smtpHostName'     => 'SMTP_HOSTNAME',
-                    'smtpHost'     => 'SMTP_HOST',
-                    'smtpPort'     => 'SMTP_PORT',
-                    'smtpUsername' => 'SMTP_USERNAME',
-                    'smtpPassword' => 'SMTP_PASSWORD',
-                    'senderName' => 'EMAIL_SENDER_NAME',
-                    'senderAddress' => 'EMAIL_SENDER_ADDRESS'
+                    'smtpHostName'     => '{{ pillar['netsensia']['SMTP_HOSTNAME'] }}',
+                    'smtpHost'     => '{{ pillar['netsensia']['SMTP_HOST'] }}',
+                    'smtpPort'     => '{{ pillar['netsensia']['SMTP_PORT'] }}',
+                    'smtpUsername' => '{{ pillar['netsensia']['SMTP_USERNAME'] }}',
+                    'smtpPassword' => '{{ pillar['netsensia']['SMTP_PASSWORD'] }}',
+                    'senderName' => '{{ pillar['directorzone']['EMAIL_SENDER_NAME'] }}',
+                    'senderAddress' => '{{ pillar['directorzone']['EMAIL_SENDER_ADDRESS'] }}'
                 ),
             ),
             'Netsensia\Service\UserService' => [

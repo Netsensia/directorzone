@@ -1,0 +1,14 @@
+netsensia:
+  CAPTCHA_PRIVATE_KEY: 
+  CAPTCHA_PUBLIC_KEY: 
+  MAXMIND_USERID: 
+  MAXMIND_LICENSEKEY: 
+  SMTP_HOSTNAME: smtp.sendgrid.net
+  SMTP_HOST: smtp.sendgrid.net
+  SMTP_PORT: 587
+  SMTP_USERNAME: 
+  SMTP_PASSWORD: 
+
+
+
+

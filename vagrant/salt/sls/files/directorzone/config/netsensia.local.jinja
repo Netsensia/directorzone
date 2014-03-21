@@ -1,0 +1,74 @@
+<?php
+/**
+ * Local Configuration Override
+ *
+ * This configuration override file is for overriding environment-specific and
+ * security-sensitive configuration information. Copy this file without the
+ * .dist extension at the end and populate values as needed.
+ *
+ * @NOTE: This file is ignored from Git by default with the .gitignore included
+ * in ZendSkeletonApplication. This is a good practice, as it prevents sensitive
+ * credentials from accidentally being committed into version control.
+ */
+
+return array(
+    'db' => array(
+        'username' => '{{ pillar['directorzone']['DB_USERNAME'] }}',
+        'password' => '{{ pillar['directorzone']['DB_PASSWORD'] }}',
+    ),
+    'zend-sentry' => array(
+        'sentry-api-key' => '{{ pillar['directorzone']['SENTRY_URI'] }}',
+    ),
+    'captcha' => [
+    	'private-key' => '{{ pillar['netsensia']['CAPTCHA_PRIVATE_KEY'] }}',
+    	'public-key' => '{{ pillar['netsensia']['CAPTCHA_PUBLIC_KEY'] }}',
+    ],
+    'di' => array(
+        'instance' => array(
+        	'alias' => array(
+                'LocationService' => 'Netsensia\Service\MaxmindLocationService',
+                'CompanyService' => 'Directorzone\Service\CompanyService',
+            ),
+            'Netsensia\Service\MaxmindLocationService' => array(
+                'parameters' => array(
+                    'userId' => '{{ pillar['netsensia']['MAXMIND_USERID'] }}',
+                    'licenseKey' => '{{ pillar['netsensia']['MAXMIND_LICENSEKEY'] }}',
+                ),
+            ),    
+            'Netsensia\Service\PdoConnectionService' => array(
+                'parameters' => array(
+                    'dataSourceName'     => '{{ pillar['directorzone']['DB_SOURCE'] }}',
+                    'dataSourceUsername' => '{{ pillar['directorzone']['DB_USERNAME'] }}',
+                    'dataSourcePassword' => '{{ pillar['directorzone']['DB_PASSWORD'] }}',
+                ),
+            ),
+            'Netsensia\Service\EmailService' => array(
+                'parameters' => array(
+                    'smtpHostName'     => '{{ pillar['netsensia']['SMTP_HOSTNAME'] }}',
+                    'smtpHost'     => '{{ pillar['netsensia']['SMTP_HOST'] }}',
+                    'smtpPort'     => '{{ pillar['netsensia']['SMTP_PORT'] }}',
+                    'smtpUsername' => '{{ pillar['netsensia']['SMTP_USERNAME'] }}',
+                    'smtpPassword' => '{{ pillar['netsensia']['SMTP_PASSWORD'] }}',
+                    'senderName' => '{{ pillar['directorzone']['EMAIL_SENDER_NAME'] }}',
+                    'senderAddress' => '{{ pillar['directorzone']['EMAIL_SENDER_ADDRESS'] }}'
+                ),
+            ),
+            'Netsensia\Service\UserService' => [
+                'parameters' => [
+                    'defaultColumnValues' => [ /*'examplecolumn' => 'Example Value'*/ ],
+                 ],
+            ],            
+        ),
+    ),
+    'registration' => [
+        'requireEmailVerification' => false,                
+    ],
+    'netsensia' => [
+        'debugMode' => true,
+        'enable-users' => true,
+        'captchaForms' => [
+        	'contact' => false,
+        	'register' => false,
+        ]
+    ],    
+);
