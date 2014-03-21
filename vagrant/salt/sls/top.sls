@@ -1,7 +1,7 @@
 base:
   '*':
     - apache2
-    - php55
+    - php5
     - mysql
     - tools
   'directorzone*':

@@ -8,5 +8,5 @@ phpmyadmin:
     - source: salt://files/phpmyadmin.conf
     - template: jinja
     - require:
-      - pkg: apache
+      - pkg: apache2
       - pkg: phpmyadmin
