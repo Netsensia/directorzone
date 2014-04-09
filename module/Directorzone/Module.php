@@ -4,7 +4,6 @@
 namespace Directorzone;
 
 use Zend\Mvc\MvcEvent;
-
 use Directorzone\Form\Account\AccountAccountForm;
 use Directorzone\Form\Account\AccountCompanyForm;
 use Directorzone\Form\Account\AccountContactForm;
@@ -35,6 +34,7 @@ use Directorzone\Service\BingService;
 use Directorzone\Service\ArticleService;
 use Bing\Client;
 use Directorzone\Form\Company\NewCompanyForm;
+use Directorzone\Form\People\PeopleFeedsForm;
 
 class Module
 {
@@ -283,6 +283,11 @@ class Module
                     $instance->setServiceLocator($sm);
                     return $instance;
                 },
+                'PeopleDirectoryModel' => function ($sm) {
+                    $instance = new \Directorzone\Model\PeopleDirectory();
+                    $instance->setServiceLocator($sm);
+                    return $instance;
+                },
                 'ArticleModel' => function ($sm) {
                     $instance = new \Directorzone\Model\Article();
                     $instance->setServiceLocator($sm);
@@ -411,7 +416,12 @@ class Module
                     $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
                     return $form;
                 },
-                
+                'PeopleFeedsForm' => function ($sm) {
+                    $form = new PeopleFeedsForm('peopleFeedsForm');
+                    $form->setTranslator($sm->get('translator'));
+                    $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                    return $form;
+                },
             ),
         );
     }

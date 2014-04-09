@@ -351,10 +351,10 @@ return array(
                                             ),
                                         ),
                                     ),
-                                ),
-                             ),
-                          ),
-                    ),
+                                ), // child routes
+                             ), // company details
+                          ), // child routes
+                    ), // company-directory
                     'people-directory' => array(
                         'type' => 'literal',
                         'options' => array(
@@ -377,10 +377,22 @@ return array(
                                         'id' => 0,
                                     ),
                                 ),
+                                'may_terminate' => true,
+                                'child_routes' => array(
+                                    'people-feeds' => array(
+                                        'type' => 'literal',
+                                        'options' => array(
+                                            'route' => '/feeds',
+                                            'defaults' => array(
+                                                'action' => 'feeds',
+                                                'controller' => 'PeopleEdit',
+                                            ),
+                                        ),
+                                    ),
+                                ),
                             ),
                         ),
                     ),
-                    
                 ),
             ),
             'events-calendar' => array(

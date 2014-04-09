@@ -1,0 +1,22 @@
+<ul class="nav nav-pills">
+<?php 
+
+$routes = [
+   'directories/people-directory/people-details/people-feeds' => 'Feeds',
+];
+
+foreach ($routes as $route => $text) {
+?>
+    <li class="<?php echo ($this->url() == $this->url($route) ? 'active' : ''); ?>">
+        <a href="<?php echo $this->url($route, ['id'=>$this->peopleDetails['officerid']]); ?>">
+            <?php echo $text; ?>
+        </a>
+    </li>
+<?php
+}
+
+?>
+</ul>
+
+<h3><?php echo $this->peopleDetails['forename'] . ' ' . $this->peopleDetails['surname']; ?></h3>
+<h5><a href="/directories/company/<?php echo $this->peopleDetails['officerid']; ?>">View person profile page</a></h5>
