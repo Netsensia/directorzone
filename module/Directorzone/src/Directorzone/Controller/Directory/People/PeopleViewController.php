@@ -47,17 +47,24 @@ class PeopleViewController extends NetsensiaActionController
                 $peopleDirectoryId
             );
         
+            $cacheSuccess = false;
             $zendCache = $this->getServiceLocator()->get('ZendCache');
-        
             $cacheKey = 'peopleDetailsActionFeedResults' . $peopleDirectoryId;
+            
+            if ($peopleDetails['canusefeedcache'] == 'Y') {
+                $result = $zendCache->getItem($cacheKey, $cacheSuccess);
+            }
         
-            $success = false;
-            $result = $zendCache->getItem($cacheKey, $success);
-        
-            if ($success) {
+            if ($cacheSuccess) {
                 $feedResults = $result;
             } else {
-                $twitterSearchTerm = str_replace('limited', '', strtolower($peopleDetails['forename'] . ' ' . $peopleDetails['surname']));
+                
+                if (isset($peopleDetails['twittersearchterms'])) {
+                    $twitterSearchTerm = $peopleDetails['twittersearchterms'];
+                } else {
+                    $twitterSearchTerm = strtolower($peopleDetails['forename'] . ' ' . $peopleDetails['surname']);
+                }
+                
                 $twitterSearchTerm = trim($twitterSearchTerm);
         
                 $twitterResults = $this->twitterService->search(
@@ -65,8 +72,12 @@ class PeopleViewController extends NetsensiaActionController
                     5
                 );
         
-                $bingSearchTerm = $twitterSearchTerm;
-        
+                if (isset($peopleDetails['rsssearchterms'])) {
+                    $bingSearchTerm = $peopleDetails['rsssearchterms'];
+                } else {
+                    $bingSearchTerm  = $twitterSearchTerm;
+                }
+                        
                 $searchResults = [];
         
                 $searchResults = $this->bingService->search(
@@ -91,6 +102,11 @@ class PeopleViewController extends NetsensiaActionController
                 );
         
                 $zendCache->setItem($cacheKey, $feedResults);
+
+                $this->peopleService->updateCanUseFeedCache(
+                    $peopleDirectoryId,
+                    true
+                );
             }
              
             $returnArray = array_merge(

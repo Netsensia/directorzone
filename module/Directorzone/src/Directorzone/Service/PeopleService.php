@@ -76,6 +76,23 @@ class PeopleService extends NetsensiaService
         return $people;
     }
     
+    public function updateCanUseFeedCache(
+        $companyOfficerId,
+        $canUseFeedCache
+    )
+    {
+        $result = $this->peopleDirectoryTable->update(
+            [
+            'canusefeedcache' => ($canUseFeedCache ? 'Y' : 'N'),
+            ],
+            [
+            'officerid' => $companyOfficerId,
+            ]
+        );
+    
+        return $result;
+    }
+    
     public function getPeopleDetails($peopleDirectoryId)
     {
         $rowset = $this->peopleDirectoryTable->select(
