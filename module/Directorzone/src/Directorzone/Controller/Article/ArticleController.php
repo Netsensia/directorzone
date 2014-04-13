@@ -36,5 +36,11 @@ class ArticleController extends NetsensiaActionController
     public function listAction()
     {
     }
+    
+    public function deleteAction()
+    {
+        $this->articleService->deleteArticle($this->params('id'));
+        $this->redirect()->toRoute('articles/article-list');
+    }
 
 }

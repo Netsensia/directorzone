@@ -219,7 +219,7 @@ return array(
                                     'route' => '/delete',
                                     'defaults' => array(
                                         'action' => 'delete',
-                                        'controller' => 'Directorzone\Controller\Account\Account',
+                                        'controller' => 'Article',
                                     ),
                                 ),
                             ),

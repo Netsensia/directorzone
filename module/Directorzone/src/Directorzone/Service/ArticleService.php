@@ -20,6 +20,11 @@ class ArticleService extends NetsensiaService
         $this->articleTable = $articleTable;
     }
     
+    public function deleteArticle($articleId)
+    {
+        $this->articleTable->delete(['articleid' => $articleId]);
+    }
+    
     public function getArticle($articleId)
     {
         $rowset = $this->articleTable->select(
