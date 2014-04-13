@@ -20,7 +20,7 @@ class TwitterService extends NetsensiaService
     public function search($searchTerm, $count)
     {
         
-        $a = $this->twitterApiExchange->setGetfield('?q=' . $searchTerm . '&count=' . $count);
+        $a = $this->twitterApiExchange->setGetfield('?q=' . urlencode($searchTerm) . '&count=' . $count);
 
         $b = $a->buildOauth(
             'https://api.twitter.com/1.1/search/tweets.json',
