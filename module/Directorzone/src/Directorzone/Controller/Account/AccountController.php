@@ -71,6 +71,11 @@ class AccountController extends NetsensiaActionController
         return $this->userAccountForm('AccountDirectoryForm', 'User');
     }
     
+    public function deleteAction()
+    {
+        $this->redirect()->toRoute('articles/article-list');
+    }
+    
     public function publishAction()
     {
         $articleId = $this->params('id');

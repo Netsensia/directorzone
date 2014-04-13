@@ -213,6 +213,16 @@ return array(
                                     ),
                                 ),
                             ),
+                            'article-delete' => array(
+                                'type' => 'literal',
+                                'options' => array(
+                                    'route' => '/delete',
+                                    'defaults' => array(
+                                        'action' => 'delete',
+                                        'controller' => 'Directorzone\Controller\Account\Account',
+                                    ),
+                                ),
+                            ),
                         ),
                     ),
                     'article-list' => array(
