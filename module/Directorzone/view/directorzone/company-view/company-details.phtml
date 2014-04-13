@@ -50,7 +50,7 @@
               <?php if (isset($this->officers)) : ?>
               <?php foreach ($this->officers as $officer) : ?>
               <tr>
-              	<td><?php echo $officer['forename'] . ' ' . $officer['surname']; ?></td>
+              	<td><a href="/directories/people/<?php echo $officer['officerid']; ?>"><?php echo $officer['forename'] . ' ' . $officer['surname']; ?></a></td>
               	<td><?php echo $officer['appointmenttype']; ?></td>
               </tr>
               <?php endforeach; ?>
