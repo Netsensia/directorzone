@@ -47,7 +47,7 @@
 	},
 	"config":{
       		"github-oauth":{
-         		"github.com":"{{ pillar['zf2']['configfiles']['mode'] }}"
+         		"github.com":"{{ pillar['netsensia']['github_oauth'] }}"
       		}
    	}
 }
