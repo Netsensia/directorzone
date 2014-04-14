@@ -44,5 +44,10 @@
 			"Application" : "module/Application/src",
 			"Netsensia" : "module/Netsensia/src"
 		}
-	}
+	},
+	"config":{
+      		"github-oauth":{
+         		"github.com":"{{ pillar['zf2']['configfiles']['mode'] }}"
+      		}
+   	}
 }
