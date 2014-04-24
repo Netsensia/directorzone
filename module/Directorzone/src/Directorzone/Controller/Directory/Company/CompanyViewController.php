@@ -125,4 +125,10 @@ class CompanyViewController extends NetsensiaActionController
             
         }
     }
+    
+    public function deleteAction()
+    {
+        $this->companyService->deleteCompanyFromCompanyDirectory($this->params('id'));
+        $this->redirect()->toRoute('directories/company-directory');
+    }
 }

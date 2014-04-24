@@ -301,6 +301,16 @@ return array(
                                             ),
                                         ),
                                     ),
+                                    'company-delete' => array(
+                                        'type' => 'literal',
+                                        'options' => array(
+                                            'route' => '/delete',
+                                            'defaults' => array(
+                                                'action' => 'delete',
+                                                'controller' => 'CompanyView',
+                                            ),
+                                        ),
+                                    ),
                                     'company-feeds' => array(
                                         'type' => 'literal',
                                         'options' => array(

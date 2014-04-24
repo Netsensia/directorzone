@@ -48,13 +48,19 @@ class CompanyService extends NetsensiaService
         TableGateway $companySicCode,
         TableGateway $companyOfficers,
         CompanyAppointmentsRequest $companyAppointmentsRequest
-    ) {
+    )
+    {
         $this->companyUploadTable = $companyUpload;
         $this->companiesHouseTable = $companiesHouse;
         $this->companyDirectoryTable = $companyDirectory;
         $this->companySicCodeTable = $companySicCode;
         $this->companyOfficersTable = $companyOfficers;
         $this->companyAppointmentsRequest = $companyAppointmentsRequest;
+    }
+
+    public function deleteCompanyFromCompanyDirectory($companyDirectoryId)
+    {
+        $this->companyDirectoryTable->delete(['companydirectoryid' => $companyDirectoryId]);
     }
     
     public function addToCompaniesHouseDirectory(
