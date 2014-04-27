@@ -37,6 +37,15 @@ return array(
                                         'action' => 'upload-companies',
                                     ),
                                 ),
+                            ),
+                            'upload-companies' => array(
+                                'type' => 'Zend\Mvc\Router\Http\Literal',
+                                'options' => array(
+                                    'route' => '/people',
+                                    'defaults' => array(
+                                        'action' => 'admin-people',
+                                    ),
+                                ),
                             )
                         )
                     )
@@ -308,16 +317,6 @@ return array(
                                             'defaults' => array(
                                                 'action' => 'delete',
                                                 'controller' => 'CompanyView',
-                                            ),
-                                        ),
-                                    ),
-                                    'company-delete' => array(
-                                        'type' => 'literal',
-                                        'options' => array(
-                                            'route' => '/claim',
-                                            'defaults' => array(
-                                                'action' => 'claim',
-                                                'controller' => 'CompanyEdit',
                                             ),
                                         ),
                                     ),

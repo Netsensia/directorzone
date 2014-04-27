@@ -60,7 +60,8 @@ class Module
                 'Directorzone\Controller\Admin\Admin' =>
                     function (ControllerManager $cm) {
                         return new \Directorzone\Controller\Admin\AdminController(
-                            $cm->getServiceLocator()->get('CompanyService')
+                            $cm->getServiceLocator()->get('CompanyService'),
+                            $cm->getServiceLocator()->get('PeopleService')
                         );
                     },
                 'Directorzone\Controller\Ajax\Company' =>

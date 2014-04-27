@@ -6,15 +6,20 @@ use Netsensia\Controller\NetsensiaActionController;
 use Zend\Mvc\MvcEvent;
 use Directorzone\Service\CompanyService;
 use Zend\View\Model\JsonModel;
+use Directorzone\Service\PeopleService;
 
 class AdminController extends NetsensiaActionController
 {
     private $companyService;
+    private $peopleService;
     
     public function __construct(
-        CompanyService $companyService
-    ) {
+        CompanyService $companyService,
+        PeopleService $peopleService
+    ) 
+    {
         $this->companyService = $companyService;
+        $this->peopleService = $peopleService;
     }
    
     public function onDispatch(MvcEvent $e)
@@ -92,4 +97,19 @@ class AdminController extends NetsensiaActionController
             ]
         ];
     }
+    
+    public function peopleAction()
+    {
+        return [
+            'selectedPersonType' => 'live',
+            'filters' =>  [
+            'live' =>
+                [
+                    'name' => 'Live',
+                    'count' => $this->peopleService->getLiveCount()
+                ],
+            ]
+        ];
+    }
+    
 }

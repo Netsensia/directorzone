@@ -5,6 +5,7 @@ use Netsensia\Service\NetsensiaService;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Select;
 use Symfony\Component\Translation\Exception\NotFoundResourceException;
+use Zend\Db\Sql\Expression;
 
 class PeopleService extends NetsensiaService
 {
@@ -114,4 +115,15 @@ class PeopleService extends NetsensiaService
         return $peopleDetails;
     
     }
+    
+    public function getLiveCount()
+    {
+        $rowset = $this->peopleDirectoryTable->select(
+            function (Select $select) {
+                $select->columns(array('count' => new Expression('COUNT(*)')));
+            }
+        );
+    
+        return $rowset->current()['count'];
+    }    
 }

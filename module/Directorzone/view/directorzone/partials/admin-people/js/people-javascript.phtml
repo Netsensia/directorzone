@@ -1,0 +1,28 @@
+<script src="/js/jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="/js/jquery-file-upload/js/jquery.iframe-transport.js"></script>
+<script src="/js/jquery-file-upload/js/jquery.fileupload.js"></script>
+
+<script>
+
+$(document).ready(function() {
+
+	netsensia_Pager(
+			1,
+			500,
+			'people',
+			'/ajax/people/list',
+			function(key, value) {
+				var url = '/directories/people/' + value.internalId;
+				var newRow = '<tr>';
+				newRow += '<td><a href="' + url + '">' + value.name + '</a></td>';
+				newRow += '<td>' + value.companyname + '</td>';
+				newRow += '<td>' + value.appointmenttype + '</td>';
+				newRow += '</tr>';
+		
+				return newRow;
+			}
+		);	
+
+});
+
+</script>

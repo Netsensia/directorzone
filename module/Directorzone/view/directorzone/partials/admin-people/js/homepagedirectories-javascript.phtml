@@ -1,0 +1,66 @@
+<script>
+
+$(document).ready(function() {
+
+	loadCompanies();
+	
+	$(document).delegate('#tab-companies', 'click', function() {
+		loadCompanies();
+	});
+	
+	$(document).delegate('#tab-people', 'click', function() {
+		loadPeople();
+	});
+
+	$(document).delegate('#tab-services', 'click', function() {
+		loadServices();
+	});
+
+});
+
+function loadCompanies()
+{
+	netsensia_Pager(
+			1,
+			5,
+			'directories',
+			'/ajax/company/list',
+			function(key, value) {
+				var url = '/directories/company/' + value.internalId;
+				var newRow = '<tr>';
+				newRow += '<td><a href="' + url + '">' + value.number + '</a></td>';
+				newRow += '<td>' + value.name + '</td>';
+				newRow += '<td>FTSE AIM 100</td>';
+				newRow += '</tr>';
+		
+				return newRow;
+			}
+		);
+}
+
+function loadPeople()
+{
+	netsensia_Pager(
+			1,
+			5,
+			'directories',
+			'/ajax/people/list',
+			function(key, value) {
+				var newRow = '<tr>';
+				newRow += '<td>' + value.name + '</td>';
+				newRow += '<td>' + value.companyname + '</td>';
+				newRow += '<td>' + value.appointmenttype + '</td>';
+				newRow += '</tr>';
+		
+				return newRow;
+			}
+		);	
+}
+
+function loadServices()
+{
+	loadCompanies();
+}
+
+
+</script>

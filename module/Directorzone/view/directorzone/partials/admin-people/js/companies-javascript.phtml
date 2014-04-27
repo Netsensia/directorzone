@@ -1,0 +1,358 @@
+<script src="/js/jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="/js/jquery-file-upload/js/jquery.iframe-transport.js"></script>
+<script src="/js/jquery-file-upload/js/jquery.fileupload.js"></script>
+
+<script>
+
+$(document).ready(function() {
+
+	function updateUploadedRecordStatus(newStatus) {
+		
+		var number = $('#searchCompanyNumber').val();
+		var id = $('#searchCompanyUploadId').val();
+		var name = $('input#searchCompanyName').val();
+		
+		var url = '/ajax/company/updateuploadstatus?uploadid=' + id + 
+		   '&number=' + number + '&name=' + encodeURIComponent(name) + '&recordstatus=' + newStatus;
+
+		$.ajax({
+			url: url
+		}).done(function(data) {
+			$('#lightboxSearchForCompany #action-cancel').click();
+			location.reload();
+		});
+	}
+
+	function deleteUploadedRecord(id, fromType) {
+				
+		var url = '/ajax/company/deleteuploaded?uploadid=' + id;
+
+		$.ajax({
+			url: url
+		}).done(function(data) {
+			$('#lightboxSearchForCompany #action-cancel').click();
+			 window.location = '/admin/companies?type=' + fromType;
+		});
+	}
+
+	function makeCompanyLive(id) {
+		
+		var url = '/ajax/company/makelive?uploadid=' + id;
+
+		$.ajax({
+			url: url
+		}).done(function(data) {
+
+			if (data[0].error) {
+                alert(data[0].error);
+            }
+            
+			$('#lightboxCompanyDetails #action-cancel').click();
+			window.location = '/admin/companies?type=pending';
+		});
+	}
+
+	function empty(str)
+	{
+		var empty = (!str || /^\s*$/.test(str));
+
+		empty = empty || str.toLowerCase() == 'none supplied';
+
+		return empty;
+	}
+
+	function prettySic(sic)
+	{
+		var parts = sic.split(" - ");
+
+		if (parts.length > 1) {
+		    return parts[1];
+		}
+	}
+
+	function populateDropdownFromNameSearch(name)
+	{
+		$('#action-search-again').addClass('active');
+		$('#searchagaintext').html('Searching...');
+		$('#companySearchDropDown').attr('disabled', 'disabled');
+		$('#companySearchDropDownText').html('Searching...');
+		
+		$('ul#searchresults').empty();
+		
+		var url = "/ajax/company/search?name=" + encodeURIComponent(name);
+		
+		$.ajax({
+			url: url
+		}).done(function(data) {
+			
+			$.each(data.hits.hits, function (key, value) {
+				var companyNumber = value['_source']['number'];
+				var companyName = value['_source']['name'];
+				var companyAddress = value['_source']['addressline1'];
+				var town = value['_source']['town'];
+				var county = value['_source']['county'];
+				var postcode = value['_source']['postcode'];
+
+				var siccode = new Array();
+				siccode[0] = value['_source']['siccode1'];
+				siccode[1] = value['_source']['siccode2'];
+				siccode[2] = value['_source']['siccode3'];
+				siccode[3] = value['_source']['siccode4'];
+				
+				if (!empty(town)) companyAddress += ', ' + town;
+				if (!empty(county)) companyAddress += ', ' + county;
+				if (!empty(postcode)) companyAddress += ', ' + postcode;
+
+				var text = '<div class="infodropdown">';
+				text += '<span class="id">' + companyNumber + '</span>';
+				text += '<span class="name">' + companyName + '</span>';
+				text += '<div class="supplement">' + companyAddress + '</div>';
+
+				var incorporationDate = value['_source']['incorporationdate'];
+				
+				if (!empty(incorporationDate)) {
+    				text += '<div class="supplement">' + 
+    			                 'Incorporated on ' + incorporationDate +
+    			            '</div>';
+				}
+	            
+	            if (!empty(siccode[0])) {
+    				text += '<div class="supplement">';
+				    text += prettySic(siccode[0]);
+				    for (i=1; i<4; i++) {
+					    if (!empty(siccode[i])) {
+						    text += ', ' + prettySic(siccode[i]);
+					    }
+				    }
+                    text += '</div>';
+			    }
+				text += '</div>';
+				
+				$('ul#searchresults').append(
+					    '<li role="presentation">' +
+					    '<a class="companysearchresult" role="menuitem" ' +
+    					    'company-number="' + companyNumber + '" ' +
+    					    'company-name="' + companyName + '" ' +
+    					    'tabindex="-1" href="#">' +
+    					    text + 
+					    '</a>' +
+					    '</li>'
+					);
+			});
+
+			$('#action-search-again').removeClass('active');
+			$('#searchagaintext').html('Search Again');
+			$('#companySearchDropDown').removeAttr('disabled');
+			$('#companySearchDropDownText').html('Select company...');
+			$('#companySearchDropDown').trigger('click');
+		});
+	}
+
+	$(document).delegate('.companysearchresult', 'click', function() {
+		$('#lightboxSearchForCompany input#searchCompanyName').val($(this).attr('company-name'));
+		$('#lightboxSearchForCompany input#searchCompanyNumber').val($(this).attr('company-number'));
+	});
+	
+	$(document).delegate('#action-move-to-pending', 'click', function() {
+		updateUploadedRecordStatus('P');
+	});
+
+	$(document).delegate('#action-delete-from-upload', 'click', function() {
+		var id = $('#searchCompanyUploadId').val();
+		deleteUploadedRecord(id, 'uploaded');
+	});
+
+	$(document).delegate('#action-company-details-delete', 'click', function() {
+		var id = $('#companyDetailsUploadId').val();
+		deleteUploadedRecord(id, 'pending');
+	});
+
+	$(document).delegate('#action-search-again', 'click', function() {
+		var name = $('#searchCompanyName').val();
+		populateDropdownFromNameSearch(name);
+	});
+
+	$(document).delegate('#action-make-company-live', 'click', function() {
+		var id = $('#companyDetailsUploadId').val();
+		makeCompanyLive(id);
+	});
+
+	$(document).delegate('.linkSearchForCompanyNumber', 'click', function() {
+		var name = $(this).attr('company-name');
+		var number = $(this).attr('company-number');
+		var uploadId = $(this).attr('company-upload-id');
+		
+		$('#lightboxSearchForCompany input#searchCompanyName').val(name);
+		$('#lightboxSearchForCompany input#searchCompanyNumber').val(number);
+		$('#lightboxSearchForCompany input#searchCompanyUploadId').val(uploadId);
+
+		$('#lightboxSearchForCompany').modal();
+
+		populateDropdownFromNameSearch(name);
+	});
+	
+	$(document).delegate('.linkUpdateDetails', 'click', function() {
+
+		var number = $(this).attr('company-number');
+		var name = $(this).attr('company-name');
+		var uploadId = $(this).attr('company-upload-id');
+		
+		$('#lightboxCompanyDetails .modal-title').html('Company details<br>' + name);
+		$('#lightboxCompanyDetails input#companyDetailsUploadId').val(uploadId);
+
+		$('#lightboxCompanyDetails').modal();
+
+		populateDropdownFromOfficerSearch(name);
+	});
+	
+	$('#fileupload').fileupload({
+		type: 'json',
+        done: function (e, data) {
+
+            if (data.result.files[0].error) {
+                alert(data.result.files[0].error);
+            }
+
+            window.location = '/admin/companies';
+            
+        },
+        fail: function (e, data) {
+
+            alert('There was an unexpected error.  ' +
+            	  'The data may have uploaded successfully anyway.  ' +
+            	  'Please check the figures on the left after ' +
+            	  'closing this box.');
+
+            window.location = '/admin/companies';
+            
+        },
+        progressall: function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('#progress').css(
+                    'display',
+                    'block'
+                );
+            $('#progress .bar').css(
+                'width',
+                progress + '%'
+            );
+        },
+    });
+
+	var page = 1;
+	var size = 500;
+	var type = getTypeFromSlug("<?php echo $this->selectedCompanyType; ?>");
+
+	$(".filter").click(function() {
+		$(".filter").removeClass('active');
+		$(this).addClass('active');
+		page = 1;
+		size = 500;
+		type = getTypeFromSlug($(this).attr('id'));
+
+		loadTable(type, page, size);
+	});
+
+	$("li#next").click(function() {
+		page ++;
+		loadTable(type, page, size);
+	});
+
+	$("li#previous").click(function() {
+		if (!$(this).hasClass('disabled')) {
+    		page --;
+    		loadTable(type, page, size);
+		}
+	});
+
+	loadTable(type, page, size);
+});
+
+function getTypeFromSlug(slug)
+{
+	var type;
+	
+	switch (slug) {
+	  case 'live' : type = 'L'; break;
+	  case 'pending' : type = 'P'; break;
+	  case 'problems' : type = 'O'; break;
+	  case 'companies-house' : type = 'H'; break;
+	  case 'uploaded' : type = 'U'; break;
+	}
+
+	return type;
+}
+
+function loadTable(type, page, size)
+{
+	$('table#companies').find("tr:gt(0)").remove();
+
+	$('table#companies tr:last').after(
+		'<tr>' +
+		'<td style="text-align:center" colspan="4"><img src="/img/ajax/ajax-loader.gif"></td>' +
+		'</tr>'
+    );
+	
+	var url = "/ajax/company/list?type=" + type + "&page=" + page + "&size=" + size;
+
+	$.ajax({
+		url: url
+	}).done(function(data) {
+
+		$('table#companies').find("tr:gt(0)").remove();
+				
+		$('li#next').removeClass('disabled');
+		$('li#previous').removeClass('disabled');
+		
+		if (data.total <= page * size) {
+			$('li#next').addClass('disabled');
+		}
+
+		if (page == 1) {
+			$('li#previous').addClass('disabled');
+		}
+
+    	if (type == 'L') {
+    		$('table#companies').attr('data-link', 'row');
+    		$('table#companies').addClass('rowlink');
+    	} else {
+    		$('table#companies').removeAttr('data-link');
+    		$('table#companies').removeClass('rowlink');
+    	}
+
+		$.each(data.results, function(key, value) {
+			if (type == 'U') {
+				value.number = 
+					'<a class="linkSearchForCompanyNumber" ' +
+					'company-name="' + value.name + '" ' +
+					'company-number="' + value.number + '" ' +
+					'company-upload-id="' + value.internalId + '" ' +
+					'href="#">Search</a>'
+			}
+
+			if (type == 'P') {
+				value.details = 
+					'<a class="linkUpdateDetails" ' +
+					'company-name="' + value.name + '" ' +
+					'company-number="' + value.number + '" ' +
+					'company-upload-id="' + value.internalId + '" ' +
+					'href="#">Update</a>'
+			}
+
+			if (type == 'L') {
+				var url = '/directories/company/' + value.internalId;
+				value.number = '<a href="' + url + '">' + value.number + '</a>';
+			}
+
+			var newRow = '<tr>';
+			newRow += '<td>' + value.number + '</td>';
+			newRow += '<td>' + value.name + '</td>';
+			newRow += '<td>' + value.details + '</td>';
+			newRow += '</tr>';
+			
+    		$('table#companies tr:last').after(newRow);
+    	});
+	});
+}
+
+</script>

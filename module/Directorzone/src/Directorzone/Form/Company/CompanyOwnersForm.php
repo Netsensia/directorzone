@@ -12,7 +12,7 @@ class CompanyOwnersForm extends NetsensiaForm
     
     public function prepare()
     {
-        $this->setFieldPrefix('account-contact-');
+        $this->setFieldPrefix('company-owners-');
         $this->setDefaultIcon('user');
         
         $this->addText('email');
