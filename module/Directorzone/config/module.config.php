@@ -311,6 +311,16 @@ return array(
                                             ),
                                         ),
                                     ),
+                                    'company-delete' => array(
+                                        'type' => 'literal',
+                                        'options' => array(
+                                            'route' => '/claim',
+                                            'defaults' => array(
+                                                'action' => 'claim',
+                                                'controller' => 'CompanyEdit',
+                                            ),
+                                        ),
+                                    ),
                                     'company-feeds' => array(
                                         'type' => 'literal',
                                         'options' => array(

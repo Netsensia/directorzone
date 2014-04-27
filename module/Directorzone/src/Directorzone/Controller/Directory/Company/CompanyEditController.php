@@ -59,6 +59,11 @@ class CompanyEditController extends NetsensiaActionController
         return $this->genericForm('CompanySectorsForm', 'CompanyDirectory');
     }
     
+    public function claimAction()
+    {
+        return $this->genericForm('CompanyClaimForm', 'CompanyDirectory');
+    }
+    
     public function newCompanyAction()
     {
         return array(
