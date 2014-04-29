@@ -22,6 +22,10 @@ trait ProvidesUserInfo
     
     public function getUserId()
     {
+        if (!$this->isLoggedOn()) {
+            return false;
+        }
+        
        	return $this->getUserIdentity()->getUserId();
     }
         

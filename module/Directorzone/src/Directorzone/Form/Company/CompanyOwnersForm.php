@@ -15,10 +15,7 @@ class CompanyOwnersForm extends NetsensiaForm
         $this->setFieldPrefix('company-owners-');
         $this->setDefaultIcon('user');
         
-        $this->addText('email');
-        $this->addText('alternative-email');
-        
-        $this->addAddress('addressid');
+        $this->addTextArea('My relationship to this company');
         
         $this->addSubmit('Submit');
         

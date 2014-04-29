@@ -46,7 +46,18 @@ class CompanyEditController extends NetsensiaActionController
     
     public function ownersAction()
     {
-        return $this->genericForm('CompanyOwnersForm', 'CompanyDirectory');
+        $return = $this->genericForm('CompanyOwnersForm', 'CompanyDirectory');
+        
+        if (!$this->isLoggedOn()) {
+            $return['ownershipRole'] = false;
+        } else {
+            $return['ownershipRole'] = $this->companyService->getOwnershipRole(
+                $this->params('id'),
+                $this->getUserId()
+            );
+        }
+        
+        return $return;
     }
     
     public function relationshipsAction()
@@ -57,11 +68,6 @@ class CompanyEditController extends NetsensiaActionController
     public function sectorsAction()
     {
         return $this->genericForm('CompanySectorsForm', 'CompanyDirectory');
-    }
-    
-    public function claimAction()
-    {
-        return $this->genericForm('CompanyClaimForm', 'CompanyDirectory');
     }
     
     public function newCompanyAction()

@@ -3,10 +3,22 @@
 
 <?php 
 
-    echo $this->BootstrapForm(
-        $this->form,
-        'Company Owners',
-        $this->url(null, ['id'=>$this->companyDetails['companydirectoryid']] )
-    );
+    if (false === $this->ownershipRole) {
+?>
+        <h4>Take ownership of this company</h4>
+        <p>
+        If you would like to take ownership of this company profile, please fill out the box below giving us details of your relationship with the company.
+        </p>
+        <p>
+        Ownership of a company profile allows you to edit the company profile and also to assign other members as editors.
+        </p>
+<?php
+        echo $this->BootstrapForm(
+            $this->form,
+            '',
+            $this->url(null, ['id'=>$this->companyDetails['companydirectoryid']] )
+        );
+    }
+
 
 ?>

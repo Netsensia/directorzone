@@ -489,6 +489,31 @@ class CompanyService extends NetsensiaService
         return $this->getDirectoryStatusCount('R');
     }
     
+    public function getOwnershipRole(
+        $companyDirectoryId,
+        $userId
+    )
+    {
+        return false;
+    }
+    
+    public function setOwnedBy(
+        $companyDirectoryId,
+        $userId,
+        $roleId
+    )
+    {
+        return true;
+    }
+    
+    public function removeOwnedBy(
+        $companyDirectoryId,
+        $userId
+    )
+    {
+        return true;
+    }
+    
     public function getCompanies($type, $start, $end)
     {               
         switch ($type) {
@@ -531,7 +556,8 @@ class CompanyService extends NetsensiaService
     public function getCompaniesHouseList(
         $companyNumberHigherThan,
         $numberOfResults
-    ) {
+    )
+    {
         $rowset = $this->companiesHouseTable->select(
             function (Select $select) use (
                 $companyNumberHigherThan,
