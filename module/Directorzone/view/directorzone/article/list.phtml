@@ -13,7 +13,12 @@
 </div>
 
 <table id="articles" data-link="row" class="rowlink table table-striped table-bordered table-hover">
-<tr><th>Title</th><th>Author</th><th>Published</th><th>Sectors</th></tr>
+<tr>
+<th><a class="columnHeading" data-column-number="1">Title</a></th>
+<th><a class="columnHeading" data-column-number="2">Author</a></th>
+<th><a class="columnHeading" data-column-number="3">Published</a></th>
+<th><a class="columnHeading" data-column-number="4">Sectors</a></th>
+</tr>
 </table>
 
 <ul class="pager">
@@ -26,6 +31,10 @@
 $(document).ready(function() {
 	var typeArray = ["1","2","8"];
 
+	$(document).delegate('.columnHeading', 'click', function() {
+		loadArticles(typeArray);
+	});
+	
     loadArticles(typeArray);
 
     $('.label').click(function() {

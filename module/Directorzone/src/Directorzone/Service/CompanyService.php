@@ -380,31 +380,33 @@ class CompanyService extends NetsensiaService
         return number_format($rowset->current()['count']);
     }
     
-    private function getUploadedCompaniesFromStatus($status, $start, $end)
+    private function getUploadedCompaniesFromStatus($status, $start, $end, $order)
     {
 
         $rowset = $this->companyUploadTable->select(
-            function (Select $select) use ($status, $start, $end) {
+            function (Select $select) use ($status, $start, $end, $order) {
+                $columns = ['companyuploadid', 'companynumber', 'name'];
                 
                 $select->where(
                     ['recordstatus' => $status]
                 )
                 ->columns(
-                    ['companyuploadid', 'companynumber', 'name']
+                    $columns
                 )
                 ->offset($start - 1)
                 ->limit(1 + ($end - $start))
-                ->order('name ASC');
+                ->order($columns[abs($order)-1] . ' ' . ($order < 0 ? 'DESC' : 'ASC'));
             }
         );
 
         return $rowset->toArray();
     }
     
-    private function getDirectoryCompaniesFromStatus($status, $start, $end, $dzType = 3)
+    private function getDirectoryCompaniesFromStatus($status, $start, $end, $dzType = 3, $order)
     {
         $rowset = $this->companyDirectoryTable->select(
-            function (Select $select) use ($status, $start, $end, $dzType) {
+            function (Select $select) use ($status, $start, $end, $dzType, $order) {
+                $columns = ['reference', 'name', 'companydirectoryid'];
                 $select->where(
                     [
                     'recordstatus' => $status,
@@ -412,61 +414,62 @@ class CompanyService extends NetsensiaService
                     ]
                 )
                 ->columns(
-                    ['reference', 'name', 'companydirectoryid']
+                    $columns   
                 )
                 ->offset($start - 1)
                 ->limit(1 + ($end - $start))
-                ->order('companydirectoryid DESC');
+                ->order($columns[abs($order)-1] . ' ' . ($order < 0 ? 'DESC' : 'ASC'));
             }
         );
     
         return $rowset->toArray();
     }
     
-    private function getCompaniesHouseCompaniesFromStatus($status, $start, $end)
+    private function getCompaniesHouseCompaniesFromStatus($status, $start, $end, $order)
     {
         $rowset = $this->companiesHouseTable->select(
-            function (Select $select) use ($status, $start, $end) {
+            function (Select $select) use ($status, $start, $end, $order) {
+                $columns = ['number', 'name'];
                 $select->columns(
-                    ['number', 'name']
+                    $columns
                 )
                 ->offset($start - 1)
                 ->limit(1 + ($end - $start))
-                ->order('name ASC');
+                ->order($columns[abs($order)-1] . ' ' . ($order < 0 ? 'DESC' : 'ASC'));
             }
         );
     
         return $rowset->toArray();
     }
     
-    public function getPendingCompanies($start, $end)
+    public function getPendingCompanies($start, $end, $order)
     {
-        return $this->getUploadedCompaniesFromStatus('P', $start, $end);
+        return $this->getUploadedCompaniesFromStatus('P', $start, $end, $order);
     }
     
-    public function getUploadedCompanies($start, $end)
+    public function getUploadedCompanies($start, $end, $order)
     {
-        return $this->getUploadedCompaniesFromStatus('U', $start, $end);
+        return $this->getUploadedCompaniesFromStatus('U', $start, $end, $order);
     }
     
-    public function getProblemCompanies($start, $end)
+    public function getProblemCompanies($start, $end, $order)
     {
-        return $this->getUploadedCompaniesFromStatus('O', $start, $end);
+        return $this->getUploadedCompaniesFromStatus('O', $start, $end, $order);
     }
     
-    public function getRemovedCompanies($start, $end)
+    public function getRemovedCompanies($start, $end, $order)
     {
-        return $this->getDirectoryCompaniesFromStatus('R', $start, $end);
+        return $this->getDirectoryCompaniesFromStatus('R', $start, $end, $order);
     }
     
-    public function getLiveCompanies($start, $end, $dzType = 3)
+    public function getLiveCompanies($start, $end, $dzType = 3, $order)
     {
-        return $this->getDirectoryCompaniesFromStatus('L', $start, $end, $dzType);
+        return $this->getDirectoryCompaniesFromStatus('L', $start, $end, $dzType, $order);
     }
     
-    public function getCompaniesHouseCompanies($start, $end)
+    public function getCompaniesHouseCompanies($start, $end, $order)
     {
-        return $this->getCompaniesHouseCompaniesFromStatus('N', $start, $end);
+        return $this->getCompaniesHouseCompaniesFromStatus('N', $start, $end, $order);
     }
     
     public function getPendingCount()
@@ -514,26 +517,26 @@ class CompanyService extends NetsensiaService
         return true;
     }
     
-    public function getCompanies($type, $start, $end)
+    public function getCompanies($type, $start, $end, $order)
     {               
         switch ($type) {
             case 'P':
-                return $this->getPendingCompanies($start, $end);
+                return $this->getPendingCompanies($start, $end, $order);
             case 'O':
-                return $this->getProblemCompanies($start, $end);
+                return $this->getProblemCompanies($start, $end, $order);
             case 'U':
-                return $this->getUploadedCompanies($start, $end);
+                return $this->getUploadedCompanies($start, $end, $order);
             case 'R':
-                return $this->getRemovedCompanies($start, $end);
+                return $this->getRemovedCompanies($start, $end, $order);
             case 'H':
-                return $this->getCompaniesHouseCompanies($start, $end);
+                return $this->getCompaniesHouseCompanies($start, $end, $order);
             case 'L':
-                return $this->getLiveCompanies($start, $end, 1);
+                return $this->getLiveCompanies($start, $end, 1, $order);
             case 'S':
-                return $this->getLiveCompanies($start, $end, 2);
+                return $this->getLiveCompanies($start, $end, 2, $order);
             case 'B':
             default:
-                return $this->getLiveCompanies($start, $end, 3);
+                return $this->getLiveCompanies($start, $end, 3, $order);
         }
     }
     

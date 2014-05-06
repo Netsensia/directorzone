@@ -20,15 +20,19 @@ class PeopleService extends NetsensiaService
         $this->peopleDirectoryTable = $peopleDirectory;
     }
 
-    public function getDirectoryPeople($start, $end)
+    public function getDirectoryPeople($start, $end, $order)
     {
         $rowset = $this->peopleDirectoryTable->select(
-            function (Select $select) use ($start, $end) {
+            function (Select $select) use ($start, $end, $order) {
+                $columns = ['forename', 'appointmenttype', 'officerid', 'officernumber', 'dob', 'companyreference', 'surname'];
+                
+                $sortColumns = ['surname', 'companydirectory.name', 'appointmenttype', 'dob'];
+                
                 $select->where(
                     ['appointmentstatus' => 'CURRENT']
                 )
                 ->columns(
-                    ['officerid', 'officernumber', 'dob', 'appointmenttype', 'companyreference', 'forename', 'surname']
+                    $columns    
                 )
                 ->join(
                     'companydirectory',
@@ -38,7 +42,7 @@ class PeopleService extends NetsensiaService
                 )
                 ->offset($start - 1)
                 ->limit(1 + ($end - $start))
-                ->order('createdtime DESC');
+                ->order($sortColumns[abs($order)-1] . ' ' . ($order < 0 ? 'DESC' : 'ASC'));
             }
         );
     

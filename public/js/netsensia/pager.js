@@ -1,21 +1,39 @@
+$(document).ready(function() {
+	$('.columnHeading').css('cursor', 'pointer');
+
+	$('.columnHeading').click(function() {
+		
+		var newColumnNumber = $(this).attr('data-column-number');
+		var currentColumnNumber = $('#columnSorter').attr('data-sort-by-column')
+		
+		if (Math.abs(currentColumnNumber) == Math.abs(newColumnNumber)) {
+			newColumnNumber = currentColumnNumber * -1;
+		}
+		
+		$('#columnSorter').attr('data-sort-by-column', newColumnNumber);
+	});
+});
+
 function netsensia_Pager(page, size, id, route, rowFunc)
 {
+	var order = $('#columnSorter').attr('data-sort-by-column');
+	
 	$("li#next").click(function() {
 		page ++;
-		loadTable(page, size, id, route, rowFunc);
+		loadTable(page, size, order, id, route, rowFunc);
 	});
 	
 	$("li#previous").click(function() {
 		if (!$(this).hasClass('disabled')) {
     		page --;
-    		loadTable(page, size, id, route, rowFunc);
+    		loadTable(page, size, order, id, route, rowFunc);
 		}
 	});
 	
-	loadTable(page, size, id, route, rowFunc);
+	loadTable(page, size, order, id, route, rowFunc);
 }
 
-function loadTable(page, size, id, route, rowFunc)
+function loadTable(page, size, order, id, route, rowFunc)
 {
 	var tableSelector = 'table#' + id;
 	
@@ -34,7 +52,7 @@ function loadTable(page, size, id, route, rowFunc)
 		joinChar = '&';
 	}
 	
-	url = route + joinChar + 'page=' + page + '&size=' + size;
+	url = route + joinChar + 'order=' + order + '&page=' + page + '&size=' + size;
 	
 	$.ajax({
 		url: url

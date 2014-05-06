@@ -3,7 +3,13 @@
 <h5><a href="/directories/company/new">Add new company</a></h5>
 
 <table id="companies" data-link="row" class="rowlink table table-striped table-bordered table-hover">
-<tr><th>Number</th><th>Name</th><th>CEO</th><th>Sectors</th><th>Turnover</th></tr>
+<tr>
+<th><a class="columnHeading" data-column-number="1">Number</a></th>
+<th><a class="columnHeading" data-column-number="2">Name</a></th>
+<th><a class="columnHeading" data-column-number="3">CEO</a></th>
+<th><a class="columnHeading" data-column-number="4">Sectors</a></th>
+<th><a class="columnHeading" data-column-number="5">Turnover</a></th>
+</tr>
 </table>
 
 <ul class="pager">
@@ -14,26 +20,33 @@
 <script>
 
 $(document).ready(function() {
-
-	netsensia_Pager(
-		1,
-		10,
-		'companies',
-		'/ajax/company/list',
-		function(key, value) {
-			var url = '/directories/company/' + value.internalId;
-			
-			var newRow = '<tr>';
-			newRow += '<td><a href="' + url + '">' + value.number + '</a></td>';
-			newRow += '<td>' + value.name + '</td>';
-			newRow += '<td>&nbsp;</td>';
-			newRow += '<td>&nbsp;</td>';
-			newRow += '<td>&nbsp;</td>';
-			newRow += '</tr>';
-	
-			return newRow;
-		}
-	);	
+	$(document).delegate('.columnHeading', 'click', function() {
+		loadTheTable();
+	});
+    loadTheTable();
 });
+
+function loadTheTable()
+{
+	netsensia_Pager(
+			1,
+			10,
+			'companies',
+			'/ajax/company/list',
+			function(key, value) {
+				var url = '/directories/company/' + value.internalId;
+				
+				var newRow = '<tr>';
+				newRow += '<td><a href="' + url + '">' + value.number + '</a></td>';
+				newRow += '<td>' + value.name + '</td>';
+				newRow += '<td>&nbsp;</td>';
+				newRow += '<td>&nbsp;</td>';
+				newRow += '<td>&nbsp;</td>';
+				newRow += '</tr>';
+		
+				return newRow;
+			}
+		);
+}
 
 </script>

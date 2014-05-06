@@ -53,7 +53,7 @@ class ArticleService extends NetsensiaService
         }
     }
     
-    public function getArticlesByType($typeArray, $start, $end = 0)
+    public function getArticlesByType($typeArray, $start, $end = 0, $order)
     {
         if ($end == 0) {
             $end = $start;
@@ -61,8 +61,10 @@ class ArticleService extends NetsensiaService
         }
         
         $rowset = $this->articleTable->select(
-            function (Select $select) use ($typeArray, $start, $end) {
+            function (Select $select) use ($typeArray, $start, $end, $order) {
         
+                $sortColumns = ['title', 'title', 'publishdate', 'publishdate'];
+                
                 $select->where(
                     ['articlecategoryid' => $typeArray]
                 )
@@ -71,7 +73,7 @@ class ArticleService extends NetsensiaService
                 )
                 ->offset($start - 1)
                 ->limit(1 + ($end - $start))
-                ->order('articleid DESC');
+                ->order($sortColumns[abs($order)-1] . ' ' . ($order < 0 ? 'DESC' : 'ASC'));
             }
         );
         

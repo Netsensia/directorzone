@@ -111,6 +111,7 @@ class CompanyController extends NetsensiaActionController
         $type = $this->params()->fromQuery('type', null);
         $page = $this->params()->fromQuery('page', null);
         $size = $this->params()->fromQuery('size', null);
+        $order = $this->params()->fromQuery('order', null);
         
         $start = ($page - 1) * $size + 1;
         $end = $start + $size - 1;
@@ -118,7 +119,8 @@ class CompanyController extends NetsensiaActionController
         $results = $this->companyService->getCompanies(
             $type,
             $start,
-            $end
+            $end,
+            $order
         );
                 
         $companies = [

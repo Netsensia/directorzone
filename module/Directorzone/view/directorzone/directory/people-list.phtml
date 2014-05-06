@@ -2,7 +2,12 @@
 <h3>People directory</h3>
 
 <table id="people" data-link="row" class="rowlink table table-striped table-bordered table-hover">
-<tr><th>Name</th><th>Company</th><th>Appointment Type</th><th>Date of Birth</th></tr>
+<tr>
+<th><a class="columnHeading" data-column-number="1">Name</a></th>
+<th><a class="columnHeading" data-column-number="2">Company</a></th>
+<th><a class="columnHeading" data-column-number="3">Appointment Type</a></th>
+<th><a class="columnHeading" data-column-number="4">Date of Birth</a></th>
+</tr>
 </table>
 
 <ul class="pager">
@@ -13,24 +18,31 @@
 <script>
 
 $(document).ready(function() {
-
-	netsensia_Pager(
-		1,
-		20,
-		'people',
-		'/ajax/people/list',
-		function(key, value) {
-			var url = '/directories/people/' + value.internalId;
-			var newRow = '<tr>';
-			newRow += '<td><a href="' + url + '">' + value.name + '</a></td>';
-			newRow += '<td>' + value.companyname + '</td>';
-			newRow += '<td>' + value.appointmenttype + '</td>';
-			newRow += '<td>' + value.dob + '</td>';
-			newRow += '</tr>';
-	
-			return newRow;
-		}
-	);	
+	$(document).delegate('.columnHeading', 'click', function() {
+		loadTheTable();
+	});
+	loadTheTable();
 });
+
+function loadTheTable()
+{
+	netsensia_Pager(
+			1,
+			20,
+			'people',
+			'/ajax/people/list',
+			function(key, value) {
+				var url = '/directories/people/' + value.internalId;
+				var newRow = '<tr>';
+				newRow += '<td><a href="' + url + '">' + value.name + '</a></td>';
+				newRow += '<td>' + value.companyname + '</td>';
+				newRow += '<td>' + value.appointmenttype + '</td>';
+				newRow += '<td>' + value.dob + '</td>';
+				newRow += '</tr>';
+
+				return newRow;
+			}
+		);	
+}
 
 </script>
