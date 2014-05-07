@@ -7,7 +7,6 @@ use Zend\Mvc\MvcEvent;
 use Zend\View\Model\JsonModel;
 use Directorzone\Service\CompanyService;
 use Directorzone\Service\ElasticService;
-use NetsensiaCompanies\Request\CompanyAppointmentsRequest;
 
 class CompanyController extends NetsensiaActionController
 {

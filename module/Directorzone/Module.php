@@ -204,6 +204,14 @@ class Module
                     );
                     return $instance;
                 },
+                'UserCompanyTableGateway' => function ($sm) {
+                
+                    $instance = new TableGateway(
+                        'usercompany',
+                        $sm->get('Zend\Db\Adapter\Adapter')
+                    );
+                    return $instance;
+                },
                 'CompanyDirectoryTableGateway' => function ($sm) {
                 
                     $instance = new TableGateway(
@@ -291,6 +299,11 @@ class Module
                 },
                 'ArticleModel' => function ($sm) {
                     $instance = new \Directorzone\Model\Article();
+                    $instance->setServiceLocator($sm);
+                    return $instance;
+                },
+                'UserCompanyModel' => function ($sm) {
+                    $instance = new \Directorzone\Model\UserCompany();
                     $instance->setServiceLocator($sm);
                     return $instance;
                 },

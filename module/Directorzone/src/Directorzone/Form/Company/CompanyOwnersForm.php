@@ -15,7 +15,10 @@ class CompanyOwnersForm extends NetsensiaForm
         $this->setFieldPrefix('company-owners-');
         $this->setDefaultIcon('user');
         
-        $this->addTextArea('My relationship to this company');
+        $this->addTextArea([
+            'name' => 'relationshiptext',
+            'title' => 'My relationship to this company',
+        ]);
         
         $this->addSubmit('Submit');
         
