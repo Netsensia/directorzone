@@ -179,13 +179,15 @@
                 <li><a href="<?= $this->url('admin'); ?>"><?= $this->translate('Admin'); ?></a></li>
             </ul>
             <ul class="footer-links">
-                <li><a
+            <li>Build number <strong><?php echo file_get_contents('build_number.txt') ?></strong></li>
+            <li>Build time: <?php echo file_get_contents('build_time.txt'); ?></li>
+            <!--     <li><a
                     href="<?php echo $this->url('locale', ["locale"=>"en_GB"]); ?>"><?php echo $this->translate('English'); ?></a>
                 
                 <li class="muted">&middot;</li>
                 <li><a
                     href="<?php echo $this->url('locale', array("locale"=>"fr_FR")); ?>"><?php echo $this->translate('French'); ?></a>
-            
+            -->
             </ul>
         </div>
 
