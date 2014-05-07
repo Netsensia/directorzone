@@ -20,20 +20,22 @@ function netsensia_Pager(page, size, id, route, rowFunc)
 	
 	$("li#next").click(function() {
 		page ++;
-		loadTable(page, size, order, id, route, rowFunc);
+		order = $('#columnSorter').attr('data-sort-by-column');
+		netsensia_pager_loadTable(page, size, order, id, route, rowFunc);
 	});
 	
 	$("li#previous").click(function() {
 		if (!$(this).hasClass('disabled')) {
     		page --;
-    		loadTable(page, size, order, id, route, rowFunc);
+    		order = $('#columnSorter').attr('data-sort-by-column');
+    		netsensia_pager_loadTable(page, size, order, id, route, rowFunc);
 		}
 	});
 	
-	loadTable(page, size, order, id, route, rowFunc);
+	netsensia_pager_loadTable(page, size, order, id, route, rowFunc);
 }
 
-function loadTable(page, size, order, id, route, rowFunc)
+function netsensia_pager_loadTable(page, size, order, id, route, rowFunc)
 {
 	var tableSelector = 'table#' + id;
 	
