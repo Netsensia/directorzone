@@ -18,5 +18,3 @@ behat.local.yml
 temp.sh
 ch_xml_gateway.last.transaction.id
 elasticsearch.log
-build_number.txt
-build_time.txt
