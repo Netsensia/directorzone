@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://www.ukfootballfinder.local/" />
+<title>master.html</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">master.html</td></tr>
+</thead><tbody>
+<tr>
+	<td>setSpeed</td>
+	<td>50</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>&quot;{{ pillar['ukff']['selenium-test-url'] }}&quot;</td>
+	<td>siteurl</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>&quot;netsensia.com&quot;</td>
+	<td>emailDomain</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>&quot;chris&quot;</td>
+	<td>emailAccount</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>var d=new Date(); ('0' + d.getDate()).slice(-2) + '/' + ('0' + (d.getMonth()+1)).slice(-2) + '/' + d.getFullYear();</td>
+	<td>today</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>var d=new Date(); d.getTime();</td>
+	<td>timestamp</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>Math.floor((Math.random()*10000000)+1);</td>
+	<td>random</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>&quot;grf9ewasfj&quot;</td>
+	<td>password</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>&quot;9t}9gute&lt;mqtKM7a79.Ea.Qcrd&quot;</td>
+	<td>newpassword</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>&quot;asdasd12&quot;</td>
+	<td>newpassword2</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>&quot;!!!222$$$WWWwww&quot;</td>
+	<td>newpassword3</td>
+</tr>
+<tr>
+	<td>setSpeed</td>
+	<td>350</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>${siteurl}/core/auth/logout.php</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Register</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Register</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=firstname</td>
+	<td>Chris</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=surname</td>
+	<td>Moreton</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=emailaddress</td>
+	<td>${emailAccount}+${timestamp}-${random}@${emailDomain}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=name</td>
+	<td>u${timestamp}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=password1</td>
+	<td>${password}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=password2</td>
+	<td>${newpassword}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=zipcode</td>
+	<td>sw19</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=teamorplayer</td>
+	<td>label=Register a team</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=agreetos</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.stdbutton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//tr[10]/td</td>
+	<td>Passwords do not match</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=password2</td>
+	<td>${password}</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=agreetos</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.stdbutton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=a &gt; img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>Please select a username</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
