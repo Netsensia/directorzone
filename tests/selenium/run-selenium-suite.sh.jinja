@@ -1,3 +1,3 @@
 Xvfb :10 -ac &
 export DISPLAY=:10
-java -jar /usr/bin/selenium-server.jar -multiwindow -htmlSuite "*firefox" "{{pillar['directorzone']['selenium-test-url']}}" "{{pillar['directorzone']['selenium-test-root']}}/suite.html" "report.html" -debug
+java -jar /usr/bin/selenium-server.jar -multiwindow -htmlSuite "*firefox" "{{pillar['directorzone']['selenium-test-url']}}" "{{pillar['directorzone']['selenium-test-root']}}/suite.html" "report.html"
