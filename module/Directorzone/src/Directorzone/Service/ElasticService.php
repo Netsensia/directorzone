@@ -175,7 +175,7 @@ class ElasticService extends NetsensiaService
     {
         $this->client->indices()->delete(array('index' => $index));
     
-        $limit = 5000;
+        $limit = 1000;
         $lastId = -1;
     
         $count = 0;
@@ -234,7 +234,7 @@ class ElasticService extends NetsensiaService
     
                 $result = $this->client->bulk($document);
     
-                for ($i=0; $i<5000; $i++) {
+                for ($i=0; $i<$limit; $i++) {
                     if (isset($result['items'][$i]['index']['error'])) {
                         var_dump($result['items'][$i]['index']);
                         die;
