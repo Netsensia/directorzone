@@ -76,6 +76,86 @@
 	<td>${siteurl}/logout</td>
 	<td></td>
 </tr>
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=drop3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>link=Create a new account</td>
+	<td>Create a new account</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=drop3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Create a new account</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=label.control-label</td>
+	<td>Your username</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=username</td>
+	<td>u${timestamp}${random}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=email</td>
+	<td>u${timestamp}${random}@${emailDomain}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password</td>
+	<td>${password}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=confirm-password</td>
+	<td>${newpassword}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=confirm-password</td>
+	<td>asdasd234234234</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=send</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.form-field-error</td>
+	<td>Passwords don't match</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=confirm-password</td>
+	<td>${password}</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=send</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=h1</td>
+	<td>Account activated</td>
+</tr>
 </tbody></table>
 </body>
 </html>
