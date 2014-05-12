@@ -26,7 +26,6 @@ $(document).ready(function() {
 	function deleteUploadedRecord(id, type, fromType) {
 				
 		var url = '/ajax/company/deleteuploaded?type=' + type + '&uploadid=' + id;
-		alert(url);
 
 		$.ajax({
 			url: url
