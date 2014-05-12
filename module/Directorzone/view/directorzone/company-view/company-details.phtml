@@ -50,11 +50,12 @@
               <h3 class="panel-title">Officers</h3>
             </div>
             <div class="panel-body">
-            <table class="table">
+            <table id="company-officers" class="table">
               <?php if (isset($this->officers)) : ?>
+              <?php $officerCount = 0; ?>
               <?php foreach ($this->officers as $officer) : ?>
               <tr>
-              	<td><a href="/directories/people/<?php echo $officer['officerid']; ?>"><?php echo $officer['forename'] . ' ' . $officer['surname']; ?></a></td>
+              	<td><a id="officer-id-<?php echo ++$officerCount ?>" href="/directories/people/<?php echo $officer['officerid']; ?>"><?php echo $officer['forename'] . ' ' . $officer['surname']; ?></a></td>
               	<td><?php echo $officer['appointmenttype']; ?></td>
               </tr>
               <?php endforeach; ?>

@@ -67,9 +67,9 @@
 	<td>newpassword3</td>
 </tr>
 <tr>
-	<td>setSpeed</td>
-	<td>350</td>
-	<td></td>
+	<td>storeEval</td>
+	<td>var d=new Date(); d.getTime();</td>
+	<td>username</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -109,12 +109,12 @@
 <tr>
 	<td>type</td>
 	<td>name=username</td>
-	<td>u${timestamp}${random}</td>
+	<td>${username}</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>name=email</td>
-	<td>u${timestamp}${random}@${emailDomain}</td>
+	<td>${username}@${emailDomain}</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -155,6 +155,111 @@
 	<td>waitForText</td>
 	<td>css=h1</td>
 	<td>Account activated</td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=drop3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=login-email</td>
+	<td>${email}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=login-password</td>
+	<td>${newpassword}</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.alert.alert-danger</td>
+	<td>Login failed. Please try again.</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=drop3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=login-email</td>
+	<td>${username}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=login-password</td>
+	<td>${password}</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.alert.alert-success</td>
+	<td>You are now logged in</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=strong</td>
+	<td>${username}</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Directories</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=h3</td>
+	<td>Company directory</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//table[@id='companies']/tbody/tr[4]/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//table[@id='companies']/tbody/tr[4]/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>id=officer-id-1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=officer-id-1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Edit this person</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit this person</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=legend</td>
+	<td>News Feeds</td>
 </tr>
 </tbody></table>
 </body>
