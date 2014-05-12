@@ -23,9 +23,10 @@ $(document).ready(function() {
 		});
 	}
 
-	function deleteUploadedRecord(id, fromType) {
+	function deleteUploadedRecord(id, type, fromType) {
 				
-		var url = '/ajax/company/deleteuploaded?uploadid=' + id;
+		var url = '/ajax/company/deleteuploaded?type=' + type + '&uploadid=' + id;
+		alert(url);
 
 		$.ajax({
 			url: url
@@ -159,12 +160,12 @@ $(document).ready(function() {
 
 	$(document).delegate('#action-delete-from-upload', 'click', function() {
 		var id = $('#searchCompanyUploadId').val();
-		deleteUploadedRecord(id, 'uploaded');
+		deleteUploadedRecord(id, 'U', 'uploaded');
 	});
 
 	$(document).delegate('#action-company-details-delete', 'click', function() {
 		var id = $('#companyDetailsUploadId').val();
-		deleteUploadedRecord(id, 'pending');
+		deleteUploadedRecord(id, 'U', 'pending');
 	});
 
 	$(document).delegate('#action-search-again', 'click', function() {
@@ -190,7 +191,20 @@ $(document).ready(function() {
 
 		populateDropdownFromNameSearch(name);
 	});
-	
+
+	$(document).delegate('.linkDeleteCompany', 'click', function() {
+		var internalId = $(this).attr('data-netsensia-id');
+		var type = $(this).attr('data-netsensia-type');
+
+		switch (type) {
+    		case 'P' : fromType='pending'; break;
+    		case 'U' : fromType='uploaded'; break;
+    		case 'L' : fromType='live'; break;
+		}
+		
+		deleteUploadedRecord(internalId, type, fromType);
+	});
+
 	$(document).delegate('.linkUpdateDetails', 'click', function() {
 
 		var number = $(this).attr('company-number');
@@ -313,11 +327,11 @@ function loadTable(type, page, size)
 		}
 
     	if (type == 'L') {
-    		$('table#companies').attr('data-link', 'row');
-    		$('table#companies').addClass('rowlink');
+ 		   //$('table#companies').attr('data-link', 'row');
+    		//$('table#companies').addClass('rowlink');
     	} else {
-    		$('table#companies').removeAttr('data-link');
-    		$('table#companies').removeClass('rowlink');
+    		//$('table#companies').removeAttr('data-link');
+    		//$('table#companies').removeClass('rowlink');
     	}
 
 		$.each(data.results, function(key, value) {
@@ -348,6 +362,7 @@ function loadTable(type, page, size)
 			newRow += '<td>' + value.number + '</td>';
 			newRow += '<td>' + value.name + '</td>';
 			newRow += '<td>' + value.details + '</td>';
+			newRow += '<td><a href="#" class="linkDeleteCompany" data-netsensia-id="' + value.internalId + '" data-netsensia-type="' + type + '">Delete</a></td>';
 			newRow += '</tr>';
 			
     		$('table#companies tr:last').after(newRow);

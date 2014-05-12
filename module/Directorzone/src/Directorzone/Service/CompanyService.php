@@ -267,13 +267,32 @@ class CompanyService extends NetsensiaService
     }
     
     public function deleteUploaded(
+        $type,
         $uploadId
     ) {
-        $result = $this->companyUploadTable->delete(
-            [
-                'companyuploadid' => $uploadId,
-            ]
-        );
+        switch ($type) {
+        	case 'U':
+            $result = $this->companyUploadTable->delete(
+                [
+                    'companyuploadid' => $uploadId,
+                ]
+            );
+            break;
+            case 'P':
+                $result = $this->companyUploadTable->delete(
+                [
+                    'companyuploadid' => $uploadId,
+                ]
+                );
+            break;
+            case 'L':
+                $result = $this->companyDirectoryTable->delete(
+                [
+                    'companydirectoryid' => $uploadId,
+                ]
+                );
+            break;
+        }
     
         return $result;
     }

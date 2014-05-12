@@ -78,8 +78,14 @@ class CompanyController extends NetsensiaActionController
     public function deleteUploadedAction()
     {
         $uploadId = $this->params()->fromQuery('uploadid', null);
-    
+        $type = $this->params()->fromQuery('type', null);
+        
+        if ($type != 'L' && $type != 'P' && $type != 'U') {
+            throw new \Exception('Invalid type');
+        }
+        
         $result = $this->companyService->deleteUploaded(
+            $type,
             $uploadId
         );
     
