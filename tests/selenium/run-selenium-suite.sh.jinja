@@ -6,7 +6,7 @@ export DISPLAY=:10
 java -jar /usr/bin/selenium-server.jar -multiwindow -htmlSuite "*firefox" "{{pillar['directorzone']['selenium-test-url']}}" "suite.html" "report.html"
 
 DATE=`date`
-if grep '<td>pissed</td>' report.html
+if grep '<td>passed</td>' report.html
 then
     RESULT="Passed @ $DATE"
     exit 0
@@ -15,6 +15,6 @@ else
     exit 1
 fi
 
-PAYLOAD="'{ \"auth_token\": \"YOUR_AUTH_TOKEN\", \"text\": \"$RESULT\" }'"
+#PAYLOAD="'{ \"auth_token\": \"YOUR_AUTH_TOKEN\", \"text\": \"$RESULT\" }'"
 
-eval curl -d $PAYLOAD http://directorzone:city-zone99@dashboard.netsensia.com/widgets/welcome
+#eval curl -d $PAYLOAD http://directorzone:city-zone99@dashboard.netsensia.com/widgets/welcome
