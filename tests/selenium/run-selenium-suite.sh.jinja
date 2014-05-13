@@ -8,9 +8,11 @@ java -jar /usr/bin/selenium-server.jar -multiwindow -htmlSuite "*firefox" "{{pil
 DATE=`date`
 if grep '<td>passed</td>' report.html
 then
-    RESULT="Passed @ $DATE"
+    RESULT="Pissed @ $DATE"
+    exit 0
 else
     RESULT="Failed @ $DATE"
+    exit 1
 fi
 
 PAYLOAD="'{ \"auth_token\": \"YOUR_AUTH_TOKEN\", \"text\": \"$RESULT\" }'"
