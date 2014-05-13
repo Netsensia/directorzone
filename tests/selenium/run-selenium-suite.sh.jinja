@@ -3,8 +3,7 @@ fuser -k 6010/tcp
 fuser -k 4444/tcp
 Xvfb :10 -ac &
 export DISPLAY=:10
-java -jar /usr/bin/selenium-server.jar -multiwindow -htmlSuite "*firefox" "{{pillar['directorzone']['selenium-test-url']}}" "{{pillar['directorzone']['selenium-test-root']}}/suite.html" "report.html"
-#cp report.html {{pillar['directorzone']['selenium-test-root']}}/../../public/report.html
+java -jar /usr/bin/selenium-server.jar -multiwindow -htmlSuite "*firefox" "{{pillar['directorzone']['selenium-test-url']}}" "suite.html" "report.html"
 
 DATE=`date`
 if grep '<td>passed</td>' report.html
