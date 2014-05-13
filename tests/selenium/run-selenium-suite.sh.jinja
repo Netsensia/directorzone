@@ -6,9 +6,9 @@ export DISPLAY=:10
 java -jar /usr/bin/selenium-server.jar -multiwindow -htmlSuite "*firefox" "{{pillar['directorzone']['selenium-test-url']}}" "suite.html" "report.html"
 
 DATE=`date`
-if grep '<td>passed</td>' report.html
+if grep '<td>pissed</td>' report.html
 then
-    RESULT="Pissed @ $DATE"
+    RESULT="Passed @ $DATE"
     exit 0
 else
     RESULT="Failed @ $DATE"
