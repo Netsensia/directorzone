@@ -30,8 +30,11 @@ runSelenium() {
 
 	java -jar /usr/bin/selenium-server.jar -multiwindow -htmlSuite "*firefox" "$1" "suite.html" "report.html"
 	
-	if grep '<td>failed</td>' report.html
+	if grep '<td>passed</td>' report.html
 	then
+	    echo "Tests passed"
+	else
+	    echo "Cannot confirm that tests passed"
 	    exit 1
 	fi
 	
