@@ -27,7 +27,7 @@ runSelenium() {
 	#################################################################################
 	echo "Running Selenium suite"
 	#################################################################################
-	cd build/selenium
+
 	java -jar /usr/bin/selenium-server.jar -multiwindow -htmlSuite "*firefox" "$1" "suite.html" "report.html"
 	
 	if grep '<td>failed</td>' report.html
