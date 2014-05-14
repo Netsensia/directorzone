@@ -7,7 +7,7 @@ LIVE_URL={{pillar[key]['protocol']}}{{pillar[key]['domain']}}
 TEST_URL=http://test.{{pillar[key]['domain']}}
 
 runSelenium() {
-    cd selenium
+    cd build/selenium
     
 	#################################################################################
 	echo "Killing any old displays"
@@ -35,7 +35,7 @@ runSelenium() {
 	    exit 1
 	fi
 	
-	cd ..
+	cd ../..
 }
 
 #################################################################################
