@@ -1,8 +1,8 @@
-{% set key='directorzone' %}
-REPO={{pillar[key]['repository']}}
-DOMAIN={{pillar[key]['domain']}}
-LIVE_URL={{pillar[key]['protocol']}}{{pillar[key]['domain']}}
-TEST_URL=http://test.{{pillar[key]['domain']}}
+
+REPO=directorzone
+DOMAIN=directorzone.local
+LIVE_URL=http://directorzone.local
+TEST_URL=http://test.directorzone.local
 
 #################################################################################
 echo "Stamping build"
@@ -40,7 +40,7 @@ ssh -i /var/lib/jenkins/.ssh/id_rsa jenkins@$DOMAIN "cd /var/www/test.$REPO && t
 echo "Running Selenium test on test server"
 #################################################################################
 
-runSelenium $TEST_URL
+runSelenium($TEST_URL)
 
 #################################################################################
 echo "Sending source to live site"
@@ -63,7 +63,7 @@ ssh -i /var/lib/jenkins/.ssh/id_rsa jenkins@$DOMAIN "cd /var/www/$REPO && tar -z
 echo "Running Selenium test on live server"
 #################################################################################
 	
-runSelenium $LIVE_URL
+runSelenium($LIVE_URL)
 
 #################################################################################
 echo "Done"
