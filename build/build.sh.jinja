@@ -3,8 +3,8 @@
 {% set key='directorzone' %}
 REPO={{pillar[key]['repository']}}
 DOMAIN={{pillar[key]['domain']}}
-LIVE_URL={{pillar[key]['protocol']}}{{pillar[key]['domain']}}
-TEST_URL=http://test.{{pillar[key]['domain']}}
+LIVE_URL={{pillar[key]['protocol']}}{{pillar[key]['httpurllogin']}}{{pillar[key]['domain']}}
+TEST_URL={{pillar[key]['protocol']}}{{pillar[key]['httpurllogin']}}test.{{pillar[key]['domain']}}
 
 runSelenium() {
 
