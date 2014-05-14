@@ -6,6 +6,38 @@ DOMAIN={{pillar[key]['domain']}}
 LIVE_URL={{pillar[key]['protocol']}}{{pillar[key]['domain']}}
 TEST_URL=http://test.{{pillar[key]['domain']}}
 
+runSelenium() {
+    cd selenium
+    
+	#################################################################################
+	echo "Killing any old displays"
+	#################################################################################
+	
+	rm /tmp/.X10-lock
+	fuser -k 6010/tcp
+	fuser -k 4444/tcp
+	
+	#################################################################################
+	echo "Initiating display"
+	#################################################################################
+	
+	Xvfb :10 -ac &
+	export DISPLAY=:10
+	
+	#################################################################################
+	echo "Running Selenium suite"
+	#################################################################################
+	cd build/selenium
+	java -jar /usr/bin/selenium-server.jar -multiwindow -htmlSuite "*firefox" "$1" "suite.html" "report.html"
+	
+	if grep '<td>failed</td>' report.html
+	then
+	    exit 1
+	fi
+	
+	cd ..
+}
+
 #################################################################################
 echo "Stamping build"
 #################################################################################
@@ -71,33 +103,3 @@ runSelenium $LIVE_URL
 echo "Done"
 #################################################################################
 
-function runSelenium
-{
-#################################################################################
-	echo "Killing any old displays"
-#################################################################################
-	
-	rm /tmp/.X10-lock
-	fuser -k 6010/tcp
-	fuser -k 4444/tcp
-	
-#################################################################################
-	echo "Initiating display"
-#################################################################################
-	
-	Xvfb :10 -ac &
-	export DISPLAY=:10
-	
-#################################################################################
-	echo "Running Selenium suite"
-#################################################################################
-	cd build/selenium
-	java -jar /usr/bin/selenium-server.jar -multiwindow -htmlSuite "*firefox" "$1" "suite.html" "report.html"
-	
-	if grep '<td>passed</td>' report.html
-	then
-	    exit 0
-	else
-	    exit 1
-	fi
-}
