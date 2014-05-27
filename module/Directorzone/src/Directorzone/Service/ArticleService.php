@@ -53,7 +53,7 @@ class ArticleService extends NetsensiaService
         }
     }
     
-    public function getArticlesByType($typeArray, $start, $end = 0, $order)
+    public function getArticlesByType($typeArray, $start, $end = 0, $order, $userId = null)
     {
         if ($end == 0) {
             $end = $start;
@@ -61,19 +61,23 @@ class ArticleService extends NetsensiaService
         }
         
         $rowset = $this->articleTable->select(
-            function (Select $select) use ($typeArray, $start, $end, $order) {
-        
+            function (Select $select) use ($typeArray, $start, $end, $order, $userId) {
+
                 $sortColumns = ['title', 'title', 'publishdate', 'publishdate'];
                 
-                $select->where(
-                    ['articlecategoryid' => $typeArray]
-                )
-                ->columns(
-                    ['image', 'title', 'content', 'publishdate', 'articleid', 'startdate', 'enddate']
-                )
-                ->offset($start - 1)
-                ->limit(1 + ($end - $start))
-                ->order($sortColumns[abs($order)-1] . ' ' . ($order < 0 ? 'DESC' : 'ASC'));
+                if ($userId == null) {
+                    $criteria = ['articlecategoryid' => $typeArray];
+                } else {
+                    $criteria = ['articlecategoryid' => $typeArray, 'userid' => $userId];
+                }
+                
+                $select->where($criteria)
+                       ->columns(
+                           ['image', 'title', 'content', 'publishdate', 'articleid', 'startdate', 'enddate']
+                       )
+                       ->offset($start - 1)
+                       ->limit(1 + ($end - $start))
+                       ->order($sortColumns[abs($order)-1] . ' ' . ($order < 0 ? 'DESC' : 'ASC'));
             }
         );
         
@@ -95,4 +99,5 @@ class ArticleService extends NetsensiaService
         
         return $articles;
     }
+
 }

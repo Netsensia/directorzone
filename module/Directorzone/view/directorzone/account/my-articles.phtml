@@ -1,1 +1,86 @@
 <?php echo $this->partial('account-nav.phtml'); ?>
+<h3>My Articles</h3>
+
+<div class="well">
+<span article-type="1" style="cursor:pointer" class="label label-primary">Blog Posts</span>
+<span article-type="2" style="cursor:pointer" class="label label-primary">News Articles</span>
+<span article-type="3" style="cursor:pointer" class="label label-default">Wanted</span>
+<span article-type="4" style="cursor:pointer" class="label label-default">Offered</span>
+<span article-type="5" style="cursor:pointer" class="label label-default">Events</span>
+<span article-type="6" style="cursor:pointer" class="label label-default">Meeting Requests</span>
+<span article-type="7" style="cursor:pointer" class="label label-default">Opportunities</span>
+<span article-type="8" style="cursor:pointer" class="label label-primary">Movers</span>
+</div>
+
+<table id="articles" data-link="row" class="rowlink table table-striped table-bordered table-hover">
+<tr>
+<th><a class="columnHeading" data-column-number="1">Title</a></th>
+<th><a class="columnHeading" data-column-number="2">Author</a></th>
+<th><a class="columnHeading" data-column-number="3">Published</a></th>
+<th><a class="columnHeading" data-column-number="4">Sectors</a></th>
+</tr>
+</table>
+
+<ul class="pager">
+<li class="previous" id="previous" class="disabled"><a href="#">&larr; Previous</a></li>
+<li class="next" id="next"><a href="#">Next &rarr;</a></li>
+</ul>
+
+<script>
+
+$(document).ready(function() {
+	var typeArray = ["1","2","8"];
+
+	$(document).delegate('.columnHeading', 'click', function() {
+		loadArticles(typeArray);
+	});
+	
+    loadArticles(typeArray);
+
+    $('.label').click(function() {
+        var articleType = $(this).attr('article-type');
+        var index = typeArray.indexOf(articleType);
+        if (index == -1) {
+            typeArray.push(articleType);
+            $('span[article-type=' + articleType + ']').addClass('label-primary');
+            $('span[article-type=' + articleType + ']').removeClass('label-default');
+        } else {
+            typeArray.splice(index, 1);
+            $('span[article-type=' + articleType + ']').removeClass('label-primary');
+            $('span[article-type=' + articleType + ']').addClass('label-default');
+        }
+
+        loadArticles(typeArray);
+    });
+});
+
+function loadArticles(typeArray) {
+
+	var typeParam = '';
+	for (var i = 0; i < typeArray.length; i++) {
+	    typeParam += 'type[]=' + typeArray[i];
+	    if (i+1 < typeArray.length) {
+		    typeParam += '&';
+	    }
+	}
+
+	netsensia_Pager(
+			1,
+			20,
+			'articles',
+			'/ajax/article/list?' + typeParam + '&onlyme=1',
+			function(key, value) {
+				var url = '/article/' + value.internalId;
+				
+				var newRow = '<tr>';
+				newRow += '<td><a href="' + url + '">' + value.title + '</a></td>';
+				newRow += '<td>' + value.author + '</td>';
+				newRow += '<td>' + value.publishdate + '</td>';
+				newRow += '<td>&nbsp;</td>';
+				newRow += '</tr>';
+		
+				return newRow;
+			}
+		);
+}
+</script>

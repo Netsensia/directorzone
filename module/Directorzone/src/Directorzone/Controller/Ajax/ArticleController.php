@@ -81,15 +81,23 @@ class ArticleController extends NetsensiaActionController
         $size = $this->params()->fromQuery('size', null);
         $typeArray = $this->params()->fromQuery('type', null);
         $order = $this->params()->fromQuery('order', null);
+        $onlyMe = $this->params()->fromQuery('onlyme', null);
         
         $start = ($page - 1) * $size + 1;
         $end = $start + $size - 1;
                 
+        if ($onlyMe == 1) {
+            $userId = $this->getUserId();
+        } else {
+            $userId = null;
+        }
+        
         $results = $this->articleService->getArticlesByType(
             $typeArray,
             $start,
             $end,
-            $order
+            $order,
+            $userId
         );
                 
         $articles = [
@@ -111,4 +119,5 @@ class ArticleController extends NetsensiaActionController
             $articles
         );
     }
+
 }
