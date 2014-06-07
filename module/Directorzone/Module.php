@@ -141,13 +141,13 @@ class Module
                     },    
                 'TalentPoolView' =>
                     function (ControllerManager $cm) {                    
-                        return new \Directorzone\Controller\Directory\People\TalentPoolViewController(
+                        return new \Directorzone\Controller\Directory\TalentPool\TalentPoolViewController(
                             $cm->getServiceLocator()->get('TalentPoolService')
                         );
                     },                                
                 'TalentPoolEdit' =>
                     function (ControllerManager $cm) {
-                        return new \Directorzone\Controller\Directory\People\TalentPoolEditController(
+                        return new \Directorzone\Controller\Directory\TalentPool\TalentPoolEditController(
                             $cm->getServiceLocator()->get('TalentPoolService')
                         );
                     },

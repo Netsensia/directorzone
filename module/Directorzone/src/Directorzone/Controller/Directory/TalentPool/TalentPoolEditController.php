@@ -1,6 +1,6 @@
 <?php
 
-namespace Directorzone\Controller\Directory\Company;
+namespace Directorzone\Controller\Directory\TalentPool;
 
 use Netsensia\Controller\NetsensiaActionController;
 use Directorzone\Service\CompanyService;
