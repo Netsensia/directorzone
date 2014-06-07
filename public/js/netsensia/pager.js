@@ -50,9 +50,9 @@ function netsensia_pager_loadTable(page, size, order, id, route, rowFunc)
 	if (route.indexOf('?') != -1) {
 		joinChar = '&';
 	}
-	
+
 	url = route + joinChar + 'order=' + order + '&page=' + page + '&size=' + size;
-	
+
 	$.ajax({
 		url: url
 	}).done(function(data) {
@@ -75,5 +75,4 @@ function netsensia_pager_loadTable(page, size, order, id, route, rowFunc)
     		$('table#' + id + ' tr:last').after(newRow);
     	});
 	});
-
 }

@@ -35,6 +35,7 @@ use Directorzone\Service\ArticleService;
 use Bing\Client;
 use Directorzone\Form\Company\NewCompanyForm;
 use Directorzone\Form\People\PeopleFeedsForm;
+use Directorzone\Service\TalentPoolService;
 
 class Module
 {
@@ -77,6 +78,12 @@ class Module
                             $cm->getServiceLocator()->get('PeopleService')
                         );
                     },
+                'Directorzone\Controller\Ajax\TalentPool' =>
+                    function (ControllerManager $cm) {
+                        return new \Directorzone\Controller\Ajax\TalentPoolController(
+                            $cm->getServiceLocator()->get('TalentPoolService')
+                        );
+                },
                 'Directorzone\Controller\Ajax\Article' =>
                     function (ControllerManager $cm) {
                         return new \Directorzone\Controller\Ajax\ArticleController(
@@ -130,6 +137,18 @@ class Module
                     function (ControllerManager $cm) {
                         return new \Directorzone\Controller\Directory\People\PeopleEditController(
                             $cm->getServiceLocator()->get('PeopleService')
+                        );
+                    },    
+                'TalentPoolView' =>
+                    function (ControllerManager $cm) {                    
+                        return new \Directorzone\Controller\Directory\People\TalentPoolViewController(
+                            $cm->getServiceLocator()->get('TalentPoolService')
+                        );
+                    },                                
+                'TalentPoolEdit' =>
+                    function (ControllerManager $cm) {
+                        return new \Directorzone\Controller\Directory\People\TalentPoolEditController(
+                            $cm->getServiceLocator()->get('TalentPoolService')
                         );
                     },
                 'AjaxSearch' =>
@@ -268,6 +287,19 @@ class Module
                     );
                     return $instance;
                 },
+                'TalentPoolService' => function ($sm) {
+                    $instance = new TalentPoolService(
+                        $sm->get('UserTableGateway')
+                    );
+                    return $instance;
+                }, 
+                'UserTableGateway' => function ($sm) {
+                    $instance = new TableGateway(
+                        'user',
+                        $sm->get('Zend\Db\Adapter\Adapter')
+                    );
+                    return $instance;
+                },                               
                 'ArticleTableGateway' => function ($sm) {
                     $instance = new TableGateway(
                         'article',

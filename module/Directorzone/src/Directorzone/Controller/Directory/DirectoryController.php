@@ -32,4 +32,9 @@ class DirectoryController extends NetsensiaActionController
     {
     
     }
+    
+    public function talentPoolListAction()
+    {
+    
+    }
 }

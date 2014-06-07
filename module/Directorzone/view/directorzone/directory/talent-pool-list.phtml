@@ -1,0 +1,46 @@
+<?php echo $this->partial('directory-nav.phtml'); ?>
+<h3>Talent pool</h3>
+
+<table id="talent-pool" data-link="row" class="rowlink table table-striped table-bordered table-hover">
+<tr>
+<th><a class="columnHeading" data-column-number="1">Anonymous Profile Summary</a></th>
+<th><a class="columnHeading" data-column-number="2">Joined</a></th>
+
+
+</tr>
+</table>
+
+<ul class="pager">
+<li class="previous" id="previous" class="disabled"><a href="#">&larr; Previous</a></li>
+<li class="next" id="next"><a href="#">Next &rarr;</a></li>
+</ul>
+
+<script>
+
+$(document).ready(function() {
+	$(document).delegate('.columnHeading', 'click', function() {
+		loadTheTable();
+	});
+	loadTheTable();
+});
+
+function loadTheTable()
+{
+	netsensia_Pager(
+			1,
+			20,
+			'talent-pool',
+			'/ajax/talent-pool/list',
+			function(key, value) {
+				var url = '/directories/talent-pool/' + value.internalId;
+				var newRow = '<tr>';
+				newRow += '<td><a href="' + url + '">' + value.anonymousSummary + '</a></td>';
+				newRow += '<td>' + value.joinedDate + '</td>';
+				newRow += '</tr>';
+
+				return newRow;
+			}
+		);	
+}
+
+</script>

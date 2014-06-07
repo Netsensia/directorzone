@@ -79,6 +79,27 @@ return array(
                             ),
                         ),
                     ),
+                    'talent-pool' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/talent-pool',
+                            'defaults' => array(
+                                'controller' => 'Directorzone\Controller\Ajax\TalentPool',
+                            ),
+                        ),
+                        'may_terminate' => false,
+                        'child_routes' => array(
+                            'list' => array(
+                                'type' => 'literal',
+                                'options' => array(
+                                    'route' => '/list',
+                                    'defaults' => array(
+                                        'action' => 'talent-pool-list',
+                                    ),
+                                )
+                            ),
+                        ),
+                    ),
                     'article' => array(
                         'type' => 'literal',
                         'options' => array(
@@ -417,6 +438,31 @@ return array(
                                                 'controller' => 'PeopleEdit',
                                             ),
                                         ),
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+                    'talent-pool' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/talent-pool',
+                            'defaults' => array(
+                                'controller' => 'Directory',
+                                'action' => 'talent-pool-list',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'people-details' => array(
+                                'type' => 'segment',
+                                'options' => array(
+                                    'route' => '/:id',
+                                    'constraints' => ['id' => '[0-9]*'],
+                                    'defaults' => array(
+                                        'action' => 'talent-pool-details',
+                                        'controller' => 'TalentPoolView',
+                                        'id' => 0,
                                     ),
                                 ),
                             ),
