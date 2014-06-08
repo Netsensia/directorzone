@@ -53,6 +53,11 @@ class NetsensiaForm extends Form
         return $this->autoDateOnCreateArray;
     }
     
+    public function addMultiTable($options)
+    {
+        $this->addHidden($options['jointable'] . uniqid(), json_encode($options), 'form_multitable');     
+    }
+    
     public function addRelation($options)
     {
 		foreach ($options['fields'] as $field) {

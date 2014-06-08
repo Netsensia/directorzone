@@ -61,6 +61,21 @@ class BootstrapForm extends AbstractHelper
                 <?php
             }
             
+            if ($element->getAttribute('data-netsensia') == 'form_multitable') {
+                $options = json_decode($element->getValue());
+                
+                ?>
+                <label class="control-label"><?= $options->groupname; ?></label>
+                <table class="table" style="margin-top:1em">
+                <tr>
+                <?php foreach ($options->fields as $field): ?>
+                <th><?= $field->label; ?></th>
+                <?php endforeach; ?>
+                </tr>
+                </table>
+                <?php
+            }
+            
             if (strpos($element->getAttribute('data-netsensia'), 'image-upload-location') !== false) {
                 $this->imageLocationElementId = $element->getAttribute('id');
             }
