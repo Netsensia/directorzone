@@ -16,7 +16,7 @@ $(document).ready(function() {
 			}
 		});
 		
-		newRow += '<td id="asdasd"><a class="form_multitable_deleterow" href="#"><span class="glyphicon glyphicon-trash"></span></a></td></tr>';
+		newRow += '<td><a class="form_multitable_deleterow" href="#"><span class="glyphicon glyphicon-trash"></span></a></td></tr>';
 		$("table[data-widgetid='" + widgetId + "'] tr:last").after(newRow);
 		
 	});

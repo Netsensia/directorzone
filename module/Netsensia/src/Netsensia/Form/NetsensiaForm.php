@@ -156,19 +156,7 @@ class NetsensiaForm extends Form
         $select = new Select($name . 'id');
         $select->setLabel($label);
         
-        if (!$this->dbAdapter) {
-            throw new \Exception('DB Adapter is not set');
-        }
-
-        $tableGateway = new TableGateway($table, $this->dbAdapter);
-        
-        $rowset = $tableGateway->select();
-        
-        $optionsArray = [];
-
-        foreach ($rowset as $row) {
-            $optionsArray[$row[$tableKey]] = $row[$tableValue];
-        }
+        $optionsArray = $this->getOptionsArray($table, $tableKey, $tableValue);
         
         $select->setValueOptions($optionsArray);
         
@@ -182,6 +170,33 @@ class NetsensiaForm extends Form
         );
         
         $this->add($select);
+    }
+    
+    public function getOptionsArray($table, $tableKey = null, $tableValue = null)
+    {
+        if (!$this->dbAdapter) {
+            throw new \Exception('DB Adapter is not set');
+        }
+        
+        if ($tableKey == null) {
+            $tableKey = $table . 'id';
+        }
+        
+        if ($tableValue == null) {
+            $tableValue = $table;
+        }
+        
+        $tableGateway = new TableGateway($table, $this->dbAdapter);
+        
+        $rowset = $tableGateway->select();
+        
+        $optionsArray = [];
+        
+        foreach ($rowset as $row) {
+            $optionsArray[$row[$tableKey]] = $row[$tableValue];
+        }
+        
+        return $optionsArray;
     }
     
     public function addSelectWithInvisibleOther($options)
