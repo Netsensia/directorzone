@@ -22,6 +22,7 @@ class ProcessForm extends AbstractPlugin
         $request = $controller->getRequest();
         
         $sl = $this->controller->getServiceLocator();
+
         $tableModel = $sl->get($modelName . 'Model');
         
         $tableModel->init($modelId);
@@ -37,7 +38,7 @@ class ProcessForm extends AbstractPlugin
                 $modelData = [];
                 
                 foreach ($formData as $key => $value) {
-                    if ($key != 'form-submit') {
+                    if ($key != 'form-submit' && preg_match('/^netsensiaWidget/', $key) == 0) {
                         $modelField = preg_replace('/^' . $prefix . '/', '', $key);
                         $modelData[$modelField] = $value;
                     }

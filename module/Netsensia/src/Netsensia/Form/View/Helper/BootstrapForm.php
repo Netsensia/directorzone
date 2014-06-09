@@ -77,8 +77,8 @@ class BootstrapForm extends AbstractHelper
                 <?php foreach ($options->fields as $field): ?>
                 <th><?= $field->label; ?></th>
                 <?php endforeach; ?>
+                <th>&nbsp;</th>
                 </tr>
-                
                 </table>
                 
                 <?php
