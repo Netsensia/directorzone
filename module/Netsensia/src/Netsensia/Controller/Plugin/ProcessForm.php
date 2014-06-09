@@ -38,7 +38,22 @@ class ProcessForm extends AbstractPlugin
                 $modelData = [];
                 
                 foreach ($formData as $key => $value) {
-                    if ($key != 'form-submit' && preg_match('/^netsensiaWidget/', $key) == 0) {
+                    $isNetsensiaWidget = !(preg_match('/^netsensiaWidget/', $key) === 0);
+                    
+                    if ($isNetsensiaWidget) {
+                        $widget = json_decode($value);
+                        
+                        $widgetJoinTableModel = $sl->get($widget->jointablemodel . 'Model');
+                        
+                        $widgetFields = [];
+                        foreach ($widget->fields as $field) {
+                        	if ($field->name == 'select') {
+                        	    $widgetFields[] = $field->name . 'id';
+                        	} else {
+                        	    $widgetFields[] = $field->name;
+                        	}
+                        }
+                    } elseif ($key != 'form-submit') {
                         $modelField = preg_replace('/^' . $prefix . '/', '', $key);
                         $modelData[$modelField] = $value;
                     }

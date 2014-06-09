@@ -23,7 +23,7 @@ class AccountProfileForm extends NetsensiaForm
         
         $this->addMultiTable([
             'groupname' => 'Target Roles',
-            'jointable' => 'useravailableas',
+            'jointablemodel' => 'UserAvailableAs',
             'jointablekeycolumn' => 'userid',
             'fields' => [
                 ['type' => 'select', 'name' => 'jobtype', 'label' => 'Role'],
@@ -37,8 +37,7 @@ class AccountProfileForm extends NetsensiaForm
         
         $this->addMultiTable([
                'groupname' => 'Languages',
-               'jointable' => 'userlanguage',
-               'jointablekeycolumn' => 'userid',
+               'jointablemodel' => 'UserLanguage',
                'fields' => [
                   [
                      'type' => 'select',
@@ -55,8 +54,7 @@ class AccountProfileForm extends NetsensiaForm
         
         $this->addMultiTable([
             'groupname' => 'Academic Qualifications',
-            'jointable' => 'userqualification',
-            'jointablekeycolumn' => 'userid',
+            'jointablemodel' => 'UserQualification',
             'fields' => [
                [
                  'type' => 'select',
@@ -73,8 +71,7 @@ class AccountProfileForm extends NetsensiaForm
         
         $this->addMultiTable([
             'groupname' => 'Professional Qualifications',
-            'jointable' => 'userqualification',
-            'jointablekeycolumn' => 'userid',
+            'jointablemodel' => 'UserQualification',
             'fields' => [
             [
                 'type' => 'select',

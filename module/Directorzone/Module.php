@@ -339,6 +339,21 @@ class Module
                     $instance->setServiceLocator($sm);
                     return $instance;
                 },
+                'UserAvailableAsModel' => function ($sm) {
+                    $instance = new \Directorzone\Model\UserAvailableAs();
+                    $instance->setServiceLocator($sm);
+                    return $instance;
+                },
+                'UserLanguageModel' => function ($sm) {
+                    $instance = new \Directorzone\Model\UserLanguage();
+                    $instance->setServiceLocator($sm);
+                    return $instance;
+                },
+                'UserQualificationModel' => function ($sm) {
+                    $instance = new \Directorzone\Model\UserQualification();
+                    $instance->setServiceLocator($sm);
+                    return $instance;
+                },                                
                 'CompanyContactForm' => function ($sm) {
                     $form = new CompanyContactForm('companyContactForm');
                     $form->setTranslator($sm->get('translator'));
