@@ -30,8 +30,8 @@ class AccountProfileForm extends NetsensiaForm
                 ['type' => 'select', 'name' => 'country', 'label' => 'Country'],
                 ['type' => 'select', 'name' => 'paylevel', 'label' => 'Pay Level'],
                 ['type' => 'select', 'name' => 'sector', 'label' => 'Primary Sector'],
-                ['type' => 'select', 'name' => 'sector', 'label' => 'Headline'],
-                ['type' => 'select', 'name' => 'sector', 'label' => 'Comment'],
+                ['type' => 'text', 'name' => 'sector', 'label' => 'Headline'],
+                ['type' => 'text', 'name' => 'sector', 'label' => 'Comment'],
             ],
         ]);
         

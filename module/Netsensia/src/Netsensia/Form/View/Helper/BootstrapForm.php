@@ -66,13 +66,21 @@ class BootstrapForm extends AbstractHelper
                 
                 ?>
                 <label class="control-label"><?= $options->groupname; ?></label>
-                <table class="table" style="margin-top:1em">
+                <br>
+                <a class="form_multitable_addrow" data-widgetid="<?= $element->getAttribute('id'); ?>">
+                <span class="glyphicon glyphicon-plus"></span>
+                </a>
+                &nbsp;
+                <a class="form_multitable_addrow" data-widgetid="<?= $element->getAttribute('id'); ?>">Add row</a>
+                <table class="table form_multitable" data-widgetid="<?= $element->getAttribute('id'); ?>" style="margin-top:1em">
                 <tr>
                 <?php foreach ($options->fields as $field): ?>
                 <th><?= $field->label; ?></th>
                 <?php endforeach; ?>
                 </tr>
+                
                 </table>
+                
                 <?php
             }
             

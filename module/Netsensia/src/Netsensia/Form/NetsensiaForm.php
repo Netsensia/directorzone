@@ -55,7 +55,7 @@ class NetsensiaForm extends Form
     
     public function addMultiTable($options)
     {
-        $this->addHidden($options['jointable'] . uniqid(), json_encode($options), 'form_multitable');     
+        $this->addHidden($options['jointable'] . '_' . uniqid(), json_encode($options), 'form_multitable');     
     }
     
     public function addRelation($options)
