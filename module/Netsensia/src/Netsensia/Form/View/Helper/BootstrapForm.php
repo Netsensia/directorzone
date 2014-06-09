@@ -3,6 +3,7 @@ namespace Netsensia\Form\View\Helper;
 
 use Zend\View\Helper\AbstractHelper;
 use Zend\Form\Element\Submit;
+use Zend\Form\Element\Select;
 
 class BootstrapForm extends AbstractHelper
 {
@@ -76,6 +77,26 @@ class BootstrapForm extends AbstractHelper
                 <tr>
                 <?php foreach ($options->fields as $field): ?>
                 <th><?= $field->label; ?></th>
+                <?php endforeach; ?>
+                <th>&nbsp;</th>
+                </tr>
+                <tr>
+                <?php foreach ($options->fields as $field): ?>
+                <td>
+                <?php
+                    switch ($field->type) {
+                        case 'select' :
+                            $select = new Select($field->name);
+                            $select->setAttribute('class', 'netsensia_form_widget');
+                            $select->setValueOptions(
+                                $this->form->getOptionsArray($field->name)
+                            );
+                            echo $this->view->formElement($select);
+                        case 'text':
+                            break;
+                    }
+                ?>
+                </td>
                 <?php endforeach; ?>
                 <th>&nbsp;</th>
                 </tr>

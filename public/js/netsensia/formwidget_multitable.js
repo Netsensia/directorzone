@@ -1,23 +1,6 @@
 $(document).ready(function() {
 	$(document).delegate('.form_multitable_addrow', 'click', function() {
 		var widgetId = $(this).attr('data-widgetid');
-		var widgetData = jQuery.parseJSON( $('#' + widgetId).val() );
-		var newRow = '<tr>';
-		
-		$.each(widgetData.fields, function(key, value) {
-			switch(value.type) {
-			    case 'select':
-			        newRow += '<td><select class="netsensia_form_widget"></select></td>';
-			        break;
-			    case 'text':
-			    	newRow += '<td><a href="#" class="netsensia_form_widget">Edit</a></td>';
-			        break;
-			    default:
-			}
-		});
-		
-		newRow += '<td><a class="form_multitable_deleterow" href="#"><span class="glyphicon glyphicon-trash"></span></a></td></tr>';
-		$("table[data-widgetid='" + widgetId + "'] tr:last").after(newRow);
 		
 	});
 	

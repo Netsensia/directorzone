@@ -58,11 +58,11 @@ class AccountProfileForm extends NetsensiaForm
             'fields' => [
                [
                  'type' => 'select',
-                 'name' => 'qualification',
+                 'name' => 'qualificationtype',
                  'label' => 'Qualification',
                ],
                [
-                 'type' => 'select',
+                 'type' => 'text',
                  'name' => 'subject',
                  'label' => 'Subject',
                ]
@@ -75,11 +75,11 @@ class AccountProfileForm extends NetsensiaForm
             'fields' => [
             [
                 'type' => 'select',
-                'name' => 'qualification',
+                'name' => 'qualificationtype',
                 'label' => 'Qualification',
             ],
             [
-                'type' => 'select',
+                'type' => 'text',
                 'name' => 'subject',
                 'label' => 'Subject',
             ]
