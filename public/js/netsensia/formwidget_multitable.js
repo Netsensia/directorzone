@@ -33,20 +33,32 @@ $(document).ready(function() {
 	
 	$(document).delegate('.form_multitable_addrow', 'click', function() {
 		var widgetId = $(this).attr('data-widgetid');
-		
 		var tableEl = $('table[data-widgetid="' + widgetId + '"]');
+		var numRows = tableEl.find('tr:visible').length - 1;
 		
 		var lastRow = $(tableEl).find('tr:last');
-	    var newRow = $(lastRow).clone().insertAfter(lastRow);
-	    
-	    var deleteIconTd = $(newRow).find('td:last-child');
-	    $(deleteIconTd).css('visibility', 'visible');
+		
+		if (numRows == 0) {
+			$(lastRow).css('display', 'table-row');
+		} else {
+			var newRow = $(lastRow).clone().insertAfter(lastRow);
+		}
 	    
 	    setEditableElements(tableEl, 'popup');
 	});
 	
 	$(document).delegate('.form_multitable_deleterow', 'click', function() {
-		var id = $(this).parent().parent().remove();
+		var widgetId = $(this).attr('data-widgetid');
+		var tableEl = $('table[data-widgetid="' + widgetId + '"]');
+		var numRows = tableEl.find('tr:visible').length - 1;
+		
+		if (numRows == 1) {
+			$(this).parent().parent().css('display', 'none');
+		} else {
+			$(this).parent().parent().remove();
+		}
+		
+		return false;
 	});
 	
 	$(document).delegate('.form_multitable_edit', 'click', function() {

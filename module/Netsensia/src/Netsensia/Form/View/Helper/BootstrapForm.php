@@ -97,7 +97,7 @@ class BootstrapForm extends AbstractHelper
                 ?>
                 </td>
                 <?php endforeach; ?>
-                <td style="visibility:hidden"><a href="#" class="form_multitable_deleterow"><span class="glyphicon glyphicon-trash"></span></a></td>
+                <td><a href="#" class="form_multitable_deleterow" data-widgetid="<?= $element->getAttribute('id'); ?>"><span class="glyphicon glyphicon-trash"></span></a></td>
                 </tr>
                 </table>
                 <a class="form_multitable_addrow" data-widgetid="<?= $element->getAttribute('id'); ?>">
