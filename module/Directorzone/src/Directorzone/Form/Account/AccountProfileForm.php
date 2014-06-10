@@ -22,6 +22,7 @@ class AccountProfileForm extends NetsensiaForm
         $this->addSelect('jobarea');
         
         $this->addMultiTable([
+            'callouttext' => 'Please list your target roles',
             'groupname' => 'Target Roles',
             'jointablemodel' => 'UserAvailableAs',
             'jointablekeycolumn' => 'userid',
@@ -36,6 +37,7 @@ class AccountProfileForm extends NetsensiaForm
         ]);
         
         $this->addMultiTable([
+               'callouttext' => 'Please list any languages you know',
                'groupname' => 'Languages',
                'jointablemodel' => 'UserLanguage',
                'fields' => [
@@ -53,6 +55,7 @@ class AccountProfileForm extends NetsensiaForm
         ]);
         
         $this->addMultiTable([
+            'callouttext' => 'Please list your academic qualifications',
             'groupname' => 'Academic Qualifications',
             'jointablemodel' => 'UserQualification',
             'fields' => [
@@ -70,6 +73,7 @@ class AccountProfileForm extends NetsensiaForm
         ]);
         
         $this->addMultiTable([
+            'callouttext' => 'Please list your professional qualifications',
             'groupname' => 'Professional Qualifications',
             'jointablemodel' => 'UserProfessionalQualification',
             'fields' => [
