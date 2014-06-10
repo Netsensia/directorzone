@@ -98,7 +98,7 @@ class BootstrapForm extends AbstractHelper
                 ?>
                 </td>
                 <?php endforeach; ?>
-                <th>&nbsp;</th>
+                <td style="visibility:hidden"><a href="#" class="form_multitable_deleterow"><span class="glyphicon glyphicon-trash"></span></a></td>
                 </tr>
                 </table>
                 

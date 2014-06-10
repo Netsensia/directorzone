@@ -2,6 +2,12 @@ $(document).ready(function() {
 	$(document).delegate('.form_multitable_addrow', 'click', function() {
 		var widgetId = $(this).attr('data-widgetid');
 		
+		var lastRow = $('table[data-widgetid="' + widgetId + '"] tr:last');
+	    var newRow = $(lastRow).clone().insertAfter(lastRow);
+	    
+	    var deleteIconTd = $(newRow).find('td:last-child');
+	    $(deleteIconTd).css('visibility', 'visible');
+	    
 	});
 	
 	$(document).delegate('.form_multitable_deleterow', 'click', function() {
