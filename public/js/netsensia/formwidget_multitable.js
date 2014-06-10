@@ -1,12 +1,13 @@
 $(document).ready(function() {
 	$.fn.editable.defaults.mode = 'popup';
 	
-	$('table.form_multitable').each(function() {
+	$('table.widget_multitable').each(function() {
 
 		var numColumns = $(this).find('tr td').length;
 		var editableMode = numColumns < 2 ? 'inline' : 'popup';
 
 		$(this).find('select').each(function() {
+			$(this).attr('name', 'widgetignore[]');
 			$(this).prepend($('<option>', {
 			    value: -1,
 			    text: 'Please select...'
@@ -19,7 +20,7 @@ $(document).ready(function() {
 	});
 	
 	function setEditableElements(tableEl, editableMode) {
-		tableEl.find('.form_multitable_edit').each(function() {
+		tableEl.find('.widget_multitable_edit').each(function() {
 			$(this).editable({
 				pk: 1,
 				url: '',
@@ -31,7 +32,7 @@ $(document).ready(function() {
 		});
 	}
 	
-	$(document).delegate('.form_multitable_addrow', 'click', function() {
+	$(document).delegate('.widget_multitable_addrow', 'click', function() {
 		var widgetId = $(this).attr('data-widgetid');
 		var tableEl = $('table[data-widgetid="' + widgetId + '"]');
 		var numRows = tableEl.find('tr:visible').length - 1;
@@ -47,7 +48,7 @@ $(document).ready(function() {
 	    setEditableElements(tableEl, 'popup');
 	});
 	
-	$(document).delegate('.form_multitable_deleterow', 'click', function() {
+	$(document).delegate('.widget_multitable_deleterow', 'click', function() {
 		var widgetId = $(this).attr('data-widgetid');
 		var tableEl = $('table[data-widgetid="' + widgetId + '"]');
 		var numRows = tableEl.find('tr:visible').length - 1;
@@ -61,11 +62,11 @@ $(document).ready(function() {
 		return false;
 	});
 	
-	$(document).delegate('.form_multitable_edit', 'click', function() {
+	$(document).delegate('.widget_multitable_edit', 'click', function() {
 	});
 	
 	$(document).delegate('input[name="form-submit"]', 'click', function() {
-		$('.form_multitable').each(function() {
+		$('.widget_multitable').each(function() {
 			
 			var widgetId = $(this).attr('data-widgetid');
 			var widgetData = jQuery.parseJSON( $('#' + widgetId).val() );

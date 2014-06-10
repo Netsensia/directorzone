@@ -53,7 +53,7 @@ class ProcessForm extends AbstractPlugin
                         	    $widgetFields[] = $field->name;
                         	}
                         }
-                    } elseif ($key != 'form-submit') {
+                    } elseif ($key != 'form-submit' && $key != 'widgetignore') {
                         $modelField = preg_replace('/^' . $prefix . '/', '', $key);
                         $modelData[$modelField] = $value;
                     }

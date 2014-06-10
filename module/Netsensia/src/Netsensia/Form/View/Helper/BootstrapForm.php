@@ -3,7 +3,7 @@ namespace Netsensia\Form\View\Helper;
 
 use Zend\View\Helper\AbstractHelper;
 use Zend\Form\Element\Submit;
-use Zend\Form\Element\Select;
+use Netsensia\Form\View\Helper\Widget\MultiTable;
 
 class BootstrapForm extends AbstractHelper
 {
@@ -62,51 +62,8 @@ class BootstrapForm extends AbstractHelper
                 <?php
             }
             
-            if ($element->getAttribute('data-netsensia') == 'form_multitable') {
-                $options = json_decode($element->getValue());
-                
-                ?>
-                <label class="control-label"><?= $options->groupname; ?></label>
-                <table class="table form_multitable" style="margin-bottom:5px" data-widgetid="<?= $element->getAttribute('id'); ?>" style="margin-top:1em">
-                <tr>
-                <?php foreach ($options->fields as $field): ?>
-                <th><?= $field->label; ?></th>
-                <?php endforeach; ?>
-                <th>&nbsp;</th>
-                </tr>
-                <tr>
-                <?php foreach ($options->fields as $field): ?>
-                <td>
-                <?php
-                    switch ($field->type) {
-                        case 'select' :
-                            $select = new Select($field->name);
-                            $select->setAttribute('class', 'netsensia_form_widget');
-                            $select->setValueOptions(
-                                $this->form->getOptionsArray($field->name)
-                            );
-                            echo $this->view->formElement($select);
-                            break;
-                        case 'text':
-                            echo '<a class="form_multitable_edit" data-type="text" data-value="" id="' . $element->getAttribute('id') . '_' . $field->name . '" data-title="Enter ' . $field->label . '" href="#">Edit</a>';
-                            break;
-                        case 'textarea':
-                            echo '<a class="form_multitable_edit" data-type="textarea" data-value="" id="' . $element->getAttribute('id') . '_' . $field->name . '" data-title="Enter ' . $field->label . '" href="#">Edit</a>';
-                            break;
-                    }
-                ?>
-                </td>
-                <?php endforeach; ?>
-                <td><a href="#" class="form_multitable_deleterow" data-widgetid="<?= $element->getAttribute('id'); ?>"><span class="glyphicon glyphicon-trash"></span></a></td>
-                </tr>
-                </table>
-                <a class="form_multitable_addrow" data-widgetid="<?= $element->getAttribute('id'); ?>">
-                <span class="glyphicon glyphicon-plus"></span>
-                </a>
-                &nbsp;
-                <a class="form_multitable_addrow" data-widgetid="<?= $element->getAttribute('id'); ?>">Add row</a>
-                
-                <?php
+            if (preg_match('/^widget_/', $element->getAttribute('data-netsensia')) !== 0) {
+                $this->widget($element);
             }
             
             if (strpos($element->getAttribute('data-netsensia'), 'image-upload-location') !== false) {
@@ -150,6 +107,14 @@ class BootstrapForm extends AbstractHelper
         }
         echo('</div>');
         
+    }
+    
+    protected function widget($element)
+    {
+        if ($element->getAttribute('data-netsensia') == 'widget_multitable') {
+            $widget = new MultiTable($this->view, $this->form, $element);
+            $widget->render();
+        }
     }
     
     protected function renderFieldsets()
