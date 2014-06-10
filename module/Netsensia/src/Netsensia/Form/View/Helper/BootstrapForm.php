@@ -67,13 +67,7 @@ class BootstrapForm extends AbstractHelper
                 
                 ?>
                 <label class="control-label"><?= $options->groupname; ?></label>
-                <br>
-                <a class="form_multitable_addrow" data-widgetid="<?= $element->getAttribute('id'); ?>">
-                <span class="glyphicon glyphicon-plus"></span>
-                </a>
-                &nbsp;
-                <a class="form_multitable_addrow" data-widgetid="<?= $element->getAttribute('id'); ?>">Add row</a>
-                <table class="table form_multitable" data-widgetid="<?= $element->getAttribute('id'); ?>" style="margin-top:1em">
+                <table class="table form_multitable" style="margin-bottom:5px" data-widgetid="<?= $element->getAttribute('id'); ?>" style="margin-top:1em">
                 <tr>
                 <?php foreach ($options->fields as $field): ?>
                 <th><?= $field->label; ?></th>
@@ -92,7 +86,9 @@ class BootstrapForm extends AbstractHelper
                                 $this->form->getOptionsArray($field->name)
                             );
                             echo $this->view->formElement($select);
+                            break;
                         case 'text':
+                            echo '<a href="#">Edit</a>';
                             break;
                     }
                 ?>
@@ -101,6 +97,11 @@ class BootstrapForm extends AbstractHelper
                 <td style="visibility:hidden"><a href="#" class="form_multitable_deleterow"><span class="glyphicon glyphicon-trash"></span></a></td>
                 </tr>
                 </table>
+                <a class="form_multitable_addrow" data-widgetid="<?= $element->getAttribute('id'); ?>">
+                <span class="glyphicon glyphicon-plus"></span>
+                </a>
+                &nbsp;
+                <a class="form_multitable_addrow" data-widgetid="<?= $element->getAttribute('id'); ?>">Add row</a>
                 
                 <?php
             }
