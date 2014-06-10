@@ -178,5 +178,9 @@ div.mini-list-item {
 	padding: 0.3em 1em 0.3em 1em;
 	font-size:0.95em;
 }
+
+div.editable-container div.form-group {
+	margin-left:0px;
+	margin-right:0px;
 }
 

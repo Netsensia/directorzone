@@ -88,7 +88,10 @@ class BootstrapForm extends AbstractHelper
                             echo $this->view->formElement($select);
                             break;
                         case 'text':
-                            echo '<a href="#">Edit</a>';
+                            echo '<a class="form_multitable_edit" data-type="text" data-value="" id="' . $element->getAttribute('id') . '_' . $field->name . '" data-title="Enter ' . $field->label . '" href="#">Edit</a>';
+                            break;
+                        case 'textarea':
+                            echo '<a class="form_multitable_edit" data-type="textarea" data-value="" id="' . $element->getAttribute('id') . '_' . $field->name . '" data-title="Enter ' . $field->label . '" href="#">Edit</a>';
                             break;
                     }
                 ?>

@@ -7,27 +7,30 @@
 
         <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
 
-        <!-- Le styles -->
+        <!-- Styles -->
         <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/brand/favicon.ico'))
                         ->prependStylesheet($this->basePath() . '/css/style.css')
                         ->prependStylesheet($this->basePath() . '/css/datepicker.css')
                         ->prependStylesheet($this->basePath() . '/css/button-spinner.css')
                         ->prependStylesheet($this->basePath() . '/js/jquery-ui-1.10.3/themes/base/jquery-ui.css')
                         ->prependStylesheet('//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.0.1-p7/css/bootstrap.min.css')
-                ?>
+                        ->prependStylesheet($this->basePath() . '/js/bootstrap3-editable-1.5.1/bootstrap3-editable/css/bootstrap-editable.css')
+        ?>
 
         <!-- Scripts -->
         <?php echo $this->headScript()->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
                       ->prependFile($this->basePath() . '/js/validate.min.js')
                       ->prependFile($this->basePath() . '/js/netsensia/pager.js')
                       ->prependFile($this->basePath() . '/js/netsensia/formwidget_multitable.js')
+                      ->prependFile($this->basePath() . '/js/bootstrap3-editable-1.5.1/bootstrap3-editable/js/bootstrap-editable.js')
                       ->prependFile($this->basePath() . '/js/application.js')
                       ->prependFile($this->basePath() . '/js/ajax-file-upload/ajaxFileUpload.js')
                       ->prependFile($this->basePath() . '/js/jquery-ui-1.10.3/ui/minified/jquery-ui.min.js')
                       ->prependFile('//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.0.1-p7/js/bootstrap.min.js')
                       ->prependFile('//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js')
-    
-                ?>
+
+                      
+        ?>
 
 </head>
 <body>

@@ -31,7 +31,7 @@ class AccountProfileForm extends NetsensiaForm
                 ['type' => 'select', 'name' => 'paylevel', 'label' => 'Pay Level'],
                 ['type' => 'select', 'name' => 'sector', 'label' => 'Primary Sector'],
                 ['type' => 'text', 'name' => 'sector', 'label' => 'Headline'],
-                ['type' => 'text', 'name' => 'sector', 'label' => 'Comment'],
+                ['type' => 'textarea', 'name' => 'sector', 'label' => 'Comment'],
             ],
         ]);
         
