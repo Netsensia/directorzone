@@ -16,6 +16,7 @@ $(document).ready(function() {
 		
 		$(this).find('input').each(function() {
 			$(this).width('60%');
+			$(this).attr('name', 'widgetignore[]');
 		});
 		
 		$(this).find('select').each(function() {
