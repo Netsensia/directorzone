@@ -3,8 +3,15 @@ $(document).ready(function() {
 	
 	$('table.widget_multitable').each(function() {
 
-		var numColumns = $(this).find('tr td').length;
+		var numColumns = $(this).find('tr th').length;
 		var editableMode = numColumns < 2 ? 'inline' : 'popup';
+		
+		if (numColumns == 3) {
+
+			$(this).find('th').each(function() {
+				$(this).width('33%');
+			});
+		}
 
 		$(this).find('select').each(function() {
 			$(this).attr('name', 'widgetignore[]');

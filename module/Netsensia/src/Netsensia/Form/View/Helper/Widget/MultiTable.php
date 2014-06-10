@@ -52,7 +52,7 @@ class MultiTable
         ?>
         </td>
         <?php endforeach; ?>
-        <td><a href="#" class="widget_multitable_deleterow" data-widgetid="<?= $this->element->getAttribute('id'); ?>"><span class="glyphicon glyphicon-trash"></span></a></td>
+        <td style="text-align:right"><a href="#" class="widget_multitable_deleterow" data-widgetid="<?= $this->element->getAttribute('id'); ?>"><span class="glyphicon glyphicon-trash"></span></a></td>
         </tr>
         </table>
         <a class="widget_multitable_addrow" data-widgetid="<?= $this->element->getAttribute('id'); ?>">

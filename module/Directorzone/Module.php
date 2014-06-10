@@ -353,7 +353,12 @@ class Module
                     $instance = new \Directorzone\Model\UserQualification();
                     $instance->setServiceLocator($sm);
                     return $instance;
-                },                                
+                },
+                'UserProfessionalQualificationModel' => function ($sm) {
+                    $instance = new \Directorzone\Model\UserProfessionalQualification();
+                    $instance->setServiceLocator($sm);
+                    return $instance;
+                },
                 'CompanyContactForm' => function ($sm) {
                     $form = new CompanyContactForm('companyContactForm');
                     $form->setTranslator($sm->get('translator'));

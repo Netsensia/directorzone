@@ -71,11 +71,11 @@ class AccountProfileForm extends NetsensiaForm
         
         $this->addMultiTable([
             'groupname' => 'Professional Qualifications',
-            'jointablemodel' => 'UserQualification',
+            'jointablemodel' => 'UserProfessionalQualification',
             'fields' => [
             [
-                'type' => 'select',
-                'name' => 'qualificationtype',
+                'type' => 'text',
+                'name' => 'qualification',
                 'label' => 'Qualification',
             ],
             [
