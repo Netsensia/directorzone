@@ -42,7 +42,6 @@ class BootstrapForm extends AbstractHelper
     
     protected function renderElements($elements)
     {
-        echo('<div class="well">');
         
         $this->hasImage = false;
         
@@ -105,7 +104,6 @@ class BootstrapForm extends AbstractHelper
             echo('</div>');
             echo('</div>');
         }
-        echo('</div>');
         
     }
     
