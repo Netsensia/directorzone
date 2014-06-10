@@ -1,4 +1,14 @@
 $(document).ready(function() {
+	$('table.form_multitable').each(function() {
+		$(this).find('select').each(function() {
+			$(this).prepend($('<option>', {
+			    value: -1,
+			    text: 'Please select...'
+			}));
+			$(this).val(-1);
+		});
+	});
+	
 	$(document).delegate('.form_multitable_addrow', 'click', function() {
 		var widgetId = $(this).attr('data-widgetid');
 		
