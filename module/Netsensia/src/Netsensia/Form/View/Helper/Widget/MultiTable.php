@@ -2,6 +2,7 @@
 namespace Netsensia\Form\View\Helper\Widget;
 
 use Zend\Form\Element\Select;
+use Zend\Form\Element\Text;
 
 class MultiTable
 {
@@ -42,11 +43,16 @@ class MultiTable
                     );
                     echo $this->view->formElement($select);
                     break;
-                case 'text':
+                case 'textlink':
                     echo '<a class="widget_multitable_edit" data-type="text" data-value="" id="' . $this->element->getAttribute('id') . '_' . $field->name . '" data-title="Enter ' . $field->label . '" href="#">Edit</a>';
                     break;
-                case 'textarea':
+                case 'textarealink':
                     echo '<a class="widget_multitable_edit" data-type="textarea" data-value="" id="' . $this->element->getAttribute('id') . '_' . $field->name . '" data-title="Enter ' . $field->label . '" href="#">Edit</a>';
+                    break;
+                case 'text':
+                    $text = new Text($field->name);
+                    $text->setAttribute('class', 'netsensia_form_widget');
+                    echo $this->view->formElement($text);
                     break;
             }
         ?>

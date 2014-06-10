@@ -11,6 +11,10 @@ $(document).ready(function() {
 			$(this).find('th').each(function() {
 				$(this).width('33%');
 			});
+			
+			$(this).find('input').each(function() {
+				$(this).width('60%');
+			});
 		}
 
 		$(this).find('select').each(function() {
