@@ -97,7 +97,7 @@ class AccountProfileForm extends NetsensiaForm
         $this->addTextArea('talent-pool-summary');
         $this->addTextArea('talent-pool-summary-skills');
         $this->addTextArea('talent-pool-summary-experience');
-        $this->addTextArea('talent-pool-interests-summary');
+        $this->addTextArea('talent-pool-summary-interests');
         
         $this->addSubmit('Submit');
         
