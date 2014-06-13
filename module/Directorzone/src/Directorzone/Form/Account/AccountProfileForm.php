@@ -14,15 +14,10 @@ class AccountProfileForm extends NetsensiaForm
     {
         $this->setFieldPrefix('account-profile-');
         $this->setDefaultIcon('user');
-
-        $this->addTextArea('talent-pool-summary');
-
-        $this->addSelect('profession');
         
-        $this->addSelect('jobarea');
+        $this->addSection(['title' => 'Target Roles', 'description' => 'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.']);
         
         $this->addMultiTable([
-            'callouttext' => 'Please list your target roles',
             'groupname' => 'Target Roles',
             'jointablemodel' => 'UserAvailableAs',
             'jointablekeycolumn' => 'userid',
@@ -35,6 +30,12 @@ class AccountProfileForm extends NetsensiaForm
                 ['type' => 'textarealink', 'name' => 'sector', 'label' => 'Comment'],
             ],
         ]);
+        
+        $this->addSection(['title' => 'Expertise', 'description' => 'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.']);
+        
+        $this->addSelect('profession');
+        
+        $this->addSelect('jobarea');
         
         $this->addMultiTable([
                'callouttext' => 'Please list any languages you know',
@@ -89,6 +90,14 @@ class AccountProfileForm extends NetsensiaForm
             ]
             ],
             ]);
+        
+
+        $this->addSection(['title' => 'Summary', 'description' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.']);
+        
+        $this->addTextArea('talent-pool-summary');
+        $this->addTextArea('talent-pool-summary-skills');
+        $this->addTextArea('talent-pool-summary-experience');
+        $this->addTextArea('talent-pool-interests-summary');
         
         $this->addSubmit('Submit');
         

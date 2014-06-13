@@ -187,7 +187,6 @@ div.editable-container div.form-group {
 
 /* Base styles (regardless of theme) */
 .bs-callout {
-margin: 20px 0;
 padding: 15px 30px 15px 15px;
 border-left: 5px solid #eee;
 }
@@ -214,5 +213,24 @@ border-color: #f0ad4e;
 .bs-callout-info {
 background-color: #f0f7fd;
 border-color: #5bc0de;
+}
+
+table caption {
+	top: 15px;
+	left: 15px;
+	text-align:left;
+	font-size: 12px;
+	font-weight: 700;
+	color: #bbb;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+table {
+	margin-top:1em;
+}
+
+input[type=submit] {
+	margin-top:1em;
 }
 

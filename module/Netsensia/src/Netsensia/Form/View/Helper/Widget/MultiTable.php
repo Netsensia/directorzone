@@ -22,11 +22,8 @@ class MultiTable
         $options = json_decode($this->element->getValue());
         
         ?>
-        <div class="bs-callout bs-callout-info">
-        <h4><?= $options->groupname ?></h4>
-        <?php if (isset($options->callouttext)) echo $options->callouttext; ?>
-        </div>
         <table class="table widget_multitable" style="margin-bottom:5px" data-widgetid="<?= $this->element->getAttribute('id'); ?>" style="margin-top:1em">
+        <?php if (isset($options->groupname)) echo '<caption>' . $options->groupname . '</caption>'; ?>
         <tr>
         <?php foreach ($options->fields as $field): ?>
         <th><?= $field->label; ?></th>
