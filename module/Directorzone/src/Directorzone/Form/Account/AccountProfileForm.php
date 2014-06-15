@@ -15,6 +15,8 @@ class AccountProfileForm extends NetsensiaForm
         $this->setFieldPrefix('account-profile-');
         $this->setDefaultIcon('user');
         
+        $this->addSelect(['label' => 'Publish Status', 'name' => 'talentpoolpublishstatus']);
+        
         $this->addSection(['title' => 'Target Roles', 'description' => 'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.']);
         
         $this->addMultiTable([

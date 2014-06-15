@@ -232,5 +232,14 @@ table {
 
 input[type=submit] {
 	margin-top:1em;
+	margin-bottom:1em;
+}
+
+input[type=checkbox] {
+	margin-bottom:1em;
+}
+
+div[data-netsensia-group=account-profile-talentpoolpublishstatus] {
+	margin-bottom: 1em;
 }
 
