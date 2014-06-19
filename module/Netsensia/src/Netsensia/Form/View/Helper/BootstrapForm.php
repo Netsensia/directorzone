@@ -5,6 +5,7 @@ use Zend\View\Helper\AbstractHelper;
 use Zend\Form\Element\Submit;
 use Netsensia\Form\View\Helper\Widget\MultiTable;
 use Netsensia\Form\View\Helper\Widget\SectionTitle;
+use Netsensia\Form\View\Helper\Widget\Overview;
 
 class BootstrapForm extends AbstractHelper
 {
@@ -118,6 +119,12 @@ class BootstrapForm extends AbstractHelper
         
         if ($element->getAttribute('data-netsensia') == 'widget_sectiontitle') {
             $widget = new SectionTitle($this->view, $this->form, $element);
+            $widget->render();
+            return;
+        }
+        
+        if ($element->getAttribute('data-netsensia') == 'widget_overview') {
+            $widget = new Overview($this->view, $this->form, $element);
             $widget->render();
             return;
         }

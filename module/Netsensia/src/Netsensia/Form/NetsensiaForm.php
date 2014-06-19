@@ -43,6 +43,11 @@ class NetsensiaForm extends Form
         $this->add($submitButton);
     }
     
+    public function addOverview($options)
+    {
+        $this->addHidden('netsensiaWidget_overview_' . uniqid(), $options['description'], 'widget_overview');
+    }
+    
     public function addSection($options)
     {
         $this->addHidden('netsensiaWidget_sectionTitle_' . uniqid(), $options['title'] . '|' . $options['description'], 'widget_sectiontitle');

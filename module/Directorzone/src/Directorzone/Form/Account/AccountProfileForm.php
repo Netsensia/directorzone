@@ -15,9 +15,15 @@ class AccountProfileForm extends NetsensiaForm
         $this->setFieldPrefix('account-profile-');
         $this->setDefaultIcon('user');
         
+        $this->addOverview(['description' => 
+            'Once completed, this anonymous profile will be published in the Talent Pool directory. This will be visible to all site visitors and allow logged-in members to message you for recruitment or other commercial purposes. Depending on the value of each approach, you may choose to respond and disclose your identity, or not respond.'
+        ]);
+        
         $this->addSelect(['label' => 'Publish Status', 'name' => 'talentpoolpublishstatus']);
         
-        $this->addSection(['title' => 'Target Roles', 'description' => 'It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.']);
+        $this->addSection([
+            'title' => 'Target Roles',
+            'description' => 'Each target role described, up to a maximum of 3, will be published as a separate headline on the Talent Pool listing page.']);
         
         $this->addMultiTable([
             'groupname' => 'Target Roles',
@@ -33,11 +39,11 @@ class AccountProfileForm extends NetsensiaForm
             ],
         ]);
         
-        $this->addSection(['title' => 'Expertise', 'description' => 'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.']);
+        $this->addSection(['title' => 'Expertise', 'description' => '']);
         
         $this->addSelect('profession');
         
-        $this->addSelect('jobarea');
+        $this->addSelect(['label' => 'Job Area', 'name' => 'jobarea']);
         
         $this->addMultiTable([
                'callouttext' => 'Please list any languages you know',
@@ -94,7 +100,7 @@ class AccountProfileForm extends NetsensiaForm
             ]);
         
 
-        $this->addSection(['title' => 'Summary', 'description' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.']);
+        $this->addSection(['title' => 'Summary', 'description' => 'Please feel free to enhance your anonymous profile with further information in these text boxes - Summary, Skills, Experience, Personal Interests - that will apply to each target role that you complete.']);
         
         $this->addTextArea('talent-pool-summary');
         $this->addTextArea('talent-pool-summary-skills');
