@@ -24,9 +24,9 @@ class PeopleService extends NetsensiaService
     {
         $rowset = $this->peopleDirectoryTable->select(
             function (Select $select) use ($start, $end, $order) {
-                $columns = ['forename', 'appointmenttype', 'officerid', 'officernumber', 'dob', 'companyreference', 'surname'];
+                $columns = ['forename', 'appointmenttype', 'officerid', 'officernumber', 'dob', 'companyreference', 'surname', 'createdtime'];
                 
-                $sortColumns = ['surname', 'companydirectory.name', 'appointmenttype', 'dob'];
+                $sortColumns = ['surname', 'companydirectory.name', 'appointmenttype', 'dob', 'createdtime'];
                 
                 $select->where(
                     ['appointmentstatus' => 'CURRENT']
@@ -74,6 +74,7 @@ class PeopleService extends NetsensiaService
                 'appointmenttype' => $type,
                 'companyname' => $result['name'],
                 'dob' => $result['dob'],
+                'createdTime' => $result['createdtime'],
                 'name' => $result['forename'] . ' ' . $result['surname']
             ];
         }

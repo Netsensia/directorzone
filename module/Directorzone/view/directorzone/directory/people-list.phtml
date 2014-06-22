@@ -7,6 +7,7 @@
 <th><a class="columnHeading" data-column-number="2">Company</a></th>
 <th><a class="columnHeading" data-column-number="3">Appointment Type</a></th>
 <th><a class="columnHeading" data-column-number="4">Date of Birth</a></th>
+<th><a class="columnHeading" data-column-number="4">Added</a></th>
 </tr>
 </table>
 
@@ -38,6 +39,7 @@ function loadTheTable()
 				newRow += '<td>' + value.companyname + '</td>';
 				newRow += '<td>' + value.appointmenttype + '</td>';
 				newRow += '<td>' + value.dob + '</td>';
+				newRow += '<td class="prettydate">' + prettyDate(value.createdTime) + '</td>';
 				newRow += '</tr>';
 
 				return newRow;
