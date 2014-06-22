@@ -135,6 +135,10 @@ class CompanyController extends NetsensiaActionController
         foreach ($results as $result) {
             
             $name = $result['name'];
+            $ceo = '';
+            $sectors = '';
+            $turnover = '';
+            $createdTime = '';
                         
             if (isset($result['companynumber'])) {
                 $companyNumber = $result['companynumber'];
@@ -148,6 +152,10 @@ class CompanyController extends NetsensiaActionController
                 $internalId = $result['companyuploadid'];
             } elseif (isset($result['companydirectoryid'])) {
                 $internalId = $result['companydirectoryid'];
+                $ceo = $result['ceo'];
+                $sectors = $result['sectors'];
+                $turnover = $result['turnoverid'];
+                $createdTime = $result['createdtime'];
             } else {
                 $internalId = '';
             }
@@ -156,6 +164,10 @@ class CompanyController extends NetsensiaActionController
                 'internalId' => $internalId,
                 'number' => $companyNumber,
                 'name' => $name,
+                'ceo' => $ceo,
+                'sectors' => $sectors,
+                'turnover' => $turnover,
+                'createdTime' => $createdTime,
                 'details' => '',
             ];
         }

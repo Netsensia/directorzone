@@ -16,7 +16,7 @@ $(document).ready(function() {
 
 function netsensia_Pager(page, size, id, route, rowFunc)
 {
-	
+
 	$("li#next").click(function() {
 		page ++;
 		netsensia_pager_loadTable(page, size, $('#columnSorter').attr('data-sort-by-column'), id, route, rowFunc);
@@ -34,13 +34,14 @@ function netsensia_Pager(page, size, id, route, rowFunc)
 
 function netsensia_pager_loadTable(page, size, order, id, route, rowFunc)
 {
+
 	var tableSelector = 'table#' + id;
 	
 	$(tableSelector).find("tr:gt(0)").remove();
 
 	$(tableSelector + ' tr:last').after(
 		'<tr>' +
-		'<td style="text-align:center" colspan="5"><img src="/img/ajax/ajax-loader.gif"></td>' +
+		'<td style="text-align:center" colspan="6"><img src="/img/ajax/ajax-loader.gif"></td>' +
 		'</tr>'
     );
 	

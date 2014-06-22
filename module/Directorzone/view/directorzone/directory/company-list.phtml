@@ -9,6 +9,7 @@
 <th><a class="columnHeading" data-column-number="3">CEO</a></th>
 <th><a class="columnHeading" data-column-number="4">Sectors</a></th>
 <th><a class="columnHeading" data-column-number="5">Turnover</a></th>
+<th><a class="columnHeading" data-column-number="6">Date Added</a></th>
 </tr>
 </table>
 
@@ -39,9 +40,10 @@ function loadTheTable()
 				var newRow = '<tr>';
 				newRow += '<td><a href="' + url + '">' + value.number + '</a></td>';
 				newRow += '<td>' + value.name + '</td>';
-				newRow += '<td>&nbsp;</td>';
-				newRow += '<td>&nbsp;</td>';
-				newRow += '<td>&nbsp;</td>';
+				newRow += '<td>' + value.ceo + '</td>';
+				newRow += '<td>' + value.sectors + '</td>';
+				newRow += '<td>' + value.turnover + '</td>';
+				newRow += '<td>' + value.createdTime + '</td>';
 				newRow += '</tr>';
 		
 				return newRow;
