@@ -43,12 +43,14 @@ function loadTheTable()
 				newRow += '<td>' + value.ceo + '</td>';
 				newRow += '<td>' + value.sectors + '</td>';
 				newRow += '<td>' + value.turnover + '</td>';
-				newRow += '<td>' + value.createdTime + '</td>';
+				newRow += '<td class="prettydate">' + prettyDate(value.createdTime) + '</td>';
 				newRow += '</tr>';
 		
 				return newRow;
 			}
 		);
+
+	
 }
 
 </script>

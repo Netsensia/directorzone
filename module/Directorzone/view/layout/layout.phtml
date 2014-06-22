@@ -19,6 +19,7 @@
 
         <!-- Scripts -->
         <?php echo $this->headScript()->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+                      ->prependFile($this->basePath() . '/js/pretty.js')
                       ->prependFile($this->basePath() . '/js/validate.min.js')
                       ->prependFile($this->basePath() . '/js/netsensia/pager.js')
                       ->prependFile($this->basePath() . '/js/netsensia/formwidget_multitable.js')

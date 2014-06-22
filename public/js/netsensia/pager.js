@@ -75,5 +75,6 @@ function netsensia_pager_loadTable(page, size, order, id, route, rowFunc)
 			newRow = rowFunc(key, value);
     		$('table#' + id + ' tr:last').after(newRow);
     	});
+
 	});
 }

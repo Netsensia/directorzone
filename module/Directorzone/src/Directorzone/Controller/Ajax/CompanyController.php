@@ -156,6 +156,9 @@ class CompanyController extends NetsensiaActionController
                 $sectors = $result['sectors'];
                 $turnover = $result['turnoverid'];
                 $createdTime = $result['createdtime'];
+                if (trim($createdTime) != '') {
+                    
+                }
             } else {
                 $internalId = '';
             }
