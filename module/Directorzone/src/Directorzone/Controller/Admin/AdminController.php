@@ -59,7 +59,7 @@ class AdminController extends NetsensiaActionController
             $returnArray['files'][0]['error'] = $e->getMessage();
         }
         
-        $this->getServiceLocator()->get('Zend\Log')->info($returnArray);
+        //$this->getServiceLocator()->get('Zend\Log')->info($returnArray);
         
         return new JsonModel($returnArray);
     }
