@@ -23,22 +23,26 @@ return array(
                 'may_terminate' => true,
                 'child_routes' => array(
                     'admin-upload' => array(
-                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'type' => 'literal',
                         'options' => array(
                             'route' => '/upload',
+                            'defaults' => array(
+                                'controller' => 'Directorzone\Controller\Admin\Admin',
+                            ),
                         ),
                         'may_terminate' => true,
                         'child_routes' => array(
                             'upload-companies' => array(
-                                'type' => 'Zend\Mvc\Router\Http\Literal',
+                                'type' => 'literal',
                                 'options' => array(
                                     'route' => '/companies',
                                     'defaults' => array(
+                                        'controller' => 'Directorzone\Controller\Admin\Admin',
                                         'action' => 'upload-companies',
                                     ),
                                 ),
                             ),
-                            'upload-companies' => array(
+                            'upload-people' => array(
                                 'type' => 'Zend\Mvc\Router\Http\Literal',
                                 'options' => array(
                                     'route' => '/people',
