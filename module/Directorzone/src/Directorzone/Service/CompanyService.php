@@ -409,7 +409,8 @@ class CompanyService extends NetsensiaService
 
         $rowset = $this->companyUploadTable->select(
             function (Select $select) use ($status, $start, $end, $order) {
-                $columns = ['companyuploadid', 'companynumber', 'name'];
+                $columns = ['companyuploadid', 'companynumber', 'name', 'createdtime'];
+                $sortColumns = ['name', 'name', 'name', 'name', 'name', 'createdtime'];
                 
                 $select->where(
                     ['recordstatus' => $status]
@@ -419,7 +420,7 @@ class CompanyService extends NetsensiaService
                 )
                 ->offset($start - 1)
                 ->limit(1 + ($end - $start))
-                ->order($columns[abs($order)-1] . ' ' . ($order < 0 ? 'DESC' : 'ASC'));
+                ->order($sortColumns[abs($order)-1] . ' ' . ($order < 0 ? 'DESC' : 'ASC'));
             }
         );
 
@@ -454,13 +455,14 @@ class CompanyService extends NetsensiaService
     {
         $rowset = $this->companiesHouseTable->select(
             function (Select $select) use ($status, $start, $end, $order) {
-                $columns = ['number', 'name'];
+                $columns = ['number', 'name', 'createdtime'];
+                $sortColumns = ['name', 'name', 'name', 'name', 'name', 'createdtime'];
                 $select->columns(
                     $columns
                 )
                 ->offset($start - 1)
                 ->limit(1 + ($end - $start))
-                ->order($columns[abs($order)-1] . ' ' . ($order < 0 ? 'DESC' : 'ASC'));
+                ->order($sortColumns[abs($order)-1] . ' ' . ($order < 0 ? 'DESC' : 'ASC'));
             }
         );
     

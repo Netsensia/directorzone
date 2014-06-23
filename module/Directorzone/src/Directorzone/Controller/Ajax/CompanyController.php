@@ -135,10 +135,10 @@ class CompanyController extends NetsensiaActionController
         foreach ($results as $result) {
             
             $name = $result['name'];
+            $createdTime = $result['createdtime'];
             $ceo = '';
             $sectors = '';
             $turnover = '';
-            $createdTime = '';
                         
             if (isset($result['companynumber'])) {
                 $companyNumber = $result['companynumber'];
@@ -155,10 +155,6 @@ class CompanyController extends NetsensiaActionController
                 $ceo = $result['ceo'];
                 $sectors = $result['sectors'];
                 $turnover = $result['turnoverid'];
-                $createdTime = $result['createdtime'];
-                if (trim($createdTime) != '') {
-                    
-                }
             } else {
                 $internalId = '';
             }
