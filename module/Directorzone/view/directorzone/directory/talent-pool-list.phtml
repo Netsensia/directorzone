@@ -34,7 +34,7 @@ function loadTheTable()
 			function(key, value) {
 				var url = '/directories/talent-pool/' + value.internalId;
 				var newRow = '<tr>';
-				newRow += '<td><a href="' + url + '">' + value.anonymousSummary + '</a></td>';
+				newRow += '<td><a href="' + url + '">' + value.talentpoolsummary + '</a></td>';
 				newRow += '<td>' + prettyDate(value.joinedDate) + '</td>';
 				newRow += '</tr>';
 

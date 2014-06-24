@@ -4,11 +4,14 @@ namespace Directorzone\Service;
 use Netsensia\Service\NetsensiaService;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Select;
-use Symfony\Component\Translation\Exception\NotFoundResourceException;
+use Netsensia\Exception\NotFoundResourceException;
 use Zend\Db\Sql\Expression;
 
 class TalentPoolService extends NetsensiaService
 {
+    const PUBLISHED_YES = 1;
+    const PUBLISHED_NO = 2;
+    
     /**
      * @var TableGateway
      */
@@ -31,6 +34,7 @@ class TalentPoolService extends NetsensiaService
                 $select->columns(
                     $columns    
                 )
+                ->where(['talentpoolpublishstatusid' => self::PUBLISHED_YES])
                 ->offset($start - 1)
                 ->limit(1 + ($end - $start))
                 ->order($sortColumns[abs($order)-1] . ' ' . ($order < 0 ? 'DESC' : 'ASC'));
@@ -45,11 +49,11 @@ class TalentPoolService extends NetsensiaService
         
         foreach ($results as $result) {
         
-            $people['results'][] = [
-                'internalId' => $result['userid'],
-                'anonymousSummary' => $result['talentpoolsummary'],
-                'joinedDate' => $result['createddate']
-            ];
+            $people['results'][] = array_merge([
+                    'internalId' => $result['userid'],
+                ],
+                $result
+            );
         }
         
         return $people;
@@ -61,7 +65,7 @@ class TalentPoolService extends NetsensiaService
             function (Select $select) use ($talentPoolDirectoryId) {
                 $select->where(
                     [
-                        'talentpoolid' => $talentPoolDirectoryId
+                        'userid' => $talentPoolDirectoryId
                     ]
                 );
             }

@@ -4,7 +4,7 @@ namespace Directorzone\Controller\Article;
 
 use Netsensia\Controller\NetsensiaActionController;
 use Directorzone\Service\ArticleService;
-use Symfony\Component\Translation\Exception\NotFoundResourceException;
+use Netsensia\Exception\NotFoundResourceException;
 
 class ArticleController extends NetsensiaActionController
 {

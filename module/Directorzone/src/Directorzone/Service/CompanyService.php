@@ -7,7 +7,7 @@ use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Expression;
 use NetsensiaCompanies\Request\CompanyAppointmentsRequest;
 use NetsensiaCompanies\Model\Person;
-use Symfony\Component\Translation\Exception\NotFoundResourceException;
+use Netsensia\Exception\NotFoundResourceException;
 
 class CompanyService extends NetsensiaService
 {

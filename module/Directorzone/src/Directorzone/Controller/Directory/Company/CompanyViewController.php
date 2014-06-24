@@ -4,7 +4,7 @@ namespace Directorzone\Controller\Directory\Company;
 
 use Netsensia\Controller\NetsensiaActionController;
 use Directorzone\Service\CompanyService;
-use Symfony\Component\Translation\Exception\NotFoundResourceException;
+use Netsensia\Exception\NotFoundResourceException;
 use Directorzone\Service\TwitterService;
 use Directorzone\Service\BingService;
 

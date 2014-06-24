@@ -3,16 +3,13 @@
 namespace Directorzone\Controller\Directory\TalentPool;
 
 use Netsensia\Controller\NetsensiaActionController;
-use Directorzone\Service\CompanyService;
-use Symfony\Component\Translation\Exception\NotFoundResourceException;
-use Directorzone\Service\TwitterService;
-use Directorzone\Service\BingService;
+use Netsensia\Exception\NotFoundResourceException;
 use Directorzone\Service\TalentPoolService;
 
 class TalentPoolViewController extends NetsensiaActionController
 {
     /**
-     * @var TalentPoolService¤
+     * @var TalentPoolService
      */
     private $talentPoolService;
     
@@ -25,5 +22,20 @@ class TalentPoolViewController extends NetsensiaActionController
 
     public function talentPoolDetailsAction()
     {
+        $talentPoolDirectoryId = $this->params('id');
+        
+        try {
+        
+            $talentPoolDetails = $this->talentPoolService->getTalentPoolDetails(
+                $talentPoolDirectoryId
+            );
+            
+            return $talentPoolDetails;
+            
+        } catch (NotFoundResourceException $e) {
+            
+            $this->getResponse()->setStatusCode(404);
+            
+        }
     }
 }

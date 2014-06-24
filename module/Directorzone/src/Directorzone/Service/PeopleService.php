@@ -4,7 +4,7 @@ namespace Directorzone\Service;
 use Netsensia\Service\NetsensiaService;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Select;
-use Symfony\Component\Translation\Exception\NotFoundResourceException;
+use Netsensia\Exception\NotFoundResourceException;
 use Zend\Db\Sql\Expression;
 
 class PeopleService extends NetsensiaService

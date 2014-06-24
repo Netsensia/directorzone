@@ -5,7 +5,7 @@ namespace Directorzone\Controller\Directory\People;
 use Netsensia\Controller\NetsensiaActionController;
 use Directorzone\Service\CompanyService;
 use Directorzone\Service\PeopleService;
-use Symfony\Component\Translation\Exception\NotFoundResourceException;
+use Netsensia\Exception\NotFoundResourceException;
 
 class PeopleEditController extends NetsensiaActionController
 {
