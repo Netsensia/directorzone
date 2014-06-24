@@ -54,8 +54,6 @@ class CompanyViewController extends NetsensiaActionController
                 $result = $zendCache->getItem($cacheKey, $cacheSuccess);
             }
             
-                        $cacheSuccess = false;
-            
             if ($cacheSuccess) {
                 $feedResults = $result;
             } else {
