@@ -49,10 +49,12 @@ class CompanyViewController extends NetsensiaActionController
             $cacheSuccess = false;
             $zendCache = $this->getServiceLocator()->get('ZendCache');
             $cacheKey = 'companyDetailsActionFeedResults' . $companyDirectoryId;
-            
+
             if ($companyDetails['canusefeedcache'] == 'Y') {
                 $result = $zendCache->getItem($cacheKey, $cacheSuccess);
             }
+            
+                        $cacheSuccess = false;
             
             if ($cacheSuccess) {
                 $feedResults = $result;

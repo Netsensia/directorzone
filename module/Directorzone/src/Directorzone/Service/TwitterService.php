@@ -13,7 +13,8 @@ class TwitterService extends NetsensiaService
     
     public function __construct(
         \TwitterAPIExchange $twitterApiExchange
-    ) {
+    )
+    {
         $this->twitterApiExchange = $twitterApiExchange;
     }
     
@@ -34,13 +35,15 @@ class TwitterService extends NetsensiaService
         if ($c) {
             $json = json_decode($c);
             
-            foreach ($json->statuses as $tweet) {
-                $results['tweets'][] = [
-                    'text' => $tweet->text,
-                    'created' => $tweet->created_at,
-                    'username' => $tweet->user->name,
-                    'userimage' => $tweet->user->profile_image_url,	
-                ];   
+            if (property_exists($json, 'statuses')) {
+                foreach ($json->statuses as $tweet) {
+                    $results['tweets'][] = [
+                        'text' => $tweet->text,
+                        'created' => $tweet->created_at,
+                        'username' => $tweet->user->name,
+                        'userimage' => $tweet->user->profile_image_url,	
+                    ];   
+                }
             }
         }
                 
