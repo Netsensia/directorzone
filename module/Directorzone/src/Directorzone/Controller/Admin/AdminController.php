@@ -41,7 +41,7 @@ class AdminController extends NetsensiaActionController
         
         $companyUploadService = $this->getServiceLocator()->get('CompanyUploadService');
         
-        $filter = new \Zend\Filter\File\RenameUpload('./assets/admin/upload/companies/');
+        $filter = new \Zend\Filter\File\RenameUpload('/tmp/');
         $filter->setUseUploadName(true);
         $filter->setOverwrite(true);
         
