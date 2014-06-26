@@ -10,6 +10,7 @@ class MultiTable extends Widget
         );
         
         $widgetFields = [];
+        
         foreach ($this->widget->fields as $field) {
             if ($field->name == 'select') {
                 $widgetFields[] = $field->name . 'id';

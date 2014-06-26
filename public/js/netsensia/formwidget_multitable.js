@@ -62,6 +62,7 @@ $(document).ready(function() {
 	});
 	
 	$(document).delegate('.widget_multitable_deleterow', 'click', function() {
+		
 		var widgetId = $(this).attr('data-widgetid');
 		var tableEl = $('table[data-widgetid="' + widgetId + '"]');
 		var numRows = tableEl.find('tr:visible').length - 1;
@@ -78,12 +79,12 @@ $(document).ready(function() {
 	$(document).delegate('.widget_multitable_edit', 'click', function() {
 	});
 	
-	$(document).delegate('input[name="form-submit"]', 'click', function() {
+	$(document).delegate('input[name="form-submit"]', 'click', function(event) {
+		event.preventDefault();
 		$('.widget_multitable').each(function() {
-			
+
 			var widgetId = $(this).attr('data-widgetid');
 			var widgetData = jQuery.parseJSON( $('#' + widgetId).val() );
-			
 			var rowCount = 0;
 			
 			widgetData.rowValues = [];
@@ -93,7 +94,9 @@ $(document).ready(function() {
 				if (rowCount > 1) {
 					var rowValueArray = [];
 					$(this).children('td').each(function () {
-						rowValueArray.push($(this).val());
+						$(this).find('select').each(function() {
+							rowValueArray.push($(this).val());
+						});
 					});
 					widgetData.rowValues.push(rowValueArray);
 				}
@@ -101,8 +104,10 @@ $(document).ready(function() {
 			});
 			
 			var newJson = JSON.stringify(widgetData);
-			$('input[id="' + widgetId + '"]').val(newJson);
+			$('#' + widgetId).val(newJson);
 		});
+		$(this).parent().submit();
+		return false;
 	});
 });
 
