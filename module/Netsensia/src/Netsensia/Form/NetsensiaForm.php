@@ -50,7 +50,7 @@ class NetsensiaForm extends Form
     
     public function addSection($options)
     {
-        $this->addHidden('netsensiaWidget_sectionTitle_' . uniqid(), $options['title'] . '|' . $options['description'], 'widget_sectiontitle');
+        $this->addHidden('netsensiaWidget_sectionTitle_' . uniqid(), $options['title'] . '|' . $options['description'], 'widget_sectionTitle');
     }
     
     public function addAutoDateOnCreate($name)
@@ -65,7 +65,7 @@ class NetsensiaForm extends Form
     
     public function addMultiTable($options)
     {
-        $this->addHidden('netsensiaWidget_multiTable_' . uniqid(), json_encode($options), 'widget_multitable');     
+        $this->addHidden('netsensiaWidget_multiTable_' . uniqid(), json_encode($options), 'widget_multiTable');     
     }
     
     public function addRelation($options)
