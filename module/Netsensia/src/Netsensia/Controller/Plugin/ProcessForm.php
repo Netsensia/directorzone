@@ -116,13 +116,14 @@ class ProcessForm extends AbstractPlugin
     
     private function widget($widgetType, $value)
     {
-        if ($widgetType == 'multiTable') {
-            $widget = new MultiTable(
+        $widgetClass = '\\Netsensia\\Controller\\Plugin\\Widget\\' . ucfirst($widgetType);
+    
+        if (class_exists($widgetClass)) {
+            $widget = new $widgetClass(
                 $this->controller->getServiceLocator(),
                 $value
             );
             $widget->process();
-            return;
         }
     }
 }

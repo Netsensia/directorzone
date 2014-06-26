@@ -111,23 +111,12 @@ class BootstrapForm extends AbstractHelper
     
     protected function widget($element)
     {
-        if ($element->getAttribute('data-netsensia') == 'widget_multitable') {
-            $widget = new MultiTable($this->view, $this->form, $element);
-            $widget->render();
-            return;
-        }
+        $parts = explode('_', $element->getAttribute('data-netsensia'));
+        $widgetClass = '\\Netsensia\\Form\\View\\Helper\\Widget\\' . ucfirst($parts[1]);
         
-        if ($element->getAttribute('data-netsensia') == 'widget_sectiontitle') {
-            $widget = new SectionTitle($this->view, $this->form, $element);
-            $widget->render();
-            return;
-        }
-        
-        if ($element->getAttribute('data-netsensia') == 'widget_overview') {
-            $widget = new Overview($this->view, $this->form, $element);
-            $widget->render();
-            return;
-        }
+        $widget = new $widgetClass($this->view, $this->form, $element);
+        $widget->render();
+        return;
     }
     
     protected function renderFieldsets()
