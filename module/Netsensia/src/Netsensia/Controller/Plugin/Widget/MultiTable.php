@@ -15,7 +15,7 @@ class MultiTable extends Widget
         );
         
         $tableGateway instanceof TableGateway;
-       // $tableGateway->delete([$this->parentModel->getPrimaryKey()]);
+        $tableGateway->delete($this->parentModel->getPrimaryKey());
         
         $widgetFields = [];
         
