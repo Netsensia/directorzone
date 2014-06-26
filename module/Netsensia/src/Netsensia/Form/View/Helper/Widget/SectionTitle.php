@@ -1,19 +1,8 @@
 <?php
 namespace Netsensia\Form\View\Helper\Widget;
 
-class SectionTitle
+class SectionTitle extends Widget
 {
-    private $view;
-    private $form;
-    private $element;
-    
-    public function __construct($view, $form, $element)
-    {
-        $this->view = $view;
-        $this->form = $form;
-        $this->element = $element;
-    }
-    
     public function render()
     {
         $parts = explode('|', $this->element->getValue());

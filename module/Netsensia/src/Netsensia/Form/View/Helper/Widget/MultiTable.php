@@ -4,19 +4,8 @@ namespace Netsensia\Form\View\Helper\Widget;
 use Zend\Form\Element\Select;
 use Zend\Form\Element\Text;
 
-class MultiTable
+class MultiTable extends Widget
 {
-    private $view;
-    private $form;
-    private $element;
-    
-    public function __construct($view, $form, $element)
-    {
-        $this->view = $view;
-        $this->form = $form;
-        $this->element = $element;
-    }
-    
     public function render()
     {
         $options = json_decode($this->element->getValue());

@@ -1,19 +1,8 @@
 <?php
 namespace Netsensia\Form\View\Helper\Widget;
 
-class Overview
+class Overview extends Widget
 {
-    private $view;
-    private $form;
-    private $element;
-    
-    public function __construct($view, $form, $element)
-    {
-        $this->view = $view;
-        $this->form = $form;
-        $this->element = $element;
-    }
-    
     public function render()
     {
         ?>

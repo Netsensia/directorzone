@@ -4,6 +4,7 @@ namespace Netsensia\Controller\Plugin;
 
 use Zend\Mvc\Controller\Plugin\AbstractPlugin;
 use Zend\Form\Element\Checkbox;
+use Netsensia\Controller\Plugin\Widget\MultiTable;
 
 class ProcessForm extends AbstractPlugin
 {
@@ -38,25 +39,8 @@ class ProcessForm extends AbstractPlugin
                 $modelData = [];
                 
                 foreach ($formData as $key => $value) {
-                    $isNetsensiaWidget = !(preg_match('/^netsensiaWidget_(.*?)_/', $key, $matches) === 0);
-                    
-                    if ($isNetsensiaWidget) {
-                        $widgetType = $matches[1];
-
-                        if ($widgetType == 'multiTable') {
-                            $widget = json_decode($value);
-                            
-                            $widgetJoinTableModel = $sl->get($widget->jointablemodel . 'Model');
-                            
-                            $widgetFields = [];
-                            foreach ($widget->fields as $field) {
-                            	if ($field->name == 'select') {
-                            	    $widgetFields[] = $field->name . 'id';
-                            	} else {
-                            	    $widgetFields[] = $field->name;
-                            	}
-                            }
-                        }
+                    if (preg_match('/^netsensiaWidget_(.*?)_/', $key, $matches) !== 0) {
+                        $this->widget($matches[1], $value);
                     } elseif ($key != 'form-submit' && $key != 'widgetignore') {
                         $modelField = preg_replace('/^' . $prefix . '/', '', $key);
                         $modelData[$modelField] = $value;
@@ -128,5 +112,17 @@ class ProcessForm extends AbstractPlugin
       
         return $form;
         
+    }
+    
+    private function widget($widgetType, $value)
+    {
+        if ($widgetType == 'multiTable') {
+            $widget = new MultiTable(
+                $this->controller->getServiceLocator(),
+                $value
+            );
+            $widget->process();
+            return;
+        }
     }
 }
