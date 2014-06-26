@@ -40,10 +40,14 @@ class ProcessForm extends AbstractPlugin
                 
                 foreach ($formData as $key => $value) {
                     if (preg_match('/^netsensiaWidget_(.*?)_/', $key, $matches) !== 0) {
-                        $this->widget($matches[1], $value);
+                        
+                        $this->widget($matches[1], $value, $tableModel);
+                        
                     } elseif ($key != 'form-submit' && $key != 'widgetignore') {
+                        
                         $modelField = preg_replace('/^' . $prefix . '/', '', $key);
                         $modelData[$modelField] = $value;
+                        
                     }
                 }
 
@@ -114,14 +118,15 @@ class ProcessForm extends AbstractPlugin
         
     }
     
-    private function widget($widgetType, $value)
+    private function widget($widgetType, $value, $tableModel)
     {
         $widgetClass = '\\Netsensia\\Controller\\Plugin\\Widget\\' . ucfirst($widgetType);
     
         if (class_exists($widgetClass)) {
             $widget = new $widgetClass(
                 $this->controller->getServiceLocator(),
-                $value
+                $value,
+                $tableModel
             );
             $widget->process();
         }

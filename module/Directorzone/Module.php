@@ -231,6 +231,34 @@ class Module
                     );
                     return $instance;
                 },
+                'UserTargetRoleTableGateway' => function ($sm) {
+                    $instance = new TableGateway(
+                        'usertargetrole',
+                        $sm->get('Zend\Db\Adapter\Adapter')
+                    );
+                    return $instance;
+                },
+                'UserLanguageTableGateway' => function ($sm) {
+                    $instance = new TableGateway(
+                        'userlanguage',
+                        $sm->get('Zend\Db\Adapter\Adapter')
+                    );
+                    return $instance;
+                },
+                'UserQualificationTableGateway' => function ($sm) {
+                    $instance = new TableGateway(
+                        'userqualification',
+                        $sm->get('Zend\Db\Adapter\Adapter')
+                    );
+                    return $instance;
+                },
+                'UserProfessionalQualificationTableGateway' => function ($sm) {
+                    $instance = new TableGateway(
+                        'userprofessionalqualification',
+                        $sm->get('Zend\Db\Adapter\Adapter')
+                    );
+                    return $instance;
+                },
                 'CompanyDirectoryTableGateway' => function ($sm) {
                 
                     $instance = new TableGateway(
@@ -341,6 +369,11 @@ class Module
                 },
                 'UserAvailableAsModel' => function ($sm) {
                     $instance = new \Directorzone\Model\UserAvailableAs();
+                    $instance->setServiceLocator($sm);
+                    return $instance;
+                },
+                'UserTargetRoleModel' => function ($sm) {
+                    $instance = new \Directorzone\Model\UserTargetRole();
                     $instance->setServiceLocator($sm);
                     return $instance;
                 },

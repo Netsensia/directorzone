@@ -1,13 +1,21 @@
 <?php
 namespace Netsensia\Controller\Plugin\Widget;
 
+use Zend\Db\TableGateway\TableGateway;
 class MultiTable extends Widget
 {
     public function process()
     {
-        $joinTableModel = $this->serviceLocator->get(
+        $model = $this->serviceLocator->get(
             $this->widget->jointablemodel . 'Model'
         );
+        
+        $tableGateway = $this->serviceLocator->get(
+            $this->widget->jointablemodel . 'TableGateway'
+        );
+        
+        $tableGateway instanceof TableGateway;
+       // $tableGateway->delete([$this->parentModel->getPrimaryKey()]);
         
         $widgetFields = [];
         

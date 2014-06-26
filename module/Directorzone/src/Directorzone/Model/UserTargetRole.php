@@ -3,7 +3,7 @@ namespace Directorzone\Model;
 
 use Netsensia\Model\DatabaseTableModel;
 
-class UserAvailableAs extends DatabaseTableModel
+class UserTargetRole extends DatabaseTableModel
 {
     public function __construct()
     {

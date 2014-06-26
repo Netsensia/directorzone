@@ -27,7 +27,7 @@ class AccountProfileForm extends NetsensiaForm
         
         $this->addMultiTable([
             'groupname' => 'Target Roles',
-            'jointablemodel' => 'UserAvailableAs',
+            'jointablemodel' => 'UserTargetRole',
             'jointablekeycolumn' => 'userid',
             'fields' => [
                 ['type' => 'select', 'name' => 'jobtype', 'label' => 'Role'],
