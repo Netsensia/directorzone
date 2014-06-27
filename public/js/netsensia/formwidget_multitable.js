@@ -36,8 +36,12 @@ $(document).ready(function() {
 		tableEl.find('.widget_multitable_edit').each(function() {
 			$(this).editable({
 				pk: 1,
+				autotext:'never',
 				url: '',
 				mode: editableMode,
+				display: function(value, sourceData) {
+					$(this).html('Edit');
+				},
 				success: function(response, newValue) {
 					$(this).attr('data-value', newValue);
 			    }
@@ -55,7 +59,17 @@ $(document).ready(function() {
 		if (numRows == 0) {
 			$(lastRow).css('display', 'table-row');
 		} else {
-			var newRow = $(lastRow).clone().insertAfter(lastRow);
+			var newRow = $(lastRow).clone();
+			newRow.children().each(function () {
+				$(this).children().each(function() {
+					if ($(this).hasClass('editable')) {
+						$(this).attr('data-value', '');
+						$(this).removeClass('editable-unsaved');
+						$(this).attr('style', '');
+					}
+				});
+			});
+			newRow.insertAfter(lastRow);
 		}
 	    
 	    setEditableElements(tableEl, 'popup');
@@ -95,7 +109,14 @@ $(document).ready(function() {
 					var rowValueArray = [];
 					$(this).children('td').each(function () {
 						$(this).children().each(function() {
-							rowValueArray.push($(this).val());
+							if ($(this).is('select')) {
+								rowValueArray.push($(this).val());
+							}
+							
+							if ($(this).hasClass('editable')) {
+								rowValueArray.push($(this).html());
+							}
+							
 						});
 					});
 					widgetData.rowValues.push(rowValueArray);

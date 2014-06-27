@@ -25,11 +25,20 @@ class MultiTable extends Widget
             } else {
                 $columnName = $field->name;
             }
+            $tableColumns[] = $columnName;
         }
         
-        foreach ($tableColumns as $column) {
-            
+        foreach ($this->widget->rowValues as $row) {
+            $updateArray = [];
+            $count = 0;
+            foreach ($tableColumns as $column) {
+                $updateArray[$column] = $row[$count];
+                $count++;
+            }
+            //echo '<pre>' . print_r($updateArray, true) . '</pre><br><br>';
         }
+
+        //die;
     }
 }
 
