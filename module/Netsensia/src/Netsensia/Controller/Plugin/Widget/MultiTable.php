@@ -17,14 +17,18 @@ class MultiTable extends Widget
         $tableGateway instanceof TableGateway;
         $tableGateway->delete($this->parentModel->getPrimaryKey());
         
-        $widgetFields = [];
+        $tableColumns = [];
         
         foreach ($this->widget->fields as $field) {
             if ($field->name == 'select') {
-                $widgetFields[] = $field->name . 'id';
+                $columnName = $field->name . 'id';
             } else {
-                $widgetFields[] = $field->name;
+                $columnName = $field->name;
             }
+        }
+        
+        foreach ($tableColumns as $column) {
+            
         }
     }
 }

@@ -94,7 +94,7 @@ $(document).ready(function() {
 				if (rowCount > 1) {
 					var rowValueArray = [];
 					$(this).children('td').each(function () {
-						$(this).find('select').each(function() {
+						$(this).children().each(function() {
 							rowValueArray.push($(this).val());
 						});
 					});

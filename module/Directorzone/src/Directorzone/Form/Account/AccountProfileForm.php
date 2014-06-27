@@ -86,20 +86,19 @@ class AccountProfileForm extends NetsensiaForm
             'groupname' => 'Professional Qualifications',
             'jointablemodel' => 'UserProfessionalQualification',
             'fields' => [
-            [
-                'type' => 'text',
-                'name' => 'qualification',
-                'label' => 'Qualification',
+                [
+                    'type' => 'text',
+                    'name' => 'qualification',
+                    'label' => 'Qualification',
+                ],
+                [
+                    'type' => 'text',
+                    'name' => 'subject',
+                    'label' => 'Subject',
+                ]
             ],
-            [
-                'type' => 'text',
-                'name' => 'subject',
-                'label' => 'Subject',
-            ]
-            ],
-            ]);
+        ]);
         
-
         $this->addSection(['title' => 'Summary', 'description' => 'Please feel free to enhance your anonymous profile with further information in these text boxes - Summary, Skills, Experience, Personal Interests - that will apply to each target role that you complete.']);
         
         $this->addTextArea('talent-pool-summary');
