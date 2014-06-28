@@ -37,6 +37,11 @@ class MultiTable extends Widget
                 $count++;
             }
             
+            $updateArray = array_merge(
+                $this->parentModel->getPrimaryKey(),
+                $updateArray
+            );
+            
             $model->setData($updateArray);
             $model->create();
         }

@@ -1,0 +1,17 @@
+/* 17:58:04 root@directorzone.local */ ALTER TABLE `usertargetrole` CHANGE `roleid` `jobtypeid` INT(11)  NULL  DEFAULT NULL;
+/* 17:58:10 root@directorzone.local */ ALTER TABLE `usertargetrole` CHANGE `country` `countryid` INT(11)  NULL  DEFAULT NULL;
+/* 17:58:43 root@directorzone.local */ ALTER TABLE `usertargetrole` CHANGE `primarysectorid` `sectorid` INT(11)  NULL  DEFAULT NULL;
+/* 18:06:48 root@directorzone.local */ ALTER TABLE `userlanguage` ADD `userlanguageid` INT  NULL  DEFAULT NULL  AFTER `languageid`;
+/* 18:07:13 root@directorzone.local */ ALTER TABLE `userlanguage` DROP FOREIGN KEY `userlanguage_ibfk_2`;
+/* 18:07:13 root@directorzone.local */ ALTER TABLE `userlanguage` DROP PRIMARY KEY;
+/* 18:07:22 root@directorzone.local */ ALTER TABLE `userlanguage` CHANGE `userlanguageid` `userlanguageid` INT(11)  NOT NULL;
+/* 18:07:30 root@directorzone.local */ ALTER TABLE `userlanguage` DROP INDEX `languageid`;
+/* 18:07:57 root@directorzone.local */ ALTER TABLE `userlanguage` MODIFY COLUMN `userlanguageid` INT(11) NOT NULL AFTER `userid`;
+/* 18:08:00 root@directorzone.local */ ALTER TABLE `userlanguage` MODIFY COLUMN `userlanguageid` INT(11) NOT NULL FIRST;
+/* 18:08:15 root@directorzone.local */ ALTER TABLE `userlanguage` CHANGE `userlanguageid` `userlanguageid` INT(11) UNSIGNED  NOT NULL  AUTO_INCREMENT  PRIMARY KEY;
+/* 18:09:05 root@directorzone.local */ ALTER TABLE `userlanguage` ADD `languagelevelid` INT(11)  NULL  DEFAULT NULL  AFTER `languageid`;
+/* 18:09:29 root@directorzone.local */ ALTER TABLE `userqualification` CHANGE `userqualificationid` `userqualificationid` INT(11)  NOT NULL  AUTO_INCREMENT;
+/* 18:10:02 root@directorzone.local */ ALTER TABLE `userqualification` DROP FOREIGN KEY `userqualification_ibfk_3`;
+/* 18:10:02 root@directorzone.local */ ALTER TABLE `userqualification` DROP FOREIGN KEY `userqualification_ibfk_2`;
+/* 18:10:29 root@directorzone.local */ ALTER TABLE `userprofessionalqualification` CHANGE `userprofessionalqualificationid` `userprofessionalqualificationid` INT(11)  NOT NULL  AUTO_INCREMENT;
+/* 18:10:44 root@directorzone.local */ ALTER TABLE `userprofessionalqualification` DROP FOREIGN KEY `userprofessionalqualification_ibfk_1`;

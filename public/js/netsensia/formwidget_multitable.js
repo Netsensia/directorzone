@@ -107,19 +107,29 @@ $(document).ready(function() {
 				rowCount ++;
 				if (rowCount > 1) {
 					var rowValueArray = [];
+					var isEmpty = true;
 					$(this).children('td').each(function () {
 						$(this).children().each(function() {
 							if ($(this).is('select')) {
-								rowValueArray.push($(this).val());
+								var value = $(this).val();
+								rowValueArray.push(value);
+								if (value > -1) {
+									isEmpty = false;
+								}
 							}
 							
 							if ($(this).hasClass('editable')) {
-								rowValueArray.push($(this).attr('data-value'));
+								var value = $(this).attr('data-value');
+								rowValueArray.push(value);
+								if (value != '') {
+									isEmpty = false;
+								}
 							}
-							
 						});
 					});
-					widgetData.rowValues.push(rowValueArray);
+					if (!isEmpty) {
+						widgetData.rowValues.push(rowValueArray);
+					}
 				}
 				
 			});
