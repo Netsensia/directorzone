@@ -7,7 +7,7 @@ class UserTargetRole extends DatabaseTableModel
 {
     public function __construct()
     {
-        $this->setTableName('useravailableas');
+        $this->setTableName('usertargetrole');
     
         parent::__construct();
     
@@ -15,7 +15,7 @@ class UserTargetRole extends DatabaseTableModel
     
     public function init($id = null)
     {
-        $this->setPrimaryKey(array("usertargetrole" => $id));
+        $this->setPrimaryKey(array("usertargetroleid" => $id));
         if ($id != null) {
             $this->load();
         }

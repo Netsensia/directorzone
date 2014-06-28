@@ -10,6 +10,8 @@ class MultiTable extends Widget
             $this->widget->jointablemodel . 'Model'
         );
         
+        $model->init();
+        
         $tableGateway = $this->serviceLocator->get(
             $this->widget->jointablemodel . 'TableGateway'
         );
@@ -20,7 +22,7 @@ class MultiTable extends Widget
         $tableColumns = [];
         
         foreach ($this->widget->fields as $field) {
-            if ($field->name == 'select') {
+            if ($field->type == 'select') {
                 $columnName = $field->name . 'id';
             } else {
                 $columnName = $field->name;
@@ -29,12 +31,14 @@ class MultiTable extends Widget
         }
 
         foreach ($this->widget->rowValues as $row) {
-            $updateArray = [];
             $count = 0;
             foreach ($tableColumns as $column) {
                 $updateArray[$column] = $row[$count];
                 $count++;
             }
+            
+            $model->setData($updateArray);
+            $model->create();
         }
 
     }

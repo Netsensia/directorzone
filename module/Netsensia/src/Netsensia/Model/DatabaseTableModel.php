@@ -96,13 +96,10 @@ abstract class DatabaseTableModel
     }
 
     /**
-     * @param multitype: $primaryKey
+     * @param array: $primaryKey
      */
-    public function setPrimaryKey ($primaryKey)
+    public function setPrimaryKey (array $primaryKey)
     {
-        if (!is_array($primaryKey)) {
-            throw new Exception("Primary key must be an array");
-        }
         $this->primaryKey = $primaryKey;
     }
     
