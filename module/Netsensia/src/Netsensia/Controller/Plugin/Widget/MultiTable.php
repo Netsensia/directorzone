@@ -27,7 +27,7 @@ class MultiTable extends Widget
             }
             $tableColumns[] = $columnName;
         }
-        
+
         foreach ($this->widget->rowValues as $row) {
             $updateArray = [];
             $count = 0;
@@ -35,10 +35,8 @@ class MultiTable extends Widget
                 $updateArray[$column] = $row[$count];
                 $count++;
             }
-            //echo '<pre>' . print_r($updateArray, true) . '</pre><br><br>';
         }
 
-        //die;
     }
 }
 

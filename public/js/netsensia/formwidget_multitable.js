@@ -114,7 +114,7 @@ $(document).ready(function() {
 							}
 							
 							if ($(this).hasClass('editable')) {
-								rowValueArray.push($(this).html());
+								rowValueArray.push($(this).attr('data-value'));
 							}
 							
 						});
