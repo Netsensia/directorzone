@@ -488,7 +488,10 @@ class NetsensiaForm extends Form
         $this->defaultClass = $class;
     }
     
-    public function setDataFromModel(DatabaseTableModel $model)
+    public function setDataFromModel(
+        DatabaseTableModel $model,
+        $serviceLocator = null
+    )
     {
         $modelData = $model->getData();
         $formData = [];
@@ -501,25 +504,32 @@ class NetsensiaForm extends Form
             }           
         }
         
-        // @todo Set widget values
-        
         foreach ($this->getElements() as $element) {
             if (preg_match('/^widget_/', $element->getAttribute('data-netsensia')) !== 0) {
-                $element = $this->widget($element);
+                $element = $this->widget(
+                    $element,
+                    $serviceLocator
+                );
             }
         }
         
         $this->setData($formData);
     }
     
-    private function widget(Element $element)
+    private function widget(
+        Element $element,
+        $serviceLocator
+    )
     {
         $parts = explode('_', $element->getAttribute('data-netsensia'));
         $widgetClass = '\\Netsensia\\Form\\Widget\\' . ucfirst($parts[1]);
         
         if (class_exists($widgetClass)) {
-            $widget = new $widgetClass($element->getValue());
-            $element->setValue($widget->getValue());
+            $widget = new $widgetClass(
+                $element,
+                $serviceLocator
+            );
+            $element = $widget->getPopulatedElement();
         }
         
         return $element;

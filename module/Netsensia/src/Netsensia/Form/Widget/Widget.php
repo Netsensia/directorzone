@@ -1,14 +1,22 @@
 <?php
 namespace Netsensia\Form\Widget;
 
+use Zend\Form\Element;
+
 abstract class Widget
 {
-    protected $value;
+    protected $serviceLocator;
+    protected $element;
     
-    public function __construct($value) {
-        $this->value = $value;
+    public function __construct(
+        Element $element,
+        $serviceLocator
+    ) 
+    {
+        $this->element = $element;
+        $this->serviceLocator = $serviceLocator;
     }
     
-    abstract function getValue();
+    abstract function getPopulatedElement();
 }
 

@@ -111,7 +111,10 @@ class ProcessForm extends AbstractPlugin
             }
         
         } else {
-            $form->setDataFromModel($tableModel);
+            $form->setDataFromModel(
+                $tableModel,
+                $this->controller->getServiceLocator()
+            );
         }
       
         return $form;

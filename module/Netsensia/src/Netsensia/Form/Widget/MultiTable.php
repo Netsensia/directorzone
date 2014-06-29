@@ -3,9 +3,15 @@ namespace Netsensia\Form\Widget;
 
 class MultiTable extends Widget
 {
-    public function getValue()
+    public function getPopulatedElement()
     {
-        return $this->value;
+        $options = json_decode($this->element->getValue());
+        
+        $modelName = $options->jointablemodel . 'Model';
+        
+        $model = $this->serviceLocator->get($modelName);
+        
+        return $this->element;
     }
 }
 
