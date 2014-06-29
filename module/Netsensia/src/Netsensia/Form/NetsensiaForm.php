@@ -12,6 +12,7 @@ use Netsensia\Model\DatabaseTableModel;
 use Zend\Validator\NotEmpty;
 use Zend\Validator\Identical;
 use Zend\Form\Element\Checkbox;
+use Zend\ServiceManager\ServiceManager;
 
 class NetsensiaForm extends Form
 {
@@ -508,6 +509,7 @@ class NetsensiaForm extends Form
             if (preg_match('/^widget_/', $element->getAttribute('data-netsensia')) !== 0) {
                 $element = $this->widget(
                     $element,
+                    $model,
                     $serviceLocator
                 );
             }
@@ -518,7 +520,8 @@ class NetsensiaForm extends Form
     
     private function widget(
         Element $element,
-        $serviceLocator
+        DatabaseTableModel $model,
+        ServiceManager $serviceLocator
     )
     {
         $parts = explode('_', $element->getAttribute('data-netsensia'));
@@ -527,6 +530,7 @@ class NetsensiaForm extends Form
         if (class_exists($widgetClass)) {
             $widget = new $widgetClass(
                 $element,
+                $model,
                 $serviceLocator
             );
             $element = $widget->getPopulatedElement();

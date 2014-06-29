@@ -22,7 +22,7 @@ class UserTargetRole extends DatabaseTableModel
         return $this;
     }
     
-    public function getArticleId()
+    public function getTargetRoleId()
     {
         $primaryKey = $this->getPrimaryKey();
         return $primaryKey['usertargetroleid'];

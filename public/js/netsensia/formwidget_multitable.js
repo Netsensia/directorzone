@@ -135,6 +135,7 @@ $(document).ready(function() {
 			});
 			
 			var newJson = JSON.stringify(widgetData);
+
 			$('#' + widgetId).val(newJson);
 		});
 		$(this).parent().submit();
