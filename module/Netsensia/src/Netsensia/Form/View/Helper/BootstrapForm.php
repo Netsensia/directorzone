@@ -3,9 +3,6 @@ namespace Netsensia\Form\View\Helper;
 
 use Zend\View\Helper\AbstractHelper;
 use Zend\Form\Element\Submit;
-use Netsensia\Form\View\Helper\Widget\MultiTable;
-use Netsensia\Form\View\Helper\Widget\SectionTitle;
-use Netsensia\Form\View\Helper\Widget\Overview;
 
 class BootstrapForm extends AbstractHelper
 {

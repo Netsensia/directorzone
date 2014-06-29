@@ -501,7 +501,28 @@ class NetsensiaForm extends Form
             }           
         }
         
+        // @todo Set widget values
+        
+        foreach ($this->getElements() as $element) {
+            if (preg_match('/^widget_/', $element->getAttribute('data-netsensia')) !== 0) {
+                $element = $this->widget($element);
+            }
+        }
+        
         $this->setData($formData);
+    }
+    
+    private function widget(Element $element)
+    {
+        $parts = explode('_', $element->getAttribute('data-netsensia'));
+        $widgetClass = '\\Netsensia\\Form\\Widget\\' . ucfirst($parts[1]);
+        
+        if (class_exists($widgetClass)) {
+            $widget = new $widgetClass($element->getValue());
+            $element->setValue($widget->getValue());
+        }
+        
+        return $element;
     }
     
     private function getTypeFromOptions($options, $default)
