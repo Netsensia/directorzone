@@ -353,7 +353,7 @@ class NetsensiaForm extends Form
         $options['class'] = $this->defaultClass;
         
         $file = new Element\File($name);
-        $file->setLabel($label);
+        $file->setLabel($options['label']);
         
         $file->setAttributes(
             [

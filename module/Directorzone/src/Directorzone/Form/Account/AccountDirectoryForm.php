@@ -43,6 +43,13 @@ class AccountDirectoryForm extends NetsensiaForm
             ]
         );
         
+        $this->addSelect(['name' => 'whoswhosector', 'label' => 'Sector', 'table' => 'sector']);
+        $this->addSelect(['name' => 'availableas', 'label' => 'Available as']);
+        $this->addSelect(['name' => 'whoswhodisplay', 'label' => 'Display']);
+        
+        
+        $this->addImage(['name' => 'profileimage', 'label' => 'Profile Image']);
+        
         $this->addSubmit('Submit');
         
         parent::prepare();
