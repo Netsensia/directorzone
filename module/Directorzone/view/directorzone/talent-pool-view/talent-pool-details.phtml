@@ -1,8 +1,9 @@
 <h3><?php echo $this->forename . ' ' . $this->surname; ?></h3>
 <h5>
-	<a href="/directories/people/<?php echo $this->officerid; ?>/feeds">Edit
-		this person</a>
+	<a href="#" id="sendmessagedialog" data-id="<?php echo $this->userid; ?>">Message this person</a>
 </h5>
+
+<?php echo $this->partial('messaging/dialog.phtml'); ?>
 
 <div class="row">
 	<div class="col-md-4">
