@@ -39,7 +39,7 @@ runSelenium() {
 	then
 	    echo "Tests passed"
 	else
-	    echo "Cannot confirm that tests passed"
+	    cat /var/lib/jenkins/jobs/directorzone/workspace/build/selenium/report.html
 	    exit 1
 	fi
 	
