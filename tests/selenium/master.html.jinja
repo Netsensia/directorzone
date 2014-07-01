@@ -436,6 +436,176 @@
 	<td>//div[@id='main']/div[2]/div/div/div[2]/div[2]/table/tbody/tr/td[2]</td>
 	<td>58130 - Publishing of newspapers</td>
 </tr>
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Account</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Talent Pool</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=account-profile-talentpoolpublishstatus</td>
+	<td>label=Published in Talent Pool Directory</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add row</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add row</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=form-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.alert.alert-success</td>
+	<td>× Your details have been saved</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Directories</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Talent Pool</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Account</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Directories</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Talent Pool</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Articles</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Account</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Talent Pool</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=account-profile-talentpoolsummary</td>
+	<td>${username} This is my talent pool summary.</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=form-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Directories</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Talent Pool</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=${username} This is my talent pool summary.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.col-md-8 &gt; div.panel.panel-primary &gt; div.panel-heading &gt; h3.panel-title</td>
+	<td>Personal Summary</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.col-md-8 &gt; div.panel.panel-primary &gt; div.panel-body</td>
+	<td>${username} This is my talent pool summary.</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=sendmessagedialog</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>css=div.modal-body</td>
+	<td>Title Message</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=messagetitle</td>
+	<td>${username} This is the title of a message</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=messagecontent</td>
+	<td>${username} This is the content of a message&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=sendmessage</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForAlert</td>
+	<td>Message sent successfully</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Account</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Inbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//table[@id='inbox']/tbody/tr[2]/td[2]</td>
+	<td>${username} This is the title of a message</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=td &gt; a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//div[@id='main']/div[2]</td>
+	<td>Personal Talent Pool Who's Who Contact Membership Account Publish My Articles Inbox Preferences Experience Company ${username} This is the title of a message ${username} This is the content of a message</td>
+</tr>
 </tbody></table>
 </body>
 </html>
