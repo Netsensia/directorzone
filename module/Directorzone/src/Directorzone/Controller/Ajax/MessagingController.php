@@ -63,4 +63,5 @@ class MessagingController extends NetsensiaActionController
             $results
         );
     }
+
 }

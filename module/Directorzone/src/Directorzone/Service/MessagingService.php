@@ -4,6 +4,7 @@ namespace Directorzone\Service;
 use Netsensia\Service\NetsensiaService;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Select;
+use Netsensia\Exception\NotFoundResourceException;
 
 class MessagingService extends NetsensiaService
 {
@@ -91,5 +92,36 @@ class MessagingService extends NetsensiaService
         
         return $messages;
     }
-
+    
+    public function getMessageDetails($userMessageId)
+    {
+        $rowset = $this->userMessageTable->select(
+            function (Select $select) use ($userMessageId) {
+        
+               $columns = ['usermessageid', 'userid', 'typeid', 'title', 'content', 'senttime'];
+                
+                $select->where(
+                    ['usermessageid' => $userMessageId]
+                )
+                ->columns(
+                    $columns
+                )
+                ->join(
+                    'user',
+                    'user.userid = usermessage.senderid',
+                    ['forenames', 'surname'],
+                    'left'
+                );
+            }
+        );
+        
+        $rows = $rowset->toArray();
+        
+        if (count($rows) == 1) {
+            $message = $rows[0];
+            return $message;
+        } else {
+            throw new NotFoundResourceException('Message not found');
+        }
+    }
 }

@@ -23,7 +23,7 @@ $(document).ready(function() {
 			'inbox',
 			'/ajax/inbox/list',
 			function(key, value) {
-				var url = '/inbox/' + value.internalId;
+				var url = '/myaccount/inbox/' + value.internalId;
 				
 				var newRow = '<tr>';
 				newRow += '<td><a href="' + url + '">' + value.from + '</a></td>';

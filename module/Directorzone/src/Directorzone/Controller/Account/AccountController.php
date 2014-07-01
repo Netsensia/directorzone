@@ -4,9 +4,23 @@ namespace Directorzone\Controller\Account;
 
 use Netsensia\Controller\NetsensiaActionController;
 use Zend\Mvc\MvcEvent;
+use Zend\View\Model\JsonModel;
+use Directorzone\Service\MessagingService;
 
 class AccountController extends NetsensiaActionController
 {
+    /**
+     * @var MessagingService $messagingService
+     */
+    private $messagingService;
+    
+    public function __construct(
+        MessagingService $messagingService
+    ) 
+    {
+        $this->messagingService = $messagingService;
+    }
+    
     public function onDispatch(MvcEvent $e)
     {
         if (!$this->isLoggedOn()) {
@@ -44,6 +58,14 @@ class AccountController extends NetsensiaActionController
     public function inboxAction()
     {
         return $this->userAccountForm('AccountInboxForm', 'User');
+    }
+    
+    public function viewMessageAction()
+    {
+        $userMessageId = $this->params('id');
+        $results = $this->messagingService->getMessageDetails($userMessageId);
+        
+        return $results;
     }
     
     public function membershipAction()

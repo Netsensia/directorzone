@@ -32,7 +32,6 @@ use Directorzone\Form\Company\CompanyFeedsForm;
 use Directorzone\Service\TwitterService;
 use Directorzone\Service\BingService;
 use Directorzone\Service\ArticleService;
-use Bing\Client;
 use Directorzone\Form\Company\NewCompanyForm;
 use Directorzone\Form\People\PeopleFeedsForm;
 use Directorzone\Service\TalentPoolService;
@@ -110,6 +109,12 @@ class Module
                             $cm->getServiceLocator()->get('ArticleService')
                         );
                     },
+                'Directorzone\Controller\Account\Account' =>
+                    function (ControllerManager $cm) {
+                        return new \Directorzone\Controller\Account\AccountController(
+                            $cm->getServiceLocator()->get('MessagingService')
+                        );
+                    },                    
                 'CompanyView' =>
                     function (ControllerManager $cm) {
                         $companyService = $cm->getServiceLocator()->get('CompanyService');

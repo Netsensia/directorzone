@@ -3,8 +3,6 @@
 return array(
     'controllers' => array(
         'invokables' => array(
-            'Directorzone\Controller\Account\Account' =>
-                'Directorzone\Controller\Account\AccountController',
             'Directorzone\Controller\Console\Company' =>
                 'Directorzone\Controller\Console\CompanyController',
         ),
@@ -697,6 +695,20 @@ return array(
                     'defaults' => array(
                         'controller' => 'Directorzone\Controller\Account\Account',
                         'action'     => 'inbox',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'view-message' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/:id',
+                            'constraints' => ['id' => '[0-9]*'],
+                            'defaults' => array(
+                                'action' => 'view-message',
+                                'id' => 0,
+                            ),
+                        ),
                     ),
                 ),
             ),

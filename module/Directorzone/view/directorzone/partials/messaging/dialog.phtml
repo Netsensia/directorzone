@@ -7,7 +7,9 @@
         <h4 class="modal-title" id="myModalLabel">Send Message</h4>
       </div>
       <div class="modal-body">
+        Title
         <input id="messagetitle" style="width:100%;">
+        Message
         <textarea id="messagecontent" style="width:100%;height:10em">
         </textarea>
       </div>
@@ -41,8 +43,8 @@ $(document).ready(function () {
 	$('div#sendMessageDialog').on('hidden.bs.modal', function (e) {
 		if (receiverId != -1) {
 			var url = '/ajax/send-message/' + receiverId + '/1';
-			var title = $('textarea#messagetitle').html();
-			var content = $('textarea#messagecontent').html();
+			var title = $('input#messagetitle').val();
+			var content = $('textarea#messagecontent').val();
 			$.ajax({
 				'url' : url,
 				'type' : 'POST',
