@@ -3,11 +3,11 @@ namespace Directorzone\Model;
 
 use Netsensia\Model\DatabaseTableModel;
 
-class UserAvailableAs extends DatabaseTableModel
+class UserMessage extends DatabaseTableModel
 {
     public function __construct()
     {
-        $this->setTableName('useravailableas');
+        $this->setTableName('usermessage');
     
         parent::__construct();
     
@@ -15,16 +15,16 @@ class UserAvailableAs extends DatabaseTableModel
     
     public function init($id = null)
     {
-        $this->setPrimaryKey(array("usertargetrole" => $id));
+        $this->setPrimaryKey(array("usermessageid" => $id));
         if ($id != null) {
             $this->load();
         }
         return $this;
     }
     
-    public function getArticleId()
+    public function getUserMessageId()
     {
         $primaryKey = $this->getPrimaryKey();
-        return $primaryKey['usertargetroleid'];
+        return $primaryKey['usermessageid'];
     }
 }

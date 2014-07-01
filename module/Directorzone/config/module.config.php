@@ -83,6 +83,22 @@ return array(
                             ),
                         ),
                     ),
+                    'send-message' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/send-message/:id[/:type]',
+                            'constraints' => [
+                                'id' => '[0-9]*',
+                                'type' => '[0-9]*',
+                            ],
+                            'defaults' => array(
+                                'controller' => 'Directorzone\Controller\Ajax\Messaging',
+                                'action' => 'send-message',
+                                'id' => 0,
+                                'type' => 0,
+                            ),
+                        ),
+                    ),
                     'talent-pool' => array(
                         'type' => 'literal',
                         'options' => array(

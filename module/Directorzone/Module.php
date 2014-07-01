@@ -36,6 +36,7 @@ use Bing\Client;
 use Directorzone\Form\Company\NewCompanyForm;
 use Directorzone\Form\People\PeopleFeedsForm;
 use Directorzone\Service\TalentPoolService;
+use Directorzone\Service\MessagingService;
 
 class Module
 {
@@ -84,6 +85,12 @@ class Module
                             $cm->getServiceLocator()->get('TalentPoolService')
                         );
                 },
+                'Directorzone\Controller\Ajax\Messaging' =>
+                    function (ControllerManager $cm) {
+                        return new \Directorzone\Controller\Ajax\MessagingController(
+                            $cm->getServiceLocator()->get('MessagingService')
+                        );
+                    },
                 'Directorzone\Controller\Ajax\Article' =>
                     function (ControllerManager $cm) {
                         return new \Directorzone\Controller\Ajax\ArticleController(
@@ -197,6 +204,11 @@ class Module
                     $twitterApiExchange = new \TwitterAPIExchange($settings);
                     return new TwitterService($twitterApiExchange);
                 },
+                'MessagingService' => function($sm) {
+                    return new MessagingService(
+                        $sm->get('UserMessageTableGateway')
+                    );
+                },
                 'BingService' => function($sm) {
                     $settings = $sm->get('config')['bing'];
                     $bingClient = new \Bing\Client($settings['key'], 'json');
@@ -224,9 +236,15 @@ class Module
                     return $instance;
                 },
                 'UserCompanyTableGateway' => function ($sm) {
-                
                     $instance = new TableGateway(
                         'usercompany',
+                        $sm->get('Zend\Db\Adapter\Adapter')
+                    );
+                    return $instance;
+                },
+                'UserMessageTableGateway' => function ($sm) {
+                    $instance = new TableGateway(
+                        'usermessage',
                         $sm->get('Zend\Db\Adapter\Adapter')
                     );
                     return $instance;
@@ -364,11 +382,6 @@ class Module
                 },
                 'UserCompanyModel' => function ($sm) {
                     $instance = new \Directorzone\Model\UserCompany();
-                    $instance->setServiceLocator($sm);
-                    return $instance;
-                },
-                'UserAvailableAsModel' => function ($sm) {
-                    $instance = new \Directorzone\Model\UserAvailableAs();
                     $instance->setServiceLocator($sm);
                     return $instance;
                 },

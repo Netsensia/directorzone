@@ -39,7 +39,19 @@ $(document).ready(function () {
 	
 	$('div#sendMessageDialog').on('hidden.bs.modal', function (e) {
 		if (receiverId != -1) {
-			  alert('Message sent to ' + receiverId);
+			var url = '/ajax/send-message/' + receiverId + '/1';
+			var content = $('textarea#messagecontent').html();
+			$.ajax({
+				'url' : url,
+				'type' : 'POST',
+				'data' : {content: content},
+			}).done(function(msg) {
+				if (msg.success) {
+				    alert('Message sent successfully');
+				} else {
+					alert('There was an unknown error sending your message');
+				}
+			});
 		}
 	})
 });
