@@ -5,7 +5,6 @@ $(document).ready(function() {
 
 		var numColumns = $(this).find('tr th').length;
 		var editableMode = numColumns < 2 ? 'inline' : 'popup';
-		
 		if (numColumns == 3) {
 
 			$(this).find('th').each(function() {
@@ -106,15 +105,22 @@ $(document).ready(function() {
 								if (value > -1) {
 									isEmpty = false;
 								}
-							}
-							
+							} else
 							if ($(this).hasClass('editable')) {
 								var value = $(this).attr('data-value');
 								rowValueArray.push(value);
 								if (value != '') {
 									isEmpty = false;
 								}
+							} else
+							if ($(this).is('input')) {
+								var value = $(this).val();
+								rowValueArray.push(value);
+								if (value != '') {
+									isEmpty = false;
+								}
 							}
+						
 						});
 					});
 					if (!isEmpty) {
