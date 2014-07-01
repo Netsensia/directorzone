@@ -106,3 +106,6 @@
 /* 13:33:25 root@192.168.40.52 */ SHOW CREATE TABLE `usermessage`;
 /* 13:33:25 root@192.168.40.52 */ SET NAMES 'latin1';
 /* 13:33:25 root@192.168.40.52 */ SELECT * FROM `usermessage` LIMIT 0,1000;
+ALTER TABLE  `usermessage` CHANGE  `senttime`  `senttime` TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ;
+
+
