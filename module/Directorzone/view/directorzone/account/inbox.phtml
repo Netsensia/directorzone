@@ -1,2 +1,38 @@
 <?php echo $this->partial('account-nav.phtml'); ?>
-<?php echo $this->BootstrapForm($this->form, 'Messages and Notifications', $this->url('account-inbox')); ?>
+<h3>My Inbox</h3>
+
+<table id="inbox" data-link="row" class="rowlink table table-striped table-bordered table-hover">
+<tr>
+<th><a class="columnHeading" data-column-number="1">From</a></th>
+<th><a class="columnHeading" data-column-number="2">Title</a></th>
+</tr>
+</table>
+
+<ul class="pager">
+<li class="previous" id="previous" class="disabled"><a href="#">&larr; Previous</a></li>
+<li class="next" id="next"><a href="#">Next &rarr;</a></li>
+</ul>
+
+<script>
+
+$(document).ready(function() {
+	
+	netsensia_Pager(
+			1,
+			20,
+			'inbox',
+			'/ajax/inbox/list',
+			function(key, value) {
+				var url = '/inbox/' + value.internalId;
+				
+				var newRow = '<tr>';
+				newRow += '<td><a href="' + url + '">' + value.from + '</a></td>';
+				newRow += '<td>' + value.title + '</td>';
+				newRow += '</tr>';
+		
+				return newRow;
+			}
+		);
+});
+
+</script>

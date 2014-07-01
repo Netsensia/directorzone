@@ -99,6 +99,16 @@ return array(
                             ),
                         ),
                     ),
+                    'inbox' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/inbox/list',
+                            'defaults' => array(
+                                'controller' => 'Directorzone\Controller\Ajax\Messaging',
+                                'action' => 'inbox',
+                            ),
+                        ),
+                    ),
                     'talent-pool' => array(
                         'type' => 'literal',
                         'options' => array(
