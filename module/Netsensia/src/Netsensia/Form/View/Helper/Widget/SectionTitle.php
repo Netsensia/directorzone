@@ -8,7 +8,7 @@ class SectionTitle extends Widget
         $parts = explode('|', $this->element->getValue());
         
         ?>
-        <div class="bs-callout bs-callout-info">
+        <div id="<?php echo $this->element->getAttribute('id') . '_callout' ?>" class="bs-callout bs-callout-info">
         <h4><?= $parts[0] ?></h4>
         <?php if (!empty($parts[1])) echo $parts[1]; ?>
         </div>

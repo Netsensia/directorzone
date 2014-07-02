@@ -51,7 +51,7 @@ class NetsensiaForm extends Form
     
     public function addSection($options)
     {
-        $this->addHidden('netsensiaWidget_sectionTitle_' . uniqid(), $options['title'] . '|' . $options['description'], 'widget_sectionTitle');
+        $this->addHidden('netsensiaWidget_sectionTitle_' . md5($options['title']), $options['title'] . '|' . $options['description'], 'widget_sectionTitle');
     }
     
     public function addAutoDateOnCreate($name)
