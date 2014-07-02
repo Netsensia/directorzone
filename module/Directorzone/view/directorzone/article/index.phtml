@@ -16,7 +16,14 @@
       <span class="badge">Information Technology</span>
       <span class="badge">Farming</span>
       <span class="badge">Investing</span>
-      <h5><a href="/article/<?php echo $this->articleid ?>/edit">Edit this article</a> | <a id="deletearticle" href="/article/<?php echo $this->articleid ?>/delete">Delete this article</a></h5>
+      <h5>
+        <a href="/article/<?php echo $this->articleid ?>/edit">Edit this article</a> | 
+        <a id="deletearticle" href="/article/<?php echo $this->articleid ?>/delete">Delete this article</a> |
+        <a href="#" id="sendmessagedialog" data-id="<?php echo $this->userid; ?>">Reply to author</a>
+      </h5>
+
+      <?php echo $this->partial('messaging/dialog.phtml'); ?>
+
       <h3>
         <?php echo $this->title; ?>
       </h3>
