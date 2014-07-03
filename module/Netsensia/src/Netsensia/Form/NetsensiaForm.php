@@ -163,6 +163,13 @@ class NetsensiaForm extends Form
         } else {
             $tableValue = $table;
         }
+
+        
+        if (isset($options['admin'])) {
+            $adminOnly = $options['admin'] ? 'Y' : 'N';
+        } else {
+            $adminOnly = 'N';
+        }
         
         $select = new Select($name . 'id');
         $select->setLabel($label);
@@ -177,6 +184,7 @@ class NetsensiaForm extends Form
                 'type'  => 'select',
                 'icon'  => $icon,
                 'class' => $class,
+                'admin' => $adminOnly,
             ]
         );
         

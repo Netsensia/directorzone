@@ -21,10 +21,11 @@ class IndexController extends NetsensiaActionController
     {
         $mediaItems = [];
         $types = [1,2,3,4,5,6,7,8];
+        $statuses = [2];
         $limit = 4;
         
         foreach ($types as $type) {
-            $mediaItems[$type] = $this->articleService->getArticlesByType($type, $limit, 0, 1);
+            $mediaItems[$type] = $this->articleService->getArticlesByType($type, $statuses, $limit, 0, 1);
         }
         
         return [

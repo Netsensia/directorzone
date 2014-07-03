@@ -51,6 +51,7 @@ class ArticleController extends NetsensiaActionController
         
         $results = $this->articleService->getArticlesByType(
             [5],
+            [2],
             1,
             100
         );
@@ -80,6 +81,11 @@ class ArticleController extends NetsensiaActionController
         $page = $this->params()->fromQuery('page', null);
         $size = $this->params()->fromQuery('size', null);
         $typeArray = $this->params()->fromQuery('type', null);
+        if ($this->isAdmin()) {
+            $statusArray = $this->params()->fromQuery('status', null);
+        } else {
+            $statusArray = ["2"];
+        }
         $order = $this->params()->fromQuery('order', null);
         $onlyMe = $this->params()->fromQuery('onlyme', null);
         
@@ -94,6 +100,7 @@ class ArticleController extends NetsensiaActionController
         
         $results = $this->articleService->getArticlesByType(
             $typeArray,
+            $statusArray,
             $start,
             $end,
             $order,

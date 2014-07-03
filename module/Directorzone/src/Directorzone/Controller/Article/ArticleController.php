@@ -5,6 +5,7 @@ namespace Directorzone\Controller\Article;
 use Netsensia\Controller\NetsensiaActionController;
 use Directorzone\Service\ArticleService;
 use Netsensia\Exception\NotFoundResourceException;
+use Zend\View\Model\JsonModel;
 
 class ArticleController extends NetsensiaActionController
 {
@@ -35,6 +36,12 @@ class ArticleController extends NetsensiaActionController
     
     public function listAction()
     {
+        $result = [
+            'isLoggedOn' => $this->isLoggedOn(),
+            'isAdmin' => $this->isAdmin()
+        ];
+        
+        return $result;
     }
     
     public function deleteAction()

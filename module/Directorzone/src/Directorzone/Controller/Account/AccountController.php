@@ -98,6 +98,7 @@ class AccountController extends NetsensiaActionController
         
         return array(
             "editId" => $articleId,
+            'isAdmin' => $this->isAdmin(),
             "form" => $this->processForm(
                 'AccountPublishForm',
                 'Article',

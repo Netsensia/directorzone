@@ -40,6 +40,13 @@ trait ProvidesUserInfo
          $userModel = $this->getServiceLocator()->get('UserModel')->init($this->getUserId());
          return $userModel;   
     }
+    
+    public function isAdmin()
+    {
+        if (!$this->isLoggedOn()) {
+            return false;
+        }
+    
+        return $this->getUserModel()->isAdmin();
+    }
 }
-
-?>

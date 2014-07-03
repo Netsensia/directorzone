@@ -22,6 +22,8 @@ class AccountPublishForm extends NetsensiaForm
         $this->setFieldPrefix('account-publish-');
         $this->setDefaultIcon('envelope');
         
+        $this->addSelect(['name' => 'approvestatus', 'label' => 'Approved Status', 'admin' => true]);
+
         $this->addSelect(['name' => 'articlecategory', 'label' => 'Category']);
         
         $this->addCheckbox(['name' => 'isanonymous', 'label' => 'Publish anonymously?']);

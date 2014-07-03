@@ -18,7 +18,8 @@ textarea {
     echo $this->BootstrapForm(
         $this->form,
         'Publishing Dashboard',
-        $this->url(null, ['id'=>$this->editId])
+        $this->url(null, ['id'=>$this->editId]),
+        ['showAdminFields' => $this->isAdmin]
     );
 ?>
 
