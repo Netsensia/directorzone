@@ -1,13 +1,8 @@
 <?php
 namespace Netsensia\Form;
 
-use Zend\Captcha\Dumb as CaptchaDumb;
-use Zend\Form\Element\Captcha;
 use Zend\Form\Element;
-use Zend\Form\Fieldset;
 use Netsensia\Form\CaptchaForm;
-use Zend\InputFilter\Input;
-use Zend\InputFilter\InputFilter;
 
 class ContactForm extends CaptchaForm
 {

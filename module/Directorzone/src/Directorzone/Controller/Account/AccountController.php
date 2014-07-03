@@ -4,8 +4,7 @@ namespace Directorzone\Controller\Account;
 
 use Netsensia\Controller\NetsensiaActionController;
 use Zend\Mvc\MvcEvent;
-use Zend\View\Model\JsonModel;
-use Directorzone\Service\MessagingService;
+use Netsensia\Service\MessagingService;
 
 class AccountController extends NetsensiaActionController
 {

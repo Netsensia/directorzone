@@ -1,7 +1,6 @@
 <?php
-namespace Directorzone\Service;
+namespace Netsensia\Service;
 
-use Netsensia\Service\NetsensiaService;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Select;
 use Netsensia\Exception\NotFoundResourceException;
@@ -9,12 +8,15 @@ use Netsensia\Exception\NotFoundResourceException;
 class MessagingService extends NetsensiaService
 {
     private $userMessageTable;
+    private $feedbackTable;
     
     public function __construct(
-	    TableGateway $userMessageTable
+	    TableGateway $userMessageTable,
+        TableGateway $feedbackTable
     )
     {
         $this->userMessageTable = $userMessageTable;
+        $this->feedbackTable = $feedbackTable;
     }
     
     public function sendMessage(
@@ -64,7 +66,7 @@ class MessagingService extends NetsensiaService
                 ->join(
                     'user',
                     'user.userid = usermessage.senderid',
-                    ['forenames', 'surname'],
+                    ['name', 'forenames', 'surname'],
                     'left'
                 )
                 ->offset($start - 1)
@@ -81,12 +83,17 @@ class MessagingService extends NetsensiaService
         
         foreach ($results as $result) {
         
+            $from = $result['forenames'] . ' ' . $result['surname'];
+            if (trim($from) == '') {
+                $from = $result['name'];
+            }
+            
             $messages['results'][] = [
                 'internalId' => $result['usermessageid'],
                 'title' => $result['title'],
                 'content' => $result['content'],
                 'senttime' => $result['senttime'],
-                'from' => $result['forenames'] . ' ' . $result['surname']
+                'from' => $from
             ];
         }
         

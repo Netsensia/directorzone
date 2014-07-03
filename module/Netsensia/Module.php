@@ -13,6 +13,8 @@ use Zend\Mvc\ModuleRouteListener;
 use Zend\Log\Writer\Stream;
 use Zend\Log\Logger;
 use Netsensia\Service\ImageService;
+use Netsensia\Service\MessagingService;
+use Zend\Db\TableGateway\TableGateway;
     
 class Module
 {
@@ -72,6 +74,26 @@ class Module
                 'AddressModel' => function (\Zend\ServiceManager\ServiceLocatorInterface $sl) {
                     $instance = new \Netsensia\Model\Address();
                     $instance->setServiceLocator($sl);
+                    return $instance;
+                },
+                'MessagingService' => function($sm) {
+                    return new MessagingService(
+                        $sm->get('UserMessageTableGateway'),
+                        $sm->get('FeedbackTableGateway')
+                    );
+                },
+                'FeedbackTableGateway' => function ($sm) {
+                    $instance = new TableGateway(
+                        'feedback',
+                        $sm->get('Zend\Db\Adapter\Adapter')
+                    );
+                    return $instance;
+                },
+                'UserMessageTableGateway' => function ($sm) {
+                    $instance = new TableGateway(
+                        'usermessage',
+                        $sm->get('Zend\Db\Adapter\Adapter')
+                    );
                     return $instance;
                 },
             ),

@@ -75,6 +75,17 @@ class HelpController extends NetsensiaActionController
                     ['feedback_id' => $feedbackId, 'feedback_code' => $feedbackCode]
                 );
                 
+                foreach ([9,10] as $adminId) {
+                    if ($this->isLoggedOn()) {
+                        $this->getServiceLocator()->get('MessagingService')->sendMessage(
+                            $adminId,
+                            1,
+                            'Site Feedback',
+                            $data['message']	
+                        );
+                    }
+                }
+                
                 $this->flashMessenger()->addSuccessMessage(
                     $this->translate('Your message was sent successfully and should reach us shortly')
                 );

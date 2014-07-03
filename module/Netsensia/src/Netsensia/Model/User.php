@@ -153,4 +153,23 @@ class User extends DatabaseTableModel
         $primaryKey = $this->getPrimaryKey();
         return $primaryKey['userid'];
     }
+    
+    public function isAdmin()
+    {
+        $sql =
+            "SELECT isadmin " .
+            "FROM " . $this->getTableName() . " " .
+            "WHERE userid = :userid " .
+            "AND isadmin = 'Y'";
+        
+        $query = $this->getConnection()->prepare($sql);
+        
+        $query->execute(
+            array(
+                ':userid' => $this->getUserId(),
+            )
+        );
+        
+        return ($query->rowCount() == 1); 
+    }
 }

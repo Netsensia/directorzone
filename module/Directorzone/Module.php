@@ -35,7 +35,6 @@ use Directorzone\Service\ArticleService;
 use Directorzone\Form\Company\NewCompanyForm;
 use Directorzone\Form\People\PeopleFeedsForm;
 use Directorzone\Service\TalentPoolService;
-use Directorzone\Service\MessagingService;
 
 class Module
 {
@@ -209,11 +208,6 @@ class Module
                     $twitterApiExchange = new \TwitterAPIExchange($settings);
                     return new TwitterService($twitterApiExchange);
                 },
-                'MessagingService' => function($sm) {
-                    return new MessagingService(
-                        $sm->get('UserMessageTableGateway')
-                    );
-                },
                 'BingService' => function($sm) {
                     $settings = $sm->get('config')['bing'];
                     $bingClient = new \Bing\Client($settings['key'], 'json');
@@ -243,13 +237,6 @@ class Module
                 'UserCompanyTableGateway' => function ($sm) {
                     $instance = new TableGateway(
                         'usercompany',
-                        $sm->get('Zend\Db\Adapter\Adapter')
-                    );
-                    return $instance;
-                },
-                'UserMessageTableGateway' => function ($sm) {
-                    $instance = new TableGateway(
-                        'usermessage',
                         $sm->get('Zend\Db\Adapter\Adapter')
                     );
                     return $instance;

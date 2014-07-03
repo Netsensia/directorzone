@@ -5,7 +5,7 @@ namespace Directorzone\Controller\Ajax;
 use Netsensia\Controller\NetsensiaActionController;
 use Zend\Mvc\MvcEvent;
 use Zend\View\Model\JsonModel;
-use Directorzone\Service\MessagingService;
+use Netsensia\Service\MessagingService;
 
 class MessagingController extends NetsensiaActionController
 {
@@ -16,7 +16,8 @@ class MessagingController extends NetsensiaActionController
     
     public function __construct(
         MessagingService $messagingService
-    ) {
+    )
+    {
         $this->messagingService = $messagingService;
     }
     
