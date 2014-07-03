@@ -84,7 +84,7 @@ class ProcessForm extends AbstractPlugin
                     
                     unset($data['confirmpassword']);
                 }
-                                
+
                 if ($isValid) {
                     $tableModel->setData($data);
                     

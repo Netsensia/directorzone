@@ -126,7 +126,6 @@ class NetsensiaForm extends Form
     
     public function addSelect($options)
     {
-
         if (!is_array($options)) {
             $options = [ 'name' => $options ];
         }
@@ -164,27 +163,19 @@ class NetsensiaForm extends Form
             $tableValue = $table;
         }
 
-        
-        if (isset($options['admin'])) {
-            $adminOnly = $options['admin'] ? 'Y' : 'N';
-        } else {
-            $adminOnly = 'N';
-        }
-        
         $select = new Select($name . 'id');
         $select->setLabel($label);
         
         $optionsArray = $this->getOptionsArray($table, $tableKey, $tableValue);
         
         $select->setValueOptions($optionsArray);
-        
+       
         $select->setAttributes(
             [
                 'id'    => $name,
                 'type'  => 'select',
                 'icon'  => $icon,
                 'class' => $class,
-                'admin' => $adminOnly,
             ]
         );
         

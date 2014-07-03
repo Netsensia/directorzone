@@ -646,6 +646,121 @@
 	<td>css=div.alert.alert-success</td>
 	<td>× Your details have been saved</td>
 </tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Account</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Publish</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=account-publish-articlecategory</td>
+	<td>label=News article</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=account-publish-title</td>
+	<td>This is a test News Article, please ignore</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=form-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=My Articles</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Logout</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=drop3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=login-email</td>
+	<td>chris@netsensia.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=login-password</td>
+	<td>asdasd</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Articles</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='main']/div[2]/div[2]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='main']/div[2]/div[2]/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=This is a test News Article, please ignore</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=This is a test News Article, please ignore</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit this article</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=account-publish-approvestatus</td>
+	<td>label=Approved</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=form-submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Articles</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='main']/div[2]/div[2]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='main']/div[2]/div[2]/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>link=This is a test News Article, please ignore</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>

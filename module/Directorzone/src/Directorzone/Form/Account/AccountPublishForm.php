@@ -5,16 +5,16 @@ use Netsensia\Form\NetsensiaForm;
 
 class AccountPublishForm extends NetsensiaForm
 {
-    private $userId;
+    private $userModel;
     
     public function __construct($name = null, $options = array())
     {
         parent::__construct($name, $options);
     }
     
-    public function setUserId($userId)
+    public function setUserModel($userModel)
     {
-        $this->userId = $userId;    
+        $this->userModel = $userModel;
     }
     
     public function prepare()
@@ -22,7 +22,9 @@ class AccountPublishForm extends NetsensiaForm
         $this->setFieldPrefix('account-publish-');
         $this->setDefaultIcon('envelope');
         
-        $this->addSelect(['name' => 'approvestatus', 'label' => 'Approved Status', 'admin' => true]);
+        if ($this->userModel->isAdmin()) {
+            $this->addSelect(['name' => 'approvestatus', 'label' => 'Approved Status']);
+        }
 
         $this->addSelect(['name' => 'articlecategory', 'label' => 'Category']);
         
@@ -36,7 +38,7 @@ class AccountPublishForm extends NetsensiaForm
         $this->addDate('start-date');
         $this->addDate('end-date');
         
-        $this->addHidden('userid', $this->userId);
+        $this->addHidden('userid', $this->userModel->getUserId());
         
         $this->addImage('image');
         

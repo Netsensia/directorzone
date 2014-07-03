@@ -27,10 +27,6 @@ class BootstrapForm extends AbstractHelper
         $this->form     = $form;
         $this->view     = $this->getView();
         
-        if (!isset($options['showAdminFields'])) {
-            $options['showAdminFields'] = false;
-        }
-        
         $this->options  = $options;
                 
         $this->openForm($title, $action);
@@ -48,16 +44,12 @@ class BootstrapForm extends AbstractHelper
     {
         
         $this->hasImage = false;
-        
+
         foreach ($elements as $element) {
             if ($element instanceof Submit) {
                 continue;
             }
             
-            if ($element->getAttribute('admin') == 'Y' && !$this->options['showAdminFields']) {
-                continue;
-            }
-                
             if ($element->getAttribute('data-netsensia') == 'image-upload') {
                 $this->hasImage = true;
                 $this->imageUploadId = $element->getAttribute('id');

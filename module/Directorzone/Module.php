@@ -521,7 +521,9 @@ class Module
                     $form = new AccountPublishForm('accountPublishForm');
                     $authService = $sm->get('Zend\Authentication\AuthenticationService');
                     $identity = $authService->getIdentity();
-                    $form->setUserId($identity->getUserId());
+                    $userId = $identity->getUserId();
+                    $userModel = $sm->get('UserModel')->init($identity->getUserId());
+                    $form->setUserModel($userModel);
                     $form->setTranslator($sm->get('translator'));
                     $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
                     return $form;
