@@ -1,0 +1,59 @@
+
+<div class="modal fade" id="addCommentDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Write Comment</h4>
+      </div>
+      <div class="modal-body">
+        Comment
+        <textarea id="commentcontent" style="width:100%;height:10em">
+        </textarea>
+      </div>
+      <div class="modal-footer">
+        <button id="cancelcomment" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button id="addcomment" type="button" class="btn btn-primary" data-dismiss="modal">Leave Comment</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$(document).ready(function () {
+	var articleId = -1;
+	
+	$('a#addcommentdialog').click(function () {
+		articleId = $(this).attr('data-id');
+		$('div#addCommentDialog').modal({
+			  keyboard: false
+		});
+	});
+
+	$('button#cancelcomment').click(function () {
+		articleId = -1;
+	});
+	
+	$('button#addcomment').click(function () {
+
+	});
+	
+	$('div#addCommentDialog').on('hidden.bs.modal', function (e) {
+		if (articleId != -1) {
+			var url = '/ajax/add-comment/' + articleId;
+			var content = $('textarea#commentcontent').val();
+			$.ajax({
+				'url' : url,
+				'type' : 'POST',
+				'data' : {content: content},
+			}).done(function(msg) {
+				if (msg.success) {
+					location.reload();
+				} else {
+					alert('There was an unknown error while adding your comment');
+				}
+			});
+		}
+	})
+});
+</script>

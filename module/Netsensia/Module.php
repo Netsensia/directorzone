@@ -14,6 +14,7 @@ use Zend\Log\Writer\Stream;
 use Zend\Log\Logger;
 use Netsensia\Service\ImageService;
 use Netsensia\Service\MessagingService;
+use Netsensia\Service\CommentsService;
 use Zend\Db\TableGateway\TableGateway;
     
 class Module
@@ -31,6 +32,7 @@ class Module
                 'BootstrapForm' => 'Netsensia\Form\View\Helper\BootstrapForm',
                 'NewsPanel' => 'Netsensia\View\Helper\NewsPanel',
                 'BbCode' => 'Netsensia\View\Helper\BbCode',
+                'ArticleComments' => 'Netsensia\View\Helper\ArticleComments',
             ),
             'factories' => array(
                 'config' => function ($serviceManager) {
@@ -81,6 +83,18 @@ class Module
                         $sm->get('UserMessageTableGateway'),
                         $sm->get('FeedbackTableGateway')
                     );
+                },
+                'CommentsService' => function($sm) {
+                    return new CommentsService(
+                        $sm->get('ArticleCommentsTableGateway')
+                    );
+                },
+                'ArticleCommentsTableGateway' => function ($sm) {
+                    $instance = new TableGateway(
+                        'articlecomment',
+                        $sm->get('Zend\Db\Adapter\Adapter')
+                    );
+                    return $instance;
                 },
                 'FeedbackTableGateway' => function ($sm) {
                     $instance = new TableGateway(

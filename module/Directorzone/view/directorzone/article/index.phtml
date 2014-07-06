@@ -19,10 +19,13 @@
       <h5>
         <a href="/article/<?php echo $this->articleid ?>/edit">Edit this article</a> | 
         <a id="deletearticle" href="/article/<?php echo $this->articleid ?>/delete">Delete this article</a> |
-        <a href="#" id="sendmessagedialog" data-id="<?php echo $this->userid; ?>">Reply to author</a>
+        <a href="#" id="sendmessagedialog" data-id="<?php echo $this->userid; ?>">Reply to author</a> |
+        <?php $addCommentLink = '<a href="#" id="addcommentdialog" data-id="' . $this->articleid . '">Add a comment</a>'; ?>
+        <?php echo $addCommentLink; ?>
       </h5>
 
       <?php echo $this->partial('messaging/dialog.phtml'); ?>
+      <?php echo $this->partial('comments/dialog.phtml'); ?>
 
       <h3>
         <?php echo $this->title; ?>
@@ -40,6 +43,7 @@
       </p>
     </div>
   
+  <?php echo $this->ArticleComments($this->comments, $addCommentLink); ?>
 
 </body>
 

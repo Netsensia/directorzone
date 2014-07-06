@@ -781,6 +781,41 @@
 	<td>link=This is a test News Article, please ignore</td>
 	<td></td>
 </tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Articles</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Adlens® announced strategic partnership with Brazilian eyewear distributor</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=addcommentdialog</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=commentcontent</td>
+	<td>This is a test comment</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=addcomment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>3000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='main']/div[2]/div[2]</td>
+	<td>This is a test comment</td>
+</tr>
 </tbody></table>
 </body>
 </html>

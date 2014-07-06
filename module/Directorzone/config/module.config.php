@@ -97,6 +97,20 @@ return array(
                             ),
                         ),
                     ),
+                    'add-comment' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/add-comment/:id',
+                            'constraints' => [
+                            'id' => '[0-9]*',
+                            ],
+                            'defaults' => array(
+                                'controller' => 'Directorzone\Controller\Ajax\Comments',
+                                'action' => 'add-comment',
+                                'id' => 0,
+                            ),
+                        ),
+                    ),
                     'inbox' => array(
                         'type' => 'segment',
                         'options' => array(

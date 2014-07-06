@@ -89,6 +89,12 @@ class Module
                             $cm->getServiceLocator()->get('MessagingService')
                         );
                     },
+                'Directorzone\Controller\Ajax\Comments' =>
+                    function (ControllerManager $cm) {
+                        return new \Directorzone\Controller\Ajax\CommentsController(
+                            $cm->getServiceLocator()->get('CommentsService')
+                        );
+                    },
                 'Directorzone\Controller\Ajax\Article' =>
                     function (ControllerManager $cm) {
                         return new \Directorzone\Controller\Ajax\ArticleController(
@@ -354,6 +360,7 @@ class Module
                 },
                 'ArticleService' => function ($sm) {
                     $instance = new ArticleService(
+                        $sm->get('CommentsService'),
                         $sm->get('ArticleTableGateway')
                     );
                     return $instance;

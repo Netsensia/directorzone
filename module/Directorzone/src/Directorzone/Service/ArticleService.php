@@ -5,18 +5,23 @@ use Netsensia\Service\NetsensiaService;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Select;
 use Netsensia\Exception\NotFoundResourceException;
+use Netsensia\Service\CommentsService;
 
 class ArticleService extends NetsensiaService
 {
+    private $commentsService;
+    
     /**
      * @var TableGateway
      */
     private $articleTable;
-    
+        
     public function __construct(
+        CommentsService $commentsService,
         TableGateway $articleTable
     )
     {
+        $this->commentsService = $commentsService;
         $this->articleTable = $articleTable;
     }
     
@@ -47,6 +52,10 @@ class ArticleService extends NetsensiaService
                 ($article['pseudonym'] == '' ? $autoPseudonym : $article['pseudonym']);
             $article['image'] =
                 ($article['image'] == '' ? '/img/brand/globe.fw.png' : $article['image']);
+            
+            $article['comments'] = 
+                $this->commentsService->getCommentsForArticle($articleId, 1, 1000, 1);
+            
             return $article;
         } else {
             throw new NotFoundResourceException('Article not found');
