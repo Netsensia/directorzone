@@ -20,7 +20,7 @@ class ArticleComments extends AbstractHelper
         }
         
         if ($count == 0) {
-            echo 'There are currently comments for this article';
+            echo 'There are currently no comments for this article';
         }
         echo '<div>';
         echo $addCommentLink;
