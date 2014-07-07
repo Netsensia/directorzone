@@ -32,23 +32,30 @@ $(document).ready(function() {
 		
 	});
 	
-	function showChildrenOfSelectParent(childSelectElement, selectedParentId)
+	function showChildrenOfSelectParent(childSelectElement, selectedParentValue)
 	{
-		if (selectedParentId == -1) {
+		if (selectedParentValue == -1) {
 			$(childSelectElement).css('display', 'none');
 			return;
 		}
+				
+		$(childSelectElement).empty();
 		
-		$(childSelectElement).css('display', 'initial');
+		childReferenceElement = $(childSelectElement).siblings('.select_reference').first();
 		
-		$(childSelectElement).children('option').each(function () {
+		$(childReferenceElement).children('option').each(function () {
 			var parts = $(this).val().split(',');
 			var childId = parts[0];
 			var parentId = parts[1];
-			if (parentId != selectedParentId && childId != -1) {
-				$(this).remove();
+			if (parentId == selectedParentValue) {
+				newElement = $(this).clone();
+				$(newElement).val(childId);
+				$(childSelectElement).append(newElement);
 			}
 		});
+		
+		$(childSelectElement).css('display', 'initial');
+
 	}
 	
 	$(document).delegate('.select_parent', 'change', function() {
