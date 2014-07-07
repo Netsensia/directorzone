@@ -92,6 +92,12 @@ $(document).ready(function() {
 			var newRow = $(lastRow).clone();
 			newRow.children().each(function () {
 				$(this).children().each(function() {
+					if ($(this).is('select')) {
+						$(this).val(-1);
+						if ($(this).hasClass('select_child')) {
+							$(this).css('display', 'none');
+						}
+					}
 					if ($(this).hasClass('editable')) {
 						$(this).attr('data-value', '');
 						$(this).removeClass('editable-unsaved');

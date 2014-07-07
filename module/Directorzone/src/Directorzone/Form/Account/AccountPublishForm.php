@@ -51,6 +51,7 @@ class AccountPublishForm extends NetsensiaForm
             'fields' => [
                 [
                     'type' => 'select',
+                    'subtype' => 'tiered',
                     'name' => 'sector',
                     'label' => 'Sector',
                 ],

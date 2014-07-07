@@ -103,9 +103,11 @@ class MultiTable extends Widget
             	        $parentValue = -1;
             	        foreach ($optionsArray as $option) {
                             $parts = explode(',', $option['value']);
-                            if ($parts[0] == $values[$fieldIndex]) {
-                                $parentValue = $parts[1];
-                                $referenceSelect->setValue($option['value']);
+                            if (count($parts) == 2 && !empty($values)) {
+                                if ($parts[0] == $values[$fieldIndex]) {
+                                    $parentValue = $parts[1];
+                                    $referenceSelect->setValue($option['value']);
+                                }
                             }
                         }
             	        $selectElements['parent']->setValue($parentValue);
