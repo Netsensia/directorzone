@@ -16,7 +16,8 @@ class PeopleService extends NetsensiaService
     
     public function __construct(
         TableGateway $peopleDirectory
-    ) {
+    )
+    {
         $this->peopleDirectoryTable = $peopleDirectory;
     }
 
@@ -130,5 +131,5 @@ class PeopleService extends NetsensiaService
         );
     
         return $rowset->current()['count'];
-    }    
+    }
 }

@@ -19,8 +19,10 @@ class TalentPoolService extends NetsensiaService
     
     public function __construct(
         TableGateway $talentPoolDirectory
-    ) {
+    )
+    {
         $this->talentPoolDirectoryTable = $talentPoolDirectory;
+        $this->setPrimaryTable($talentPoolDirectory);
     }
 
     public function getTalentPoolList($start, $end, $order)
@@ -51,6 +53,7 @@ class TalentPoolService extends NetsensiaService
         
             $people['results'][] = array_merge([
                     'internalId' => $result['userid'],
+                    'footprint' => $this->getFootprint($result['userid'])
                 ],
                 $result
             );
@@ -76,6 +79,9 @@ class TalentPoolService extends NetsensiaService
         }
     
         $peopleDetails = $rowset->current()->getArrayCopy();
+        $peopleDetails['footprint'] = $this->getFootprint(
+            $talentPoolDirectoryId
+        );
     
         return $peopleDetails;
     
@@ -90,5 +96,13 @@ class TalentPoolService extends NetsensiaService
         );
     
         return $rowset->current()['count'];
-    }    
+    }
+    
+    public function getFootprint($userId)
+    {
+        $jobArea = $this->getResolvedProperty($userId, 'jobarea');
+        $profession = $this->getResolvedProperty($userId, 'profession');
+        
+        return $profession . ', ' . $jobArea;
+    }
 }

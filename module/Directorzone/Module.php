@@ -35,6 +35,7 @@ use Directorzone\Service\ArticleService;
 use Directorzone\Form\Company\NewCompanyForm;
 use Directorzone\Form\People\PeopleFeedsForm;
 use Directorzone\Service\TalentPoolService;
+use Directorzone\Service\DirectorzoneUserService;
 
 class Module
 {
