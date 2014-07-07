@@ -262,6 +262,13 @@ class Module
                     );
                     return $instance;
                 },
+                'ArticleSectorTableGateway' => function ($sm) {
+                    $instance = new TableGateway(
+                        'articlesector',
+                        $sm->get('Zend\Db\Adapter\Adapter')
+                    );
+                    return $instance;
+                },
                 'UserLanguageTableGateway' => function ($sm) {
                     $instance = new TableGateway(
                         'userlanguage',
@@ -399,6 +406,11 @@ class Module
                 },
                 'UserWhosWhoSectorModel' => function ($sm) {
                     $instance = new \Directorzone\Model\UserWhosWhoSector();
+                    $instance->setServiceLocator($sm);
+                    return $instance;
+                },
+                'ArticleSectorModel' => function ($sm) {
+                    $instance = new \Directorzone\Model\ArticleSector();
                     $instance->setServiceLocator($sm);
                     return $instance;
                 },

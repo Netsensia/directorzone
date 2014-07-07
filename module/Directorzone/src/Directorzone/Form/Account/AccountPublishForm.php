@@ -44,6 +44,19 @@ class AccountPublishForm extends NetsensiaForm
         
         $this->addAutoDateOnCreate('publishdate');
         
+        $this->addMultiTable([
+            'callouttext' => 'Please list the sectors in which you are available',
+            'groupname' => 'Sectors',
+            'jointablemodel' => 'ArticleSector',
+            'fields' => [
+                [
+                    'type' => 'select',
+                    'name' => 'sector',
+                    'label' => 'Sector',
+                ],
+            ],
+        ]);
+        
         $this->addSubmit('Publish');
         
         parent::prepare();
