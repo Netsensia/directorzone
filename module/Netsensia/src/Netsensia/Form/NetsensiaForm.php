@@ -182,7 +182,12 @@ class NetsensiaForm extends Form
         $this->add($select);
     }
     
-    public function getOptionsArray($table, $tableKey = null, $tableValue = null)
+    public function getOptionsArray(
+        $table,
+        $tableKey = null,
+        $tableValue = null,
+        $isTiered = false
+    )
     {
         if (!$this->dbAdapter) {
             throw new \Exception('DB Adapter is not set');
@@ -203,7 +208,20 @@ class NetsensiaForm extends Form
         $optionsArray = [];
         
         foreach ($rowset as $row) {
-            $optionsArray[$row[$tableKey]] = $row[$tableValue];
+            if ($isTiered) {
+                $parentColumn = $table . 'parentid';
+                if (isset($row[$parentColumn])) {
+                    $value = $row[$tableKey] . ',' . $row[$parentColumn];
+                } else {
+                    $value = $row[$tableKey];
+                }
+            } else {
+                $value = $row[$tableKey];
+            }
+            $optionsArray[] = [
+                'value' => $value,
+                'label' => $row[$tableValue],
+            ];
         }
         
         return $optionsArray;

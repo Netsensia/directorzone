@@ -2,6 +2,7 @@
 namespace Netsensia\Controller\Plugin\Widget;
 
 use Zend\Db\TableGateway\TableGateway;
+
 class MultiTable extends Widget
 {
     public function process()

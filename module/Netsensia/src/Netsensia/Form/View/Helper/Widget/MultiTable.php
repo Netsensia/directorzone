@@ -51,19 +51,49 @@ class MultiTable extends Widget
             echo '<td>';
             switch ($field->type) {
             	case 'select' :
+            	    $isTiered = (isset($field->subtype) && $field->subtype == 'tiered');
+            	    if ($isTiered) {
+            	        $parentSelect = new Select('widgetignore[]');
+            	        $parentSelect->setAttribute('class', 'netsensia_form_widget select_parent');
+            	        $parentOptionsArray = $this->form->getOptionsArray($field->name . 'parent');
+            	        $parentOptionsArray = array_merge(
+            	           [['value' => -1, 'label' => 'Please select parent...']],
+            	           $parentOptionsArray
+            	        );
+            	        $parentSelect->setValueOptions(
+            	            $parentOptionsArray
+            	        );
+            	        if (!empty($values)) {
+            	            // @todo get parent from child value
+            	        }
+            	        echo $this->view->formElement($parentSelect);
+            	    }
             	    $select = new Select('widgetignore[]');
-            	    $select->setAttribute('class', 'netsensia_form_widget');
+            	    $select->setAttribute('class', 'netsensia_form_widget' . ($isTiered ? ' select_child' : ''));
             	    $optionsArray = $this->form->getOptionsArray($field->name);
+            	    $optionsArray = array_merge(
+                        [['value' => -1, 'label' => 'Please select...']],
+            	        $optionsArray
+            	    );
             	    $select->setValueOptions(
-            	        array_merge(
-                            [-1 => 'Please select...'],
-                            $optionsArray
-                        )
+            	        $optionsArray
             	    );
                     if (!empty($values)) {
                         $select->setValue($values[$fieldIndex]);
                     }
             	    echo $this->view->formElement($select);
+            	    if ($isTiered) {
+                        $optionsArray = $this->form->getOptionsArray($field->name, null, null, true);
+                        $optionsArray = array_merge(
+                            [['value' => -1, 'label' => 'Please select...']],
+                            $optionsArray
+                        );
+                        $select->setValueOptions(
+                            $optionsArray
+                        );
+            	        $select->setAttribute('class', 'netsensia_form_widget select_reference');
+            	        echo $this->view->formElement($select);
+            	    }
             	    break;
             	case 'textlink':
             	    echo '<a class="widget_multitable_edit" data-type="text" data-value="' . $textValue . '" id="' . $this->element->getAttribute('id') . '_' . $field->name . '" data-title="Enter ' . $field->label . '" href="#">Edit</a>';
