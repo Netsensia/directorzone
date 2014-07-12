@@ -4,36 +4,17 @@
 namespace Directorzone;
 
 use Zend\Mvc\MvcEvent;
-use Directorzone\Form\Account\AccountAccountForm;
-use Directorzone\Form\Account\AccountCompanyForm;
-use Directorzone\Form\Account\AccountContactForm;
-use Directorzone\Form\Account\AccountExperienceForm;
-use Directorzone\Form\Account\AccountInboxForm;
-use Directorzone\Form\Account\AccountMembershipForm;
-use Directorzone\Form\Account\AccountPreferencesForm;
-use Directorzone\Form\Account\AccountProfileForm;
-use Directorzone\Form\Account\AccountPersonalForm;
+
 use Directorzone\Form\Account\AccountPublishForm;
-use Directorzone\Form\Account\AccountDirectoryForm;
 use Elasticsearch\Client as ElasticClient;
 use Zend\Db\TableGateway\TableGateway;
 use \Zend\Mvc\Controller\ControllerManager;
 use Directorzone\Service\CompanyService;
 use Directorzone\Service\Admin\CompanyUploadService;
 use Directorzone\Service\PeopleService;
-use Directorzone\Form\Company\CompanyContactForm;
-use Directorzone\Form\Company\CompanyOverviewForm;
-use Directorzone\Form\Company\CompanySectorsForm;
-use Directorzone\Form\Company\CompanyRelationshipsForm;
-use Directorzone\Form\Company\CompanyOwnersForm;
-use Directorzone\Form\Company\CompanyOfficersForm;
-use Directorzone\Form\Company\CompanyFinancialsForm;
-use Directorzone\Form\Company\CompanyFeedsForm;
 use Directorzone\Service\TwitterService;
 use Directorzone\Service\BingService;
 use Directorzone\Service\ArticleService;
-use Directorzone\Form\Company\NewCompanyForm;
-use Directorzone\Form\People\PeopleFeedsForm;
 use Directorzone\Service\TalentPoolService;
 
 class Module
@@ -221,6 +202,29 @@ class Module
             ]
         );
         
+        $forms = [
+            'CompanyContactForm',
+            'CompanyFeedsForm',
+            'CompanyFinancials',
+            'CompanyOfficers',
+            'CompanyOverview',
+            'CompanyNewCompany',
+            'CompanyOwners',
+            'CompanyRelationships',
+            'CompanySectors',
+            'AccountAccount',
+            'AccountCompany',
+            'AccountContact',
+            'AccountExperience',
+            'AccountInbox',
+            'AccountMembership',
+            'AccountPersonal',
+            'AccountPreferences',
+            'AccountProfile',
+            'AccountDirectory',
+            'PeopleFeeds',
+        ];
+        
         $tableGatewayFactories = [];
         
         foreach ($tableGateways as $tableGateway) {
@@ -242,6 +246,20 @@ class Module
                 $instance = new $className();
                 $instance->setServiceLocator($sm);
                 return $instance;
+            };
+        }
+        
+        $formFactories = [];
+        
+        foreach ($forms as $form) {
+            $formFactories[$form . 'Form'] = function ($sm) use ($form) {
+                $parts = preg_split('/(?=[A-Z])/', lcfirst($form));
+                $className = $form . 'Form';
+                $classPath = '\\Directorzone\\Form\\' . ucfirst($parts[0]) . '\\' . $className;
+                $form = new $classPath(lcfirst($className));
+                $form->setTranslator($sm->get('translator'));
+                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                return $form;
             };
         }
         
@@ -324,114 +342,6 @@ class Module
                 );
                 return $instance;
             },
-            'CompanyContactForm' => function ($sm) {
-                $form = new CompanyContactForm('companyContactForm');
-                $form->setTranslator($sm->get('translator'));
-                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                return $form;
-            },
-            'CompanyFeedsForm' => function ($sm) {
-                $form = new CompanyFeedsForm('companyFeedsForm');
-                $form->setTranslator($sm->get('translator'));
-                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                return $form;
-            },
-            'CompanyFinancialsForm' => function ($sm) {
-                $form = new CompanyFinancialsForm('companyFinancialsForm');
-                $form->setTranslator($sm->get('translator'));
-                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                return $form;
-            },
-            'CompanyOfficersForm' => function ($sm) {
-                $form = new CompanyOfficersForm('companyOfficersForm');
-                $form->setTranslator($sm->get('translator'));
-                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                return $form;
-            },
-            'CompanyOverviewForm' => function ($sm) {
-                $form = new CompanyOverviewForm('companyOverviewForm');
-                $form->setTranslator($sm->get('translator'));
-                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                return $form;
-            },
-            'NewCompanyForm' => function ($sm) {
-                $form = new NewCompanyForm('newCompanyForm');
-                $form->setTranslator($sm->get('translator'));
-                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                return $form;
-            },
-            'CompanyOwnersForm' => function ($sm) {
-                $form = new CompanyOwnersForm('companyOwnersForm');
-                $form->setTranslator($sm->get('translator'));
-                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                return $form;
-            },
-            'CompanyRelationshipsForm' => function ($sm) {
-                $form = new CompanyRelationshipsForm('companyRelationshipsForm');
-                $form->setTranslator($sm->get('translator'));
-                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                return $form;
-            },
-            'CompanySectorsForm' => function ($sm) {
-                $form = new CompanySectorsForm('companySectorsForm');
-                $form->setTranslator($sm->get('translator'));
-                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                return $form;
-            },
-            'AccountAccountForm' => function ($sm) {
-                $form = new AccountAccountForm('accountAccountForm');
-                $form->setTranslator($sm->get('translator'));
-                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                return $form;
-            },
-            'AccountCompanyForm' => function ($sm) {
-                $form = new AccountCompanyForm('accountCompanyForm');
-                $form->setTranslator($sm->get('translator'));
-                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                return $form;
-            },
-            'AccountContactForm' => function ($sm) {
-                $form = new AccountContactForm('accountContactForm');
-                $form->setTranslator($sm->get('translator'));
-                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                return $form;
-            },
-            'AccountExperienceForm' => function ($sm) {
-                $form = new AccountExperienceForm('accountExperienceForm');
-                $form->setTranslator($sm->get('translator'));
-                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                return $form;
-            },
-            'AccountInboxForm' => function ($sm) {
-                $form = new AccountInboxForm('accountInboxForm');
-                $form->setTranslator($sm->get('translator'));
-                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                return $form;
-            },
-            'AccountMembershipForm' => function ($sm) {
-                $form = new AccountMembershipForm('accountMembershipForm');
-                $form->setTranslator($sm->get('translator'));
-                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                return $form;
-            },
-            'AccountPersonalForm' => function ($sm) {
-                $form = new AccountPersonalForm('accountPersonalForm');
-                $form->setTranslator($sm->get('translator'));
-                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                return $form;
-            },
-            'AccountPreferencesForm' => function ($sm) {
-                $form = new AccountPreferencesForm('accountPreferencesForm');
-                $form->setTranslator($sm->get('translator'));
-                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                return $form;
-            },
-            'AccountProfileForm' => function ($sm) {
-                $form = new AccountProfileForm('accountProfileForm');
-                $form->setTranslator($sm->get('translator'));
-                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                return $form;
-            },
             'AccountPublishForm' =>  function ($sm) {
                 $form = new AccountPublishForm('accountPublishForm');
                 $authService = $sm->get('Zend\Authentication\AuthenticationService');
@@ -443,24 +353,13 @@ class Module
                 $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
                 return $form;
             },
-            'AccountDirectoryForm' =>  function ($sm) {
-                $form = new AccountDirectoryForm('accountDirectoryForm');
-                $form->setTranslator($sm->get('translator'));
-                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                return $form;
-            },
-            'PeopleFeedsForm' => function ($sm) {
-                $form = new PeopleFeedsForm('peopleFeedsForm');
-                $form->setTranslator($sm->get('translator'));
-                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                return $form;
-            },
         );
         
         $services = array(
         	'factories' => array_merge(
         	    $tableGatewayFactories,
         	    $modelFactories,
+        	    $formFactories,
         	    $otherFactories
             )
         );

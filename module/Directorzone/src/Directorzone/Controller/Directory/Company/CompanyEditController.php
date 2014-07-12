@@ -95,7 +95,7 @@ class CompanyEditController extends NetsensiaActionController
     {
         return array(
             "form" => $this->processForm(
-                'NewCompanyForm',
+                'CompanyNewCompanyForm',
                 'CompanyDirectory',
                 0
             ),

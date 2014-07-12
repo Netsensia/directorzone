@@ -3,7 +3,7 @@ namespace Directorzone\Form\Company;
 
 use Netsensia\Form\NetsensiaForm;
 
-class NewCompanyForm extends NetsensiaForm
+class CompanyNewCompanyForm extends NetsensiaForm
 {
     public function __construct($name = null, $options = array())
     {

@@ -91,18 +91,6 @@ class TalentPoolEditController extends NetsensiaActionController
         return $this->genericForm('CompanySectorsForm', 'CompanyDirectory');
     }
     
-    public function newCompanyAction()
-    {
-        return array(
-            "form" => $this->processForm(
-                'NewCompanyForm',
-                'CompanyDirectory',
-                0
-            ),
-            'flashMessages' => $this->getFlashMessages(),
-        );    
-    }
-    
     private function genericForm($formName, $modelName)
     {
         $companyDetails = $this->companyService->getCompanyDetails(
