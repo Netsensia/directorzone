@@ -275,6 +275,13 @@ class Module
                     );
                     return $instance;
                 },
+                'ArticleKeyEventTableGateway' => function ($sm) {
+                    $instance = new TableGateway(
+                        'articlekeyevent',
+                        $sm->get('Zend\Db\Adapter\Adapter')
+                    );
+                    return $instance;
+                },
                 'UserLanguageTableGateway' => function ($sm) {
                     $instance = new TableGateway(
                         'userlanguage',
@@ -422,6 +429,11 @@ class Module
                 },
                 'ArticleGeographyModel' => function ($sm) {
                     $instance = new \Directorzone\Model\ArticleGeography();
+                    $instance->setServiceLocator($sm);
+                    return $instance;
+                },
+                'ArticleKeyEventModel' => function ($sm) {
+                    $instance = new \Directorzone\Model\ArticleKeyEvent();
                     $instance->setServiceLocator($sm);
                     return $instance;
                 },

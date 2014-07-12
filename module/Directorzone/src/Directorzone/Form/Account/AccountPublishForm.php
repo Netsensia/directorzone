@@ -45,7 +45,6 @@ class AccountPublishForm extends NetsensiaForm
         $this->addAutoDateOnCreate('publishdate');
         
         $this->addMultiTable([
-            'callouttext' => 'Please list the sectors in which you are available',
             'groupname' => 'Sectors',
             'jointablemodel' => 'ArticleSector',
             'fields' => [
@@ -59,18 +58,29 @@ class AccountPublishForm extends NetsensiaForm
         ]);
         
         $this->addMultiTable([
-            'callouttext' => 'Please list the sectors in which you are available',
             'groupname' => 'Geography',
             'jointablemodel' => 'ArticleGeography',
             'fields' => [
-            [
-            'type' => 'select',
-            'subtype' => 'tiered',
-            'name' => 'geography',
-            'label' => 'Geography',
+                [
+                    'type' => 'select',
+                    'subtype' => 'tiered',
+                    'name' => 'geography',
+                    'label' => 'Geography',
+                ],
             ],
+        ]);
+        
+        $this->addMultiTable([
+            'groupname' => 'Key Event',
+            'jointablemodel' => 'ArticleKeyEvent',
+            'fields' => [
+                [
+                'type' => 'select',
+                'name' => 'keyevent',
+                'label' => 'Key Event',
+                ],
             ],
-            ]);
+        ]);
         
         $this->addSubmit('Publish');
         
