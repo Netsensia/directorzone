@@ -7,18 +7,17 @@ class MultiTable extends Widget
 {
     public function process()
     {
-        $model = $this->serviceLocator->get(
-            $this->widget->jointablemodel . 'Model'
-        );
-        
-        $model->init();
-        
         $tableGateway = $this->serviceLocator->get(
             $this->widget->jointablemodel . 'TableGateway'
         );
         
         $tableGateway instanceof TableGateway;
-        $tableGateway->delete($this->parentModel->getPrimaryKey());
+        $parentKey = $this->parentModel->getPrimaryKey();
+        
+        /* Will throw exception if model is not populated */
+        $parentId = $this->parentModel->getId();
+
+        $tableGateway->delete($parentKey);
         
         $tableColumns = [];
         
@@ -32,6 +31,7 @@ class MultiTable extends Widget
         }
 
         foreach ($this->widget->rowValues as $row) {
+            
             $count = 0;
             foreach ($tableColumns as $column) {
                 $updateArray[$column] = $row[$count];
@@ -43,10 +43,20 @@ class MultiTable extends Widget
                 $updateArray
             );
             
+            $model = $this->serviceLocator->get(
+                $this->widget->jointablemodel . 'Model'
+            );
+            
+            $model->init();
+            
             $model->setData($updateArray);
+            
+            var_dump($updateArray);
+            
             $model->create();
-        }
 
+        }
+        
     }
 }
 

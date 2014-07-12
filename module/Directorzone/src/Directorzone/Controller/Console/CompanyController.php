@@ -239,6 +239,9 @@ class CompanyController extends NetsensiaActionController
     public function indexArticlesAction()
     {
         $elasticService = $this->getServiceLocator()->get('ElasticService');
-        $elasticService->indexArticles();
+        while (true) {
+            $elasticService->indexArticles();
+            sleep(10);
+        }
     }
 }

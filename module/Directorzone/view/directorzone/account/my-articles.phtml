@@ -2,18 +2,18 @@
 <h3>My Articles</h3>
 
 <div class="well">
-<span article-type="1" style="cursor:pointer" class="label label-primary">Blog Posts</span>
-<span article-type="2" style="cursor:pointer" class="label label-primary">News Articles</span>
-<span article-type="3" style="cursor:pointer" class="label label-default">Wanted</span>
-<span article-type="4" style="cursor:pointer" class="label label-default">Offered</span>
-<span article-type="5" style="cursor:pointer" class="label label-default">Events</span>
-<span article-type="6" style="cursor:pointer" class="label label-default">Meeting Requests</span>
-<span article-type="7" style="cursor:pointer" class="label label-default">Opportunities</span>
-<span article-type="8" style="cursor:pointer" class="label label-primary">Movers</span>
+<span article-type="1" style="cursor:pointer" class="type-label label label-primary">Blog Posts</span>
+<span article-type="2" style="cursor:pointer" class="type-label label label-primary">News Articles</span>
+<span article-type="3" style="cursor:pointer" class="type-label label label-primary">Wanted</span>
+<span article-type="4" style="cursor:pointer" class="type-label label label-primary">Offered</span>
+<span article-type="5" style="cursor:pointer" class="type-label label label-primary">Events</span>
+<span article-type="6" style="cursor:pointer" class="type-label label label-primary">Meeting Requests</span>
+<span article-type="7" style="cursor:pointer" class="type-label label label-primary">Opportunities</span>
+<span article-type="8" style="cursor:pointer" class="type-label label label-primary">Movers</span>
 </div>
 
 <div class="well">
-<span article-status="1" style="cursor:pointer" class="status-label label label-default">Unapproved</span>
+<span article-status="1" style="cursor:pointer" class="status-label label label-primary">Unapproved</span>
 <span article-status="2" style="cursor:pointer" class="status-label label label-primary">Approved</span>
 <span article-status="3" style="cursor:pointer" class="status-label label label-default">Rejected</span>
 <span article-status="4" style="cursor:pointer" class="status-label label label-default">Hidden</span>
@@ -36,8 +36,8 @@
 <script>
 
 $(document).ready(function() {
-	var typeArray = ["1","2","3", "4", "5", "6", "7", "8"];
-	var statusArray = ["2"];
+	var typeArray = ["1","2","3","4","5","6","7","8"];
+	var statusArray = ["1", "2"];
 	
 	$(document).delegate('.columnHeading', 'click', function() {
 		loadArticles(typeArray, statusArray);
@@ -45,7 +45,8 @@ $(document).ready(function() {
 	
     loadArticles(typeArray, statusArray);
 
-    $('.label').click(function() {
+    $('.type-label').click(function() {
+        
         var articleType = $(this).attr('article-type');
         var index = typeArray.indexOf(articleType);
         if (index == -1) {
@@ -56,9 +57,12 @@ $(document).ready(function() {
             typeArray.splice(index, 1);
             $('span[article-type=' + articleType + ']').removeClass('label-primary');
             $('span[article-type=' + articleType + ']').addClass('label-default');
-        }
 
+        }
+        
         loadArticles(typeArray, statusArray);
+        return false;
+        
     });
 
     $('.status-label').click(function() {
@@ -72,9 +76,12 @@ $(document).ready(function() {
         	statusArray.splice(index, 1);
             $('span[article-status=' + articleStatus + ']').removeClass('label-primary');
             $('span[article-status=' + articleStatus + ']').addClass('label-default');
+
         }
         
         loadArticles(typeArray, statusArray);
+        return false;
+        
     });
 });
 
@@ -96,14 +103,15 @@ function loadArticles(typeArray, statusArray) {
 	    }
 	}
 
+	url = '/ajax/article/list?' + typeParam + '&' + statusParam + '&onlyme=1';
+    
 	netsensia_Pager(
 			1,
 			20,
 			'articles',
-			'/ajax/article/list?' + typeParam + '&' + statusParam + '&onlyme=1',
+			url,
 			function(key, value) {
 				var url = '/article/' + value.internalId;
-				
 				var newRow = '<tr>';
 				newRow += '<td><a href="' + url + '">' + value.title + '</a></td>';
 				newRow += '<td>' + value.author + '</td>';

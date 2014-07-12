@@ -81,16 +81,12 @@ class ArticleController extends NetsensiaActionController
         $page = $this->params()->fromQuery('page', null);
         $size = $this->params()->fromQuery('size', null);
         $typeArray = $this->params()->fromQuery('type', null);
-        if ($this->isAdmin()) {
-            $statusArray = $this->params()->fromQuery('status', null);
-        } else {
-            $statusArray = ["2"];
-        }
+        $statusArray = $this->params()->fromQuery('status', null);
         
         if ($statusArray == null) {
             $statusArray = ["2"];    
         }
-        
+
         $order = $this->params()->fromQuery('order', null);
         $onlyMe = $this->params()->fromQuery('onlyme', null);
         

@@ -40,17 +40,13 @@ class ProcessForm extends AbstractPlugin
                 
                 foreach ($formData as $key => $value) {
                     if (preg_match('/^netsensiaWidget_(.*?)_/', $key, $matches) !== 0) {
-                        
-                        $this->widget($matches[1], $value, $tableModel);
-                        
+                        // is a widget, ignore until we get the ID of the parent model
                     } elseif ($key != 'form-submit' && $key != 'widgetignore') {
-                        
                         $modelField = preg_replace('/^' . $prefix . '/', '', $key);
                         $modelData[$modelField] = $value;
-                        
                     }
                 }
-
+                
                 foreach ($form->getAutoDateOnCreateArray() as $autoDateOnCreate) {
                     $modelData[$autoDateOnCreate] = date('Y-m-d H:i:s', time());    
                 }
@@ -92,6 +88,12 @@ class ProcessForm extends AbstractPlugin
                         $tableModel->create();
                     } else {
                         $tableModel->save();
+                    }
+                    
+                    foreach ($formData as $key => $value) {
+                        if (preg_match('/^netsensiaWidget_(.*?)_/', $key, $matches) !== 0) {
+                            $this->widget($matches[1], $value, $tableModel);
+                        }
                     }
                     
                     $this->controller->flashMessenger()->addSuccessMessage(

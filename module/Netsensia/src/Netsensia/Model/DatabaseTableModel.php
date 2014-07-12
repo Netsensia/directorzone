@@ -196,7 +196,11 @@ abstract class DatabaseTableModel
         }
 
         $query->execute($bindArray);
-        return $this->getConnection()->lastInsertId();
+        $insertId = $this->getConnection()->lastInsertId();
+        if (is_numeric($insertId) && $insertId > 0) {
+            $this->setId($insertId);
+        }
+        return $insertId;
     }
     
     public function save()
@@ -255,6 +259,19 @@ abstract class DatabaseTableModel
         $id = reset($this->primaryKey);
         
         return $id !== false ? $id : null;
+    }
+    
+    /**
+     * Shortcut method for single-column primary keys
+     */
+    public function setId($id)
+    {
+        foreach ($this->primaryKey as $key => $value) {
+            $this->primaryKey[$key] = $id;
+            break;
+        }
+        
+        return $this;
     }
 
     public function load()
