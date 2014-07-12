@@ -58,6 +58,20 @@ class AccountPublishForm extends NetsensiaForm
             ],
         ]);
         
+        $this->addMultiTable([
+            'callouttext' => 'Please list the sectors in which you are available',
+            'groupname' => 'Geography',
+            'jointablemodel' => 'ArticleGeography',
+            'fields' => [
+            [
+            'type' => 'select',
+            'subtype' => 'tiered',
+            'name' => 'geography',
+            'label' => 'Geography',
+            ],
+            ],
+            ]);
+        
         $this->addSubmit('Publish');
         
         parent::prepare();

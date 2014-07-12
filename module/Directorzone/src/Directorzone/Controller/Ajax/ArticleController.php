@@ -86,6 +86,11 @@ class ArticleController extends NetsensiaActionController
         } else {
             $statusArray = ["2"];
         }
+        
+        if ($statusArray == null) {
+            $statusArray = ["2"];    
+        }
+        
         $order = $this->params()->fromQuery('order', null);
         $onlyMe = $this->params()->fromQuery('onlyme', null);
         

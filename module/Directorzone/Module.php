@@ -35,7 +35,6 @@ use Directorzone\Service\ArticleService;
 use Directorzone\Form\Company\NewCompanyForm;
 use Directorzone\Form\People\PeopleFeedsForm;
 use Directorzone\Service\TalentPoolService;
-use Directorzone\Service\DirectorzoneUserService;
 
 class Module
 {
@@ -269,6 +268,13 @@ class Module
                     );
                     return $instance;
                 },
+                'ArticleGeographyTableGateway' => function ($sm) {
+                    $instance = new TableGateway(
+                        'articlegeography',
+                        $sm->get('Zend\Db\Adapter\Adapter')
+                    );
+                    return $instance;
+                },
                 'UserLanguageTableGateway' => function ($sm) {
                     $instance = new TableGateway(
                         'userlanguage',
@@ -411,6 +417,11 @@ class Module
                 },
                 'ArticleSectorModel' => function ($sm) {
                     $instance = new \Directorzone\Model\ArticleSector();
+                    $instance->setServiceLocator($sm);
+                    return $instance;
+                },
+                'ArticleGeographyModel' => function ($sm) {
+                    $instance = new \Directorzone\Model\ArticleGeography();
                     $instance->setServiceLocator($sm);
                     return $instance;
                 },
