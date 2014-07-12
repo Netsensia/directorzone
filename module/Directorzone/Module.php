@@ -332,7 +332,11 @@ class Module
             'ArticleService' => function ($sm) {
                 $instance = new ArticleService(
                     $sm->get('CommentsService'),
-                    $sm->get('ArticleTableGateway')
+                    $sm->get('ArticleTableGateway'),
+                    $sm->get('ArticleSectorTableGateway'),
+                    $sm->get('ArticleGeographyTableGateway'),
+                    $sm->get('ArticleKeyEventTableGateway'),
+                    $sm->get('ArticleJobAreaTableGateway')
                 );
                 return $instance;
             },

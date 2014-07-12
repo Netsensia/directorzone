@@ -13,9 +13,10 @@
 
     <div style="min-height:30em">
     
-      <span class="badge">Information Technology</span>
-      <span class="badge">Farming</span>
-      <span class="badge">Investing</span>
+      <?php foreach ($this->sectors as $sectorId => $sectorName): ?>
+      <span class="badge"><?php echo $sectorName ?></span>
+      <?php endforeach; ?>
+
       <h5>
         <a href="/article/<?php echo $this->articleid ?>/edit">Edit this article</a> | 
         <a id="deletearticle" href="/article/<?php echo $this->articleid ?>/delete">Delete this article</a> |

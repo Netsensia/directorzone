@@ -15,14 +15,28 @@ class ArticleService extends NetsensiaService
      * @var TableGateway
      */
     private $articleTable;
+    private $articleSectorTable;
+    private $articleGeographyTable;
+    private $articleKeyEventTable;
+    private $articleJobAreaTable;
         
     public function __construct(
         CommentsService $commentsService,
-        TableGateway $articleTable
+        TableGateway $articleTable,
+        TableGateway $articleSectorTable,
+        TableGateway $articleGeographyTable,
+        TableGateway $articleKeyEventTable,
+        TableGateway $articleJobAreaTable 
     )
     {
+        $this->setPrimaryTable($articleTable);
+        
         $this->commentsService = $commentsService;
         $this->articleTable = $articleTable;
+        $this->articleSectorTable = $articleSectorTable;
+        $this->articleGeographyTable = $articleGeographyTable;
+        $this->articleKeyEventTable = $articleKeyEventTable;
+        $this->articleJobAreaTable = $articleJobAreaTable;
     }
     
     public function deleteArticle($articleId)
@@ -55,6 +69,12 @@ class ArticleService extends NetsensiaService
             
             $article['comments'] = 
                 $this->commentsService->getCommentsForArticle($articleId, 1, 1000, 1);
+            
+            $article['sectors'] = $this->getRelationshipList(
+                $articleId,
+                'sector',
+                $this->articleSectorTable
+            );
             
             return $article;
         } else {
