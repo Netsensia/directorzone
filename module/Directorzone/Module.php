@@ -188,402 +188,283 @@ class Module
     
     public function getServiceConfig()
     {
-        return array(
-            'factories' => array(
-                'ZendCache' => function () {
-                    return \Zend\Cache\StorageFactory::factory(
-                        array(
-                            'adapter' => array(
-                                'name' => 'filesystem',
-                                'options' => array(
-                                    'dirLevel' => 2,
-                                    'cacheDir' => '/tmp',
-                                    'ttl' => 7200,
-                                    'dirPermission' => 0755,
-                                    'filePermission' => 0666,
-                                    'namespace' => 'directorzone',
-                                    'namespaceSeparator' => '-db-'
-                                ),
-                            ),
-                            'plugins' => array('serializer'),
-                        )
-                    );
-                },
-                'TwitterService' => function($sm) {
-                    $settings = $sm->get('config')['twitter'];
-                    $twitterApiExchange = new \TwitterAPIExchange($settings);
-                    return new TwitterService($twitterApiExchange);
-                },
-                'BingService' => function($sm) {
-                    $settings = $sm->get('config')['bing'];
-                    $bingClient = new \Bing\Client($settings['key'], 'json');
-                    return new BingService($bingClient);
-                },
-                'ElasticService' => function ($sm) {
-                    $elasticClient = new ElasticClient();
-                    
-                    $instance = new \Directorzone\Service\ElasticService(
-                        $elasticClient,
-                        $sm->get('CompaniesHouseTableGateway'),
-                        $sm->get('CompanyOfficersTableGateway'),
-                        $sm->get('CompanyDirectoryTableGateway'),
-                        $sm->get('ArticlesTableGateway')
-                    );
-                    
-                    return $instance;
-                },
-                'ArticlesTableGateway' => function ($sm) {
-                
-                    $instance = new TableGateway(
-                        'article',
-                        $sm->get('Zend\Db\Adapter\Adapter')
-                    );
-                    return $instance;
-                },
-                'UserCompanyTableGateway' => function ($sm) {
-                    $instance = new TableGateway(
-                        'usercompany',
-                        $sm->get('Zend\Db\Adapter\Adapter')
-                    );
-                    return $instance;
-                },
-                'UserTargetRoleTableGateway' => function ($sm) {
-                    $instance = new TableGateway(
-                        'usertargetrole',
-                        $sm->get('Zend\Db\Adapter\Adapter')
-                    );
-                    return $instance;
-                },
-                'UserWhosWhoSectorTableGateway' => function ($sm) {
-                    $instance = new TableGateway(
-                        'userwhoswhosector',
-                        $sm->get('Zend\Db\Adapter\Adapter')
-                    );
-                    return $instance;
-                },
-                'ArticleSectorTableGateway' => function ($sm) {
-                    $instance = new TableGateway(
-                        'articlesector',
-                        $sm->get('Zend\Db\Adapter\Adapter')
-                    );
-                    return $instance;
-                },
-                'ArticleGeographyTableGateway' => function ($sm) {
-                    $instance = new TableGateway(
-                        'articlegeography',
-                        $sm->get('Zend\Db\Adapter\Adapter')
-                    );
-                    return $instance;
-                },
-                'ArticleKeyEventTableGateway' => function ($sm) {
-                    $instance = new TableGateway(
-                        'articlekeyevent',
-                        $sm->get('Zend\Db\Adapter\Adapter')
-                    );
-                    return $instance;
-                },
-                'UserLanguageTableGateway' => function ($sm) {
-                    $instance = new TableGateway(
-                        'userlanguage',
-                        $sm->get('Zend\Db\Adapter\Adapter')
-                    );
-                    return $instance;
-                },
-                'UserQualificationTableGateway' => function ($sm) {
-                    $instance = new TableGateway(
-                        'userqualification',
-                        $sm->get('Zend\Db\Adapter\Adapter')
-                    );
-                    return $instance;
-                },
-                'UserProfessionalQualificationTableGateway' => function ($sm) {
-                    $instance = new TableGateway(
-                        'userprofessionalqualification',
-                        $sm->get('Zend\Db\Adapter\Adapter')
-                    );
-                    return $instance;
-                },
-                'CompanyDirectoryTableGateway' => function ($sm) {
-                
-                    $instance = new TableGateway(
-                        'companydirectory',
-                        $sm->get('Zend\Db\Adapter\Adapter')
-                    );
-                    return $instance;
-                },
-                'CompaniesHouseTableGateway' => function ($sm) {
-                    
-                    $instance = new TableGateway(
-                        'companieshouse',
-                        $sm->get('Zend\Db\Adapter\Adapter')
-                    );
-                    return $instance;
-                },
-                'CompanyUploadTableGateway' => function ($sm) {
-                
-                    $instance = new TableGateway(
-                        'companyupload',
-                        $sm->get('Zend\Db\Adapter\Adapter')
-                    );
-                    return $instance;
-                },
-                'CompanySicCodeTableGateway' => function ($sm) {
-                
-                    $instance = new TableGateway(
-                        'companysiccode',
-                        $sm->get('Zend\Db\Adapter\Adapter')
-                    );
-                    return $instance;
-                },
-                'CompanyOfficersTableGateway' => function ($sm) {
-                    $instance = new TableGateway(
-                        'companyofficer',
-                        $sm->get('Zend\Db\Adapter\Adapter')
-                    );
-                    return $instance;
-                },
-                'CompanyService' => function ($sm) {
-                    $instance = new CompanyService(
-                        $sm->get('CompanyUploadTableGateway'),
-                        $sm->get('CompaniesHouseTableGateway'),
-                        $sm->get('CompanyDirectoryTableGateway'),
-                        $sm->get('CompanySicCodeTableGateway'),
-                        $sm->get('CompanyOfficersTableGateway'),
-                        $sm->get('NetsensiaCompanies\Request\CompanyAppointmentsRequest')
-                    );
-                    return $instance;
-                },
-                'PeopleService' => function ($sm) {
-                    $instance = new PeopleService(
-                        $sm->get('CompanyOfficersTableGateway')
-                    );
-                    return $instance;
-                },
-                'TalentPoolService' => function ($sm) {
-                    $instance = new TalentPoolService(
-                        $sm->get('UserTableGateway')
-                    );
-                    return $instance;
-                }, 
-                'UserTableGateway' => function ($sm) {
-                    $instance = new TableGateway(
-                        'user',
-                        $sm->get('Zend\Db\Adapter\Adapter')
-                    );
-                    return $instance;
-                },                               
-                'ArticleTableGateway' => function ($sm) {
-                    $instance = new TableGateway(
-                        'article',
-                        $sm->get('Zend\Db\Adapter\Adapter')
-                    );
-                    return $instance;
-                },
-                'ArticleService' => function ($sm) {
-                    $instance = new ArticleService(
-                        $sm->get('CommentsService'),
-                        $sm->get('ArticleTableGateway')
-                    );
-                    return $instance;
-                },
-                'CompanyUploadService' => function ($sm) {
-                    $instance = new CompanyUploadService(
-                        $sm->get('CompanyUploadTableGateway')
-                    );
-                    return $instance;
-                },
-                'CompanyDirectoryModel' => function ($sm) {
-                    $instance = new \Directorzone\Model\CompanyDirectory();
-                    $instance->setServiceLocator($sm);
-                    return $instance;
-                },
-                'PeopleDirectoryModel' => function ($sm) {
-                    $instance = new \Directorzone\Model\PeopleDirectory();
-                    $instance->setServiceLocator($sm);
-                    return $instance;
-                },
-                'ArticleModel' => function ($sm) {
-                    $instance = new \Directorzone\Model\Article();
-                    $instance->setServiceLocator($sm);
-                    return $instance;
-                },
-                'UserCompanyModel' => function ($sm) {
-                    $instance = new \Directorzone\Model\UserCompany();
-                    $instance->setServiceLocator($sm);
-                    return $instance;
-                },
-                'UserTargetRoleModel' => function ($sm) {
-                    $instance = new \Directorzone\Model\UserTargetRole();
-                    $instance->setServiceLocator($sm);
-                    return $instance;
-                },
-                'UserWhosWhoSectorModel' => function ($sm) {
-                    $instance = new \Directorzone\Model\UserWhosWhoSector();
-                    $instance->setServiceLocator($sm);
-                    return $instance;
-                },
-                'ArticleSectorModel' => function ($sm) {
-                    $instance = new \Directorzone\Model\ArticleSector();
-                    $instance->setServiceLocator($sm);
-                    return $instance;
-                },
-                'ArticleGeographyModel' => function ($sm) {
-                    $instance = new \Directorzone\Model\ArticleGeography();
-                    $instance->setServiceLocator($sm);
-                    return $instance;
-                },
-                'ArticleKeyEventModel' => function ($sm) {
-                    $instance = new \Directorzone\Model\ArticleKeyEvent();
-                    $instance->setServiceLocator($sm);
-                    return $instance;
-                },
-                'UserLanguageModel' => function ($sm) {
-                    $instance = new \Directorzone\Model\UserLanguage();
-                    $instance->setServiceLocator($sm);
-                    return $instance;
-                },
-                'UserQualificationModel' => function ($sm) {
-                    $instance = new \Directorzone\Model\UserQualification();
-                    $instance->setServiceLocator($sm);
-                    return $instance;
-                },
-                'UserProfessionalQualificationModel' => function ($sm) {
-                    $instance = new \Directorzone\Model\UserProfessionalQualification();
-                    $instance->setServiceLocator($sm);
-                    return $instance;
-                },
-                'CompanyContactForm' => function ($sm) {
-                    $form = new CompanyContactForm('companyContactForm');
-                    $form->setTranslator($sm->get('translator'));
-                    $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                    return $form;
-                },
-                'CompanyFeedsForm' => function ($sm) {
-                    $form = new CompanyFeedsForm('companyFeedsForm');
-                    $form->setTranslator($sm->get('translator'));
-                    $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                    return $form;
-                },
-                'CompanyFinancialsForm' => function ($sm) {
-                    $form = new CompanyFinancialsForm('companyFinancialsForm');
-                    $form->setTranslator($sm->get('translator'));
-                    $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                    return $form;
-                },
-                'CompanyOfficersForm' => function ($sm) {
-                    $form = new CompanyOfficersForm('companyOfficersForm');
-                    $form->setTranslator($sm->get('translator'));
-                    $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                    return $form;
-                },
-                'CompanyOverviewForm' => function ($sm) {
-                    $form = new CompanyOverviewForm('companyOverviewForm');
-                    $form->setTranslator($sm->get('translator'));
-                    $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                    return $form;
-                },
-                'NewCompanyForm' => function ($sm) {
-                    $form = new NewCompanyForm('newCompanyForm');
-                    $form->setTranslator($sm->get('translator'));
-                    $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                    return $form;
-                },
-                'CompanyOwnersForm' => function ($sm) {
-                    $form = new CompanyOwnersForm('companyOwnersForm');
-                    $form->setTranslator($sm->get('translator'));
-                    $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                    return $form;
-                },
-                'CompanyRelationshipsForm' => function ($sm) {
-                    $form = new CompanyRelationshipsForm('companyRelationshipsForm');
-                    $form->setTranslator($sm->get('translator'));
-                    $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                    return $form;
-                },
-                'CompanySectorsForm' => function ($sm) {
-                    $form = new CompanySectorsForm('companySectorsForm');
-                    $form->setTranslator($sm->get('translator'));
-                    $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                    return $form;
-                },
-                'AccountAccountForm' => function ($sm) {
-                    $form = new AccountAccountForm('accountAccountForm');
-                    $form->setTranslator($sm->get('translator'));
-                    $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                    return $form;
-                },
-                'AccountCompanyForm' => function ($sm) {
-                    $form = new AccountCompanyForm('accountCompanyForm');
-                    $form->setTranslator($sm->get('translator'));
-                    $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                    return $form;
-                },
-                'AccountContactForm' => function ($sm) {
-                    $form = new AccountContactForm('accountContactForm');
-                    $form->setTranslator($sm->get('translator'));
-                    $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                    return $form;
-                },
-                'AccountExperienceForm' => function ($sm) {
-                    $form = new AccountExperienceForm('accountExperienceForm');
-                    $form->setTranslator($sm->get('translator'));
-                    $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                    return $form;
-                },
-                'AccountInboxForm' => function ($sm) {
-                    $form = new AccountInboxForm('accountInboxForm');
-                    $form->setTranslator($sm->get('translator'));
-                    $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                    return $form;
-                },
-                'AccountMembershipForm' => function ($sm) {
-                    $form = new AccountMembershipForm('accountMembershipForm');
-                    $form->setTranslator($sm->get('translator'));
-                    $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                    return $form;
-                },
-                'AccountPersonalForm' => function ($sm) {
-                    $form = new AccountPersonalForm('accountPersonalForm');
-                    $form->setTranslator($sm->get('translator'));
-                    $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                    return $form;
-                },
-                'AccountPreferencesForm' => function ($sm) {
-                    $form = new AccountPreferencesForm('accountPreferencesForm');
-                    $form->setTranslator($sm->get('translator'));
-                    $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                    return $form;
-                },
-                'AccountProfileForm' => function ($sm) {
-                    $form = new AccountProfileForm('accountProfileForm');
-                    $form->setTranslator($sm->get('translator'));
-                    $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                    return $form;
-                },
-                'AccountPublishForm' =>  function ($sm) {
-                    $form = new AccountPublishForm('accountPublishForm');
-                    $authService = $sm->get('Zend\Authentication\AuthenticationService');
-                    $identity = $authService->getIdentity();
-                    $userId = $identity->getUserId();
-                    $userModel = $sm->get('UserModel')->init($identity->getUserId());
-                    $form->setUserModel($userModel);
-                    $form->setTranslator($sm->get('translator'));
-                    $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                    return $form;
-                },
-                'AccountDirectoryForm' =>  function ($sm) {
-                    $form = new AccountDirectoryForm('accountDirectoryForm');
-                    $form->setTranslator($sm->get('translator'));
-                    $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                    return $form;
-                },
-                'PeopleFeedsForm' => function ($sm) {
-                    $form = new PeopleFeedsForm('peopleFeedsForm');
-                    $form->setTranslator($sm->get('translator'));
-                    $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
-                    return $form;
-                },
-            ),
+        $modelsAndGateways = [
+            'Article',
+            'CompanyDirectory',
+            'UserProfessionalQualification',
+            'UserCompany',
+            'UserQualification',
+            'UserLanguage',
+            'ArticleSector',
+            'ArticleGeography',
+            'ArticleKeyEvent',
+            'UserWhosWhoSector',
+            'UserTargetRole',
+            'ArticleJobArea',
+        ];
+        
+        $tableGateways = array_merge(
+            $modelsAndGateways,
+            [
+            'User',
+            'CompanyOfficer',
+            'CompanySicCode',
+            'CompanyUpload',
+            'CompaniesHouse',
+            ]
         );
+        
+        $models = array_merge(
+            $modelsAndGateways,
+            [
+            'PeopleDirectory',
+            ]
+        );
+        
+        $tableGatewayFactories = [];
+        
+        foreach ($tableGateways as $tableGateway) {
+            $tableName = strtolower($tableGateway);
+            $tableGatewayFactories[$tableGateway . 'TableGateway'] = function ($sm) use ($tableName) {
+                $instance = new TableGateway(
+                    $tableName,
+                    $sm->get('Zend\Db\Adapter\Adapter')
+                );
+                return $instance;
+            };    
+        }
+        
+        $modelFactories = [];
+        
+        foreach ($models as $model) {
+            $modelFactories[$model . 'Model'] = function ($sm) use ($model) {
+                $className = "\\Directorzone\\Model\\$model";
+                $instance = new $className();
+                $instance->setServiceLocator($sm);
+                return $instance;
+            };
+        }
+        
+        $otherFactories = array(
+            'ZendCache' => function () {
+                return \Zend\Cache\StorageFactory::factory(
+                    array(
+                        'adapter' => array(
+                            'name' => 'filesystem',
+                            'options' => array(
+                                'dirLevel' => 2,
+                                'cacheDir' => '/tmp',
+                                'ttl' => 7200,
+                                'dirPermission' => 0755,
+                                'filePermission' => 0666,
+                                'namespace' => 'directorzone',
+                                'namespaceSeparator' => '-db-'
+                            ),
+                        ),
+                        'plugins' => array('serializer'),
+                    )
+                );
+            },
+            'TwitterService' => function($sm) {
+                $settings = $sm->get('config')['twitter'];
+                $twitterApiExchange = new \TwitterAPIExchange($settings);
+                return new TwitterService($twitterApiExchange);
+            },
+            'BingService' => function($sm) {
+                $settings = $sm->get('config')['bing'];
+                $bingClient = new \Bing\Client($settings['key'], 'json');
+                return new BingService($bingClient);
+            },
+            'ElasticService' => function ($sm) {
+                $elasticClient = new ElasticClient();
+                
+                $instance = new \Directorzone\Service\ElasticService(
+                    $elasticClient,
+                    $sm->get('CompaniesHouseTableGateway'),
+                    $sm->get('CompanyOfficerTableGateway'),
+                    $sm->get('CompanyDirectoryTableGateway'),
+                    $sm->get('ArticleTableGateway')
+                );
+                
+                return $instance;
+            },
+            'CompanyService' => function ($sm) {
+                $instance = new CompanyService(
+                    $sm->get('CompanyUploadTableGateway'),
+                    $sm->get('CompaniesHouseTableGateway'),
+                    $sm->get('CompanyDirectoryTableGateway'),
+                    $sm->get('CompanySicCodeTableGateway'),
+                    $sm->get('CompanyOfficerTableGateway'),
+                    $sm->get('NetsensiaCompanies\Request\CompanyAppointmentsRequest')
+                );
+                return $instance;
+            },
+            'PeopleService' => function ($sm) {
+                $instance = new PeopleService(
+                    $sm->get('CompanyOfficerTableGateway')
+                );
+                return $instance;
+            },
+            'TalentPoolService' => function ($sm) {
+                $instance = new TalentPoolService(
+                    $sm->get('UserTableGateway')
+                );
+                return $instance;
+            },
+            'ArticleService' => function ($sm) {
+                $instance = new ArticleService(
+                    $sm->get('CommentsService'),
+                    $sm->get('ArticleTableGateway')
+                );
+                return $instance;
+            },
+            'CompanyUploadService' => function ($sm) {
+                $instance = new CompanyUploadService(
+                    $sm->get('CompanyUploadTableGateway')
+                );
+                return $instance;
+            },
+            'CompanyContactForm' => function ($sm) {
+                $form = new CompanyContactForm('companyContactForm');
+                $form->setTranslator($sm->get('translator'));
+                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                return $form;
+            },
+            'CompanyFeedsForm' => function ($sm) {
+                $form = new CompanyFeedsForm('companyFeedsForm');
+                $form->setTranslator($sm->get('translator'));
+                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                return $form;
+            },
+            'CompanyFinancialsForm' => function ($sm) {
+                $form = new CompanyFinancialsForm('companyFinancialsForm');
+                $form->setTranslator($sm->get('translator'));
+                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                return $form;
+            },
+            'CompanyOfficersForm' => function ($sm) {
+                $form = new CompanyOfficersForm('companyOfficersForm');
+                $form->setTranslator($sm->get('translator'));
+                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                return $form;
+            },
+            'CompanyOverviewForm' => function ($sm) {
+                $form = new CompanyOverviewForm('companyOverviewForm');
+                $form->setTranslator($sm->get('translator'));
+                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                return $form;
+            },
+            'NewCompanyForm' => function ($sm) {
+                $form = new NewCompanyForm('newCompanyForm');
+                $form->setTranslator($sm->get('translator'));
+                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                return $form;
+            },
+            'CompanyOwnersForm' => function ($sm) {
+                $form = new CompanyOwnersForm('companyOwnersForm');
+                $form->setTranslator($sm->get('translator'));
+                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                return $form;
+            },
+            'CompanyRelationshipsForm' => function ($sm) {
+                $form = new CompanyRelationshipsForm('companyRelationshipsForm');
+                $form->setTranslator($sm->get('translator'));
+                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                return $form;
+            },
+            'CompanySectorsForm' => function ($sm) {
+                $form = new CompanySectorsForm('companySectorsForm');
+                $form->setTranslator($sm->get('translator'));
+                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                return $form;
+            },
+            'AccountAccountForm' => function ($sm) {
+                $form = new AccountAccountForm('accountAccountForm');
+                $form->setTranslator($sm->get('translator'));
+                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                return $form;
+            },
+            'AccountCompanyForm' => function ($sm) {
+                $form = new AccountCompanyForm('accountCompanyForm');
+                $form->setTranslator($sm->get('translator'));
+                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                return $form;
+            },
+            'AccountContactForm' => function ($sm) {
+                $form = new AccountContactForm('accountContactForm');
+                $form->setTranslator($sm->get('translator'));
+                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                return $form;
+            },
+            'AccountExperienceForm' => function ($sm) {
+                $form = new AccountExperienceForm('accountExperienceForm');
+                $form->setTranslator($sm->get('translator'));
+                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                return $form;
+            },
+            'AccountInboxForm' => function ($sm) {
+                $form = new AccountInboxForm('accountInboxForm');
+                $form->setTranslator($sm->get('translator'));
+                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                return $form;
+            },
+            'AccountMembershipForm' => function ($sm) {
+                $form = new AccountMembershipForm('accountMembershipForm');
+                $form->setTranslator($sm->get('translator'));
+                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                return $form;
+            },
+            'AccountPersonalForm' => function ($sm) {
+                $form = new AccountPersonalForm('accountPersonalForm');
+                $form->setTranslator($sm->get('translator'));
+                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                return $form;
+            },
+            'AccountPreferencesForm' => function ($sm) {
+                $form = new AccountPreferencesForm('accountPreferencesForm');
+                $form->setTranslator($sm->get('translator'));
+                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                return $form;
+            },
+            'AccountProfileForm' => function ($sm) {
+                $form = new AccountProfileForm('accountProfileForm');
+                $form->setTranslator($sm->get('translator'));
+                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                return $form;
+            },
+            'AccountPublishForm' =>  function ($sm) {
+                $form = new AccountPublishForm('accountPublishForm');
+                $authService = $sm->get('Zend\Authentication\AuthenticationService');
+                $identity = $authService->getIdentity();
+                $userId = $identity->getUserId();
+                $userModel = $sm->get('UserModel')->init($identity->getUserId());
+                $form->setUserModel($userModel);
+                $form->setTranslator($sm->get('translator'));
+                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                return $form;
+            },
+            'AccountDirectoryForm' =>  function ($sm) {
+                $form = new AccountDirectoryForm('accountDirectoryForm');
+                $form->setTranslator($sm->get('translator'));
+                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                return $form;
+            },
+            'PeopleFeedsForm' => function ($sm) {
+                $form = new PeopleFeedsForm('peopleFeedsForm');
+                $form->setTranslator($sm->get('translator'));
+                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                return $form;
+            },
+        );
+        
+        $services = array(
+        	'factories' => array_merge(
+        	    $tableGatewayFactories,
+        	    $modelFactories,
+        	    $otherFactories
+            )
+        );
+        
+        return $services;
     }
 }

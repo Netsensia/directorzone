@@ -82,6 +82,18 @@ class AccountPublishForm extends NetsensiaForm
             ],
         ]);
         
+        $this->addMultiTable([
+            'groupname' => 'Functional Area',
+            'jointablemodel' => 'ArticleJobArea',
+            'fields' => [
+            [
+            'type' => 'select',
+            'name' => 'jobarea',
+            'label' => 'Functional Area',
+            ],
+            ],
+            ]);
+        
         $this->addSubmit('Publish');
         
         parent::prepare();
