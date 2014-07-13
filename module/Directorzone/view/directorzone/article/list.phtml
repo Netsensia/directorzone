@@ -1,7 +1,7 @@
 <?php echo $this->partial('article-nav.phtml'); ?>
 <h3>Member Articles</h3>
 
-<div class="well">
+<div class="well well-sm">
 <span article-type="1" style="cursor:pointer" class="type-label label label-primary">Blog Posts</span>
 <span article-type="2" style="cursor:pointer" class="type-label label label-primary">News Articles</span>
 <span article-type="3" style="cursor:pointer" class="type-label label label-primary">Wanted</span>
@@ -13,13 +13,23 @@
 </div>
 
 <?php if ($this->isAdmin): ?>
-<div class="well">
+<div class="well well-sm">
 <span article-status="1" style="cursor:pointer" class="status-label label label-default">Unapproved</span>
 <span article-status="2" style="cursor:pointer" class="status-label label label-primary">Approved</span>
 <span article-status="3" style="cursor:pointer" class="status-label label label-default">Rejected</span>
 <span article-status="4" style="cursor:pointer" class="status-label label label-default">Hidden</span>
 </div>
 <?php endif; ?>
+
+<div class="well well-sm">
+Add Filter
+<select id="filtertype">
+<option id="sector">Sector</option>
+<option id="geography">Geography</option>
+<option id="keyevent">Key Event</option>
+<option id="jobarea">Functional Area</option>
+</select>
+</div>
 
 <table id="articles" data-link="row" class="rowlink table table-striped table-bordered table-hover">
 <tr>
