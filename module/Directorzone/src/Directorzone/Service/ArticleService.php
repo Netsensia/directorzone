@@ -68,12 +68,32 @@ class ArticleService extends NetsensiaService
                 ($article['image'] == '' ? '/img/brand/globe.fw.png' : $article['image']);
             
             $article['comments'] = 
-                $this->commentsService->getCommentsForArticle($articleId, 1, 1000, 1);
+                $this->commentsService->getCommentsForArticle(
+                    $articleId, 1, 1000, 1
+                );
             
             $article['sectors'] = $this->getRelationshipList(
                 $articleId,
                 'sector',
                 $this->articleSectorTable
+            );
+            
+            $article['geographies'] = $this->getRelationshipList(
+                $articleId,
+                'geography',
+                $this->articleGeographyTable
+            );
+            
+            $article['keyevents'] = $this->getRelationshipList(
+                $articleId,
+                'keyevent',
+                $this->articleKeyEventTable
+            );
+            
+            $article['jobareas'] = $this->getRelationshipList(
+                $articleId,
+                'jobarea',
+                $this->articleJobAreaTable
             );
             
             return $article;

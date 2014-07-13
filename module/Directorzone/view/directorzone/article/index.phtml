@@ -13,10 +13,22 @@
 
     <div style="min-height:30em">
     
-      <?php foreach ($this->sectors as $sectorId => $sectorName): ?>
-      <span class="badge"><?php echo $sectorName ?></span>
+      <?php foreach ($this->sectors as $id => $name): ?>
+      <span class="badge"><?php echo $name ?></span>
       <?php endforeach; ?>
-
+      
+      <?php foreach ($this->geographies as $id => $name): ?>
+      <span class="badge"><?php echo $name ?></span>
+      <?php endforeach; ?>
+      
+      <?php foreach ($this->keyevents as $id => $name): ?>
+      <span class="badge"><?php echo $name ?></span>
+      <?php endforeach; ?>
+      
+      <?php foreach ($this->jobareas as $id => $name): ?>
+      <span class="badge"><?php echo $name ?></span>
+      <?php endforeach; ?>
+      
       <h5>
         <a href="/article/<?php echo $this->articleid ?>/edit">Edit this article</a> | 
         <a id="deletearticle" href="/article/<?php echo $this->articleid ?>/delete">Delete this article</a> |
