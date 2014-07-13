@@ -5,7 +5,7 @@ namespace Directorzone\Controller\Article;
 use Netsensia\Controller\NetsensiaActionController;
 use Directorzone\Service\ArticleService;
 use Netsensia\Exception\NotFoundResourceException;
-use Zend\View\Model\JsonModel;
+use Directorzone\Service\FilterService;
 
 class ArticleController extends NetsensiaActionController
 {
@@ -14,11 +14,15 @@ class ArticleController extends NetsensiaActionController
      */
     private $articleService;
     
+    private $filterService;
+    
     public function __construct(
-        ArticleService $articleService
+        ArticleService $articleService,
+        FilterService $filterService
     )
     {
         $this->articleService = $articleService;
+        $this->filterService = $filterService;
     }
       
     public function indexAction()
@@ -38,7 +42,8 @@ class ArticleController extends NetsensiaActionController
     {
         $result = [
             'isLoggedOn' => $this->isLoggedOn(),
-            'isAdmin' => $this->isAdmin()
+            'isAdmin' => $this->isAdmin(),
+            'filter' => $this->filterService->getFilterJson()
         ];
         
         return $result;

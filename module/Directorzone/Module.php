@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Directorzone;
 
 use Zend\Mvc\MvcEvent;
@@ -16,6 +15,7 @@ use Directorzone\Service\TwitterService;
 use Directorzone\Service\BingService;
 use Directorzone\Service\ArticleService;
 use Directorzone\Service\TalentPoolService;
+use Directorzone\Service\FilterService;
 
 class Module
 {
@@ -92,7 +92,8 @@ class Module
                 'Article' =>
                     function (ControllerManager $cm) {
                         return new \Directorzone\Controller\Article\ArticleController(
-                            $cm->getServiceLocator()->get('ArticleService')
+                            $cm->getServiceLocator()->get('ArticleService'),
+                            $cm->getServiceLocator()->get('FilterService')
                         );
                     },
                 'Directorzone\Controller\Account\Account' =>
@@ -192,6 +193,12 @@ class Module
             'CompanySicCode',
             'CompanyUpload',
             'CompaniesHouse',
+            'Sector',
+            'SectorParent',
+            'Geography',
+            'GeographyParent',
+            'KeyEvent',
+            'JobArea',
             ]
         );
         
@@ -321,6 +328,10 @@ class Module
                 $instance = new PeopleService(
                     $sm->get('CompanyOfficerTableGateway')
                 );
+                return $instance;
+            },
+            'FilterService' => function ($sm) {
+                $instance = new FilterService();
                 return $instance;
             },
             'TalentPoolService' => function ($sm) {

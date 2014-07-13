@@ -76,7 +76,6 @@ class NetsensiaService implements ServiceLocatorAwareInterface
                 $gateway
             )
             {
-                
                 $select->columns(
                     [$relationshipIdColumn]
                 )
