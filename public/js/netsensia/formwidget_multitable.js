@@ -24,12 +24,16 @@ $(document).ready(function() {
 			}
 			
 			if ($(this).hasClass('select_child')) {
-				parentSelect = $(this).siblings('.select_parent').first();
-				parentValue = $(parentSelect).val();
+				var tier = $(this).attr('data-tier');
+				var parentTier = +tier+1;
+				var selector = '.select_parent[data-tier=' + parentTier + ']';
+				var parent = $(this).siblings(selector);
+				var parentVal = parent.val();
+				
 				showChildrenOfSelectParent(
-					$(this),
-					parentValue
-				);
+						$(this),
+						parentVal
+					);
 			}
 		});
 		
@@ -47,11 +51,12 @@ $(document).ready(function() {
 			return;
 		}
 				
-		var tier = $(childSelectElement).attr('data-tier');
 		$(childSelectElement).empty();
+		var tier = $(childSelectElement).attr('data-tier');
+		var selector = '[data-tier="' + tier + '"]';
 		
-		childReferenceElement = $(childSelectElement).siblings('[data-tier="' + tier + '"]');
-
+		childReferenceElement = $(childSelectElement).siblings('.select_reference[data-tier=' + tier + ']');
+		
 		$(childReferenceElement).children('option').each(function () {
 			var parts = $(this).val().split(',');
 			var childId = parts[0];
@@ -64,7 +69,6 @@ $(document).ready(function() {
 		});
 		
 		$(childSelectElement).css('display', 'initial');
-
 	}
 	
 	$(document).delegate('.select_parent', 'change', function() {

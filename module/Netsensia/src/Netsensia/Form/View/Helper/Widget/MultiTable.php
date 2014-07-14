@@ -106,6 +106,12 @@ class MultiTable extends Widget
             	    
             	    if ($isTiered) {
 
+            	        if (!empty($values)) {
+            	            $childValue = $values[$fieldIndex];
+            	        } else {
+            	            $childValue = -1;
+            	        }
+            	         
             	        for ($i=1; $i<=$tierCount-1; $i++) {
             	            // process each select element except the ultimate parent
             	            $parentAppend = '';
@@ -127,21 +133,24 @@ class MultiTable extends Widget
                 	        $referenceSelect->setAttribute('class', 'netsensia_form_widget select_reference');
     
                 	        $parentValue = -1;
+                	        
                 	        foreach ($optionsArray as $option) {
                                 $parts = explode(',', $option['value']);
                                 if (count($parts) == 2 && !empty($values)) {
-                                    if ($parts[0] == $values[$fieldIndex]) {
+                                    if ($parts[0] == $childValue) {
                                         $parentValue = $parts[1];
                                         $referenceSelect->setValue($option['value']);
                                     }
                                 }
                             }
                             
+                            $childValue = $parentValue;
+
                 	        $selectElements['parent' . $parentAppend]->setValue($parentValue);
                 	        $selectElements['reference' . $parentAppend] = $referenceSelect;
                 	    }
             	    }
-            	    
+
             	    foreach ($selectElements as $key => $select) {
                        echo $this->view->formElement($select);
                     }
