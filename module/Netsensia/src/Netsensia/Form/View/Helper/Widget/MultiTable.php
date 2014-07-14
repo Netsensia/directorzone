@@ -68,9 +68,11 @@ class MultiTable extends Widget
                 	        $parentSelect = new Select('widgetignore[]');
                 	        $parentSelect->setAttribute(
                 	           'class',
-                	            'netsensia_form_widget select_parent ' .
+                	            'netsensia_form_widget select_parent' .
                 	            ($tier < $tierCount-1 ? ' select_child' : '')
                             );
+                	        $parentSelect->setAttribute('data-tier', $tier+1);
+
                 	        $parentOptionsArray = $this->form->getOptionsArray($field->name . $parentText);
                 	        $parentOptionsArray = array_merge(
                 	           [['value' => -1, 'label' => 'Please select parent...']],
@@ -88,6 +90,7 @@ class MultiTable extends Widget
             	    
             	    $select = new Select('widgetignore[]');
             	    $select->setAttribute('class', 'netsensia_form_widget' . ($isTiered ? ' select_child select_node' : ''));
+            	    $select->setAttribute('data-tier', 1);
             	    $optionsArray = $this->form->getOptionsArray($field->name);
             	    $optionsArray = array_merge(
                         [['value' => -1, 'label' => 'Please select...']],
@@ -103,14 +106,14 @@ class MultiTable extends Widget
             	    
             	    if ($isTiered) {
 
-            	        for ($i=$tierCount; $i>=2; $i--) {
+            	        for ($i=1; $i<=$tierCount-1; $i++) {
+            	            // process each select element except the ultimate parent
             	            $parentAppend = '';
-            	            for ($tier=3; $tier<=$i; $tier++) {
+            	            for ($tier=2; $tier<=$i; $tier++) {
             	               $parentAppend .= 'parent';
             	            }
 
                 	        $referenceSelect = new Select('widgetignore[]');
-                	        $referenceSelect->setAttribute('class', 'netsensia_form_widget' . ($isTiered ? ' select_child' : ''));
                 	         
                             $optionsArray = $this->form->getOptionsArray($field->name . $parentAppend, null, null, true);
                             $optionsArray = array_merge(
@@ -120,6 +123,7 @@ class MultiTable extends Widget
                             $referenceSelect->setValueOptions(
                                 $optionsArray
                             );
+                            $referenceSelect->setAttribute('data-tier', $i);
                 	        $referenceSelect->setAttribute('class', 'netsensia_form_widget select_reference');
     
                 	        $parentValue = -1;
@@ -132,14 +136,13 @@ class MultiTable extends Widget
                                     }
                                 }
                             }
+                            
                 	        $selectElements['parent' . $parentAppend]->setValue($parentValue);
                 	        $selectElements['reference' . $parentAppend] = $referenceSelect;
-            	        }
-            	        
+                	    }
             	    }
             	    
             	    foreach ($selectElements as $key => $select) {
-
                        echo $this->view->formElement($select);
                     }
 

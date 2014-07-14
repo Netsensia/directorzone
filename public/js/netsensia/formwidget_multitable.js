@@ -26,7 +26,10 @@ $(document).ready(function() {
 			if ($(this).hasClass('select_child')) {
 				parentSelect = $(this).siblings('.select_parent').first();
 				parentValue = $(parentSelect).val();
-				showChildrenOfSelectParent($(this), parentValue);
+				showChildrenOfSelectParent(
+					$(this),
+					parentValue
+				);
 			}
 		});
 		
@@ -34,17 +37,21 @@ $(document).ready(function() {
 		
 	});
 	
-	function showChildrenOfSelectParent(childSelectElement, selectedParentValue)
+	function showChildrenOfSelectParent(
+		childSelectElement,
+		selectedParentValue
+	)
 	{
 		if (selectedParentValue == -1) {
 			$(childSelectElement).css('display', 'none');
 			return;
 		}
 				
+		var tier = $(childSelectElement).attr('data-tier');
 		$(childSelectElement).empty();
 		
-		childReferenceElement = $(childSelectElement).siblings('.select_reference').first();
-		
+		childReferenceElement = $(childSelectElement).siblings('[data-tier="' + tier + '"]');
+
 		$(childReferenceElement).children('option').each(function () {
 			var parts = $(this).val().split(',');
 			var childId = parts[0];
@@ -61,7 +68,10 @@ $(document).ready(function() {
 	}
 	
 	$(document).delegate('.select_parent', 'change', function() {
-		showChildrenOfSelectParent($(this).siblings('.select_child').first(), $(this).val());
+		showChildrenOfSelectParent(
+			$(this).next(),
+			$(this).val()
+		);
 	});
 	
 	function setEditableElements(tableEl, editableMode) {
