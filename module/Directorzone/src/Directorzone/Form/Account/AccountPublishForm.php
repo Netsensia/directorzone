@@ -64,6 +64,7 @@ class AccountPublishForm extends NetsensiaForm
                 [
                     'type' => 'select',
                     'subtype' => 'tiered',
+                    'tiers' => 4,
                     'name' => 'geography',
                     'label' => 'Geography',
                 ],

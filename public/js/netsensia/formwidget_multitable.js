@@ -18,9 +18,11 @@ $(document).ready(function() {
 		});
 		
 		$(this).find('select').each(function() {
-			if ($(this).hasClass('select_reference')) {
+			if ($(this).hasClass('select_reference'))
+			{
 				$(this).css('display', 'none');
 			}
+			
 			if ($(this).hasClass('select_child')) {
 				parentSelect = $(this).siblings('.select_parent').first();
 				parentValue = $(parentSelect).val();
@@ -59,7 +61,7 @@ $(document).ready(function() {
 	}
 	
 	$(document).delegate('.select_parent', 'change', function() {
-		showChildrenOfSelectParent($(this).siblings('.select_child'), $(this).val());
+		showChildrenOfSelectParent($(this).siblings('.select_child').first(), $(this).val());
 	});
 	
 	function setEditableElements(tableEl, editableMode) {
