@@ -717,28 +717,48 @@
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>document.accountPublishForm.elements['widgetignore[]'][9]</td>
-	<td>label=OCEANIA</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>xpath=(//a[contains(text(),'Add row')])[2]</td>
+	<td>selectWindow</td>
+	<td>null</td>
 	<td></td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>document.accountPublishForm.elements['widgetignore[]'][12]</td>
-	<td>label=EUROPE</td>
+	<td>document.accountPublishForm.elements['widgetignore[]'][6]</td>
+	<td>label=OCEANIA</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>document.accountPublishForm.elements['widgetignore[]'][7]</td>
+	<td>label=Melanesia</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>document.accountPublishForm.elements['widgetignore[]'][8]</td>
+	<td>label=New Caledonia</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>document.accountPublishForm.elements['widgetignore[]'][13]</td>
-	<td>label=Northern Europe</td>
+	<td>label=AMERICAS</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>document.accountPublishForm.elements['widgetignore[]'][14]</td>
+	<td>label=South America</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>document.accountPublishForm.elements['widgetignore[]'][15]</td>
+	<td>label=Brazil</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>document.accountPublishForm.elements['widgetignore[]'][16]</td>
+	<td>label=Sao Paulo City</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>document.accountPublishForm.elements['widgetignore[]'][20]</td>
 	<td>label=Investment: Private Equity</td>
 </tr>
 <tr>
@@ -748,7 +768,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>document.accountPublishForm.elements['widgetignore[]'][16]</td>
+	<td>document.accountPublishForm.elements['widgetignore[]'][21]</td>
 	<td>label=Takeover / Merger</td>
 </tr>
 <tr>
@@ -758,12 +778,12 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>document.accountPublishForm.elements['widgetignore[]'][17]</td>
+	<td>document.accountPublishForm.elements['widgetignore[]'][22]</td>
 	<td>label=HR &amp; Training</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>document.accountPublishForm.elements['widgetignore[]'][18]</td>
+	<td>document.accountPublishForm.elements['widgetignore[]'][23]</td>
 	<td>label=Legal</td>
 </tr>
 <tr>
@@ -842,11 +862,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>document.accountPublishForm.elements['widgetignore[]'][12]</td>
-	<td>label=GLOBAL</td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
 	<td>name=form-submit</td>
 	<td></td>
@@ -870,11 +885,6 @@
 	<td>clickAndWait</td>
 	<td>link=Edit this article</td>
 	<td></td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>document.accountPublishForm.elements['widgetignore[]'][12]</td>
-	<td>Please select parent... AFRICA AMERICAS ANTARTICA OCEANIA ASIA EUROPE GLOBAL</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -1073,38 +1083,38 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>//div[@id='main']/div[2]/div/span[3]</td>
-	<td>All Oceania</td>
+	<td>//div[@id='main']/div[2]/div/span[8]</td>
+	<td>Legal</td>
 </tr>
 <tr>
 	<td>waitForText</td>
 	<td>//div[@id='main']/div[2]/div/span[4]</td>
-	<td>Northern Europe</td>
+	<td>Sao Paulo City</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='main']/div[2]/div/span[3]</td>
+	<td>New Caledonia</td>
 </tr>
 <tr>
 	<td>waitForText</td>
 	<td>//div[@id='main']/div[2]/div/span[5]</td>
-	<td>Global</td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>//div[@id='main']/div[2]/div/span[6]</td>
 	<td>exact:Investment: Private Equity</td>
 </tr>
 <tr>
 	<td>waitForText</td>
+	<td>css=span.badge</td>
+	<td>Investment Services</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='main']/div[2]/div/span[2]</td>
+	<td>Financial Administration</td>
+</tr>
+<tr>
+	<td>waitForText</td>
 	<td>//div[@id='main']/div[2]/div/span[7]</td>
-	<td>Takeover / Merger</td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>//div[@id='main']/div[2]/div/span[8]</td>
 	<td>HR &amp; Training</td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>//div[@id='main']/div[2]/div/span[9]</td>
-	<td>Legal</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
