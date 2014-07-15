@@ -69,6 +69,11 @@ class NetsensiaForm extends Form
         $this->addHidden('netsensiaWidget_multiTable_' . uniqid(), json_encode($options), 'widget_multiTable');     
     }
     
+    public function addGeographyPicker($options)
+    {
+        $this->addHidden('netsensiaWidget_geography_' . uniqid(), json_encode($options), 'widget_geography');
+    }
+    
     public function addRelation($options)
     {
 		foreach ($options['fields'] as $field) {

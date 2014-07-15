@@ -44,6 +44,10 @@ class AccountPublishForm extends NetsensiaForm
         
         $this->addAutoDateOnCreate('publishdate');
         
+        $this->addGeographyPicker([
+            'jointablemodel' => 'ArticleGeography'
+        ]);
+        
         $this->addMultiTable([
             'groupname' => 'Sectors',
             'jointablemodel' => 'ArticleSector',
@@ -53,20 +57,6 @@ class AccountPublishForm extends NetsensiaForm
                     'subtype' => 'tiered',
                     'name' => 'sector',
                     'label' => 'Sector',
-                ],
-            ],
-        ]);
-        
-        $this->addMultiTable([
-            'groupname' => 'Geography',
-            'jointablemodel' => 'ArticleGeography',
-            'fields' => [
-                [
-                    'type' => 'select',
-                    'subtype' => 'tiered',
-                    'tiers' => 4,
-                    'name' => 'geography',
-                    'label' => 'Geography',
                 ],
             ],
         ]);

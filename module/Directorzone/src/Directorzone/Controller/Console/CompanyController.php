@@ -28,7 +28,7 @@ class CompanyController extends NetsensiaActionController
         ];
                 
     }
-    
+
     public function ingestFromCsvAction()
     {
         $companyService = $this->getServiceLocator()->get('CompanyService');

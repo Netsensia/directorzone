@@ -5,6 +5,8 @@ return array(
         'invokables' => array(
             'Directorzone\Controller\Console\Company' =>
                 'Directorzone\Controller\Console\CompanyController',
+            'Directorzone\Controller\Console\Geography' =>
+                'Directorzone\Controller\Console\GeographyController'
         ),
     ),
     'router' => array(
@@ -808,6 +810,15 @@ return array(
     'console' => array(
         'router' => array(
             'routes' => array(
+                'populate-geography' => array(
+                    'options' => array(
+                        'route'    => 'populate-geography',
+                        'defaults' => array(
+                            'controller' => 'Directorzone\Controller\Console\Geography',
+                            'action'     => 'populate-geography',
+                        ),
+                    ),
+                ),
                 'ingest' => array(
                     'options' => array(
                         'route'    => 'ingest',
