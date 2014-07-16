@@ -30,7 +30,7 @@ class Geography extends Widget
         if (!property_exists($tree, 'items')) {
             return;
         }
-        echo '<ul class="treepicker">';
+        echo '<ul data-widgetid="' . $this->elId . '" class="treepicker">';
         foreach ($tree->items as $item) {
             echo '<li>';
             $this->renderExpandState($item);

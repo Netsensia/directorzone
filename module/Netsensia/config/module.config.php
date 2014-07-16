@@ -42,13 +42,13 @@ return array(
                     'people' => array(
                         'type' => 'segment',
                         'options' => array(
-                            'route' => '/geography/:id',
+                            'route' => '/geography/children/:id',
                             'constraints' => [
                                 'id' => '[0-9]*',
                             ],
                             'defaults' => array(
                                 'controller' => 'Netsensia\Controller\Api\Geography',
-                                'action' => 'tree',
+                                'action' => 'children',
                                 'id' => 0,
                             ),
                         ),

@@ -24,8 +24,12 @@ class GeographyController extends NetsensiaActionController
         $this->geographyTable = $geographyTable;    
     }
     
-    public function treeAction()
+    public function childrenAction()
     {
-        return new JsonModel([]);
+        $id = $this->params('id');
+        
+        $rows = $this->geographyTable->select(['parentid' => $id])->toArray();
+        
+        return new JsonModel($rows);
     }
 }

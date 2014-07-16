@@ -66,6 +66,9 @@ class Module
                 'Geography',
                 'Feedback',
                 'UserMessage',
+                'Gn_ContinentCodes',
+                'Gn_CountryInfo',
+                'Gn_Geoname',
             ]
         );
 
@@ -82,59 +85,66 @@ class Module
             };
         }
         
-        return [
-            'factories' => array(
-                'Zend\Log' => function ($sm) {
-                    $log = new Logger();
-                    
-                    $stream_writer = new Stream('./data/log/application.log');
-                    $log->addWriter($stream_writer);
-     
-                    $log->info('Logging started...');
-                    
-                    return $log;
-                },
-                'ImageService' => function (\Zend\ServiceManager\ServiceLocatorInterface $sl) {
-                    return new ImageService();
-                },
-                'UserModel' => function (\Zend\ServiceManager\ServiceLocatorInterface $sl) {
-                    $instance = new \Application\Model\User();
-                    $instance->setServiceLocator($sl);
-                    
-                    $instance->setRelation('addressid', 'address');
-                    
-                    return $instance;
-                },
-                'FeedbackModel' => function (\Zend\ServiceManager\ServiceLocatorInterface $sl) {
-                    $instance = new \Netsensia\Model\Feedback();
-                    $instance->setServiceLocator($sl);
-                    return $instance;
-                },
-                'AddressModel' => function (\Zend\ServiceManager\ServiceLocatorInterface $sl) {
-                    $instance = new \Netsensia\Model\Address();
-                    $instance->setServiceLocator($sl);
-                    return $instance;
-                },
-                'MessagingService' => function($sm) {
-                    return new MessagingService(
-                        $sm->get('UserMessageTableGateway'),
-                        $sm->get('FeedbackTableGateway')
-                    );
-                },
-                'CommentsService' => function($sm) {
-                    return new CommentsService(
-                        $sm->get('ArticleCommentsTableGateway')
-                    );
-                },
-                'ArticleCommentsTableGateway' => function ($sm) {
-                    $instance = new TableGateway(
-                        'articlecomment',
-                        $sm->get('Zend\Db\Adapter\Adapter')
-                    );
-                    return $instance;
-                },
-            ),
-        ];
+        $otherFactories = array(
+            'Zend\Log' => function ($sm) {
+                $log = new Logger();
+                
+                $stream_writer = new Stream('./data/log/application.log');
+                $log->addWriter($stream_writer);
+ 
+                $log->info('Logging started...');
+                
+                return $log;
+            },
+            'ImageService' => function (\Zend\ServiceManager\ServiceLocatorInterface $sl) {
+                return new ImageService();
+            },
+            'UserModel' => function (\Zend\ServiceManager\ServiceLocatorInterface $sl) {
+                $instance = new \Application\Model\User();
+                $instance->setServiceLocator($sl);
+                
+                $instance->setRelation('addressid', 'address');
+                
+                return $instance;
+            },
+            'FeedbackModel' => function (\Zend\ServiceManager\ServiceLocatorInterface $sl) {
+                $instance = new \Netsensia\Model\Feedback();
+                $instance->setServiceLocator($sl);
+                return $instance;
+            },
+            'AddressModel' => function (\Zend\ServiceManager\ServiceLocatorInterface $sl) {
+                $instance = new \Netsensia\Model\Address();
+                $instance->setServiceLocator($sl);
+                return $instance;
+            },
+            'MessagingService' => function($sm) {
+                return new MessagingService(
+                    $sm->get('UserMessageTableGateway'),
+                    $sm->get('FeedbackTableGateway')
+                );
+            },
+            'CommentsService' => function($sm) {
+                return new CommentsService(
+                    $sm->get('ArticleCommentsTableGateway')
+                );
+            },
+            'ArticleCommentsTableGateway' => function ($sm) {
+                $instance = new TableGateway(
+                    'articlecomment',
+                    $sm->get('Zend\Db\Adapter\Adapter')
+                );
+                return $instance;
+            },
+        );
+        
+        $services = array(
+            'factories' => array_merge(
+                $tableGatewayFactories,
+                $otherFactories
+            )
+        );
+        
+        return $services;
     }
 
     public function onBootstrap($e)

@@ -195,8 +195,6 @@ class Module
             'CompaniesHouse',
             'Sector',
             'SectorParent',
-            'Geography',
-            'GeographyParent',
             'KeyEvent',
             'JobArea',
             ]
