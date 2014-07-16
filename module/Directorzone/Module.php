@@ -199,10 +199,6 @@ class Module
             'GeographyParent',
             'KeyEvent',
             'JobArea',
-            'Gn_ContinentCodes',
-            'Gn_CountryInfo',
-            'Gn_Geoname',
-            'Gn_Admin1CodesAscii',
             ]
         );
         

@@ -32,7 +32,30 @@ return array(
                     ),
                 ),
             ),
-            
+            'api' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/api',
+                ),
+                'may_terminate' => false,
+                'child_routes' => array(
+                    'people' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/geography/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*',
+                            ],
+                            'defaults' => array(
+                                'controller' => 'Netsensia\Controller\Api\Geography',
+                                'action' => 'tree',
+                                'id' => 0,
+                            ),
+                        ),
+                        
+                    ),
+                ),
+            ),
             'logout' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(

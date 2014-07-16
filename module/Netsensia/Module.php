@@ -16,6 +16,8 @@ use Netsensia\Service\ImageService;
 use Netsensia\Service\MessagingService;
 use Netsensia\Service\CommentsService;
 use Zend\Db\TableGateway\TableGateway;
+use Zend\Mvc\Controller\ControllerManager;
+use Netsensia\Controller\GeographyController;
     
 class Module
 {
@@ -43,8 +45,43 @@ class Module
         );
     }
     
+    public function getControllerConfig()
+    {
+        return array(
+            'factories' => array(
+                'Netsensia\Controller\Api\Geography' =>
+                function (ControllerManager $cm) {
+                    return new \Netsensia\Controller\Api\GeographyController(
+                        $cm->getServiceLocator()->get('GeographyTableGateway')
+                    );
+                },
+            )
+        );
+    }
+    
     public function getServiceConfig()
     {
+        $tableGateways = array_merge(
+            [
+                'Geography',
+                'Feedback',
+                'UserMessage',
+            ]
+        );
+
+        $tableGatewayFactories = [];
+        
+        foreach ($tableGateways as $tableGateway) {
+            $tableName = strtolower($tableGateway);
+            $tableGatewayFactories[$tableGateway . 'TableGateway'] = function ($sm) use ($tableName) {
+                $instance = new TableGateway(
+                    $tableName,
+                    $sm->get('Zend\Db\Adapter\Adapter')
+                );
+                return $instance;
+            };
+        }
+        
         return [
             'factories' => array(
                 'Zend\Log' => function ($sm) {
@@ -92,20 +129,6 @@ class Module
                 'ArticleCommentsTableGateway' => function ($sm) {
                     $instance = new TableGateway(
                         'articlecomment',
-                        $sm->get('Zend\Db\Adapter\Adapter')
-                    );
-                    return $instance;
-                },
-                'FeedbackTableGateway' => function ($sm) {
-                    $instance = new TableGateway(
-                        'feedback',
-                        $sm->get('Zend\Db\Adapter\Adapter')
-                    );
-                    return $instance;
-                },
-                'UserMessageTableGateway' => function ($sm) {
-                    $instance = new TableGateway(
-                        'usermessage',
                         $sm->get('Zend\Db\Adapter\Adapter')
                     );
                     return $instance;

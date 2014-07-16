@@ -66,20 +66,26 @@ class Geography extends Widget
     
     private function renderSelectState($item)
     {
-        $attributes = 'data-widgetid="' . $this->elId . '" style="cursor:pointer" class="treeitemselect" data-id="' . $item->id . '"';
+        $attributes = 
+            'data-state="' . $item->state . '" ' .
+            'data-loaded="' . $item->loaded . '" ' . 
+            'data-widgetid="' . $this->elId . '" ' .
+            'style="cursor:pointer" ' .
+            'class="treeitemselect" ' .
+            'data-id="' . $item->id . '"';
         
         switch ($item->state) {
             case GeographyWidget::STATE_ALL :
-                echo '<img ' . $attributes . ' data-state="' . GeographyWidget::STATE_ALL . '" src="' . self::TREE_ICON_DIR . 'iconCheckAll.gif">&nbsp;';
+                echo '<img ' . $attributes . ' src="' . self::TREE_ICON_DIR . 'iconCheckAll.gif">&nbsp;';
                 break;
             case GeographyWidget::STATE_SOME :
-                echo '<img ' . $attributes . ' data-state="' . GeographyWidget::STATE_SOME . '" src="' . self::TREE_ICON_DIR . 'iconCheckGray.gif">&nbsp;';
+                echo '<img ' . $attributes . ' src="' . self::TREE_ICON_DIR . 'iconCheckGray.gif">&nbsp;';
                 break;
             case GeographyWidget::STATE_NONE :
-                echo '<img ' . $attributes . ' data-state="' . GeographyWidget::STATE_NONE . '" src="' . self::TREE_ICON_DIR . 'iconUncheckAll.gif">&nbsp;';
+                echo '<img ' . $attributes . ' src="' . self::TREE_ICON_DIR . 'iconUncheckAll.gif">&nbsp;';
                 break;
             case GeographyWidget::STATE_DISABLED :
-                echo '<img ' . $attributes . ' data-state="' . GeographyWidget::STATE_DISABLED . '" src="' . self::TREE_ICON_DIR . 'iconCheckDis.gif">&nbsp;';
+                echo '<img ' . $attributes . ' src="' . self::TREE_ICON_DIR . 'iconCheckDis.gif">&nbsp;';
                 break;
         }
 
