@@ -33,7 +33,10 @@ class Geography extends Widget
             echo '<li>';
             if (property_exists($item, 'expanded')) {
                 echo $this->expandState($item->expanded);
+            } elseif (property_exists($item, 'items')) {
+                echo $this->expandState($item->state == GeographyWidget::STATE_SOME);
             }
+                
             echo $this->selectState($item->state);
             echo $item->name;
             
@@ -47,9 +50,9 @@ class Geography extends Widget
     private function expandState($isExpanded)
     {
         if ($isExpanded) {
-            return '<img src="' . self::TREE_ICON_DIR . 'plus.gif">&nbsp;';
-        } else {
             return '<img src="' . self::TREE_ICON_DIR . 'minus.gif">&nbsp;';
+        } else {
+            return '<img src="' . self::TREE_ICON_DIR . 'plus.gif">&nbsp;';
         }
     }
     

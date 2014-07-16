@@ -52,6 +52,7 @@ class Geography extends Widget
                 'id' => $row['geographyid'],
                 'name' => $row['geography'],
                 'state' => self::STATE_ALL,
+                'expanded' => false, // will force a plus icon even though no children yet
             ];
         }
         
