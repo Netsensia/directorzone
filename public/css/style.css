@@ -254,3 +254,7 @@ div[data-netsensia-group=account-profile-talentpoolpublishstatus] {
 	margin-top: 1em;
 }
 
+ul.treepicker {
+	list-style-type: none;
+}
+

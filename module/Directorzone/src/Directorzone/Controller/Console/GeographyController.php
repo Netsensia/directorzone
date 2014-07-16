@@ -14,6 +14,9 @@ class GeographyController extends NetsensiaActionController
     
     public function populateGeographyAction()
     {
+        $regionsWithNoTown = [];
+        $regionsWithTooManyTowns = [];
+            
         $this->geographyTable =
             $this->getServiceLocator()->get('GeographyTableGateway');
         
@@ -21,7 +24,7 @@ class GeographyController extends NetsensiaActionController
             $this->getServiceLocator()->get('Gn_ContinentCodesTableGateway');
         $countriesTable =
             $this->getServiceLocator()->get('Gn_CountryInfoTableGateway');
-        $regionsTable =
+        $geonameTable =
             $this->getServiceLocator()->get('Gn_GeonameTableGateway');
         $admin1Table =
             $this->getServiceLocator()->get('Gn_Admin1CodesAsciiTableGateway');
@@ -32,6 +35,7 @@ class GeographyController extends NetsensiaActionController
         $this->geographyTable->delete([1 => 1]);
         
         foreach ($continents as $continent) {
+            $this->printPlace(1, $continent['name']);
             
             $continentId = $this->insert([
 	            'parentid' => -1,
@@ -43,6 +47,8 @@ class GeographyController extends NetsensiaActionController
             $countries = $countriesTable->select(['continent' => $continent['code']])->toArray();
 
             foreach ($countries as $country) {
+                $this->printPlace(2, $country['name']);
+                
                 $countryId = $this->insert([
     	            'parentid' => $continentId,
                     'geography' => $country['name'],
@@ -50,22 +56,67 @@ class GeographyController extends NetsensiaActionController
                     'geonameid' => $country['geonameId'],
                 ]);
                 
-                $where = new Where();
-                $where->like('code', $country['iso_alpha2'] . '.%');
-                $admin1s = $admin1Table->select($where);
+                $admin1Regions = $geonameTable->select(
+                        function (Select $select) use ($country) {
+                                $select->where([
+                                    'fcode' => 'ADM1',
+                                    'country' => $country['iso_alpha2'],
+                                ])
+                                ->order('name ASC');
+                            }
+                        )->toArray();
                 
-                foreach ($admin1s as $admin1) {
-                    $admin1Id = $this->insert([
-                        'parentid' => $countryId,
-                        'geography' => $admin1['nameAscii'],
-                        'level' => 3,
-                        'code' => $admin1['code'],
-                        'geonameid' => $admin1['geonameid'],
-                    ]);
+                foreach ($admin1Regions as $admin1Region) {
+                    $admin1Id = $this->insertFromGeonameRow($countryId, $admin1Region, 3);
+                    
+                    $admin2Regions = $geonameTable->select(
+                        function (Select $select) use ($admin1Region) {
+                            $select->where([
+                                'fcode' => 'ADM2',
+                                'country' => $admin1Region['country'],
+                                'admin1' => $admin1Region['admin1'],
+                                ])
+                                ->order('name ASC');
+                        }
+                    )->toArray();
+                    
+                    foreach ($admin2Regions as $admin2Region) {
+                        $admin2Id = $this->insertFromGeonameRow($admin1Id, $admin2Region, 4);
+                    }
+                    
                 }
              }
+
         }
         
+        echo PHP_EOL;
+        
+        $this->insertContinentalRegions();
+    }
+    
+    private function insertContinentalRegions()
+    {
+
+    }
+    
+    private function printPlace($level, $name)
+    {
+        echo PHP_EOL . str_pad(' ', $level * 4) . $name;
+    }
+    
+    private function insertFromGeonameRow($parentId, $geonameRow, $level)
+    {
+        $this->printPlace($level, $geonameRow['asciiname']);
+        
+        return $this->insert([
+            'parentid' => $parentId,
+            'geography' => $geonameRow['asciiname'],
+            'level' => $level,
+            'population' => $geonameRow['population'],
+            'geonameid' => $geonameRow['geonameid'],
+            'latitude' => $geonameRow['latitude'],
+            'longitude' => $geonameRow['longitude'],
+            ]);
     }
     
     private function insert($row) {

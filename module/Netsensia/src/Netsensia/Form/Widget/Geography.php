@@ -5,6 +5,11 @@ use Zend\Db\Sql\Select;
 
 class Geography extends Widget
 {
+    const STATE_ALL = 0;
+    const STATE_SOME = 1;
+    const STATE_NONE = 2;
+    const STATE_DISABLED = 3;
+    
     public function getPopulatedElement()
     {
         $elementValue = $this->element->getValue();
@@ -36,6 +41,33 @@ class Geography extends Widget
         }
         
         $options->rowValues = $allRowValues;
+        
+        $continents = [];
+        
+        $geographyTable = $this->serviceLocator->get('GeographyTableGateway');
+        $rows = $geographyTable->select(['level' => 1])->toArray();
+        
+        foreach ($rows as $row) {
+            $continents[] = [
+                'id' => $row['geographyid'],
+                'name' => $row['geography'],
+                'state' => self::STATE_ALL,
+            ];
+        }
+        
+        $options->tree = [
+            'items' =>
+                [
+                    [
+                       'id' => 123,
+                       'name' => 'Global',
+                       'state' => self::STATE_ALL,
+                       'expanded' => true,
+                       'items' => $continents,
+                    ],
+                ],
+        ];
+        
         $elementValue = json_encode($options);
         
         $this->element->setValue($elementValue);

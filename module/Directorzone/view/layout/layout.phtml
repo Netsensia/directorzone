@@ -9,6 +9,7 @@
 
         <!-- Styles -->
         <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/brand/favicon.ico'))
+                        ->prependStylesheet($this->basePath() . '/js/dhtmlxTree/dhtmlxTree_v403_std/codebase/dhtmlxtree.css')
                         ->prependStylesheet($this->basePath() . '/css/style.css')
                         ->prependStylesheet($this->basePath() . '/css/datepicker.css')
                         ->prependStylesheet($this->basePath() . '/css/button-spinner.css')
@@ -20,6 +21,8 @@
         <!-- Scripts -->
         <?php echo $this->headScript()->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
                       ->prependFile($this->basePath() . '/js/pretty.js')
+                      ->prependFile($this->basePath() . '/js/dhtmlxTree/dhtmlxTree_v403_std/codebase/dhtmlxtree.js')
+                      ->prependFile($this->basePath() . '/js/dhtmlxTree/dhtmlxTree_v403_std/codebase/dhtmlxcommon.js')
                       ->prependFile($this->basePath() . '/js/validate.min.js')
                       ->prependFile($this->basePath() . '/js/netsensia/pager.js')
                       ->prependFile($this->basePath() . '/js/netsensia/formwidget_geography.js')
@@ -30,8 +33,6 @@
                       ->prependFile($this->basePath() . '/js/jquery-ui-1.10.3/ui/minified/jquery-ui.min.js')
                       ->prependFile('//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.0.1-p7/js/bootstrap.min.js')
                       ->prependFile('//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js')
-
-                      
         ?>
 
 </head>

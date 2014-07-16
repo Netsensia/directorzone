@@ -122,4 +122,5 @@ LOAD DATA LOCAL INFILE '/Users/chris/git/geography/timeZones.txt' INTO TABLE gn_
 LOAD DATA LOCAL INFILE '/Users/chris/git/geography/countryInfo-n.txt' INTO TABLE gn_countryInfo IGNORE 1 LINES (iso_alpha2,iso_alpha3,iso_numeric,fips_code,name,capital,areaInSqKm,population,continent,languages,currency,geonameId); 
 LOAD DATA LOCAL INFILE '/Users/chris/git/geography/continentCodes.txt' INTO TABLE gn_continentCodes FIELDS TERMINATED BY ',' (code, name, geonameId); 
 
+/* 10:52:16 root@directorzone.local */ ALTER TABLE `gn_geoname` ADD INDEX (`country`, `admin1`);
 
