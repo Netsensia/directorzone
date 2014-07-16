@@ -45,6 +45,7 @@ class Geography extends Widget
         $continents = [];
         
         $geographyTable = $this->serviceLocator->get('GeographyTableGateway');
+        
         $rows = $geographyTable->select(['level' => 1])->toArray();
         
         foreach ($rows as $row) {
@@ -60,7 +61,7 @@ class Geography extends Widget
             'items' =>
                 [
                     [
-                       'id' => 123,
+                       'id' => 0,
                        'name' => 'Global',
                        'state' => self::STATE_ALL,
                        'expanded' => true,

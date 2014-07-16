@@ -5,7 +5,8 @@ use Netsensia\Form\Widget\Geography as GeographyWidget;
 
 class Geography extends Widget
 {
-    const TREE_ICON_DIR = '/js/dhtmlxTree/dhtmlxTree_v403_std/codebase/imgs/dhxtree_skyblue/';
+    const TREE_ICON_DIR = '/img/tree/';
+    var $elId;
     
     public function render()
     {
@@ -15,8 +16,9 @@ class Geography extends Widget
         
         <?php
             $options = json_decode($this->element->getValue());
-            
+            $this->elId = $this->element->getAttribute('id');
             $this->renderTree($options->tree);
+            
         ?>
         
         </div>
@@ -31,13 +33,9 @@ class Geography extends Widget
         echo '<ul class="treepicker">';
         foreach ($tree->items as $item) {
             echo '<li>';
-            if (property_exists($item, 'expanded')) {
-                echo $this->expandState($item->expanded);
-            } elseif (property_exists($item, 'items')) {
-                echo $this->expandState($item->state == GeographyWidget::STATE_SOME);
-            }
-                
-            echo $this->selectState($item->state);
+            $this->renderExpandState($item);
+            $this->renderSelectState($item);
+            
             echo $item->name;
             
             $this->renderTree($item);
@@ -47,29 +45,41 @@ class Geography extends Widget
         echo '</ul>';
     }
     
-    private function expandState($isExpanded)
+    private function renderExpandState($item)
     {
-        if ($isExpanded) {
-            return '<img src="' . self::TREE_ICON_DIR . 'minus.gif">&nbsp;';
+        if (property_exists($item, 'expanded')) {
+            $isExpanded = $item->expanded;
+        } elseif (property_exists($item, 'items')) {
+            $isExpanded = ($item->state == GeographyWidget::STATE_SOME);
         } else {
-            return '<img src="' . self::TREE_ICON_DIR . 'plus.gif">&nbsp;';
+            return;
+        }
+        
+        $attributes = 'data-widgetid="' . $this->elId . '" style="cursor:pointer" data-id="' . $item->id . '"';
+       
+        if ($isExpanded) {
+            echo '<img ' . $attributes . ' class="treecollapse" src="' . self::TREE_ICON_DIR . 'minus.gif">&nbsp;';
+        } else {
+            echo '<img ' . $attributes . ' class="treeexpand" src="' . self::TREE_ICON_DIR . 'plus.gif">&nbsp;';
         }
     }
     
-    private function selectState($state)
+    private function renderSelectState($item)
     {
-        switch ($state) {
+        $attributes = 'data-widgetid="' . $this->elId . '" style="cursor:pointer" class="treeitemselect" data-id="' . $item->id . '"';
+        
+        switch ($item->state) {
             case GeographyWidget::STATE_ALL :
-                return '<img src="' . self::TREE_ICON_DIR . 'iconCheckAll.gif">&nbsp;';
+                echo '<img ' . $attributes . ' data-state="' . GeographyWidget::STATE_ALL . '" src="' . self::TREE_ICON_DIR . 'iconCheckAll.gif">&nbsp;';
                 break;
             case GeographyWidget::STATE_SOME :
-                return '<img src="' . self::TREE_ICON_DIR . 'iconCheckGray.gif">&nbsp;';
+                echo '<img ' . $attributes . ' data-state="' . GeographyWidget::STATE_SOME . '" src="' . self::TREE_ICON_DIR . 'iconCheckGray.gif">&nbsp;';
                 break;
             case GeographyWidget::STATE_NONE :
-                return '<img src="' . self::TREE_ICON_DIR . 'iconUncheckAll.gif">&nbsp;';
+                echo '<img ' . $attributes . ' data-state="' . GeographyWidget::STATE_NONE . '" src="' . self::TREE_ICON_DIR . 'iconUncheckAll.gif">&nbsp;';
                 break;
             case GeographyWidget::STATE_DISABLED :
-                return '<img src="' . self::TREE_ICON_DIR . 'iconCheckDis.gif">&nbsp;';
+                echo '<img ' . $attributes . ' data-state="' . GeographyWidget::STATE_DISABLED . '" src="' . self::TREE_ICON_DIR . 'iconCheckDis.gif">&nbsp;';
                 break;
         }
 
