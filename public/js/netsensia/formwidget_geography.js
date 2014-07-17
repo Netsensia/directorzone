@@ -5,14 +5,14 @@ $(document).ready(function() {
 		var isLoaded = $(this).attr('data-loaded');
 		if (isLoaded == "1") {
 			$(this).siblings('ul').css('display', 'list-item');
+			$(this).attr('src', '/img/tree/minus.gif');
 		} else {
 			var geographyId = $(this).attr('data-geographyid');
-			loadTree(geographyId, $(this).parent());
+			loadTree(geographyId, $(this));
 			$(this).attr('data-loaded', '1');
 		}
 		$(this).removeClass('treeexpand');
 		$(this).addClass('treecollapse');
-		$(this).attr('src', '/img/tree/minus.gif');
 	});
 	
 	$(document).delegate('.treecollapse', 'click', function () {
@@ -31,8 +31,10 @@ $(document).ready(function() {
 		return value.tree;
 	}
 	
-	function loadTree(geographyId, liParent)
+	function loadTree(geographyId, imageClicked)
 	{
+		liParent = $(imageClicked).parent();
+		
 		var widgetId = $(liParent).parent().attr('data-widgetid');
 		url = '/api/geography/children/' + geographyId;
 		$.ajax({
@@ -73,6 +75,7 @@ $(document).ready(function() {
 				}
 				ul += '</ul>';
 				$(liParent).append(ul);
+				$(imageClicked).attr('src', '/img/tree/minus.gif');
 			}
 		});
 	}
