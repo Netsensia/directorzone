@@ -1,13 +1,25 @@
 $(document).ready(function() {
 	
 	$(document).delegate('.treeexpand', 'click', function () {
-		var tree = getTree($(this));
+		$(this).attr('src', '/img/tree/dhxmenu_loader.gif');
 		var isLoaded = $(this).attr('data-loaded');
-		if (!isLoaded) {
-			var geographyId = $(this).attr('data-id');
+		if (isLoaded == "1") {
+			$(this).siblings('ul').css('display', 'list-item');
+		} else {
+			var geographyId = $(this).attr('data-geographyid');
 			loadTree(geographyId, $(this).parent());
+			$(this).attr('data-loaded', '1');
 		}
-		
+		$(this).removeClass('treeexpand');
+		$(this).addClass('treecollapse');
+		$(this).attr('src', '/img/tree/minus.gif');
+	});
+	
+	$(document).delegate('.treecollapse', 'click', function () {
+		$(this).siblings('ul').css('display', 'none');
+		$(this).addClass('treeexpand');
+		$(this).removeClass('treecollapse');
+		$(this).attr('src', '/img/tree/plus.gif');
 	});
 	
 	function getTree(el)
@@ -19,21 +31,48 @@ $(document).ready(function() {
 		return value.tree;
 	}
 	
-	function loadTree(geographyId, listItemParent)
+	function loadTree(geographyId, liParent)
 	{
+		var widgetId = $(liParent).parent().attr('data-widgetid');
 		url = '/api/geography/children/' + geographyId;
 		$.ajax({
 			url: url,
 			success: function (data) {
-				$(listItemParent).append('<ul class="treepicker">');
+				var ul ='<ul class="treepicker" data-widgetid="' + widgetId + '">';
 				for (i=0; i<data.length; i++) {
 					var name = data[i].geography;
 					var childId = data[i].geographyid;
-					$(listItemParent).append('<li>');
-					$(listItemParent).append(name);
-					$(listItemParent).append('</li>');
+					var hasChildren = data[i].haschildren;
+					
+					var expandTag = '';
+					
+					var attrs = 'data-widgetid="' + widgetId + '" style="cursor:pointer" data-geographyid="' + childId + '" ';
+					
+					if (hasChildren == "1") {
+						expandTag = '<img ' + attrs + ' class="treeexpand" src="/img/tree/plus.gif">';
+					} else {
+						expandTag = '<img ' + attrs + ' class="treecollapse" src="/img/tree/blank.gif">';
+					}
+					
+					attrs = 
+			            'data-haschildren="' + hasChildren + '" ' +
+			            'data-loaded="0" ' +
+			            'data-state="2" ' +
+			            'data-widgetid="' + widgetId + '" ' +
+			            'style="cursor:pointer" ' +
+			            'class="treeitemselect" ' +
+			            'data-geographyid="' + childId + '"';
+			            
+					var checkTag = '<img ' + attrs + ' src="/img/tree/iconUncheckAll.gif">&nbsp;';
+					ul += 
+						 '<li>' +
+						 expandTag +
+						 checkTag +
+						 name +
+						 '</li>';
 				}
-				$(listItemParent).append('</ul>');
+				ul += '</ul>';
+				$(liParent).append(ul);
 			}
 		});
 	}

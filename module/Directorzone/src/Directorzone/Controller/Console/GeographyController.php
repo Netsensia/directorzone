@@ -26,13 +26,10 @@ class GeographyController extends NetsensiaActionController
             $this->getServiceLocator()->get('Gn_CountryInfoTableGateway');
         $geonameTable =
             $this->getServiceLocator()->get('Gn_GeonameTableGateway');
-        $admin1Table =
-            $this->getServiceLocator()->get('Gn_Admin1CodesAsciiTableGateway');
         
         $continents = $continentsTable->select()->toArray();
         
-        // 
-        $this->geographyTable->delete([1 => 1]);
+        $this->geographyTable->delete(1);
         
         foreach ($continents as $continent) {
             $this->printPlace(1, $continent['name']);
@@ -42,6 +39,7 @@ class GeographyController extends NetsensiaActionController
                 'geography' => $continent['name'],
                 'level' => 1,
                 'geonameid' => $continent['geonameid'],
+                'haschildren' => true,
             ]);
             
             $countries = $countriesTable->select(['continent' => $continent['code']])->toArray();
@@ -54,6 +52,7 @@ class GeographyController extends NetsensiaActionController
                     'geography' => $country['name'],
                     'level' => 2,
                     'geonameid' => $country['geonameId'],
+                    'haschildren' => true,
                 ]);
                 
                 $admin1Regions = $geonameTable->select(
@@ -67,6 +66,7 @@ class GeographyController extends NetsensiaActionController
                         )->toArray();
                 
                 foreach ($admin1Regions as $admin1Region) {
+                    $admin1Region['haschildren'] = true;
                     $admin1Id = $this->insertFromGeonameRow($countryId, $admin1Region, 3);
                     
                     $admin2Regions = $geonameTable->select(
@@ -81,6 +81,7 @@ class GeographyController extends NetsensiaActionController
                     )->toArray();
                     
                     foreach ($admin2Regions as $admin2Region) {
+                        $admin2Region['haschildren'] = false;
                         $admin2Id = $this->insertFromGeonameRow($admin1Id, $admin2Region, 4);
                     }
                     
@@ -116,6 +117,7 @@ class GeographyController extends NetsensiaActionController
             'geonameid' => $geonameRow['geonameid'],
             'latitude' => $geonameRow['latitude'],
             'longitude' => $geonameRow['longitude'],
+            'haschildren' => $geonameRow['haschildren'],
             ]);
     }
     

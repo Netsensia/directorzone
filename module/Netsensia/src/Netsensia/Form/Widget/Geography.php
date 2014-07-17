@@ -50,10 +50,11 @@ class Geography extends Widget
         
         foreach ($rows as $row) {
             $continents[] = [
-                'id' => $row['geographyid'],
+                'geographyid' => $row['geographyid'],
                 'name' => $row['geography'],
                 'state' => self::STATE_ALL,
                 'loaded' => false,
+                'haschildren' => true,
                 'expanded' => false, // will force a plus icon even though no children yet
             ];
         }
@@ -62,10 +63,11 @@ class Geography extends Widget
             'items' =>
                 [
                     [
-                       'id' => 0,
+                       'geographyid' => 0,
                        'name' => 'Global',
                        'state' => self::STATE_ALL,
                        'expanded' => true,
+                       'haschildren' => true,
                        'loaded' => true,
                        'items' => $continents,
                     ],

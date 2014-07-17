@@ -18,7 +18,6 @@ class Geography extends Widget
             $options = json_decode($this->element->getValue());
             $this->elId = $this->element->getAttribute('id');
             $this->renderTree($options->tree);
-            
         ?>
         
         </div>
@@ -55,7 +54,11 @@ class Geography extends Widget
             return;
         }
         
-        $attributes = 'data-widgetid="' . $this->elId . '" style="cursor:pointer" data-id="' . $item->id . '"';
+        $attributes = 
+            'data-widgetid="' . $this->elId . '" ' .
+            'data-loaded="' . $item->loaded . '" ' .
+            'style="cursor:pointer" ' .
+            'data-geographyid="' . $item->geographyid . '"';
        
         if ($isExpanded) {
             echo '<img ' . $attributes . ' class="treecollapse" src="' . self::TREE_ICON_DIR . 'minus.gif">&nbsp;';
@@ -67,12 +70,12 @@ class Geography extends Widget
     private function renderSelectState($item)
     {
         $attributes = 
+            'data-haschildren="' . $item->haschildren . '" ' .
             'data-state="' . $item->state . '" ' .
-            'data-loaded="' . $item->loaded . '" ' . 
             'data-widgetid="' . $this->elId . '" ' .
             'style="cursor:pointer" ' .
             'class="treeitemselect" ' .
-            'data-id="' . $item->id . '"';
+            'data-geographyid="' . $item->geographyid . '"';
         
         switch ($item->state) {
             case GeographyWidget::STATE_ALL :
