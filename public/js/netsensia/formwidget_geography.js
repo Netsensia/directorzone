@@ -34,16 +34,20 @@ $(document).ready(function() {
 		if (currentState == STATE_DISABLED) {
 			return;
 		}
+
+		var parentCheckImage = $(this).parent().parent().siblings('.treeitemselect').first();
 		
 		if (currentState == STATE_ALL || currentState == STATE_SOME) {
 			$(this).attr('data-state', STATE_NONE);
 			$(this).attr('src', '/img/tree/iconUncheckAll.gif');
+			
 			$(this).next().children().each(function () {
 				var img = $(this).children('.treeitemselect').first();
-				$(img).attr('data-state', STATE_ALL);
+				$(img).attr('data-state', STATE_NONE);
 				$(img).attr('src', '/img/tree/iconUncheckAll.gif');
 			});
 
+			setParentState(parentCheckImage);
 		}
 		
 		if (currentState == STATE_NONE) {
@@ -54,8 +58,54 @@ $(document).ready(function() {
 				$(img).attr('data-state', STATE_ALL);
 				$(img).attr('src', '/img/tree/iconCheckAll.gif');
 			});
+			
+			setParentState(parentCheckImage);
 		}
 	});
+	
+	function setParentState(checkImage)
+	{
+		var numChecked = 0;
+		var numBlank = 0;
+		var numPartial = 0;
+		var state;
+		var image;
+		
+		$(checkImage).next().children().each(function () {
+			var img = $(this).children('.treeitemselect').first();
+			var state = $(img).attr('data-state');
+			
+			if (state == STATE_ALL) {
+				numChecked ++;
+			}
+			
+			if (state == STATE_NONE) {
+				numBlank ++;
+			}
+			
+			if (state == STATE_SOME) {
+				numPartial ++;
+			}
+		});
+		
+		if (numChecked + numPartial == 0) {
+			state = STATE_NONE;
+			image = 'iconUncheckAll.gif';
+		}
+		
+		if (numChecked > 0 && numBlank + numPartial == 0) {
+			state = STATE_ALL;
+			image = 'iconCheckAll.gif';
+		}
+		
+		if (numPartial > 0 || (numChecked > 0 && numBlank > 0)) {
+			state = STATE_SOME;
+			image = 'iconCheckGray.gif';
+		}
+		
+		$(checkImage).attr('data-state', state);
+		$(checkImage).attr('src', '/img/tree/' + image);		
+	}
 	
 	function getTree(el)
 	{
@@ -71,6 +121,7 @@ $(document).ready(function() {
 		liParent = $(imageClicked).parent();
 		var widgetId = $(liParent).parent().attr('data-widgetid');
 		var selectorImg = $(imageClicked).siblings('.treeitemselect').first();
+		
 		var checkState = parseInt($(selectorImg).attr('data-state'));
 		var checkImage = '';
 		
