@@ -52,7 +52,7 @@ class MultiTable extends Widget
         $elementValue = json_encode($options);
         
         $this->element->setValue($elementValue);
-                
+        
         return $this->element;
     }
 }

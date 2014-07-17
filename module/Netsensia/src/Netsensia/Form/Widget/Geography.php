@@ -33,11 +33,10 @@ class Geography extends Widget
         $allRowValues = [];
         
         foreach ($results as $row) {
-            $thisRowValues = [];
-            foreach ($row as $value) {
-                $thisRowValues[] = $value;
-            }
-            $allRowValues[] = $thisRowValues;
+            $allRowValues[] = [
+                'value' => $row['geographyid'],
+                'parents' => $this->getParents($row['geographyid'])
+            ];
         }
         
         $options->rowValues = $allRowValues;
@@ -47,6 +46,13 @@ class Geography extends Widget
         $geographyTable = $this->serviceLocator->get('GeographyTableGateway');
         
         $rows = $geographyTable->select(['level' => 1])->toArray();
+        
+        $numSelected = count($allRowValues);
+        if ($numSelected == 0) {
+            $globalState = self::STATE_ALL;
+        } else {
+            $globalState = self::STATE_SOME;
+        }
         
         foreach ($rows as $row) {
             $continents[] = [
@@ -65,7 +71,7 @@ class Geography extends Widget
                     [
                        'geographyid' => 0,
                        'name' => 'Global',
-                       'state' => self::STATE_ALL,
+                       'state' => $globalState,
                        'expanded' => true,
                        'haschildren' => true,
                        'loaded' => true,
@@ -79,6 +85,30 @@ class Geography extends Widget
         $this->element->setValue($elementValue);
                 
         return $this->element;
+    }
+    
+    private function getParents($geographyId)
+    {
+        $parents = [];
+        $gateway = $this->serviceLocator->get('GeographyTableGateway');
+        
+        $rows = $gateway->select(['geographyid' => $geographyId])->toArray();
+        $row = $rows[0];
+        $level = $row['level'];
+        
+        while ($level > 0) {
+            $level --;
+            $parents[$level] = $row['parentid'];
+            
+            if ($level > 0) {
+                $rows = $gateway->select(['geographyid' => $row['parentid']])->toArray();
+                $row = $rows[0];
+            }
+
+        }
+        
+        var_dump($parents); die;
+        return $parents;
     }
 }
 
