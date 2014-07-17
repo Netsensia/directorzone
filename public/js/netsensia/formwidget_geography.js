@@ -30,14 +30,12 @@ $(document).ready(function() {
 	
 	function updateElementValue(widgetId)
 	{
-		var topUl = $("ul[data-widgetid='" + widgetId + "']");
-		
+		var topUl = $("ul.treepicker[data-widgetid='" + widgetId + "']").first();
 		var selectedRegions = new Array();
 		
-		$(topUl).children('li').each(function () {
-			var checkImage = $(this).sibilings('.treeitemselect');
+		$(topUl).children().each(function () {
+			var checkImage = $(this).children('.treeitemselect').first();
 			var state = $(checkImage).attr('data-state');
-			alert(state);
 		});
 	}
 	
@@ -83,6 +81,10 @@ $(document).ready(function() {
 	
 	function setParentState(checkImage)
 	{
+		if (checkImage.length == 0) {
+			return;
+		}
+		
 		var numChecked = 0;
 		var numBlank = 0;
 		var numPartial = 0;
@@ -126,7 +128,7 @@ $(document).ready(function() {
 		
 		var parentImage = $(checkImage).parent().parent().siblings('.treeitemselect');
 		
-		if (parentImage) {
+		if (parentImage.length > 0) {
 			setParentState(parentImage);
 		}
 	}
