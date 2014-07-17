@@ -107,7 +107,6 @@ class Geography extends Widget
 
         }
         
-        var_dump($parents); die;
         return $parents;
     }
 }
