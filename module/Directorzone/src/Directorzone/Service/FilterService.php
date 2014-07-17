@@ -16,10 +16,6 @@ class FilterService extends NetsensiaService
 	            'parents' => $this->getRows('SectorParent'),
 	            'children' => $this->getRows('Sector'),
             ],
-            'Geography' => [
-	            'parents' => $geographyParents = $this->getRows('GeographyParent'),
-	            'children' => $this->getRows('Geography'),
-            ],
             'KeyEvent' => [
                 'children' => $this->getRows('KeyEvent'),
             ],
