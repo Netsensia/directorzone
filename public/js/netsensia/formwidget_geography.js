@@ -1,6 +1,11 @@
 $(document).ready(function() {
 	
-	$(document).delegate('.treeexpand', 'click', function () {
+    var STATE_ALL = 0;
+    var STATE_SOME = 1;
+    var STATE_NONE = 2;
+    var STATE_DISABLED = 3;
+    
+	$(document).delegate('img.treeexpand', 'click', function () {
 		$(this).attr('src', '/img/tree/dhxmenu_loader.gif');
 		var isLoaded = $(this).attr('data-loaded');
 		if (isLoaded == "1") {
@@ -15,11 +20,41 @@ $(document).ready(function() {
 		$(this).addClass('treecollapse');
 	});
 	
-	$(document).delegate('.treecollapse', 'click', function () {
+	$(document).delegate('img.treecollapse', 'click', function () {
 		$(this).siblings('ul').css('display', 'none');
 		$(this).addClass('treeexpand');
 		$(this).removeClass('treecollapse');
 		$(this).attr('src', '/img/tree/plus.gif');
+	});
+	
+	$(document).delegate('img.treeitemselect', 'click', function () {
+		
+		var currentState = parseInt($(this).attr('data-state'));
+		
+		if (currentState == STATE_DISABLED) {
+			return;
+		}
+		
+		if (currentState == STATE_ALL || currentState == STATE_SOME) {
+			$(this).attr('data-state', STATE_NONE);
+			$(this).attr('src', '/img/tree/iconUncheckAll.gif');
+			$(this).next().children().each(function () {
+				var img = $(this).children('.treeitemselect').first();
+				$(img).attr('data-state', STATE_ALL);
+				$(img).attr('src', '/img/tree/iconUncheckAll.gif');
+			});
+
+		}
+		
+		if (currentState == STATE_NONE) {
+			$(this).attr('data-state', STATE_ALL);
+			$(this).attr('src', '/img/tree/iconCheckAll.gif');
+			$(this).next().children().each(function () {
+				var img = $(this).children('.treeitemselect').first();
+				$(img).attr('data-state', STATE_ALL);
+				$(img).attr('src', '/img/tree/iconCheckAll.gif');
+			});
+		}
 	});
 	
 	function getTree(el)
@@ -34,8 +69,18 @@ $(document).ready(function() {
 	function loadTree(geographyId, imageClicked)
 	{
 		liParent = $(imageClicked).parent();
-		
 		var widgetId = $(liParent).parent().attr('data-widgetid');
+		var selectorImg = $(imageClicked).siblings('.treeitemselect').first();
+		var checkState = parseInt($(selectorImg).attr('data-state'));
+		var checkImage = '';
+		
+		switch (checkState) {
+			case STATE_ALL: checkImage = 'iconCheckAll.gif'; break;
+			case STATE_SOME: checkImage = 'iconCheckGrey.gif'; break;
+			case STATE_NONE: checkImage = 'iconUncheckAll.gif'; break;
+			case STATE_DISABLED: checkImage = 'iconCheckDis.gif'; break;
+		}
+		
 		url = '/api/geography/children/' + geographyId;
 		$.ajax({
 			url: url,
@@ -59,13 +104,14 @@ $(document).ready(function() {
 					attrs = 
 			            'data-haschildren="' + hasChildren + '" ' +
 			            'data-loaded="0" ' +
-			            'data-state="2" ' +
+			            'data-state="' + checkState + '" ' +
 			            'data-widgetid="' + widgetId + '" ' +
 			            'style="cursor:pointer" ' +
 			            'class="treeitemselect" ' +
 			            'data-geographyid="' + childId + '"';
-			            
-					var checkTag = '<img ' + attrs + ' src="/img/tree/iconUncheckAll.gif">&nbsp;';
+					
+					var checkTag = '<img ' + attrs + ' src="/img/tree/' + checkImage + '">&nbsp;';
+					
 					ul += 
 						 '<li>' +
 						 expandTag +
