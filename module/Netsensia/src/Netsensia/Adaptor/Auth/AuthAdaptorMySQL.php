@@ -28,7 +28,8 @@ class AuthAdaptorMySQL implements AdapterInterface, ServiceLocatorAwareInterface
     public function setCredentials(
         $username,
         $password
-    ) {
+    )
+    {
         $this->username = $username;
         $this->password = $password;
     }

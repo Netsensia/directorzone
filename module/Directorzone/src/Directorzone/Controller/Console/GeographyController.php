@@ -47,12 +47,22 @@ class GeographyController extends NetsensiaActionController
             foreach ($countries as $country) {
                 $this->printPlace(2, $country['name']);
                 
+                $admin1Regions = $geonameTable->select(
+                    function (Select $select) use ($country) {
+                        $select->where([
+                            'fcode' => 'ADM1',
+                            'country' => $country['iso_alpha2'],
+                            ])
+                            ->order('name ASC');
+                    }
+                )->toArray();
+
                 $countryId = $this->insert([
     	            'parentid' => $continentId,
                     'geography' => $country['name'],
                     'level' => 2,
                     'geonameid' => $country['geonameId'],
-                    'haschildren' => true,
+                    'haschildren' => count($admin1Regions) > 0,
                 ]);
                 
                 $admin1Regions = $geonameTable->select(
@@ -66,8 +76,6 @@ class GeographyController extends NetsensiaActionController
                         )->toArray();
                 
                 foreach ($admin1Regions as $admin1Region) {
-                    $admin1Region['haschildren'] = true;
-                    $admin1Id = $this->insertFromGeonameRow($countryId, $admin1Region, 3);
                     
                     $admin2Regions = $geonameTable->select(
                         function (Select $select) use ($admin1Region) {
@@ -79,6 +87,9 @@ class GeographyController extends NetsensiaActionController
                                 ->order('name ASC');
                         }
                     )->toArray();
+                    
+                    $admin1Region['haschildren'] = count($admin2Regions) > 0;
+                    $admin1Id = $this->insertFromGeonameRow($countryId, $admin1Region, 3);
                     
                     foreach ($admin2Regions as $admin2Region) {
                         $admin2Region['haschildren'] = false;

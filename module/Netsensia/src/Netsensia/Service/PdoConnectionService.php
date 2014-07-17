@@ -8,8 +8,21 @@ class PdoConnectionService
 {
     private $db = null;
     
-    ### CONSTRUCTOR
+    /**
+     * @var string
+     */
+    private $dataSourceName;
 
+    /**
+     * @var string
+     */
+    private $dataSourceUsername;
+
+    /**
+     * @var string
+     */
+    private $dataSourcePassword;
+    
     public function __construct(
         $dataSourceName,
         $dataSourceUsername = null,
@@ -50,21 +63,4 @@ class PdoConnectionService
     {
     	return $this->db->lastInsertId();
     }
-
-    ### PRIVATE MEMBERS
-
-    /**
-     * @var string
-     */
-    private $dataSourceName;
-
-    /**
-     * @var string
-     */
-    private $dataSourceUsername;
-
-    /**
-     * @var string
-     */
-    private $dataSourcePassword;
 }

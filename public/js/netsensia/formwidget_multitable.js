@@ -142,11 +142,7 @@ $(document).ready(function() {
 		return false;
 	});
 	
-	$(document).delegate('.widget_multitable_edit', 'click', function() {
-	});
-	
-	$(document).delegate('input[name="form-submit"]', 'click', function(event) {
-		event.preventDefault();
+	$(document).delegate('.select_child', 'change', function(event) {
 		$('.widget_multitable').each(function() {
 
 			var widgetId = $(this).attr('data-widgetid');
@@ -199,7 +195,6 @@ $(document).ready(function() {
 
 			$('#' + widgetId).val(newJson);
 		});
-		$(this).parent().submit();
 		return false;
 	});
 });

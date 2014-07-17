@@ -18,6 +18,7 @@ $(document).ready(function() {
 		}
 		$(this).removeClass('treeexpand');
 		$(this).addClass('treecollapse');
+		
 	});
 	
 	$(document).delegate('img.treecollapse', 'click', function () {
@@ -26,6 +27,19 @@ $(document).ready(function() {
 		$(this).removeClass('treecollapse');
 		$(this).attr('src', '/img/tree/plus.gif');
 	});
+	
+	function updateElementValue(widgetId)
+	{
+		var topUl = $("ul[data-widgetid='" + widgetId + "']");
+		
+		var selectedRegions = new Array();
+		
+		$(topUl).children('li').each(function () {
+			var checkImage = $(this).sibilings('.treeitemselect');
+			var state = $(checkImage).attr('data-state');
+			alert(state);
+		});
+	}
 	
 	$(document).delegate('img.treeitemselect', 'click', function () {
 		
@@ -61,6 +75,10 @@ $(document).ready(function() {
 			
 			setParentState(parentCheckImage);
 		}
+		
+		var widgetId = $(this).parent().parent().attr('data-widgetid');
+		updateElementValue(widgetId);
+
 	});
 	
 	function setParentState(checkImage)
@@ -104,7 +122,13 @@ $(document).ready(function() {
 		}
 		
 		$(checkImage).attr('data-state', state);
-		$(checkImage).attr('src', '/img/tree/' + image);		
+		$(checkImage).attr('src', '/img/tree/' + image);
+		
+		var parentImage = $(checkImage).parent().parent().siblings('.treeitemselect');
+		
+		if (parentImage) {
+			setParentState(parentImage);
+		}
 	}
 	
 	function getTree(el)
