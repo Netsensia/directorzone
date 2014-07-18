@@ -42,7 +42,6 @@ class Geography extends Widget
         }
         
         $this->rowValues = $allRowValues;
-        
         $options->rowValues = $allRowValues;
         
         $numSelected = count($allRowValues);
@@ -64,7 +63,7 @@ class Geography extends Widget
                        'expanded' => true,
                        'haschildren' => true,
                        'loaded' => true,
-                       'items' => $this->populateTree(1, $parentId),
+                       'items' => $this->populateTree(1, $parentId, $globalState),
                     ],
                 ],
         ];
@@ -76,7 +75,7 @@ class Geography extends Widget
         return $this->element;
     }
     
-    private function populateTree($level, $parentId)
+    private function populateTree($level, $parentId, $parentState)
     {
         $return = [];
         
@@ -87,23 +86,55 @@ class Geography extends Widget
         )->toArray();
         
         foreach ($rows as $row) {
-            $node = [
-                'geographyid' => $row['geographyid'],
-                'name' => $row['geography'],
-                'state' => self::STATE_ALL,
-                'loaded' => false,
-                'haschildren' => true,
-                'expanded' => false, // will force a plus icon even though no children yet
-            ];
-            // if anyone has this as a parent, then add items to the node, set expanded as false,
-            // loaded as true, haschildren as true and state as STATE_SOME
-            // otherwise...
-            // find out if there are any children and set haschildren accordingly
+            if ($this->isParentOfUserSelection($row['geographyid'], $level)) {
+                $items = $this->populateTree($level + 1, $row['geographyid'], self::STATE_SOME);
+                
+                $node = [
+                    'geographyid' => $row['geographyid'],
+                    'name' => $row['geography'],
+                    'state' => self::STATE_SOME,
+                    'loaded' => true,
+                    'haschildren' => $this->hasChildren($row['geographyid']),
+                    'expanded' => false,
+                    'items' => $items
+                ];
+            } else {
+                $node = [
+                    'geographyid' => $row['geographyid'],
+                    'name' => $row['geography'],
+                    'state' => 
+                        // no children selected so can't be STATE_SOME - it's all or nothing
+                        $parentState == self::STATE_NONE || $parentState == self::STATE_DISABLED 
+                            ? $parentState 
+                            : self::STATE_ALL,
+                    'loaded' => false,
+                    'haschildren' => $this->hasChildren($row['geographyid']),
+                    'expanded' => false,
+                ];
+            }
         
             $return[] = $node;
         }
         
         return $return;
+    }
+    
+    private function hasChildren($geographyId)
+    {
+        $geographyTable = $this->serviceLocator->get('GeographyTableGateway');
+        $rows = $geographyTable->select(['parentid' => $geographyId])->toArray();
+       
+        return count($rows) > 0;
+    }
+    
+    private function isParentOfUserSelection($geographyId, $level)
+    {
+        foreach ($this->rowValues as $rowValue) {
+            if (isset($rowValue['parents'][$level]) && $rowValue['parents'][$level] == $geographyId) {
+                return true;
+            }
+        }
+        return false;
     }
     
     private function getParents($geographyId)

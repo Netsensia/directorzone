@@ -17,27 +17,35 @@ class Geography extends Widget
         <?php
             $options = json_decode($this->element->getValue());
             $this->elId = $this->element->getAttribute('id');
-            $this->renderTree($options->tree);
+            $this->renderTree($options->tree, true);
         ?>
         
         </div>
         <?php
     }
     
-    private function renderTree($tree)
+    private function renderTree($tree, $isExpanded)
     {
         if (!property_exists($tree, 'items')) {
             return;
         }
-        echo '<ul data-widgetid="' . $this->elId . '" class="treepicker">';
+        
+        if ($isExpanded) {
+            $visibililty = '';
+        } else {
+            $visibililty = 'style="display:none"';
+        }
+        
+        echo '<ul data-widgetid="' . $this->elId . '" class="treepicker" ' . $visibililty . '">';
         foreach ($tree->items as $item) {
             echo '<li>';
-            $this->renderExpandState($item);
+            
+            $isExpanded = $this->renderExpandState($item);
             $this->renderSelectState($item);
             
             echo $item->name;
             
-            $this->renderTree($item);
+            $this->renderTree($item, $isExpanded);
 
             echo '</li>';
         }
@@ -46,12 +54,16 @@ class Geography extends Widget
     
     private function renderExpandState($item)
     {
+        $hasChildren = $item->haschildren;
+        
+        if (!$hasChildren) {
+            return false;
+        }
+        
         if (property_exists($item, 'expanded')) {
             $isExpanded = $item->expanded;
-        } elseif (property_exists($item, 'items')) {
-            $isExpanded = ($item->state == GeographyWidget::STATE_SOME);
         } else {
-            return;
+            $isExpanded = false;
         }
         
         $attributes = 
@@ -62,8 +74,10 @@ class Geography extends Widget
        
         if ($isExpanded) {
             echo '<img ' . $attributes . ' class="treecollapse" src="' . self::TREE_ICON_DIR . 'minus.gif">&nbsp;';
+            return true;
         } else {
             echo '<img ' . $attributes . ' class="treeexpand" src="' . self::TREE_ICON_DIR . 'plus.gif">&nbsp;';
+            return false;
         }
     }
     
