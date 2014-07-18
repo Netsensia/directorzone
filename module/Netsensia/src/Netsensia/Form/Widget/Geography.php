@@ -99,14 +99,20 @@ class Geography extends Widget
                     'items' => $items
                 ];
             } else {
+                if ($parentState == self::STATE_DISABLED) {
+                    $state = self::STATE_DISABLED;
+                } else
+                if ($this->isSelected($row['geographyid'])) {
+                    // not a parent, so...
+                    $state = self::STATE_ALL;
+                } else {
+                    // not a parent, so...
+                    $state = self::STATE_NONE;
+                }
                 $node = [
                     'geographyid' => $row['geographyid'],
                     'name' => $row['geography'],
-                    'state' => 
-                        // no children selected so can't be STATE_SOME - it's all or nothing
-                        $parentState == self::STATE_NONE || $parentState == self::STATE_DISABLED 
-                            ? $parentState 
-                            : self::STATE_ALL,
+                    'state' => $state,
                     'loaded' => false,
                     'haschildren' => $this->hasChildren($row['geographyid']),
                     'expanded' => false,
@@ -117,6 +123,16 @@ class Geography extends Widget
         }
         
         return $return;
+    }
+    
+    private function isSelected($geographyId)
+    {
+        foreach ($this->rowValues as $rowValue) {
+            if ($rowValue['value'] == $geographyId) {
+                return true;
+            }
+        }
+        return false;
     }
     
     private function hasChildren($geographyId)
