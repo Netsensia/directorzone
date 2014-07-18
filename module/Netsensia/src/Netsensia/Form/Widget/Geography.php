@@ -10,6 +10,8 @@ class Geography extends Widget
     const STATE_NONE = 2;
     const STATE_DISABLED = 3;
     
+    private $rowValues;
+    
     public function getPopulatedElement()
     {
         $elementValue = $this->element->getValue();
@@ -39,13 +41,9 @@ class Geography extends Widget
             ];
         }
         
+        $this->rowValues = $allRowValues;
+        
         $options->rowValues = $allRowValues;
-        
-        $continents = [];
-        
-        $geographyTable = $this->serviceLocator->get('GeographyTableGateway');
-        
-        $rows = $geographyTable->select(['level' => 1])->toArray();
         
         $numSelected = count($allRowValues);
         if ($numSelected == 0) {
@@ -54,28 +52,19 @@ class Geography extends Widget
             $globalState = self::STATE_SOME;
         }
         
-        foreach ($rows as $row) {
-            $continents[] = [
-                'geographyid' => $row['geographyid'],
-                'name' => $row['geography'],
-                'state' => self::STATE_ALL,
-                'loaded' => false,
-                'haschildren' => true,
-                'expanded' => false, // will force a plus icon even though no children yet
-            ];
-        }
+        $parentId = -1;
         
         $options->tree = [
             'items' =>
                 [
                     [
-                       'geographyid' => 0,
+                       'geographyid' => $parentId,
                        'name' => 'Global',
                        'state' => $globalState,
                        'expanded' => true,
                        'haschildren' => true,
                        'loaded' => true,
-                       'items' => $continents,
+                       'items' => $this->populateTree(1, $parentId),
                     ],
                 ],
         ];
@@ -85,6 +74,36 @@ class Geography extends Widget
         $this->element->setValue($elementValue);
                 
         return $this->element;
+    }
+    
+    private function populateTree($level, $parentId)
+    {
+        $return = [];
+        
+        $geographyTable = $this->serviceLocator->get('GeographyTableGateway');
+        
+        $rows = $geographyTable->select(
+            ['level' => $level, 'parentid' => $parentId]
+        )->toArray();
+        
+        foreach ($rows as $row) {
+            $node = [
+                'geographyid' => $row['geographyid'],
+                'name' => $row['geography'],
+                'state' => self::STATE_ALL,
+                'loaded' => false,
+                'haschildren' => true,
+                'expanded' => false, // will force a plus icon even though no children yet
+            ];
+            // if anyone has this as a parent, then add items to the node, set expanded as false,
+            // loaded as true, haschildren as true and state as STATE_SOME
+            // otherwise...
+            // find out if there are any children and set haschildren accordingly
+        
+            $return[] = $node;
+        }
+        
+        return $return;
     }
     
     private function getParents($geographyId)
