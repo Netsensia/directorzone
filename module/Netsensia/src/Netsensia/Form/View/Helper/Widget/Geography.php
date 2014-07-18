@@ -38,7 +38,7 @@ class Geography extends Widget
         
         echo '<ul data-widgetid="' . $this->elId . '" class="treepicker" ' . $visibililty . '">';
         foreach ($tree->items as $item) {
-            echo '<li>';
+            echo '<li data-geographyid="' . $item->geographyid . '">';
             
             $isExpanded = $this->renderExpandState($item);
             $this->renderSelectState($item);

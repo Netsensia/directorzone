@@ -31,12 +31,34 @@ $(document).ready(function() {
 	function updateElementValue(widgetId)
 	{
 		var topUl = $("ul.treepicker[data-widgetid='" + widgetId + "']").first();
-		var selectedRegions = new Array();
+		var selectedRegions = getSelectedRegions(topUl);
 		
-		$(topUl).children().each(function () {
+		var widgetData = jQuery.parseJSON( $('#' + widgetId).val() );
+		widgetData.rowValues = selectedRegions;
+		var newJson = JSON.stringify(widgetData);
+		$('#' + widgetId).val(newJson);
+	}
+	
+	function getSelectedRegions(ul)
+	{
+		var regions = new Array();
+		$(ul).children().each(function () {
 			var checkImage = $(this).children('.treeitemselect').first();
 			var state = $(checkImage).attr('data-state');
+			
+			if (state == STATE_ALL) {
+				regions.push($(this).attr('data-geographyid'));
+			} else {
+				var childUl = $(this).children('ul');
+				if (childUl) {
+					childRegions = getSelectedRegions(childUl);
+					childRegions.forEach(function(region) {
+						regions.push(region);
+					});
+				}
+			}
 		});
+		return regions;
 	}
 	
 	$(document).delegate('img.treeitemselect', 'click', function () {
@@ -50,27 +72,12 @@ $(document).ready(function() {
 		var parentCheckImage = $(this).parent().parent().siblings('.treeitemselect').first();
 		
 		if (currentState == STATE_ALL || currentState == STATE_SOME) {
-			$(this).attr('data-state', STATE_NONE);
-			$(this).attr('src', '/img/tree/iconUncheckAll.gif');
-			
-			$(this).next().children().each(function () {
-				var img = $(this).children('.treeitemselect').first();
-				$(img).attr('data-state', STATE_NONE);
-				$(img).attr('src', '/img/tree/iconUncheckAll.gif');
-			});
-
+			setTreeStates($(this), STATE_NONE);
 			setParentState(parentCheckImage);
 		}
 		
 		if (currentState == STATE_NONE) {
-			$(this).attr('data-state', STATE_ALL);
-			$(this).attr('src', '/img/tree/iconCheckAll.gif');
-			$(this).next().children().each(function () {
-				var img = $(this).children('.treeitemselect').first();
-				$(img).attr('data-state', STATE_ALL);
-				$(img).attr('src', '/img/tree/iconCheckAll.gif');
-			});
-			
+			setTreeStates($(this), STATE_ALL);
 			setParentState(parentCheckImage);
 		}
 		
@@ -78,6 +85,28 @@ $(document).ready(function() {
 		updateElementValue(widgetId);
 
 	});
+
+	function setTreeStates(treeSelect, state)
+	{
+		$(treeSelect).attr('data-state', state);
+		
+		var imageFile = '';
+		switch (state)
+		{
+			case STATE_ALL : imageFile = 'iconCheckAll.gif'; break;
+			case STATE_SOME : imageFile = 'iconCheckGray.gif'; break;
+			case STATE_NONE : imageFile = 'iconUncheckAll.gif'; break;
+			case STATE_DISABLED : imageFile = 'iconCheckDis.gif'; break;
+		}
+		
+		$(treeSelect).attr('src', '/img/tree/' + imageFile);
+		
+		$(treeSelect).next().children().each(function () {
+			var treeSelect = $(this).children('.treeitemselect').first();
+			setTreeStates(treeSelect, state);
+		});
+
+	}
 	
 	function setParentState(checkImage)
 	{
@@ -190,7 +219,7 @@ $(document).ready(function() {
 					var checkTag = '<img ' + attrs + ' src="/img/tree/' + checkImage + '">&nbsp;';
 					
 					ul += 
-						 '<li>' +
+						 '<li data-geographyid="' + childId + '">' +
 						 expandTag +
 						 checkTag +
 						 name +
