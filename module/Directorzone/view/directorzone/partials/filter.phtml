@@ -1,0 +1,27 @@
+<div class="well well-sm">
+New Filter
+<select id="filtertype">
+<option id="sector">Sector</option>
+<option id="geography">Geography</option>
+<option id="keyevent">Key Event</option>
+<option id="jobarea">Functional Area</option>
+</select>
+<input type="text" id="searchfilter" placeholder="Start typing..." style="width:20em">
+<input type="button" class="button" value="Add filter">
+</div>
+<input type="hidden" name="filters">
+
+<script>
+$(document).ready(function() {
+	$(document).delegate('#searchfilter', 'change', function() {
+		var value = $(this).val();
+		var url = '/ajax/filtersearch/' + value;
+		$.ajax({
+		    url: url,
+		    success: function(data) {
+			    alert(data);
+		    }	
+		});
+	});
+});
+</script>

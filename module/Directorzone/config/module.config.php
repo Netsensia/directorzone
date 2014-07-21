@@ -99,6 +99,20 @@ return array(
                             ),
                         ),
                     ),
+                    'filter-search' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/filter/search/:type/:searchtext',
+                            'constraints' => [
+                            'type' => '[a-zA-Z][a-zA-Z0-9_-]+',
+                            'searchtext' => '[a-zA-Z][a-zA-Z0-9_-]+',
+                            ],
+                            'defaults' => array(
+                                'controller' => 'Directorzone\Controller\Ajax\Filter',
+                                'action' => 'search',
+                            ),
+                        ),
+                    ),
                     'add-comment' => array(
                         'type' => 'segment',
                         'options' => array(

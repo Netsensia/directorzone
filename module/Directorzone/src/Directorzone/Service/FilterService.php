@@ -9,29 +9,45 @@ use Zend\Db\Sql\Expression;
 
 class FilterService extends NetsensiaService
 {
-    public function getFilterJson()
+    private $geographyTable;
+    private $sectorTable;
+    private $jobAreaTable;
+    private $keyEventTable;
+    
+    public function __construct(
+        TableGateway $geographyTable,
+        TableGateway $sectorTable,
+        TableGateway $jobAreaTable,
+        TableGateway $keyEventTable
+    )
     {
-        $filter = [
-	        'Sector' => [
-	            'parents' => $this->getRows('SectorParent'),
-	            'children' => $this->getRows('Sector'),
-            ],
-            'KeyEvent' => [
-                'children' => $this->getRows('KeyEvent'),
-            ],
-            'JobArea' => [
-                'children' => $this->getRows('JobArea'),
-            ],
-        ];
-        
-        return $filter;
+        $this->geographyTable = $geographyTable;
+        $this->sectorTable = $sectorTable;
+        $this->jobAreaTable = $jobAreaTable;
+        $this->keyEventTable = $keyEventTable;
     }
     
-    private function getRows($table)
+    public function search($type, $text)
     {
-        $gateway = $this->getServiceLocator()->get($table . 'TableGateway');
-        $rowset = $gateway->select();
+        switch ($type) {
+        	case 'geography' :
+        	case 'sector' :
+        	case 'jobarea' :
+        	case 'keyevent' :
+        	    break;
+        	default:
+        	    throw new \Exception('Invalid filter search request');
+        }
         
-        return $rowset->toArray();
+        $table = $this->{$type . 'Table'};
+        $column = $type;
+        
+        $result = $table->select(function(Select $select) use ($column, $text) {
+            $select
+                ->columns([$column . 'id', $column])
+                ->where->like($column, '%' . $text . '%');
+        })->toArray();
+        
+        return $result;
     }
 }

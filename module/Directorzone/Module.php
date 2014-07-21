@@ -83,6 +83,12 @@ class Module
                             $cm->getServiceLocator()->get('ElasticService')
                         );
                     },
+                'Directorzone\Controller\Ajax\Filter' =>
+                    function (ControllerManager $cm) {
+                        return new \Directorzone\Controller\Ajax\FilterController(
+                            $cm->getServiceLocator()->get('FilterService')
+                        );
+                    },
                 'Directory' =>
                     function (ControllerManager $cm) {
                         return new \Directorzone\Controller\Directory\DirectoryController(
@@ -329,7 +335,12 @@ class Module
                 return $instance;
             },
             'FilterService' => function ($sm) {
-                $instance = new FilterService();
+                $instance = new FilterService(
+                    $sm->get('GeographyTableGateway'),
+                    $sm->get('SectorTableGateway'),
+                    $sm->get('JobAreaTableGateway'),
+                    $sm->get('KeyEventTableGateway')
+                );
                 return $instance;
             },
             'TalentPoolService' => function ($sm) {

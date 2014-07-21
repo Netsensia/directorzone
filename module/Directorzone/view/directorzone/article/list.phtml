@@ -21,15 +21,7 @@
 </div>
 <?php endif; ?>
 
-<div class="well well-sm">
-Add Filter
-<select id="filtertype">
-<option id="sector">Sector</option>
-<option id="geography">Geography</option>
-<option id="keyevent">Key Event</option>
-<option id="jobarea">Functional Area</option>
-</select>
-</div>
+<?php echo $this->partial('filter.phtml'); ?>
 
 <table id="articles" data-link="row" class="rowlink table table-striped table-bordered table-hover">
 <tr>
