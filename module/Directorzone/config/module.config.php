@@ -104,8 +104,8 @@ return array(
                         'options' => array(
                             'route' => '/filter/search/:type/:searchtext',
                             'constraints' => [
-                            'type' => '[a-zA-Z][a-zA-Z0-9_-]+',
-                            'searchtext' => '[a-zA-Z][a-zA-Z0-9_-]+',
+                            'type' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            'searchtext' => '[a-zA-Z][a-zA-Z0-9_-]*',
                             ],
                             'defaults' => array(
                                 'controller' => 'Directorzone\Controller\Ajax\Filter',

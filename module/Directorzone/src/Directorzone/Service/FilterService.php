@@ -11,20 +11,20 @@ class FilterService extends NetsensiaService
 {
     private $geographyTable;
     private $sectorTable;
-    private $jobAreaTable;
-    private $keyEventTable;
+    private $jobareaTable;
+    private $keyeventTable;
 
     public function __construct(
         TableGateway $geographyTable,
         TableGateway $sectorTable,
-        TableGateway $jobAreaTable,
-        TableGateway $keyEventTable
+        TableGateway $jobareaTable,
+        TableGateway $keyeventTable
     )
     {
         $this->geographyTable = $geographyTable;
         $this->sectorTable = $sectorTable;
-        $this->jobAreaTable = $jobAreaTable;
-        $this->keyEventTable = $keyEventTable;
+        $this->jobareaTable = $jobareaTable;
+        $this->keyeventTable = $keyeventTable;
     }
 
     public function getFilterJson()
@@ -71,9 +71,18 @@ class FilterService extends NetsensiaService
         $result = $table->select(function(Select $select) use ($column, $text) {
             $select
             ->columns([$column . 'id', $column])
+            ->limit(20)
             ->where->like($column, '%' . $text . '%');
         })->toArray();
+        
+        $return = [];
+        foreach ($result as $row) {
+            $return[] = [
+	            'value' => $row[$column . 'id'],
+	            'label' => $row[$column],
+            ];
+        }
 
-        return $result;
+        return $return;
     }
 }

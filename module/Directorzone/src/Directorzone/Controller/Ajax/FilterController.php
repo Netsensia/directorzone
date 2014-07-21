@@ -34,7 +34,7 @@ class FilterController extends NetsensiaActionController
             $filterType,
             $searchText
         );
-                
+        
         return new JsonModel(
             $results
         );
