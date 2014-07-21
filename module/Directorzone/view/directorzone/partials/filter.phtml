@@ -9,10 +9,14 @@ New Filter
 <input type="text" id="searchfilter" placeholder="Start typing..." style="width:20em">
 <input type="button" class="button" value="Add filter">
 </div>
-<input type="hidden" name="filters">
+<input type="hidden" id="filters" value='[{}]'>
 
 <script>
 $(document).ready(function() {
+	function updateTags()
+	{
+	}
+	
     $('#searchfilter').autocomplete({
         source: function(request, response) {
 
@@ -22,13 +26,19 @@ $(document).ready(function() {
             $.ajax({
                 url: url,
                 success: function(data) {
-                    data.forEach(function(item) {
-                        item.value = item.label;
-                    });
                     response(data);
                 }
             });
+        },
+        select: function(event, ui) {
+        	$('#searchfilter').val(ui.item.label);
+        	var json = $('#filters').val();
+        	var currentFilters = jQuery.parseJSON(json);
+        	currentFilters.push(ui.item);
+        	$('#filters').val(JSON.stringify(currentFilters));
+        	updateTags();
+        	event.preventDefault();
         }
     });
-	});
+});
 </script>
