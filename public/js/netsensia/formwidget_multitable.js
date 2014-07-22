@@ -68,7 +68,7 @@ $(document).ready(function() {
 			}
 		});
 		
-		$(childSelectElement).css('display', 'initial');
+		$(childSelectElement).css('display', 'inline-block');
 	}
 	
 	$(document).delegate('.select_parent', 'change', function() {
