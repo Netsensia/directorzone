@@ -324,6 +324,26 @@ return array(
                    ),
                 ),
             ),
+            'anonymous' => array(
+                'type' => 'literal',
+                'options' => array(
+                    'route'    => '/anonymous',
+                    'defaults' => array(
+                        'controller' => 'Directory',
+                        'action'     => 'anonymous',
+                    ),
+                ),
+            ),
+            'public' => array(
+                'type' => 'literal',
+                'options' => array(
+                    'route'    => '/public',
+                    'defaults' => array(
+                        'controller' => 'Directory',
+                        'action'     => 'public',
+                    ),
+                ),
+            ),
             'directories' => array(
                 'type' => 'literal',
                 'options' => array(
