@@ -159,18 +159,21 @@ class Geography extends Widget
         $gateway = $this->serviceLocator->get('GeographyTableGateway');
         
         $rows = $gateway->select(['geographyid' => $geographyId])->toArray();
-        $row = $rows[0];
-        $level = $row['level'];
         
-        while ($level > 0) {
-            $level --;
-            $parents[$level] = $row['parentid'];
+        if (isset($rows[0])) {
+            $row = $rows[0];
+            $level = $row['level'];
             
-            if ($level > 0) {
-                $rows = $gateway->select(['geographyid' => $row['parentid']])->toArray();
-                $row = $rows[0];
+            while ($level > 0) {
+                $level --;
+                $parents[$level] = $row['parentid'];
+                
+                if ($level > 0) {
+                    $rows = $gateway->select(['geographyid' => $row['parentid']])->toArray();
+                    $row = $rows[0];
+                }
+    
             }
-
         }
         
         return $parents;
