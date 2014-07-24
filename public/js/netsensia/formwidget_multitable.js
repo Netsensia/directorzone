@@ -142,7 +142,7 @@ $(document).ready(function() {
 		return false;
 	});
 	
-	$(document).delegate('.select_child', 'change', function(event) {
+	$(document).delegate('.select_node', 'change', function(event) {
 		$('.widget_multitable').each(function() {
 
 			var widgetId = $(this).attr('data-widgetid');

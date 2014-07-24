@@ -5,6 +5,10 @@ $(document).ready(function() {
     var STATE_NONE = 2;
     var STATE_DISABLED = 3;
     
+    $("ul.treepicker").each(function() {
+    	updateElementValue($(this).attr('data-widgetid'));
+    });
+    
 	$(document).delegate('img.treeexpand', 'click', function () {
 		$(this).attr('src', '/img/tree/dhxmenu_loader.gif');
 		var isLoaded = $(this).attr('data-loaded');

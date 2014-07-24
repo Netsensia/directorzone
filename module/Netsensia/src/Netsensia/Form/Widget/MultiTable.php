@@ -53,6 +53,9 @@ class MultiTable extends Widget
         
         $this->element->setValue($elementValue);
         
+        if ($options->jointablemodel == 'ArticleKeyEvent') {
+            //var_dump($allRowValues); die;
+        }
         return $this->element;
     }
 }

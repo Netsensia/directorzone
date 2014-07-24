@@ -89,7 +89,7 @@ class MultiTable extends Widget
             	    }
             	    
             	    $select = new Select('widgetignore[]');
-            	    $select->setAttribute('class', 'netsensia_form_widget' . ($isTiered ? ' select_child select_node' : ''));
+            	    $select->setAttribute('class', 'netsensia_form_widget select_node' . ($isTiered ? ' select_child' : ''));
             	    $select->setAttribute('data-tier', 1);
             	    $optionsArray = $this->form->getOptionsArray($field->name);
             	    $optionsArray = array_merge(
