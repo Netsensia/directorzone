@@ -4,10 +4,13 @@ $(document).ready(function() {
 	$('.columnHeading').click(function() {
 		
 		var newColumnNumber = $(this).attr('data-column-number');
-		var currentColumnNumber = $('#columnSorter').attr('data-sort-by-column')
 		
-		if (Math.abs(currentColumnNumber) == Math.abs(newColumnNumber)) {
-			newColumnNumber = currentColumnNumber * -1;
+		if (!$(this).hasClass('fixed-order')) {
+			var currentColumnNumber = $('#columnSorter').attr('data-sort-by-column')
+			
+			if (Math.abs(currentColumnNumber) == Math.abs(newColumnNumber)) {
+				newColumnNumber = currentColumnNumber * -1;
+			}
 		}
 		
 		$('#columnSorter').attr('data-sort-by-column', newColumnNumber);
@@ -53,7 +56,6 @@ function netsensia_pager_loadTable(page, size, order, id, route, rowFunc)
 	}
 
 	url = route + joinChar + 'order=' + order + '&page=' + page + '&size=' + size;
-
 	$.ajax({
 		url: url
 	}).done(function(data) {
