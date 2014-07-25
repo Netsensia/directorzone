@@ -61,14 +61,12 @@
                                 'events-calendar' => $this->translate("Events"),
                             ];
                             if ($this->identity()) {
-                                $moreurls = array(
-                                    'contact' => $this->translate("Contact")
-                                );
+                                $moreurls = [];
+                               //
                             } else {
                                 if ($this->config()['netsensia']['enable-users']) {
                                     $moreurls = array(
                                         'home' => $this->translate("Home"),
-                                        'contact' => $this->translate("Contact"),
                                     );
                                 } else {
                                     $moreurls = array(
@@ -84,19 +82,14 @@
                                 class="<?php echo ($this->url() == $this->url($url) ? "active" : ""); ?>"><a
                                 href="<?php echo $this->url($url); ?>"><?php echo $this->translate($name); ?></a></li>
                         <?php } ?>
-                            <?php if ($user = $this->identity()) { ?>
-                            <li><a href="<?php echo $this->url('myaccount') ?>"><?php echo $this->translate('Account') ?></a></li>
-                            
-                            <li><a href="<?php echo $this->url('logout') ?>"><?php echo $this->translate('Logout') ?></a></li>
-                            
-                        <?php } ?>
+                           <li><a style="color:#b94a48"><?php echo $this->translate('Anonymous') ?></a></li>
+                           <li><a style="color:#3a87ad"><?php echo $this->translate('Public') ?></a></li>
+
                     </ul>
                     <?php if ($this->config()['netsensia']['enable-users']) { ?>
                     <?php if (!$this->identity()) { ?>
                         <ul class="nav navbar-nav pull-right">
-                            <li class="dropdown"><a href="#" id="drop3" role="button"
-                                class="dropdown-toggle" data-toggle="dropdown"><?php echo $this->translate('Sign In / Sign Up'); ?><b
-                                    class="caret"></b></a>
+                            <li class="dropdown"><a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown"><?php echo $this->translate('Sign In / Sign Up'); ?><b class="caret"></b></a>
                                 <ul class="dropdown-menu" id="login-dropdown" aria-labelledby="drop3">
                                     <li>
                                         <form method="post" action="<?php echo $this->url('login'); ?>">
@@ -119,9 +112,20 @@
                             
                         </ul>
                         <?php } else { ?>
+                         <?php $user = $this->identity(); ?>
                         <ul class="nav navbar-nav pull-right">
-                        <li><a><strong><?php echo $this->escapeHtml($user->getName()); ?></strong></a></li>
+                            <li class="dropdown"><a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown"><?php echo $this->escapeHtml($user->getName()); ?><b class="caret"></b></a>
+                                <ul class="dropdown-menu" id="login-dropdown" aria-labelledby="drop3">
+                                    <li><a href="<?php echo $this->url('myaccount') ?>"><?php echo $this->translate('Account') ?></a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="<?php echo $this->url('logout') ?>"><?php echo $this->translate('Logout') ?></a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="<?php echo $this->url('contact') ?>"><?php echo $this->translate('Contact Us') ?></a></li>
+                                   </ul>
+                            </li>
+                            
                         </ul>
+
                         <?php } ?>
                         <?php } ?>
                         <div class="visible-lg">
