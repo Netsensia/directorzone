@@ -25,7 +25,7 @@ class IndexController extends NetsensiaActionController
         $limit = 4;
         
         foreach ($types as $type) {
-            $mediaItems[$type] = $this->articleService->getArticlesByType($type, $statuses, $limit, 0, 1);
+            $mediaItems[$type] = $this->articleService->getArticlesByType($type, $statuses, $limit, 0, -2);
         }
         
         return [
