@@ -8,8 +8,9 @@
 
 			<div class="row clearfix">
 				<div class="col-md-3 column">
+					<?php $this->NewsPanel('News', $this->mediaItems[2], 'panel-info'); ?>
 					<?php $this->NewsPanel('Movers', $this->mediaItems[8], 'panel-info'); ?>
-					<?php $this->NewsPanel('Offered', $this->mediaItems[4], 'panel-danger'); ?>
+					<?php $this->NewsPanel('Member Articles', $this->mediaItems[1], 'panel-info'); ?>
 				</div>
 				<div class="col-md-6 column">
 					<ul class="nav nav-tabs">
@@ -45,17 +46,17 @@
                     </ul>
 				</div>
 				<div class="col-md-3 column">
-					<?php $this->NewsPanel('News', $this->mediaItems[2], 'panel-info'); ?>
+					<?php $this->NewsPanel('Offered', $this->mediaItems[4], 'panel-danger'); ?>
 					<?php $this->NewsPanel('Wanted', $this->mediaItems[3], 'panel-danger'); ?>
-
+					<?php $this->NewsPanel('Meeting Requests', $this->mediaItems[6], 'panel-danger'); ?>
 				</div>
 			</div>
 			<div class="row clearfix">
 				<div class="col-md-6 column">
-					<?php $this->NewsPanel('Member Articles', $this->mediaItems[1], 'panel-info'); ?>
+				    <?php $this->NewsPanel('Events', $this->mediaItems[5], 'panel-info'); ?>
 				</div>
 				<div class="col-md-6 column">
-					<?php $this->NewsPanel('Events', $this->mediaItems[5], 'panel-info'); ?>
+					<?php $this->NewsPanel('Jobs', $this->mediaItems[7], 'panel-danger'); ?>
 				</div>
 			</div>
 		</div>

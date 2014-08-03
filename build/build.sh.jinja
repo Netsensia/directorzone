@@ -115,6 +115,11 @@ echo "Running Selenium test on live server"
 runSelenium $LIVE_URL
 
 #################################################################################
-echo "Done"
+echo "Removing test articles"
 #################################################################################
 
+ssh -i /var/lib/jenkins/.ssh/id_rsa jenkins@$DOMAIN "mysql -uroot directorzone_zf2 -e 'delete from article where title like \"This is a test%\";'"
+
+#################################################################################
+echo "Done"
+#################################################################################
