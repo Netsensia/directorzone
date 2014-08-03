@@ -109,6 +109,7 @@ class ArticleService extends NetsensiaService
             $start = 1;
         }
         
+
         $rowset = $this->articleTable->select(
             function (Select $select) use ($typeArray, $statusArray, $start, $end, $order, $userId) {
 
@@ -132,8 +133,8 @@ class ArticleService extends NetsensiaService
                            ['image', 'title', 'content', 'publishdate', 'articleid', 'startdate', 'enddate']
                        )
                        ->offset($start - 1)
-                       ->limit(1 + ($end - $start))
-                       ->order($sortColumns[abs($order)-1] . ' ' . ($order < 0 ? 'DESC' : 'ASC'));
+                       ->order($sortColumns[abs($order)-1] . ' ' . ($order < 0 ? 'DESC' : 'ASC'))
+                       ->limit(1 + ($end - $start));
             }
         );
         
