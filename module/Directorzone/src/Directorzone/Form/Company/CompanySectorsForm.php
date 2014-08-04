@@ -15,9 +15,25 @@ class CompanySectorsForm extends NetsensiaForm
         $this->setFieldPrefix('account-contact-');
         $this->setDefaultIcon('user');
         
-        $this->addSelect([
-            'name' => 'companytype',
-            'label' => 'Company Type',
+        $this->addMultiTable([
+            'groupname' => 'Sectors',
+            'jointablemodel' => 'CompanySector',
+            'jointablekeycolumn' => 'companydirectoryid',
+            'fields' => [
+            ['type' => 'select', 'subtype' => 'tiered', 'name' => 'sector', 'label' => 'Please select one or more sectors'],
+            ],
+        ]);
+        
+        $this->addText(['name' => 'exportpercent', 'label' => 'Exports (% of revenues)']);
+        
+        $this->addGeographyPicker([
+            'jointablemodel' => 'CompanyImportMarket',
+            'label' => 'Import Markets',
+        ]);
+        
+        $this->addGeographyPicker([
+            'jointablemodel' => 'CompanyExportMarket',
+            'label' => 'Export Markets',
         ]);
         
         $this->addSubmit('Submit');

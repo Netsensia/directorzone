@@ -258,3 +258,7 @@ ul.treepicker {
 	list-style-type: none;
 }
 
+input#account-contact-exportpercent {
+	width:4em;
+}
+

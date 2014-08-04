@@ -189,6 +189,9 @@ class Module
             'UserWhosWhoSector',
             'UserTargetRole',
             'ArticleJobArea',
+            'CompanySector',
+            'CompanyImportMarket',
+            'CompanyExportMarket',
         ];
         
         $tableGateways = array_merge(
