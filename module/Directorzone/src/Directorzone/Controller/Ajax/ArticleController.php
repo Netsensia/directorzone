@@ -50,7 +50,7 @@ class ArticleController extends NetsensiaActionController
         $events = [];
         
         $results = $this->articleService->getArticlesByType(
-            [5],
+            [5,6],
             [2],
             1,
             100

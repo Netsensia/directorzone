@@ -102,7 +102,7 @@ class ArticleService extends NetsensiaService
         }
     }
     
-    public function getArticlesByType($typeArray, $statusArray, $start, $end = 0, $order, $userId = null)
+    public function getArticlesByType($typeArray, $statusArray, $start, $end = 0, $order = 1, $userId = null)
     {
         if ($end == 0) {
             $end = $start;

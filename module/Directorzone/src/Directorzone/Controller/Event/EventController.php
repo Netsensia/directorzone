@@ -10,5 +10,4 @@ class EventController extends NetsensiaActionController
     public function calendarAction()
     {
     }
-
 }
