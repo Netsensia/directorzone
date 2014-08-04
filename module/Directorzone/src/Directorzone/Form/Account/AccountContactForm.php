@@ -18,6 +18,10 @@ class AccountContactForm extends NetsensiaForm
         $this->addText('email');
         $this->addText('alternative-email');
         
+        $this->addText('telephone');
+        $this->addText('mobile');
+        $this->addText('fax');
+        
         $this->addAddress('addressid');
         
         $this->addSubmit('Submit');
