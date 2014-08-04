@@ -38,8 +38,14 @@ $(function() {
 
     var display;
 
+    setVisibilities($("#account-publish-articlecategory"));
+    
     $("#account-publish-articlecategory").change(function() {
-        var val = $(this).val();
+        setVisibilities($(this));
+    });
+
+    function setVisibilities(obj) {
+    	var val = obj.val();
 
         if (val == 5 || val == 6) {
             display = 'block';
@@ -49,7 +55,7 @@ $(function() {
         dateVisibility(display);
         locationVisibility(display);
         isAnonymousVisibility(val == 7 ? 'block' : 'none');
-    });
+    }
 });
 
 function isAnonymousVisibility(display)
