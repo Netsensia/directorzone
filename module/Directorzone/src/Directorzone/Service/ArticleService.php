@@ -9,6 +9,16 @@ use Netsensia\Service\CommentsService;
 
 class ArticleService extends NetsensiaService
 {
+	const ARTICLETYPE_BLOG = 1;
+	const ARTICLETYPE_NEWS = 2;
+	const ARTICLETYPE_WANTED = 3;
+	const ARTICLETYPE_OFFERED = 4;
+	const ARTICLETYPE_EVENT = 5;
+	const ARTICLETYPE_MEETING = 6;
+	const ARTICLETYPE_JOB = 7;
+	const ARTICLETYPE_MOVERS = 8;
+	const ARTICLETYPE_KNOWLEDGE = 9;
+	
     private $commentsService;
     
     /**
@@ -50,7 +60,7 @@ class ArticleService extends NetsensiaService
             function (Select $select) use ($articleId) {
         
                 $select->columns(
-                    ['title', 'publishdate', 'articleid', 'content', 'image', 'userid']
+                    ['title', 'publishdate', 'articleid', 'content', 'image', 'userid', 'startdate', 'enddate', 'location', 'articlecategoryid']
                 )
                 ->join('user', 'article.userid = user.userid', ['pseudonym'])
                 ->where(['articleid' => $articleId]);

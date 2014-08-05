@@ -46,6 +46,8 @@
       <div>
         Published by <?php echo $this->pseudonym; ?>
       </div>
+      <?php $this->ArticleFields(); ?>
+
       <p>
       <div class="col-xs-6 col-md-2" style="padding:0.5em">
             <img class="img-thumbnail" src="<?php echo $this->image; ?>">
@@ -56,7 +58,7 @@
       </p>
     </div>
   
-  <?php echo $this->ArticleComments($this->comments, $addCommentLink); ?>
+  <?php  $this->ArticleComments($this->comments, $addCommentLink); ?>
 
 </body>
 

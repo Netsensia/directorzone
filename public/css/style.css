@@ -262,3 +262,10 @@ input#account-contact-exportpercent {
 	width:4em;
 }
 
+div.articlekeyfacts ul {
+	width:25em;
+}
+
+div.articlekeyfacts span {
+	min-width:10em;
+}
