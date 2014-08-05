@@ -13,7 +13,6 @@ class ArticleFields extends AbstractHelper
     			return;
     	}
         
-    	echo '<h2>Key Facts</h2>';
     	echo '<div class="articlekeyfacts">';
     	echo '<ul class="list-group">';
     	echo('<li class="list-group-item">Location<span class="badge">' . $this->view->location . '</span></li>');
