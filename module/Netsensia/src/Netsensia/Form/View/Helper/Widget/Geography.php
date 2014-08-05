@@ -13,7 +13,7 @@ class Geography extends Widget
         $options = json_decode($this->element->getValue());
         
         ?>
-        <table><caption style="white-space:nowrap"><?php echo $options->label; ?></caption></table>
+        <table><caption style="white-space:nowrap"><?php echo (property_exists($options, 'label') ? $options->label : 'Regions'); ?></caption></table>
         <div id="geographytree_<?php echo uniqid(); ?>">
         
         <?php

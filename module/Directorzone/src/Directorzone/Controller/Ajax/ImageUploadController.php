@@ -27,6 +27,10 @@ class ImageUploadController extends NetsensiaActionController
     
     public function imageUploadAction()
     {
+        $this->getServiceLocator()->get('Application')->getEventManager()->attach(\Zend\Mvc\MvcEvent::EVENT_RENDER, function($event){
+            $event->getResponse()->getHeaders()->addHeaderLine('Content-Type', 'text/plain');
+        }, -10000);
+        
         try {
             if ($_FILES && is_array($_FILES) && count($_FILES) > 0) {
                 $fieldIds = array_keys($_FILES);
