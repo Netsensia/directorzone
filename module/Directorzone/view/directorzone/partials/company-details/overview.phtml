@@ -1,0 +1,181 @@
+<div class="row">
+	<div class="col-md-4">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title">Address</h3>
+			</div>
+			<div class="panel-body">
+            <?php
+            echo $this->addressline1 . '<br>';
+            echo trim(
+                $this->addressline2) == '' ? '' : ($this->addressline2 . '<br>');
+            echo trim(
+                $this->addressline3) == '' ? '' : ($this->addressline3 . '<br>');
+            echo trim(
+                $this->addressline4) == '' ? '' : ($this->addressline4 . '<br>');
+            echo trim(
+                $this->addressline5) == '' ? '' : ($this->addressline5 . '<br>');
+            echo trim(
+                $this->town) == '' ? '' : ($this->town . '<br>');
+            echo trim(
+                $this->county) == '' ? '' : ($this->county . '<br>');
+            echo trim(
+                $this->country) == '' ? '' : ($this->country . '<br>');
+            echo $this->postcode;
+            ?>
+            </div>
+		</div>
+
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title">Key Data</h3>
+			</div>
+			<div class="panel-body">
+				<table class="table">
+					<tr>
+						<td>Sectors</td>
+						<td><?php
+    echo trim(
+        $this->siccode1) == '' ? '' : ($this->siccode1 . '<br>');
+    echo trim(
+        $this->siccode2) == '' ? '' : ($this->siccode2 . '<br>');
+    echo trim(
+        $this->siccode3) == '' ? '' : ($this->siccode3 . '<br>');
+    echo trim(
+        $this->siccode4) == '' ? '' : ($this->siccode4 . '<br>');
+    ?></td>
+					</tr>
+					<tr>
+						<td>Category</td>
+						<td><?php echo $this->category; ?></td>
+					</tr>
+					<tr>
+						<td>Incorporated</td>
+						<td><?php echo $this->incorporationdate; ?></td>
+					</tr>
+					<tr>
+						<td>Status</td>
+						<td><?php echo $this->detailstatus; ?></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title">Officers</h3>
+			</div>
+			<div class="panel-body">
+				<table id="company-officers" class="table">
+              <?php if (isset($this->officers)) : ?>
+              <?php $officerCount = 0; ?>
+              <?php foreach ($this->officers as $officer) : ?>
+              <tr>
+						<td><a id="officer-id-<?php echo ++$officerCount ?>" href="/directories/people/<?php echo $officer['officerid']; ?>"><?php echo $officer['forename'] . ' ' . $officer['surname']; ?></a></td>
+						<td><?php echo $officer['appointmenttype']; ?></td>
+					</tr>
+              <?php endforeach; ?>
+              <?php endif; ?>
+            </table>
+			</div>
+		</div>
+
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title">Related Companies</h3>
+			</div>
+			<div class="panel-body">
+				<table class="table">
+              <?php foreach ($this->relatedCompanies as $relatedCompany) : ?>
+              <tr>
+						<td><?php echo $relatedCompany['name']; ?></td>
+						<td><?php echo $relatedCompany['reason']; ?></td>
+					</tr>
+              <?php endforeach; ?>
+            </table>
+			</div>
+		</div>
+
+
+
+	</div>
+	<div class="col-md-8">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title">Business Description</h3>
+			</div>
+			<div class="panel-body">
+            <?php
+            echo $this->businessdescription;
+            ?>
+            </div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<h3 class="panel-title">News Feed</h3>
+					</div>
+					<div class="panel-body">
+						<table class="table">
+                    <?php
+                    foreach ($this->bing as $bingResult) {
+                        ?>
+                        <tr>
+								<td>
+									<h5>
+										<a href="<?php echo $bingResult['Url']; ?>"><?php echo $bingResult['Title']; ?></a>
+									</h5>
+									<div style="font-size: 0.8em; margin-bottom: 5px;">
+                                    <?php
+                        $timestamp = strtotime(
+                            $bingResult['Date']);
+                        $bingResult['Date'] = date(
+                            'g:ia \o\n l jS F Y', 
+                            $timestamp);
+                        echo $bingResult['Date'];
+                        ?>
+                                </div>
+                                <?php echo $bingResult['Description']; ?>
+                            </td>
+							</tr>
+
+                    <?php
+                    }
+                    ?>
+                    </table>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+
+
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<h3 class="panel-title">Twitter Feed</h3>
+					</div>
+					<div class="panel-body">
+						<table class="table">
+                    <?php
+                    foreach ($this->tweets as $tweet) {
+                        ?>
+                        <tr>
+								<td><img src="<?php echo $tweet['userimage']; ?>"></td>
+								<td>
+                                <?php echo $tweet['text']; ?>
+                            </td>
+							</tr>
+
+                    <?php
+                    }
+                    ?>
+                    </table>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>

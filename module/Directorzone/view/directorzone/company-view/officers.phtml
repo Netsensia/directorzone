@@ -1,0 +1,10 @@
+
+<?php echo $this->partial('company-nav.phtml'); ?>
+
+<?php 
+
+    echo $this->BootstrapForm(
+        $this->form,
+        'Company Officers',
+        $this->url(null, ['id'=>$this->companyDetails['companydirectoryid']] )
+    );

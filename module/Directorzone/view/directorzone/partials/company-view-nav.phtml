@@ -1,0 +1,29 @@
+<ul class="nav nav-pills">
+<?php 
+
+$routes = [
+   'directories/company-directory/company-details/company-overview' => 'Overview',
+   'directories/company-directory/company-details/company-contact' => 'Contact',
+   'directories/company-directory/company-details/company-financials' => 'Metrics / Data',
+   'directories/company-directory/company-details/company-officers' => 'Officers',
+   'directories/company-directory/company-details/company-relationships' => 'Relationships',
+   'directories/company-directory/company-details/company-sectors' => 'Markets',
+   'directories/company-directory/company-details/company-feeds' => 'Feeds',
+   'directories/company-directory/company-details/company-owners' => 'Admin Owners',
+];
+
+foreach ($routes as $route => $text) {
+?>
+    <li class="<?php echo ($this->url() == $this->url($route) ? 'active' : ''); ?>">
+        <a href="<?php echo $this->url($route, ['id'=>$this->companyDetails['companydirectoryid']]); ?>">
+            <?php echo $text; ?>
+        </a>
+    </li>
+<?php
+}
+
+?>
+</ul>
+
+<h3><?php echo $this->companyDetails['name']; ?></h3>
+<h5><a href="/directories/company/<?php echo $this->companyDetails['companydirectoryid']; ?>">View company profile page</a></h5>

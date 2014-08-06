@@ -15,11 +15,6 @@ class CompanyOfficersForm extends NetsensiaForm
         $this->setFieldPrefix('account-contact-');
         $this->setDefaultIcon('user');
         
-        $this->addText('email');
-        $this->addText('alternative-email');
-        
-        $this->addAddress('addressid');
-        
         $this->addSubmit('Submit');
         
         parent::prepare();
