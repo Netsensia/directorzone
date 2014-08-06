@@ -2,21 +2,30 @@
 <div class="col-md-12">
     <table class="table" id="currentdirectors">
     <caption>Current Directors</caption>
-    <?php if (isset($this->officers)) : ?>
-              <?php $officerCount = 0; ?>
-              <tr><th>Officer Name</th><th>Role</th></tr>
-              <?php foreach ($this->officers as $officer) : ?>
-              <tr>
-						<td><a id="officer-id-<?php echo ++$officerCount ?>" href="/directories/people/<?php echo $officer['officerid']; ?>"><?php echo $officer['forename'] . ' ' . $officer['surname']; ?></a></td>
-						<td><?php echo $officer['appointmenttype']; ?></td>
-					</tr>
-              <?php endforeach; ?>
-              <?php endif; ?>
+        <?php renderOfficerRows($this->officers); ?>
     </table>
     
     <table class="table" id="pastdirectors">
     <caption>Past Directors</caption>
+        <?php renderOfficerRows($this->pastofficers); ?>
     </table>
     </div>
 </div>
 
+<?php
+
+function renderOfficerRows($officers)
+{
+    $officerCount = 0;
+?>
+      <tr><th>Officer Name</th><th style="width:20%">Role</th><th style="width:10%">Status</th></tr>
+      <?php foreach ($officers as $officer) : ?>
+      <tr>
+    			<td><a id="officer-id-<?php echo ++$officerCount ?>" href="/directories/people/<?php echo $officer['officerid']; ?>"><?php echo $officer['forename'] . ' ' . $officer['surname']; ?></a></td>
+    			<td><?php echo $officer['appointmenttype']; ?></td>
+    			<td><?php echo $officer['appointmentstatus']; ?>
+    			
+    		</tr>
+      <?php endforeach; ?>
+<?php
+}

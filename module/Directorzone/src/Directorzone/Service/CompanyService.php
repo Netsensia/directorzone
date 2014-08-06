@@ -153,7 +153,6 @@ class CompanyService extends NetsensiaService
                 $select->where(
                     [
                         'companyreference' => $companyDetails['reference'],
-                        'appointmentstatus' => 'CURRENT',
                     ]
                 );
             }
@@ -174,15 +173,21 @@ class CompanyService extends NetsensiaService
                     $select->where(
                         [
                         'companyreference' => $companyDetails['reference'],
-                        'appointmentstatus' => 'CURRENT',
                         ]
                     );
                 }
             );
         }
         
+        $companyDetails['officers'] = [];
+        $companyDetails['pastofficers'] = [];
+        
         foreach ($rowset as $row) {
-        	$companyDetails['officers'][] = $row->getArrayCopy();
+            if ($row['appointmentstatus'] == 'CURRENT') {
+        	   $companyDetails['officers'][] = $row->getArrayCopy();
+            } else {
+               $companyDetails['pastofficers'][] = $row->getArrayCopy();
+            }
         }
         
         $companyDetails['relatedCompanies'] = [];
