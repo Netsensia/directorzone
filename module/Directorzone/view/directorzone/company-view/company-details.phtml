@@ -13,7 +13,6 @@
 			<li><a href="#" id="tab-metrics">Metrics</a></li>
 			<li><a href="#" id="tab-relationships">Relationships</a></li>
 			<li><a href="#" id="tab-markets">Markets</a></li>
-			<li><a href="#" id="tab-newsfeeds">News Feeds</a></li>
 
 		</ul>
 	</div>
@@ -26,14 +25,15 @@
         <?php echo $this->partial('company-details/officers.phtml'); ?>
     </div>
     <div class="tab-partial" id="metrics" style="display:none">
+                <?php echo $this->partial('company-details/metrics.phtml'); ?>
+    
     </div>
     <div class="tab-partial" id="relationships" style="display:none">
+            <?php echo $this->partial('company-details/relationships.phtml'); ?>
     </div>
     <div class="tab-partial" id="markets" style="display:none">
+            <?php echo $this->partial('company-details/markets.phtml'); ?>
     </div>
-    <div class="tab-partial" id="newsfeeds" style="display:none">
-    </div>
-    
 </div>
 
 <script>

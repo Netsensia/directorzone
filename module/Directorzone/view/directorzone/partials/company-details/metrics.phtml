@@ -1,0 +1,16 @@
+<div class="row">
+<div class="col-md-12">
+
+				<table class="table">
+				<caption>Metrics &amp; Financials</caption>
+              <?php foreach ($this->relatedCompanies as $relatedCompany) : ?>
+              <tr>
+						<td><?php echo $relatedCompany['name']; ?></td>
+						<td><?php echo $relatedCompany['reason']; ?></td>
+					</tr>
+              <?php endforeach; ?>
+            </table>
+
+</div>
+</div>
+
