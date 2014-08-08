@@ -15,10 +15,16 @@ class CompanyRelationshipsForm extends NetsensiaForm
         $this->setFieldPrefix('account-contact-');
         $this->setDefaultIcon('user');
         
-        $this->addText('email');
-        $this->addText('alternative-email');
-        
-        $this->addAddress('addressid');
+        $this->addMultiTable([
+        		'groupname' => 'Relationships for this company',
+        		'jointablemodel' => 'CompanyRelationship',
+        		'jointablekeycolumn' => 'companydirectoryid',
+        		'fields' => [
+        				['type' => 'select', 'name' => 'relationship', 'label' => 'Relationship Type'],
+        				['type' => 'text', 'name' => 'relatedcompany', 'label' => 'Company Name'],
+        				['type' => 'textarealink', 'name' => 'comment', 'label' => 'Comment'],
+        				],
+        		]);
         
         $this->addSubmit('Submit');
         

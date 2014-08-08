@@ -52,7 +52,8 @@ class MultiTable extends Widget
             $model->setData($updateArray);
             
             $model->create();
-
+//            	var_dump($updateArray); die;
+            
         }
         
     }

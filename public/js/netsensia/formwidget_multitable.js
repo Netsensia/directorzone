@@ -90,6 +90,7 @@ $(document).ready(function() {
 				},
 				success: function(response, newValue) {
 					$(this).attr('data-value', newValue);
+					updateWidgetValues();
 			    }
 			});
 		});
@@ -142,7 +143,8 @@ $(document).ready(function() {
 		return false;
 	});
 	
-	$(document).delegate('.select_node', 'change', function(event) {
+	function updateWidgetValues()
+	{
 		$('.widget_multitable').each(function() {
 
 			var widgetId = $(this).attr('data-widgetid');
@@ -195,7 +197,11 @@ $(document).ready(function() {
 
 			$('#' + widgetId).val(newJson);
 		});
-		return false;
+	}
+	
+	$(document).delegate('.netsensia_form_widget', 'change', function(event) {
+		updateWidgetValues();
 	});
+
 });
 
