@@ -140,6 +140,8 @@ $(document).ready(function() {
 			$(this).parent().parent().remove();
 		}
 		
+		updateWidgetValues();
+		
 		return false;
 	});
 	
