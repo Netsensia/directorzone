@@ -15,6 +15,13 @@ class AccountPersonalForm extends NetsensiaForm
         $this->setFieldPrefix('account-personal-');
         $this->setDefaultIcon('user');
         
+        $this->addSection(['title' => 'Login information', 'description' => '']);
+        $this->addText('email');
+        
+        $this->addPasswordPair();
+        
+        $this->addSection(['title' => 'Personal Information', 'description' => '']);
+        
         $this->addSelectWithInvisibleOther('title');
         
         $this->addText('forenames');

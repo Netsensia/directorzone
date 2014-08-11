@@ -15,10 +15,6 @@ class AccountAccountForm extends NetsensiaForm
         $this->setFieldPrefix('account-account-');
         $this->setDefaultIcon('user');
         
-        $this->addText('email');
-        
-        $this->addPasswordPair();
-        
         $this->addSubmit('Submit');
         
         parent::prepare();
