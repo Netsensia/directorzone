@@ -1,5 +1,6 @@
 <?php echo $this->partial('account-nav.phtml'); ?>
 
+<?php if (strlen(trim($this->footprint)) > 10): ?>
 <div class="container" id="talentpooleditheadline">
 	<div class="row">
 		<div class="col-md-12">
@@ -14,4 +15,5 @@
 		</div>
 	</div>
 </div>
+<?php endif; ?>
 <?php echo $this->BootstrapForm($this->form, 'Talent Pool Profile', $this->url('account-profile')); ?>
