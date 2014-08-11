@@ -119,6 +119,7 @@ echo "Removing test articles"
 #################################################################################
 
 ssh -i /var/lib/jenkins/.ssh/id_rsa jenkins@$DOMAIN "mysql -uroot directorzone_zf2 -e 'delete from article where title like \"This is a test%\";'"
+ssh -i /var/lib/jenkins/.ssh/id_rsa jenkins@$DOMAIN "mysql -uroot directorzone_zf2 -e 'delete from article where title like \"This is test news%\";'"
 
 #################################################################################
 echo "Done"
