@@ -10,3 +10,41 @@
     );
 
 ?>
+
+<script>
+function initAutoCompleteElements()
+{	
+	$('input[type="text"].netsensia_form_widget').each(function() {
+    	//if (!$(this).hasClass('ui-autocomplete-input')) {
+  		  setupAutoCompleteForElement($(this));
+    	//}
+	});
+}
+
+function setupAutoCompleteForElement(el)
+{
+	el.autocomplete({
+        source: function(request, response) {
+
+    		var url = '/ajax/company/search?format=autocomplete&limit=20&name=' + request.term;
+    		
+            $.ajax({
+                url: url,
+                success: function(data) {
+                    response(data);
+                }
+            });
+        },
+        select: function(event, ui) {
+        	$(this).val(ui.item.label);
+        	event.preventDefault();
+        }
+    });
+}
+
+$(document).ready(function() {
+
+	initAutoCompleteElements();
+
+});
+</script>

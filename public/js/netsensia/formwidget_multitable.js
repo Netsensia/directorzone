@@ -115,6 +115,11 @@ $(document).ready(function() {
 							$(this).css('display', 'none');
 						}
 					}
+
+					if ($(this).is(':text')) {
+						$(this).val('');
+					}
+					
 					if ($(this).hasClass('editable')) {
 						$(this).attr('data-value', '');
 						$(this).removeClass('editable-unsaved');
@@ -126,6 +131,10 @@ $(document).ready(function() {
 		}
 	    
 	    setEditableElements(tableEl, 'popup');
+	    
+	    if (typeof initAutoCompleteElements == 'function') { 
+	    	initAutoCompleteElements(); 
+	    }
 	});
 	
 	$(document).delegate('.widget_multitable_deleterow', 'click', function() {

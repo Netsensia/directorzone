@@ -32,15 +32,31 @@ class ElasticService extends NetsensiaService
         $this->articleTableGateway = $articleTableGateway;
     }
     
-    public function searchCompanies($name)
+    public function searchCompanies($name, $limit = 10, $format = '')
     {
-        return $this->search(
+        $results = $this->search(
 	       $name,
             [
                 'index' => 'companies',
                 'type'  => 'company',
-            ]
+            ],
+            $limit
         );  
+        
+        if ($format == 'autocomplete') {
+            $return = [];
+            foreach ($results['hits']['hits'] as $result) {
+                $source = $result['_source'];
+                $return[] = [
+                    'value' => $source['companyid'],
+                    'label' => $source['name'],
+               ];
+            }
+            
+            $results = $return;
+        }
+        
+        return $results;
     }
     
     public function searchArticles($name)
@@ -76,11 +92,13 @@ class ElasticService extends NetsensiaService
         );
     }
     
-    public function search($name, $params = [])
+    public function search($name, $params = [], $limit = 10)
     {
         $params['body']['query']['query_string']['query'] = $name;
         $params['body']['query']['query_string']['default_operator'] = 'OR';
         $params['body']['query']['query_string']['analyzer'] = 'standard';
+        $params['body']['from'] = 0;
+        $params['body']['size'] = $limit;
         
         $result = $this->client->search($params);
         

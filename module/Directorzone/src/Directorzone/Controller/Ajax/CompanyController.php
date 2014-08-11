@@ -37,8 +37,14 @@ class CompanyController extends NetsensiaActionController
     public function companySearchAction()
     {
         $name = $this->params()->fromQuery('name', null);
+        $limit = $this->params()->fromQuery('limit', null);
+        $format = $this->params()->fromQuery('format', null);
         
-        $result = $this->elasticService->searchCompanies($name);
+        if ($limit == '') {
+            $limit = 10;
+        }
+        
+        $result = $this->elasticService->searchCompanies($name, $limit, $format);
         
         return new JsonModel(
             $result
