@@ -310,7 +310,7 @@ class CompanyService extends NetsensiaService
             function (Select $select) use ($uploadId) {
                 $select->where(
                     ['companyuploadid' => $uploadId]
-                );
+                )->join('companieshouse', 'companieshouse.number=companyupload.companynumber', ['incorporationdate']);
             }
         );
         
@@ -328,6 +328,7 @@ class CompanyService extends NetsensiaService
             [
                 'reference' => $companyRow['companynumber'],
                 'name' => $companyRow['name'],
+                'incorporationdate' => date('Y-m-d', strtotime($companyRow['incorporationdate'])),
                 'recordstatus' => 'L',
             ]
         );

@@ -15,10 +15,7 @@ class CompanyFinancialsForm extends NetsensiaForm
         $this->setFieldPrefix('account-contact-');
         $this->setDefaultIcon('user');
         
-        $this->addSelect([
-            'name' => 'companytype',
-            'label' => 'Company Type',
-        ]);
+        $this->addDate('incorporationdate');
         
         $this->addSubmit('Submit');
         

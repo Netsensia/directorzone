@@ -15,6 +15,11 @@ class CompanyOverviewForm extends NetsensiaForm
         $this->setFieldPrefix('company-overview-');
         $this->setDefaultIcon('user');
         
+        $this->addSelect([
+            'name' => 'companytype',
+            'label' => 'Company Type',
+            ]);
+        
         $this->addTextArea('business-description');
         
         $this->addSelectWithInvisibleOther(
