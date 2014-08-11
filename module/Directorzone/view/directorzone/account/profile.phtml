@@ -1,2 +1,17 @@
 <?php echo $this->partial('account-nav.phtml'); ?>
+
+<div class="container" id="talentpooleditheadline">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="well well-sm">
+				<div>
+					<strong><?php echo $this->footprint; ?></strong>
+				</div>
+				<div>
+<?php echo $this->talentpoolsummary; ?>
+</div>
+			</div>
+		</div>
+	</div>
+</div>
 <?php echo $this->BootstrapForm($this->form, 'Talent Pool Profile', $this->url('account-profile')); ?>

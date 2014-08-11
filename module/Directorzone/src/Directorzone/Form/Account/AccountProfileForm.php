@@ -12,6 +12,7 @@ class AccountProfileForm extends NetsensiaForm
     
     public function prepare()
     {
+        
         $this->setFieldPrefix('account-profile-');
         $this->setDefaultIcon('user');
         

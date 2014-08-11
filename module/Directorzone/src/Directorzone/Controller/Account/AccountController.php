@@ -5,19 +5,27 @@ namespace Directorzone\Controller\Account;
 use Netsensia\Controller\NetsensiaActionController;
 use Zend\Mvc\MvcEvent;
 use Netsensia\Service\MessagingService;
+use Directorzone\Service\TalentPoolService;
 
 class AccountController extends NetsensiaActionController
 {
     /**
-     * @var MessagingService $messagingService
+     * @var MessagingService
      */
     private $messagingService;
     
+    /**
+     * @var TalentPoolService
+     */
+    private $talentPoolService;
+    
     public function __construct(
-        MessagingService $messagingService
+        MessagingService $messagingService,
+        TalentPoolService $talentPoolService
     ) 
     {
         $this->messagingService = $messagingService;
+        $this->talentPoolService = $talentPoolService;
     }
     
     public function onDispatch(MvcEvent $e)
@@ -84,7 +92,22 @@ class AccountController extends NetsensiaActionController
     
     public function profileAction()
     {
-        return $this->userAccountForm('AccountProfileForm', 'User');
+        $form = $this->processForm(
+                'AccountProfileForm',
+                'User',
+                $this->getUserId()
+            );
+        
+        $talentPoolDetails = $this->talentPoolService->getTalentPoolDetails(
+            $this->getUserId()
+        );
+        
+        return array(
+            'form' => $form,
+            'footprint' => $talentPoolDetails['footprint'],
+            'talentpoolsummary' => $talentPoolDetails['talentpoolsummary'],
+            'flashMessages' => $this->getFlashMessages(),
+        );
     }
 
     public function directoryAction()

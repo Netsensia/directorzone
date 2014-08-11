@@ -114,7 +114,8 @@ class Module
                 'Directorzone\Controller\Account\Account' =>
                     function (ControllerManager $cm) {
                         return new \Directorzone\Controller\Account\AccountController(
-                            $cm->getServiceLocator()->get('MessagingService')
+                            $cm->getServiceLocator()->get('MessagingService'),
+                            $cm->getServiceLocator()->get('TalentPoolService')
                         );
                     },                    
                 'CompanyView' =>
