@@ -48,8 +48,11 @@ class NetsensiaService implements ServiceLocatorAwareInterface
         
         $rows = $rowset->toArray();
         
+        if (count($rows) == 0) {
+        	return '';
+        }
         if (count($rows) != 1) {
-            throw new \Exception('Expected one row, found ' . count($rows));
+        	throw new \Exception('Expected one row, found ' . count($rows));
         }
         
         return $rows[0][$property];
