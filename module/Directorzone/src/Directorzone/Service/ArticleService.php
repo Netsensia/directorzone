@@ -60,9 +60,9 @@ class ArticleService extends NetsensiaService
             function (Select $select) use ($articleId) {
         
                 $select->columns(
-                    ['title', 'publishdate', 'articleid', 'content', 'image', 'userid', 'startdate', 'enddate', 'location', 'articlecategoryid']
+                    ['title', 'publishdate', 'articleid', 'isanonymous', 'content', 'image', 'userid', 'startdate', 'enddate', 'location', 'articlecategoryid']
                 )
-                ->join('user', 'article.userid = user.userid', ['pseudonym'])
+                ->join('user', 'article.userid = user.userid', ['pseudonym', 'name'])
                 ->where(['articleid' => $articleId]);
             }
         );

@@ -30,11 +30,12 @@ class Module
     
     public function getViewHelperConfig()
     {
-    	return array(
-    			'invokables' => array(
-    					'ArticleFields' => 'Directorzone\View\Helper\ArticleFields',
-    			)
-    	);
+        return array(
+            'invokables' => array(
+            	'ArticleFields' => 'Directorzone\View\Helper\ArticleFields',
+                'ArticleAuthor' => 'Directorzone\View\Helper\ArticleAuthor',
+            )
+        );
     }
     
     public function getControllerConfig()
