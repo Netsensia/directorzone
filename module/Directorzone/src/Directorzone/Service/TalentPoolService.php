@@ -68,9 +68,8 @@ class TalentPoolService extends NetsensiaService
                 if (trim($targetRole['titlesummary']) != '') {
                     $people['results'][] = array_merge([
                             'internalId' => $result['userid'],
-                            'footprint' => 
-                                $footprint . ', ' .
-                                $targetRole['titlesummary']
+                            'footprint' => $footprint,
+                            'targetrole' => $targetRole['titlesummary']
                         ],
                         $result
                     );
