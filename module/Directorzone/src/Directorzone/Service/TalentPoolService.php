@@ -16,12 +16,15 @@ class TalentPoolService extends NetsensiaService
      * @var TableGateway
      */
     private $talentPoolDirectoryTable;
+    private $userTargetRole;
     
     public function __construct(
-        TableGateway $talentPoolDirectory
+        TableGateway $talentPoolDirectory,
+        TableGateway $userTargetRole
     )
     {
         $this->talentPoolDirectoryTable = $talentPoolDirectory;
+        $this->userTargetRoleTable = $userTargetRole;
         $this->setPrimaryTable($talentPoolDirectory);
     }
 
@@ -51,12 +54,26 @@ class TalentPoolService extends NetsensiaService
         
         foreach ($results as $result) {
         
-            $people['results'][] = array_merge([
-                    'internalId' => $result['userid'],
-                    'footprint' => $this->getFootprint($result['userid'])
-                ],
-                $result
-            );
+            $userId = $result['userid'];
+            
+            $footprint = $this->getFootprint($userId);
+            $targetRoles = $this->userTargetRoleTable->select(
+                function (Select $select) use ($userId) {
+                    $select->columns(['titlesummary'])
+                    ->where(['userid' => $userId]);
+                }
+            )->toArray();            
+            
+            foreach ($targetRoles as $targetRole) {
+                if (trim($targetRole['titlesummary']) != '') {
+                    $people['results'][] = array_merge([
+                            'internalId' => $result['userid'],
+                            'footprint' => $footprint . ', ' . $targetRole['titlesummary']
+                        ],
+                        $result
+                    );
+                }
+            }
         }
         
         return $people;

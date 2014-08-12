@@ -359,7 +359,8 @@ class Module
             },
             'TalentPoolService' => function ($sm) {
                 $instance = new TalentPoolService(
-                    $sm->get('UserTableGateway')
+                    $sm->get('UserTableGateway'),
+                    $sm->get('UserTargetRoleTableGateway')
                 );
                 return $instance;
             },
