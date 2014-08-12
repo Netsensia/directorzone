@@ -86,6 +86,7 @@ $(document).ready(function() {
 				url: '',
 				mode: editableMode,
 				display: function(value, sourceData) {
+					$(this).prev().html('<div>' + value + '</div>');
 					$(this).html('Edit');
 				},
 				success: function(response, newValue) {

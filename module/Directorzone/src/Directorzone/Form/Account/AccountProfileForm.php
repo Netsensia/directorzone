@@ -31,12 +31,12 @@ class AccountProfileForm extends NetsensiaForm
             'jointablemodel' => 'UserTargetRole',
             'jointablekeycolumn' => 'userid',
             'fields' => [
+                ['type' => 'textlink', 'name' => 'titlesummary', 'label' => 'Headline'],
+                ['type' => 'textarealink', 'name' => 'commentrequirement', 'label' => 'Comment'],
                 ['type' => 'select', 'name' => 'jobtype', 'label' => 'Role'],
                 ['type' => 'select', 'name' => 'country', 'label' => 'Country'],
                 ['type' => 'select', 'name' => 'paylevel', 'label' => 'Pay Level'],
                 ['type' => 'select', 'subtype' => 'tiered', 'name' => 'sector', 'label' => 'Primary Sector'],
-                ['type' => 'textlink', 'name' => 'titlesummary', 'label' => 'Headline'],
-                ['type' => 'textarealink', 'name' => 'commentrequirement', 'label' => 'Comment'],
             ],
         ]);
         

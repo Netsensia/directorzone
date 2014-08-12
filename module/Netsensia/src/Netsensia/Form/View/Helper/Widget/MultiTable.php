@@ -49,6 +49,7 @@ class MultiTable extends Widget
         foreach ($fields as $field) {
             $textValue = empty($values) ? '' : $values[$fieldIndex];
             echo '<td>';
+            $fieldId = $this->element->getAttribute('id') . '_' . $field->name;
             switch ($field->type) {
             	case 'select' :
             	    $selectElements = [];
@@ -157,10 +158,10 @@ class MultiTable extends Widget
 
             	    break;
             	case 'textlink':
-            	    echo '<a class="widget_multitable_edit" data-type="text" data-value="' . $textValue . '" id="' . $this->element->getAttribute('id') . '_' . $field->name . '" data-title="Enter ' . $field->label . '" href="#">Edit</a>';
+            	    echo '<span></span><a class="widget_multitable_edit" data-type="text" data-value="' . $textValue . '" id="' . $fieldId . '" data-title="Enter ' . $field->label . '" href="#">Edit</a>';
             	    break;
             	case 'textarealink':
-            	    echo '<a class="widget_multitable_edit" data-type="textarea" data-value="' . $textValue . '" id="' . $this->element->getAttribute('id') . '_' . $field->name . '" data-title="Enter ' . $field->label . '" href="#">Edit</a>';
+            	    echo '<span></span><a class="widget_multitable_edit" data-type="textarea" data-value="' . $textValue . '" id="' . $fieldId . '" data-title="Enter ' . $field->label . '" href="#">Edit</a>';
             	    break;
             	case 'text':
             	    $text = new Text('widgetignore[]');
