@@ -47,8 +47,8 @@ return array(
                     'smtpHostName'     => '{{ pillar['netsensia']['SMTP_HOSTNAME'] }}',
                     'smtpHost'     => '{{ pillar['netsensia']['SMTP_HOST'] }}',
                     'smtpPort'     => '{{ pillar['netsensia']['SMTP_PORT'] }}',
-                    'smtpUsername' => '{{ pillar['netsensia']['SMTP_USERNAME'] }}',
-                    'smtpPassword' => '{{ pillar['netsensia']['SMTP_PASSWORD'] }}',
+                    'smtpUsername' => '{{ pillar['directorzone']['SMTP_USERNAME'] }}',
+                    'smtpPassword' => '{{ pillar['directorzone']['SMTP_PASSWORD'] }}',
                     'senderName' => '{{ pillar['directorzone']['EMAIL_SENDER_NAME'] }}',
                     'senderAddress' => '{{ pillar['directorzone']['EMAIL_SENDER_ADDRESS'] }}'
                 ),
