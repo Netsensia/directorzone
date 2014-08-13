@@ -3,8 +3,8 @@
 
 <table id="talent-pool" data-link="row" class="rowlink table table-striped table-bordered table-hover">
 <tr>
-<th><a class="columnHeading" data-column-number="1">Anonymous Footprint</a></th>
-<th><a class="columnHeading" data-column-number="2">Joined</a></th>
+<th>Anonymous Footprint</th>
+<th>Target Role</th>
 
 
 </tr>
@@ -35,7 +35,7 @@ function loadTheTable()
 				var url = '/directories/talent-pool/' + value.internalId;
 				var newRow = '<tr>';
 				newRow += '<td><a href="' + url + '">' + value.footprint + '</a></td>';
-				newRow += '<td>' + prettyDate(value.joinedDate) + '</td>';
+				newRow += '<td><a href="' + url + '">' + value.targetrole + '</a></td>';
 				newRow += '</tr>';
 
 				return newRow;
