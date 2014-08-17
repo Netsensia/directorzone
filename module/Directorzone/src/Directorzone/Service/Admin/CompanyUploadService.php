@@ -80,12 +80,12 @@ class CompanyUploadService extends NetsensiaService
         return $companies;
     }
     
-    private function addCompaniesToUploadTable(
+    public function addCompaniesToUploadTable(
         array $companies
-    ) {
+    )
+    {
 
         foreach ($companies as $company) {
-            
             $this->companyUploadTableGateway->insert(
                 [
                     'companynumber' => '',

@@ -59,7 +59,8 @@ class Module
                     function (ControllerManager $cm) {
                         return new \Directorzone\Controller\Ajax\CompanyController(
                             $cm->getServiceLocator()->get('CompanyService'),
-                            $cm->getServiceLocator()->get('ElasticService')
+                            $cm->getServiceLocator()->get('ElasticService'),
+                            $cm->getServiceLocator()->get('CompanyUploadService')
                         );
                     },
                 'Directorzone\Controller\Ajax\People' =>

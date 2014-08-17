@@ -19,6 +19,7 @@
 </div>
 </div>
 
+<input id="addsinglecompany" style="width:50%" type="text">&nbsp;<button id="addsinglecompany" class="btn">Add Single Company</button>
 <table id="companies" style="table-layout: fixed; width: 100%" class="table table-striped table-bordered table-hover">
 <tr>
 <th>Number</th>
@@ -33,3 +34,19 @@
 <li class="previous" id="previous" class="disabled"><a href="#">&larr; Previous</a></li>
 <li class="next" id="next"><a href="#">Next &rarr;</a></li>
 </ul>
+
+<script>
+$(document).ready(function() {
+	$('button#addsinglecompany').click(function () {
+		var companyName = $('input#addsinglecompany').val();
+		$.ajax({
+			url: '/ajax/upload-company',
+			type: 'POST',
+			data: {name: companyName},
+			success: function() {
+				location.reload();
+			}
+		});
+	});
+});
+</script>

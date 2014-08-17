@@ -7,6 +7,7 @@ use Zend\Mvc\MvcEvent;
 use Zend\View\Model\JsonModel;
 use Directorzone\Service\CompanyService;
 use Directorzone\Service\ElasticService;
+use Directorzone\Service\Admin\CompanyUploadService;
 
 class CompanyController extends NetsensiaActionController
 {
@@ -20,18 +21,31 @@ class CompanyController extends NetsensiaActionController
      */
     private $elasticService;
     
+    private $companyUploadService;
+    
     public function __construct(
         CompanyService $companyService,
-        ElasticService $elasticService
+        ElasticService $elasticService,
+        CompanyUploadService $companyUploadService
     )
     {
         $this->companyService = $companyService;
         $this->elasticService = $elasticService;
+        $this->companyUploadService = $companyUploadService;
     }
     
     public function onDispatch(MvcEvent $e)
     {
         parent::onDispatch($e);
+    }
+    
+    public function uploadCompanyAction()
+    {
+        $name = $this->params()->fromPost('name', null);
+        
+        $this->companyUploadService->addCompaniesToUploadTable([['name' => $name]]);
+        
+        return new JsonModel(['success' => true]);
     }
     
     public function companySearchAction()

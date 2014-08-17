@@ -83,6 +83,16 @@ return array(
                             ),
                         ),
                     ),
+                    'upload-company' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/upload-company',
+                            'defaults' => array(
+                                'controller' => 'Directorzone\Controller\Ajax\Company',
+                                'action' => 'upload-company',
+                            ),
+                        ),
+                    ),
                     'send-message' => array(
                         'type' => 'segment',
                         'options' => array(
