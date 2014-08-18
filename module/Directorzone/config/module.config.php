@@ -365,6 +365,16 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
+                    'accelerator-directory' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/accelerator',
+                            'defaults' => array(
+                                'action' => 'accelerator-list',
+                                'controller' => 'Directory',
+                            ),
+                        ),
+                    ),
                     'company-directory' => array(
                         'type' => 'literal',
                         'options' => array(

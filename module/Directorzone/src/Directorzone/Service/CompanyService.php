@@ -437,7 +437,7 @@ class CompanyService extends NetsensiaService
     {
         $rowset = $this->companyDirectoryTable->select(
             function (Select $select) use ($status, $start, $end, $dzType, $order) {
-                $columns = ['createdtime', 'reference', 'name', 'ceo', 'sectors', 'turnoverid', 'companydirectoryid'];
+                $columns = ['reference', 'name', 'ceo', 'sectors', 'turnoverid',  'createdtime', 'companydirectoryid'];
 
                 $select->where(
                     [

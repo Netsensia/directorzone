@@ -28,6 +28,11 @@ class DirectoryController extends NetsensiaActionController
     
     }
     
+    public function acceleratorListAction()
+    {
+    
+    }
+    
     public function peopleListAction()
     {
     

@@ -1,5 +1,5 @@
 <?php echo $this->partial('directory-nav.phtml'); ?>
-<h3>Company directory</h3>
+<h3>Accelerator directory</h3>
 <h5><a href="/directories/company/new">Add new company</a></h5>
 
 <table id="companies" data-link="row" class="rowlink table table-striped table-bordered table-hover">
@@ -34,7 +34,7 @@ function loadTheTable()
 			1,
 			10,
 			'companies',
-			'/ajax/company/list?type=B',
+			'/ajax/company/list',
 			function(key, value) {
 				var url = '/directories/company/' + value.internalId;
 				
