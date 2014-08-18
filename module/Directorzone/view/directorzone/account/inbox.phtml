@@ -18,31 +18,31 @@
 <script>
 
 $(document).ready(function() {
+	$('#columnSorter').attr('data-sort-by-column', -3);
+	
 	$(document).delegate('.columnHeading', 'click', function() {
 		loadTheTable();
 	});
     loadTheTable();
-
-    function loadTheTable() {
-    	netsensia_Pager(
-    			1,
-    			20,
-    			'inbox',
-    			'/ajax/inbox/list',
-    			function(key, value) {
-    				var url = '/myaccount/inbox/' + value.internalId;
-    				
-    				var newRow = '<tr>';
-    				newRow += '<td><a href="' + url + '">' + value.from + '</a></td>';
-    				newRow += '<td>' + value.title + '</td>';
-    				newRow += '<td class="prettydate">' + prettyDate(value.senttime) + '</td>';
-    				newRow += '</tr>';
-    		
-    				return newRow;
-    			}
-    		);
-    }
-
 });
 
+function loadTheTable() {
+	netsensia_Pager(
+			1,
+			20,
+			'inbox',
+			'/ajax/inbox/list',
+			function(key, value) {
+				var url = '/myaccount/inbox/' + value.internalId;
+				
+				var newRow = '<tr>';
+				newRow += '<td><a href="' + url + '">' + value.from + '</a></td>';
+				newRow += '<td>' + value.title + '</td>';
+				newRow += '<td class="prettydate">' + prettyDate(value.senttime) + '</td>';
+				newRow += '</tr>';
+		
+				return newRow;
+			}
+		);
+}
 </script>
