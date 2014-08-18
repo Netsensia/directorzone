@@ -53,9 +53,9 @@ class MessagingService extends NetsensiaService
     {
         $rowset = $this->userMessageTable->select(
             function (Select $select) use ($start, $end, $order) {
-                $columns = ['usermessageid', 'userid', 'typeid', 'title', 'content', 'senttime'];
+                $columns = ['usermessageid', 'userid', 'senttime', 'typeid', 'title', 'content'];
         
-                $sortColumns = ['surname', 'title'];
+                $sortColumns = ['surname', 'title', 'senttime'];
         
                 $select->where(
                     ['usermessage.userid' => $this->getUserId()]
