@@ -70,6 +70,7 @@ $(document).ready(function() {
 
 	function prettySic(sic)
 	{
+		return sic;
 		var parts = sic.split(" - ");
 
 		if (parts.length > 1) {
@@ -133,6 +134,12 @@ $(document).ready(function() {
 				    }
                     text += '</div>';
 			    }
+	            var detailStatus = value['_source']['detailstatus'];
+	            
+	            text += '<div class="supplement" style="color:' + getColor(detailStatus) + '">';
+	            text += detailStatus;
+	            text += '</div>';
+				
 				text += '</div>';
 				
 				$('ul#searchresults').append(
@@ -153,6 +160,17 @@ $(document).ready(function() {
 			$('#companySearchDropDownText').html('Select company...');
 			$('#companySearchDropDown').trigger('click');
 		});
+	}
+
+	function getColor(str)
+	{
+	    switch (str)
+	    {
+	    case 'Active' :
+	      return 'green';
+	    default:
+		  return 'red';
+	    }
 	}
 
 	$(document).delegate('.companysearchresult', 'click', function() {
