@@ -5,9 +5,22 @@ use Netsensia\Form\NetsensiaForm;
 
 class CompanyOwnersForm extends NetsensiaForm
 {
+    private $userModel;
+    private $companyModel;
+    
     public function __construct($name = null, $options = array())
     {
         parent::__construct($name, $options);
+    }
+    
+    public function setUserModel($userModel)
+    {
+        $this->userModel = $userModel;
+    }
+    
+    public function setCompanyModel($companyModel)
+    {
+        $this->companyModel = $companyModel;
     }
     
     public function prepare()
@@ -17,8 +30,11 @@ class CompanyOwnersForm extends NetsensiaForm
         
         $this->addTextArea([
             'name' => 'relationshiptext',
-            'title' => 'My relationship to this company',
+            'label' => 'My relationship to this company',
         ]);
+        
+        $this->addHidden('userid', $this->userModel->getUserId());
+        $this->addHidden('companydirectoryid', $this->companyModel->getId());
         
         $this->addSubmit('Submit');
         

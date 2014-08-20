@@ -16,6 +16,9 @@ use Directorzone\Service\BingService;
 use Directorzone\Service\ArticleService;
 use Directorzone\Service\TalentPoolService;
 use Directorzone\Service\FilterService;
+use Directorzone\Form\Company\CompanyOwnersForm;
+use Zend\Mvc\Router\Http\TreeRouteStack;
+use Zend\Mvc\Router\PriorityList;
 
 class Module
 {
@@ -236,7 +239,6 @@ class Module
             'CompanyOfficers',
             'CompanyOverview',
             'CompanyNewCompany',
-            'CompanyOwners',
             'CompanyRelationships',
             'CompanySectors',
             'AccountAccount',
@@ -384,12 +386,29 @@ class Module
                 return $instance;
             },
             'AccountPublishForm' =>  function ($sm) {
-                $form = new AccountPublishForm('accountPublishForm');
                 $authService = $sm->get('Zend\Authentication\AuthenticationService');
                 $identity = $authService->getIdentity();
                 $userId = $identity->getUserId();
                 $userModel = $sm->get('UserModel')->init($identity->getUserId());
+                $form = new AccountPublishForm('accountPublishForm');
                 $form->setUserModel($userModel);
+                $form->setTranslator($sm->get('translator'));
+                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                return $form;
+            },
+            'CompanyOwnersForm' =>  function ($sm) {
+                $authService = $sm->get('Zend\Authentication\AuthenticationService');
+                $identity = $authService->getIdentity();
+                $userId = $identity->getUserId();
+                $userModel = $sm->get('UserModel')->init($identity->getUserId());
+                $router = $sm->get('Router');
+                $routeMatch = $router->match($sm->get('Request'));
+                $params = $routeMatch->getParams();
+                $companyId = $params['id'];
+                $companyModel = $sm->get('CompanyDirectoryModel')->init($companyId);
+                $form = new CompanyOwnersForm('companyOwnersForm');
+                $form->setUserModel($userModel);
+                $form->setCompanyModel($companyModel);
                 $form->setTranslator($sm->get('translator'));
                 $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
                 return $form;
