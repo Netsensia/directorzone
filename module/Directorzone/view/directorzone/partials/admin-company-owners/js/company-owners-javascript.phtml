@@ -14,9 +14,10 @@ $(document).ready(function() {
 			function(key, value) {
 				var url = '/directories/people/' + value.internalId;
 				var newRow = '<tr>';
-				newRow += '<td><a href="' + url + '">' + value.name + '</a></td>';
-				newRow += '<td>' + value.companyname + '</td>';
-				newRow += '<td>' + value.appointmenttype + '</td>';
+				newRow += '<td><a href="' + url + '">' + value.company + '</a></td>';
+				newRow += '<td>' + value.owner + '</td>';
+				newRow += '<td>' + prettyDate(value.requestdate) + '</td>';
+				newRow += '<td>' + value.status + '</td>';
 				newRow += '</tr>';
 		
 				return newRow;

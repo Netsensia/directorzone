@@ -19,6 +19,7 @@ use Directorzone\Service\FilterService;
 use Directorzone\Form\Company\CompanyOwnersForm;
 use Zend\Mvc\Router\Http\TreeRouteStack;
 use Zend\Mvc\Router\PriorityList;
+use Directorzone\Service\CompanyOwnersService;
 
 class Module
 {
@@ -70,6 +71,12 @@ class Module
                     function (ControllerManager $cm) {
                         return new \Directorzone\Controller\Ajax\PeopleController(
                             $cm->getServiceLocator()->get('PeopleService')
+                        );
+                    },
+                'Directorzone\Controller\Ajax\CompanyOwners' =>
+                    function (ControllerManager $cm) {
+                        return new \Directorzone\Controller\Ajax\CompanyOwnersController(
+                            $cm->getServiceLocator()->get('CompanyOwnersService')
                         );
                     },
                 'Directorzone\Controller\Ajax\TalentPool' =>
@@ -349,6 +356,12 @@ class Module
             'PeopleService' => function ($sm) {
                 $instance = new PeopleService(
                     $sm->get('CompanyOfficerTableGateway')
+                );
+                return $instance;
+            },
+            'CompanyOwnersService' => function ($sm) {
+                $instance = new CompanyOwnersService(
+                    $sm->get('UserCompanyTableGateway')
                 );
                 return $instance;
             },

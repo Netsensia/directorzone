@@ -83,6 +83,27 @@ return array(
                             ),
                         ),
                     ),
+                    'company-owners' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/company-owners',
+                            'defaults' => array(
+                                'controller' => 'Directorzone\Controller\Ajax\CompanyOwners',
+                            ),
+                        ),
+                        'may_terminate' => false,
+                        'child_routes' => array(
+                            'list' => array(
+                                'type' => 'literal',
+                                'options' => array(
+                                    'route' => '/list',
+                                    'defaults' => array(
+                                        'action' => 'company-owners-list',
+                                    ),
+                                )
+                            ),
+                        ),
+                    ),
                     'upload-company' => array(
                         'type' => 'segment',
                         'options' => array(
