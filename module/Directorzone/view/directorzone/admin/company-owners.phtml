@@ -1,0 +1,16 @@
+<?php echo $this->partial('admin-nav.phtml'); ?>
+
+<hr>
+
+<div class="row">
+    <?php echo $this->partial('admin-company-owners/side-nav.phtml'); ?>
+
+    <div class="col-md-12">
+
+        <?php echo $this->partial('admin-company-owners/body.phtml'); ?>
+
+    </div>
+</div>
+
+<?php 
+    echo $this->partial('admin-company-owners/js/company-owners-javascript.phtml');

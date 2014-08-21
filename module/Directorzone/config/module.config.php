@@ -608,6 +608,16 @@ return array(
                     ),
                 ),
             ),
+            'admin-company-owners' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/admin/company-owners',
+                    'defaults' => array(
+                        'controller' => 'Directorzone\Controller\Admin\Admin',
+                        'action'     => 'company-owners',
+                    ),
+                ),
+            ),
             'admin-users' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(

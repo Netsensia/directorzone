@@ -112,4 +112,9 @@ class AdminController extends NetsensiaActionController
         ];
     }
     
+    public function companyOwnersAction()
+    {
+        return [];
+    }
+    
 }
