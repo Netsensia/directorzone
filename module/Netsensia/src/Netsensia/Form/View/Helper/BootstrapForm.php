@@ -24,6 +24,10 @@ class BootstrapForm extends AbstractHelper
      */
     public function __invoke($form, $title, $action, $options = array())
     {
+        if (!$form) {
+            return;
+        }
+        
         $this->form     = $form;
         $this->view     = $this->getView();
         

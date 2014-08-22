@@ -25,39 +25,40 @@ class CompanyOwnersController extends NetsensiaActionController
     }
       
     public function ownersAction()
-    {
+    {  
         $return = [
             'hasOwner' => false,
+            'ownershipRole' => false,
             'companyId' => $this->params('id'),
+            'flashMessages' => $this->getFlashMessages(),
+            'loggedOn' => false,
             'companyDetails' => $this->companyService->getCompanyDetails($this->params('id')),
         ];
     
         if (!$this->isLoggedOn()) {
-            $return['ownershipRole'] = false;
-        } else {
-    
-            $hiddenValues['companydirectoryid'] = $this->params('id');
-            $hiddenValues['userid'] = $this->getUserId();
-    
-            $userCompanyId = $this->companyOwnersService->getUserCompanyId(
-                $this->getUserId(),
-                $this->params('id')
-            );
-    
-            $return['form'] = $this->processForm(
-                    'CompanyOwnersForm',
-                    'UserCompany',
-                    $userCompanyId
-                );
-           
-            $return['flashMessages'] = $this->getFlashMessages();
-            
-            $return['ownershipRole'] = $this->companyOwnersService->getOwnershipRole(
-                $this->params('id'),
-                $this->getUserId()
-            );
-            
+            return $return;
         }
+        
+        $hiddenValues['companydirectoryid'] = $this->params('id');
+        $hiddenValues['userid'] = $this->getUserId();
+
+        $userCompanyId = $this->companyOwnersService->getUserCompanyId(
+            $this->getUserId(),
+            $this->params('id')
+        );
+
+        $return['form'] = $this->processForm(
+                'CompanyOwnersForm',
+                'UserCompany',
+                $userCompanyId
+            );
+       
+        $return['ownershipRole'] = $this->companyOwnersService->getOwnershipRole(
+            $this->params('id'),
+            $this->getUserId()
+        );
+        
+        $return['loggedOn'] = true;
         
         return $return;
     }

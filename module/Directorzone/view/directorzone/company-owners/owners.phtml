@@ -7,12 +7,23 @@
 ?>
         <h4>Take ownership of this company</h4>
         <p>
-        If you would like to take ownership of this company profile, please fill out the box below giving us details of your relationship with the company.
+        
+<?php 
+        if (true == $this->loggedOn) {
+?>
+            If you would like to take ownership of this company profile, please fill out the box below giving us details of your relationship with the company.
+<?php
+        } else {
+?>
+            Please login in order to make a request to take ownership of this company profile.     
+<?php
+        }            
+?>
         </p>
         <p>
-        Ownership of a company profile allows you to edit the company profile and also to assign other members as editors.
+            Ownership of a company profile allows you to edit the company profile and also to assign other members as editors.
         </p>
-<?php
+    <?php
         echo $this->BootstrapForm(
             $this->form,
             '',
