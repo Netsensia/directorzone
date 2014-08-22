@@ -4,6 +4,7 @@ namespace Directorzone\Controller\Directory\Company;
 
 use Netsensia\Controller\NetsensiaActionController;
 use Directorzone\Service\CompanyService;
+use Directorzone\Service\CompanyOwnersService;
 
 class CompanyEditController extends NetsensiaActionController
 {
@@ -42,43 +43,6 @@ class CompanyEditController extends NetsensiaActionController
     public function officersAction()
     {
         return $this->genericForm('CompanyOfficersForm', 'CompanyDirectory');
-    }
-    
-    public function ownersAction()
-    {
-        if (!$this->isLoggedOn()) {
-            $return['ownershipRole'] = false;
-        } else {
-            
-            $hiddenValues['companydirectoryid'] = $this->params('id');
-            $hiddenValues['userid'] = $this->getUserId();
-            
-            $companyDetails = $this->companyService->getCompanyDetails(
-                $this->params('id')
-            );
-            
-            $userCompanyId = $this->companyService->getUserCompanyId(
-	            $this->getUserId(),
-                $this->params('id')
-            );
-            
-            $return = [
-                "companyDetails" => $companyDetails,
-                "form" => $this->processForm(
-                    'CompanyOwnersForm',
-                    'UserCompany',
-                    $userCompanyId
-                ),
-                'flashMessages' => $this->getFlashMessages(),
-            ];
-            
-            $return['ownershipRole'] = $this->companyService->getOwnershipRole(
-                $this->params('id'),
-                $this->getUserId()
-            );
-        }
-        
-        return $return;
     }
     
     public function relationshipsAction()

@@ -496,7 +496,7 @@ return array(
                                             'route' => '/owners',
                                             'defaults' => array(
                                                 'action' => 'owners',
-                                                'controller' => 'CompanyEdit',
+                                                'controller' => 'CompanyOwners',
                                             ),
                                         ),
                                     ),

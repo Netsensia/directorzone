@@ -148,6 +148,13 @@ class Module
                             $cm->getServiceLocator()->get('CompanyService')
                         );
                     },
+                'CompanyOwners' =>
+                    function (ControllerManager $cm) {
+                        return new \Directorzone\Controller\Directory\Company\CompanyOwnersController(
+                            $cm->getServiceLocator()->get('CompanyOwnersService'),
+                            $cm->getServiceLocator()->get('CompanyService')
+                        );
+                    },
                 'PeopleView' =>
                     function (ControllerManager $cm) {
                         $peopleService = $cm->getServiceLocator()->get('PeopleService');

@@ -23,6 +23,23 @@ class CompanyOwnersService extends NetsensiaService
 
     public function getCompanyOwners()
     {
-        return ['results' => [['internalId' => 1, 'company' => 'This', 'owner' => 'Is', 'requestdate' => '2014-07-01', 'status' => 'Temporary Data']]];
+        $return['results'] = [];
+        
+        $return['results'][] = 
+            ['internalId' => 1, 'company' => 'This', 'owner' => 'Is', 'requestdate' => '2014-07-01', 'status' => 'Temporary Data'];
+        
+    }
+    
+    public function getUserCompanyId()
+    {
+        return 0;
+    }
+    
+    public function getOwnershipRole(
+        $companyDirectoryId,
+        $userId
+    )
+    {
+        return false;
     }
 }

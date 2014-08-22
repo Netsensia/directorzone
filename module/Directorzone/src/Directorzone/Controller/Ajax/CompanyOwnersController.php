@@ -16,7 +16,8 @@ class CompanyOwnersController extends NetsensiaActionController
     
     public function __construct(
         CompanyOwnersService $companyOwnersService
-    ) {
+    )
+    {
         $this->companyOwnersService = $companyOwnersService;
     }
     
@@ -44,4 +45,6 @@ class CompanyOwnersController extends NetsensiaActionController
             $results
         );
     }
+    
+
 }

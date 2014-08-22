@@ -119,11 +119,6 @@ class CompanyService extends NetsensiaService
         }
     }
     
-    public function getUserCompanyId()
-    {
-        return 0;
-    }
-    
     public function getCompanyDetails($companyDirectoryId)
     {
         $rowset = $this->companyDirectoryTable->select(
@@ -523,14 +518,6 @@ class CompanyService extends NetsensiaService
     public function getRemovedCount()
     {
         return $this->getDirectoryStatusCount('R');
-    }
-    
-    public function getOwnershipRole(
-        $companyDirectoryId,
-        $userId
-    )
-    {
-        return false;
     }
     
     public function setOwnedBy(
