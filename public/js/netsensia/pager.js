@@ -56,10 +56,10 @@ function netsensia_pager_loadTable(page, size, order, id, route, rowFunc)
 	}
 
 	url = route + joinChar + 'order=' + order + '&page=' + page + '&size=' + size;
+	
 	$.ajax({
 		url: url
 	}).done(function(data) {
-
 		$('table#' + id).find("tr:gt(0)").remove();
 				
 		$('li#next').removeClass('disabled');

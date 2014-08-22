@@ -21,13 +21,59 @@ class CompanyOwnersService extends NetsensiaService
         $this->userCompanyDirectoryTable = $userCompany;
     }
 
-    public function getCompanyOwners()
+    public function getCompanyOwners($start, $end = 0, $order = 1)
     {
-        $return['results'] = [];
+        if ($end == 0) {
+            $end = $start;
+            $start = 1;
+        }
         
-        $return['results'][] = 
-            ['internalId' => 1, 'company' => 'This', 'owner' => 'Is', 'requestdate' => '2014-07-01', 'status' => 'Temporary Data'];
+        if ($order < 1 || $order > 5) {
+            $order = 1;
+        }
         
+        $rowset = $this->userCompanyDirectoryTable->select(
+            function (Select $select) use ($start, $end, $order) {
+        
+                $sortColumns = ['companydirectory.name', 'user.name', 'requesttime', 'relationshiptext', 'granted'];
+
+                $select->columns(
+                    ['usercompanyid', 'userid', 'companydirectoryid', 'relationshiptext', 'granted', 'requesttime'] 
+                )
+                ->join(
+                    'companydirectory',
+                    'companydirectory.companydirectoryid = usercompany.companydirectoryid',
+                    ['companyname' => 'name'],
+                    Select::JOIN_LEFT
+                )
+                ->join(
+                    'user',
+                    'user.userid = usercompany.userid',
+                    ['username' => 'name'],
+                    Select::JOIN_LEFT
+                )
+                ->offset($start - 1)
+                ->order($sortColumns[abs($order)-1] . ' ' . ($order < 0 ? 'DESC' : 'ASC'))
+                ->limit(1 + ($end - $start));
+            }
+        );
+        
+        $rows = $rowset->toArray();
+        $results = [];
+        
+        foreach ($rows as $row) {
+            $results[] = [
+                'internalId' => $row['usercompanyid'],
+                'companyname' => $row['companyname'],
+                'username' => $row['username'],
+                'requesttime' => $row['requesttime'],
+                'granted' => $row['granted'],
+                'text' => $row['relationshiptext'],
+            ];
+        }
+        
+        return ['results' => $results];
+
     }
     
     public function getUserCompanyId()

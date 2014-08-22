@@ -119,7 +119,6 @@ class ArticleService extends NetsensiaService
             $start = 1;
         }
         
-
         $rowset = $this->articleTable->select(
             function (Select $select) use ($typeArray, $statusArray, $start, $end, $order, $userId) {
 
