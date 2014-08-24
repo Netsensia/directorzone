@@ -28,14 +28,14 @@ class CompanyOwnersService extends NetsensiaService
             $start = 1;
         }
         
-        if ($order < 1 || $order > 5) {
+        if (abs($order) < 1 || abs($order) > 5) {
             $order = 1;
         }
         
         $rowset = $this->userCompanyDirectoryTable->select(
             function (Select $select) use ($start, $end, $order) {
         
-                $sortColumns = ['companydirectory.name', 'user.name', 'requesttime', 'relationshiptext', 'granted'];
+                $sortColumns = ['companyname', 'username', 'requesttime', 'relationshiptext', 'granted'];
 
                 $select->columns(
                     ['usercompanyid', 'userid', 'companydirectoryid', 'relationshiptext', 'granted', 'requesttime'] 

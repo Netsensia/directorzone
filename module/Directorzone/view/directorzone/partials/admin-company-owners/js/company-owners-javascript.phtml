@@ -6,23 +6,36 @@
 
 $(document).ready(function() {
 
-	netsensia_Pager(
-			1,
-			500,
-			'owners',
-			'/ajax/company-owners/list',
-			function(key, value) {
-				var newRow = '<tr>';
-				newRow += '<td>' + value.companyname + '</td>';
-				newRow += '<td>' + value.username + '</td>';
-				newRow += '<td>' + prettyDate(value.requesttime) + '</td>';
-				newRow += '<td>' + value.text + '</td>';
-				newRow += '<td>' + (value.granted == 'Y' ? 'Granted' : 'Pending') + '</td>';
-				newRow += '</tr>';
-		
-				return newRow;
-			}
-		);	
+	function loadTable()
+	{
+		netsensia_Pager(
+				1,
+				500,
+				'owners',
+				'/ajax/company-owners/list',
+				function(key, value) {
+					var newRow = '<tr>';
+					newRow += '<td>' + value.companyname + '</td>';
+					newRow += '<td>' + value.username + '</td>';
+					newRow += '<td>' + prettyDate(value.requesttime) + '</td>';
+					newRow += '<td>' + value.text + '</td>';
+					newRow += '<td><a href="#" id="' + value.internalId + '" class="changeownerstatus">' + (value.granted == 'Y' ? 'Granted' : 'Pending') + '</a></td>';
+					newRow += '</tr>';
+			
+					return newRow;
+				}
+			);	
+	}
+
+	loadTable();
+
+	$(document).delegate('.columnHeading', 'click', function() {
+		loadTable();
+	});
+	
+	$(document).delegate('.changeownerstatus', 'click', function() {
+		loadTable();
+	});
 
 });
 
