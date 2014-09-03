@@ -13,7 +13,8 @@ class IndexController extends NetsensiaActionController
     
     public function __construct(
         ArticleService $articleService
-    ) {
+    )
+    {
         $this->articleService = $articleService;
     }
     
