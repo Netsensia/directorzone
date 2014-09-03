@@ -279,3 +279,7 @@ div.articlekeyfacts span {
 .news-panel {
 	height:25em;
 }
+
+.news-panel-wide {
+    height:20em;	
+}
