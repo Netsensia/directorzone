@@ -17,7 +17,7 @@ class NewsPanel extends AbstractHelper
     public function __invoke($panelTitle, array $items, $panelClass = 'panel-default')
     {
         ?>
-            <div class="panel <?php echo $panelClass; ?>">
+            <div class="panel news-panel <?php echo $panelClass; ?>">
             <div class="panel-heading">
             <h3 class="panel-title">
             <?php echo $panelTitle; ?>
