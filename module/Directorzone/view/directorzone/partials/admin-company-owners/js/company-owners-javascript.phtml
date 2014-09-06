@@ -34,7 +34,12 @@ $(document).ready(function() {
 	});
 	
 	$(document).delegate('.changeownerstatus', 'click', function() {
-		loadTable();
+		var requestId = $(this).attr('id');
+		$.ajax({
+			url: '/ajax/company-owners/switch/' + requestId
+		}).done(function () {
+			loadTable();
+		});
 	});
 
 });

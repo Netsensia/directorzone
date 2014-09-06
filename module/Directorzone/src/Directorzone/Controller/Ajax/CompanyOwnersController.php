@@ -26,6 +26,20 @@ class CompanyOwnersController extends NetsensiaActionController
         parent::onDispatch($e);
     }
 
+    public function switchAction()
+    {
+        $requestId = $this->params('requestid');
+        
+        $status = $this->companyOwnersService->switchGrantStatus($requestId);        
+        
+        return new JsonModel(
+            [
+                'requestid' => $requestId,
+                'status' => $status,
+            ]
+        );
+    }
+    
     public function companyOwnersListAction()
     {
         $page = $this->params()->fromQuery('page', null);

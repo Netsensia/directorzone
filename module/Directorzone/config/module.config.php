@@ -102,6 +102,15 @@ return array(
                                     ),
                                 )
                             ),
+                            'switch' => array(
+                                'type' => 'segment',
+                                'options' => array(
+                                    'route' => '/switch/:requestid',
+                                    'defaults' => array (
+                                        'action' => 'switch',
+                                    )
+                                ),
+                            ),
                         ),
                     ),
                     'upload-company' => array(

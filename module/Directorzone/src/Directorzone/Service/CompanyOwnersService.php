@@ -21,6 +21,30 @@ class CompanyOwnersService extends NetsensiaService
         $this->userCompanyDirectoryTable = $userCompany;
     }
 
+    public function switchGrantStatus($requestId)
+    {
+        $result = $this->userCompanyDirectoryTable->select(
+            function (Select $select) use ($requestId) {
+                $select->columns(
+                    ['granted']
+                )
+                ->where(
+                    ['usercompanyid' => $requestId]
+                );
+            }
+        )->toArray();
+        
+        $row = $result[0];
+        $grantedStatus = $row['granted'] == 'Y' ? 'N' : 'Y';
+        
+        $status = $this->userCompanyDirectoryTable->update(
+            ['granted' => $grantedStatus],
+            ['usercompanyid' => $requestId]
+        );
+
+        return $grantedStatus;
+    }
+    
     public function getCompanyOwners($start, $end = 0, $order = 1)
     {
         if ($end == 0) {
