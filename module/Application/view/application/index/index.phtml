@@ -49,14 +49,20 @@
 					<?php $this->NewsPanel('Wanted', $this->mediaItems[3], 'panel-danger'); ?>
 				</div>
 			</div>
+								
+			
 			<div class="row clearfix">
-				<div class="col-md-6 column">
-					<?php $this->NewsPanel('Member Articles', $this->mediaItems[1], 'panel-info news-panel-wide'); ?>
-				    <?php $this->NewsPanel('Events', $this->mediaItems[5], 'panel-info news-panel-wide'); ?>
+				<div class="col-md-3 column">
+				    <?php $this->NewsPanel('Events', $this->mediaItems[5], 'panel-info'); ?>
 				</div>
-				<div class="col-md-6 column">
-					<?php $this->NewsPanel('Meeting Requests', $this->mediaItems[6], 'panel-danger news-panel-wide'); ?>
-					<?php $this->NewsPanel('Jobs', $this->mediaItems[7], 'panel-danger news-panel-wide'); ?>
+				<div class="col-md-3 column">
+				    <?php $this->NewsPanel('Member Articles', $this->mediaItems[1], 'panel-info'); ?>
+				</div>
+				<div class="col-md-3 column">
+				    <?php $this->NewsPanel('Meeting Requests', $this->mediaItems[6], 'panel-danger'); ?>
+				</div>
+				<div class="col-md-3 column">
+					<?php $this->NewsPanel('Jobs', $this->mediaItems[7], 'panel-danger'); ?>
 				</div>
 			</div>
 		</div>
