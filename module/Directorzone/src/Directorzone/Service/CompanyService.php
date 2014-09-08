@@ -37,6 +37,11 @@ class CompanyService extends NetsensiaService
     private $companySicCodesTable;
     
     /**
+     * @var TableGateway
+     */
+    private $companyRelationship;
+    
+    /**
      * @var CompanyAppointmentsRequest
      */
     private $companyAppointmentsRequest;
@@ -47,6 +52,7 @@ class CompanyService extends NetsensiaService
         TableGateway $companyDirectory,
         TableGateway $companySicCode,
         TableGateway $companyOfficers,
+        TableGateway $companyRelationship,
         CompanyAppointmentsRequest $companyAppointmentsRequest
     )
     {
@@ -55,6 +61,7 @@ class CompanyService extends NetsensiaService
         $this->companyDirectoryTable = $companyDirectory;
         $this->companySicCodeTable = $companySicCode;
         $this->companyOfficersTable = $companyOfficers;
+        $this->companyRelationship = $companyRelationship;
         $this->companyAppointmentsRequest = $companyAppointmentsRequest;
     }
 
@@ -185,7 +192,34 @@ class CompanyService extends NetsensiaService
             }
         }
         
-        $companyDetails['relatedCompanies'] = [];
+        $relatedCompanies = [];
+        
+        $rowset = $this->companyRelationship->select(
+            function (Select $select) use ($companyDetails) {
+                $select->where(
+                    [
+                        'companyrelationship.companydirectoryid' => $companyDetails['companydirectoryid'],
+                    ]
+                )
+                ->join(
+                    'relationship',
+                    'companyrelationship.relationshipid = relationship.relationshipid',
+                    ['relationship']
+                )
+                ->join(
+                    'companydirectory',
+                    'companydirectory.companydirectoryid = companyrelationship.relatedcompanyid',
+                    ['relatedcompanyname' => 'name'],
+                    Select::JOIN_LEFT
+                ); 
+            }
+        )->toArray();
+        
+        foreach ($rowset as $row) {
+            $relatedCompanies[] = $row;
+        }
+        
+        $companyDetails['relatedCompanies'] = $relatedCompanies;
         
         return $companyDetails;
         
