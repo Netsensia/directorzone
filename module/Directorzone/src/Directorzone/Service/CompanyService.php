@@ -346,9 +346,9 @@ class CompanyService extends NetsensiaService
         $array = $rowset->toArray();
         
         if (count($array) != 1) {
-            throw new \Exception(
-                'Could not find company to make live'
-            );
+//             throw new \Exception(
+//                 'Could not find company to make live'
+//             );
         }
         
         $companyRow = $array[0];
