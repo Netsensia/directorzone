@@ -26,6 +26,14 @@ class AccountPublishForm extends NetsensiaForm
             $this->addSelect(['name' => 'approvestatus', 'label' => 'Approved Status']);
         }
 
+        $this->addHierachy(
+                [
+                'type' => 'select',
+                'name' => 'articlecategory',
+                'label' => 'Article Category',
+                ]
+        );
+        
         $this->addSelect(['name' => 'articlecategory', 'label' => 'Category']);
         
         $this->addCheckbox(['name' => 'isanonymous', 'label' => 'Publish anonymously?']);

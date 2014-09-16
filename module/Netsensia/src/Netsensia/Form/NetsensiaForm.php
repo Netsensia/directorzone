@@ -74,6 +74,11 @@ class NetsensiaForm extends Form
         $this->addHidden('netsensiaWidget_geography_' . uniqid(), json_encode($options), 'widget_geography');
     }
     
+    public function addHierachy($options)
+    {
+        $this->addHidden('netsensiaWidget_tieredselect_' . uniqid(), json_encode($options), 'widget_hierarchy');
+    }
+    
     public function addRelation($options)
     {
 		foreach ($options['fields'] as $field) {

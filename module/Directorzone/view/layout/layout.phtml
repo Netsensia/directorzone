@@ -164,8 +164,9 @@
                 
                 $variables = $ourView->getVariables();
                 
-                if (isset($variables['flashMessages']) && count($variables['flashMessages']) > 0) : 
+                if (isset($variables['flashMessages']) && count($variables['flashMessages']) > 0) :
             ?>
+            <div class="container">
                  <?php foreach ($variables['flashMessages'] as $fMessage) : ?>
                     <?php $alertType = 'block'; ?>
                     <?php if (preg_match('/^(.*)##(.*)$/', $fMessage, $matches)) { $fMessage = $matches[1]; $alertType = $matches[2]; } ?>
@@ -173,14 +174,13 @@
                         <button type="button" class="close" data-dismiss="alert">&times;</button> 
                     <?php echo $fMessage; ?>
                     </div>
-                    <?php endforeach; ?>  
+                    <?php endforeach; ?>
+             </div>  
                 <?php endif; ?>
             <?php 
             }
             ?>
             
-
-
             <?php echo $this->content; ?>
             
         </div>
