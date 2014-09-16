@@ -29,7 +29,7 @@ class AccountPublishForm extends NetsensiaForm
         $this->addHierachy(
                 [
                 'type' => 'select',
-                'tablemodel' => 'ArtcleCategory',
+                'tablemodel' => 'ArticleCategory',
                 'name' => 'articlecategory',
                 'label' => 'Article Category',
                 ]

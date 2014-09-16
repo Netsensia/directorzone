@@ -213,7 +213,7 @@ class Module
             'UserQualification',
             'UserLanguage',
             'ArticleSector',
-            'ArticleArticleCategory',
+            'ArticleCategory',
             'ArticleGeography',
             'ArticleKeyEvent',
             'UserWhosWhoSector',

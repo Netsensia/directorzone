@@ -14,6 +14,6 @@ class Hierarchy extends Widget
             true
         );
         
-        //var_dump($optionsArray); die;
+        $this->element->setAttribute('data-hierarchyvalues', json_encode($optionsArray));
     }
 }
