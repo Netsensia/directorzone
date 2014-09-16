@@ -76,7 +76,7 @@ class NetsensiaForm extends Form
     
     public function addHierachy($options)
     {
-        $this->addHidden('netsensiaWidget_tieredselect_' . uniqid(), json_encode($options), 'widget_hierarchy');
+        $this->addHidden('netsensiaWidget_hierachy_' . uniqid(), json_encode($options), 'widget_hierarchy');
     }
     
     public function addRelation($options)
