@@ -74,9 +74,9 @@ class NetsensiaForm extends Form
         $this->addHidden('netsensiaWidget_geography_' . uniqid(), json_encode($options), 'widget_geography');
     }
     
-    public function addHierachy($options)
+    public function addHierarchy($options)
     {
-        $this->addHidden('netsensiaWidget_hierachy_' . uniqid(), json_encode($options), 'widget_hierarchy');
+        $this->addHidden('netsensiaWidget_hierarchy_' . uniqid(), json_encode($options), 'widget_hierarchy');
     }
     
     public function addRelation($options)
