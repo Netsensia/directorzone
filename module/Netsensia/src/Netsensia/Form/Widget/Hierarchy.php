@@ -23,7 +23,9 @@ class Hierarchy extends Widget
         
         $results = $rowset->toArray();
         
-        $options->value = $results[0]['articlecategoryid'];
+        if (is_array($results) && count($results) != 0) {
+            $options->value = $results[0][$options->name . 'id'];
+        }
                         
         $this->element->setValue(json_encode($options));
 
