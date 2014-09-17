@@ -77,6 +77,11 @@ $(document).ready(function() {
 		var selectedId = $(this).val();
 		$(widgetDiv).append(getSelectHtml(widgetId, selectedId, allOptions));
 		
+		var widgetValue = $.parseJSON($(widgetEl).val());
+
+		widgetValue.value = selectedId;
+		$(widgetEl).val(JSON.stringify(widgetValue));
+		
 	});
 	
 });
