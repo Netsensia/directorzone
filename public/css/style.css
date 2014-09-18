@@ -283,3 +283,7 @@ div.articlekeyfacts span {
 .news-panel-wide {
     height:20em;	
 }
+
+.hierarchy-widget-group {
+	display:block;
+}

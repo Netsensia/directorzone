@@ -35,14 +35,14 @@ $(document).ready(function() {
 	{
 		var selectOptions = getOptions(allOptions, parentId);
 		
-    	var selectHtml = '<select id="' + widgetId + '_' + parentId + '" data-widgetId="' + widgetId + '">';
+    	var selectHtml = '<div class="hierarchy-widget-group"><select id="' + widgetId + '_' + parentId + '" class="form-control" data-widgetId="' + widgetId + '">';
     	selectHtml += '<option value="-1">Please select...</option>';
     	var count = 0;
     	for (var i=0; i<selectOptions.length; i++) {
     		selectHtml += '<option value="' + selectOptions[i][0] + '">' + selectOptions[i][1] + '</option>';
     		count++;
     	}
-    	selectHtml += '</select>';
+    	selectHtml += '</select></div>';
     	
     	return count > 0 ? selectHtml : '';
 	}
@@ -57,7 +57,7 @@ $(document).ready(function() {
     	var labelDiv = $('div[data-netsensia-group=' + widgetId + '] label.control-label');
     	
     	$(labelDiv).html(widgetValue.label);
-    	$(widgetDiv).append('<div class="input-group">');
+    	$(widgetDiv).append('<div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span></div>');
     	var widgetDiv = $('div[data-netsensia-group=' + widgetId + '] div.controls div.input-group');
     	
     	$(widgetDiv).append(getSelectHtml(widgetId, -1, allOptions));
