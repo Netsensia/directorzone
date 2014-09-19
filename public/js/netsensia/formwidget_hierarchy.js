@@ -66,7 +66,7 @@ $(document).ready(function() {
 	
 	$(document).delegate('select[id^=netsensiaWidget_hierarchy]', 'change', function() {
 		
-		$(this).nextAll('select').each(function() {
+		$(this).parent().nextAll('div').each(function() {
 			$(this).remove();
 		})
 		
