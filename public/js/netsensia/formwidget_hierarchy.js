@@ -84,5 +84,19 @@ $(document).ready(function() {
 		
 	});
 	
+	$('input[name="form-submit"]').click(function (event) {
+		
+		var complete = true;
+		$('select[id^=netsensiaWidget_hierarchy]').each(function() {
+			if ($(this).val() == -1) {
+				alert('Please select a category for this post');
+				event.stopPropagation();
+				complete = false;
+			}
+		});
+		
+		return complete;
+	});
+	
 });
 
