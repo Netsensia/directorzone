@@ -87,14 +87,28 @@ $(document).ready(function() {
 	$('input[name="form-submit"]').click(function (event) {
 		
 		var complete = true;
-		$('select[id^=netsensiaWidget_hierarchy]').each(function() {
-			if ($(this).val() == -1) {
-				alert('Please select a category for this post');
-				event.stopPropagation();
-				complete = false;
+		$('input[id^=netsensiaWidget_hierarchy]').each(function() {
+			
+			var widgetId = $(this).attr('id');
+			var widgetEl = $('input#' + widgetId);
+			var widgetValue = $.parseJSON($(widgetEl).val());
+			
+			$('select[data-widgetid=' + widgetId + ']').each(function() {
+				if ($(this).val() == -1) {
+					alert(widgetValue.messageWhenEmpty);
+					event.stopPropagation();
+					complete = false;
+				}
+			});
+			
+			if (complete) {
+				$(widgetEl).val(widgetValue.value);
+				$(widgetEl).attr('name', widgetValue.name + 'id');
+				$(widgetEl).attr('id', 'processDirectly_' + $(widgetEl).attr('id'));
+			
 			}
 		});
-		
+
 		return complete;
 	});
 	

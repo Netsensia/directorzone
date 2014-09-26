@@ -29,7 +29,8 @@ class AccountPublishForm extends NetsensiaForm
         $this->addHierarchy(
                 [
                 'type' => 'select',
-                'tablemodel' => 'ArticleCategory',
+                'tablemodel' => 'Article',
+                'messageWhenEmpty' => 'Please select a category for this post',
                 'name' => 'articlecategory',
                 'label' => 'Article Category',
                 ]

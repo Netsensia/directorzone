@@ -119,6 +119,11 @@ class ArticleService extends NetsensiaService
             $start = 1;
         }
         
+        $typeArray = [];
+        for ($i=0; $i<1000; $i++) {
+            $typeArray[] = $i;
+        }
+        
         $rowset = $this->articleTable->select(
             function (Select $select) use ($typeArray, $statusArray, $start, $end, $order, $userId) {
 
