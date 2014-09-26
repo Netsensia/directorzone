@@ -31,20 +31,66 @@ $(document).ready(function() {
 		return items;
 	}
 	
-	function getSelectHtml(widgetId, parentId, allOptions)
+	function getChildren(value, allOptions)
+	{
+		var children = [];
+		for (var i=0; i<allOptions.length; i++)	{
+			var childParentCombo = allOptions[i].value;
+			var split = childParentCombo.split(',');
+			var childId = split[0];
+			var parentId = split[1];
+			if (parentId == value) {
+				children[children.length] = childId;
+			}
+		}
+		return children;
+	}
+	
+	function isFamily(value, ultimateId, allOptions)
+	{
+		if (value == ultimateId) {
+			return true;
+		}
+		
+		var children = getChildren(value, allOptions);
+		
+		for (var i=0; i<children.length; i++) {
+			var child = children[i];
+			if (isFamily(child, ultimateId, allOptions)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	function getSelectHtml(widgetId, parentId, allOptions, ultimateId)
 	{
 		var selectOptions = getOptions(allOptions, parentId);
+		var selectedId = -1;
 		
     	var selectHtml = '<div class="hierarchy-widget-group"><select id="' + widgetId + '_' + parentId + '" class="form-control" data-widgetId="' + widgetId + '">';
     	selectHtml += '<option value="-1">Please select...</option>';
     	var count = 0;
     	for (var i=0; i<selectOptions.length; i++) {
-    		selectHtml += '<option value="' + selectOptions[i][0] + '">' + selectOptions[i][1] + '</option>';
+    		var value = selectOptions[i][0];
+    		var selectedText = '';
+    		
+    		if (isFamily(value, ultimateId, allOptions)) {
+    			selectedText = ' selected ';
+    			selectedId = value;
+    		}
+    		
+    		selectHtml += '<option ' + selectedText + ' value="' + selectOptions[i][0] + '">' + selectOptions[i][1] + '</option>';
     		count++;
     	}
     	selectHtml += '</select></div>';
     	
-    	return count > 0 ? selectHtml : '';
+    	if (count == 0) {
+    		selectHtml = '';
+    	}
+    	
+    	return {selectHtml: selectHtml, selectedId: selectedId};
 	}
 	
 	$('input[id^=netsensiaWidget_hierarchy]').each(function() {
@@ -52,6 +98,7 @@ $(document).ready(function() {
 		var widgetId = $(this).attr('id');
     	var allOptions = $.parseJSON($(this).attr('data-hierarchyvalues'));
     	var widgetValue = $.parseJSON($(this).val());
+    	var selectedId = widgetValue.value;
     	
     	var widgetDiv = $('div[data-netsensia-group=' + widgetId + '] div.controls');
     	var labelDiv = $('div[data-netsensia-group=' + widgetId + '] label.control-label');
@@ -60,9 +107,15 @@ $(document).ready(function() {
     	$(widgetDiv).append('<div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span></div>');
     	var widgetDiv = $('div[data-netsensia-group=' + widgetId + '] div.controls div.input-group');
     	
-    	$(widgetDiv).append(getSelectHtml(widgetId, -1, allOptions));
-
-    });
+    	var parentId = -1;
+    	do 
+    	{
+    		var result = getSelectHtml(widgetId, parentId, allOptions, selectedId);
+    		$(widgetDiv).append(result.selectHtml);
+    		parentId = result.selectedId;
+		} // keep going if we have a value set and it's not the ultimate selection
+    	while (result.selectedId != selectedId && result.selectedId != -1)
+	});
 	
 	$(document).delegate('select[id^=netsensiaWidget_hierarchy]', 'change', function() {
 		
@@ -75,7 +128,8 @@ $(document).ready(function() {
 		var allOptions = $.parseJSON($(widgetEl).attr('data-hierarchyvalues'));
 		var widgetDiv = $('div[data-netsensia-group=' + widgetId + '] div.controls div.input-group');
 		var selectedId = $(this).val();
-		$(widgetDiv).append(getSelectHtml(widgetId, selectedId, allOptions));
+		var result = getSelectHtml(widgetId, selectedId, allOptions, selectedId);
+		$(widgetDiv).append(result.selectHtml);
 		
 		var widgetValue = $.parseJSON($(widgetEl).val());
 
