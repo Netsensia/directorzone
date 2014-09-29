@@ -26,6 +26,7 @@ textarea {
 <script>
 
 $(function() {
+
     // Replace all textareas
     // with SCEditor
     $("textarea").sceditor({
@@ -74,4 +75,17 @@ function locationVisibility(display)
 {
     $("[data-netsensia-group='account-publish-location']").css('display', display);
 }
+
+$(document).delegate('select[id^=netsensiaWidget_hierarchy]', 'change', function(event) {
+	var selectedId = $(this).val();
+	if (selectedId == 18 || selectedId == 20) {
+		if ($('#no-company-warning').length == 0) {
+			  $('.hierarchy-widget-group').parent().append('<div id="no-company-warning" class="bs-callout bs-callout-danger bs-callout-overview">You do not currently have any companies associated with your account.</div>');
+		}
+		$(this).val(-1);
+		event.stopPropogation();
+		return false;
+	}
+});
+
 </script>
