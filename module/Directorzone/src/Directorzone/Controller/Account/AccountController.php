@@ -119,9 +119,12 @@ class AccountController extends NetsensiaActionController
     {
         $articleId = $this->params('id');
         
+        $hasCompany = $this->talentPoolService->hasCompany($this->getUserId());
+        
         return array(
             "editId" => $articleId,
             'isAdmin' => $this->isAdmin(),
+            'hasCompany' => $hasCompany,
             "form" => $this->processForm(
                 'AccountPublishForm',
                 'Article',

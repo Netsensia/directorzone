@@ -16,9 +16,6 @@ use Directorzone\Service\BingService;
 use Directorzone\Service\ArticleService;
 use Directorzone\Service\TalentPoolService;
 use Directorzone\Service\FilterService;
-use Directorzone\Form\Company\CompanyOwnersForm;
-use Zend\Mvc\Router\Http\TreeRouteStack;
-use Zend\Mvc\Router\PriorityList;
 use Directorzone\Service\CompanyOwnersService;
 
 class Module
@@ -209,7 +206,6 @@ class Module
             'Article',
             'CompanyDirectory',
             'UserProfessionalQualification',
-            'UserCompany',
             'UserQualification',
             'UserLanguage',
             'ArticleSector',
@@ -229,6 +225,7 @@ class Module
             $modelsAndGateways,
             [
             'User',
+            'UserCompany',
             'CompanyOfficer',
             'CompanySicCode',
             'CompanyUpload',
@@ -386,7 +383,8 @@ class Module
             'TalentPoolService' => function ($sm) {
                 $instance = new TalentPoolService(
                     $sm->get('UserTableGateway'),
-                    $sm->get('UserTargetRoleTableGateway')
+                    $sm->get('UserTargetRoleTableGateway'),
+                    $sm->get('UserCompanyTableGateway')
                 );
                 return $instance;
             },

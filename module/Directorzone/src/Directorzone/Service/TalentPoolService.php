@@ -16,15 +16,18 @@ class TalentPoolService extends NetsensiaService
      * @var TableGateway
      */
     private $talentPoolDirectoryTable;
-    private $userTargetRole;
+    private $userTargetRoleTable;
+    private $userCompanyTable;
     
     public function __construct(
         TableGateway $talentPoolDirectory,
-        TableGateway $userTargetRole
+        TableGateway $userTargetRole,
+        TableGateway $userCompany
     )
     {
         $this->talentPoolDirectoryTable = $talentPoolDirectory;
         $this->userTargetRoleTable = $userTargetRole;
+        $this->userCompanyTable = $userCompany;
         $this->setPrimaryTable($talentPoolDirectory);
     }
 
@@ -78,6 +81,21 @@ class TalentPoolService extends NetsensiaService
         }
         
         return $people;
+    }
+    
+    public function hasCompany($talentPoolDirectoryId)
+    {
+        $rowset = $this->userCompanyTable->select(
+            function (Select $select) use ($talentPoolDirectoryId) {
+                $select->where(
+                    [
+                        'userid' => $talentPoolDirectoryId
+                    ]
+                );
+            }
+        )->toArray();
+        
+        return count($rowset) > 0;
     }
         
     public function getTalentPoolDetails($talentPoolDirectoryId)
