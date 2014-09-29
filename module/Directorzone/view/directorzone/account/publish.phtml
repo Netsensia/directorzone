@@ -80,7 +80,12 @@ $(document).delegate('select[id^=netsensiaWidget_hierarchy]', 'change', function
 	var selectedId = $(this).val();
 	if (<?php echo !$this->hasCompany ?> && (selectedId == 18 || selectedId == 20)) {
 		if ($('#no-company-warning').length == 0) {
-			  $('.hierarchy-widget-group').parent().append('<div id="no-company-warning" class="bs-callout bs-callout-danger bs-callout-overview">You do not currently have any companies associated with your account.</div>');
+			  $('.hierarchy-widget-group').parent().append(
+				  '<div id="no-company-warning" class="bs-callout bs-callout-danger bs-callout-overview">' +
+				  'You do not currently have any companies associated with your account. You can associate your account with a company ' +
+				  'on the profile page of any company. If your company is not in our directory, you can add it via your personal profile.' +
+				  '</div>'
+			  );
 		}
 		$(this).val(-1);
 		event.stopPropogation();
