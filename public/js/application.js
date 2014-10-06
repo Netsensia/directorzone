@@ -7,6 +7,10 @@ $(function(){
 		toggleSelectOther($(this).attr('id'));
 	});
 	
+	$('.date-entry').each( function () {
+		$(this).val($(this).val().substring(0,10));
+	});
+	
 	$('.date-entry').datepicker( { 
 		changeYear: true, yearRange: "1920:2020",
 		dateFormat: "yy-mm-dd",
