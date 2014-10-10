@@ -22,26 +22,42 @@ class CompanyFinancialsForm extends NetsensiaForm
         $this->addSelect('exchange');
         $this->addSelect(['name' => 'companycategory', 'label' => 'Company Category']);
         $this->addText('trading-symbol');
-        /*
+        $this->addSelect(['name' => 'employeerange', 'label' => 'Number of Employees']);
+        $this->addText(['name' => 'actualemployees', 'label' => 'Actual Employees']);
+        $this->addDate(['name' => 'employeecountdate', 'label' => 'Date of Employee Count']);
+        $this->addSelect(['name' => 'revenuerange', 'label' => 'Company Revenue']);
+        $this->addText(['name' => 'actualrevenue', 'label' => 'Actual Revenue']);
+        $this->addText(['name' => 'revenueyear', 'label' => 'Year of Reported Revenue']);
+        $this->addSelect(['name' => 'revenuegrowthrange', 'table' => 'revenuerange', 'label' => 'Revenue Growth']);
+        $this->addText(['name' => 'actualrevenuegrowth', 'label' => 'Actual Revenue Growth']);
+        $this->addText(['name' => 'revenuegrowthyear', 'label' => 'Year of Revenue Growth']);
+        $this->addSelect(['name' => 'financialyearend', 'table' => 'month', 'label' => 'Financial Year End']);
+        $this->addMultiTable([
+            'groupname' => 'Past Company Names',
+            'jointablemodel' => 'CompanyPastName',
+            'jointablekeycolumn' => 'companydirectoryid',
+            'fields' => [
+                ['type' => 'text', 'name' => 'companypastname', 'label' => 'Previous Name'],
+            ],
+        ]);
+        $this->addSelect(['name' => 'companyphase', 'label' => 'Company Phase/Size']);
 
-        Trading symbol (if listed)		DD
-        Company EMPLOYEES*			DD	Range
-        Company EMPLOYEES		FT	Actual
-        Company EMPLOYEES (date)		DD	i.e year of reported employees
-        Company REVENUES*			DD	Range
-        Company REVENUES		FT	Actual
-        Company REVENUES (date)		DD	i.e year of reported rev
-        Company revenue GROWTH (range) DD
-        Company revenue GROWTH (date) DD i.e year of reported growth
-        Financial year (end)			CH / FT	Month
-        Past company names			CH / FT
-        Company PHASE / SIZE			DD	Large, Medium, Small, Micro, Start-up
-        Company PROFIT			DD	Range
-        Company RANKING			DD	Choose from list of Ranking bodies (Fastrack, Queen’s Award, etc.)
-        Company RANKING			DD	Select year(s) that appeared in ranking
-        Patents				FT
-        Company INVESTMENT status		DD	Vc-backed, Angel-backed, etc.
-        */
+        $this->addSelectWithInvisibleOther(
+            [
+                'name' => 'companyranking',
+                'label' => 'Company Ranking',
+            ]);
+        $this->addSelect(['name' => 'companyprofit', 'label' => 'Company Profit']);
+        $this->addSelect(['name' => 'investmentstatus', 'label' => 'Investment Status']);
+        
+        $this->addMultiTable([
+            'groupname' => 'Patents',
+            'jointablemodel' => 'CompanyPatent',
+            'jointablekeycolumn' => 'companydirectoryid',
+            'fields' => [
+                ['type' => 'text', 'name' => 'companypatent', 'label' => 'Patent'],
+            ],
+        ]);
         
         $this->addSubmit('Submit');
         

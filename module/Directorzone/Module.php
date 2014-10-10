@@ -219,6 +219,8 @@ class Module
             'CompanyImportMarket',
             'CompanyExportMarket',
         	'CompanyRelationship',
+            'CompanyPastName',        
+            'CompanyPatent',
         ];
         
         $tableGateways = array_merge(

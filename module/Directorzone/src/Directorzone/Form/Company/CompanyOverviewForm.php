@@ -22,12 +22,6 @@ class CompanyOverviewForm extends NetsensiaForm
         
         $this->addTextArea('business-description');
         
-        $this->addSelectWithInvisibleOther(
-            [
-                'name' => 'companyranking',
-                'label' => 'Company Ranking',
-            ]);
-        
         $this->addSubmit('Submit');
         
         parent::prepare();
