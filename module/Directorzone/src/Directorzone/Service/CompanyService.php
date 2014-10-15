@@ -477,6 +477,12 @@ class CompanyService extends NetsensiaService
                 ->columns(
                     $columns   
                 )
+                ->join(
+                    'exchange',
+                    'companydirectory.exchangeid = exchange.exchangeid',
+                    ['exchange'],
+                    Select::JOIN_LEFT
+                )
                 ->offset($start - 1)
                 ->limit(1 + ($end - $start))
                 ->order($columns[abs($order)-1] . ' ' . ($order < 0 ? 'DESC' : 'ASC'));

@@ -131,7 +131,7 @@ function loadCompanies(type)
 				var newRow = '<tr>';
 				newRow += '<td><a href="' + url + '">' + value.number + '</a></td>';
 				newRow += '<td>' + value.name + '</td>';
-				newRow += '<td>FTSE AIM 100</td>';
+				newRow += '<td style="white-space: nowrap;">' + value.exchange + '</td>';
 				newRow += '</tr>';
 		
 				return newRow;
