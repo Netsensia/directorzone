@@ -467,6 +467,7 @@ class CompanyService extends NetsensiaService
         $rowset = $this->companyDirectoryTable->select(
             function (Select $select) use ($status, $start, $end, $dzType, $order) {
                 $columns = ['reference', 'name', 'ceo', 'sectors', 'turnoverid',  'createdtime', 'companydirectoryid'];
+                $sortColumns = ['reference', 'name', 'ceo', 'sectors', 'turnoverid',  'createdtime', 'companydirectoryid', 'exchange', 'town', 'siccode1'];
 
                 $select->where(
                     [
@@ -491,7 +492,7 @@ class CompanyService extends NetsensiaService
                 )
                 ->offset($start - 1)
                 ->limit(1 + ($end - $start))
-                ->order($columns[abs($order)-1] . ' ' . ($order < 0 ? 'DESC' : 'ASC'));
+                ->order($sortColumns[abs($order)-1] . ' ' . ($order < 0 ? 'DESC' : 'ASC'));
             }
         );
     
