@@ -160,6 +160,8 @@ class CompanyController extends NetsensiaActionController
             $sectors = '';
             $turnover = '';
             $exchange = $result['exchange'] == null ? '' : $result['exchange'];
+            $town = $result['town'] == null ? '' : $result['town'];
+            $primarySector = $result['siccode1'];
                         
             if (isset($result['companynumber'])) {
                 $companyNumber = $result['companynumber'];
@@ -185,6 +187,8 @@ class CompanyController extends NetsensiaActionController
                 'number' => $companyNumber,
                 'name' => $name,
                 'ceo' => $ceo,
+                'town' => $town,
+                'primarysector' => $primarySector,
                 'exchange' => $exchange,
                 'sectors' => $sectors,
                 'turnover' => $turnover,

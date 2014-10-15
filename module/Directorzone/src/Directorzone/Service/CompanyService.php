@@ -470,7 +470,7 @@ class CompanyService extends NetsensiaService
 
                 $select->where(
                     [
-                    'recordstatus' => $status,
+                    'companydirectory.recordstatus' => $status,
                     'companytypeid' => ($dzType == 3 ? [1,2,3] : [$dzType, 3])
                     ]
                 )
@@ -481,6 +481,12 @@ class CompanyService extends NetsensiaService
                     'exchange',
                     'companydirectory.exchangeid = exchange.exchangeid',
                     ['exchange'],
+                    Select::JOIN_LEFT
+                )
+                ->join(
+                    'companieshouse',
+                    'companydirectory.reference = companieshouse.number',
+                    ['town', 'siccode1'],
                     Select::JOIN_LEFT
                 )
                 ->offset($start - 1)
