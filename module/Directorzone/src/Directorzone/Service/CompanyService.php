@@ -221,8 +221,117 @@ class CompanyService extends NetsensiaService
         
         $companyDetails['relatedCompanies'] = $relatedCompanies;
         
+        if ($companyDetails['closuredate'] == '0000-00-00') $companyDetails['closuredate'] = '';
+        if ($companyDetails['incorporationdate'] == '0000-00-00') $companyDetails['incorporationdate'] = '';
+        if ($companyDetails['employeecountdate'] == '0000-00-00') $companyDetails['employeecountdate'] = '';
+        if ($companyDetails['revenuedate'] == '0000-00-00') $companyDetails['revenuedate'] = '';
+        if ($companyDetails['revenuegrowthdate'] == '0000-00-00') $companyDetails['revenuegrowthdate'] = '';
+        
+        $companyDetails['revenuegrowthrange'] = $this->getGrowthRange($companyDetails['actualrevenuegrowth']);
+        $companyDetails['revenuerange'] = $this->getRevenueRange($companyDetails['actualrevenue']);
+        $companyDetails['employeerange'] = $this->getEmployeeRange($companyDetails['actualemployees']);
+        
         return $companyDetails;
         
+    }
+    
+    private function getGrowthRange($n)
+    {
+        if ($n <= 5) {
+            return '0-5%';
+        }
+        
+        if ($n <= 10) {
+            return '6-10%';
+        }
+        
+        if ($n <= 20) {
+            return '11-20%';
+        }
+        
+        if ($n <= 30) {
+            return '21-30%';
+        }
+        
+        if ($n <= 50) {
+            return '31-50%';
+        }
+        
+        if ($n <= 75) {
+            return '51-75%';
+        }
+        
+        if ($n < 100) {
+            return '76-100%';
+        }
+        
+        return '100% +';
+    }
+    
+    private function getEmployeeRange($n)
+    {
+        if ($n <= 4) {
+            return '0-4';
+        }
+        
+        if ($n <= 10) {
+            return '5-10';
+        }
+        
+        if ($n <= 20) {
+            return '11-20';
+        }
+        
+        if ($n <= 50) {
+            return '21-50';
+        }
+        
+        return '50+';
+    }
+    
+    private function getRevenueRange($n)
+    {
+        if ($n == '') {
+            return 'Not available/applicable';
+        }
+        
+        if ($n < 0) {
+            return 'Pre-revenue';
+        }
+        
+        if ($n <= 100) {
+            return 'EUR 0-100k';
+        }
+        
+        if ($n <= 500) {
+            return 'EUR 100-500k';
+        }
+        
+        if ($n <= 2000000) {
+            return 'EUR 500k - 2m';
+        }
+        
+        if ($n <= 5000000) {
+            return 'EUR 2 - 5m';
+        }
+        
+        if ($n <= 20000000) {
+            return 'EUR 5 - 20m';
+        }
+        
+        if ($n <= 50000000) {
+            return 'EUR 20 - 50m';
+        }
+        
+        if ($n <= 200000000) {
+            return 'EUR 50 - 200m';
+        }
+        
+        if ($n <= 1000000000) {
+            return 'EUR 200m - 1bn';
+        }
+        
+        return 'EUR 1bn+';
     }
     
     public function getCompaniesHouseCount()

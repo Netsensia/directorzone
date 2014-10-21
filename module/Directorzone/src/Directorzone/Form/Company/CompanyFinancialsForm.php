@@ -22,14 +22,11 @@ class CompanyFinancialsForm extends NetsensiaForm
         $this->addSelect('exchange');
         $this->addSelect(['name' => 'companycategory', 'label' => 'Company Category']);
         $this->addText('trading-symbol');
-        $this->addSelect(['name' => 'employeerange', 'label' => 'Number of Employees']);
-        $this->addText(['name' => 'actualemployees', 'label' => 'Actual Employees']);
+        $this->addText(['name' => 'actualemployees', 'label' => 'Number of Employees']);
         $this->addDate(['name' => 'employeecountdate', 'label' => 'Date of Employee Count']);
-        $this->addSelect(['name' => 'revenuerange', 'label' => 'Company Revenue']);
-        $this->addText(['name' => 'actualrevenue', 'label' => 'Actual Revenue']);
+        $this->addText(['name' => 'actualrevenue', 'label' => 'Revenue']);
         $this->addText(['name' => 'revenueyear', 'label' => 'Year of Reported Revenue']);
-        $this->addSelect(['name' => 'revenuegrowthrange', 'table' => 'revenuerange', 'label' => 'Revenue Growth']);
-        $this->addText(['name' => 'actualrevenuegrowth', 'label' => 'Actual Revenue Growth']);
+        $this->addText(['name' => 'actualrevenuegrowth', 'label' => 'Revenue Growth %']);
         $this->addText(['name' => 'revenuegrowthyear', 'label' => 'Year of Revenue Growth']);
         $this->addSelect(['name' => 'financialyearend', 'table' => 'month', 'label' => 'Financial Year End']);
         $this->addMultiTable([
