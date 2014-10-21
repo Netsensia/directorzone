@@ -127,9 +127,11 @@ function loadCompanies(type)
 			'directories',
 			'/ajax/company/list?type=' + type,
 			function(key, value) {
+				var sectorSplit = value.primarysector.split(" ");
+				var primarySector = sectorSplit[0];
 				var url = '/directories/company/' + value.internalId;
 				var newRow = '<tr>';
-				newRow += '<td><a href="' + url + '">' + value.primarysector + '</a></td>';
+				newRow += '<td><a href="' + url + '">' + primarySector + '</a></td>';
 				newRow += '<td>' + value.name + '</td>';
 				newRow += '<td style="white-space: nowrap;">' + value.town + '</td>';
 				newRow += '</tr>';

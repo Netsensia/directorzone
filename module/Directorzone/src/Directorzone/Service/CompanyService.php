@@ -476,7 +476,7 @@ class CompanyService extends NetsensiaService
                     ]
                 )
                 ->columns(
-                    $columns   
+                    $columns
                 )
                 ->join(
                     'exchange',
