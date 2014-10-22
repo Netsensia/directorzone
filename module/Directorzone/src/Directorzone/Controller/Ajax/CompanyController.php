@@ -159,9 +159,9 @@ class CompanyController extends NetsensiaActionController
             $ceo = '';
             $sectors = '';
             $turnover = '';
-            $exchange = $result['exchange'] == null ? '' : $result['exchange'];
-            $town = $result['town'] == null ? '' : $result['town'];
-            $primarySector = $result['siccode1'];
+            $exchange = @($result['exchange'] == null ? '' : $result['exchange']);
+            $town = @($result['town'] == null ? '' : $result['town']);
+            $primarySector = @$result['siccode1'];
                         
             if (isset($result['companynumber'])) {
                 $companyNumber = $result['companynumber'];
