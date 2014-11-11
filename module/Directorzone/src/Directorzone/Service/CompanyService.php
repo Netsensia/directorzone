@@ -140,6 +140,51 @@ class CompanyService extends NetsensiaService
                     'companydirectory.reference = companieshouse.number',
                     Select::SQL_STAR,
                     Select::JOIN_LEFT
+                )
+                ->join(
+                    'companystatus',
+                    'companydirectory.companystatusid = companystatus.companystatusid',
+                    ['companystatus']
+                )
+                ->join(
+                    'companyphase',
+                    'companydirectory.companyphaseid = companyphase.companyphaseid',
+                    ['companyphase']
+                )
+                ->join(
+                    'companyprofit',
+                    'companydirectory.companyprofitid = companyprofit.companyprofitid',
+                    ['companyprofit']
+                )
+                ->join(
+                    'companyranking',
+                    'companydirectory.companyrankingid = companyranking.companyrankingid',
+                    ['companyranking']
+                )
+                ->join(
+                    'investmentstatus',
+                    'companydirectory.investmentstatusid = investmentstatus.investmentstatusid',
+                    ['investmentstatus']
+                )
+                ->join(
+                    'month',
+                    'companydirectory.financialyearendid = month.monthid',
+                    ['financialyearend' => 'month']
+                )
+                ->join(
+                    'exchange',
+                    'companydirectory.exchangeid = exchange.exchangeid',
+                    ['exchange']
+                )
+                ->join(
+                    'companycategory',
+                    'companydirectory.companycategoryid = companycategory.companycategoryid',
+                    ['companycategory']
+                )
+                ->join(
+                    'country',
+                    'companydirectory.countryoforiginid = country.countryid',
+                    ['countryoforigin' => 'country']
                 );
             }
         );
