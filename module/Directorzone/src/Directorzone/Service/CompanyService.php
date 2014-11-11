@@ -53,6 +53,8 @@ class CompanyService extends NetsensiaService
         TableGateway $companySicCode,
         TableGateway $companyOfficers,
         TableGateway $companyRelationship,
+        TableGateway $companyPastName,
+        TableGateway $companyPatent,
         CompanyAppointmentsRequest $companyAppointmentsRequest
     )
     {
@@ -62,6 +64,8 @@ class CompanyService extends NetsensiaService
         $this->companySicCodeTable = $companySicCode;
         $this->companyOfficersTable = $companyOfficers;
         $this->companyRelationship = $companyRelationship;
+        $this->companyPastName = $companyPastName;
+        $this->companyPatent = $companyPatent;
         $this->companyAppointmentsRequest = $companyAppointmentsRequest;
     }
 
@@ -237,6 +241,16 @@ class CompanyService extends NetsensiaService
             }
         }
         
+        $companyDetails['pastnames'] = $this->getMultipleTextValues(
+            $this->companyPastName,
+            $companyDetails['companydirectoryid']
+        );
+        
+        $companyDetails['patents'] = $this->getMultipleTextValues(
+            $this->companyPatent,
+            $companyDetails['companydirectoryid']
+        );
+        
         $relatedCompanies = [];
         
         $rowset = $this->companyRelationship->select(
@@ -278,6 +292,28 @@ class CompanyService extends NetsensiaService
         
         return $companyDetails;
         
+    }
+    
+    private function getMultipleTextValues(TableGateway $tableGateway, $companyDirectoryId)
+    {
+        $tableName = $tableGateway->getTable();
+        
+        return $tableGateway->select(
+            function (Select $select) use ($tableName, $companyDirectoryId) {
+                $select->where(
+                    [
+                        $tableName . '.companydirectoryid' => $companyDirectoryId,
+                    ]
+                )
+                ->columns([$tableName])
+                ->join(
+                    'companydirectory',
+                    'companydirectory.companydirectoryid = ' . $tableName .  '.companydirectoryid',
+                    [],
+                    Select::JOIN_LEFT
+                );
+            }
+        )->toArray();
     }
     
     private function getGrowthRange($n)

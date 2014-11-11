@@ -357,6 +357,8 @@ class Module
                     $sm->get('CompanySicCodeTableGateway'),
                     $sm->get('CompanyOfficerTableGateway'),
                     $sm->get('CompanyRelationshipTableGateway'),
+                    $sm->get('CompanyPastNameTableGateway'),
+                    $sm->get('CompanyPatentTableGateway'),
                     $sm->get('NetsensiaCompanies\Request\CompanyAppointmentsRequest')
                 );
                 return $instance;
