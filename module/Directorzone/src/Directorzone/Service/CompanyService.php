@@ -148,47 +148,56 @@ class CompanyService extends NetsensiaService
                 ->join(
                     'companystatus',
                     'companydirectory.companystatusid = companystatus.companystatusid',
-                    ['companystatus']
+                    ['companystatus'],
+                    Select::JOIN_LEFT
                 )
                 ->join(
                     'companyphase',
                     'companydirectory.companyphaseid = companyphase.companyphaseid',
-                    ['companyphase']
+                    ['companyphase'],
+                    Select::JOIN_LEFT
                 )
                 ->join(
                     'companyprofit',
                     'companydirectory.companyprofitid = companyprofit.companyprofitid',
-                    ['companyprofit']
+                    ['companyprofit'],
+                    Select::JOIN_LEFT
                 )
                 ->join(
                     'companyranking',
                     'companydirectory.companyrankingid = companyranking.companyrankingid',
-                    ['companyranking']
+                    ['companyranking'],
+                    Select::JOIN_LEFT
                 )
                 ->join(
                     'investmentstatus',
                     'companydirectory.investmentstatusid = investmentstatus.investmentstatusid',
-                    ['investmentstatus']
+                    ['investmentstatus'],
+                    Select::JOIN_LEFT
                 )
                 ->join(
                     'month',
                     'companydirectory.financialyearendid = month.monthid',
-                    ['financialyearend' => 'month']
+                    ['financialyearend' => 'month'],
+                    Select::JOIN_LEFT
                 )
                 ->join(
                     'exchange',
                     'companydirectory.exchangeid = exchange.exchangeid',
-                    ['exchange']
+                    ['exchange'],
+                    Select::JOIN_LEFT
                 )
                 ->join(
                     'companycategory',
                     'companydirectory.companycategoryid = companycategory.companycategoryid',
-                    ['companycategory']
+                    ['companycategory'],
+                    Select::JOIN_LEFT
                 )
                 ->join(
                     'country',
                     'companydirectory.countryoforiginid = country.countryid',
-                    ['countryoforigin' => 'country']
+                    ['countryoforigin' => 'country'],
+                    Select::JOIN_LEFT
                 );
             }
         );
