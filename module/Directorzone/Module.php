@@ -37,6 +37,7 @@ class Module
             'invokables' => array(
             	'ArticleFields' => 'Directorzone\View\Helper\ArticleFields',
                 'ArticleAuthor' => 'Directorzone\View\Helper\ArticleAuthor',
+                'Address' => 'Directorzone\View\Helper\Address',
             )
         );
     }
@@ -227,6 +228,7 @@ class Module
         $tableGateways = array_merge(
             $modelsAndGateways,
             [
+            'Country',
             'Address',
             'CompanyDirectory',
             'User',
@@ -409,7 +411,8 @@ class Module
             },
             'AddressService' => function ($sm) {
                 $instance = new AddressService(
-                    $sm->get('AddressTableGateway')
+                    $sm->get('AddressTableGateway'),
+                    $sm->get('CountryTableGateway')
                 );
                 return $instance;
             },

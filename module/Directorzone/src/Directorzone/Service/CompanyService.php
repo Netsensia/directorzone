@@ -320,7 +320,7 @@ class CompanyService extends NetsensiaService
         
         $companyDetails['registeredaddress'] = $this->addressService->getAddressDetails($companyDetails['registeredaddressid']);
         $companyDetails['tradingaddress'] = $this->addressService->getAddressDetails($companyDetails['tradingaddressid']);
-        
+
         return $companyDetails;
         
     }
