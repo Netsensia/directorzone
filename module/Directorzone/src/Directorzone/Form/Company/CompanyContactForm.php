@@ -15,7 +15,7 @@ class CompanyContactForm extends NetsensiaForm
         $this->setFieldPrefix('company-contact-');
         $this->setDefaultIcon('user');
         
-        $this->addText('telephone');
+        
         
         $this->addSubmit('Submit');
         

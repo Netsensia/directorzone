@@ -22,6 +22,20 @@ class CompanyOverviewForm extends NetsensiaForm
         
         $this->addTextArea('business-description');
         
+        $this->addText('telephone');
+        $this->addText('fax');
+        $this->addText('webaddress');
+        
+        $this->addText('name');
+        
+        $this->addText(['name' => 'reference', 'label' => 'Company Number']);
+        
+        $this->addSection(['title' => 'Registered Address', 'description' => '']);
+        $this->addAddress('registeredaddressid');
+        
+        $this->addSection(['title' => 'Trading Address', 'description' => '']);
+        $this->addAddress('tradingaddressid');
+                
         $this->addSubmit('Submit');
         
         parent::prepare();
