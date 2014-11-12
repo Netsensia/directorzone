@@ -17,6 +17,8 @@ use Directorzone\Service\ArticleService;
 use Directorzone\Service\TalentPoolService;
 use Directorzone\Service\FilterService;
 use Directorzone\Service\CompanyOwnersService;
+use Directorzone\Service\AddressService;
+use Directorzone\Model\CompanyDirectory;
 
 class Module
 {
@@ -204,7 +206,6 @@ class Module
     {
         $modelsAndGateways = [
             'Article',
-            'CompanyDirectory',
             'UserProfessionalQualification',
             'UserQualification',
             'UserLanguage',
@@ -226,6 +227,8 @@ class Module
         $tableGateways = array_merge(
             $modelsAndGateways,
             [
+            'Address',
+            'CompanyDirectory',
             'User',
             'UserCompany',
             'CompanyOfficer',
@@ -359,6 +362,7 @@ class Module
                     $sm->get('CompanyRelationshipTableGateway'),
                     $sm->get('CompanyPastNameTableGateway'),
                     $sm->get('CompanyPatentTableGateway'),
+                    $sm->get('AddressService'),
                     $sm->get('NetsensiaCompanies\Request\CompanyAppointmentsRequest')
                 );
                 return $instance;
@@ -403,6 +407,12 @@ class Module
                 );
                 return $instance;
             },
+            'AddressService' => function ($sm) {
+                $instance = new AddressService(
+                    $sm->get('AddressTableGateway')
+                );
+                return $instance;
+            },
             'CompanyUploadService' => function ($sm) {
                 $instance = new CompanyUploadService(
                     $sm->get('CompanyUploadTableGateway')
@@ -436,6 +446,15 @@ class Module
                 $form->setTranslator($sm->get('translator'));
                 $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
                 return $form;
+            },
+            'CompanyDirectoryModel' => function (\Zend\ServiceManager\ServiceLocatorInterface $sl) {
+                $instance = new CompanyDirectory();
+                $instance->setServiceLocator($sl);
+            
+                $instance->setRelation('registeredaddressid', 'address');
+                $instance->setRelation('tradingaddressid', 'address');
+            
+                return $instance;
             },
         );
         

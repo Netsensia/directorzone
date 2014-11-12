@@ -325,9 +325,6 @@ abstract class DatabaseTableModel
 
     private function getValueFromDataElement($value)
     {
-        //echo '<pre>';
-        //var_dump(debug_backtrace());
-        //var_dump($value);
         if (isset($value['type'])) {
             $value = $value['value'];
         }

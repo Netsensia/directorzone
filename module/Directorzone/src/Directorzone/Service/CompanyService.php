@@ -46,6 +46,8 @@ class CompanyService extends NetsensiaService
      */
     private $companyAppointmentsRequest;
     
+    private $addressService;
+    
     public function __construct(
         TableGateway $companyUpload,
         TableGateway $companiesHouse,
@@ -55,6 +57,7 @@ class CompanyService extends NetsensiaService
         TableGateway $companyRelationship,
         TableGateway $companyPastName,
         TableGateway $companyPatent,
+        AddressService $addressService,
         CompanyAppointmentsRequest $companyAppointmentsRequest
     )
     {
@@ -66,6 +69,7 @@ class CompanyService extends NetsensiaService
         $this->companyRelationship = $companyRelationship;
         $this->companyPastName = $companyPastName;
         $this->companyPatent = $companyPatent;
+        $this->addressService = $addressService;
         $this->companyAppointmentsRequest = $companyAppointmentsRequest;
     }
 
@@ -201,7 +205,7 @@ class CompanyService extends NetsensiaService
                 );
             }
         );
-                
+
         if ($rowset->count() == 0) {
             throw new NotFoundResourceException('Company not found in directory');
         }
@@ -298,6 +302,24 @@ class CompanyService extends NetsensiaService
         $companyDetails['revenuegrowthrange'] = $this->getGrowthRange($companyDetails['actualrevenuegrowth']);
         $companyDetails['revenuerange'] = $this->getRevenueRange($companyDetails['actualrevenue']);
         $companyDetails['employeerange'] = $this->getEmployeeRange($companyDetails['actualemployees']);
+        
+        if (empty($companyDetails['registeredaddressid'])) {
+            $registeredAddressId = $this->addressService->addAddress([
+                'address1' =>  $companyDetails['addressline1'],
+                'address2' =>  $companyDetails['addressline2'],
+                'address3' =>  $companyDetails['addressline3'],
+                'town' =>  $companyDetails['addressline4'],
+                'postcode' =>  $companyDetails['postcode'],
+            ]);
+            
+            $this->companyDirectoryTable->update(
+                ['registeredaddressid' => $registeredAddressId],
+                ['companydirectoryid' => $companyDetails['companydirectoryid']]
+            );
+        }
+        
+        $companyDetails['registeredaddress'] = $this->addressService->getAddressDetails($companyDetails['registeredaddressid']);
+        $companyDetails['tradingaddress'] = $this->addressService->getAddressDetails($companyDetails['tradingaddressid']);
         
         return $companyDetails;
         
