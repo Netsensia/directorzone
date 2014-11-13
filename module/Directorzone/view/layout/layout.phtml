@@ -79,9 +79,8 @@
                             $urls = array_merge($someurls, $moreurls); 
                         ?>
                         <?php foreach ($urls as $url => $name) { ?>
-                             <li
-                                class="<?php echo ($this->url() == $this->url($url) ? "active" : ""); ?>"><a
-                                href="<?php echo $this->url($url); ?>"><?php echo $this->translate($name); ?></a></li>
+                             <li class="">
+                                <a href="<?php echo $this->url($url); ?>"><?php echo $this->translate($name); ?></a></li>
                         <?php } ?>
                            <li><a style="color:#b94a48"><?php echo $this->translate('Anonymous') ?></a></li>
                            <li><a style="color:#3a87ad"><?php echo $this->translate('Public') ?></a></li>

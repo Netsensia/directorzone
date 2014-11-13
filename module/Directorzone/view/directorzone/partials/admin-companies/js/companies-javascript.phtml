@@ -54,7 +54,7 @@ $(document).ready(function() {
                 alert(data[0].error);
             }
             
-			$('#lightboxCompanyDetails #action-cancel').click();
+			$('#lightboxCompanyDetails #action-cancel').trigger("click");
 			window.location = '/admin/companies?type=pending';
 		});
 	}

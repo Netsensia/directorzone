@@ -568,7 +568,7 @@ class CompanyService extends NetsensiaService
         
         if (count($array) == 0) {
              throw new \Exception(
-                 'Could not find company to make live'
+                 'Could not find company ' . $uploadId . ' to make live'
              );
         }
         
