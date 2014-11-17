@@ -325,29 +325,73 @@ class CompanyService extends NetsensiaService
         $companyDetails['registeredaddress'] = $this->addressService->getAddressDetails($companyDetails['registeredaddressid']);
         $companyDetails['tradingaddress'] = $this->addressService->getAddressDetails($companyDetails['tradingaddressid']);
         
+        $companyDetails['isowner'] = $this->companyIsOwnedBy(
+            $companyDetails['companydirectoryid'],
+            $this->getUserId()
+        );
+        
+        return $companyDetails;
+        
+    }
+    
+    public function getOwners($companyDirectoryId)
+    {
         $rowset = $this->userCompany->select(
-            function (Select $select) use ($companyDetails) {
+            function (Select $select) use ($companyDirectoryId) {
                 $select->where(
                     [
-                        'usercompany.companydirectoryid' => $companyDetails['companydirectoryid'],
+                        'usercompany.companydirectoryid' => $companyDirectoryId,
                     ]
+                )
+                ->join(
+                    'usercompanyrole',
+                    'usercompanyrole.usercompanyroleid = usercompany.usercompanyroleid',
+                    ['usercompanyrole']
                 );
             }
         )->toArray();
         
+        $owners = [];
+        
+        foreach ($rowset as $owner) {
+            $owners[] = [
+                'userid' => $owner['userid'],
+                'roleid' => $owner['usercompanyroleid'],
+                'roledesc' => $owner['usercompanyrole']  
+            ];
+        }
+        
+        return $owners;
+    }
+    
+    public function companyIsOwnedBy($companyDirectoryId, $userId)
+    {
+        $owners = $this->getOwners($companyDirectoryId);
+        
         $isOwner = false;
         
-        foreach ($rowset as $companyOwner) {
-            if ($companyOwner['userid'] == $this->getUserId()) {
-                $isOwner = true;
-                break;
+        foreach ($owners as $owner) {
+            if ($owner['userid'] == $userId && $owner['roledesc'] == 'Owner') {
+                return true;
             }
         }
-
-        $companyDetails['isowner'] = $isOwner;
         
-        return $companyDetails;
+        return false;
+    }
+    
+    public function getOwnershipRole($companyDirectoryId, $userId)
+    {
+        $owners = $this->getOwners($companyDirectoryId);
         
+        $isOwner = false;
+        
+        foreach ($owners as $owner) {
+            if ($owner['userid'] == $userId) {
+                return $owner['roledesc'];
+            }
+        }
+        
+        return null;
     }
     
     private function getMultipleTextValues(TableGateway $tableGateway, $companyDirectoryId)

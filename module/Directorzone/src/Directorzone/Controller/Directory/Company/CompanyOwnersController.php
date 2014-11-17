@@ -27,8 +27,8 @@ class CompanyOwnersController extends NetsensiaActionController
     public function ownersAction()
     {  
         $return = [
-            'hasOwner' => false,
-            'ownershipRole' => false,
+            'hasOwner' => count($this->companyService->getOwners($this->params('id'))) > 0,
+            'ownershipRole' => $this->companyService->getOwnershipRole($this->params('id'), $this->getUserId()),
             'companyId' => $this->params('id'),
             'flashMessages' => $this->getFlashMessages(),
             'loggedOn' => false,
