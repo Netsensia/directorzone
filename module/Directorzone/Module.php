@@ -19,6 +19,7 @@ use Directorzone\Service\FilterService;
 use Directorzone\Service\CompanyOwnersService;
 use Directorzone\Service\AddressService;
 use Directorzone\Model\CompanyDirectory;
+use Directorzone\Form\Company\CompanyOwnersForm;
 
 class Module
 {
@@ -217,6 +218,7 @@ class Module
             'UserWhosWhoSector',
             'UserTargetRole',
             'ArticleJobArea',
+            'UserCompany',
             'CompanySector',
             'CompanyImportMarket',
             'CompanyExportMarket',
@@ -233,7 +235,6 @@ class Module
             'Address',
             'CompanyDirectory',
             'User',
-            'UserCompany',
             'CompanyOfficer',
             'CompanySicCode',
             'CompanyUpload',
@@ -365,6 +366,7 @@ class Module
                     $sm->get('CompanyRelationshipTableGateway'),
                     $sm->get('CompanyPastNameTableGateway'),
                     $sm->get('CompanyPatentTableGateway'),
+                    $sm->get('UserCompanyTableGateway'),
                     $sm->get('AddressService'),
                     $sm->get('NetsensiaCompanies\Request\CompanyAppointmentsRequest')
                 );

@@ -35,6 +35,8 @@ class CompanyService extends NetsensiaService
      * @var TableGateway
      */
     private $companySicCodesTable;
+   
+    private $userCompanyTable;
     
     /**
      * @var TableGateway
@@ -57,6 +59,7 @@ class CompanyService extends NetsensiaService
         TableGateway $companyRelationship,
         TableGateway $companyPastName,
         TableGateway $companyPatent,
+        TableGateway $userCompany,
         AddressService $addressService,
         CompanyAppointmentsRequest $companyAppointmentsRequest
     )
@@ -69,6 +72,7 @@ class CompanyService extends NetsensiaService
         $this->companyRelationship = $companyRelationship;
         $this->companyPastName = $companyPastName;
         $this->companyPatent = $companyPatent;
+        $this->userCompany = $userCompany;
         $this->addressService = $addressService;
         $this->companyAppointmentsRequest = $companyAppointmentsRequest;
     }
@@ -320,7 +324,28 @@ class CompanyService extends NetsensiaService
         
         $companyDetails['registeredaddress'] = $this->addressService->getAddressDetails($companyDetails['registeredaddressid']);
         $companyDetails['tradingaddress'] = $this->addressService->getAddressDetails($companyDetails['tradingaddressid']);
+        
+        $rowset = $this->userCompany->select(
+            function (Select $select) use ($companyDetails) {
+                $select->where(
+                    [
+                        'usercompany.companydirectoryid' => $companyDetails['companydirectoryid'],
+                    ]
+                );
+            }
+        )->toArray();
+        
+        $isOwner = false;
+        
+        foreach ($rowset as $companyOwner) {
+            if ($companyOwner['userid'] == $this->getUserId()) {
+                $isOwner = true;
+                break;
+            }
+        }
 
+        $companyDetails['isowner'] = $isOwner;
+        
         return $companyDetails;
         
     }
