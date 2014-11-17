@@ -29,4 +29,8 @@
             '',
             $this->url(null, ['id'=>$this->companyId] )
         );
+    } else {
+        if ($this->ownershipRole !== false) {
+            echo 'You are set as <strong>' . $this->ownershipRole . '</strong> for this company';
+        }
     }

@@ -53,7 +53,7 @@ class CompanyOwnersController extends NetsensiaActionController
                 $userCompanyId
             );
        
-        $return['ownershipRole'] = $this->companyOwnersService->getOwnershipRole(
+        $return['ownershipRole'] = $this->companyService->getOwnershipRole(
             $this->params('id'),
             $this->getUserId()
         );

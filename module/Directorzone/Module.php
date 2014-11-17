@@ -446,9 +446,11 @@ class Module
                 $params = $routeMatch->getParams();
                 $companyId = $params['id'];
                 $companyModel = $sm->get('CompanyDirectoryModel')->init($companyId);
+                $companyService = $sm->get('CompanyService');
                 $form = new CompanyOwnersForm('companyOwnersForm');
                 $form->setUserModel($userModel);
                 $form->setCompanyModel($companyModel);
+                $form->setCompanyService($companyService);
                 $form->setTranslator($sm->get('translator'));
                 $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
                 return $form;
