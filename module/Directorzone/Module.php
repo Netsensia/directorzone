@@ -223,6 +223,7 @@ class Module
         	'CompanyRelationship',
             'CompanyPastName',        
             'CompanyPatent',
+            'CompanyKeyword',
         ];
         
         $tableGateways = array_merge(
