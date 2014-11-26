@@ -1,6 +1,3 @@
-<link rel="stylesheet" href="/js/sceditor/minified/themes/default.min.css" type="text/css" media="all" />
-<script type="text/javascript" src="/js/sceditor/minified/jquery.sceditor.bbcode.min.js"></script>
-
 <style>
 .sceditor-button {
 	width:24px;
@@ -29,9 +26,8 @@ $(function() {
 
     // Replace all textareas
     // with SCEditor
-    $("textarea").sceditor({
-       plugins: "bbcode",
-        style: "/js/sceditor/minified/jquery.sceditor.default.min.css"
+    $("textarea").each(function() {
+        $(this).wysihtml5();
     });
 
     dateVisibility('none');

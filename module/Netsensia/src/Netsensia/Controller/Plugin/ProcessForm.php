@@ -41,7 +41,7 @@ class ProcessForm extends AbstractPlugin
                 foreach ($formData as $key => $value) {
                     if (preg_match('/^netsensiaWidget_(.*?)_/', $key, $matches) !== 0) {
                         // is a widget, ignore until we get the ID of the parent model
-                    } elseif ($key != 'form-submit' && $key != 'widgetignore') {
+                    } elseif ($key != 'form-submit' && $key != 'widgetignore' && $key != '_wysihtml5_mode') {
                         $modelField = preg_replace('/^' . $prefix . '/', '', $key);
                         $modelData[$modelField] = $value;
                     }
