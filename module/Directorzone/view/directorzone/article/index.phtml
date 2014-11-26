@@ -40,21 +40,27 @@
       <?php echo $this->partial('messaging/dialog.phtml'); ?>
       <?php echo $this->partial('comments/dialog.phtml'); ?>
 
-      <h3>
-        <?php echo $this->title; ?>
-      </h3>
+      
+      <hr>
+      
+      <div>
+          <h3>
+            <?php echo $this->title; ?>
+          </h3>
+      </div>
+      <hr>
+      
       <div>
       <?php $this->ArticleAuthor(); ?>
       </div>
-      <?php $this->ArticleFields(); ?>
-      <p>
-      <div class="col-xs-6 col-md-2" style="padding:0.5em">
-            <img class="img-thumbnail" src="<?php echo $this->image; ?>">
-      </div>
-  
-        
-        <?php echo $this->BbCode($this->content); ?>
-      </p>
+      
+      <?php // $this->ArticleFields(); ?>
+
+       <div style="clear:both">
+        <img style="float:left;margin-right:1em;height:150px;width:150px" src="<?php echo $this->image; ?>">
+       
+        <?php echo $this->content; ?>
+        </div> 
     </div>
   
   <?php  $this->ArticleComments($this->comments, $addCommentLink); ?>
