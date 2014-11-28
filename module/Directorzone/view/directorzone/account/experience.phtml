@@ -1,2 +1,14 @@
 <?php echo $this->partial('account-nav.phtml'); ?>
 <?php echo $this->BootstrapForm($this->form, 'Career Experience', $this->url('account-experience')); ?>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular.min.js"></script>
+
+<div ng-app="experience" ng-controller="ExperienceController as experience">
+    <input class="companyname" ng-model="experience.companyname" ng-change="experience.autocomplete()" type="text" style="width: 66%;">
+  
+    <div ng-repeat="company in experience.companies">
+        Testing: {{ company }}
+    </div>
+</div>
+    
+<script src="/js/angular/modules/experience.js"></script>

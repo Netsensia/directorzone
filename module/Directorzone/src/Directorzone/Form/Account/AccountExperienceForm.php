@@ -15,8 +15,6 @@ class AccountExperienceForm extends NetsensiaForm
         $this->setFieldPrefix('account-experience-');
         $this->setDefaultIcon('user');
         
-        $this->addSubmit('Submit');
-        
         parent::prepare();
     }
 }
