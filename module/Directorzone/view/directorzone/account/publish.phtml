@@ -72,7 +72,7 @@ function locationVisibility(display)
 
 $(document).delegate('select[id^=netsensiaWidget_hierarchy]', 'change', function(event) {
 	var selectedId = $(this).val();
-	if (<?php echo !$this->hasCompany ?> && (selectedId == 18 || selectedId == 20)) {
+	if (<?php echo $this->hasCompany ? 'false' : 'true'; ?> && (selectedId == 18 || selectedId == 20)) {
 		if ($('#no-company-warning').length == 0) {
 			  $('.hierarchy-widget-group').parent().append(
 				  '<div id="no-company-warning" class="bs-callout bs-callout-danger bs-callout-overview">' +
