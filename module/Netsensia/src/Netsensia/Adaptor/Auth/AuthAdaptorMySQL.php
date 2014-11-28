@@ -106,7 +106,6 @@ class AuthAdaptorMySQL implements AdapterInterface, ServiceLocatorAwareInterface
     {
         if ($row = $query->fetch()) {
             $bcrypt = new Bcrypt();
-            return $row['userid'];
             if ($bcrypt->verify($this->password, $row['password'])) {
                 return $row['userid'];
             }
