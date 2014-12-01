@@ -23,32 +23,18 @@ class IndexController extends NetsensiaActionController
         $retArray = [
             'flashMessages' => $this->getFlashMessages(),
             'mediaItems' => [
-                'news' => $this->mergeMediaItems([7, 10, 18, 9]),
-                'people' => $this->mergeMediaItems([8]),
-                'events' => $this->mergeMediaItems([5]),
-                'blogs' => $this->mergeMediaItems([1]),
-                'meetingrequests' => $this->mergeMediaItems([11]),
-                'jobs' => $this->mergeMediaItems([6]),
-                'offered' => $this->mergeMediaItems([4,13]),
-                'wanted' => $this->mergeMediaItems([3, 12]),
+                'news' => $this->articleService->mergeArticles([7, 10, 18, 9], [2], 1, 4, -3, null),
+                'people' => $this->articleService->mergeArticles([8], [2], 1, 4, -3, null),
+                'events' => $this->articleService->mergeArticles([5], [2], 1, 4, -3, null),
+                'blogs' => $this->articleService->mergeArticles([1], [2], 1, 4, -3, null),
+                'meetingrequests' => $this->articleService->mergeArticles([11], [2], 1, 4, -3, null),
+                'jobs' => $this->articleService->mergeArticles([6], [2], 1, 4, -3, null),
+                'offered' => $this->articleService->mergeArticles([4,13], [2], 1, 4, -3, null),
+                'wanted' => $this->articleService->mergeArticles([3, 12], [2], 1, 4, -3, null),
             ],
         ];
-
+        
         return $retArray;
     }
-    
-    private function mergeMediaItems($typeArray)
-    {
-        $allTypes = [];
-        
-        foreach ($typeArray as $parentId) {
-            $allTypes = array_merge(
-                $allTypes,
-                $this->articleService->getAllTypesWithParent($parentId)
-            );
-        }
-        
-        return $this->articleService->getArticlesByType($allTypes, [2], 4, 0, -3);
-        
-    }
+
 }

@@ -2,15 +2,16 @@
 <h3>Member Articles</h3>
 
 <div class="well well-sm">
-<span article-type="1" style="cursor:pointer" class="type-label label label-primary">Blog Posts</span>
-<span article-type="2" style="cursor:pointer" class="type-label label label-primary">News Articles</span>
-<span article-type="3" style="cursor:pointer" class="type-label label label-primary">Wanted</span>
-<span article-type="4" style="cursor:pointer" class="type-label label label-primary">Offered</span>
-<span article-type="5" style="cursor:pointer" class="type-label label label-primary">Events</span>
-<span article-type="6" style="cursor:pointer" class="type-label label label-primary">Meeting Requests</span>
-<span article-type="7" style="cursor:pointer" class="type-label label label-primary">Opportunities</span>
-<span article-type="8" style="cursor:pointer" class="type-label label label-primary">Movers</span>
-<span article-type="9" style="cursor:pointer" class="type-label label label-primary">Knowledge</span>
+<span article-type="0" style="cursor:pointer" class="type-label label label-primary">All Articles</span>
+<span article-type="1" style="cursor:pointer" class="type-label label label-default">Blog Posts</span>
+<span article-type="2" style="cursor:pointer" class="type-label label label-default">News Articles</span>
+<span article-type="3" style="cursor:pointer" class="type-label label label-default">Wanted</span>
+<span article-type="4" style="cursor:pointer" class="type-label label label-default">Offered</span>
+<span article-type="5" style="cursor:pointer" class="type-label label label-default">Events</span>
+<span article-type="6" style="cursor:pointer" class="type-label label label-default">Meeting Requests</span>
+<span article-type="7" style="cursor:pointer" class="type-label label label-default">Opportunities</span>
+<span article-type="8" style="cursor:pointer" class="type-label label label-default">Movers</span>
+<span article-type="9" style="cursor:pointer" class="type-label label label-default">Knowledge</span>
 </div>
 
 <?php if ($this->isAdmin): ?>
@@ -41,7 +42,10 @@
 <script>
 
 $(document).ready(function() {
-	var typeArray = ["1","2","3","4","5","6","7","8","9"];
+
+	$('#columnSorter').attr('data-sort-by-column', '-3');
+	
+	var typeArray = [1,2,3,4,5,6,7,8,9];
 	var statusArray = ["2"];
 
 	$(document).delegate('.columnHeading', 'click', function() {
@@ -53,15 +57,19 @@ $(document).ready(function() {
     $('.type-label').click(function() {
         var articleType = $(this).attr('article-type');
         var index = typeArray.indexOf(articleType);
-        if (index == -1) {
-            typeArray.push(articleType);
-            $('span[article-type=' + articleType + ']').addClass('label-primary');
-            $('span[article-type=' + articleType + ']').removeClass('label-default');
-        } else {
-            typeArray.splice(index, 1);
-            $('span[article-type=' + articleType + ']').removeClass('label-primary');
-            $('span[article-type=' + articleType + ']').addClass('label-default');
+        for (i=0; i<=9; i++) {
+        	$('span[article-type=' + i + ']').addClass('label-default');
+        	$('span[article-type=' + i + ']').removeClass('label-primary');
         }
+
+        $('span[article-type=' + articleType + ']').addClass('label-primary');
+
+        var articleType = $(this).attr('article-type');
+        if (articleType == 0) {
+            typeArray = [1,2,3,4,5,6,7,8,9];
+        } else {
+        	typeArray = [articleType];
+        }  
         
         loadArticles(typeArray, statusArray);
     });

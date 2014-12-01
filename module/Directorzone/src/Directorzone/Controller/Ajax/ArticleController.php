@@ -99,7 +99,7 @@ class ArticleController extends NetsensiaActionController
             $userId = null;
         }
         
-        $results = $this->articleService->getArticlesByType(
+        $results = $this->articleService->mergeArticles(
             $typeArray,
             $statusArray,
             $start,

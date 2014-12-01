@@ -140,7 +140,22 @@ class ArticleService extends NetsensiaService
         }
     }
     
-    public function getArticlesByType($typeArray, $statusArray, $start, $end = 0, $order = 1, $userId = null)
+    public function mergeArticles($typeArray, $statusArray, $start, $end, $order, $userId)
+    {
+        $allTypes = [];
+    
+        foreach ($typeArray as $parentId) {
+            $allTypes = array_merge(
+                $allTypes,
+                $this->getAllTypesWithParent($parentId)
+            );
+        }
+    
+        return $this->getArticlesByType($allTypes, $statusArray, $start, $end, $order, $userId);
+    
+    }
+    
+    public function getArticlesByType($typeArray, $statusArray, $start, $end = 0, $order = -3, $userId = null)
     {
         if ($end == 0) {
             $end = $start;
@@ -152,17 +167,30 @@ class ArticleService extends NetsensiaService
 
                 $sortColumns = ['title', 'title', 'publishdate', 'publishdate'];
                 
-                if ($userId == null) {
-                    $criteria = [
-                        'articlecategoryid' => $typeArray,
-                        'approvestatusid' => $statusArray,
-                    ];
+                if (count($typeArray) == 0) {
+                    if ($userId == null) {
+                        $criteria = [
+                            'approvestatusid' => $statusArray,
+                        ];
+                    } else {
+                        $criteria = [
+                            'userid' => $userId,
+                            'approvestatusid' => $statusArray,
+                        ];
+                    }
                 } else {
-                    $criteria = [
-                        'articlecategoryid' => $typeArray,
-                        'userid' => $userId,
-                        'approvestatusid' => $statusArray,
-                    ];
+                    if ($userId == null) {
+                        $criteria = [
+                            'articlecategoryid' => $typeArray,
+                            'approvestatusid' => $statusArray,
+                        ];
+                    } else {
+                        $criteria = [
+                            'articlecategoryid' => $typeArray,
+                            'userid' => $userId,
+                            'approvestatusid' => $statusArray,
+                        ];
+                    }
                 }
                 
                 $select->where($criteria)
