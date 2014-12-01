@@ -45,6 +45,17 @@ class ArticleController extends NetsensiaActionController
         );
     }
     
+    public function publishOptionsAction()
+    {
+        $articleCategoryId = $this->params()->fromRoute('articlecategoryid', null);
+        
+        $result = $this->articleService->getPublishOptions($articleCategoryId);
+        
+        return new JsonModel(
+            $result
+        );  
+    }
+    
     public function eventsAction()
     {
         $events = [];

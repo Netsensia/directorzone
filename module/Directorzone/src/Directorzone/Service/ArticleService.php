@@ -140,6 +140,29 @@ class ArticleService extends NetsensiaService
         }
     }
     
+    public function getPublishOptions($articleCategoryType)
+    {
+        $isStartDate = false;
+        $isEndDate = false;
+        $isLocation = false;
+        
+        $events = $this->getAllTypesWithParent(5);
+        $meetings = $this->getAllTypesWithParent(11);
+        $jobs = $this->getAllTypesWithParent(6);
+        
+        return [
+            'isstartdate' => 
+                in_array($articleCategoryType, $events) ||
+                in_array($articleCategoryType, $meetings),
+            'isenddate' => 
+                in_array($articleCategoryType, $events),
+            'islocation' => 
+                in_array($articleCategoryType, $events) ||
+                in_array($articleCategoryType, $jobs) ||
+                in_array($articleCategoryType, $meetings),
+        ];
+    }
+    
     public function mergeArticles($typeArray, $statusArray, $start, $end, $order, $userId)
     {
         $allTypes = [];

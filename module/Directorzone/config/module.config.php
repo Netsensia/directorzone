@@ -113,6 +113,16 @@ return array(
                             ),
                         ),
                     ),
+                    'publish-options' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/publish-options[/:articlecategoryid]',
+                            'defaults' => array(
+                                'controller' => 'Directorzone\Controller\Ajax\Article',
+                                'action' => 'publish-options',
+                            ),
+                        ),
+                    ),
                     'upload-company' => array(
                         'type' => 'segment',
                         'options' => array(

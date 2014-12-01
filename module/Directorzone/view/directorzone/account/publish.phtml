@@ -28,7 +28,8 @@ $(function() {
         $(this).wysihtml5();
     });
 
-    dateVisibility('none');
+    startDateVisibility('none');
+    endDateVisibility('none');
     locationVisibility('none');
     isAnonymousVisibility('none');
 
@@ -36,20 +37,22 @@ $(function() {
 
     setVisibilities($("#account-publish-articlecategory"));
     
-    $("#account-publish-articlecategory").change(function() {
+    $(document).delegate('[id^="netsensiaWidget_hierarchy_"]', "change", function() {
         setVisibilities($(this));
     });
 
     function setVisibilities(obj) {
     	var val = obj.val();
 
-        if (val == 5 || val == 6) {
-            display = 'block';
-        } else {
-            display = 'none';
-        }
-        dateVisibility(display);
-        locationVisibility(display);
+    	$.ajax({
+        	url: '/ajax/publish-options/' + val,
+        	success: function(data) {
+        		startDateVisibility(data.isstartdate ? 'block' : 'none');
+        		endDateVisibility(data.isenddate ? 'block' : 'none');
+                locationVisibility(data.islocation ? 'block' : 'none');
+        	}
+    	});
+    	
         isAnonymousVisibility(val == 7 ? 'block' : 'none');
     }
 });
@@ -59,9 +62,13 @@ function isAnonymousVisibility(display)
     $("[data-netsensia-group='account-publish-isanonymous']").css('display', display);
 }
 
-function dateVisibility(display)
+function startDateVisibility(display)
 {
     $("[data-netsensia-group='account-publish-startdate']").css('display', display);
+}
+
+function endDateVisibility(display)
+{
     $("[data-netsensia-group='account-publish-enddate']").css('display', display);
 }
 
@@ -82,6 +89,17 @@ $(document).delegate('select[id^=netsensiaWidget_hierarchy]', 'change', function
 			  );
 		}
 		$(this).val(-1);
+		var count = 0;
+		$('select[id^=netsensiaWidget_hierarchy]').each(function() {
+			count ++;
+			if (count > 1) {
+			  $(this).val(-1);
+			}
+			if (count > 2) {
+			  $(this).css('display', 'none');
+			}
+		});
+
 		event.stopPropogation();
 		return false;
 	}
