@@ -20,18 +20,35 @@ class IndexController extends NetsensiaActionController
     
     public function indexAction()
     {
-        $mediaItems = [];
-        $types = [1,2,3,4,5,6,7,8];
-        $statuses = [2];
-        $limit = 4;
-        
-        foreach ($types as $type) {
-            $mediaItems[$type] = $this->articleService->getArticlesByType($type, $statuses, $limit, 0, -3);
-        }
-
-        return [
+        $retArray = [
             'flashMessages' => $this->getFlashMessages(),
-            'mediaItems' => $mediaItems,
+            'mediaItems' => [
+                'news' => $this->mergeMediaItems([7, 10, 18, 9]),
+                'people' => $this->mergeMediaItems([8]),
+                'events' => $this->mergeMediaItems([5]),
+                'blogs' => $this->mergeMediaItems([1]),
+                'meetingrequests' => $this->mergeMediaItems([11]),
+                'jobs' => $this->mergeMediaItems([6]),
+                'offered' => $this->mergeMediaItems([4,13]),
+                'wanted' => $this->mergeMediaItems([3, 12]),
+            ],
         ];
+
+        return $retArray;
+    }
+    
+    private function mergeMediaItems($typeArray)
+    {
+        $allTypes = [];
+        
+        foreach ($typeArray as $parentId) {
+            $allTypes = array_merge(
+                $allTypes,
+                $this->articleService->getAllTypesWithParent($parentId)
+            );
+        }
+        
+        return $this->articleService->getArticlesByType($allTypes, [2], 4, 0, -3);
+        
     }
 }

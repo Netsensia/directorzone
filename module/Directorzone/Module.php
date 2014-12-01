@@ -408,7 +408,8 @@ class Module
                     $sm->get('ArticleSectorTableGateway'),
                     $sm->get('ArticleGeographyTableGateway'),
                     $sm->get('ArticleKeyEventTableGateway'),
-                    $sm->get('ArticleJobAreaTableGateway')
+                    $sm->get('ArticleJobAreaTableGateway'),
+                    $sm->get('ArticleCategoryTableGateway')
                 );
                 return $instance;
             },

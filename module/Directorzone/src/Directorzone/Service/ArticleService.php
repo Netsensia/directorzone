@@ -29,6 +29,7 @@ class ArticleService extends NetsensiaService
     private $articleGeographyTable;
     private $articleKeyEventTable;
     private $articleJobAreaTable;
+    private $articleCategoryTable;
         
     public function __construct(
         CommentsService $commentsService,
@@ -36,7 +37,8 @@ class ArticleService extends NetsensiaService
         TableGateway $articleSectorTable,
         TableGateway $articleGeographyTable,
         TableGateway $articleKeyEventTable,
-        TableGateway $articleJobAreaTable 
+        TableGateway $articleJobAreaTable,
+        TableGateway $articleCategoryTable
     )
     {
         $this->setPrimaryTable($articleTable);
@@ -47,6 +49,32 @@ class ArticleService extends NetsensiaService
         $this->articleGeographyTable = $articleGeographyTable;
         $this->articleKeyEventTable = $articleKeyEventTable;
         $this->articleJobAreaTable = $articleJobAreaTable;
+        $this->articleCategoryTable = $articleCategoryTable;
+    }
+    
+    public function getAllTypesWithParent($parentId)
+    {
+        $all = [$parentId];
+        
+        $rowset = $this->articleCategoryTable->select(
+            function (Select $select) use ($parentId) {
+        
+                $select->columns(
+                    ['articlecategoryid', 'articlecategoryparentid']
+                )
+                ->where(['articlecategoryparentid' => $parentId]);
+            }
+        )->toArray();
+        
+        foreach ($rowset as $row) {
+            $new = $this->getAllTypesWithParent($row['articlecategoryid']);
+            $all = array_merge(
+                $all,
+                $new
+            );
+        }
+        
+        return $all;
     }
     
     public function deleteArticle($articleId)
@@ -117,13 +145,6 @@ class ArticleService extends NetsensiaService
         if ($end == 0) {
             $end = $start;
             $start = 1;
-        }
-        
-        if (count($typeArray) > 4) {
-            $typeArray = [];
-            for ($i=0; $i<1000; $i++) {
-                $typeArray[] = $i;
-            }
         }
         
         $rowset = $this->articleTable->select(
