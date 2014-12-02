@@ -23,7 +23,7 @@ class IndexController extends NetsensiaActionController
         $retArray = [
             'flashMessages' => $this->getFlashMessages(),
             'mediaItems' => [
-                'news' => $this->articleService->mergeArticles([7, 10, 18, 9], [2], 1, 4, -3, null),
+                'news' => $this->articleService->mergeArticles([7, 10, 2, 7, 8, 9, 10], [2], 1, 4, -3, null),
                 'people' => $this->articleService->mergeArticles([8], [2], 1, 4, -3, null),
                 'events' => $this->articleService->mergeArticles([5], [2], 1, 4, -3, null),
                 'blogs' => $this->articleService->mergeArticles([1], [2], 1, 4, -3, null),

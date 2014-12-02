@@ -136,6 +136,8 @@ class TalentPoolService extends NetsensiaService
     
     public function getFootprint($userId)
     {
+        // job title, job status, job area, languages, country (i.e. from own address), company category, sector, company revenue range.
+        
         $jobArea = $this->getResolvedProperty($userId, 'jobarea');
         $profession = $this->getResolvedProperty($userId, 'profession');
         

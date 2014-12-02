@@ -857,23 +857,6 @@ class CompanyService extends NetsensiaService
         return $this->getDirectoryStatusCount('R');
     }
     
-    public function setOwnedBy(
-        $companyDirectoryId,
-        $userId,
-        $roleId
-    )
-    {
-        return true;
-    }
-    
-    public function removeOwnedBy(
-        $companyDirectoryId,
-        $userId
-    )
-    {
-        return true;
-    }
-    
     public function getCompanies($type, $start, $end, $order)
     {               
         switch ($type) {
@@ -933,5 +916,13 @@ class CompanyService extends NetsensiaService
         );
     
         return $rowset;
+    }
+    
+    public function getFootprint($companyDirectoryId)
+    {
+        $details = $this->getCompanyDetails($companyDirectoryId);
+        
+        return $details['name'];
+        
     }
 }
