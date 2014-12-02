@@ -50,7 +50,7 @@ class NewsPanel extends AbstractHelper
     public function __invoke($panelTitle, array $items, $panelClass = 'panel-default')
     {
         ?>
-<div class="panel news-panel <?php echo $panelClass; ?>">
+<div class="panel news-panel <?php echo $panelClass; ?>" style="overflow:hidden">
 	<div class="panel-heading">
 		<h3 class="panel-title">
             <?php echo $panelTitle; ?>
@@ -70,9 +70,9 @@ class NewsPanel extends AbstractHelper
 
                 <?php if (++$count == 1): ?>
                             
-        <div class="panel-body" style="overflow:hidden">
+        <div class="panel-body" style="padding-bottom:5px">
     		<div class="media">
-    			<div style="margin-bottom:0.5em;background: #fff url(<?php echo $item['image']; ?>) center center no-repeat;width: 100%;height:100px;border: 1px solid #fff;text-indent: -9999px;">
+    			<div style="margin-bottom:0.5em;background: #fff url(<?php echo $item['image']; ?>) center center no-repeat;width: 100%;height:125px;border: 1px solid #fff;text-indent: -9999px;">
     			</div>
     			<div class="media-body">
     				<h4 class="media-heading" style="font-size: 1.15em">
