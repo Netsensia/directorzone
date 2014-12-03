@@ -292,6 +292,21 @@ class CompanyService extends NetsensiaService
         )->toArray();
         
         foreach ($rowset as $row) {
+            $relationshipCompanyDetails = $this->companyDirectoryTable->select(
+                function (Select $select) use ($row, $companyDetails) {
+                    $select->where(
+                        [
+                            'companydirectory.name' => $row['relatedcompany'],
+                        ]
+                    ); 
+                }
+            )->toArray();
+            
+            if (count($relationshipCompanyDetails) > 0) {
+                $row['relatedcompanyid'] = $relationshipCompanyDetails[0]['companydirectoryid'];
+            } else {
+                $row['relatedcompanyid'] = 0;
+            }
             $relatedCompanies[] = $row;
         }
         

@@ -6,7 +6,15 @@
 				<tr><th>Company</th><th>Relationship</th></tr>
               <?php foreach ($this->relatedCompanies as $relatedCompany) :?>
               <tr>
-						<td><?php echo $relatedCompany['relatedcompany']; ?></td>
+						<td>
+						<?php if ($relatedCompany['relatedcompanyid'] != 0): ?>
+						<a href="/directories/company/<?php echo $relatedCompany['relatedcompanyid']; ?>">
+						<?php echo $relatedCompany['relatedcompany']; ?>
+						</a>
+						<?php else: ?>
+						  <?php echo $relatedCompany['relatedcompany']; ?>
+						<?php endif; ?>
+						</td>
 						<td><?php echo $relatedCompany['relationship']; ?></td>
 					</tr>
               <?php endforeach; ?>
