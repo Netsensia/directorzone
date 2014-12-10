@@ -222,6 +222,21 @@ class CompanyController extends NetsensiaActionController
     {
         $elasticService = $this->getServiceLocator()->get('ElasticService');
         $elasticService->indexCompanyOfficers();
+        
+        sleep(3);
+        
+        $searchTerms = ['and'];
+        
+        echo PHP_EOL;
+        foreach ($searchTerms as $searchTerm) {
+            $results = $elasticService->searchOfficers($searchTerm);
+        
+            echo '------------ ' . $searchTerm . ' ------------' . PHP_EOL;
+            foreach ($results['hits']['hits'] as $hit) {
+                echo trim($hit['_source']['forename'] . ' ' . $hit['_source']['surname']) . PHP_EOL;
+            }
+            echo PHP_EOL;
+        }
     }
     
     public function indexCompanyDirectoryAction()
@@ -232,7 +247,7 @@ class CompanyController extends NetsensiaActionController
         
         sleep(3);
         
-        $searchTerms = ['buyenergyonline', 'buyenergyonline.com', 'BUYENERGYONLINE', 'BUYENERGYONLINE.COM', 'capvest', 'Iron Maiden', 'Buy', 'Energy', 'Online'];
+        $searchTerms = ['buyenergyonline', 'buyenergyonline.com', 'BUYENERGYONLINE', 'BUYENERGYONLINE.COM', 'capvest', 'Iron Maiden', 'Buy', 'Energy', 'Online', 'and', 'but'];
         
         echo PHP_EOL;
         foreach ($searchTerms as $searchTerm) {

@@ -206,6 +206,13 @@ class ElasticService extends NetsensiaService
                     }        
                 }
                 
+                $unsets = ['nationality', 'country'];
+                foreach ($unsets as $unset) {
+                    if (isset($row[$unset])) {
+                        unset($row[$unset]);
+                    }
+                }
+                
                 $body .=
                     '{ "index" : { "_index" : "' . $index .
                     '", "_type" : "' . $type . '", "_id" : "' .
@@ -283,6 +290,7 @@ class ElasticService extends NetsensiaService
                                   "type":      "custom",
                                   "tokenizer": "letter",
                                   "filter":   [
+                                     "my_stop",
                                      "lowercase",
                                      "trigrams_filter"
                                   ]
@@ -296,6 +304,10 @@ class ElasticService extends NetsensiaService
                                  "type":     "ngram",
                                  "min_gram": 4,
                                  "max_gram": 20
+                              },
+                              "my_stop": {
+                                "type":       "stop",
+                                "stopwords": ["and", "is", "the", "but"]
                               }
                             }
                           }
@@ -304,7 +316,7 @@ class ElasticService extends NetsensiaService
                       "mappings" : {
                         "companydz" : {
                           "properties" : {
-                            "name": { "type" : "string", "store" : "yes", "index" : "analyzed", "analyzer": "trigrams" }
+                            "name": { "type" : "string", "store" : "yes", "index" : "analyzed", "analyzer": "trigrams", "boost": 2 }
                           }
                         }
                       }
@@ -335,7 +347,7 @@ class ElasticService extends NetsensiaService
         $settings = $this->client->indices()->getSettings(['index' => 'companydirectory']);
     }
 
-    public function search($name, $params = [], $limit = 500)
+    public function search($name, $params = [], $limit = 20)
     {
         $params['body']['query']['query_string']['query'] = 'name:' . $name . ' ' . $name;
         $params['body']['query']['query_string']['default_operator'] = 'OR';
