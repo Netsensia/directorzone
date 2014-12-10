@@ -351,7 +351,8 @@ class Module
                     $sm->get('CompaniesHouseTableGateway'),
                     $sm->get('CompanyOfficerTableGateway'),
                     $sm->get('CompanyDirectoryTableGateway'),
-                    $sm->get('ArticleTableGateway')
+                    $sm->get('ArticleTableGateway'),
+                    $sm->get('AddressService')
                 );
                 
                 return $instance;

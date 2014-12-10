@@ -16,13 +16,15 @@ class ElasticService extends NetsensiaService
     private $companyOfficersTableGateway;
     private $companyDirectoryTableGateway;
     private $articleTableGateway;
+    private $addressService;
     
     public function __construct(
         ElasticClient $client,
         TableGateway $companiesHouseTableGateway,
         TableGateway $companyOfficersTableGateway,
         TableGateway $companyDirectoryTableGateway,
-        TableGateway $articleTableGateway
+        TableGateway $articleTableGateway,
+        AddressService $addressService
     )
     {
         $this->client = $client;
@@ -30,6 +32,7 @@ class ElasticService extends NetsensiaService
         $this->companyOfficersTableGateway = $companyOfficersTableGateway;
         $this->companyDirectoryTableGateway = $companyDirectoryTableGateway;
         $this->articleTableGateway = $articleTableGateway;
+        $this->addressService = $addressService;
     }
     
     public function searchCompanies($name, $limit = 10, $format = '')
@@ -213,6 +216,23 @@ class ElasticService extends NetsensiaService
                     }
                 }
                 
+                $addresses = [];
+                foreach ($row as $key => $value) {
+                    if (strpos($key, 'addressid') !== false) {
+                        $address = $this->addressService->getAddressDetails($value);
+                        if (is_array($address)) {
+                            $newKey = str_replace('addressid', 'address', $key);
+                            
+                            foreach ($address as $subKey => $subValue) {
+                                $addresses[$newKey . '_' . $subKey] = $subValue;
+                            }
+                        }
+                    }
+                }
+                
+
+                $row = array_merge($row->getArrayCopy(), $addresses);
+                
                 $body .=
                     '{ "index" : { "_index" : "' . $index .
                     '", "_type" : "' . $type . '", "_id" : "' .
@@ -295,8 +315,10 @@ class ElasticService extends NetsensiaService
                                      "trigrams_filter"
                                   ]
                                 }
+            
                             },
                             "filter": {
+    
                               "ourEnglishFilter": {
                                 "type": "kstem"
                               },
@@ -351,7 +373,7 @@ class ElasticService extends NetsensiaService
     {
         $params['body']['query']['query_string']['query'] = 'name:' . $name . ' ' . $name;
         $params['body']['query']['query_string']['default_operator'] = 'OR';
-        $params['body']['query']['query_string']['analyzer'] = 'en';
+       // $params['body']['query']['query_string']['analyzer'] = 'postcode_search';
         $params['body']['from'] = 0;
         $params['body']['size'] = $limit;
     
