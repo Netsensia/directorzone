@@ -227,7 +227,24 @@ class CompanyController extends NetsensiaActionController
     public function indexCompanyDirectoryAction()
     {
         $elasticService = $this->getServiceLocator()->get('ElasticService');
+        
         $elasticService->indexCompanyDirectory();
+        
+        sleep(3);
+        
+        $searchTerms = ['buyenergyonline', 'buyenergyonline.com', 'BUYENERGYONLINE', 'BUYENERGYONLINE.COM', 'capvest', 'Iron Maiden', 'Buy', 'Energy', 'Online'];
+        
+        echo PHP_EOL;
+        foreach ($searchTerms as $searchTerm) {
+            $results = $elasticService->searchCompanyDirectory($searchTerm);
+            
+            echo '------------ ' . $searchTerm . ' ------------' . PHP_EOL;
+            foreach ($results['hits']['hits'] as $hit) {
+                echo $hit['_source']['name'] . PHP_EOL;
+            }
+            echo PHP_EOL;
+        }
+        
     }
     
     public function indexCompaniesAction()

@@ -70,6 +70,17 @@ class ElasticService extends NetsensiaService
         );
     }
     
+    public function searchCompanyDirectory($name)
+    {
+        return $this->search(
+            $name,
+            [
+                'index' => 'companydirectory',
+                'type'  => 'companydz',
+            ]
+        );
+    }
+    
     public function searchOfficers($name)
     {
         return $this->search(
@@ -87,48 +98,9 @@ class ElasticService extends NetsensiaService
             $name,
             [
                 'index' => 'articles,companydirectory,officers',
-                'type'  => 'article,company,officer',
+                'type'  => 'article,companydz,officer',
             ]
         );
-    }
-    
-    public function search($name, $params = [], $limit = 10)
-    {
-        $params['body']['query']['query_string']['query'] = $name;
-        $params['body']['query']['query_string']['default_operator'] = 'OR';
-        $params['body']['query']['query_string']['analyzer'] = 'standard';
-        $params['body']['from'] = 0;
-        $params['body']['size'] = $limit;
-        
-        $result = $this->client->search($params);
-        
-        return $result;
-    }
-    
-    private function createIndex($name, $defaultField = null)
-    {
-        $indexParams['index']  = $name;
-    
-        // Index Settings
-        $indexParams['body']['settings']['number_of_shards']   = 3;
-        $indexParams['body']['settings']['number_of_replicas'] = 2;
-        
-        if ($defaultField) {
-            $indexParams['body']['settings']['query']['default_field'] = $defaultField;
-        }
-        
-        $indexParams['body']['settings']['analysis']['char_filter']['nopunc_mapping'] = [
-            "type" => "mapping",
-            "mappings" => [".=>"]
-        ];
-    
-        $indexParams['body']['settings']['analysis']['analyzer']['custom_with_char_filter'] = [
-            "tokenizer" => "standard",
-            "char_filter" => ["nopunc_mapping"]
-        ];
-         
-        // Create the index
-        $this->client->indices()->create($indexParams);
     }
     
     public function indexCompanies()
@@ -148,9 +120,11 @@ class ElasticService extends NetsensiaService
     {
         $this->createIndex('companydirectory');
         
+        echo 'Index Created' . PHP_EOL;
+        
         $this->indexGeneric(
             'companydirectory',
-            'company',
+            'companydz',
             $this->companyDirectoryTableGateway,
             'companydirectoryid',
             'name'
@@ -191,8 +165,6 @@ class ElasticService extends NetsensiaService
         $nameKey
     )
     {
-        $this->client->indices()->delete(array('index' => $index));
-    
         $limit = 1000;
         $lastId = -1;
     
@@ -263,6 +235,8 @@ class ElasticService extends NetsensiaService
             }
     
         } while ($found);
+        
+        print "Data indexed" . PHP_EOL;
     }
     
     private function validateDate($date, $format = 'Y-m-d H:i:s')
@@ -287,5 +261,90 @@ class ElasticService extends NetsensiaService
         
         $this->dateKeys = $dateKeys;
     }
+    
+    private function getIndexSettings()
+    {
+        $json = '{
+                      "settings" : {
+                        "number_of_shards" : 3,
+                        "number_of_replicas" : 0,
+                        "index" : {
+                          "analysis": {
+                            "analyzer": {
+                              "en": {
+                                "tokenizer": "letter",
+                                "filter": [
+                                 "asciifolding",
+                                 "lowercase",
+                                 "ourEnglishFilter"
+                                ]
+                              },
+                              "trigrams": {
+                                  "type":      "custom",
+                                  "tokenizer": "letter",
+                                  "filter":   [
+                                     "lowercase",
+                                     "trigrams_filter"
+                                  ]
+                                }
+                            },
+                            "filter": {
+                              "ourEnglishFilter": {
+                                "type": "kstem"
+                              },
+                              "trigrams_filter": {
+                                 "type":     "ngram",
+                                 "min_gram": 4,
+                                 "max_gram": 20
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "mappings" : {
+                        "companydz" : {
+                          "properties" : {
+                            "name": { "type" : "string", "store" : "yes", "index" : "analyzed", "analyzer": "trigrams" }
+                          }
+                        }
+                      }
+                    }';
+    
+        $ret = json_decode($json, true);
+        return $ret;
+    }
+    
+    private function createIndex($name, $defaultField = null)
+    {
+        $indexParams['index']  = $name;
+        try {
+            $this->client->indices()->delete($indexParams);
+        } catch (\Exception $e) {
+            echo "No index to delete" . PHP_EOL;
+        }
+    
+        $indexParams['body'] = $this->getIndexSettings();
+    
+        if ($defaultField) {
+            $indexParams['body']['settings']['query']['default_field'] = $defaultField;
+        }
+    
+        // Create the index
+        $this->client->indices()->create($indexParams);
+    
+        $settings = $this->client->indices()->getSettings(['index' => 'companydirectory']);
+    }
 
+    public function search($name, $params = [], $limit = 500)
+    {
+        $params['body']['query']['query_string']['query'] = 'name:' . $name . ' ' . $name;
+        $params['body']['query']['query_string']['default_operator'] = 'OR';
+        $params['body']['query']['query_string']['analyzer'] = 'en';
+        $params['body']['from'] = 0;
+        $params['body']['size'] = $limit;
+    
+        $result = $this->client->search($params);
+    
+        return $result;
+    }
 }

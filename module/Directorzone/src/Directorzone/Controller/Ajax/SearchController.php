@@ -50,7 +50,7 @@ class SearchController extends NetsensiaActionController
             }
             
             switch ($type) {
-            	case 'company' :
+            	case 'companydz' :
             	    $internalId = $source['companydirectoryid'];
             	    $url = '/directories/company/' . $internalId;
             	    break;
