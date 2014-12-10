@@ -324,7 +324,7 @@ class ElasticService extends NetsensiaService
                               },
                               "trigrams_filter": {
                                  "type":     "ngram",
-                                 "min_gram": 4,
+                                 "min_gram": 3,
                                  "max_gram": 20
                               },
                               "my_stop": {
