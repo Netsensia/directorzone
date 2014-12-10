@@ -247,7 +247,7 @@ class CompanyController extends NetsensiaActionController
         
         sleep(3);
         
-        $searchTerms = ['sw19', 'buyenergyonline', 'buyenergyonline.com', 'BUYENERGYONLINE', 'BUYENERGYONLINE.COM', 'capvest', 'Iron Maiden', 'Buy', 'Energy', 'Online', 'and', 'but', 'CF14', 'CF'];
+        $searchTerms = ['sw19', 'buyenergyonline', 'buyenergyonline.com', 'BUYENERGYONLINE', 'BUYENERGYONLINE.COM', 'capvest', 'Iron Maiden', 'Buy', 'Energy', 'Online', 'and', 'but', 'CF14', 'CF','directorzone'];
         
         echo PHP_EOL;
         foreach ($searchTerms as $searchTerm) {

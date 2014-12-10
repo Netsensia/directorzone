@@ -373,7 +373,7 @@ class ElasticService extends NetsensiaService
     {
         $params['body']['query']['query_string']['query'] = 'name:' . $name . ' ' . $name;
         $params['body']['query']['query_string']['default_operator'] = 'OR';
-       // $params['body']['query']['query_string']['analyzer'] = 'postcode_search';
+        $params['body']['query']['query_string']['analyzer'] = 'standard';
         $params['body']['from'] = 0;
         $params['body']['size'] = $limit;
     
