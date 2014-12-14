@@ -24,5 +24,6 @@ return array(
             'Zend\Db\Adapter\Adapter'
             => 'Zend\Db\Adapter\AdapterServiceFactory',
         ),
-    ), 
+    ),
+    'netsensia_form_widget_extension_namespace' => '\Directorzone\Controller\Plugin\Widget',
 );

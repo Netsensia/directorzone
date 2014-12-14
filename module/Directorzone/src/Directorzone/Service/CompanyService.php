@@ -349,6 +349,46 @@ class CompanyService extends NetsensiaService
         
     }
     
+    public function getCompanyDirectoryIdFromName($name)
+    {
+        $result = $this->companyDirectoryTable->select(
+            function (Select $select) use ($name) {
+                $select->where(
+                    [
+                        'companydirectory.name' => $name,
+                    ]
+                )->
+                columns(['companydirectoryid']);
+            }
+        )->toArray();
+        
+        if (count($result) > 0) {
+            return $result[0]['companydirectoryid'];
+        }
+        
+        return false;
+    }
+    
+    public function getNameFromCompanyDirectoryId($id)
+    {
+        $result = $this->companyDirectoryTable->select(
+            function (Select $select) use ($id) {
+                $select->where(
+                    [
+                        'companydirectoryid' => $id,
+                    ]
+                )->
+                columns(['name']);
+            }
+        )->toArray();
+    
+        if (count($result) > 0) {
+            return $result[0]['name'];
+        }
+    
+        return false;
+    }
+    
     public function getOwners($companyDirectoryId)
     {
         $rowset = $this->userCompany->select(

@@ -243,6 +243,7 @@ class Module
             'SectorParent',
             'KeyEvent',
             'JobArea',
+            'Relationship',
             ]
         );
         

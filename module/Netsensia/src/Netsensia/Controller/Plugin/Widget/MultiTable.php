@@ -1,8 +1,6 @@
 <?php
 namespace Netsensia\Controller\Plugin\Widget;
 
-use Zend\Db\TableGateway\TableGateway;
-
 class MultiTable extends Widget
 {
     public function process()
@@ -49,8 +47,6 @@ class MultiTable extends Widget
             $model->init();
             
             $model->setData($updateArray);
-            
-            var_dump($updateArray);
             
             $model->create();
         }

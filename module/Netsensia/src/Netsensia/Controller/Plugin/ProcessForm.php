@@ -4,7 +4,7 @@ namespace Netsensia\Controller\Plugin;
 
 use Zend\Mvc\Controller\Plugin\AbstractPlugin;
 use Zend\Form\Element\Checkbox;
-use Netsensia\Controller\Plugin\Widget\MultiTable;
+use Zend\Di\ServiceLocator;
 
 class ProcessForm extends AbstractPlugin
 {
@@ -127,13 +127,30 @@ class ProcessForm extends AbstractPlugin
     {
         $widgetClass = '\\Netsensia\\Controller\\Plugin\\Widget\\' . ucfirst($widgetType);
     
+        $serviceLocator = $this->controller->getServiceLocator();
+        
         if (class_exists($widgetClass)) {
             $widget = new $widgetClass(
-                $this->controller->getServiceLocator(),
+                $serviceLocator,
                 $value,
                 $tableModel
             );
             $widget->process();
+        }
+        
+        $config = $serviceLocator->get('config');
+
+        if (array_key_exists('netsensia_form_widget_extension_namespace', $config)) {
+            $extensionNamespace = $config['netsensia_form_widget_extension_namespace'];
+            $extensionClass = $extensionNamespace . '\\' . ucfirst($widgetType);
+            if (class_exists($extensionClass)) {
+                $widget = new $extensionClass(
+                    $serviceLocator,
+                    $value,
+                    $tableModel
+                );
+                $widget->process();
+            }
         }
     }
 }
