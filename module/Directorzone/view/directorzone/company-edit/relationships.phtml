@@ -15,9 +15,7 @@
 function initAutoCompleteElements()
 {	
 	$('input[type="text"].netsensia_form_widget').each(function() {
-    	//if (!$(this).hasClass('ui-autocomplete-input')) {
-  		  setupAutoCompleteForElement($(this));
-    	//}
+	    setupAutoCompleteForElement($(this));
 	});
 }
 
@@ -37,6 +35,7 @@ function setupAutoCompleteForElement(el)
         },
         select: function(event, ui) {
         	$(this).val(ui.item.label);
+        	$(this).trigger('change');
         	event.preventDefault();
         }
     });

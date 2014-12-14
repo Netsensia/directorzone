@@ -11,7 +11,6 @@ class MultiTable extends Widget
             $this->widget->jointablemodel . 'TableGateway'
         );
         
-        $tableGateway instanceof TableGateway;
         $parentKey = $this->parentModel->getPrimaryKey();
         
         /* Will throw exception if model is not populated */
@@ -29,7 +28,7 @@ class MultiTable extends Widget
             }
             $tableColumns[] = $columnName;
         }
-
+        
         foreach ($this->widget->rowValues as $row) {
             
             $count = 0;
@@ -50,6 +49,8 @@ class MultiTable extends Widget
             $model->init();
             
             $model->setData($updateArray);
+            
+            var_dump($updateArray);
             
             $model->create();
         }
