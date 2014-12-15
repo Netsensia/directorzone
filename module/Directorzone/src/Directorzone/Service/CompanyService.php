@@ -35,8 +35,14 @@ class CompanyService extends NetsensiaService
      * @var TableGateway
      */
     private $companySicCodesTable;
+    
+    private $companySectorTable;
    
     private $userCompanyTable;
+    
+    private $companyImportMarketTable;
+    
+    private $companyExportMarketTable;
     
     /**
      * @var TableGateway
@@ -55,10 +61,13 @@ class CompanyService extends NetsensiaService
         TableGateway $companiesHouse,
         TableGateway $companyDirectory,
         TableGateway $companySicCode,
+        TableGateway $companySector,
         TableGateway $companyOfficers,
         TableGateway $companyRelationship,
         TableGateway $companyPastName,
         TableGateway $companyPatent,
+        TableGateway $companyImportMarket,
+        TableGateway $companyExportMarket,
         TableGateway $userCompany,
         AddressService $addressService,
         CompanyAppointmentsRequest $companyAppointmentsRequest
@@ -68,10 +77,13 @@ class CompanyService extends NetsensiaService
         $this->companiesHouseTable = $companiesHouse;
         $this->companyDirectoryTable = $companyDirectory;
         $this->companySicCodeTable = $companySicCode;
+        $this->companySectorTable = $companySector;
         $this->companyOfficersTable = $companyOfficers;
         $this->companyRelationship = $companyRelationship;
         $this->companyPastName = $companyPastName;
         $this->companyPatent = $companyPatent;
+        $this->companyImportMarketTable = $companyImportMarket;
+        $this->companyExportMarketTable = $companyExportMarket;
         $this->userCompany = $userCompany;
         $this->addressService = $addressService;
         $this->companyAppointmentsRequest = $companyAppointmentsRequest;
@@ -311,6 +323,51 @@ class CompanyService extends NetsensiaService
         }
         
         $companyDetails['relatedCompanies'] = $relatedCompanies;
+        
+        $companyDetails['sectors'] = $this->companySectorTable->select(
+            function (Select $select) use ($companyDetails) {
+                $select->where(
+                    [
+                        'companysector.companydirectoryid' => $companyDetails['companydirectoryid'],
+                    ]
+                )
+                ->join(
+                    'sector',
+                    'companysector.sectorid = sector.sectorid',
+                    ['sectorid', 'sector']
+                );
+            }
+        )->toArray();
+        
+        $companyDetails['importmarkets'] = $this->companyImportMarketTable->select(
+            function (Select $select) use ($companyDetails) {
+                $select->where(
+                    [
+                        'companyimportmarket.companydirectoryid' => $companyDetails['companydirectoryid'],
+                    ]
+                )
+                ->join(
+                    'geography',
+                    'companyimportmarket.geographyid = geography.geographyid',
+                    ['geographyid', 'geography']
+                );
+            }
+        )->toArray();
+        
+        $companyDetails['exportmarkets'] = $this->companyExportMarketTable->select(
+            function (Select $select) use ($companyDetails) {
+                $select->where(
+                    [
+                        'companyexportmarket.companydirectoryid' => $companyDetails['companydirectoryid'],
+                    ]
+                )
+                ->join(
+                    'geography',
+                    'companyexportmarket.geographyid = geography.geographyid',
+                    ['geographyid', 'geography']
+                );
+            }
+        )->toArray();
         
         if ($companyDetails['closuredate'] == '0000-00-00') $companyDetails['closuredate'] = '';
         if ($companyDetails['incorporationdate'] == '0000-00-00') $companyDetails['incorporationdate'] = '';

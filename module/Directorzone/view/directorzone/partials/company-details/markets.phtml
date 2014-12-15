@@ -3,14 +3,60 @@
 
 				<table class="table">
 				<caption>Markets</caption>
-              <?php foreach ($this->relatedCompanies as $relatedCompany) : ?>
-              <tr>
-						<td></td>
-						<td></td>
+              <?php foreach ($this->sectors as $sector) : ?>
+                    <tr>
+						<td><a href="/search?keywords=<?php echo $sector['sector']; ?>"><?php echo $sector['sector']; ?></a></td>
 					</tr>
               <?php endforeach; ?>
+              
             </table>
+            
+            <table class="table">
+				<caption>Exports</caption>
+                    <tr>
+						<td style="width:25%">Percentage of revenues</td>
+						<td><?php echo $this->exportpercent; ?></td>
+					</tr>
+            </table>
+            
+            <table class="table">
+				<caption>Market Geography</caption>
+                    <tr>
+						<td style="width:25%">Import Markets</td>
+						<td>
+						<?php
+						$marketString = '';
+						foreach ($this->importmarkets as $geography) {
+						    $marketString .= '<a href="/search?keywords=' . $geography['geography'] . '">' . $geography['geography'] . '</a>, ';
+						}
+						if ($marketString != '') {
+						    $marketString = substr($marketString, 0, strlen($marketString)-2);
+						}
+						echo $marketString;
+						?>
+						
+						</td>
+					</tr>
+					<tr>
+						<td style="width:25%">Export Markets</td>
+						<td>
+						<?php
+						$marketString = '';
+						foreach ($this->exportmarkets as $geography) {
+						    $marketString .= '<a href="/search?keywords=' . $geography['geography'] . '">' . $geography['geography'] . '</a>, ';
+						}
+						if ($marketString != '') {
+						    $marketString = substr($marketString, 0, strlen($marketString)-2);
+						}
+						echo $marketString;
+						?>
+						</td>
+					</tr>
+            </table>
+            
+            
 
+            
 </div>
 </div>
 
