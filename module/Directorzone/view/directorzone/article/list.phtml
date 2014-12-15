@@ -8,10 +8,12 @@
 <span article-type="3" style="cursor:pointer" class="type-label label label-default">Wanted</span>
 <span article-type="4" style="cursor:pointer" class="type-label label label-default">Offered</span>
 <span article-type="5" style="cursor:pointer" class="type-label label label-default">Events</span>
-<span article-type="6" style="cursor:pointer" class="type-label label label-default">Meeting Requests</span>
-<span article-type="7" style="cursor:pointer" class="type-label label label-default">Opportunities</span>
-<span article-type="8" style="cursor:pointer" class="type-label label label-default">Movers</span>
+<span article-type="6" style="cursor:pointer" class="type-label label label-default">Job Opportunities</span>
+<span article-type="7" style="cursor:pointer" class="type-label label label-default">Jobs News</span>
+<span article-type="8" style="cursor:pointer" class="type-label label label-default">People</span>
 <span article-type="9" style="cursor:pointer" class="type-label label label-default">Knowledge</span>
+<span article-type="10" style="cursor:pointer" class="type-label label label-default">Innovation</span>
+<span article-type="11" style="cursor:pointer" class="type-label label label-default">Meeting Requests</span>
 </div>
 
 <?php if ($this->isAdmin): ?>
@@ -45,7 +47,7 @@ $(document).ready(function() {
 
 	$('#columnSorter').attr('data-sort-by-column', '-3');
 	
-	var typeArray = [1,2,3,4,5,6,7,8,9];
+	var typeArray = [1,2,3,4,5,6,7,8,9,10,11];
 	var statusArray = ["2"];
 
 	$(document).delegate('.columnHeading', 'click', function() {
@@ -57,7 +59,7 @@ $(document).ready(function() {
     $('.type-label').click(function() {
         var articleType = $(this).attr('article-type');
         var index = typeArray.indexOf(articleType);
-        for (i=0; i<=9; i++) {
+        for (i=0; i<=11; i++) {
         	$('span[article-type=' + i + ']').addClass('label-default');
         	$('span[article-type=' + i + ']').removeClass('label-primary');
         }
@@ -66,7 +68,7 @@ $(document).ready(function() {
 
         var articleType = $(this).attr('article-type');
         if (articleType == 0) {
-            typeArray = [1,2,3,4,5,6,7,8,9];
+            typeArray = [1,2,3,4,5,6,7,8,9,10,11];
         } else {
         	typeArray = [articleType];
         }  
