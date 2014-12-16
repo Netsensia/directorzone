@@ -7,6 +7,7 @@ use Zend\Form\Element\Submit;
 use Zend\Form\Element\Select;
 use Zend\Form\Element\Hidden;
 use Zend\Form\Element;
+use Zend\Db\Sql\Select as SqlSelect;
 use Zend\Db\TableGateway\TableGateway;
 use Netsensia\Model\DatabaseTableModel;
 use Zend\Validator\NotEmpty;
@@ -172,11 +173,17 @@ class NetsensiaForm extends Form
         } else {
             $tableValue = $table;
         }
+        
+        if (isset($options['condition'])) {
+            $condition = $options['condition'];
+        } else {
+            $condition = null;
+        }
 
         $select = new Select($name . 'id');
         $select->setLabel($label);
         
-        $optionsArray = $this->getOptionsArray($table, $tableKey, $tableValue);
+        $optionsArray = $this->getOptionsArray($table, $tableKey, $tableValue, false, $condition);
         
         $select->setValueOptions($optionsArray);
        
@@ -196,7 +203,8 @@ class NetsensiaForm extends Form
         $table,
         $tableKey = null,
         $tableValue = null,
-        $isTiered = false
+        $isTiered = false,
+        $condition = null
     )
     {
         if (!$this->dbAdapter) {
@@ -213,7 +221,22 @@ class NetsensiaForm extends Form
         
         $tableGateway = new TableGateway($table, $this->dbAdapter);
         
-        $rowset = $tableGateway->select();
+        if ($condition == null) {
+            $rowset = $tableGateway->select();
+        } else {
+            $rowset = $tableGateway->select(
+                function (SqlSelect $select) use ($condition) {
+                    foreach ($condition as $clause => $value) {
+                        if ($clause == 'join') {
+                            $select->join($value['table'], $value['on'], $value['columns']);
+                        }
+                        if ($clause == 'where') {
+                            $select->where($value);
+                        }
+                    }
+                }
+            );
+        }
         
         $optionsArray = [];
         

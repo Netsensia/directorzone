@@ -142,9 +142,6 @@ class ArticleService extends NetsensiaService
     
     public function getPublishOptions($articleCategoryType)
     {
-        $isStartDate = false;
-        $isEndDate = false;
-        $isLocation = false;
         
         $events = $this->getAllTypesWithParent(5);
         $meetings = $this->getAllTypesWithParent(11);
@@ -160,6 +157,9 @@ class ArticleService extends NetsensiaService
                 in_array($articleCategoryType, $events) ||
                 in_array($articleCategoryType, $jobs) ||
                 in_array($articleCategoryType, $meetings),
+            'iscompany' =>
+                in_array($articleCategoryType, $this->getAllTypesWithParent(18)) ||
+                in_array($articleCategoryType, $this->getAllTypesWithParent(20))
         ];
     }
     

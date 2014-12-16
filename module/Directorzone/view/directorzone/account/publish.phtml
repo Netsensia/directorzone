@@ -50,6 +50,7 @@ $(function() {
         		startDateVisibility(data.isstartdate ? 'block' : 'none');
         		endDateVisibility(data.isenddate ? 'block' : 'none');
                 locationVisibility(data.islocation ? 'block' : 'none');
+                companyVisibility(data.iscompany ? 'block' : 'none');
         	}
     	});
     	
@@ -75,6 +76,11 @@ function endDateVisibility(display)
 function locationVisibility(display)
 {
     $("[data-netsensia-group='account-publish-location']").css('display', display);
+}
+
+function companyVisibility(display)
+{
+    $("[data-netsensia-group='account-publish-company']").css('display', display);
 }
 
 $(document).delegate('select[id^=netsensiaWidget_hierarchy]', 'change', function(event) {

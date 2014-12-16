@@ -2,6 +2,7 @@
 namespace Directorzone\Form\Account;
 
 use Netsensia\Form\NetsensiaForm;
+use Zend\Db\Sql\Select;
 
 class AccountPublishForm extends NetsensiaForm
 {
@@ -34,6 +35,22 @@ class AccountPublishForm extends NetsensiaForm
                 'name' => 'articlecategory',
                 'label' => 'Article Category',
                 ]
+        );
+
+        $this->addSelect([
+            'name' => 'company',
+            'label' => 'Published on behalf of company',
+            'table' => 'companydirectory',
+            'tableKey' => 'companydirectoryid',
+            'tableValue' => 'name',
+            'condition' => [
+                'join' => [ 'table' => 'usercompany',
+                            'on' => 'usercompany.companydirectoryid = companydirectory.companydirectoryid',
+                            'columns' => Select::SQL_STAR
+                          ],
+                'where' => ['granted' => 'Y', 'userid' => $this->userModel->getUserId()]
+            ]
+        ]
         );
         
         $this->addCheckbox(['name' => 'isanonymous', 'label' => 'Publish anonymously?']);
