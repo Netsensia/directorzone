@@ -53,6 +53,7 @@ class ElasticService extends NetsensiaService
                 $return[] = [
                     'value' => $source['companyid'],
                     'label' => $source['name'],
+                    'source' => $source,
                ];
             }
             
