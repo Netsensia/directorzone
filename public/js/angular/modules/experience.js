@@ -1,15 +1,18 @@
 angular.module('experience', []).controller('ExperienceController', function($scope, $http) {
-	this.companyname='';
-	this.companies = [];
+	$scope.companyname='';
+	$scope.companies = [];
+	$scope.history = [];
 	
-	this.autocomplete = function autocomplete() {
+	$scope.autocomplete = function() {
 		var responsePromise = $http.get('/ajax/company/search?format=autocomplete&limit=200&name=' + this.companyname);
-		var companies = this.companies;
+		var companies = $scope.companies;
 		
         responsePromise.success(function(data, status, headers, config) {
         	companies.length = 0;
         	for (i=0; i<data.length; i++) {
-        		companies.push(data[i].source);
+        		var companyDetails = data[i].source;
+        		companyDetails['arrayindex'] = i;
+        		companies.push(companyDetails);
         	}
         });
         
@@ -18,7 +21,8 @@ angular.module('experience', []).controller('ExperienceController', function($sc
         });
 	};
 	
-	$scope.select = function(id) {
-		
+	$scope.select = function(arrayindex) {
+		$scope.history.push($scope.companies[arrayindex]);
+		$scope.companies = [];
 	}
 });

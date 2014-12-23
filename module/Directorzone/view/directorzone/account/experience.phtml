@@ -4,10 +4,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.27/angular.min.js"></script>
 
 <div ng-app="experience" ng-controller="ExperienceController as experience">
-    <input placeholder="Search for a company" class="companyname" ng-model="experience.companyname" ng-change="experience.autocomplete()" type="text" style="width: 66%;">
-  
-    <div ng-repeat="company in experience.companies">
-        <div ng-click="select(company.companyid)" id="{{ company.companyid }}" class="autocomplete-selection">
+
+    <input placeholder="Search for a company" class="companyname" ng-model="companyname" ng-change="autocomplete()" type="text" style="width: 66%;">
+    <div ng-if="companies.length>0" class="autocomplete-selections">
+    <div ng-repeat="company in companies">
+        <div ng-click="select(company.arrayindex)" id="{{ company.companyid }}" class="autocomplete-selection">
         <div style="font-size:1em;font-weight:bold">{{ company.name }}</div>
         <div style="font-size:0.8em">
         {{ company.category }}, {{ company.detailstatus }}
@@ -17,6 +18,24 @@
         </div>
         </div>
     </div>
+    </div>
+    
+    <h3>Company History</h3>
+    <div ng-if="history.length==0">
+        Please use the search box above to find your current and previous companies.
+    </div>
+    
+    <div ng-repeat="company in history">
+        <div style="font-size:1em;font-weight:bold">{{ company.name }}</div>
+        <div style="font-size:0.8em">
+        {{ company.category }}, {{ company.detailstatus }}
+        </div>
+        <div style="font-size:0.8em">
+        Company number: {{ company.number }}, Address: {{ company.addressline1 }}, {{ company.town }}, {{ company.postcode }}
+        </div>
+    </div>
+    
+    
 </div>
     
 <script src="/js/angular/modules/experience.js"></script>

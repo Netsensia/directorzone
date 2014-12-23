@@ -294,6 +294,14 @@ div.autocomplete-selection {
     padding-left:0.2em;	
 }
 
+div.autocomplete-selections {
+	width:40em;
+	border:1px solid #428bca;
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.76);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.76);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.76);
+}
+
 div.autocomplete-selection:hover {
 	background: #428bca;
 	color:#fff;
