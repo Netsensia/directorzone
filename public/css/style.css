@@ -289,3 +289,13 @@ div.articlekeyfacts span {
 .hierarchy-widget-group {
 	display:block;
 }
+
+div.autocomplete-selection {
+    padding-left:0.2em;	
+}
+
+div.autocomplete-selection:hover {
+	background: #428bca;
+	color:#fff;
+	cursor:pointer;
+}

@@ -7,6 +7,7 @@
     <input placeholder="Search for a company" class="companyname" ng-model="experience.companyname" ng-change="experience.autocomplete()" type="text" style="width: 66%;">
   
     <div ng-repeat="company in experience.companies">
+        <div ng-click="select(company.companyid)" id="{{ company.companyid }}" class="autocomplete-selection">
         <div style="font-size:1em;font-weight:bold">{{ company.name }}</div>
         <div style="font-size:0.8em">
         {{ company.category }}, {{ company.detailstatus }}
@@ -14,7 +15,7 @@
         <div style="font-size:0.8em">
         Company number: {{ company.number }}, Address: {{ company.addressline1 }}, {{ company.town }}, {{ company.postcode }}
         </div>
-
+        </div>
     </div>
 </div>
     

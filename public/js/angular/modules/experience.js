@@ -17,4 +17,8 @@ angular.module('experience', []).controller('ExperienceController', function($sc
             alert("AJAX failed!");
         });
 	};
+	
+	$scope.select = function(id) {
+		
+	}
 });
