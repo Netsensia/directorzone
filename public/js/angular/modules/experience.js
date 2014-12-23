@@ -22,7 +22,18 @@ angular.module('experience', []).controller('ExperienceController', function($sc
 	};
 	
 	$scope.select = function(arrayindex) {
-		$scope.history.push($scope.companies[arrayindex]);
-		$scope.companies = [];
+		//var responsePromise = $http.get('/ajax/account/addcompany?companyid=' + $scope.companies[arrayindex].companyid);
+		
+		var responsePromise = $http.get('/ajax/company/search?format=autocomplete&limit=200&name=' + this.companyname);
+		
+		responsePromise.success(function(data, status, headers, config) {
+			$scope.history.push($scope.companies[arrayindex]);
+			$scope.companies = [];
+        });
+        
+        responsePromise.error(function(data, status, headers, config) {
+            alert("AJAX failed!");
+            $scope.companies = [];
+        });
 	}
 });

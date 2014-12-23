@@ -83,6 +83,27 @@ return array(
                             ),
                         ),
                     ),
+                    'experience' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/experience',
+                            'defaults' => array(
+                                'controller' => 'Directorzone\Controller\Ajax\Experience',
+                            ),
+                        ),
+                        'may_terminate' => false,
+                        'child_routes' => array(
+                            'add-company' => array(
+                                'type' => 'literal',
+                                'options' => array(
+                                    'route' => '/add-company',
+                                    'defaults' => array(
+                                        'action' => 'add-company',
+                                    ),
+                                )
+                            ),
+                        ),
+                    ),
                     'company-owners' => array(
                         'type' => 'literal',
                         'options' => array(

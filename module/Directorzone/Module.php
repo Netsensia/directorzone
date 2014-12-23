@@ -20,6 +20,7 @@ use Directorzone\Service\CompanyOwnersService;
 use Directorzone\Service\AddressService;
 use Directorzone\Model\CompanyDirectory;
 use Directorzone\Form\Company\CompanyOwnersForm;
+use Directorzone\Service\ExperienceService;
 
 class Module
 {
@@ -72,6 +73,12 @@ class Module
                     function (ControllerManager $cm) {
                         return new \Directorzone\Controller\Ajax\PeopleController(
                             $cm->getServiceLocator()->get('PeopleService')
+                        );
+                    },
+                'Directorzone\Controller\Ajax\Experience' =>
+                    function (ControllerManager $cm) {
+                        return new \Directorzone\Controller\Ajax\ExperienceController(
+                            $cm->getServiceLocator()->get('ExperienceService')
                         );
                     },
                 'Directorzone\Controller\Ajax\CompanyOwners' =>
@@ -246,6 +253,7 @@ class Module
             'KeyEvent',
             'JobArea',
             'Relationship',
+            'UserExperience',
             ]
         );
         
@@ -424,6 +432,14 @@ class Module
                 $instance = new AddressService(
                     $sm->get('AddressTableGateway'),
                     $sm->get('CountryTableGateway')
+                );
+                return $instance;
+            },
+            'ExperienceService' => function ($sm) {
+                $instance = new ExperienceService(
+                    $sm->get('CompanyDirectoryTableGateway'),
+                    $sm->get('CompaniesHouseTableGateway'),
+                    $sm->get('UserExperienceTableGateway')
                 );
                 return $instance;
             },
