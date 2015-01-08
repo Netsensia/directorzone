@@ -22,7 +22,6 @@ angular.module('experience', []).controller('ExperienceController', function($sc
 	};
 	
 	$scope.select = function(arrayindex) {
-		//var responsePromise = $http.get('/ajax/account/addcompany?companyid=' + $scope.companies[arrayindex].companyid);
 		
 		var responsePromise = $http.get('/ajax/company/search?format=autocomplete&limit=200&name=' + this.companyname);
 		
