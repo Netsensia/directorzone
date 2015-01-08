@@ -4,7 +4,9 @@
 				<table class="table">
 				<caption>Metrics &amp; Financials</caption>
               
+              <tr><td>Business Description</td><td><?php echo $this->businessdescription; ?></td>	</tr>
 						<tr><td>Incorporation Date</td><td><?php echo $this->incorporationdate; ?></td>	</tr>
+						<tr><td>Market Group</td><td><?php echo $this->companytype; ?></td>	</tr>
 						<tr><td>Closure Date</td><td><?php echo $this->closuredate; ?></td>	</tr>
 						<tr><td>Company Status</td><td><?php echo $this->companystatus; ?></td>	</tr>
 						<tr><td>Country of Origin</td><td><?php echo $this->countryoforigin; ?></td>	</tr>
@@ -24,6 +26,16 @@
 						  <?php
 						      foreach($this->pastnames as $pastname) {
 						          echo $pastname['companypastname'] . '<br>';
+						      } 
+						  ?>
+						  </td>
+						</tr>
+						<tr>
+						  <td>Keywords</td>
+						  <td>
+						  <?php
+						      foreach($this->keywords as $keyword) {
+						          echo $keyword['companykeyword'] . '<br>';
 						      } 
 						  ?>
 						  </td>

@@ -35,6 +35,12 @@ class CompanyService extends NetsensiaService
      * @var TableGateway
      */
     private $companySicCodesTable;
+   
+    private $companyKeywordTable;
+    
+    private $companyPastNameTable;
+    
+    private $companyPatentTable;
     
     private $companySectorTable;
    
@@ -65,6 +71,7 @@ class CompanyService extends NetsensiaService
         TableGateway $companyOfficers,
         TableGateway $companyRelationship,
         TableGateway $companyPastName,
+        TableGateway $companyKeywords,
         TableGateway $companyPatent,
         TableGateway $companyImportMarket,
         TableGateway $companyExportMarket,
@@ -80,8 +87,9 @@ class CompanyService extends NetsensiaService
         $this->companySectorTable = $companySector;
         $this->companyOfficersTable = $companyOfficers;
         $this->companyRelationship = $companyRelationship;
-        $this->companyPastName = $companyPastName;
-        $this->companyPatent = $companyPatent;
+        $this->companyPastNameTable = $companyPastName;
+        $this->companyKeywordTable = $companyKeywords;
+        $this->companyPatentTable = $companyPatent;
         $this->companyImportMarketTable = $companyImportMarket;
         $this->companyExportMarketTable = $companyExportMarket;
         $this->userCompany = $userCompany;
@@ -271,12 +279,17 @@ class CompanyService extends NetsensiaService
         }
         
         $companyDetails['pastnames'] = $this->getMultipleTextValues(
-            $this->companyPastName,
+            $this->companyPastNameTable,
+            $companyDetails['companydirectoryid']
+        );
+        
+        $companyDetails['keywords'] = $this->getMultipleTextValues(
+            $this->companyKeywordTable,
             $companyDetails['companydirectoryid']
         );
         
         $companyDetails['patents'] = $this->getMultipleTextValues(
-            $this->companyPatent,
+            $this->companyPatentTable,
             $companyDetails['companydirectoryid']
         );
         

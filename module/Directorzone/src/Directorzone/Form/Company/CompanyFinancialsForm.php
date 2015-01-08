@@ -15,6 +15,22 @@ class CompanyFinancialsForm extends NetsensiaForm
         $this->setFieldPrefix('account-contact-');
         $this->setDefaultIcon('user');
         
+        $this->addSelect([
+            'name' => 'companytype',
+            'label' => 'Market Group',
+        ]);
+        
+        $this->addTextArea('business-description');
+        
+        $this->addMultiTable([
+            'groupname' => 'Keywords',
+            'jointablemodel' => 'CompanyKeyword',
+            'jointablekeycolumn' => 'companykeywordid',
+            'fields' => [
+                ['type' => 'text', 'name' => 'companykeyword', 'label' => 'Keyword'],
+            ],
+        ]);
+        
         $this->addDate('incorporation-date');
         $this->addDate('closure-date');
         $this->addSelect(['name' => 'companystatus', 'label' => 'Company Status']);

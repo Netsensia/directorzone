@@ -378,6 +378,7 @@ class Module
                     $sm->get('CompanyOfficerTableGateway'),
                     $sm->get('CompanyRelationshipTableGateway'),
                     $sm->get('CompanyPastNameTableGateway'),
+                    $sm->get('CompanyKeywordTableGateway'),
                     $sm->get('CompanyPatentTableGateway'),
                     $sm->get('CompanyImportMarketTableGateway'),
                     $sm->get('CompanyExportMarketTableGateway'),
