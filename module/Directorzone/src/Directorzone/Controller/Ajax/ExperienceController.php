@@ -23,8 +23,15 @@ class ExperienceController extends NetsensiaActionController
         parent::onDispatch($e);
     }
     
-    public function addCompanyAction()
+    public function setHistoryAction()
     {
+        $body = $this->getRequest()->getContent();
+        $userId = $this->getUserId();
+        
+        $companies = json_decode($body, true);
+        
+        $this->experienceService->setHistory($userId, $companies);
+
         return new JsonModel([]);
     }
     

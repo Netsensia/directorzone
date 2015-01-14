@@ -4,6 +4,7 @@ angular.module('experience', []).controller('ExperienceController', function($sc
 	$scope.history = [];
 	
 	$scope.autocomplete = function() {
+		
 		var responsePromise = $http.get('/ajax/company/search?format=autocomplete&limit=200&name=' + this.companyname);
 		var companies = $scope.companies;
 		
@@ -17,22 +18,63 @@ angular.module('experience', []).controller('ExperienceController', function($sc
         });
         
         responsePromise.error(function(data, status, headers, config) {
-            alert("AJAX failed!");
+            alert("Autocomplete AJAX failed!");
         });
 	};
 	
+	function updateHistory() {
+
+		var historyPromise = $http.post('/ajax/experience/history', $scope.history);
+		
+		historyPromise.success(function(data, status, headers, config) {
+		});
+		
+		historyPromise.error(function(data, status, headers, config) {
+			alert("History AJAX failed!");
+		});
+	}
+	
 	$scope.select = function(arrayindex) {
 		
-		var responsePromise = $http.get('/ajax/company/search?format=autocomplete&limit=200&name=' + this.companyname);
+		$scope.history.push($scope.companies[arrayindex]);
 		
-		responsePromise.success(function(data, status, headers, config) {
-			$scope.history.push($scope.companies[arrayindex]);
-			$scope.companies = [];
-        });
-        
-        responsePromise.error(function(data, status, headers, config) {
-            alert("AJAX failed!");
-            $scope.companies = [];
-        });
+		var elementId = '#companyid-' + $scope.companies[arrayindex].companyid;
+		
+		setTimeout(function () {
+			$(elementId).css('display', 'none');
+			$(elementId).fadeIn(1200, function () {});
+		}, 0);
+		
+		$scope.companies = [];
+		
+		updateHistory();
 	}
+	
+	$scope.remove = function(companyId) {
+		
+		if (confirm('Do you wish to remove this company from your history?')) {
+			var elementId = '#companyid-' + companyId;
+			
+			$(elementId).fadeOut('slow', function () {
+				var foundIndex = -1;
+				
+				for (var i=0; i<$scope.history.length; i++) {
+					if ($scope.history[i].companyid == companyId) {
+						foundIndex = i;
+						break;
+					}
+				}
+		
+				if (foundIndex != -1) {
+					$scope.history.splice(foundIndex, 1);
+				}
+				
+				setTimeout(function () {
+					updateHistory();
+				});
+			});
+
+		}
+	}
+
 });

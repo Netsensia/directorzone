@@ -25,8 +25,8 @@
         Please use the search box above to find your current and previous companies.
     </div>
     
-    <div ng-repeat="company in history">
-        <div style="font-size:1em;font-weight:bold">{{ company.name }}</div>
+    <div ng-repeat="company in history" id="companyid-{{ company.companyid }}">
+        <div style="font-size:1em;font-weight:bold">{{ company.name }} [<a ng-click="remove(company.companyid)" href="#">Delete</a>]</div>
         <div style="font-size:0.8em">
         {{ company.category }}, {{ company.detailstatus }}
         </div>

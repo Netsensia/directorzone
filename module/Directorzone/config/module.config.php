@@ -93,12 +93,12 @@ return array(
                         ),
                         'may_terminate' => false,
                         'child_routes' => array(
-                            'add-company' => array(
+                            'set-history' => array(
                                 'type' => 'literal',
                                 'options' => array(
-                                    'route' => '/add-company',
+                                    'route' => '/history',
                                     'defaults' => array(
-                                        'action' => 'add-company',
+                                        'action' => 'set-history',
                                     ),
                                 )
                             ),
