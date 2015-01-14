@@ -135,7 +135,8 @@ class Module
                     function (ControllerManager $cm) {
                         return new \Directorzone\Controller\Account\AccountController(
                             $cm->getServiceLocator()->get('MessagingService'),
-                            $cm->getServiceLocator()->get('TalentPoolService')
+                            $cm->getServiceLocator()->get('TalentPoolService'),
+                            $cm->getServiceLocator()->get('ExperienceService')
                         );
                     },                    
                 'CompanyView' =>
@@ -438,8 +439,7 @@ class Module
             },
             'ExperienceService' => function ($sm) {
                 $instance = new ExperienceService(
-                    $sm->get('CompanyDirectoryTableGateway'),
-                    $sm->get('CompaniesHouseTableGateway'),
+                    $sm->get('CompanyService'),
                     $sm->get('UserExperienceTableGateway')
                 );
                 return $instance;

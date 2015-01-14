@@ -6,6 +6,7 @@ use Netsensia\Controller\NetsensiaActionController;
 use Zend\Mvc\MvcEvent;
 use Netsensia\Service\MessagingService;
 use Directorzone\Service\TalentPoolService;
+use Directorzone\Service\ExperienceService;
 
 class AccountController extends NetsensiaActionController
 {
@@ -19,13 +20,20 @@ class AccountController extends NetsensiaActionController
      */
     private $talentPoolService;
     
+    /**
+     * @var ExperienceService
+     */
+    private $experienceService;
+    
     public function __construct(
         MessagingService $messagingService,
-        TalentPoolService $talentPoolService
+        TalentPoolService $talentPoolService,
+        ExperienceService $experienceService
     ) 
     {
         $this->messagingService = $messagingService;
         $this->talentPoolService = $talentPoolService;
+        $this->experienceService = $experienceService;
     }
     
     public function onDispatch(MvcEvent $e)
@@ -59,7 +67,9 @@ class AccountController extends NetsensiaActionController
         
     public function experienceAction()
     {
-        return $this->userAccountForm('AccountExperienceForm', 'User');
+        return array(
+            'history' => $this->experienceService->getHistory($this->getUserId()),
+        );
     }
     
     public function inboxAction()

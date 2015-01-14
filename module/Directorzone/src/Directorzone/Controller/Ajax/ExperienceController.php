@@ -35,4 +35,10 @@ class ExperienceController extends NetsensiaActionController
         return new JsonModel([]);
     }
     
+    public function getHistoryAction()
+    {
+        return new JsonModel(
+            $this->experienceService->getHistory($this->getUserId())
+        );
+    }
 }

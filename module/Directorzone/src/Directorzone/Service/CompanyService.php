@@ -1050,4 +1050,41 @@ class CompanyService extends NetsensiaService
         return $details['name'];
         
     }
+    
+    public function getCompanyDirectoryId($reference)
+    {
+        $result = $this->companyDirectoryTable->select(
+            ['reference' => $reference]
+        )->toArray();
+        
+        if (count($result) > 1) {
+            throw new \Exception('Duplicate company (' . $reference . ') detected');
+        }
+    
+        if (count($result) == 1) {
+            return $result[0]['companydirectoryid'];
+        }
+        
+        return false;
+    }
+    
+    public function isCompanyInDirectory($reference)
+    {
+        $count = $this->companyDirectoryTable->select(
+            ['reference' => $reference]
+        )->count();
+        
+        if ($count > 1) {
+            throw new \Exception('Duplicate company (' . $reference . ') detected');
+        }
+        
+        return $count > 0;
+    }
+    
+    public function addCompanyToDirectory($companyDetails)
+    {
+        $result = $this->companyDirectoryTable->insert($companyDetails);
+        
+        return $this->companyDirectoryTable->getAdapter()->getDriver()->getLastGeneratedValue();
+    }
 }

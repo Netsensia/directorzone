@@ -93,15 +93,37 @@ return array(
                         ),
                         'may_terminate' => false,
                         'child_routes' => array(
-                            'set-history' => array(
+                            'history' => array(
                                 'type' => 'literal',
                                 'options' => array(
                                     'route' => '/history',
                                     'defaults' => array(
-                                        'action' => 'set-history',
+                                        'action' => 'get-history',
                                     ),
-                                )
+                                ),
+                                'may_terminate' => false,
+                                'child_routes' => array (
+                                    'set-history' => array(
+                                        'type' => 'method',
+                                        'options' => array(
+                                            'verb' => 'post',
+                                            'defaults' => array(
+                                                'action' => 'set-history',
+                                            ),
+                                        )
+                                    ),                                
+                                    'get-history' => array(
+                                        'type' => 'method',
+                                        'options' => array(
+                                            'verb' => 'get',
+                                            'defaults' => array(
+                                                'action' => 'get-history',
+                                            ),
+                                        ),
+                                    ),
+                                ),
                             ),
+                            
                         ),
                     ),
                     'company-owners' => array(

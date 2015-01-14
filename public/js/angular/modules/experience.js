@@ -22,6 +22,24 @@ angular.module('experience', []).controller('ExperienceController', function($sc
         });
 	};
 	
+	function loadHistory() {
+		var historyPromise = $http.get('/ajax/experience/history');
+		
+		historyPromise.success(function(data, status, headers, config) {
+			$scope.history = [];
+			for (var i=0; i<data.length; i++) {
+				$scope.history[i] = {
+					'companyid': data[i].companydirectoryid,
+					'name': data[i].name
+				};
+			}
+		});
+		
+		historyPromise.error(function(data, status, headers, config) {
+			alert("Load history AJAX failed!");
+		});
+	}
+	
 	function updateHistory() {
 
 		var historyPromise = $http.post('/ajax/experience/history', $scope.history);
@@ -76,5 +94,7 @@ angular.module('experience', []).controller('ExperienceController', function($sc
 
 		}
 	}
+	
+	loadHistory();
 
 });
