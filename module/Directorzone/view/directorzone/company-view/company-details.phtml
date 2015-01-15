@@ -1,3 +1,5 @@
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+
 <h3><?php echo $this->name; ?></h3>
 <h5>
 	<a href="/directories/company/<?php echo $this->companydirectoryid; ?>/overview">Edit this company</a> | 
@@ -66,6 +68,39 @@ $(document).ready(function() {
     $(document).delegate('a[id^=tab-]', 'click', function() {
         switchActiveTab($(this));
 	});
+
+    function renderMap(id, lat, long, title) {
+    	var mapCanvas = document.getElementById(id);
+
+    	var myLatlng = new google.maps.LatLng(lat, long);
+    	
+        var mapOptions = {
+          center: myLatlng,
+          zoom: 12,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var map = new google.maps.Map(mapCanvas, mapOptions);
+
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            title: title
+        });
+    }
+    
+    function initialize() {
+
+    	<?php if (!empty($this->registeredaddress['lat'])) : ?>
+        renderMap('registered-address-map', <?php echo $this->registeredaddress['lat']; ?>, <?php echo $this->registeredaddress['long'] ?>, '');
+        <?php endif; ?>
+
+        <?php if (!empty($this->tradingaddress['lat'])) : ?>
+        renderMap('trading-address-map', <?php echo $this->tradingaddress['lat']; ?>, <?php echo $this->tradingaddress['long'] ?>, '');
+        <?php endif;?>
+        
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+
 });
 </script>
 

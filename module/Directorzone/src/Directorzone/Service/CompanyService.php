@@ -409,6 +409,18 @@ class CompanyService extends NetsensiaService
         
         $companyDetails['registeredaddress'] = $this->addressService->getAddressDetails($companyDetails['registeredaddressid']);
         $companyDetails['tradingaddress'] = $this->addressService->getAddressDetails($companyDetails['tradingaddressid']);
+
+        if (isset($companyDetails['registeredaddress']['postcode']) && trim($companyDetails['registeredaddress']['postcode']) != '') {
+            $latLong = $this->getLatLong($companyDetails['registeredaddress']['postcode']);
+            $companyDetails['registeredaddress']['lat'] = $latLong['lat'];
+            $companyDetails['registeredaddress']['long'] = $latLong['long'];
+        }
+        
+        if (isset($companyDetails['tradingaddress']['postcode']) && trim($companyDetails['tradingaddress']['postcode']) != '') {
+            $latLong = $this->getLatLong($companyDetails['tradingaddress']['postcode']);
+            $companyDetails['tradingaddress']['lat'] = $latLong['lat'];
+            $companyDetails['tradingaddress']['long'] = $latLong['long'];
+        }
         
         $companyDetails['isowner'] = $this->companyIsOwnedBy(
             $companyDetails['companydirectoryid'],
@@ -417,6 +429,19 @@ class CompanyService extends NetsensiaService
         
         return $companyDetails;
         
+    }
+    
+    private function getLatLong($postcode)
+    {
+        if (trim($postcode) == '') return;
+        
+        $url = 'http://maps.googleapis.com/maps/api/geocode/json?address=' . urlencode($postcode) . '&sensor=false';
+        $json = json_decode(file_get_contents($url));
+        
+        return [
+            'lat' => $json->results[0]->geometry->location->lat,
+            'long' => $json->results[0]->geometry->location->lng
+        ];
     }
     
     public function getCompanyDirectoryIdFromName($name)
