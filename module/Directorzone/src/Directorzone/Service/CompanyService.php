@@ -405,6 +405,8 @@ class CompanyService extends NetsensiaService
                 ['registeredaddressid' => $registeredAddressId],
                 ['companydirectoryid' => $companyDetails['companydirectoryid']]
             );
+            
+            $companyDetails['registeredaddressid'] = $registeredAddressId;
         }
         
         $companyDetails['registeredaddress'] = $this->addressService->getAddressDetails($companyDetails['registeredaddressid']);
@@ -775,15 +777,20 @@ class CompanyService extends NetsensiaService
         $uploadId
     )
     {        
-        $rowset = $this->companyUploadTable->select(
+        $array = $this->companyUploadTable->select(
             function (Select $select) use ($uploadId) {
                 $select->where(
                     ['companyuploadid' => $uploadId]
-                )->join('companieshouse', 'companieshouse.number=companyupload.companynumber', ['incorporationdate']);
+                )->join('companieshouse', 'companieshouse.number=companyupload.companynumber', [
+                    'incorporationdate',
+                    'addressline1',
+                    'addressline2',
+                    'addressline3',
+                    'addressline4',
+                    'postcode',
+                ]);
             }
-        );
-        
-        $array = $rowset->toArray();
+        )->toArray();
         
         if (count($array) == 0) {
              throw new \Exception(
@@ -793,12 +800,21 @@ class CompanyService extends NetsensiaService
         
         $companyRow = $array[0];
         
+        $registeredAddressId = $this->addressService->addAddress([
+            'address1' => $companyRow['addressline1'],
+            'address2' => $companyRow['addressline2'],
+            'address3' => $companyRow['addressline3'],
+            'town' => $companyRow['addressline4'],
+            'postcode' => $companyRow['postcode'],
+        ]);
+        
         $result = $this->companyDirectoryTable->insert(
             [
                 'reference' => $companyRow['companynumber'],
                 'name' => $companyRow['name'],
                 'incorporationdate' => date('Y-m-d', strtotime($companyRow['incorporationdate'])),
                 'recordstatus' => 'L',
+                'registeredaddressid' => $registeredAddressId,
             ]
         );
         
