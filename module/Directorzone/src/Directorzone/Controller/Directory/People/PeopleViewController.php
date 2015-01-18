@@ -52,7 +52,7 @@ class PeopleViewController extends NetsensiaActionController
             $cacheKey = 'peopleDetailsActionFeedResults' . $peopleDirectoryId;
             
             if ($peopleDetails['canusefeedcache'] == 'Y') {
-                $result = $zendCache->getItem($cacheKey, $cacheSuccess);
+                //$result = $zendCache->getItem($cacheKey, $cacheSuccess);
             }
         
             if ($cacheSuccess) {

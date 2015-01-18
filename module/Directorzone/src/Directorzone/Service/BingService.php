@@ -20,7 +20,12 @@ class BingService extends NetsensiaService
     
     public function search($searchTerm, $count)
     {
-        $res = $this->client->get('News', ['Query' => $searchTerm, '$top' => '3']);
+        $searchTerm = str_replace(' ', '+', $searchTerm);
+        
+        $res = $this->client->get('News', [
+                'Query' => $searchTerm,
+            ]
+        );
         
         $res = json_decode($res, true);
 

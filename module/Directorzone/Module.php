@@ -267,7 +267,7 @@ class Module
         
         $forms = [
             'CompanyContactForm',
-            'CompanyFeedsForm',
+            'CompanyFeeds',
             'CompanyFinancials',
             'CompanyOfficers',
             'CompanyOverview',
