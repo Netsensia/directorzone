@@ -20,6 +20,8 @@ class ArticleService extends NetsensiaService
 	const ARTICLETYPE_KNOWLEDGE = 9;
 	
     private $commentsService;
+    private $companyService;
+    private $talentPoolService;
     
     /**
      * @var TableGateway
@@ -33,6 +35,8 @@ class ArticleService extends NetsensiaService
         
     public function __construct(
         CommentsService $commentsService,
+        CompanyService $companyService,
+        TalentPoolService $talentPoolService,
         TableGateway $articleTable,
         TableGateway $articleSectorTable,
         TableGateway $articleGeographyTable,
@@ -44,6 +48,8 @@ class ArticleService extends NetsensiaService
         $this->setPrimaryTable($articleTable);
         
         $this->commentsService = $commentsService;
+        $this->companyService = $companyService;
+        $this->talentPoolService = $talentPoolService;
         $this->articleTable = $articleTable;
         $this->articleSectorTable = $articleSectorTable;
         $this->articleGeographyTable = $articleGeographyTable;
@@ -88,7 +94,7 @@ class ArticleService extends NetsensiaService
             function (Select $select) use ($articleId) {
         
                 $select->columns(
-                    ['title', 'publishdate', 'articleid', 'anonymousstatusid', 'content', 'image', 'userid', 'startdate', 'enddate', 'location', 'articlecategoryid']
+                    ['title', 'publishdate', 'articleid', 'anonymousstatusid', 'companyid', 'content', 'image', 'userid', 'startdate', 'enddate', 'location', 'articlecategoryid']
                 )
                 ->join('user', 'article.userid = user.userid', ['pseudonym', 'name'])
                 ->where(['articleid' => $articleId]);
@@ -133,6 +139,15 @@ class ArticleService extends NetsensiaService
                 'jobarea',
                 $this->articleJobAreaTable
             );
+            
+            $article['anonymousstatusid'] = 
+                $this->getAnonymousStatusForCategory($article['articlecategoryid']) == 'A' ? 1 : 2;
+            
+            if ($this->getPublisherTypeForCategory($article['articlecategoryid']) == 'C') {
+                $article['footprint'] = $this->companyService->getFootprint($article['companyid']);
+            } else {
+                $article['footprint'] = $this->talentPoolService->getFootprint($article['userid']);
+            }
             
             return $article;
         } else {
@@ -245,6 +260,28 @@ class ArticleService extends NetsensiaService
         }
         
         return $articles;
+    }
+    
+    public function getAnonymousStatusForCategory($articleCategoryId)
+    {
+        $rowset = $this->articleCategoryTable->select(
+            function (Select $select) use ($articleCategoryId) {
+                $select->columns(['publicoranonymous'])->where(['articlecategoryid' => $articleCategoryId]);
+            }   
+        )->toArray();
+        
+        return $rowset[0]['publicoranonymous'];
+    }
+    
+    public function getPublisherTypeForCategory($articleCategoryId)
+    {
+        $rowset = $this->articleCategoryTable->select(
+            function (Select $select) use ($articleCategoryId) {
+                $select->columns(['companyorpersonal'])->where(['articlecategoryid' => $articleCategoryId]);
+            }
+        )->toArray();
+    
+        return $rowset[0]['companyorpersonal'];
     }
 
 }

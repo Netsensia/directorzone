@@ -421,6 +421,8 @@ class Module
             'ArticleService' => function ($sm) {
                 $instance = new ArticleService(
                     $sm->get('CommentsService'),
+                    $sm->get('CompanyService'),
+                    $sm->get('TalentPoolService'),
                     $sm->get('ArticleTableGateway'),
                     $sm->get('ArticleSectorTableGateway'),
                     $sm->get('ArticleGeographyTableGateway'),

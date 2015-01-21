@@ -1088,7 +1088,7 @@ class CompanyService extends NetsensiaService
     {
         $details = $this->getCompanyDetails($companyDirectoryId);
         
-        return $details['name'];
+        return 'Placeholder footprint for ' . $details['name'];
         
     }
     
