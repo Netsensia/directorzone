@@ -429,6 +429,9 @@ class CompanyService extends NetsensiaService
             $this->getUserId()
         );
         
+        $companyDetails['employeerange'] = $this->getEmployeeRange($companyDetails['employeerangeid']);
+        $companyDetails['revenuerange'] = $this->getEmployeeRange($companyDetails['revenuerangeid']);
+        
         return $companyDetails;
         
     }
@@ -1088,8 +1091,38 @@ class CompanyService extends NetsensiaService
     {
         $details = $this->getCompanyDetails($companyDirectoryId);
         
-        return 'Placeholder footprint for ' . $details['name'];
+        //echo '<pre>';
+        //echo print_r($details, true);
+        //echo '</pre>';
         
+        $footprint = '';
+        
+        if (empty($details['countryoforigin'])) {
+            $details['countryoforigin'] = 'unknown country';
+        }
+        
+        if (empty($details['category'])) {
+            $details['countryoforigin'] = 'unknown company type';
+        }
+        
+        if (empty($details['companyphase'])) {
+            $details['companyphase'] = 'unknown size';
+        }
+        
+        if (empty($details['employeerange'])) {
+            $details['employeerange'] = 'unknown';
+        }   
+
+        if (empty($details['revenuerange'])) {
+            $details['revenuerange'] = 'unknown';
+        }
+        
+        $footprint .= $details['category'] . ' from ' . $details['countryoforigin'] . '; ';
+        $footprint .= $details['companyphase'] . '; ';
+        $footprint .= 'Employees: ' . $details['employeerange'] . '; ';
+        $footprint .= 'Revenues: ' . $details['revenuerange'] . '; ';
+        
+        return $footprint;
     }
     
     public function getCompanyDirectoryId($reference)
