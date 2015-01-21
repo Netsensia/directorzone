@@ -429,9 +429,6 @@ class CompanyService extends NetsensiaService
             $this->getUserId()
         );
         
-        $companyDetails['employeerange'] = $this->getEmployeeRange($companyDetails['employeerangeid']);
-        $companyDetails['revenuerange'] = $this->getEmployeeRange($companyDetails['revenuerangeid']);
-        
         return $companyDetails;
         
     }
@@ -1117,10 +1114,38 @@ class CompanyService extends NetsensiaService
             $details['revenuerange'] = 'unknown';
         }
         
+        if (empty($details['siccode1'])) {
+            $details['siccode1'] = 'unknown';
+        }
+        
         $footprint .= $details['category'] . ' from ' . $details['countryoforigin'] . '; ';
         $footprint .= $details['companyphase'] . '; ';
         $footprint .= 'Employees: ' . $details['employeerange'] . '; ';
         $footprint .= 'Revenues: ' . $details['revenuerange'] . '; ';
+        
+        $footprint .= 'Import markets: ';
+        
+        if (count($details['importmarkets']) > 0) {
+            foreach ($details['importmarkets'] as $market) {
+                $footprint .= $market['geography'] . ', ';
+            }
+            $footprint = substr($footprint, 0, strlen($footprint) - 2) . '; ';
+        } else {
+            $footprint .= 'unknown; ';
+        }
+        
+        $footprint .= 'Export markets: ';
+        
+        if (count($details['exportmarkets']) > 0) {
+            foreach ($details['exportmarkets'] as $market) {
+                $footprint .= $market['geography'] . ', ';
+            }
+            $footprint = substr($footprint, 0, strlen($footprint) - 2) . '; ';
+        } else {
+            $footprint .= 'unknown; ';
+        }
+        
+        $footprint .= 'Activities: ' . $details['siccode1'];
         
         return $footprint;
     }
