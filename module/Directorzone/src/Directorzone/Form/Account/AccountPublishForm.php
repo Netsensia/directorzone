@@ -53,7 +53,11 @@ class AccountPublishForm extends NetsensiaForm
         ]
         );
         
-        $this->addCheckbox(['name' => 'isanonymous', 'label' => 'Publish anonymously?']);
+        $this->addSelect([
+            'name' => 'anonymousstatus',
+            'label' => 'Publish anonymously?',
+            ]
+        );
         
         $this->addText('title');
         $this->addTextArea('content');

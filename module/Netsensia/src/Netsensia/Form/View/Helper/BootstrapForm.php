@@ -3,6 +3,8 @@ namespace Netsensia\Form\View\Helper;
 
 use Zend\View\Helper\AbstractHelper;
 use Zend\Form\Element\Submit;
+use Zend\Form\Element\Select;
+use Zend\Form\Element\Checkbox;
 
 class BootstrapForm extends AbstractHelper
 {
@@ -53,6 +55,14 @@ class BootstrapForm extends AbstractHelper
             if ($element instanceof Submit) {
                 continue;
             }
+            
+//             if ($element instanceof Checkbox) {
+//                 var_dump($element); die;
+                
+//                 if ($element->getValue() == 1) {
+//                     $element->setAttribute('checked', 1);
+//                 }
+//             }
             
             if ($element->getAttribute('data-netsensia') == 'image-upload') {
                 $this->hasImage = true;

@@ -88,7 +88,7 @@ class ArticleService extends NetsensiaService
             function (Select $select) use ($articleId) {
         
                 $select->columns(
-                    ['title', 'publishdate', 'articleid', 'isanonymous', 'content', 'image', 'userid', 'startdate', 'enddate', 'location', 'articlecategoryid']
+                    ['title', 'publishdate', 'articleid', 'anonymousstatusid', 'content', 'image', 'userid', 'startdate', 'enddate', 'location', 'articlecategoryid']
                 )
                 ->join('user', 'article.userid = user.userid', ['pseudonym', 'name'])
                 ->where(['articleid' => $articleId]);
@@ -157,6 +157,8 @@ class ArticleService extends NetsensiaService
                 in_array($articleCategoryType, $events) ||
                 in_array($articleCategoryType, $jobs) ||
                 in_array($articleCategoryType, $meetings),
+            'isanonymous' =>
+                in_array($articleCategoryType, $jobs),
             'iscompany' =>
                 in_array($articleCategoryType, $this->getAllTypesWithParent(18)) ||
                 in_array($articleCategoryType, $this->getAllTypesWithParent(20))

@@ -32,17 +32,16 @@ $(function() {
     endDateVisibility('none');
     locationVisibility('none');
     isAnonymousVisibility('none');
+    companyVisibility('none');
 
-    var display;
-
-    setVisibilities($("#account-publish-articlecategory"));
+    var rawWidgetValue = JSON.parse($('input[id^="netsensiaWidget_hierarchy_"]').val());
+    setVisibilities(rawWidgetValue.value);
     
     $(document).delegate('[id^="netsensiaWidget_hierarchy_"]', "change", function() {
-        setVisibilities($(this));
+        setVisibilities($(this).val());
     });
 
-    function setVisibilities(obj) {
-    	var val = obj.val();
+    function setVisibilities(val) {
 
     	$.ajax({
         	url: '/ajax/publish-options/' + val,
@@ -51,10 +50,11 @@ $(function() {
         		endDateVisibility(data.isenddate ? 'block' : 'none');
                 locationVisibility(data.islocation ? 'block' : 'none');
                 companyVisibility(data.iscompany ? 'block' : 'none');
+                isAnonymousVisibility(data.isanonymous ? 'block' : 'none');
         	}
     	});
     	
-        isAnonymousVisibility(val == 6 ? 'block' : 'none');
+        
     }
 });
 
