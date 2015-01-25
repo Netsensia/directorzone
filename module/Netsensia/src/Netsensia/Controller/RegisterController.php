@@ -226,7 +226,7 @@ class RegisterController extends NetsensiaActionController
                 if ($this->getServiceLocator()->get('config')['netsensia']['debugMode']) {
                     $this->flashMessenger()->addInfoMessage(
                         $this->translate(
-                            '<a href="http://netsensia.zf2.skeleton/update-password/' . $passwordResetCode . '">' .
+                            '<a href="/update-password/' . $passwordResetCode . '">' .
                             'Here is the link' .
                             '</a> - seeings as this is only an example site.'
                         )
