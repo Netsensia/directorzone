@@ -26,8 +26,9 @@ $(document).ready(function() {
 
 function loadTheTable()
 {
+	var startPage = <?php echo $this->startPage; ?>;
 	netsensia_Pager(
-			1,
+			startPage,
 			20,
 			'talent-pool',
 			'/ajax/talent-pool/list',

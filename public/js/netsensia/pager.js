@@ -17,17 +17,28 @@ $(document).ready(function() {
 	});
 });
 
+function rewriteUrlForNewPage(direction)
+{
+	var currentUrl = document.URL.replace('#', '');
+	var pageNumber = currentUrl.match(/\d+$/);
+	var newPageNumber = parseInt(pageNumber) + direction;
+	var newUrl = currentUrl.replace(/\d+$/, newPageNumber.toString());
+	window.history.pushState("object or string", "Title", newUrl);
+}
+
 function netsensia_Pager(page, size, id, route, rowFunc)
 {
 
 	$("li#next").click(function() {
 		page ++;
+		rewriteUrlForNewPage(1);
 		netsensia_pager_loadTable(page, size, $('#columnSorter').attr('data-sort-by-column'), id, route, rowFunc);
 	});
 	
 	$("li#previous").click(function() {
 		if (!$(this).hasClass('disabled')) {
     		page --;
+    		rewriteUrlForNewPage(-1);
     		netsensia_pager_loadTable(page, size, $('#columnSorter').attr('data-sort-by-column'), id, route, rowFunc);
 		}
 	});

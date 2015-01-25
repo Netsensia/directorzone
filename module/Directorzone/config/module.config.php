@@ -469,6 +469,17 @@ return array(
                         ),
                         'may_terminate' => true,
                         'child_routes' => array(
+                            'company-directory-page' => array(
+                                'type' => 'segment',
+                                'options' => array(
+                                    'route' => '/page[/:page]',
+                                    'constraints' => ['page' => '[0-9]*'],
+                                    'defaults' => array(
+                                        'action' => 'company-list',
+                                        'controller' => 'Directory',
+                                    ),
+                                ),
+                            ),
                             'add-new-company' => array(
                                 'type' => 'literal',
                                 'options' => array(
@@ -597,6 +608,17 @@ return array(
                         ),
                         'may_terminate' => true,
                         'child_routes' => array(
+                            'people-directory-page' => array(
+                                'type' => 'segment',
+                                'options' => array(
+                                    'route' => '/page[/:page]',
+                                    'constraints' => ['page' => '[0-9]*'],
+                                    'defaults' => array(
+                                        'action' => 'people-list',
+                                        'controller' => 'Directory',
+                                    ),
+                                ),
+                            ),
                             'people-details' => array(
                                 'type' => 'segment',
                                 'options' => array(
@@ -635,7 +657,18 @@ return array(
                         ),
                         'may_terminate' => true,
                         'child_routes' => array(
-                            'people-details' => array(
+                            'talent-pool-directory-page' => array(
+                                'type' => 'segment',
+                                'options' => array(
+                                    'route' => '/page[/:page]',
+                                    'constraints' => ['page' => '[0-9]*'],
+                                    'defaults' => array(
+                                        'action' => 'talent-pool-list',
+                                        'controller' => 'Directory',
+                                    ),
+                                ),
+                            ),
+                            'talent-pool-details' => array(
                                 'type' => 'segment',
                                 'options' => array(
                                     'route' => '/:id',
