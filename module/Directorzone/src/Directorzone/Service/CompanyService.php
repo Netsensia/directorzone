@@ -1088,10 +1088,6 @@ class CompanyService extends NetsensiaService
     {
         $details = $this->getCompanyDetails($companyDirectoryId);
         
-        //echo '<pre>';
-        //echo print_r($details, true);
-        //echo '</pre>';
-        
         $footprint = '';
         
         if (empty($details['countryoforigin'])) {

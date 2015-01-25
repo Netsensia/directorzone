@@ -29,7 +29,7 @@ class ArticleController extends NetsensiaActionController
     {
         $articleId = $this->params('id');
         $response = $this->getResponse();
-       
+        
         try {
             $article = $this->articleService->getArticle($articleId);
             return $article;
