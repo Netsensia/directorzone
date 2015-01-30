@@ -11,14 +11,16 @@ $(function(){
 		$(this).val($(this).val().substring(0,10));
 	});
 	
-	$('.date-entry').datepicker( { 
-		changeYear: true, yearRange: "1920:2020",
-		dateFormat: "yy-mm-dd",
-		inline: true,
-		defaultDate: 0,
-        showOtherMonths: true,  
-        dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']}
-	);
+	$(document).on('focus', '.date-entry', function() {
+		$(this).datepicker({
+			changeYear: true, yearRange: "1920:2020",
+			dateFormat: "yy-mm-dd",
+			inline: true,
+			defaultDate: 0,
+	        showOtherMonths: true,  
+	        dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+		});
+	});
 });
 
 function toggleSelectOther(id)

@@ -3,6 +3,8 @@ angular.module('experience', []).controller('ExperienceController', function($sc
 	$scope.companies = [];
 	$scope.history = [];
 	
+	$scope.$watch(function() {return element.attr('class'); }, function(newValue){ alert(newValue);});
+	
 	$scope.autocomplete = function() {
 		
 		var responsePromise = $http.get('/ajax/company/search?format=autocomplete&limit=200&name=' + this.companyname);
@@ -61,6 +63,7 @@ angular.module('experience', []).controller('ExperienceController', function($sc
 		setTimeout(function () {
 			$(elementId).css('display', 'none');
 			$(elementId).fadeIn(1200, function () {});
+			setupDatepickers();
 		}, 0);
 		
 		$scope.companies = [];
@@ -93,6 +96,19 @@ angular.module('experience', []).controller('ExperienceController', function($sc
 			});
 
 		}
+	}
+	
+	function setupDatefields()
+	{
+		alert(1);
+		$('.date-entry').datepicker( { 
+			changeYear: true, yearRange: "1920:2020",
+			dateFormat: "yy-mm-dd",
+			inline: true,
+			defaultDate: 0,
+	        showOtherMonths: true,  
+	        dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']}
+		);
 	}
 	
 	loadHistory();

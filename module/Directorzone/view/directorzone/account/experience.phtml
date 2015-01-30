@@ -19,17 +19,43 @@
         </div>
     </div>
     </div>
-    
+
     <h3>Company History</h3>
     <div ng-if="history.length==0">
         Please use the search box above to find your current and previous companies.
     </div>
     
-    <div ng-repeat="company in history" id="companyid-{{ company.companyid }}">
-        <div style="font-size:1em;font-weight:bold">{{ company.name }} [<a ng-click="remove(company.companyid)" href="#">Delete</a>]</div>
+    <div class="container">
+        <div ng-repeat="company in history" id="companyid-{{ company.companyid }}">
+            <div class="row">
+                <div class="col-md-12" style="font-size:1em;font-weight:bold">{{ company.name }} [<a ng-click="remove(company.companyid)" href="#">Delete</a>]</div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                Start Date: <input style="width:10em" type="text" class="form-control date-entry" value="">
+                </div>
+                <div class="col-md-3">
+                End Date: <input style="width:10em" type="text" class="form-control date-entry" value="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                Job Title: <input style="width:100%" type="text" class="form-control" value="">
+                </div>
+                <div class="col-md-3">
+                Status: <input style="width:100%" type="text" class="form-control" value="">
+                </div>
+                <div class="col-md-3">
+                Area: <input style="width:100%" type="text" class="form-control" value="">
+                </div>
+                <div class="col-md-3">
+                Committee Role: <input style="width:100%" type="text" class="form-control" value="">
+                </div>
+             </div>
+
+            <hr>
+        </div>
     </div>
-    
-    
 </div>
     
 <script src="/js/angular/modules/experience.js"></script>
