@@ -414,6 +414,16 @@ return array(
                                 'action' => 'list',
                             ),
                         ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'article-list-page' => array(
+                                'type' => 'segment',
+                                'options' => array(
+                                    'route' => '/page[/:page]',
+                                    'constraints' => ['page' => '[0-9]*'],
+                                ),
+                            ),
+                        ),
                    ),
                 ),
             ),

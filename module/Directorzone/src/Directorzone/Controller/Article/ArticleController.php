@@ -40,7 +40,14 @@ class ArticleController extends NetsensiaActionController
     
     public function listAction()
     {
+        $startPage = $this->params()->fromRoute('page', -1);
+        
+        if ($startPage == -1) {
+            $this->redirect()->toRoute('articles/article-list/article-list-page', ['page' => '1']);
+        }
+        
         $result = [
+            'startPage' => $startPage,
             'isLoggedOn' => $this->isLoggedOn(),
             'isAdmin' => $this->isAdmin(),
             'filter' => $this->filterService->getFilterJson()

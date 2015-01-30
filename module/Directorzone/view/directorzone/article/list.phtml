@@ -111,8 +111,10 @@ function loadArticles(typeArray, statusArray) {
 	    }
 	}
 
+	var startPage = <?php echo $this->startPage; ?>;
+	
 	netsensia_Pager(
-			1,
+			startPage,
 			20,
 			'articles',
 			'/ajax/article/list?' + typeParam + '&' + statusParam,
