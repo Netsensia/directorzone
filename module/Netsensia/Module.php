@@ -41,6 +41,10 @@ class Module
                     $helper = new \Netsensia\View\Helper\Config($serviceManager);
                     return $helper;
                 },
+                'Username' => function ($serviceManager) {
+                    $helper = new \Netsensia\View\Helper\Username($serviceManager);
+                    return $helper;
+                },
             )
         );
     }

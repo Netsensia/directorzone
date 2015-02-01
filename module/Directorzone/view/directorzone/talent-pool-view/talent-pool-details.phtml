@@ -105,3 +105,9 @@
 </div>
 </div>
 
+<script>
+$(document).ready(function() {
+
+    $('#messagetitle').val('Message from ' + '<?php echo htmlentities($this->identity()->getName()); ?>');
+});
+</script>

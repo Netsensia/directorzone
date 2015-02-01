@@ -1,8 +1,13 @@
 <?php echo $this->partial('account-nav.phtml'); ?>
 <h3><?php echo $this->title ?></h3>
+<hr>
+From: <?php
+    $link = $this->url('directories/talent-pool/talent-pool-details', ['id' => $this->userid]); 
+    echo '<a href="' . $link . '">' . $this->from . '</a>'; 
+?>
+<hr>
 
 <?php echo $this->content; ?>
-
 
 <script>
 

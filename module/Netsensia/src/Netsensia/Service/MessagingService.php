@@ -126,6 +126,14 @@ class MessagingService extends NetsensiaService
         
         if (count($rows) == 1) {
             $message = $rows[0];
+            
+            $from = $message['forenames'] . ' ' . $message['surname'];
+            if (trim($from) == '') {
+                $from = $message['name'];
+            }
+            
+            $message['from'] = $from;
+            
             return $message;
         } else {
             throw new NotFoundResourceException('Message not found');

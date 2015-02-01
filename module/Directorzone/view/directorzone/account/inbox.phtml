@@ -28,7 +28,7 @@ $(document).ready(function() {
 
 function loadTheTable() {
 	netsensia_Pager(
-			1,
+			<?php echo $this->startPage; ?>,
 			20,
 			'inbox',
 			'/ajax/inbox/list',

@@ -74,7 +74,15 @@ class AccountController extends NetsensiaActionController
     
     public function inboxAction()
     {
-        return $this->userAccountForm('AccountInboxForm', 'User');
+        $startPage = $this->params()->fromRoute('page', -1);
+        
+        if ($startPage == -1) {
+            $this->redirect()->toRoute('account-inbox/inbox-page', ['page' => '1']);
+        }
+        
+        return [
+            'startPage' => $startPage
+        ];
     }
     
     public function viewMessageAction()

@@ -916,6 +916,13 @@ return array(
                             ),
                         ),
                     ),
+                    'inbox-page' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/page[/:page]',
+                            'constraints' => ['page' => '[0-9]*'],
+                        ),
+                    ),
                 ),
             ),
             'account-preferences' => array(
