@@ -6,6 +6,8 @@ use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Select;
 use Netsensia\Exception\NotFoundResourceException;
 use Netsensia\Service\CommentsService;
+use Zend\Mvc\Router\RouteMatch;
+use Zend\Mvc\Router\RouteInterface;
 
 class ArticleService extends NetsensiaService
 {
@@ -145,9 +147,11 @@ class ArticleService extends NetsensiaService
             
             if ($this->getPublisherTypeForCategory($article['articlecategoryid']) == 'C') {
                 if (empty($article['companyid'])) {
+                    $article['publishertype'] = 'Company';
                     $article['footprint'] = 'Footprint not available';
                     $article['name'] = 'Company name not available';
                 } else {
+                    $article['publishertype'] = 'Person';
                     $article['footprint'] = $this->companyService->getFootprint($article['companyid']);
                     $article['name'] = $this->companyService->getNameFromCompanyDirectoryId($article['companyid']);
                 }
