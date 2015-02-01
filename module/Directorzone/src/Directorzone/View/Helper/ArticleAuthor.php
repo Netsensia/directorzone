@@ -43,12 +43,13 @@ class ArticleAuthor extends AbstractHelper implements ServiceLocatorAwareInterfa
     	    echo $this->view->footprint;
     	    echo '<hr>';
     	} else {
-    	    if (empty($this->view->publishertype == 'Company')) {
+    	    if ($this->view->publishertype == 'Company') {
     	        $link = $this->view->url('directories/company-directory/company-details', ['id' => $this->view->companyid]);
+    	        echo 'Published by <a href="' . $link . '">' . $this->view->name . '</a> on ' . date("F j, Y, g:i a", strtotime($this->view->publishdate));
     	    } else {
-    	        $link = $this->view->url('directories/talent-pool/talent-pool-details', ['id' => $this->view->userid]);
+    	        echo 'Published by ' . $this->view->name . ' on ' . date("F j, Y, g:i a", strtotime($this->view->publishdate));
+    	         
     	    }
-    	    echo 'Published by <a href="' . $link . '">' . $this->view->name . '</a> on ' . date("F j, Y, g:i a", strtotime($this->view->publishdate));
     	}
 
     }

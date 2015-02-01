@@ -146,16 +146,17 @@ class ArticleService extends NetsensiaService
                 $this->getAnonymousStatusForCategory($article['articlecategoryid']) == 'A' ? 1 : 2;
             
             if ($this->getPublisherTypeForCategory($article['articlecategoryid']) == 'C') {
+                $article['publishertype'] = 'Company';
+
                 if (empty($article['companyid'])) {
-                    $article['publishertype'] = 'Company';
                     $article['footprint'] = 'Footprint not available';
                     $article['name'] = 'Company name not available';
                 } else {
-                    $article['publishertype'] = 'Person';
                     $article['footprint'] = $this->companyService->getFootprint($article['companyid']);
                     $article['name'] = $this->companyService->getNameFromCompanyDirectoryId($article['companyid']);
                 }
             } else {
+                $article['publishertype'] = 'Person';
                 $article['footprint'] = $this->talentPoolService->getFootprint($article['userid']);
             }
             
