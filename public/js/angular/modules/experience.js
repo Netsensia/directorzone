@@ -2,6 +2,9 @@ angular.module('experience', []).controller('ExperienceController', function($sc
 	$scope.companyname='';
 	$scope.companies = [];
 	$scope.history = [];
+	$scope.selectedJobArea = [];
+	$scope.selectedJobStatus = [];
+	$scope.selectedCommitteeRole = [];
 	
 	function loadLookupData(resourceName)
 	{
@@ -9,7 +12,6 @@ angular.module('experience', []).controller('ExperienceController', function($sc
 		
         responsePromise.success(function(data, status, headers, config) {
         	$scope.lookups[resourceName] = data._embedded[resourceName];
-        	//$scope.$apply();
         });
         
         responsePromise.error(function(data, status, headers, config) {
@@ -56,8 +58,15 @@ angular.module('experience', []).controller('ExperienceController', function($sc
 			$scope.history = [];
 			for (var i=0; i<data.length; i++) {
 				$scope.history[i] = {
+					'arrayindex': i,
 					'companyid': data[i].companydirectoryid,
-					'name': data[i].name
+					'name': data[i].name,
+					'startdate': '',
+					'enddate': '',
+					'jobtitle': '',
+					"jobstatus":$scope.lookups.jobstatus[0],
+					'jobarea': {'jobareaid':1},
+					"committeerole":{"committeeroleid":1,"committeerole":"Audit"}
 				};
 			}
 		});
@@ -79,16 +88,29 @@ angular.module('experience', []).controller('ExperienceController', function($sc
 		});
 	}
 	
+	$scope.showhistory = function(arrayindex) {
+		alert(JSON.stringify($scope.history[arrayindex]));
+	}
+	
 	$scope.select = function(arrayindex) {
 		
-		$scope.history.push($scope.companies[arrayindex]);
+		$scope.history.push({
+			'arrayindex': $scope.history.length,
+			'companyid': $scope.companies[arrayindex].companydirectoryid,
+			'name': $scope.companies[arrayindex].name,
+			'startdate': '',
+			'enddate': '',
+			'jobtitle': '',
+			'jobstatus': {},
+			'jobarea': {},
+			'committeerole': {}
+		});
 		
 		var elementId = '#companyid-' + $scope.companies[arrayindex].companyid;
 		
 		setTimeout(function () {
 			$(elementId).css('display', 'none');
 			$(elementId).fadeIn(1200, function () {});
-			setupDatepickers();
 		}, 0);
 		
 		$scope.companies = [];

@@ -44,13 +44,13 @@
             <div class="row">
                 
                 <div class="col-md-4">
-                Status:<br><select ng-model="selectedJobStatus" ng-options="data.jobstatus for data in lookups.jobstatus"></select>
+                Status:<br><select ng-change="showhistory(company.arrayindex)" ng-model="history[company.arrayindex].jobstatus" ng-options="data.jobstatus for data in lookups.jobstatus"></select>
                 </div>
                 <div class="col-md-4">
-                Area:<br><select ng-model="selectedJobArea" ng-options="data.jobarea for data in lookups.jobarea"></select>
+                Area:<br><select ng-change="showhistory(company.arrayindex)" ng-model="history[company.arrayindex].jobarea" ng-options="data.jobarea for data in lookups.jobarea"></select>
                 </div>
                 <div class="col-md-4">
-                Committee Role:<br><select ng-model="selectedCommitteeRole" ng-options="data.committeerole for data in lookups.committeerole"></select>
+                Committee Role:<br><select ng-change="showhistory(company.arrayindex)" ng-model="history[company.arrayindex].committeerole" ng-options="data.committeerole for data in lookups.committeerole"></select>
                 </div>
              </div>
 
