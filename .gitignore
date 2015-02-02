@@ -7,7 +7,7 @@ nbproject
 .project
 .settings
 composer.lock
-composer.json
+/composer.json
 vendor/
 vagrant/.vagrant/
 vagrant/salt/.vagrant/
