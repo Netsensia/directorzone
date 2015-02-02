@@ -37,19 +37,20 @@
                 <div class="col-md-3">
                 End Date: <input style="width:10em" type="text" class="form-control date-entry" value="">
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-6">
                 Job Title: <input style="width:100%" type="text" class="form-control" value="">
                 </div>
-                <div class="col-md-3">
-                Status: <input style="width:100%" type="text" class="form-control" value="">
+            </div>
+            <div class="row">
+                
+                <div class="col-md-4">
+                Status:<br><select ng-model="selectedJobStatus" ng-options="data.jobstatus for data in lookups.jobstatus"></select>
                 </div>
-                <div class="col-md-3">
-                Area: <input style="width:100%" type="text" class="form-control" value="">
+                <div class="col-md-4">
+                Area:<br><select ng-model="selectedJobArea" ng-options="data.jobarea for data in lookups.jobarea"></select>
                 </div>
-                <div class="col-md-3">
-                Committee Role: <input style="width:100%" type="text" class="form-control" value="">
+                <div class="col-md-4">
+                Committee Role:<br><select ng-model="selectedCommitteeRole" ng-options="data.committeerole for data in lookups.committeerole"></select>
                 </div>
              </div>
 

@@ -9,6 +9,7 @@ angular.module('experience', []).controller('ExperienceController', function($sc
 		
         responsePromise.success(function(data, status, headers, config) {
         	$scope.lookups[resourceName] = data._embedded[resourceName];
+        	//$scope.$apply();
         });
         
         responsePromise.error(function(data, status, headers, config) {
