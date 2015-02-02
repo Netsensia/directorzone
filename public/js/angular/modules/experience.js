@@ -9,8 +9,6 @@ angular.module('experience', []).controller('ExperienceController', function($sc
 		
         responsePromise.success(function(data, status, headers, config) {
         	$scope.lookups[resourceName] = data._embedded[resourceName];
-
-        	alert(JSON.stringify($scope.lookups[resourceName][0]));
         });
         
         responsePromise.error(function(data, status, headers, config) {
@@ -18,8 +16,15 @@ angular.module('experience', []).controller('ExperienceController', function($sc
         });
 	}
 
+	$scope.lookups = [];
+	
+	$scope.lookups.jobstatus = [];
 	loadLookupData('jobstatus');
+	
+	$scope.lookups.committeerole = [];
 	loadLookupData('committeerole');
+	
+	$scope.lookups.jobarea = [];
 	loadLookupData('jobarea');
 	
 	$scope.$watch(function() {return element.attr('class'); }, function(newValue){ alert(newValue);});
