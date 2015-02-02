@@ -6,11 +6,34 @@ return array(
             'Directorzone\Controller\Console\Company' =>
                 'Directorzone\Controller\Console\CompanyController',
             'Directorzone\Controller\Console\Geography' =>
-                'Directorzone\Controller\Console\GeographyController'
+                'Directorzone\Controller\Console\GeographyController',
+            'Directorzone\Controller\Api' =>
+                'Directorzone\Controller\Api\ApiController',
         ),
     ),
     'router' => array(
         'routes' => array(
+            'api' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/api',
+                    'defaults' => array(
+                        'controller' => 'Directorzone\Controller\Api',
+                    ),
+                ),
+                'may_terminate' => false,
+                'child_routes' => array(
+                    'lookup' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/lookup[/:resource]',
+                            'defaults' => array(
+                                'action' => 'lookup',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
             'admin' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(

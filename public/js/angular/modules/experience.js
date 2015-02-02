@@ -3,6 +3,25 @@ angular.module('experience', []).controller('ExperienceController', function($sc
 	$scope.companies = [];
 	$scope.history = [];
 	
+	function loadLookupData(resourceName)
+	{
+		var responsePromise = $http.get('/api/lookup/' + resourceName);
+		
+        responsePromise.success(function(data, status, headers, config) {
+        	$scope.lookups[resourceName] = data._embedded[resourceName];
+
+        	alert(JSON.stringify($scope.lookups[resourceName][0]));
+        });
+        
+        responsePromise.error(function(data, status, headers, config) {
+            alert("Loading lookup data for " + resourceName + " failed.");
+        });
+	}
+
+	loadLookupData('jobstatus');
+	loadLookupData('committeerole');
+	loadLookupData('jobarea');
+	
 	$scope.$watch(function() {return element.attr('class'); }, function(newValue){ alert(newValue);});
 	
 	$scope.autocomplete = function() {
