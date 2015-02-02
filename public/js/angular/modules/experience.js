@@ -1,4 +1,5 @@
 angular.module('experience', []).controller('ExperienceController', function($scope, $http) {
+	
 	$scope.companyname='';
 	$scope.companies = [];
 	$scope.history = [];
@@ -6,19 +7,6 @@ angular.module('experience', []).controller('ExperienceController', function($sc
 	$scope.selectedJobStatus = [];
 	$scope.selectedCommitteeRole = [];
 	
-	function loadLookupData(resourceName)
-	{
-		var responsePromise = $http.get('/api/lookup/' + resourceName);
-		
-        responsePromise.success(function(data, status, headers, config) {
-        	$scope.lookups[resourceName] = data._embedded[resourceName];
-        });
-        
-        responsePromise.error(function(data, status, headers, config) {
-            alert("Loading lookup data for " + resourceName + " failed.");
-        });
-	}
-
 	$scope.lookups = [];
 	
 	$scope.lookups.jobstatus = [];
@@ -30,6 +18,31 @@ angular.module('experience', []).controller('ExperienceController', function($sc
 	$scope.lookups.jobarea = [];
 	loadLookupData('jobarea');
 	
+	function loadLookupData(resourceName)
+	{
+		var responsePromise = $http.get('/api/lookup/' + resourceName);
+		
+        responsePromise.success(function(data, status, headers, config) {
+        	$scope.lookups[resourceName] = data._embedded[resourceName];
+        	
+        	var checks = ['jobarea', 'jobstatus', 'committeerole'];
+        	var allDone = true;
+        	for (var i=0; i<checks.length; i++) {
+        		if (checks[i].length == 0) {
+        			allDone = false;
+        		}
+        	}
+        	
+        	if (allDone) {
+        		loadHistory();
+        	}
+        });
+        
+        responsePromise.error(function(data, status, headers, config) {
+            alert("Loading lookup data for " + resourceName + " failed.");
+        });
+	}
+
 	$scope.$watch(function() {return element.attr('class'); }, function(newValue){ alert(newValue);});
 	
 	$scope.autocomplete = function() {
@@ -51,6 +64,14 @@ angular.module('experience', []).controller('ExperienceController', function($sc
         });
 	};
 	
+	function findDropDownObject(resourceName, index) {
+		for (var i=0; i<$scope.lookups[resourceName].length; i++) {
+			if ($scope.lookups[resourceName][i][resourceName + 'id'] == index) {
+				return $scope.lookups[resourceName][i];
+			}
+		}
+	}
+	
 	function loadHistory() {
 		var historyPromise = $http.get('/ajax/experience/history');
 		
@@ -64,9 +85,9 @@ angular.module('experience', []).controller('ExperienceController', function($sc
 					'startdate': '',
 					'enddate': '',
 					'jobtitle': '',
-					"jobstatus":$scope.lookups.jobstatus[0],
-					'jobarea': {'jobareaid':1},
-					"committeerole":{"committeeroleid":1,"committeerole":"Audit"}
+					"jobstatus":findDropDownObject('jobstatus', 3),
+					'jobarea': findDropDownObject('jobarea', 2),
+					"committeerole":findDropDownObject('committeerole', 3),
 				};
 			}
 		});
@@ -92,6 +113,9 @@ angular.module('experience', []).controller('ExperienceController', function($sc
 		alert(JSON.stringify($scope.history[arrayindex]));
 	}
 	
+	/**
+	 * New company added to list
+	 */
 	$scope.select = function(arrayindex) {
 		
 		$scope.history.push({
@@ -157,7 +181,5 @@ angular.module('experience', []).controller('ExperienceController', function($sc
 	        dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']}
 		);
 	}
-	
-	loadHistory();
 
 });
