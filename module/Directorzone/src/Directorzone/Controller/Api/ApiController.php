@@ -38,7 +38,10 @@ class ApiController extends NetsensiaActionController
             ]
         ]);
         
-        echo $response->getBody(); die;
+        return new JsonModel(
+            json_decode($response->getBody(), true)
+        );
+        
     }
         
 }
