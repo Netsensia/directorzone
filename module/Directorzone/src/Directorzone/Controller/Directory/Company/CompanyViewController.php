@@ -38,6 +38,7 @@ class CompanyViewController extends NetsensiaActionController
     
     public function companyDetailsAction()
     {
+
         $companyDirectoryId = $this->params('id');
         
         try {

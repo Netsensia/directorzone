@@ -15,6 +15,12 @@ class PeopleOverviewForm extends NetsensiaForm
         $this->setFieldPrefix('people-overview-');
         $this->setDefaultIcon('user');
         
+        $this->addText('forename');
+        $this->addText('surname');
+        $this->addText('nationality');
+        
+        $this->addDate(['label'=>'Date of Birth', 'name'=>'dob']);
+        
         $this->addAddress('addressid');
         
         $this->addSubmit('Submit');

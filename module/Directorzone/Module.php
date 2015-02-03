@@ -22,6 +22,8 @@ use Directorzone\Model\CompanyDirectory;
 use Directorzone\Form\Company\CompanyOwnersForm;
 use Directorzone\Service\ExperienceService;
 use Directorzone\Model\PeopleDirectory;
+use Directorzone\Model\WhosWho;
+use Directorzone\Service\WhosWhoService;
 
 class Module
 {
@@ -256,13 +258,13 @@ class Module
             'JobArea',
             'Relationship',
             'UserExperience',
+            'WhosWho',
             ]
         );
         
         $models = array_merge(
             $modelsAndGateways,
             [
-            'PeopleDirectory',
             ]
         );
         
@@ -386,6 +388,7 @@ class Module
                     $sm->get('CompanyImportMarketTableGateway'),
                     $sm->get('CompanyExportMarketTableGateway'),
                     $sm->get('UserCompanyTableGateway'),
+                    $sm->get('WhosWhoService'),
                     $sm->get('AddressService'),
                     $sm->get('NetsensiaCompanies\Request\CompanyAppointmentsRequest')
                 );
@@ -394,6 +397,13 @@ class Module
             'PeopleService' => function ($sm) {
                 $instance = new PeopleService(
                     $sm->get('CompanyOfficerTableGateway'),
+                    $sm->get('AddressService')
+                );
+                return $instance;
+            },
+            'WhosWhoService' => function ($sm) {
+                $instance = new WhosWhoService(
+                    $sm->get('WhosWhoTableGateway'),
                     $sm->get('AddressService')
                 );
                 return $instance;
@@ -484,6 +494,14 @@ class Module
                 $form->setTranslator($sm->get('translator'));
                 $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
                 return $form;
+            },
+            'WhosWhoModel' => function (\Zend\ServiceManager\ServiceLocatorInterface $sl) {
+                $instance = new WhosWho();
+                $instance->setServiceLocator($sl);
+                
+                $instance->setRelation('addressid', 'address');
+                
+                return $instance;
             },
             'PeopleDirectoryModel' => function (\Zend\ServiceManager\ServiceLocatorInterface $sl) {
                 $instance = new PeopleDirectory();

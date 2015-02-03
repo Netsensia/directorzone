@@ -50,6 +50,8 @@ class CompanyService extends NetsensiaService
     
     private $companyExportMarketTable;
     
+    private $whosWhoService;
+    
     /**
      * @var TableGateway
      */
@@ -76,6 +78,7 @@ class CompanyService extends NetsensiaService
         TableGateway $companyImportMarket,
         TableGateway $companyExportMarket,
         TableGateway $userCompany,
+        WhosWhoService $whosWhoService,
         AddressService $addressService,
         CompanyAppointmentsRequest $companyAppointmentsRequest
     )
@@ -94,6 +97,7 @@ class CompanyService extends NetsensiaService
         $this->companyExportMarketTable = $companyExportMarket;
         $this->userCompany = $userCompany;
         $this->addressService = $addressService;
+        $this->whosWhoService = $whosWhoService;
         $this->companyAppointmentsRequest = $companyAppointmentsRequest;
     }
 
@@ -855,8 +859,24 @@ class CompanyService extends NetsensiaService
         
         foreach ($appointments as $appointment) {
         
-            $appointment instanceof Person;
             $address = $appointment->getAddress();
+            
+            if ($this->whosWhoService->officerExists($appointment->getId())) {
+                
+            } else {
+                $data = [
+                    'officernumber' => $appointment->getId(),
+                    'forename' => $appointment->getForename(),
+                    'surname' => $appointment->getSurname(),
+                    'dob' => $appointment->getDob(),
+                    'nationality' => $appointment->getNationality(),
+                    'numappointments' => $appointment->getNumAppointments(),
+                    'honours' => $appointment->getHonours(),
+                ];
+                
+                $whosWhoId = $this->whosWhoService->insert($data);
+            }
+            
             $data = [
                 'companyreference' => $companyNumber,
                 'officernumber' => $appointment->getId(),
@@ -869,11 +889,13 @@ class CompanyService extends NetsensiaService
                 'appointmentstatus' => $appointment->getAppointmentStatus(),
                 'appointmentdate' => $appointment->getAppointmentDate(),
                 'honours' => $appointment->getHonours(),
+                'whoswhoid' => $whosWhoId,
             ];
         
             $result = $this->companyOfficersTable->insert(
                 $data
             );
+            
         }
 
         return $result;
