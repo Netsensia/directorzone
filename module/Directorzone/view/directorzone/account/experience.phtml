@@ -32,25 +32,25 @@
             </div>
             <div class="row">
                 <div class="col-md-3">
-                Start Date: <input style="width:10em" type="text" class="form-control date-entry" value="">
+                Start Date: <input ng-change="updateHistory()" style="width:10em" ng-model="history[company.arrayindex].fromdate" type="text" class="form-control date-entry" value="">
                 </div>
                 <div class="col-md-3">
-                End Date: <input style="width:10em" type="text" class="form-control date-entry" value="">
+                End Date: <input ng-change="updateHistory()" style="width:10em" ng-model="history[company.arrayindex].todate" type="text" class="form-control date-entry" value="">
                 </div>
                 <div class="col-md-6">
-                Job Title: <input style="width:100%" type="text" class="form-control" value="">
+                Job Title: <input ng-change="updateHistory()" style="width:100%" ng-model="history[company.arrayindex].title" type="text" class="form-control" value="">
                 </div>
             </div>
             <div class="row">
                 
                 <div class="col-md-4">
-                Status:<br><select ng-change="showhistory(company.arrayindex)" ng-model="history[company.arrayindex].jobstatus" ng-options="data.jobstatus for data in lookups.jobstatus"></select>
+                Status:<br><select ng-change="updateHistory()" ng-model="history[company.arrayindex].jobstatus" ng-options="data.jobstatus for data in lookups.jobstatus"></select>
                 </div>
                 <div class="col-md-4">
-                Area:<br><select ng-change="showhistory(company.arrayindex)" ng-model="history[company.arrayindex].jobarea" ng-options="data.jobarea for data in lookups.jobarea"></select>
+                Area:<br><select ng-change="updateHistory()" ng-model="history[company.arrayindex].jobarea" ng-options="data.jobarea for data in lookups.jobarea"></select>
                 </div>
                 <div class="col-md-4">
-                Committee Role:<br><select ng-change="showhistory(company.arrayindex)" ng-model="history[company.arrayindex].committeerole" ng-options="data.committeerole for data in lookups.committeerole"></select>
+                Committee Role:<br><select ng-change="updateHistory()" ng-model="history[company.arrayindex].committeerole" ng-options="data.committeerole for data in lookups.committeerole"></select>
                 </div>
              </div>
 

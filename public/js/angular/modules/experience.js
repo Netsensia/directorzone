@@ -70,7 +70,14 @@ angular.module('experience', []).controller('ExperienceController', function($sc
 				return $scope.lookups[resourceName][i];
 			}
 		}
-	}
+		
+		var key = resourceName + 'id';
+		var retVal = {};
+		retVal[key] = -1;
+		
+		return retVal;
+		
+ 	}
 	
 	function loadHistory() {
 		var historyPromise = $http.get('/ajax/experience/history');
@@ -80,14 +87,15 @@ angular.module('experience', []).controller('ExperienceController', function($sc
 			for (var i=0; i<data.length; i++) {
 				$scope.history[i] = {
 					'arrayindex': i,
-					'companyid': data[i].companydirectoryid,
+					'companyid': -1,
+					'companydirectoryid': data[i].companydirectoryid,
 					'name': data[i].name,
-					'startdate': '',
-					'enddate': '',
-					'jobtitle': '',
-					"jobstatus":findDropDownObject('jobstatus', 3),
-					'jobarea': findDropDownObject('jobarea', 2),
-					"committeerole":findDropDownObject('committeerole', 3),
+					'fromdate': data[i].fromdate,
+					'todate': data[i].todate,
+					'title': data[i].title,
+					"jobstatus":findDropDownObject('jobstatus', data[i].jobstatusid),
+					'jobarea': findDropDownObject('jobarea', data[i].jobareaid),
+					"committeerole":findDropDownObject('committeerole', data[i].committeeroleid),
 				};
 			}
 		});
@@ -97,9 +105,25 @@ angular.module('experience', []).controller('ExperienceController', function($sc
 		});
 	}
 	
-	function updateHistory() {
+	$scope.updateHistory = function() {
 
-		var historyPromise = $http.post('/ajax/experience/history', $scope.history);
+		var flatHistory = [];
+		
+		for (var i=0; i<$scope.history.length; i++) {
+			flatHistory[i] = {
+				'companyid' : $scope.history[i].companyid,
+				'companydirectoryid' : $scope.history[i].companydirectoryid,
+				'fromdate': $scope.history[i].fromdate,
+				'name': $scope.history[i].name,
+				'todate': $scope.history[i].todate,
+				'title': $scope.history[i].title,
+				'jobstatusid': $scope.history[i].jobstatus.jobstatusid,
+				'jobareaid': $scope.history[i].jobarea.jobareaid,
+				'committeeroleid': $scope.history[i].committeerole.committeeroleid
+			}
+		}
+		
+		var historyPromise = $http.post('/ajax/experience/history', flatHistory);
 		
 		historyPromise.success(function(data, status, headers, config) {
 		});
@@ -109,9 +133,6 @@ angular.module('experience', []).controller('ExperienceController', function($sc
 		});
 	}
 	
-	$scope.showhistory = function(arrayindex) {
-	}
-	
 	/**
 	 * New company added to list
 	 */
@@ -119,14 +140,15 @@ angular.module('experience', []).controller('ExperienceController', function($sc
 		
 		$scope.history.push({
 			'arrayindex': $scope.history.length,
-			'companyid': $scope.companies[arrayindex].companydirectoryid,
+			'companyid': $scope.companies[arrayindex].companyid,
+			'companydirectoryid': '',
 			'name': $scope.companies[arrayindex].name,
-			'startdate': '',
-			'enddate': '',
-			'jobtitle': '',
-			'jobstatus': {},
-			'jobarea': {},
-			'committeerole': {}
+			'fromdate': '',
+			'todate': '',
+			'title': '',
+			'jobstatus': {'jobstatusid':-1},
+			'jobarea': {'jobareaid':-1},
+			'committeerole': {'committeeroleid':-1},
 		});
 		
 		var elementId = '#companyid-' + $scope.companies[arrayindex].companyid;
@@ -138,7 +160,7 @@ angular.module('experience', []).controller('ExperienceController', function($sc
 		
 		$scope.companies = [];
 		
-		updateHistory();
+		$scope.updateHistory();
 	}
 	
 	$scope.remove = function(companyId) {
@@ -161,7 +183,7 @@ angular.module('experience', []).controller('ExperienceController', function($sc
 				}
 				
 				setTimeout(function () {
-					updateHistory();
+					$scope.updateHistory();
 				});
 			});
 

@@ -28,22 +28,29 @@ class ExperienceService extends NetsensiaService
         
         foreach ($companies as $company) {
             
-            $companyDirectoryId = $this->companyService->getCompanyDirectoryId($company['companyid']);
-            
-            if ($companyDirectoryId === false) {
-                $companyDirectoryId = $this->companyService->addCompanyToDirectory([
-                    'reference' => $company['companyid'],
-                    'name' => $company['name'],
-                    'directorzonecommunity' => 'N'
-                ]);
+            if (empty($company['companydirectoryid'])) {
+                $companyDirectoryId = $this->companyService->getCompanyDirectoryId($company['companyid']);
+                
+                if ($companyDirectoryId === false) {
+                    $companyDirectoryId = $this->companyService->addCompanyToDirectory([
+                        'reference' => $company['companyid'],
+                        'name' => $company['name'],
+                        'directorzonecommunity' => 'N'
+                    ]);
+                }
+            } else {
+                $companyDirectoryId = $company['companydirectoryid'];
             }
             
             $this->userExperienceTable->insert([
                 'userid' => $userId,
                 'companydirectoryid' => $companyDirectoryId,
-                //'statusid' => isset($company['jobstatus']['jobstatusid']) ? $company['jobstatus']['jobstatusid'] : null,
-                //'experienceareaid' => 1,
-                //'committeeroleid' => 1,
+                'fromdate' => $company['fromdate'],
+                'todate' => $company['todate'],
+                'title' => $company['title'],
+                'jobstatusid' => $company['jobstatusid'],
+                'jobareaid' => $company['jobareaid'],
+                'committeeroleid' => $company['committeeroleid'],
             ]);
         }
     }
@@ -52,11 +59,11 @@ class ExperienceService extends NetsensiaService
     {
         $resultSet = $this->userExperienceTable->select(
             function (Select $select) use ($userId) {
-                $select->columns(['companydirectoryid'])
+                $select->columns(['companydirectoryid', 'jobstatusid', 'jobareaid', 'committeeroleid', 'title', 'fromdate', 'todate'])
                     ->join(
                         'companydirectory', 
                         'companydirectory.companydirectoryid = userexperience.companydirectoryid',
-                        Select::SQL_STAR,
+                        ['name'],
                         Select::JOIN_RIGHT
                     )
                     ->where(['userid' => $userId]);
