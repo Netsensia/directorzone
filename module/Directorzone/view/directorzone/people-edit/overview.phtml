@@ -1,0 +1,12 @@
+
+<?php echo $this->partial('people-nav.phtml'); ?>
+
+<?php 
+
+    echo $this->BootstrapForm(
+        $this->form,
+        'Overview',
+        $this->url(null, ['id'=>$this->peopleDetails['officerid']] )
+    );
+
+   

@@ -3,7 +3,6 @@
 namespace Directorzone\Controller\Directory\People;
 
 use Netsensia\Controller\NetsensiaActionController;
-use Directorzone\Service\CompanyService;
 use Directorzone\Service\PeopleService;
 use Netsensia\Exception\NotFoundResourceException;
 use Directorzone\Service\TwitterService;
@@ -113,7 +112,7 @@ class PeopleViewController extends NetsensiaActionController
                 $peopleDetails,
                 $feedResults
             );
-        
+            
             return $returnArray;
         
         } catch (NotFoundResourceException $e) {

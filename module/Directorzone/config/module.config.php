@@ -675,6 +675,16 @@ return array(
                                             ),
                                         ),
                                     ),
+                                    'people-overview' => array(
+                                        'type' => 'literal',
+                                        'options' => array(
+                                            'route' => '/overview',
+                                            'defaults' => array(
+                                                'action' => 'overview',
+                                                'controller' => 'PeopleEdit',
+                                            ),
+                                        ),
+                                    ),
                                 ),
                             ),
                         ),

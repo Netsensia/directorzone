@@ -1,5 +1,5 @@
 <h3><?php echo $this->forename . ' ' . $this->surname; ?></h3>
-<h5><a href="/directories/people/<?php echo $this->officerid; ?>/feeds">Edit this person</a></h5>
+<h5><a href="/directories/people/<?php echo $this->officerid; ?>/overview">Edit this person</a></h5>
 
 <div class="row">
     <div class="col-md-4">
@@ -8,16 +8,8 @@
               <h3 class="panel-title">Address</h3>
             </div>
             <div class="panel-body">
-            <?php 
-                echo $this->addressline1 . '<br>';
-                echo trim($this->addressline2) == '' ? '' : ($this->addressline2 . '<br>');
-                echo trim($this->addressline3) == '' ? '' : ($this->addressline3 . '<br>');
-                echo trim($this->addressline4) == '' ? '' : ($this->addressline4 . '<br>');
-                echo trim($this->addressline5) == '' ? '' : ($this->addressline5 . '<br>');
-                echo trim($this->town) == '' ? '' : ($this->town . '<br>');
-                echo trim($this->county) == '' ? '' : ($this->county . '<br>');
-                echo trim($this->country) == '' ? '' : ($this->country . '<br>');
-                echo $this->postcode;
+            <?php
+            $this->Address($this->address);
             ?>
             </div>
         </div>

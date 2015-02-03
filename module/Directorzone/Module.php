@@ -285,6 +285,7 @@ class Module
             'AccountProfile',
             'AccountDirectory',
             'PeopleFeeds',
+            'PeopleOverview',
         ];
         
         $tableGatewayFactories = [];
@@ -391,7 +392,8 @@ class Module
             },
             'PeopleService' => function ($sm) {
                 $instance = new PeopleService(
-                    $sm->get('CompanyOfficerTableGateway')
+                    $sm->get('CompanyOfficerTableGateway'),
+                    $sm->get('AddressService')
                 );
                 return $instance;
             },

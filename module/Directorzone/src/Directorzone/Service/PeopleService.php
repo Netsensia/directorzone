@@ -14,11 +14,15 @@ class PeopleService extends NetsensiaService
      */
     private $peopleDirectoryTable;
     
+    private $addressService;
+    
     public function __construct(
-        TableGateway $peopleDirectory
+        TableGateway $peopleDirectory,
+        AddressService $addressService
     )
     {
         $this->peopleDirectoryTable = $peopleDirectory;
+        $this->addressService = $addressService;
     }
 
     public function getDirectoryPeople($start, $end, $order)
@@ -117,6 +121,8 @@ class PeopleService extends NetsensiaService
         }
     
         $peopleDetails = $rowset->current()->getArrayCopy();
+        
+        $peopleDetails['address'] = $this->addressService->getAddressDetails($peopleDetails['addressid']);
     
         return $peopleDetails;
     

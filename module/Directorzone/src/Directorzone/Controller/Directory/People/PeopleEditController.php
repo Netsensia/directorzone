@@ -21,6 +21,11 @@ class PeopleEditController extends NetsensiaActionController
         $this->peopleService = $peopleService;
     }
 
+    public function overviewAction()
+    {
+        return $this->genericForm('PeopleOverviewForm', 'PeopleDirectory');
+    }
+    
     public function feedsAction()
     {
         return $this->genericForm('PeopleFeedsForm', 'PeopleDirectory');
