@@ -33,7 +33,7 @@ function loadTheTable()
 	var startPage = <?php echo $this->startPage; ?>;
 	netsensia_Pager(
 			startPage,
-			10,
+			20,
 			'companies',
 			'/ajax/company/list?type=B',
 			function(key, value) {

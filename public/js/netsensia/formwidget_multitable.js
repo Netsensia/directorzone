@@ -144,11 +144,7 @@ $(document).ready(function() {
 		var tableEl = $('table[data-widgetid="' + widgetId + '"]');
 		var numRows = tableEl.find('tr:visible').length - 1;
 		
-		if (numRows == 1) {
-			$(this).parent().parent().css('display', 'none');
-		} else {
-			$(this).parent().parent().remove();
-		}
+		$(this).parent().parent().remove();
 		
 		updateWidgetValues();
 		
