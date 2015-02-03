@@ -110,7 +110,6 @@ angular.module('experience', []).controller('ExperienceController', function($sc
 	}
 	
 	$scope.showhistory = function(arrayindex) {
-		alert(JSON.stringify($scope.history[arrayindex]));
 	}
 	
 	/**
