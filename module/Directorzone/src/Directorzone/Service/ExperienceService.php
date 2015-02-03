@@ -70,6 +70,14 @@ class ExperienceService extends NetsensiaService
             }
         )->toArray();
         
+        foreach ($resultSet as &$result) {
+            if ($result['fromdate'] == '0000-00-00') {
+                $result['fromdate'] = '';
+            }
+            if ($result['todate'] == '0000-00-00') {
+                $result['todate'] = '';
+            }
+        }
         return $resultSet;
     }
  }
