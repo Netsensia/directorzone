@@ -84,7 +84,7 @@ fi
 echo "Untarring source on remote test site"
 #################################################################################
 
-ssh -i /var/lib/jenkins/.ssh/id_rsa jenkins@$DOMAIN "cd /var/www/test.$REPO && tar -zxfm source.tar.gz"
+ssh -i /var/lib/jenkins/.ssh/id_rsa jenkins@$DOMAIN "cd /var/www/test.$REPO && tar -zmxf source.tar.gz"
 
 #################################################################################
 echo "Running Selenium test on test server"
@@ -107,7 +107,7 @@ fi
 echo "Untarring source on live site"
 #################################################################################
 
-ssh -i /var/lib/jenkins/.ssh/id_rsa jenkins@$DOMAIN "cd /var/www/$REPO && tar -zxfm source.tar.gz"
+ssh -i /var/lib/jenkins/.ssh/id_rsa jenkins@$DOMAIN "cd /var/www/$REPO && tar -zmxf source.tar.gz"
 ssh -i /var/lib/jenkins/.ssh/id_rsa jenkins@$DOMAIN "chmod -R 777 /var/www/$REPO/public/img/upload"
 
 #################################################################################
