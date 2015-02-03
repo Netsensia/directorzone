@@ -41,9 +41,9 @@ class ExperienceService extends NetsensiaService
             $this->userExperienceTable->insert([
                 'userid' => $userId,
                 'companydirectoryid' => $companyDirectoryId,
-                'statusid' => isset($company['jobstatus']['jobstatusid']) ? $company['jobstatus']['jobstatusid'] : null,
-                'experienceareaid' => 1,
-                'committeeroleid' => 1,
+                //'statusid' => isset($company['jobstatus']['jobstatusid']) ? $company['jobstatus']['jobstatusid'] : null,
+                //'experienceareaid' => 1,
+                //'committeeroleid' => 1,
             ]);
         }
     }

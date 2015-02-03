@@ -105,7 +105,7 @@ angular.module('experience', []).controller('ExperienceController', function($sc
 		});
 		
 		historyPromise.error(function(data, status, headers, config) {
-			alert("History AJAX failed!");
+			alert("Update History AJAX failed!");
 		});
 	}
 	
