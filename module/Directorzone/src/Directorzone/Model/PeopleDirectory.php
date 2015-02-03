@@ -10,13 +10,12 @@ class PeopleDirectory extends DatabaseTableModel
         $this->setTableName('companyofficer');
     
         parent::__construct();
-    
     }
     
-    public function init($companyId = null)
+    public function init($officerId = null)
     {
-        $this->setPrimaryKey(array("officerid" => $companyId));
-        if ($companyId != null) {
+        $this->setPrimaryKey(array("officerid" => $officerId));
+        if ($officerId != null) {
             $this->load();
         }
         return $this;

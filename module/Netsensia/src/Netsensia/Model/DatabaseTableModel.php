@@ -280,7 +280,7 @@ abstract class DatabaseTableModel
             "SELECT * " .
             "FROM " . $this->getTableName() . " " .
             "WHERE ";
-         
+        
         $map = array();
         
         foreach ($this->getPrimaryKey() as $column => $value) {

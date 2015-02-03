@@ -21,6 +21,7 @@ use Directorzone\Service\AddressService;
 use Directorzone\Model\CompanyDirectory;
 use Directorzone\Form\Company\CompanyOwnersForm;
 use Directorzone\Service\ExperienceService;
+use Directorzone\Model\PeopleDirectory;
 
 class Module
 {
@@ -483,6 +484,14 @@ class Module
                 $form->setTranslator($sm->get('translator'));
                 $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
                 return $form;
+            },
+            'PeopleDirectoryModel' => function (\Zend\ServiceManager\ServiceLocatorInterface $sl) {
+                $instance = new PeopleDirectory();
+                $instance->setServiceLocator($sl);
+                
+                $instance->setRelation('addressid', 'address');
+                
+                return $instance;
             },
             'CompanyDirectoryModel' => function (\Zend\ServiceManager\ServiceLocatorInterface $sl) {
                 $instance = new CompanyDirectory();
