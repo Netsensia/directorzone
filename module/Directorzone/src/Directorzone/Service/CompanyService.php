@@ -1102,6 +1102,27 @@ class CompanyService extends NetsensiaService
         return $rowset;
     }
     
+    public function getOfficerCompanies(
+        $whosWhoId
+    )
+    {
+        $rowset = $this->getServiceLocator()->get('CompanyOfficerTableGateway')->select(
+            function (Select $select) use ($whosWhoId) {
+                $select
+                    ->columns(['companyreference', 'appointmenttype'])
+                    ->join(
+                        'companydirectory',
+                        'companydirectory.reference = companyofficer.companyreference',
+                        ['name', 'companydirectoryid'],
+                        Select::JOIN_LEFT
+                    )
+                    ->where(['whoswhoid' => $whosWhoId]);
+            }
+        )->toArray();
+    
+        return $rowset;
+    }
+    
     public function getFootprint($companyDirectoryId)
     {
         $details = $this->getCompanyDetails($companyDirectoryId);
