@@ -1185,6 +1185,23 @@ class CompanyService extends NetsensiaService
         return $footprint;
     }
     
+    public function getCompanyReference($companyId)
+    {
+        $result = $this->companiesHouseTable->select(
+            ['companyid' => $companyId]
+        )->toArray();
+    
+        if (count($result) > 1) {
+            throw new \Exception('Duplicate company (' . $reference . ') detected');
+        }
+    
+        if (count($result) == 1) {
+            return $result[0]['number'];
+        }
+    
+        return false;
+    }
+    
     public function getCompanyDirectoryId($reference)
     {
         $result = $this->companyDirectoryTable->select(

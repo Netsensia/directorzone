@@ -29,7 +29,8 @@ class ExperienceService extends NetsensiaService
         foreach ($companies as $company) {
             
             if (empty($company['companydirectoryid'])) {
-                $companyDirectoryId = $this->companyService->getCompanyDirectoryId($company['companyid']);
+                $reference = $this->companyService->getCompanyReference($company['companyid']);
+                $companyDirectoryId = $this->companyService->getCompanyReference($reference);
                 
                 if ($companyDirectoryId === false) {
                     $companyDirectoryId = $this->companyService->addCompanyToDirectory([

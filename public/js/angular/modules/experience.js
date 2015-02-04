@@ -121,6 +121,7 @@ angular.module('experience', []).controller('ExperienceController', function($sc
 				'jobareaid': $scope.history[i].jobarea.jobareaid,
 				'committeeroleid': $scope.history[i].committeerole.committeeroleid
 			}
+			
 		}
 		
 		var historyPromise = $http.post('/ajax/experience/history', flatHistory);
