@@ -142,8 +142,8 @@ class ElasticService extends NetsensiaService
         $this->indexGeneric(
             'officers',
             'officer',
-            $this->companyOfficersTableGateway,
-            'officernumber',
+            $this->getServiceLocator()->get('WhosWhoTableGateway'),
+            'whoswhoid',
             'surname'
         );
     }

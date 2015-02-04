@@ -138,7 +138,7 @@ class CompanyController extends NetsensiaActionController
             
             $gateway->update(['whoswhoid' => $whosWhoId], ['officerid' => $row['officerid']]);
             
-            echo 'Created #' . $whosWhoId . ' for ' . $row['forename'] . ' ' . $row['surname'] . PHP_EOL;
+            //echo 'Created #' . $whosWhoId . ' for ' . $row['forename'] . ' ' . $row['surname'] . PHP_EOL;
         }
     }
     

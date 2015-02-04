@@ -6,6 +6,7 @@ use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Select;
 use Netsensia\Exception\NotFoundResourceException;
 use Zend\Db\Sql\Expression;
+use Zend\Db\Sql\Where;
 
 class WhosWhoService extends NetsensiaService
 {
@@ -38,18 +39,52 @@ class WhosWhoService extends NetsensiaService
         return $rowset->current()['count'] > 0;
     }
     
-    public function whosWhoIdFromOfficerId($officerId)
+    public function whosWhoIdFromKnownData($data)
     {
         $rowset = $this->whosWhoTable->select(
-            function (Select $select) use ($officerId) {
-                $select->columns(
-                    [ 'whoswhoid' ]
-                )->where(['officernumber' => $officerId]);
+            function (Select $select) use ($data) {
+                
+                $where = new Where();
+                $where->equalTo('officernumber', $data['officernumber']);
+                
+                $select->columns(['whoswhoid'])->where($where);
             }
         )->toArray();
     
         if (count($rowset) > 0) {
             return $rowset[0]['whoswhoid'];
+        }
+
+        $rowset = $this->whosWhoTable->select(
+            function (Select $select) use ($data) {
+        
+                $select->columns(['whoswhoid'])->where([
+                        'forename' => $data['forename'],
+                        'surname' => $data['surname'],
+                        'numappointments' => $data['numappointments'],
+                        'honours' => $data['honours'],
+                    ]);
+            }
+        )->toArray();
+        
+        if (count($rowset) > 0) {
+            return $rowset[0]['whoswhoid'];
+        }
+        
+        if (strlen($data['surname']) > 20) {
+            $rowset = $this->whosWhoTable->select(
+                function (Select $select) use ($data) {
+            
+                    $select->columns(['whoswhoid'])->where([
+                        'forename' => $data['forename'],
+                        'surname' => $data['surname'],
+                    ]);
+                }
+            )->toArray();
+            
+            if (count($rowset) > 0) {
+                return $rowset[0]['whoswhoid'];
+            }
         }
         
         return null;
@@ -57,7 +92,7 @@ class WhosWhoService extends NetsensiaService
     
     public function addOfficer($data)
     {
-        $whosWhoId = $this->whosWhoIdFromOfficerId($data['officernumber']);
+        $whosWhoId = $this->whosWhoIdFromKnownData($data);
         
         if ($whosWhoId == null) {
             $result = $this->whosWhoTable->insert(
@@ -85,6 +120,8 @@ class WhosWhoService extends NetsensiaService
             }
         )->toArray();
     
+        $people['results'] = [];
+        
         foreach ($results as $result) {
             $people['results'][] = [
                 'internalId' => $result['whoswhoid'],

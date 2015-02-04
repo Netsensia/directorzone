@@ -59,8 +59,8 @@ class SearchController extends NetsensiaActionController
             	    $url = '/article/' . $internalId;
             	    break;
         	    case 'officer' :
-        	        $internalId = $source['officerid'];
-        	        $url = '/directories/people/' . $internalId;
+        	        $internalId = $source['whoswhoid'];
+        	        $url = $this->url()->fromRoute('directories/people-directory/people-details', ['id' => $internalId]);
         	        break;            
             }
             
