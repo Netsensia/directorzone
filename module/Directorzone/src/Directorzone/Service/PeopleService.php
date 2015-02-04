@@ -31,12 +31,9 @@ class PeopleService extends NetsensiaService
             function (Select $select) use ($start, $end, $order) {
                 $columns = ['forename', 'appointmenttype', 'officerid', 'officernumber', 'dob', 'companyreference', 'surname', 'createdtime'];
                 
-                $sortColumns = ['createdtime', 'surname', 'companydirectory.name', 'appointmenttype', 'dob', 'createdtime'];
+                $sortColumns = ['createdtime', 'surname', 'companydirectory.name', 'appointmenttype', 'dob'];
                 
-                $select->where(
-                    ['appointmentstatus' => 'CURRENT']
-                )
-                ->columns(
+                $select->columns(
                     $columns    
                 )
                 ->join(

@@ -85,6 +85,27 @@ return array(
                 ),
                 'may_terminate' => false,
                 'child_routes' => array(
+                    'whoswho' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/whoswho',
+                            'defaults' => array(
+                                'controller' => 'Directorzone\Controller\Ajax\WhosWho',
+                            ),
+                        ),
+                        'may_terminate' => false,
+                        'child_routes' => array(
+                            'list' => array(
+                                'type' => 'literal',
+                                'options' => array(
+                                    'route' => '/list',
+                                    'defaults' => array(
+                                        'action' => 'whos-who-list',
+                                    ),
+                                )
+                            ),
+                        ),
+                    ),
                     'people' => array(
                         'type' => 'literal',
                         'options' => array(
@@ -1040,6 +1061,15 @@ return array(
     'console' => array(
         'router' => array(
             'routes' => array(
+                'whos-who-init' => array(
+                    'options' => array(
+                        'route'    => 'whos-who-init',
+                        'defaults' => array(
+                            'controller' => 'Directorzone\Controller\Console\Company',
+                            'action'     => 'whos-who-init',
+                        ),
+                    ),
+                ),
                 'populate-geography' => array(
                     'options' => array(
                         'route'    => 'populate-geography',

@@ -4,10 +4,8 @@
 <table id="people" data-link="row" class="rowlink table table-striped table-bordered table-hover">
 <tr>
 <th><a class="columnHeading" data-column-number="2">Name</a></th>
-<th><a class="columnHeading" data-column-number="3">Company</a></th>
-<th><a class="columnHeading" data-column-number="4">Appointment Type</a></th>
-<th><a class="columnHeading" data-column-number="5">Date of Birth</a></th>
-<th><a class="columnHeading" data-column-number="6">Added</a></th>
+<th><a class="columnHeading" data-column-number="3">Companies</a></th>
+<th><a class="columnHeading" data-column-number="1">Added</a></th>
 </tr>
 </table>
 
@@ -32,14 +30,12 @@ function loadTheTable()
 			startPage,
 			20,
 			'people',
-			'/ajax/people/list',
+			'/ajax/whoswho/list',
 			function(key, value) {
 				var url = '/directories/people/' + value.internalId;
 				var newRow = '<tr>';
 				newRow += '<td><a href="' + url + '">' + value.name + '</a></td>';
-				newRow += '<td>' + value.companyname + '</td>';
-				newRow += '<td>' + value.appointmenttype + '</td>';
-				newRow += '<td>' + value.dob + '</td>';
+				newRow += '<td>' + value.numappointments + '</td>';
 				newRow += '<td class="prettydate">' + prettyDate(value.createdTime) + '</td>';
 				newRow += '</tr>';
 

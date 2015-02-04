@@ -861,21 +861,17 @@ class CompanyService extends NetsensiaService
         
             $address = $appointment->getAddress();
             
-            if ($this->whosWhoService->officerExists($appointment->getId())) {
-                
-            } else {
-                $data = [
-                    'officernumber' => $appointment->getId(),
-                    'forename' => $appointment->getForename(),
-                    'surname' => $appointment->getSurname(),
-                    'dob' => $appointment->getDob(),
-                    'nationality' => $appointment->getNationality(),
-                    'numappointments' => $appointment->getNumAppointments(),
-                    'honours' => $appointment->getHonours(),
-                ];
-                
-                $whosWhoId = $this->whosWhoService->insert($data);
-            }
+            $data = [
+                'officernumber' => $appointment->getId(),
+                'forename' => $appointment->getForename(),
+                'surname' => $appointment->getSurname(),
+                'dob' => $appointment->getDob(),
+                'nationality' => $appointment->getNationality(),
+                'numappointments' => $appointment->getNumAppointments(),
+                'honours' => $appointment->getHonours(),
+            ];
+            
+            $whosWhoId = $this->whosWhoService->addOfficer($data);
             
             $data = [
                 'companyreference' => $companyNumber,

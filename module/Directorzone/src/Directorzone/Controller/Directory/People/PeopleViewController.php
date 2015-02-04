@@ -11,11 +11,6 @@ use Directorzone\Service\BingService;
 class PeopleViewController extends NetsensiaActionController
 {
     /**
-     * @var PeopleService
-     */
-    private $peopleService;
-    
-    /**
      * @var TwitterService
      */
     private $twitterService;
@@ -26,12 +21,10 @@ class PeopleViewController extends NetsensiaActionController
     private $bingService;
     
     public function __construct(
-        PeopleService $peopleService,
         TwitterService $twitterService,
         BingService $bingService
     )
     {
-        $this->peopleService = $peopleService;
         $this->twitterService = $twitterService;
         $this->bingService = $bingService;
     }
@@ -42,71 +35,51 @@ class PeopleViewController extends NetsensiaActionController
         
         try {
         
-            $peopleDetails = $this->peopleService->getPeopleDetails(
+            $peopleDetails = $this->getServiceLocator()->get('WhosWhoService')->getWhosWhoDetails(
                 $peopleDirectoryId
             );
         
-            $cacheSuccess = false;
-            $zendCache = $this->getServiceLocator()->get('ZendCache');
-            $cacheKey = 'peopleDetailsActionFeedResults' . $peopleDirectoryId;
-            
-            if ($peopleDetails['canusefeedcache'] == 'Y') {
-                //$result = $zendCache->getItem($cacheKey, $cacheSuccess);
-            }
-        
-            if ($cacheSuccess) {
-                $feedResults = $result;
+            if (isset($peopleDetails['twittersearchterms'])) {
+                $twitterSearchTerm = $peopleDetails['twittersearchterms'];
             } else {
-                
-                if (isset($peopleDetails['twittersearchterms'])) {
-                    $twitterSearchTerm = $peopleDetails['twittersearchterms'];
-                } else {
-                    $twitterSearchTerm = strtolower($peopleDetails['forename'] . ' ' . $peopleDetails['surname']);
-                }
-                
-                $twitterSearchTerm = trim($twitterSearchTerm);
-        
-                $twitterResults = $this->twitterService->search(
-                    $twitterSearchTerm,
-                    5
-                );
-        
-                if (isset($peopleDetails['rsssearchterms'])) {
-                    $bingSearchTerm = $peopleDetails['rsssearchterms'];
-                } else {
-                    $bingSearchTerm  = $twitterSearchTerm;
-                }
-                        
-                $searchResults = [];
-        
-                $searchResults = $this->bingService->search(
-                    $bingSearchTerm,
-                    4
-                );
-        
-                $returnArray = array_merge(
-                    $peopleDetails,
-                    $twitterResults
-                );
-        
-                if (isset($searchResults['d']['results'])) {
-                    $bingResults = ['bing' => $searchResults['d']['results']];
-                } else {
-                    $bingResults = ['bing' => []];
-                }
-        
-                $feedResults = array_merge(
-                    $twitterResults,
-                    $bingResults
-                );
-        
-                $zendCache->setItem($cacheKey, $feedResults);
-
-                $this->peopleService->updateCanUseFeedCache(
-                    $peopleDirectoryId,
-                    true
-                );
+                $twitterSearchTerm = strtolower($peopleDetails['forename'] . ' ' . $peopleDetails['surname']);
             }
+            
+            $twitterSearchTerm = trim($twitterSearchTerm);
+    
+            $twitterResults = $this->twitterService->search(
+                $twitterSearchTerm,
+                5
+            );
+    
+            if (isset($peopleDetails['rsssearchterms'])) {
+                $bingSearchTerm = $peopleDetails['rsssearchterms'];
+            } else {
+                $bingSearchTerm  = $twitterSearchTerm;
+            }
+                    
+            $searchResults = [];
+    
+            $searchResults = $this->bingService->search(
+                $bingSearchTerm,
+                4
+            );
+    
+            $returnArray = array_merge(
+                $peopleDetails,
+                $twitterResults
+            );
+    
+            if (isset($searchResults['d']['results'])) {
+                $bingResults = ['bing' => $searchResults['d']['results']];
+            } else {
+                $bingResults = ['bing' => []];
+            }
+    
+            $feedResults = array_merge(
+                $twitterResults,
+                $bingResults
+            );
              
             $returnArray = array_merge(
                 $peopleDetails,

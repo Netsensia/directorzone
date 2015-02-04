@@ -48,20 +48,79 @@ class WhosWhoService extends NetsensiaService
             }
         )->toArray();
     
-        var_dump($rowset); die;
         if (count($rowset) > 0) {
-            return $rowset['officernumber'];
+            return $rowset[0]['whoswhoid'];
         }
         
         return null;
     }
     
-    public function insert($data)
+    public function addOfficer($data)
     {
-        $result = $this->whosWhoTable->insert(
-            $data
-        );
+        $whosWhoId = $this->whosWhoIdFromOfficerId($data['officernumber']);
         
-        return $this->whosWhoTable->getAdapter()->getDriver()->getLastGeneratedValue();
+        if ($whosWhoId == null) {
+            $result = $this->whosWhoTable->insert(
+                $data
+            );
+            
+            $whosWhoId = $this->whosWhoTable->getAdapter()->getDriver()->getLastGeneratedValue();
+        }
+        
+        return $whosWhoId;
+    }
+    
+    public function getWhosWhoList($start, $end, $order)
+    {
+        $results = $this->whosWhoTable->select(
+            function (Select $select) use ($start, $end, $order) {
+                $columns = ['whoswhoid', 'forename', 'surname', 'nationality', 'numappointments', 'honours', 'dob', 'officernumber', 'userid', 'createdtime'];
+    
+                $sortColumns = ['createdtime', 'surname', 'numappointments', 'createdtime', 'createdtime', 'createdtime', 'createdtime'];
+    
+                $select->columns($columns)
+                    ->offset($start - 1)
+                    ->limit(1 + ($end - $start))
+                    ->order($sortColumns[abs($order)-1] . ' ' . ($order < 0 ? 'DESC' : 'ASC'));
+            }
+        )->toArray();
+    
+        foreach ($results as $result) {
+            $people['results'][] = [
+                'internalId' => $result['whoswhoid'],
+                'officernumber' => $result['officernumber'],
+                'nationality' => $result['nationality'],
+                'dob' => $result['dob'],
+                'numappointments' => $result['numappointments'],
+                'createdTime' => $result['createdtime'],
+                'name' => $result['forename'] . ' ' . $result['surname']
+            ];
+        }
+    
+        return $people;
+    }
+    
+    public function getWhosWhoDetails($peopleDirectoryId)
+    {
+        $rowset = $this->whosWhoTable->select(
+            function (Select $select) use ($peopleDirectoryId) {
+                $select->where(
+                    [
+                        'whoswhoid' => $peopleDirectoryId
+                    ]
+                );
+            }
+        );
+    
+        if ($rowset->count() == 0) {
+            throw new NotFoundResourceException('Person not found in directory');
+        }
+    
+        $peopleDetails = $rowset->current()->getArrayCopy();
+    
+        $peopleDetails['address'] = $this->addressService->getAddressDetails($peopleDetails['addressid']);
+    
+        return $peopleDetails;
+    
     }
 }

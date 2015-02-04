@@ -3,14 +3,13 @@
 
 $routes = [
    'directories/company-directory' => 'Companies',
-   //'directories/accelerator-directory' => 'Accelerators',
    'directories/people-directory' => "Who's Who",
    'directories/talent-pool' => "Talent Pool",
 ];
 
 foreach ($routes as $route => $text) {
 ?>
-    <li class="<?php echo ($this->url() == $this->url($route) ? 'active' : ''); ?>">
+    <li class="<?php echo (substr($this->url(), 0, strlen($this->url($route))) == $this->url($route) ? 'active' : ''); ?>">
         <a href="<?php echo $this->url($route); ?>">
             <?php echo $text; ?>
         </a>

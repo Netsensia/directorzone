@@ -8,8 +8,8 @@ $routes = [
 
 foreach ($routes as $route => $text) {
 ?>
-    <li class="<?php echo ($this->url() == $this->url($route) ? 'active' : ''); ?>">
-        <a href="<?php echo $this->url($route, ['id'=>$this->peopleDetails['officerid']]); ?>">
+    <li class="<?php echo (substr($this->url(), 0, strlen($this->url($route))) == $this->url($route) ? 'active' : ''); ?>">
+        <a href="<?php echo $this->url($route, ['id'=>$this->whosWhoDetails['whoswhoid']]); ?>">
             <?php echo $text; ?>
         </a>
     </li>
@@ -19,5 +19,5 @@ foreach ($routes as $route => $text) {
 ?>
 </ul>
 
-<h3><?php echo $this->peopleDetails['forename'] . ' ' . $this->peopleDetails['surname']; ?></h3>
-<h5><a href="/directories/people/<?php echo $this->peopleDetails['officerid']; ?>">View person profile page</a></h5>
+<h3><?php echo $this->whosWhoDetails['forename'] . ' ' . $this->whosWhoDetails['surname']; ?></h3>
+<h5><a href="/directories/people/<?php echo $this->whosWhoDetails['whoswhoid']; ?>">View person profile page</a></h5>

@@ -4,6 +4,7 @@ namespace Directorzone\Controller\Console;
 use Netsensia\Controller\NetsensiaActionController;
 use Netsensia\Library\Csv\Csv;
 use Netsensia\Library\Datetime\Datetime;
+use Zend\Db\Sql\Select;
 
 class CompanyController extends NetsensiaActionController
 {
@@ -106,6 +107,38 @@ class CompanyController extends NetsensiaActionController
                     }
                 }
             }
+        }
+    }
+    
+    public function whosWhoInitAction()
+    {
+        $this->getServiceLocator()->get('WhosWhoTableGateway')->delete([]);
+        
+        $gateway = $this->getServiceLocator()->get('CompanyOfficerTableGateway');
+        
+        $rowset = $gateway->select(
+            function (Select $select) {
+                $select->where(1); 
+            }
+        )->toArray();
+        
+        foreach ($rowset as $row) {
+            
+            $data = [
+                'officernumber' => $row['officernumber'],
+                'forename' => $row['forename'],
+                'surname' => $row['surname'],
+                'dob' => $row['dob'],
+                'nationality' => $row['nationality'],
+                'numappointments' => $row['numappointments'],
+                'honours' => $row['honours'],
+            ];
+            
+            $whosWhoId = $this->getServiceLocator()->get('WhosWhoService')->addOfficer($data);
+            
+            $gateway->update(['whoswhoid' => $whosWhoId], ['officerid' => $row['officerid']]);
+            
+            echo 'Created #' . $whosWhoId . ' for ' . $row['forename'] . ' ' . $row['surname'] . PHP_EOL;
         }
     }
     

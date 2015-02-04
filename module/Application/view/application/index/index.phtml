@@ -27,13 +27,13 @@
                     <caption>Sort by <a class="columnHeading fixed-order" data-column-number="-6">newest</a> | <a class="columnHeading fixed-order" data-column-number="6">oldest</a></caption>        
 							<tr>
 								<th>
-									<a class="columnHeading" data-column-number="10">Sector</a>
+									<a id="column1" class="columnHeading" data-column-number="10">Sector</a>
 								</th>
 								<th>
-									<a class="columnHeading" data-column-number="2">Name</a>
+									<a id="column2" class="columnHeading" data-column-number="2">Name</a>
 								</th>
 								<th>
-									<a class="columnHeading" data-column-number="9">Town</a>
+									<a id="column3" class="columnHeading" data-column-number="2">Town</a>
 								</th>
 							</tr>
 
@@ -98,6 +98,9 @@ $(document).ready(function() {
 		$('#tab-companies').parent().addClass('active');
 		$('#tab-people').parent().removeClass('active');
 		$('#tab-services').parent().removeClass('active');
+		$('#column1').html('Sector');
+		$('#column2').html('Name');
+		$('#column3').html('Town');
 		$('#columnSorter').attr('data-tab', 1);
 		loadCompanies('L');
 	});
@@ -106,6 +109,9 @@ $(document).ready(function() {
 		$('#tab-companies').parent().removeClass('active');
 		$('#tab-people').parent().addClass('active');
 		$('#tab-services').parent().removeClass('active');
+		$('#column1').html('Name');
+		$('#column2').html('Appointments');
+		$('#column3').html('&nbsp;');
 		$('#columnSorter').attr('data-tab', 2);
 		loadPeople();
 	});
@@ -114,6 +120,9 @@ $(document).ready(function() {
 		$('#tab-companies').parent().removeClass('active');
 		$('#tab-people').parent().removeClass('active');
 		$('#tab-services').parent().addClass('active');
+		$('#column1').html('Sector');
+		$('#column2').html('Name');
+		$('#column3').html('Town');
 		$('#columnSorter').attr('data-tab', 3);
 		loadCompanies('S');
 	});
@@ -149,13 +158,12 @@ function loadPeople()
 			1,
 			12,
 			'directories',
-			'/ajax/people/list',
+			'/ajax/whoswho/list',
 			function(key, value) {
 				var url = '/directories/people/' + value.internalId;
 				var newRow = '<tr>';
 				newRow += '<td><a href="' + url + '">' + value.name + '</a></td>';
-				newRow += '<td>' + value.companyname + '</td>';
-				newRow += '<td>' + value.appointmenttype + '</td>';
+				newRow += '<td>' + value.numappointments + '</td>';
 				newRow += '</tr>';
 		
 				return newRow;

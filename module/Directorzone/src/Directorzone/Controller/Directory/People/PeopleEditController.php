@@ -9,41 +9,31 @@ use Netsensia\Exception\NotFoundResourceException;
 
 class PeopleEditController extends NetsensiaActionController
 {
-    /**
-     * @var PeopleService
-     */
-    private $peopleService;
-    
-    public function __construct(
-        PeopleService $peopleService
-    )
-    {
-        $this->peopleService = $peopleService;
-    }
-
     public function overviewAction()
     {
-        return $this->genericForm('PeopleOverviewForm', 'PeopleDirectory');
+        return $this->genericForm('PeopleOverviewForm', 'WhosWho');
     }
     
     public function feedsAction()
     {
-        return $this->genericForm('PeopleFeedsForm', 'PeopleDirectory');
+        return $this->genericForm('PeopleFeedsForm', 'WhosWho');
     }
     
     private function genericForm($formName, $modelName)
     {
-        $peopleDetails = $this->peopleService->getPeopleDetails(
+        $peopleDetails = $this->getServiceLocator()->get('WhosWhoService')->getWhosWhoDetails(
             $this->params('id')
         );
-    
-        return array(
-            "peopleDetails" => $peopleDetails,
-            "form" => $this->processForm(
+        
+        $form = $this->processForm(
                 $formName,
                 $modelName,
                 $this->params('id')
-            ),
+            );
+        
+        return array(
+            "whosWhoDetails" => $peopleDetails,
+            "form" => $form,
             'flashMessages' => $this->getFlashMessages(),
         );
     }    

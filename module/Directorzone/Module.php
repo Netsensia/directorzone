@@ -78,6 +78,10 @@ class Module
                             $cm->getServiceLocator()->get('PeopleService')
                         );
                     },
+                'Directorzone\Controller\Ajax\WhosWho' =>
+                    function (ControllerManager $cm) {
+                        return new \Directorzone\Controller\Ajax\WhosWhoController();
+                    },
                 'Directorzone\Controller\Ajax\Experience' =>
                     function (ControllerManager $cm) {
                         return new \Directorzone\Controller\Ajax\ExperienceController(
@@ -169,12 +173,10 @@ class Module
                     },
                 'PeopleView' =>
                     function (ControllerManager $cm) {
-                        $peopleService = $cm->getServiceLocator()->get('PeopleService');
                         $twitterService = $cm->getServiceLocator()->get('TwitterService');
                         $bingService = $cm->getServiceLocator()->get('BingService');
                         
                         return new \Directorzone\Controller\Directory\People\PeopleViewController(
-                            $peopleService,
                             $twitterService,
                             $bingService
                         );

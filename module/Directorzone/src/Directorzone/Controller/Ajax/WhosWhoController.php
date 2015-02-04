@@ -5,28 +5,15 @@ namespace Directorzone\Controller\Ajax;
 use Netsensia\Controller\NetsensiaActionController;
 use Zend\Mvc\MvcEvent;
 use Zend\View\Model\JsonModel;
-use Directorzone\Service\PeopleService;
-use Directorzone\Service\WhosWhoService;
 
-class PeopleController extends NetsensiaActionController
+class WhosWhoController extends NetsensiaActionController
 {
-    /**
-     * @var PeopleService $peopleService
-     */
-    private $peopleService;
-    
-    public function __construct(
-        PeopleService $peopleService
-    ) {
-        $this->peopleService = $peopleService;
-    }
-    
     public function onDispatch(MvcEvent $e)
     {
         parent::onDispatch($e);
     }
 
-    public function peopleListAction()
+    public function whosWhoListAction()
     {
         $page = $this->params()->fromQuery('page', null);
         $size = $this->params()->fromQuery('size', null);
@@ -34,10 +21,8 @@ class PeopleController extends NetsensiaActionController
         
         $start = ($page - 1) * $size + 1;
         $end = $start + $size - 1;
-        
-        $service = $this->getServiceLocator()->get('WhosWhoService');
 
-        $results = $this->$service->getDirectoryPeople(
+        $results = $this->getServiceLocator()->get('WhosWhoService')->getWhosWhoList(
             $start,
             $end,
             $order
