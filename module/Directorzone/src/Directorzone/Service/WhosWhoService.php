@@ -55,36 +55,37 @@ class WhosWhoService extends NetsensiaService
             return $rowset[0]['whoswhoid'];
         }
 
-        $rowset = $this->whosWhoTable->select(
-            function (Select $select) use ($data) {
-        
-                $select->columns(['whoswhoid'])->where([
-                        'forename' => $data['forename'],
-                        'surname' => $data['surname'],
-                        'numappointments' => $data['numappointments'],
-                        'honours' => $data['honours'],
-                    ]);
-            }
-        )->toArray();
-        
-        if (count($rowset) > 0) {
-            return $rowset[0]['whoswhoid'];
-        }
-        
-        if (strlen($data['surname']) > 20) {
+        if ($data['numappointments'] > 10) {
             $rowset = $this->whosWhoTable->select(
                 function (Select $select) use ($data) {
             
                     $select->columns(['whoswhoid'])->where([
-                        'forename' => $data['forename'],
-                        'surname' => $data['surname'],
-                    ]);
+                            'forename' => $data['forename'],
+                            'surname' => $data['surname'],
+                            'numappointments' => $data['numappointments'],
+                            'honours' => $data['honours'],
+                        ]);
                 }
             )->toArray();
             
             if (count($rowset) > 0) {
                 return $rowset[0]['whoswhoid'];
             }
+        }
+        
+        $rowset = $this->whosWhoTable->select(
+            function (Select $select) use ($data) {
+        
+                $select->columns(['whoswhoid'])->where([
+                    'forename' => $data['forename'],
+                    'surname' => $data['surname'],
+                    'dob' => $data['dob']
+                ]);
+            }
+        )->toArray();
+        
+        if (count($rowset) > 0) {
+            return $rowset[0]['whoswhoid'];
         }
         
         return null;

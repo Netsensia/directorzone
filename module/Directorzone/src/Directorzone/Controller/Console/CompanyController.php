@@ -110,38 +110,6 @@ class CompanyController extends NetsensiaActionController
         }
     }
     
-    public function whosWhoInitAction()
-    {
-        $this->getServiceLocator()->get('WhosWhoTableGateway')->delete([]);
-        
-        $gateway = $this->getServiceLocator()->get('CompanyOfficerTableGateway');
-        
-        $rowset = $gateway->select(
-            function (Select $select) {
-                $select->where(1); 
-            }
-        )->toArray();
-        
-        foreach ($rowset as $row) {
-            
-            $data = [
-                'officernumber' => $row['officernumber'],
-                'forename' => $row['forename'],
-                'surname' => $row['surname'],
-                'dob' => $row['dob'],
-                'nationality' => $row['nationality'],
-                'numappointments' => $row['numappointments'],
-                'honours' => $row['honours'],
-            ];
-            
-            $whosWhoId = $this->getServiceLocator()->get('WhosWhoService')->addOfficer($data);
-            
-            $gateway->update(['whoswhoid' => $whosWhoId], ['officerid' => $row['officerid']]);
-            
-            //echo 'Created #' . $whosWhoId . ' for ' . $row['forename'] . ' ' . $row['surname'] . PHP_EOL;
-        }
-    }
-    
     public function ingestCompanyDetailsAction()
     {
         $companyService = $this->getServiceLocator()->get('CompanyService');
@@ -305,5 +273,37 @@ class CompanyController extends NetsensiaActionController
     {
         $elasticService = $this->getServiceLocator()->get('ElasticService');
         $elasticService->indexArticles();
+    }
+    
+    public function whosWhoInitAction()
+    {
+        $this->getServiceLocator()->get('WhosWhoTableGateway')->delete([]);
+    
+        $gateway = $this->getServiceLocator()->get('CompanyOfficerTableGateway');
+    
+        $rowset = $gateway->select(
+            function (Select $select) {
+                $select->where(1);
+            }
+        )->toArray();
+    
+        foreach ($rowset as $row) {
+    
+            $data = [
+                'officernumber' => $row['officernumber'],
+                'forename' => $row['forename'],
+                'surname' => $row['surname'],
+                'dob' => $row['dob'],
+                'nationality' => $row['nationality'],
+                'numappointments' => $row['numappointments'],
+                'honours' => $row['honours'],
+            ];
+    
+            $whosWhoId = $this->getServiceLocator()->get('WhosWhoService')->addOfficer($data);
+    
+            $gateway->update(['whoswhoid' => $whosWhoId], ['officerid' => $row['officerid']]);
+    
+            echo 'Created #' . $whosWhoId . ' for ' . $row['forename'] . ' ' . $row['surname'] . PHP_EOL;
+        }
     }
 }
