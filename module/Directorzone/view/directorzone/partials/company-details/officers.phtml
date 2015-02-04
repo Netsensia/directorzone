@@ -21,7 +21,7 @@ function renderOfficerRows($officers)
       <tr><th>Officer Name</th><th style="width:20%">Role</th><th style="width:10%">Status</th></tr>
       <?php foreach ($officers as $officer) : ?>
       <tr>
-    			<td><a id="officer-id-<?php echo ++$officerCount ?>" href="/directories/people/<?php echo $officer['officerid']; ?>"><?php echo $officer['forename'] . ' ' . $officer['surname']; ?></a></td>
+    			<td><a id="officer-id-<?php echo ++$officerCount ?>" href="/directories/people/<?php echo $officer['whoswhoid']; ?>"><?php echo $officer['forename'] . ' ' . $officer['surname']; ?></a></td>
     			<td><?php echo $officer['appointmenttype']; ?></td>
     			<td><?php echo $officer['appointmentstatus']; ?>
     			
