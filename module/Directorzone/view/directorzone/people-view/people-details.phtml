@@ -21,6 +21,7 @@
             <div class="panel-body">
             <?php foreach ($this->companies as $company): ?>
             <a href="<?php echo $this->url('directories/company-directory/company-details', ['id' => $company['companydirectoryid']]); ?>"><?php echo $company['name']; ?></a>
+            (<?php echo $company['appointmenttype']; ?>)
             <br>
             <?php endforeach; ?>
             
