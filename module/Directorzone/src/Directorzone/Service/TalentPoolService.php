@@ -137,10 +137,20 @@ class TalentPoolService extends NetsensiaService
     public function getFootprint($userId)
     {
         // job title, job status, job area, languages, country (i.e. from own address), company category, sector, company revenue range.
+        $resultSet = $this->talentPoolDirectoryTable->select(
+            function (Select $select) {
+                $select->columns([])
+                ->join('address', 'user.addressid = address.addressid', [])
+                ->join('country', 'address.countryid = country.countryid', ['name' => 'country']);
+            }
+        )->toArray();
         
+        if (count($resultSet) == 1) {
+            $country = $resultSet[0]['name'];
+        }
         $jobArea = $this->getResolvedProperty($userId, 'jobarea');
         $profession = $this->getResolvedProperty($userId, 'profession');
         
-        return $profession . ', ' . $jobArea;
+        return $country . ', ' . $profession . ', ' . $jobArea;
     }
 }
