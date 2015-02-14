@@ -16,9 +16,9 @@ class AccountProfileForm extends NetsensiaForm
         $this->setFieldPrefix('account-profile-');
         $this->setDefaultIcon('user');
         
-        $this->addOverview(['description' => 
-            'Once completed, this anonymous profile will be published in the Talent Pool directory. This will be visible to all site visitors and allow logged-in members to message you for recruitment or other commercial purposes. Depending on the value of each approach, you may choose to respond and disclose your identity, or not respond.'
-        ]);
+        $overview = 'Once completed, this anonymous profile will be published in the Talent Pool directory. This will be visible to all site visitors and allow logged-in members to message you for recruitment or other commercial purposes. Depending on the value of each approach, you may choose to respond and disclose your identity, or not respond.';
+            
+        $this->addOverview(['description' => $overview]);
         
         $this->addSelect(['label' => 'Publish Status', 'name' => 'talentpoolpublishstatus']);
         

@@ -28,7 +28,6 @@ class ProcessForm extends AbstractPlugin
         
         $tableModel->init($modelId);
         
-        
         if ($request->isPost()) {
             
             $formData = $request->getPost()->toArray();

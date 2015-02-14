@@ -1,3 +1,23 @@
 <?php echo $this->partial('account-nav.phtml'); ?>
 
-<?php echo $this->BootstrapForm($this->form, 'Talent Pool Profile', $this->url('account-profile')); ?>
+<?php
+
+if (trim($this->footprint) != '') {
+    $footprint = '';
+    $footprint .= '<div style=\'margin-top:5px;font-weight:bold\'>Your current talent pool profile:</div>';
+    $footprint .= '<div>' . htmlentities($this->footprint) . '</div>';
+    ?>
+    <script>
+    $(document).ready(function () {
+        var html = "<?php echo $footprint; ?>";
+        $('.bs-callout-overview').append(html);
+     });
+    </script>
+    
+     <?php
+}
+
+?>
+
+<?php echo $this->BootstrapForm($this->form, 'Talent Pool Profile', $this->url('account-profile'));
+
