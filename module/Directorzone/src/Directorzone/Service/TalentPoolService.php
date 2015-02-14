@@ -28,6 +28,7 @@ class TalentPoolService extends NetsensiaService
         $this->talentPoolDirectoryTable = $talentPoolDirectory;
         $this->userTargetRoleTable = $userTargetRole;
         $this->userCompanyTable = $userCompany;
+        
         $this->setPrimaryTable($talentPoolDirectory);
     }
 
@@ -136,7 +137,6 @@ class TalentPoolService extends NetsensiaService
     
     public function getFootprint($userId)
     {
-        // job title, job status, job area, languages, country (i.e. from own address), company category, sector, company revenue range.
         $resultSet = $this->talentPoolDirectoryTable->select(
             function (Select $select) {
                 $select->columns([])
@@ -147,10 +147,30 @@ class TalentPoolService extends NetsensiaService
         
         if (count($resultSet) == 1) {
             $country = $resultSet[0]['name'];
+        } else {
+            $country = 'Unknown country';
         }
+        
         $jobArea = $this->getResolvedProperty($userId, 'jobarea');
         $profession = $this->getResolvedProperty($userId, 'profession');
+
+        $resultSet = $this->getServiceLocator()->get('UserExperienceTableGateway')->select(
+            function (Select $select) use ($userId) {
+                $select
+                    ->columns(['title'])
+                    ->join('jobstatus', 'userexperience.jobstatusid = jobstatus.jobstatusid', ['jobstatus'])
+                    ->where(['userid' => $userId]);
+            }
+        );
         
-        return $country . ', ' . $profession . ', ' . $jobArea;
+        if (count($resultSet) == 1) {
+            $jobTitle = $resultSet[0]['title'];
+            $jobStatus = $resultSet[0]['jobstatus'];
+        } else {
+            $jobTitle = 'Unknown job title';
+            $jobStatus = 'Unknown job status';
+        }
+        
+        return $country . ', ' . $profession . ', ' . $jobArea . ', ' . $jobTitle . ', ' . $jobStatus;
     }
 }

@@ -27,13 +27,16 @@ class ProcessForm extends AbstractPlugin
         $tableModel = $sl->get($modelName . 'Model');
         
         $tableModel->init($modelId);
-
-        if ($request->isPost()) {
-            $formData = $request->getPost()->toArray();
         
+        
+        if ($request->isPost()) {
+            
+            $formData = $request->getPost()->toArray();
+
             $form->setData($formData);
-                    
+            
             if ($form->isValid()) {
+        
                 $prefix = $form->getFieldPrefix();
                                 
                 $modelData = [];
@@ -89,7 +92,7 @@ class ProcessForm extends AbstractPlugin
                     } else {
                         $tableModel->save();
                     }
-                    
+
                     foreach ($formData as $key => $value) {
                         if (preg_match('/^netsensiaWidget_(.*?)_/', $key, $matches) !== 0) {
                             $this->widget($matches[1], $value, $tableModel);
@@ -110,6 +113,8 @@ class ProcessForm extends AbstractPlugin
                         $routeMatch->getParams()
                     );
                 }
+            } else {
+                var_dump($form->getMessages()); die;
             }
         
         } else {
@@ -130,6 +135,7 @@ class ProcessForm extends AbstractPlugin
         $serviceLocator = $this->controller->getServiceLocator();
         
         if (class_exists($widgetClass)) {
+
             $widget = new $widgetClass(
                 $serviceLocator,
                 $value,

@@ -257,6 +257,13 @@ class NetsensiaForm extends Form
             ];
         }
         
+        if (count($optionsArray) == 0) {
+            $optionsArray[] = [
+                'value' => 'No value',
+                'label' => 'No label',
+            ];
+        }
+        
         return $optionsArray;
     }
     
