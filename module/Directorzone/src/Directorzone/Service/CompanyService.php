@@ -1192,7 +1192,7 @@ class CompanyService extends NetsensiaService
         )->toArray();
     
         if (count($result) > 1) {
-            throw new \Exception('Duplicate company (' . $reference . ') detected');
+            throw new \Exception('Duplicate company (' . $companyId . ') detected');
         }
     
         if (count($result) == 1) {
