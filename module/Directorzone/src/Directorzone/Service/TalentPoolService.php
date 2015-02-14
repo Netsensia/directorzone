@@ -172,6 +172,54 @@ class TalentPoolService extends NetsensiaService
             $jobStatus = 'Unknown job status';
         }
         
-        return $country . ', ' . $profession . ', ' . $jobArea . ', ' . $jobTitle . ', ' . $jobStatus;
+        $resultSet = $this->getServiceLocator()->get('UserLanguageTableGateway')->select(
+            function (Select $select) use ($userId) {
+                $select
+                ->columns([])
+                ->join('language', 'userlanguage.languageid = language.languageid', ['language'])
+                ->join('languagelevel', 'userlanguage.languagelevelid = languagelevel.languagelevelid', ['languagelevel'])
+                ->where(['userid' => $userId]);
+            }
+        )->toArray();
+        
+        $languages = '';
+        if (count($resultSet) > 0) {
+            foreach ($resultSet as $result) {
+                $languages .= ', ' . $result['language'] . ' (' . $result['languagelevel'] . ')';
+            } 
+        }
+        
+        $resultSet = $this->getServiceLocator()->get('UserQualificationTableGateway')->select(
+            function (Select $select) use ($userId) {
+                $select
+                ->columns(['subject'])
+                ->join('qualificationtype', 'qualificationtype.qualificationtypeid = userqualification.qualificationtypeid', ['qualificationtype'])
+                ->where(['userid' => $userId]);
+            }
+        )->toArray();
+        
+        $qualifications = '';
+        if (count($resultSet) > 0) {
+            foreach ($resultSet as $result) {
+                $qualifications .= ', ' . $result['subject'] . ' (' . $result['qualificationtype'] . ')';
+            }
+        }
+        
+        $resultSet = $this->getServiceLocator()->get('UserProfessionalQualificationTableGateway')->select(
+            function (Select $select) use ($userId) {
+                $select
+                ->columns(['qualification', 'subject'])
+                ->where(['userid' => $userId]);
+            }
+        )->toArray();
+        
+        $proQualifications = '';
+        if (count($resultSet) > 0) {
+            foreach ($resultSet as $result) {
+                $proQualifications .= ', ' . $result['subject'] . ' (' . $result['qualification'] . ')';
+            }
+        }
+        
+        return $country . ', ' . $profession . ', ' . $jobArea . ', ' . $jobTitle . ', ' . $jobStatus . $languages . $qualifications . $proQualifications;
     }
 }
