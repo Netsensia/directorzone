@@ -159,11 +159,12 @@ class TalentPoolService extends NetsensiaService
                 $select
                     ->columns(['title'])
                     ->join('jobstatus', 'userexperience.jobstatusid = jobstatus.jobstatusid', ['jobstatus'])
-                    ->where(['userid' => $userId]);
+                    ->where(['userid' => $userId])
+                    ->order('fromdate DESC');
             }
-        );
+        )->toArray();
         
-        if (count($resultSet) == 1) {
+        if (count($resultSet) > 0) {
             $jobTitle = $resultSet[0]['title'];
             $jobStatus = $resultSet[0]['jobstatus'];
         } else {
