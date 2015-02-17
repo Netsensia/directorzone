@@ -29,7 +29,7 @@ class TalentPoolViewController extends NetsensiaActionController
             $talentPoolDetails = $this->talentPoolService->getTalentPoolDetails(
                 $talentPoolDirectoryId
             );
-            
+
             return $talentPoolDetails;
             
         } catch (NotFoundResourceException $e) {
