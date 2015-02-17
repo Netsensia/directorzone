@@ -50,7 +50,7 @@ class ArticleController extends NetsensiaActionController
             'startPage' => $startPage,
             'isLoggedOn' => $this->isLoggedOn(),
             'isAdmin' => $this->isAdmin(),
-            'filter' => $this->filterService->getFilterJson()
+            'onlyMe' => 0,
         ];
         
         return $result;
