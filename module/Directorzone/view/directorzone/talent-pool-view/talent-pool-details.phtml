@@ -107,7 +107,6 @@
 
 <script>
 $(document).ready(function() {
-
-    $('#messagetitle').val('Message from ' + '<?php echo htmlentities($this->identity()->getName()); ?>');
+    $('#messagetitle').val('Message from ' + '<?php echo htmlentities($this->identity() ? $this->identity()->getName() : ''); ?>');
 });
 </script>

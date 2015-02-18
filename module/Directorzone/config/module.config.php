@@ -947,6 +947,16 @@ return array(
                         'action'     => 'my-articles',
                     ),
                 ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'my-articles-list-page' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/page[/:page]',
+                            'constraints' => ['page' => '[0-9]*'],
+                        ),
+                    ),
+                ),
             ),
             'account-inbox' => array(
                 'type'    => 'Literal',

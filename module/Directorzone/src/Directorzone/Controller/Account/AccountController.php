@@ -154,6 +154,20 @@ class AccountController extends NetsensiaActionController
     
     public function myArticlesAction()
     {
+        $startPage = $this->params()->fromRoute('page', -1);
+        
+        if ($startPage == -1) {
+            $this->redirect()->toRoute('account-myarticles/my-articles-list-page', ['page' => '1']);
+        }
+        
+        $result = [
+            'startPage' => $startPage,
+            'isLoggedOn' => $this->isLoggedOn(),
+            'isAdmin' => $this->isAdmin(),
+            'onlyMe' => 1,
+        ];
+        
+        return $result;
     }
     
     private function userAccountForm($formName, $modelName)
