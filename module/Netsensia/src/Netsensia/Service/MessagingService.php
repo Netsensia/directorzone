@@ -105,7 +105,7 @@ class MessagingService extends NetsensiaService
         $rowset = $this->userMessageTable->select(
             function (Select $select) use ($userMessageId) {
         
-               $columns = ['usermessageid', 'userid', 'typeid', 'title', 'content', 'senttime'];
+               $columns = ['usermessageid', 'senderid', 'userid', 'typeid', 'title', 'content', 'senttime'];
                 
                 $select->where(
                     ['usermessageid' => $userMessageId]
@@ -116,7 +116,7 @@ class MessagingService extends NetsensiaService
                 ->join(
                     'user',
                     'user.userid = usermessage.senderid',
-                    ['forenames', 'surname'],
+                    ['forenames', 'surname', 'name'],
                     'left'
                 );
             }

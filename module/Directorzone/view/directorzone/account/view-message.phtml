@@ -1,10 +1,13 @@
 <?php echo $this->partial('account-nav.phtml'); ?>
+<?php echo $this->partial('messaging/dialog.phtml'); ?>
 <h3><?php echo $this->title ?></h3>
 <hr>
 From: <?php
-    $link = $this->url('directories/talent-pool/talent-pool-details', ['id' => $this->userid]); 
+    $link = $this->url('directories/talent-pool/talent-pool-details', ['id' => $this->senderid]); 
     echo '<a href="' . $link . '">' . $this->from . '</a>'; 
 ?>
+<hr>
+<a href="#" id="sendmessagedialog" data-id="<?php echo $this->senderid; ?>">Reply</a> | <a href="#">Forward</a> | <a href="#">Delete</a> | <a href="#">Archive</a> | <a href="#">Flag</a>
 <hr>
 
 <?php echo $this->content; ?>
