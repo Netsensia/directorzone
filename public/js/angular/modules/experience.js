@@ -43,8 +43,6 @@ angular.module('experience', []).controller('ExperienceController', function($sc
         });
 	}
 
-	$scope.$watch(function() {return element.attr('class'); }, function(newValue){ alert(newValue);});
-	
 	$scope.autocomplete = function() {
 		
 		var responsePromise = $http.get('/ajax/company/search?format=autocomplete&limit=200&name=' + this.companyname);
