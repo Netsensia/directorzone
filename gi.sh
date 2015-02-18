@@ -2,6 +2,6 @@ ssh -i "/Volumes/Boxcryptor/Dropbox/Encrypted/Security/Keys/Amazon EC2/Directorz
 scp -i "/Volumes/Boxcryptor/Dropbox/Encrypted/Security/Keys/Amazon EC2/DirectorzoneSaltTrusty.pem" ubuntu@54.76.116.80:upload.tar.gz /Users/Chris/git/directorzone/public/img
 cd /Users/Chris/git/directorzone/public/img
 tar -zxvf upload.tar.gz
-rm public/img/upload/upload.tar.gz
+rm upload.tar.gz
 
  
