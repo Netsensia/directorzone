@@ -60,7 +60,7 @@ class ArticleController extends NetsensiaActionController
     {
         $events = [];
         
-        $results = $this->articleService->getArticlesByType(
+        $results = $this->articleService->mergeArticles(
             [5,6],
             [2],
             1,

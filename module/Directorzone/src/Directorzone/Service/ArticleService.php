@@ -168,7 +168,6 @@ class ArticleService extends NetsensiaService
     
     public function getPublishOptions($articleCategoryType)
     {
-        
         $events = $this->getAllTypesWithParent(5);
         $meetings = $this->getAllTypesWithParent(11);
         $jobs = $this->getAllTypesWithParent(6);
@@ -191,7 +190,7 @@ class ArticleService extends NetsensiaService
         ];
     }
     
-    public function mergeArticles($typeArray, $statusArray, $start, $end, $order, $userId)
+    public function mergeArticles($typeArray, $statusArray, $start, $end, $order = -3, $userId = null)
     {
         $allTypes = [];
     
