@@ -55,6 +55,13 @@ runSelenium() {
 }
 
 #################################################################################
+echo "Bowering"
+#################################################################################
+cd /var/lib/jenkins/jobs/directorzone/workspace/public
+printf "\n" | bower --allow-root install bootstrap-calendar
+cd /var/lib/jenkins/jobs/directorzone/workspace
+
+#################################################################################
 echo "Stamping build"
 #################################################################################
 
