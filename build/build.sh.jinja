@@ -59,7 +59,6 @@ echo "Bowering"
 #################################################################################
 cd /var/lib/jenkins/jobs/directorzone/workspace/public
 printf "\n" | bower --allow-root install bootstrap-calendar
-cd /var/lib/jenkins/jobs/directorzone/workspace
 
 #################################################################################
 echo "Stamping build"
@@ -72,7 +71,7 @@ echo $2 > build_time.txt
 echo "Tarring source"
 #################################################################################
 
-cd ..
+cd /var/lib/jenkins/jobs/directorzone/workspace
 rm source.tar.gz
 tar -zcf source.tar.gz ./*
 
