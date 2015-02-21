@@ -47,7 +47,7 @@ $(document).ready(function () {
 		});
 	});
 
-	$('a#deletemessage').click(function () {
+	$(document).delegate('a#deletemessage', 'click', function () {
 		if (confirm('Are you sure you want to delete this message?')) {
 			var messageId = $(this).attr('data-messageid');
 			var url = '/ajax/delete-message/' + messageId;
@@ -67,7 +67,7 @@ $(document).ready(function () {
 		}
 	});
 
-	$('a#archivemessage').click(function () {
+	$(document).delegate('a#archivemessage', 'click', function () {
 		if (confirm('Are you sure you want to archive this message?')) {
 			var messageId = $(this).attr('data-messageid');
 			var url = '/ajax/archive-message/' + messageId;
@@ -87,7 +87,7 @@ $(document).ready(function () {
 		}
 	});
 
-	$('a#unarchivemessage').click(function () {
+	$(document).delegate('a#unarchivemessage', 'click', function () {
 		if (confirm('Are you sure you want to unarchive this message?')) {
 			var messageId = $(this).attr('data-messageid');
 			var url = '/ajax/unarchive-message/' + messageId;
@@ -107,7 +107,7 @@ $(document).ready(function () {
 		}
 	});
 
-	$('a#flagmessage').click(function () {
+	$(document).delegate('a#flagmessage', 'click', function () {
 		var messageId = $(this).attr('data-messageid');
 		var url = '/ajax/flag-message/' + messageId;
 		$.ajax({
@@ -125,7 +125,7 @@ $(document).ready(function () {
 		});
 	});
 
-	$('a#unflagmessage').click(function () {
+	$(document).delegate('a#unflagmessage', 'click', function () {
 		var messageId = $(this).attr('data-messageid');
 		var url = '/ajax/unflag-message/' + messageId;
 		$.ajax({

@@ -4,6 +4,7 @@ namespace Netsensia\Service;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Select;
 use Netsensia\Exception\NotFoundResourceException;
+use Zend\Db\Sql\Expression;
 
 class MessagingService extends NetsensiaService
 {
@@ -106,6 +107,7 @@ class MessagingService extends NetsensiaService
                 'senderid' => $this->getUserId(),
                 'typeid' => $type,
                 'title' => $title,
+                'senttime' => new Expression('NOW()'),
                 'content' => $content,
             ]
         );
@@ -128,7 +130,7 @@ class MessagingService extends NetsensiaService
     {
         $rowset = $this->userMessageTable->select(
             function (Select $select) use ($start, $end, $order, $isArchive) {
-                $columns = ['usermessageid', 'userid', 'senttime', 'typeid', 'title', 'content'];
+                $columns = ['usermessageid', 'userid', 'senttime', 'typeid', 'title', 'content', 'isarchived', 'isflagged'];
         
                 $sortColumns = ['surname', 'title', 'senttime'];
         
@@ -166,6 +168,8 @@ class MessagingService extends NetsensiaService
             $messages['results'][] = [
                 'internalId' => $result['usermessageid'],
                 'title' => $result['title'],
+                'isFlagged' => $result['isflagged'],
+                'isArchived' => $result['isarchived'],
                 'content' => $result['content'],
                 'senttime' => $result['senttime'],
                 'from' => $from
