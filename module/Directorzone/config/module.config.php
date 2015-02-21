@@ -251,6 +251,36 @@ return array(
                             ),
                         ),
                     ),
+                    'archive-message' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/archive-message/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*',
+                                'type' => '[0-9]*',
+                            ],
+                            'defaults' => array(
+                                'controller' => 'Directorzone\Controller\Ajax\Messaging',
+                                'action' => 'archive-message',
+                                'id' => 0,
+                            ),
+                        ),
+                    ),
+                    'unarchive-message' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/unarchive-message/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*',
+                                'type' => '[0-9]*',
+                            ],
+                            'defaults' => array(
+                                'controller' => 'Directorzone\Controller\Ajax\Messaging',
+                                'action' => 'unarchive-message',
+                                'id' => 0,
+                            ),
+                        ),
+                    ),
                     'filter-search' => array(
                         'type' => 'segment',
                         'options' => array(

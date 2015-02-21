@@ -35,6 +35,24 @@ class MessagingService extends NetsensiaService
         ];
     }
     
+    public function archiveMessage($id, $unarchive = false)
+    {
+        $archiveFlag = $unarchive ? 'N' : 'Y';
+        
+        $rowCount = $this->userMessageTable->update(['isarchived' => $archiveFlag], ['usermessageid' => $id]);
+        if ($rowCount != 1) {
+            return [
+                'success' => false,
+                'message' => 'Unknown error archiving message',
+            ];
+        }
+    
+        return [
+            'success' => true,
+            'message' => 'Message archived',
+        ];
+    }
+    
     public function sendMessage(
         $id,
         $type,
@@ -144,7 +162,7 @@ class MessagingService extends NetsensiaService
         $rowset = $this->userMessageTable->select(
             function (Select $select) use ($userMessageId) {
         
-               $columns = ['usermessageid', 'senderid', 'userid', 'typeid', 'title', 'content', 'senttime'];
+               $columns = ['usermessageid', 'senderid', 'userid', 'typeid', 'title', 'content', 'senttime', 'isarchived'];
                 
                 $select->where(
                     ['usermessageid' => $userMessageId]

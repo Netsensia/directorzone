@@ -60,7 +60,47 @@ $(document).ready(function () {
 					if (msg.message) {
 						alert(msg.message);
 					} else {
-						alert('There was an unknown error sending your message');
+						alert('There was an unknown error deleting your message');
+					}
+				}
+			});
+		}
+	});
+
+	$('a#archivemessage').click(function () {
+		if (confirm('Are you sure you want to archive this message?')) {
+			var messageId = $(this).attr('data-messageid');
+			var url = '/ajax/archive-message/' + messageId;
+			$.ajax({
+				'url' : url,
+			}).done(function(msg) {
+				if (msg.success) {
+					window.location = '/myaccount/inbox';
+				} else {
+					if (msg.message) {
+						alert(msg.message);
+					} else {
+						alert('There was an unknown error archiving your message');
+					}
+				}
+			});
+		}
+	});
+
+	$('a#unarchivemessage').click(function () {
+		if (confirm('Are you sure you want to unarchive this message?')) {
+			var messageId = $(this).attr('data-messageid');
+			var url = '/ajax/unarchive-message/' + messageId;
+			$.ajax({
+				'url' : url,
+			}).done(function(msg) {
+				if (msg.success) {
+					window.location = '/myaccount/inbox';
+				} else {
+					if (msg.message) {
+						alert(msg.message);
+					} else {
+						alert('There was an unknown error unarchiving your message');
 					}
 				}
 			});
