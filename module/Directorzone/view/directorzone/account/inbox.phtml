@@ -1,5 +1,13 @@
 <?php echo $this->partial('account-nav.phtml'); ?>
-<h3>My Inbox</h3>
+<?php if ($this->isArchive == 'Y'): ?>
+    <h3>My Inbox (archive)</h3>
+    <a href="/myaccount/inbox/page/1?isArchive=N">View Inbox</a>
+    
+<?php else: ?>
+    <h3>My Inbox</h3>
+    <a href="/myaccount/inbox/page/1?isArchive=Y">View Inbox Archive</a>
+<?php endif; ?>
+
 
 <table id="inbox" data-link="row" class="rowlink table table-striped table-bordered table-hover">
 <tr>
@@ -31,7 +39,7 @@ function loadTheTable() {
 			<?php echo $this->startPage; ?>,
 			20,
 			'inbox',
-			'/ajax/inbox/list',
+			'/ajax/inbox/list?isArchive=<?php echo $this->isArchive; ?>',
 			function(key, value) {
 				var url = '/myaccount/inbox/' + value.internalId;
 				

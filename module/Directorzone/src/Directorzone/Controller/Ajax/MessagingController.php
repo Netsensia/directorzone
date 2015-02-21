@@ -62,6 +62,7 @@ class MessagingController extends NetsensiaActionController
         $page = $this->params()->fromQuery('page', null);
         $size = $this->params()->fromQuery('size', null);
         $order = $this->params()->fromQuery('order', null);
+        $isArchive = $this->params()->fromQuery('isArchive', 'N') == 'Y';
         
         $start = ($page - 1) * $size + 1;
         $end = $start + $size - 1;
@@ -69,7 +70,8 @@ class MessagingController extends NetsensiaActionController
         $results = $this->messagingService->getInboxList(
             $start,
             $end,
-            $order
+            $order,
+            $isArchive
         );
         
         return new JsonModel(

@@ -88,16 +88,16 @@ class MessagingService extends NetsensiaService
         return $result;
     }
     
-    public function getInboxList($start, $end, $order)
+    public function getInboxList($start, $end, $order, $isArchive = false)
     {
         $rowset = $this->userMessageTable->select(
-            function (Select $select) use ($start, $end, $order) {
+            function (Select $select) use ($start, $end, $order, $isArchive) {
                 $columns = ['usermessageid', 'userid', 'senttime', 'typeid', 'title', 'content'];
         
                 $sortColumns = ['surname', 'title', 'senttime'];
         
                 $select->where(
-                    ['usermessage.userid' => $this->getUserId()]
+                    ['usermessage.userid' => $this->getUserId(), 'isarchived' => ($isArchive ? 'Y' : 'N')]
                 )
                 ->columns(
                     $columns

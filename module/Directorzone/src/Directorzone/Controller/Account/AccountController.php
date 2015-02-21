@@ -75,13 +75,15 @@ class AccountController extends NetsensiaActionController
     public function inboxAction()
     {
         $startPage = $this->params()->fromRoute('page', -1);
+        $isArchive = $this->params()->fromQuery('isArchive', 'N');
         
         if ($startPage == -1) {
             $this->redirect()->toRoute('account-inbox/inbox-page', ['page' => '1']);
         }
         
         return [
-            'startPage' => $startPage
+            'startPage' => $startPage,
+            'isArchive' => $isArchive,
         ];
     }
     
