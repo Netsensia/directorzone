@@ -42,8 +42,18 @@ class CompanyController extends NetsensiaActionController
     public function uploadCompanyAction()
     {
         $name = $this->params()->fromPost('name', null);
+        $nonch = $this->params()->fromPost('nonch', false);
         
-        $this->companyUploadService->addCompaniesToUploadTable([['name' => $name]]);
+        if ($nonch) {
+            $this->companyService->addCompanyToDirectory([
+                'reference' => md5($name . uniqid()),
+                'name' => $name,
+                'recordstatus' => 'L',
+                'directorzonecommunity' => 'Y'
+            ]);
+        } else {
+            $this->companyUploadService->addCompaniesToUploadTable([['name' => $name]]);
+        }
         
         return new JsonModel(['success' => true]);
     }
@@ -188,7 +198,7 @@ class CompanyController extends NetsensiaActionController
                 'name' => $name,
                 'ceo' => $ceo,
                 'town' => $town,
-                'primarysector' => $primarySector,
+                'primarysector' => (empty($primarySector) ? 'Unknown Unknown activities' : $primarySector),
                 'exchange' => $exchange,
                 'sectors' => $sectors,
                 'turnover' => $turnover,
