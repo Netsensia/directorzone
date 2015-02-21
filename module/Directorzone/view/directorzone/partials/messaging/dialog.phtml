@@ -46,6 +46,26 @@ $(document).ready(function () {
 			  keyboard: false
 		});
 	});
+
+	$('a#deletemessage').click(function () {
+		if (confirm('Are you sure you want to delete this message?')) {
+			var messageId = $(this).attr('data-messageid');
+			var url = '/ajax/delete-message/' + messageId;
+			$.ajax({
+				'url' : url,
+			}).done(function(msg) {
+				if (msg.success) {
+					window.location = '/myaccount/inbox';
+				} else {
+					if (msg.message) {
+						alert(msg.message);
+					} else {
+						alert('There was an unknown error sending your message');
+					}
+				}
+			});
+		}
+	});
 	
 	$('button#cancelmessage').click(function () {
 		receiverId = -1;

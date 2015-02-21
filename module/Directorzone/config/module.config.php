@@ -236,6 +236,21 @@ return array(
                             ),
                         ),
                     ),
+                    'delete-message' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/delete-message/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*',
+                                'type' => '[0-9]*',
+                            ],
+                            'defaults' => array(
+                                'controller' => 'Directorzone\Controller\Ajax\Messaging',
+                                'action' => 'delete-message',
+                                'id' => 0,
+                            ),
+                        ),
+                    ),
                     'filter-search' => array(
                         'type' => 'segment',
                         'options' => array(

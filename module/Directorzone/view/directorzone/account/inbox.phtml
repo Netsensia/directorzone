@@ -36,7 +36,7 @@ function loadTheTable() {
 				var url = '/myaccount/inbox/' + value.internalId;
 				
 				var newRow = '<tr>';
-				newRow += '<td><a href="' + url + '">' + value.from + '</a></td>';
+				newRow += '<td><a data-messageid="' + value.internalId + '" href="' + url + '">' + value.from + '</a></td>';
 				newRow += '<td>' + value.title + '</td>';
 				newRow += '<td class="prettydate">' + prettyDate(value.senttime) + '</td>';
 				newRow += '</tr>';

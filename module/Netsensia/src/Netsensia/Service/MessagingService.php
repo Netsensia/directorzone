@@ -19,6 +19,22 @@ class MessagingService extends NetsensiaService
         $this->feedbackTable = $feedbackTable;
     }
     
+    public function deleteMessage($id)
+    {
+        $deletedRows = $this->userMessageTable->delete(['usermessageid' => $id]);
+        if ($deletedRows != 1) {
+            return [
+                'success' => false,
+                'message' => 'Unknown error deleting message',
+            ];
+        }
+        
+        return [
+            'success' => true,
+            'message' => 'Message deleted',
+        ];
+    }
+    
     public function sendMessage(
         $id,
         $type,
