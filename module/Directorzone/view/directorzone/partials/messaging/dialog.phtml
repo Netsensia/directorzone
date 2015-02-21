@@ -32,11 +32,21 @@ $(document).ready(function () {
 	
 	$('a#sendmessagedialog').click(function () {
 		receiverId = $(this).attr('data-id');
+		receiverName = $(this).attr('data-name');
+		$('#messagerecipient').val(receiverName);
 		$('div#sendMessageDialog').modal({
 			  keyboard: false
 		});
 	});
 
+	$('a#forwardmessagedialog').click(function () {
+		receiverId = -1;
+		$('#messagerecipient').val('');
+		$('div#sendMessageDialog').modal({
+			  keyboard: false
+		});
+	});
+	
 	$('button#cancelmessage').click(function () {
 		receiverId = -1;
 	});
