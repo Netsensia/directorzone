@@ -32,12 +32,14 @@ class MessagingController extends NetsensiaActionController
         $type = $this->params()->fromRoute('type', null);
         $content = $this->params()->fromPost('content', null);
         $title = $this->params()->fromPost('title', null);
+        $receiverName = $this->params()->fromPost('receiverName', null);
         
         $result = $this->messagingService->sendMessage(
             $id,
             $type,
             $title,
-            $content
+            $content,
+            $receiverName
         );
         
         return new JsonModel(

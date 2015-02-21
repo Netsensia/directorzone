@@ -7,8 +7,12 @@
         <h4 class="modal-title" id="myModalLabel">Send Message</h4>
       </div>
       <div class="modal-body">
+        <?php if (!empty($this->messageRecipient)): ?>
+        To
+        <input id="messagerecipient" style="width:100%;" value="<?= $this->messageRecipient ?>">
+        <?php endif; ?>
         Title
-        <input id="messagetitle" style="width:100%;">
+        <input id="messagetitle" style="width:100%;" value="<?= $this->messageTitle ?>">
         Message
         <textarea id="messagecontent" style="width:100%;height:10em">
         </textarea>
@@ -24,6 +28,7 @@
 <script>
 $(document).ready(function () {
 	var receiverId = -1;
+	var receiverName = '';
 	
 	$('a#sendmessagedialog').click(function () {
 		receiverId = $(this).attr('data-id');
@@ -39,8 +44,9 @@ $(document).ready(function () {
 	$('button#sendmessage').click(function () {
 
 	});
-	
+
 	$('div#sendMessageDialog').on('hidden.bs.modal', function (e) {
+		var receiverName = $('#messagerecipient').val();
 		if (receiverId != -1) {
 			var url = '/ajax/send-message/' + receiverId + '/1';
 			var title = $('input#messagetitle').val();
@@ -48,11 +54,18 @@ $(document).ready(function () {
 			$.ajax({
 				'url' : url,
 				'type' : 'POST',
-				'data' : {title: title, content: content},
+				'data' : {receiverName: receiverName, title: title, content: content},
 			}).done(function(msg) {
 				if (msg.success) {
+					if (msg.message) {
+						alert(msg.message);
+					}
 				} else {
-					alert('There was an unknown error sending your message');
+					if (msg.message) {
+						alert(msg.message);
+					} else {
+						alert('There was an unknown error sending your message');
+					}
 				}
 			});
 		}

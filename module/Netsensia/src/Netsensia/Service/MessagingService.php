@@ -23,9 +23,31 @@ class MessagingService extends NetsensiaService
         $id,
         $type,
         $title,
-        $content
+        $content,
+        $receiverName
     )
     {
+        $receiverName = trim($receiverName);
+        
+        $title = preg_replace('/^Re: Re:/', 'Re:', $title);
+        
+        if ($receiverName != '') {
+            $result = $this->getServiceLocator()->get('UserTableGateway')->select(
+                function (Select $select) use ($receiverName) {
+                    $select->columns(['userid'])->where(['name' => $receiverName]);
+                }
+            )->toArray();
+
+            if (count($result) == 1) {
+                $id = $result[0]['userid'];
+            } else {
+                return [
+                    'success' => false,
+                    'message' => 'Recipient not found',
+                ];
+            }
+        }
+        
         $result = $this->userMessageTable->insert(
             [
                 'userid' => $id,
@@ -44,6 +66,7 @@ class MessagingService extends NetsensiaService
             'type' => $type,
             'title' => $title,
             'content' => $content,
+            'message' => 'Message sent',
         ];
         
         return $result;
@@ -126,13 +149,8 @@ class MessagingService extends NetsensiaService
         
         if (count($rows) == 1) {
             $message = $rows[0];
-            
-            $from = $message['forenames'] . ' ' . $message['surname'];
-            if (trim($from) == '') {
-                $from = $message['name'];
-            }
-            
-            $message['from'] = $from;
+
+            $message['from'] = $message['name'];
             
             return $message;
         } else {
