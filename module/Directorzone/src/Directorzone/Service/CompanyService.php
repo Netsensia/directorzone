@@ -172,12 +172,6 @@ class CompanyService extends NetsensiaService
                     ]
                 )
                 ->join(
-                    'companieshouse',
-                    'companydirectory.reference = companieshouse.number',
-                    Select::SQL_STAR,
-                    Select::JOIN_LEFT
-                )
-                ->join(
                     'companystatus',
                     'companydirectory.companystatusid = companystatus.companystatusid',
                     ['companystatus'],
