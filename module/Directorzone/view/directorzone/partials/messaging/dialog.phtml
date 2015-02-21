@@ -106,6 +106,42 @@ $(document).ready(function () {
 			});
 		}
 	});
+
+	$('a#flagmessage').click(function () {
+		var messageId = $(this).attr('data-messageid');
+		var url = '/ajax/flag-message/' + messageId;
+		$.ajax({
+			'url' : url,
+		}).done(function(msg) {
+			if (msg.success) {
+				window.location.reload();
+			} else {
+				if (msg.message) {
+					alert(msg.message);
+				} else {
+					alert('There was an unknown error flagging your message');
+				}
+			}
+		});
+	});
+
+	$('a#unflagmessage').click(function () {
+		var messageId = $(this).attr('data-messageid');
+		var url = '/ajax/unflag-message/' + messageId;
+		$.ajax({
+			'url' : url,
+		}).done(function(msg) {
+			if (msg.success) {
+				window.location.reload();
+			} else {
+				if (msg.message) {
+					alert(msg.message);
+				} else {
+					alert('There was an unknown error unflagging your message');
+				}
+			}
+		});
+	});
 	
 	$('button#cancelmessage').click(function () {
 		receiverId = -1;

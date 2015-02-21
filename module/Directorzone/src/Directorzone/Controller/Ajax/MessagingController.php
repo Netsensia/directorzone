@@ -26,6 +26,26 @@ class MessagingController extends NetsensiaActionController
         parent::onDispatch($e);
     }
 
+    public function flagMessageAction()
+    {
+        $messageId = $this->params()->fromRoute('id', null);
+        $result = $this->messagingService->flagMessage($messageId);
+    
+        return new JsonModel(
+            $result
+        );
+    }
+    
+    public function unflagMessageAction()
+    {
+        $messageId = $this->params()->fromRoute('id', null);
+        $result = $this->messagingService->flagMessage($messageId, true);
+    
+        return new JsonModel(
+            $result
+        );
+    }
+    
     public function archiveMessageAction()
     {
         $messageId = $this->params()->fromRoute('id', null);

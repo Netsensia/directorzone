@@ -281,6 +281,36 @@ return array(
                             ),
                         ),
                     ),
+                    'flag-message' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/flag-message/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*',
+                                'type' => '[0-9]*',
+                            ],
+                            'defaults' => array(
+                                'controller' => 'Directorzone\Controller\Ajax\Messaging',
+                                'action' => 'flag-message',
+                                'id' => 0,
+                            ),
+                        ),
+                    ),
+                    'unflag-message' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/unflag-message/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*',
+                                'type' => '[0-9]*',
+                            ],
+                            'defaults' => array(
+                                'controller' => 'Directorzone\Controller\Ajax\Messaging',
+                                'action' => 'unflag-message',
+                                'id' => 0,
+                            ),
+                        ),
+                    ),
                     'filter-search' => array(
                         'type' => 'segment',
                         'options' => array(

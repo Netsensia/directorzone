@@ -14,12 +14,19 @@ From: <?php
 <a href="#" id="sendmessagedialog" data-id="<?php echo $this->senderid; ?>" data-name="<?php echo $this->from; ?>">Reply</a> | 
 <a href="#" id="forwardmessagedialog">Forward</a> | 
 <a href="#" id="deletemessage" data-messageid="<?php echo $this->usermessageid; ?>">Delete</a> |
+
 <?php if ($this->isarchived == 'N'): ?>
 <a href="#" id="archivemessage" data-messageid="<?php echo $this->usermessageid; ?>">Archive</a> |
 <?php else: ?>
 <a href="#" id="unarchivemessage" data-messageid="<?php echo $this->usermessageid; ?>">Move to inbox</a> |
 <?php endif; ?> 
-<a href="#">Flag</a>
+
+<?php if ($this->isflagged == 'N'): ?>
+<a href="#" id="flagmessage" data-messageid="<?php echo $this->usermessageid; ?>">Flag</a>
+<?php else: ?>
+<a href="#" id="unflagmessage" data-messageid="<?php echo $this->usermessageid; ?>">Unflag</a>
+<?php endif; ?> 
+
 <hr>
 
 <?php echo $this->content; ?>

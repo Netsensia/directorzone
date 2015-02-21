@@ -43,13 +43,31 @@ class MessagingService extends NetsensiaService
         if ($rowCount != 1) {
             return [
                 'success' => false,
-                'message' => 'Unknown error archiving message',
+                'message' => 'Unknown error updating message',
             ];
         }
     
         return [
             'success' => true,
-            'message' => 'Message archived',
+            'message' => 'Message updating',
+        ];
+    }
+    
+    public function flagMessage($id, $unflag = false)
+    {
+        $flagFlag = $unflag ? 'N' : 'Y';
+    
+        $rowCount = $this->userMessageTable->update(['isflagged' => $flagFlag], ['usermessageid' => $id]);
+        if ($rowCount != 1) {
+            return [
+                'success' => false,
+                'message' => 'Unknown error updating message',
+            ];
+        }
+    
+        return [
+            'success' => true,
+            'message' => 'Message updated',
         ];
     }
     
@@ -162,7 +180,7 @@ class MessagingService extends NetsensiaService
         $rowset = $this->userMessageTable->select(
             function (Select $select) use ($userMessageId) {
         
-               $columns = ['usermessageid', 'senderid', 'userid', 'typeid', 'title', 'content', 'senttime', 'isarchived'];
+               $columns = ['usermessageid', 'senderid', 'userid', 'typeid', 'title', 'content', 'senttime', 'isarchived', 'isflagged'];
                 
                 $select->where(
                     ['usermessageid' => $userMessageId]
