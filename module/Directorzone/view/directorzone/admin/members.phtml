@@ -1,0 +1,21 @@
+<?php echo $this->partial('admin-nav.phtml'); ?>
+
+<hr>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <tr><th>ID</th><th>Username</th><th>Forenames</th><th>Surname</th></tr>
+                <?php foreach ($this->members as $member): ?>
+                <tr>
+                    <td><?= $member['userid']; ?></td>
+                    <td><a href="<?= $this->url('admin-members/details', ['id' => $member['userid']]); ?>"><?= $member['name']; ?></a></td>
+                    <td><?= $member['forenames']; ?></td>
+                    <td><?= $member['surname']; ?></td>
+                </tr>
+                <?php endforeach; ?>
+            </table>
+        </div>
+    </div>
+</div>

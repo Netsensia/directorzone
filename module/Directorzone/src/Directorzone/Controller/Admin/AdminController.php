@@ -7,6 +7,9 @@ use Zend\Mvc\MvcEvent;
 use Directorzone\Service\CompanyService;
 use Zend\View\Model\JsonModel;
 use Directorzone\Service\PeopleService;
+use Directorzone\Form\Zend\Admin\MemberForm;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\Factory;
 
 class AdminController extends NetsensiaActionController
 {
@@ -98,18 +101,77 @@ class AdminController extends NetsensiaActionController
         ];
     }
     
-    public function peopleAction()
+    public function membersAction()
     {
         return [
-            'selectedPersonType' => 'live',
-            'filters' =>  [
-            'live' =>
-                [
-                    'name' => 'Live',
-                    'count' => $this->peopleService->getLiveCount()
-                ],
-            ]
+            'members' => $this->getServiceLocator()->get('MemberService')->getMemberList()
         ];
+
+    }
+    
+    public function memberDetailsAction()
+    {
+        $service = $this->getServiceLocator()->get('MemberService');
+        
+        $userId = $this->params()->fromRoute('id');
+        $details = $service->getMemberDetails($userId);
+
+        $form = new MemberForm();
+        $form->get('userid')->setValue($details['userid']);
+        $form->get('name')->setValue($details['name']);
+        $form->get('forenames')->setValue($details['forenames']);
+        $form->get('surname')->setValue($details['surname']);
+        $form->get('email')->setValue($details['email']);
+        
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $form->setData($request->getPost());
+            
+            if (trim($form->get('newpassword')->getValue()) != '') {
+                $inputFactory = new Factory();
+                $inputFilter = $inputFactory->createInputFilter(array(
+                    'confirmnewpassword' => array(
+                        'name'       => 'confirmnewpassword',
+                        'validators' => array(
+                            array(
+                                'name' => 'Identical',
+                                'options' => array(
+                                    'token' => 'newpassword',
+                                    'message' => 'The passwords do not match'
+                                ),
+                            ),
+                        ),
+                    ),
+                ));
+                $form->setInputFilter($inputFilter);
+            }
+            
+            if ($form->isValid()) {
+                
+                $details = [
+                        'name' => $form->get('name')->getValue(),
+                        'forenames' => $form->get('forenames')->getValue(),
+                        'surname' => $form->get('surname')->getValue(),
+                        'email' => $form->get('email')->getValue(),
+                    ];
+                
+                $newPassword = $form->get('newpassword')->getValue();
+                $confirmNewPassword = $form->get('confirmnewpassword')->getValue();
+                
+                if (trim($newPassword) != '') {
+                    $details['password'] = $this->getServiceLocator()->get('Netsensia\Service\UserService')->encryptPassword($newPassword);
+                }
+                
+                $service->setMemberDetails(
+                    $userId, 
+                    $details
+                );
+                
+                return $this->redirect()->toRoute('admin-members');
+            }
+        }
+        
+        return array('form' => $form);
     }
     
     public function companyOwnersAction()

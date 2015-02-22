@@ -1,0 +1,33 @@
+<?php echo $this->partial('admin-nav.phtml'); ?>
+
+<style>
+    form[name="admin-member"] input[type=text] {
+    	width:30em;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <?php foreach ($this->form->getMessages() as $message): ?>
+            <?php foreach ($message as $oneMessage): ?>
+            <div>
+            <?php echo '<strong style="color:red">' . $oneMessage . '</strong>'; ?>
+            </div>
+            <?php endforeach; ?>
+            <?php endforeach; ?>
+            <form method="post" name="<?= $this->form->getName() ?>">
+            <table class="table">
+                <tr><td style="width:20em">User ID</td><td><?= $this->form->get('userid')->getValue(); ?></td></tr>
+                <tr><td style="width:20em">Username</td><td><?= $this->formelement($this->form->get('name')); ?></td></tr>
+                <tr><td style="width:20em">Forenames</td><td><?= $this->formelement($this->form->get('forenames')); ?></td></tr>
+                <tr><td style="width:20em">Surname</td><td><?= $this->formelement($this->form->get('surname')); ?></td></tr>
+                <tr><td style="width:20em">Email</td><td><?= $this->formelement($this->form->get('email')); ?></td></tr>
+                <tr><td style="width:20em">Set new password</td><td><?= $this->formelement($this->form->get('newpassword')); ?></td></tr>
+                <tr><td style="width:20em">Confirm password</td><td><?= $this->formelement($this->form->get('confirmnewpassword')); ?></td></tr>
+            </table>
+            <?= $this->formelement($this->form->get('submit')); ?>
+            </form>
+        </div>
+    </div>
+</div>

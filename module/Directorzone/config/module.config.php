@@ -65,15 +65,6 @@ return array(
                                     ),
                                 ),
                             ),
-                            'upload-people' => array(
-                                'type' => 'Zend\Mvc\Router\Http\Literal',
-                                'options' => array(
-                                    'route' => '/people',
-                                    'defaults' => array(
-                                        'action' => 'admin-people',
-                                    ),
-                                ),
-                            )
                         )
                     )
                 )
@@ -853,13 +844,27 @@ return array(
                     ),
                 ),
             ),
-            'admin-people' => array(
+            'admin-members' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route'    => '/admin/people',
+                    'route'    => '/admin/members',
                     'defaults' => array(
                         'controller' => 'Directorzone\Controller\Admin\Admin',
-                        'action'     => 'people',
+                        'action'     => 'members',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'details' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Segment',
+                        'options' => array(
+                            'route'    => '/:id',
+                            'constraints' => ['id' => '[0-9]*'],
+                            'defaults' => array(
+                                'action'     => 'member-details',
+                                'id' => 0,
+                            ),
+                        ),
                     ),
                 ),
             ),
@@ -1101,6 +1106,7 @@ return array(
         'abstract_factories' => array(
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
             'Zend\Log\LoggerAbstractServiceFactory',
+            'Directorzone\Factory\AbstractServiceFactory',
         ),
         'aliases' => array(
             'translator' => 'MvcTranslator',

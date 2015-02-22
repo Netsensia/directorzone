@@ -34,17 +34,9 @@ class PeopleController extends NetsensiaActionController
         
         $start = ($page - 1) * $size + 1;
         $end = $start + $size - 1;
-        
-        $service = $this->getServiceLocator()->get('WhosWhoService');
-
-        $results = $this->$service->getDirectoryPeople(
-            $start,
-            $end,
-            $order
-        );
                 
         return new JsonModel(
-            $results
+            []
         );
     }
 }
