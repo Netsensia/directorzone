@@ -25,6 +25,8 @@ use Directorzone\Model\PeopleDirectory;
 use Directorzone\Model\WhosWho;
 use Directorzone\Service\WhosWhoService;
 use Zend\Stdlib\ArrayUtils;
+use Directorzone\Service\PeopleThisIsMeService;
+use Directorzone\Form\People\PeopleThisIsMeForm;
 
 class Module
 {
@@ -197,6 +199,13 @@ class Module
                             $cm->getServiceLocator()->get('CompanyService')
                         );
                     },
+                'PeopleThisIsMe' =>
+                    function (ControllerManager $cm) {
+                        return new \Directorzone\Controller\Directory\People\PeopleThisIsMeController(
+                            $cm->getServiceLocator()->get('PeopleThisIsMeService'),
+                            $cm->getServiceLocator()->get('WhosWhoService')
+                        );
+                    },
                 'PeopleView' =>
                     function (ControllerManager $cm) {
                         $twitterService = $cm->getServiceLocator()->get('TwitterService');
@@ -258,6 +267,7 @@ class Module
             'UserTargetRole',
             'ArticleJobArea',
             'UserCompany',
+            'UserWhosWho',
             'CompanySector',
             'CompanyImportMarket',
             'CompanyExportMarket',
@@ -442,6 +452,12 @@ class Module
                 );
                 return $instance;
             },
+            'PeopleThisIsMeService' => function ($sm) {
+                $instance = new PeopleThisIsMeService(
+                    $sm->get('UserWhosWhoTableGateway')
+                );
+                return $instance;
+            },
             'FilterService' => function ($sm) {
                 $instance = new FilterService(
                     $sm->get('GeographyTableGateway'),
@@ -519,6 +535,25 @@ class Module
                 $form->setUserModel($userModel);
                 $form->setCompanyModel($companyModel);
                 $form->setCompanyService($companyService);
+                $form->setTranslator($sm->get('translator'));
+                $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+                return $form;
+            },
+            'PeopleThisIsMeForm' =>  function ($sm) {
+                $authService = $sm->get('Zend\Authentication\AuthenticationService');
+                $identity = $authService->getIdentity();
+                $userId = $identity->getUserId();
+                $userModel = $sm->get('UserModel')->init($identity->getUserId());
+                $router = $sm->get('Router');
+                $routeMatch = $router->match($sm->get('Request'));
+                $params = $routeMatch->getParams();
+                $whosWhoId = $params['id'];
+                $whosWhoModel = $sm->get('WhosWhoModel')->init($whosWhoId);
+                $whosWhoService = $sm->get('WhosWhoService');
+                $form = new PeopleThisIsMeForm('peopleThisIsMeForm');
+                $form->setUserModel($userModel);
+                $form->setWhosWhoModel($whosWhoModel);
+                $form->setWhosWhoService($whosWhoService);
                 $form->setTranslator($sm->get('translator'));
                 $form->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
                 return $form;

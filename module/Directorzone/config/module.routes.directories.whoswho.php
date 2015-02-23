@@ -60,6 +60,16 @@ return array(
                                             ),
                                         ),
                                     ),
+                                    'this-is-me' => array(
+                                        'type' => 'literal',
+                                        'options' => array(
+                                            'route' => '/this-is-me',
+                                            'defaults' => array(
+                                                'action' => 'this-is-me',
+                                                'controller' => 'PeopleThisIsMe',
+                                            ),
+                                        ),
+                                    ),
                                 ),
                             ),
                         ),

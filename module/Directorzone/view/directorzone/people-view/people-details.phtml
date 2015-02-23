@@ -3,7 +3,7 @@
 <a href="/directories/people/<?php echo $this->whoswhoid; ?>/overview">Edit this person</a>
 <?php if ($this->canClaim): ?>
  |
-<a href="/directories/people/<?php echo $this->whoswhoid; ?>/me">This is me</a>
+<a href="<?= $this->url('directories/people-directory/people-details/this-is-me', ['id' => $this->whoswhoid]) ?>">This is me</a>
 <?php endif; ?>
 </h5>
 

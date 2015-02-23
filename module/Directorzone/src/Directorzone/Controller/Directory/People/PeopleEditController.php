@@ -19,6 +19,11 @@ class PeopleEditController extends NetsensiaActionController
         return $this->genericForm('PeopleFeedsForm', 'WhosWho');
     }
     
+    public function thisIsMeAction()
+    {
+        return $this->genericForm('PeopleThisIsMeForm', 'WhosWho');
+    }
+    
     private function genericForm($formName, $modelName)
     {
         $peopleDetails = $this->getServiceLocator()->get('WhosWhoService')->getWhosWhoDetails(
@@ -36,5 +41,5 @@ class PeopleEditController extends NetsensiaActionController
             "form" => $form,
             'flashMessages' => $this->getFlashMessages(),
         );
-    }    
+    }
 }
