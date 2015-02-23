@@ -1,0 +1,34 @@
+
+<?php 
+
+    if (false === $this->hasOwner) {
+?>
+        <h4>Take ownership of this Who's Who profile</h4>
+        <p>
+        
+<?php 
+        if (true == $this->loggedOn) {
+?>
+            If you would like to take ownership of this who's who profile, please fill out the box below giving us some details about yourself.
+<?php
+        } else {
+?>
+            Please login in order to make a request ownership of this Who's Who profile.     
+<?php
+        }            
+?>
+        </p>
+        <p>
+            Ownership of a Who's Who profile allows you to edit it and to add more information.
+        </p>
+    <?php
+        echo $this->BootstrapForm(
+            $this->form,
+            '',
+            $this->url(null, ['id'=>$this->whosWhoId] )
+        );
+    } else {
+        if ($this->ownershipRole !== false) {
+            echo 'This Who\'s Who profile has already been claimed';
+        }
+    }

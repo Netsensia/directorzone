@@ -35,7 +35,7 @@ class PeopleThisIsMeForm extends NetsensiaForm
         $this->setFieldPrefix('people-this-is-me-');
         $this->setDefaultIcon('user');
         
-        $isOwner = $this->whosWhoService->isOwner(
+        $isOwner = $this->whosWhoService->userIsOwner(
             $this->whosWhoModel->getId(),
             $this->userModel->getUserId()
         );

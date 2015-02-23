@@ -138,6 +138,11 @@ class WhosWhoService extends NetsensiaService
         return $people;
     }
     
+    public function userIsOwner($userId, $whosWhoId)
+    {
+        return $this->getServiceLocator()->get('PeopleThisIsMeService')->userIsOwner($userId, $whosWhoId);
+    }
+    
     public function getWhosWhoDetails($peopleDirectoryId)
     {
         $rowset = $this->whosWhoTable->select(
