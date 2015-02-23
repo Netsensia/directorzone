@@ -316,7 +316,9 @@ class CompanyController extends NetsensiaActionController
             function (Select $select) {
                 $select
                     ->columns(['companydirectoryid'])
-                    ->join('companieshouse', 'companydirectory.reference = companieshouse.number', ['category', 'siccode1', 'siccode2', 'siccode3', 'siccode4']);
+                    ->join('companieshouse', 'companydirectory.reference = companieshouse.number', 
+                        ['category', 'addressline1', 'addressline2', 'addressline3', 'addressline4', 'postcode', 'siccode1', 'siccode2', 'siccode3', 'siccode4']
+                      );
             }
         )->toArray();
     
