@@ -38,7 +38,7 @@ class PeopleViewController extends NetsensiaActionController
             $peopleDetails = $this->getServiceLocator()->get('WhosWhoService')->getWhosWhoDetails(
                 $peopleDirectoryId
             );
-        
+            
             if (isset($peopleDetails['twittersearchterms'])) {
                 $twitterSearchTerm = $peopleDetails['twittersearchterms'];
             } else {

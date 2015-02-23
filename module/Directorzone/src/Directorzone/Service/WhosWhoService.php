@@ -159,6 +159,8 @@ class WhosWhoService extends NetsensiaService
         $peopleDetails['address'] = $this->addressService->getAddressDetails($peopleDetails['addressid']);
     
         $peopleDetails['companies'] = $this->getServiceLocator()->get('CompanyService')->getOfficerCompanies($peopleDirectoryId);
+        
+        $peopleDetails['canClaim'] = true;
                
         return $peopleDetails;
     

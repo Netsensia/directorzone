@@ -823,6 +823,11 @@ class CompanyService extends NetsensiaService
                 'siccode3' => $companyRow['siccode3'],
                 'siccode4' => $companyRow['siccode4'],
                 'category' => $companyRow['category'],
+                'addressline1' => $companyRow['siccode1'],
+                'addressline2' => $companyRow['addressline2'],
+                'addressline3' => $companyRow['addressline3'],
+                'addressline4' => $companyRow['addressline4'],
+                'postcode' => $companyRow['postcode'],
             ]
         );
         

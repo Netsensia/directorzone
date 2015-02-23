@@ -24,6 +24,7 @@ use Directorzone\Service\ExperienceService;
 use Directorzone\Model\PeopleDirectory;
 use Directorzone\Model\WhosWho;
 use Directorzone\Service\WhosWhoService;
+use Zend\Stdlib\ArrayUtils;
 
 class Module
 {
@@ -33,7 +34,29 @@ class Module
 
     public function getConfig()
     {
-        return include __DIR__ . '/config/module.config.php';
+        $configFiles = [
+            __DIR__ . '/config/module.config.php',
+            __DIR__ . '/config/module.console.php',
+            __DIR__ . '/config/module.routes.ajax.php',
+            __DIR__ . '/config/module.routes.directories.php',
+            __DIR__ . '/config/module.routes.api.php',
+            __DIR__ . '/config/module.routes.admin.php',
+            __DIR__ . '/config/module.routes.articles.php',
+            __DIR__ . '/config/module.routes.account.php',
+            __DIR__ . '/config/module.routes.php',
+        ];
+        
+        //---
+        
+        $config = array();
+        
+        // Merge all module config options
+        foreach($configFiles as $configFile) {
+            $config = ArrayUtils::merge( $config, include($configFile) );
+        }
+        
+        return $config;
+        
     }
     
     public function getViewHelperConfig()
