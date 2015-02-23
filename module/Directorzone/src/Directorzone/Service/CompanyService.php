@@ -785,6 +785,11 @@ class CompanyService extends NetsensiaService
                     'addressline2',
                     'addressline3',
                     'addressline4',
+                    'category',
+                    'siccode1',
+                    'siccode2',
+                    'siccode3',
+                    'siccode4',
                     'postcode',
                 ]);
             }
@@ -813,6 +818,11 @@ class CompanyService extends NetsensiaService
                 'incorporationdate' => date('Y-m-d', strtotime($companyRow['incorporationdate'])),
                 'recordstatus' => 'L',
                 'registeredaddressid' => $registeredAddressId,
+                'siccode1' => $companyRow['siccode1'],
+                'siccode2' => $companyRow['siccode2'],
+                'siccode3' => $companyRow['siccode3'],
+                'siccode4' => $companyRow['siccode4'],
+                'category' => $companyRow['category'],
             ]
         );
         

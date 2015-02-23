@@ -306,4 +306,23 @@ class CompanyController extends NetsensiaActionController
             echo 'Created #' . $whosWhoId . ' for ' . $row['forename'] . ' ' . $row['surname'] . PHP_EOL;
         }
     }
+    
+    public function updateCompaniesAction()
+    {
+        $companiesHouse = $this->getServiceLocator()->get('CompaniesHouseTableGateway');
+        $companyDirectory = $this->getServiceLocator()->get('CompanyDirectoryTableGateway');
+        
+        $rowset = $companyDirectory->select(
+            function (Select $select) {
+                $select
+                    ->columns(['companydirectoryid'])
+                    ->join('companieshouse', 'companydirectory.reference = companieshouse.number', ['category', 'siccode1', 'siccode2', 'siccode3', 'siccode4']);
+            }
+        )->toArray();
+    
+        foreach ($rowset as $row) {
+            $companyDirectory->update($row, ['companydirectoryid' => $row['companydirectoryid']]);
+            echo 'Updated #' . $row['companydirectoryid'] . PHP_EOL;
+        }
+    }
 }

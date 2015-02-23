@@ -1152,6 +1152,15 @@ return array(
     'console' => array(
         'router' => array(
             'routes' => array(
+                'update-companies' => array(
+                    'options' => array(
+                        'route'    => 'update-companies',
+                        'defaults' => array(
+                            'controller' => 'Directorzone\Controller\Console\Company',
+                            'action'     => 'update-companies',
+                        ),
+                    ),
+                ),
                 'whos-who-init' => array(
                     'options' => array(
                         'route'    => 'whos-who-init',
