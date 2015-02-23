@@ -11,6 +11,19 @@ class MemberForm extends Form
         parent::__construct('admin-member');
     
         $this->add(array(
+            'type' => 'Zend\Form\Element\Select',
+            'name' => 'approvestatusid',
+            'options' => array(
+                'value_options' => array(
+                    '1' => 'Unapproved',
+                    '2' => 'Approved',
+                    '3' => 'Rejected',
+                    '4' => 'Hidden',
+                ),
+            ),
+        ));
+        
+        $this->add(array(
             'name' => 'userid',
             'type' => 'Hidden',
         ));

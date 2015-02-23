@@ -22,7 +22,7 @@ class MemberService extends NetsensiaService
         $gateway = $this->getServiceLocator()->get('UserTableGateway');
         
         $results = $gateway->select(function (Select $select) use ($userId) {
-            $select->columns(['userid', 'name', 'forenames', 'surname', 'email'])->where(['userid' => $userId]);
+            $select->columns(['userid', 'approvestatusid', 'name', 'forenames', 'surname', 'email'])->where(['userid' => $userId]);
         })->toArray();
         
         return $results[0];

@@ -18,6 +18,7 @@
             <?php endforeach; ?>
             <form method="post" name="<?= $this->form->getName() ?>">
             <table class="table">
+                <tr><td style="width:20em">Approval Status</td><td><?= $this->formElement($form->get('approvestatusid')); ?></td></tr>
                 <tr><td style="width:20em">User ID</td><td><?= $this->form->get('userid')->getValue(); ?></td></tr>
                 <tr><td style="width:20em">Username</td><td><?= $this->formelement($this->form->get('name')); ?></td></tr>
                 <tr><td style="width:20em">Forenames</td><td><?= $this->formelement($this->form->get('forenames')); ?></td></tr>

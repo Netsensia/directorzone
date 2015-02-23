@@ -117,6 +117,7 @@ class AdminController extends NetsensiaActionController
         $details = $service->getMemberDetails($userId);
 
         $form = new MemberForm();
+        $form->get('approvestatusid')->setValue($details['approvestatusid']);
         $form->get('userid')->setValue($details['userid']);
         $form->get('name')->setValue($details['name']);
         $form->get('forenames')->setValue($details['forenames']);
@@ -149,6 +150,7 @@ class AdminController extends NetsensiaActionController
             if ($form->isValid()) {
                 
                 $details = [
+                        'approvestatusid' => $form->get('approvestatusid')->getValue(),
                         'name' => $form->get('name')->getValue(),
                         'forenames' => $form->get('forenames')->getValue(),
                         'surname' => $form->get('surname')->getValue(),
