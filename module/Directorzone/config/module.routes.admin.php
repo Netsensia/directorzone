@@ -82,6 +82,16 @@ return array(
                     ),
                 ),
             ),
+            'admin-this-is-me-claims' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/admin/this-is-me-claims',
+                    'defaults' => array(
+                        'controller' => 'Directorzone\Controller\Admin\Admin',
+                        'action'     => 'this-is-me-claims',
+                    ),
+                ),
+            ),
             'admin-users' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(

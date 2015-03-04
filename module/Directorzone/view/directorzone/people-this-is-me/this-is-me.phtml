@@ -7,7 +7,7 @@
         <p>
         
 <?php 
-        if (true == $this->loggedOn) {
+        if ($this->identity()) {
 ?>
             If you would like to take ownership of this who's who profile, please fill out the box below giving us some details about yourself.
 <?php

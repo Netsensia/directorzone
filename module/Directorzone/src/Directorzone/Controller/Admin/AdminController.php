@@ -181,4 +181,8 @@ class AdminController extends NetsensiaActionController
         return [];
     }
     
+    public function thisIsMeClaimsAction()
+    {
+        return [];
+    }
 }

@@ -42,7 +42,7 @@ class PeopleThisIsMeForm extends NetsensiaForm
         
         if (!$isOwner) {
             $this->addTextArea([
-                'name' => 'relationshiptext',
+                'name' => 'aboutme',
                 'label' => 'About me',
             ]);
         } else {

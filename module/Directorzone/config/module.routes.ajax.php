@@ -95,6 +95,36 @@ return array(
                             
                         ),
                     ),
+                    'this-is-me-claims' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/this-is-me-claims',
+                            'defaults' => array(
+                                'controller' => 'Directorzone\Controller\Ajax\ThisIsMeClaims',
+                            ),
+                        ),
+                        'may_terminate' => false,
+                        'child_routes' => array(
+                            'list' => array(
+                                'type' => 'literal',
+                                'options' => array(
+                                    'route' => '/list',
+                                    'defaults' => array(
+                                        'action' => 'this-is-me-claims-list',
+                                    ),
+                                )
+                            ),
+                            'switch' => array(
+                                'type' => 'segment',
+                                'options' => array(
+                                    'route' => '/switch/:requestid',
+                                    'defaults' => array (
+                                        'action' => 'switch',
+                                    )
+                                ),
+                            ),
+                        ),
+                    ),
                     'company-owners' => array(
                         'type' => 'literal',
                         'options' => array(

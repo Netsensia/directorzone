@@ -1,0 +1,48 @@
+<script src="/js/jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="/js/jquery-file-upload/js/jquery.iframe-transport.js"></script>
+<script src="/js/jquery-file-upload/js/jquery.fileupload.js"></script>
+
+<script>
+
+$(document).ready(function() {
+
+	function loadTable()
+	{
+		netsensia_Pager(
+				1,
+				500,
+				'owners',
+				'/ajax/this-is-me-claims/list',
+				function(key, value) {
+					var newRow = '<tr>';
+					newRow += '<td>' + value.username + '</td>';
+					newRow += '<td>' + value.fullname + '</td>';
+					newRow += '<td>' + value.email + '</td>';
+					newRow += '<td>' + value.whoswhoname + '</td>';
+					newRow += '<td>' + value.aboutme + '</td>';
+					newRow += '<td><a href="#" id="' + value.internalId + '" class="changeclaimstatus">' + (value.granted == 'Y' ? 'Granted' : 'Pending') + '</a></td>';
+					newRow += '</tr>';
+			
+					return newRow;
+				}
+			);	
+	}
+
+	loadTable();
+
+	$(document).delegate('.columnHeading', 'click', function() {
+		loadTable();
+	});
+	
+	$(document).delegate('.changeclaimstatus', 'click', function() {
+		var requestId = $(this).attr('id');
+		$.ajax({
+			url: '/ajax/this-is-me-claims/switch/' + requestId
+		}).done(function () {
+			loadTable();
+		});
+	});
+
+});
+
+</script>

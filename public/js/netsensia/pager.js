@@ -28,7 +28,6 @@ function rewriteUrlForNewPage(direction)
 
 function netsensia_Pager(page, size, id, route, rowFunc)
 {
-
 	$("li#next").click(function() {
 		page ++;
 		rewriteUrlForNewPage(1);
@@ -48,7 +47,6 @@ function netsensia_Pager(page, size, id, route, rowFunc)
 
 function netsensia_pager_loadTable(page, size, order, id, route, rowFunc)
 {
-
 	var tableSelector = 'table#' + id;
 	
 	$(tableSelector).find("tr:gt(0)").remove();

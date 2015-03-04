@@ -29,8 +29,8 @@ class PeopleThisIsMeController extends NetsensiaActionController
     {  
         $whosWhoId = $this->params('id');
         $return = [
-            'hasOwner' => false,
-            'userIsOwner' => $this->peopleThisIsMeService->userIsOwner($this->getUserId()),
+            'hasOwner' => $this->peopleThisIsMeService->hasOwner($whosWhoId),
+            'userIsOwner' => $this->peopleThisIsMeService->userIsOwner($whosWhoId),
             'whosWhoId' => $whosWhoId,
             'whosWhoDetails' => $this->whosWhoService->getWhosWhoDetails($whosWhoId)
         ];
@@ -52,6 +52,8 @@ class PeopleThisIsMeController extends NetsensiaActionController
                 'UserWhosWho',
                 $userWhosWhoId
             );
+        
+        $return['flashMessages'] = $this->getFlashMessages();
         
         return $return;
     }

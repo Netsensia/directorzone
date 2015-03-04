@@ -122,6 +122,12 @@ class Module
                             $cm->getServiceLocator()->get('CompanyOwnersService')
                         );
                     },
+                'Directorzone\Controller\Ajax\ThisIsMeClaims' =>
+                    function (ControllerManager $cm) {
+                        return new \Directorzone\Controller\Ajax\ThisIsMeClaimsController(
+                            $cm->getServiceLocator()->get('PeopleThisIsMeService')
+                        );
+                    },                   
                 'Directorzone\Controller\Ajax\TalentPool' =>
                     function (ControllerManager $cm) {
                         return new \Directorzone\Controller\Ajax\TalentPoolController(
